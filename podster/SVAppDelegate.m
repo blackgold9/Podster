@@ -7,14 +7,17 @@
 //
 
 #import "SVAppDelegate.h"
-
+#import "SVGPodderClient.h"
 @implementation SVAppDelegate
+{
+    MKNetworkEngine *engine;
+}
 
 @synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+ //   [[SVGPodderClient sharedInstance] useCache];
     return YES;
 }
 							

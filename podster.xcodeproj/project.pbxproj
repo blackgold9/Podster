@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
+		4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
+		4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
+		4B189B3814AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
+		4B189B3A14AFDEE6001E378A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B189B3914AFDEE6001E378A /* AVFoundation.framework */; };
+		4B44869F14B011C000D2F182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B189B3914AFDEE6001E378A /* AVFoundation.framework */; };
+		4B4486A214B0120700D2F182 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4486A114B0120700D2F182 /* CoreMedia.framework */; };
+		4B4486A314B0120D00D2F182 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4486A114B0120700D2F182 /* CoreMedia.framework */; };
+		4B4486A414B012AE00D2F182 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */; };
+		4B4486A514B012B400D2F182 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */; };
+		4B4486A614B012BF00D2F182 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F214A5BBBD00D26F4C /* Security.framework */; };
 		4B71F79014A5B08C00D26F4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F78F14A5B08C00D26F4C /* UIKit.framework */; };
 		4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79114A5B08C00D26F4C /* Foundation.framework */; };
 		4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79314A5B08C00D26F4C /* CoreGraphics.framework */; };
@@ -20,6 +31,49 @@
 		4B71F7B014A5B08C00D26F4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79114A5B08C00D26F4C /* Foundation.framework */; };
 		4B71F7B814A5B08C00D26F4C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B71F7B614A5B08C00D26F4C /* InfoPlist.strings */; };
 		4B71F7BB14A5B08C00D26F4C /* podsterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7BA14A5B08C00D26F4C /* podsterTests.m */; };
+		4B71F7DE14A5B62E00D26F4C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CB14A5B62E00D26F4C /* NSData+Base64.m */; };
+		4B71F7DF14A5B62E00D26F4C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CB14A5B62E00D26F4C /* NSData+Base64.m */; };
+		4B71F7E014A5B62E00D26F4C /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */; };
+		4B71F7E114A5B62E00D26F4C /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */; };
+		4B71F7E214A5B62E00D26F4C /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CF14A5B62E00D26F4C /* NSDictionary+RequestEncoding.m */; };
+		4B71F7E314A5B62E00D26F4C /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CF14A5B62E00D26F4C /* NSDictionary+RequestEncoding.m */; };
+		4B71F7E414A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7D114A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m */; };
+		4B71F7E514A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7D114A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m */; };
+		4B71F7E614A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7D314A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.m */; };
+		4B71F7E714A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7D314A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.m */; };
+		4B71F7E814A5B62E00D26F4C /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7D514A5B62E00D26F4C /* MKNetworkEngine.m */; };
+		4B71F7E914A5B62E00D26F4C /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7D514A5B62E00D26F4C /* MKNetworkEngine.m */; };
+		4B71F7EA14A5B62E00D26F4C /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7D814A5B62E00D26F4C /* MKNetworkOperation.m */; };
+		4B71F7EB14A5B62E00D26F4C /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7D814A5B62E00D26F4C /* MKNetworkOperation.m */; };
+		4B71F7EC14A5B62E00D26F4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7DB14A5B62E00D26F4C /* Reachability.m */; };
+		4B71F7ED14A5B62E00D26F4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7DB14A5B62E00D26F4C /* Reachability.m */; };
+		4B71F7F014A5B66400D26F4C /* SVGPodderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7EF14A5B66400D26F4C /* SVGPodderClient.m */; };
+		4B71F7F114A5B66400D26F4C /* SVGPodderClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7EF14A5B66400D26F4C /* SVGPodderClient.m */; };
+		4B71F7F314A5BBBD00D26F4C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F214A5BBBD00D26F4C /* Security.framework */; };
+		4B71F7F514A5BBD200D26F4C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */; };
+		4B71F7F714A5BBFB00D26F4C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */; };
+		4B71F7FA14A5BE6C00D26F4C /* SVPodcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7F914A5BE6C00D26F4C /* SVPodcast.m */; };
+		4B71F7FB14A5BE6C00D26F4C /* SVPodcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7F914A5BE6C00D26F4C /* SVPodcast.m */; };
+		4B71F7FE14A6BAAE00D26F4C /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7FD14A6BAAE00D26F4C /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4B71F7FF14A6BAAE00D26F4C /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7FD14A6BAAE00D26F4C /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4B71F81114A6D84C00D26F4C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80314A6D84C00D26F4C /* GTMNSString+HTML.m */; };
+		4B71F81214A6D84C00D26F4C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80314A6D84C00D26F4C /* GTMNSString+HTML.m */; };
+		4B71F81314A6D84C00D26F4C /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80514A6D84C00D26F4C /* MWFeedInfo.m */; };
+		4B71F81414A6D84C00D26F4C /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80514A6D84C00D26F4C /* MWFeedInfo.m */; };
+		4B71F81514A6D84C00D26F4C /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80714A6D84C00D26F4C /* MWFeedItem.m */; };
+		4B71F81614A6D84C00D26F4C /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80714A6D84C00D26F4C /* MWFeedItem.m */; };
+		4B71F81714A6D84C00D26F4C /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80A14A6D84C00D26F4C /* MWFeedParser.m */; };
+		4B71F81814A6D84C00D26F4C /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80A14A6D84C00D26F4C /* MWFeedParser.m */; };
+		4B71F81914A6D84C00D26F4C /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80C14A6D84C00D26F4C /* NSDate+InternetDateTime.m */; };
+		4B71F81A14A6D84C00D26F4C /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80C14A6D84C00D26F4C /* NSDate+InternetDateTime.m */; };
+		4B71F81B14A6D84C00D26F4C /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80E14A6D84C00D26F4C /* NSString+HTML.m */; };
+		4B71F81C14A6D84C00D26F4C /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80E14A6D84C00D26F4C /* NSString+HTML.m */; };
+		4B71F81D14A6D84C00D26F4C /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */; };
+		4B71F81E14A6D84C00D26F4C /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */; };
+		4B71F82114A6E95B00D26F4C /* SVTagListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVTagListController.m */; };
+		4B71F82214A6E95B00D26F4C /* SVTagListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVTagListController.m */; };
+		4B71F82514A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */; };
+		4B71F82614A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,25 +87,76 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastDetailsViewController.h; sourceTree = "<group>"; };
+		4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastDetailsViewController.m; sourceTree = "<group>"; };
+		4B189B3514AFAD12001E378A /* SVPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackController.h; sourceTree = "<group>"; };
+		4B189B3614AFAD13001E378A /* SVPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlaybackController.m; sourceTree = "<group>"; };
+		4B189B3914AFDEE6001E378A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4B4486A114B0120700D2F182 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4B71F78B14A5B08C00D26F4C /* podster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B71F78F14A5B08C00D26F4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B71F79114A5B08C00D26F4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4B71F79314A5B08C00D26F4C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4B71F79714A5B08C00D26F4C /* podster-Info.plist */ = {isa = PBXFileReference; path = "podster-Info.plist"; sourceTree = "<group>"; };
+		4B71F79714A5B08C00D26F4C /* podster-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "podster-Info.plist"; sourceTree = "<group>"; };
 		4B71F79914A5B08C00D26F4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B71F79B14A5B08C00D26F4C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4B71F79D14A5B08C00D26F4C /* podster-Prefix.pch */ = {isa = PBXFileReference; path = "podster-Prefix.pch"; sourceTree = "<group>"; };
-		4B71F79E14A5B08C00D26F4C /* SVAppDelegate.h */ = {isa = PBXFileReference; path = SVAppDelegate.h; sourceTree = "<group>"; };
+		4B71F79D14A5B08C00D26F4C /* podster-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "podster-Prefix.pch"; sourceTree = "<group>"; };
+		4B71F79E14A5B08C00D26F4C /* SVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVAppDelegate.h; sourceTree = "<group>"; };
 		4B71F79F14A5B08C00D26F4C /* SVAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVAppDelegate.m; sourceTree = "<group>"; };
 		4B71F7A214A5B08C00D26F4C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		4B71F7A414A5B08C00D26F4C /* SVViewController.h */ = {isa = PBXFileReference; path = SVViewController.h; sourceTree = "<group>"; };
+		4B71F7A414A5B08C00D26F4C /* SVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVViewController.h; sourceTree = "<group>"; };
 		4B71F7A514A5B08C00D26F4C /* SVViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVViewController.m; sourceTree = "<group>"; };
 		4B71F7AC14A5B08C00D26F4C /* podsterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = podsterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B71F7AD14A5B08C00D26F4C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		4B71F7B514A5B08C00D26F4C /* podsterTests-Info.plist */ = {isa = PBXFileReference; path = "podsterTests-Info.plist"; sourceTree = "<group>"; };
+		4B71F7B514A5B08C00D26F4C /* podsterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "podsterTests-Info.plist"; sourceTree = "<group>"; };
 		4B71F7B714A5B08C00D26F4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4B71F7B914A5B08C00D26F4C /* podsterTests.h */ = {isa = PBXFileReference; path = podsterTests.h; sourceTree = "<group>"; };
+		4B71F7B914A5B08C00D26F4C /* podsterTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = podsterTests.h; sourceTree = "<group>"; };
 		4B71F7BA14A5B08C00D26F4C /* podsterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = podsterTests.m; sourceTree = "<group>"; };
+		4B71F7CA14A5B62E00D26F4C /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		4B71F7CB14A5B62E00D26F4C /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		4B71F7CC14A5B62E00D26F4C /* NSDate+RFC1123.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RFC1123.h"; sourceTree = "<group>"; };
+		4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RFC1123.m"; sourceTree = "<group>"; };
+		4B71F7CE14A5B62E00D26F4C /* NSDictionary+RequestEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+RequestEncoding.h"; sourceTree = "<group>"; };
+		4B71F7CF14A5B62E00D26F4C /* NSDictionary+RequestEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+RequestEncoding.m"; sourceTree = "<group>"; };
+		4B71F7D014A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
+		4B71F7D114A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
+		4B71F7D214A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
+		4B71F7D314A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
+		4B71F7D414A5B62E00D26F4C /* MKNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkEngine.h; sourceTree = "<group>"; };
+		4B71F7D514A5B62E00D26F4C /* MKNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkEngine.m; sourceTree = "<group>"; };
+		4B71F7D614A5B62E00D26F4C /* MKNetworkKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkKit.h; sourceTree = "<group>"; };
+		4B71F7D714A5B62E00D26F4C /* MKNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkOperation.h; sourceTree = "<group>"; };
+		4B71F7D814A5B62E00D26F4C /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
+		4B71F7DA14A5B62E00D26F4C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		4B71F7DB14A5B62E00D26F4C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		4B71F7EE14A5B66400D26F4C /* SVGPodderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGPodderClient.h; sourceTree = "<group>"; };
+		4B71F7EF14A5B66400D26F4C /* SVGPodderClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGPodderClient.m; sourceTree = "<group>"; };
+		4B71F7F214A5BBBD00D26F4C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4B71F7F814A5BE6C00D26F4C /* SVPodcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcast.h; sourceTree = "<group>"; };
+		4B71F7F914A5BE6C00D26F4C /* SVPodcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcast.m; sourceTree = "<group>"; };
+		4B71F7FC14A6BAAD00D26F4C /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		4B71F7FD14A6BAAE00D26F4C /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		4B71F80214A6D84C00D26F4C /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		4B71F80314A6D84C00D26F4C /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		4B71F80414A6D84C00D26F4C /* MWFeedInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedInfo.h; sourceTree = "<group>"; };
+		4B71F80514A6D84C00D26F4C /* MWFeedInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedInfo.m; sourceTree = "<group>"; };
+		4B71F80614A6D84C00D26F4C /* MWFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedItem.h; sourceTree = "<group>"; };
+		4B71F80714A6D84C00D26F4C /* MWFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedItem.m; sourceTree = "<group>"; };
+		4B71F80814A6D84C00D26F4C /* MWFeedParser_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser_Private.h; sourceTree = "<group>"; };
+		4B71F80914A6D84C00D26F4C /* MWFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser.h; sourceTree = "<group>"; };
+		4B71F80A14A6D84C00D26F4C /* MWFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParser.m; sourceTree = "<group>"; };
+		4B71F80B14A6D84C00D26F4C /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+InternetDateTime.h"; sourceTree = "<group>"; };
+		4B71F80C14A6D84C00D26F4C /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
+		4B71F80D14A6D84C00D26F4C /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		4B71F80E14A6D84C00D26F4C /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		4B71F80F14A6D84C00D26F4C /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
+		4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
+		4B71F81F14A6E95A00D26F4C /* SVTagListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVTagListController.h; sourceTree = "<group>"; };
+		4B71F82014A6E95B00D26F4C /* SVTagListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVTagListController.m; sourceTree = "<group>"; };
+		4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcastsForTagViewController.h; path = ../SVPodcastsForTagViewController.h; sourceTree = "<group>"; };
+		4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcastsForTagViewController.m; path = ../SVPodcastsForTagViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +164,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B4486A314B0120D00D2F182 /* CoreMedia.framework in Frameworks */,
+				4B189B3A14AFDEE6001E378A /* AVFoundation.framework in Frameworks */,
+				4B71F7F714A5BBFB00D26F4C /* SystemConfiguration.framework in Frameworks */,
+				4B71F7F514A5BBD200D26F4C /* CFNetwork.framework in Frameworks */,
+				4B71F7F314A5BBBD00D26F4C /* Security.framework in Frameworks */,
 				4B71F79014A5B08C00D26F4C /* UIKit.framework in Frameworks */,
 				4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */,
 				4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */,
@@ -69,6 +179,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B4486A614B012BF00D2F182 /* Security.framework in Frameworks */,
+				4B4486A514B012B400D2F182 /* CFNetwork.framework in Frameworks */,
+				4B4486A414B012AE00D2F182 /* SystemConfiguration.framework in Frameworks */,
+				4B4486A214B0120700D2F182 /* CoreMedia.framework in Frameworks */,
+				4B44869F14B011C000D2F182 /* AVFoundation.framework in Frameworks */,
 				4B71F7AE14A5B08C00D26F4C /* SenTestingKit.framework in Frameworks */,
 				4B71F7AF14A5B08C00D26F4C /* UIKit.framework in Frameworks */,
 				4B71F7B014A5B08C00D26F4C /* Foundation.framework in Frameworks */,
@@ -81,6 +196,12 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
+				4B4486A114B0120700D2F182 /* CoreMedia.framework */,
+				4B189B3914AFDEE6001E378A /* AVFoundation.framework */,
+				4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */,
+				4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */,
+				4B71F7F214A5BBBD00D26F4C /* Security.framework */,
+				4B71F7C514A5B09B00D26F4C /* 3rd Party */,
 				4B71F79514A5B08C00D26F4C /* podster */,
 				4B71F7B314A5B08C00D26F4C /* podsterTests */,
 				4B71F78E14A5B08C00D26F4C /* Frameworks */,
@@ -111,12 +232,24 @@
 		4B71F79514A5B08C00D26F4C /* podster */ = {
 			isa = PBXGroup;
 			children = (
+				4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */,
+				4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */,
 				4B71F79E14A5B08C00D26F4C /* SVAppDelegate.h */,
 				4B71F79F14A5B08C00D26F4C /* SVAppDelegate.m */,
 				4B71F7A114A5B08C00D26F4C /* MainStoryboard.storyboard */,
 				4B71F7A414A5B08C00D26F4C /* SVViewController.h */,
 				4B71F7A514A5B08C00D26F4C /* SVViewController.m */,
 				4B71F79614A5B08C00D26F4C /* Supporting Files */,
+				4B71F7EE14A5B66400D26F4C /* SVGPodderClient.h */,
+				4B71F7EF14A5B66400D26F4C /* SVGPodderClient.m */,
+				4B71F7F814A5BE6C00D26F4C /* SVPodcast.h */,
+				4B71F7F914A5BE6C00D26F4C /* SVPodcast.m */,
+				4B71F81F14A6E95A00D26F4C /* SVTagListController.h */,
+				4B71F82014A6E95B00D26F4C /* SVTagListController.m */,
+				4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */,
+				4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */,
+				4B189B3514AFAD12001E378A /* SVPlaybackController.h */,
+				4B189B3614AFAD13001E378A /* SVPlaybackController.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -149,6 +282,87 @@
 				4B71F7B614A5B08C00D26F4C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
+			isa = PBXGroup;
+			children = (
+				4B71F80114A6D7F500D26F4C /* MWFeedParser */,
+				4B71F80014A6D7E300D26F4C /* GDataXMLNode */,
+				4B71F7C614A5B2E100D26F4C /* MKNetworkKit */,
+			);
+			name = "3rd Party";
+			sourceTree = "<group>";
+		};
+		4B71F7C614A5B2E100D26F4C /* MKNetworkKit */ = {
+			isa = PBXGroup;
+			children = (
+				4B71F7C714A5B62E00D26F4C /* Categories */,
+				4B71F7D414A5B62E00D26F4C /* MKNetworkEngine.h */,
+				4B71F7D514A5B62E00D26F4C /* MKNetworkEngine.m */,
+				4B71F7D614A5B62E00D26F4C /* MKNetworkKit.h */,
+				4B71F7D714A5B62E00D26F4C /* MKNetworkOperation.h */,
+				4B71F7D814A5B62E00D26F4C /* MKNetworkOperation.m */,
+				4B71F7D914A5B62E00D26F4C /* Reachability */,
+			);
+			name = MKNetworkKit;
+			sourceTree = "<group>";
+		};
+		4B71F7C714A5B62E00D26F4C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4B71F7CA14A5B62E00D26F4C /* NSData+Base64.h */,
+				4B71F7CB14A5B62E00D26F4C /* NSData+Base64.m */,
+				4B71F7CC14A5B62E00D26F4C /* NSDate+RFC1123.h */,
+				4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */,
+				4B71F7CE14A5B62E00D26F4C /* NSDictionary+RequestEncoding.h */,
+				4B71F7CF14A5B62E00D26F4C /* NSDictionary+RequestEncoding.m */,
+				4B71F7D014A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.h */,
+				4B71F7D114A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m */,
+				4B71F7D214A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.h */,
+				4B71F7D314A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		4B71F7D914A5B62E00D26F4C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				4B71F7DA14A5B62E00D26F4C /* Reachability.h */,
+				4B71F7DB14A5B62E00D26F4C /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		4B71F80014A6D7E300D26F4C /* GDataXMLNode */ = {
+			isa = PBXGroup;
+			children = (
+				4B71F7FC14A6BAAD00D26F4C /* GDataXMLNode.h */,
+				4B71F7FD14A6BAAE00D26F4C /* GDataXMLNode.m */,
+			);
+			name = GDataXMLNode;
+			sourceTree = "<group>";
+		};
+		4B71F80114A6D7F500D26F4C /* MWFeedParser */ = {
+			isa = PBXGroup;
+			children = (
+				4B71F80214A6D84C00D26F4C /* GTMNSString+HTML.h */,
+				4B71F80314A6D84C00D26F4C /* GTMNSString+HTML.m */,
+				4B71F80414A6D84C00D26F4C /* MWFeedInfo.h */,
+				4B71F80514A6D84C00D26F4C /* MWFeedInfo.m */,
+				4B71F80614A6D84C00D26F4C /* MWFeedItem.h */,
+				4B71F80714A6D84C00D26F4C /* MWFeedItem.m */,
+				4B71F80814A6D84C00D26F4C /* MWFeedParser_Private.h */,
+				4B71F80914A6D84C00D26F4C /* MWFeedParser.h */,
+				4B71F80A14A6D84C00D26F4C /* MWFeedParser.m */,
+				4B71F80B14A6D84C00D26F4C /* NSDate+InternetDateTime.h */,
+				4B71F80C14A6D84C00D26F4C /* NSDate+InternetDateTime.m */,
+				4B71F80D14A6D84C00D26F4C /* NSString+HTML.h */,
+				4B71F80E14A6D84C00D26F4C /* NSString+HTML.m */,
+				4B71F80F14A6D84C00D26F4C /* NSString+XMLEntities.h */,
+				4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */,
+			);
+			name = MWFeedParser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +474,28 @@
 				4B71F79C14A5B08C00D26F4C /* main.m in Sources */,
 				4B71F7A014A5B08C00D26F4C /* SVAppDelegate.m in Sources */,
 				4B71F7A614A5B08C00D26F4C /* SVViewController.m in Sources */,
+				4B71F7DE14A5B62E00D26F4C /* NSData+Base64.m in Sources */,
+				4B71F7E014A5B62E00D26F4C /* NSDate+RFC1123.m in Sources */,
+				4B71F7E214A5B62E00D26F4C /* NSDictionary+RequestEncoding.m in Sources */,
+				4B71F7E414A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m in Sources */,
+				4B71F7E614A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
+				4B71F7E814A5B62E00D26F4C /* MKNetworkEngine.m in Sources */,
+				4B71F7EA14A5B62E00D26F4C /* MKNetworkOperation.m in Sources */,
+				4B71F7EC14A5B62E00D26F4C /* Reachability.m in Sources */,
+				4B71F7F014A5B66400D26F4C /* SVGPodderClient.m in Sources */,
+				4B71F7FA14A5BE6C00D26F4C /* SVPodcast.m in Sources */,
+				4B71F7FE14A6BAAE00D26F4C /* GDataXMLNode.m in Sources */,
+				4B71F81114A6D84C00D26F4C /* GTMNSString+HTML.m in Sources */,
+				4B71F81314A6D84C00D26F4C /* MWFeedInfo.m in Sources */,
+				4B71F81514A6D84C00D26F4C /* MWFeedItem.m in Sources */,
+				4B71F81714A6D84C00D26F4C /* MWFeedParser.m in Sources */,
+				4B71F81914A6D84C00D26F4C /* NSDate+InternetDateTime.m in Sources */,
+				4B71F81B14A6D84C00D26F4C /* NSString+HTML.m in Sources */,
+				4B71F81D14A6D84C00D26F4C /* NSString+XMLEntities.m in Sources */,
+				4B71F82114A6E95B00D26F4C /* SVTagListController.m in Sources */,
+				4B71F82514A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */,
+				4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */,
+				4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +504,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B71F7BB14A5B08C00D26F4C /* podsterTests.m in Sources */,
+				4B71F7DF14A5B62E00D26F4C /* NSData+Base64.m in Sources */,
+				4B71F7E114A5B62E00D26F4C /* NSDate+RFC1123.m in Sources */,
+				4B71F7E314A5B62E00D26F4C /* NSDictionary+RequestEncoding.m in Sources */,
+				4B71F7E514A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m in Sources */,
+				4B71F7E714A5B62E00D26F4C /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
+				4B71F7E914A5B62E00D26F4C /* MKNetworkEngine.m in Sources */,
+				4B71F7EB14A5B62E00D26F4C /* MKNetworkOperation.m in Sources */,
+				4B71F7ED14A5B62E00D26F4C /* Reachability.m in Sources */,
+				4B71F7F114A5B66400D26F4C /* SVGPodderClient.m in Sources */,
+				4B71F7FB14A5BE6C00D26F4C /* SVPodcast.m in Sources */,
+				4B71F7FF14A6BAAE00D26F4C /* GDataXMLNode.m in Sources */,
+				4B71F81214A6D84C00D26F4C /* GTMNSString+HTML.m in Sources */,
+				4B71F81414A6D84C00D26F4C /* MWFeedInfo.m in Sources */,
+				4B71F81614A6D84C00D26F4C /* MWFeedItem.m in Sources */,
+				4B71F81814A6D84C00D26F4C /* MWFeedParser.m in Sources */,
+				4B71F81A14A6D84C00D26F4C /* NSDate+InternetDateTime.m in Sources */,
+				4B71F81C14A6D84C00D26F4C /* NSString+HTML.m in Sources */,
+				4B71F81E14A6D84C00D26F4C /* NSString+XMLEntities.m in Sources */,
+				4B71F82214A6E95B00D26F4C /* SVTagListController.m in Sources */,
+				4B71F82614A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */,
+				4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */,
+				4B189B3814AFAD13001E378A /* SVPlaybackController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +617,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "podster/podster-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -370,7 +630,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "podster/podster-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -386,7 +648,9 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "podsterTests/podsterTests-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -403,7 +667,9 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "podsterTests/podsterTests-Info.plist";
+				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -429,6 +695,7 @@
 				4B71F7C014A5B08C00D26F4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B71F7C114A5B08C00D26F4C /* Build configuration list for PBXNativeTarget "podsterTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +704,7 @@
 				4B71F7C314A5B08C00D26F4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

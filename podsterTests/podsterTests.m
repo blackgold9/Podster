@@ -7,7 +7,7 @@
 //
 
 #import "podsterTests.h"
-
+#import "SVPlaybackController.h"
 @implementation podsterTests
 
 - (void)setUp
@@ -24,9 +24,13 @@
     [super tearDown];
 }
 
-- (void)testExample
+
+-(void)testCorrectlyFormatsSecondsAsString
 {
-    STFail(@"Unit tests are not implemented yet in podsterTests");
+    // Check 1 second
+    NSInteger numberOfSeconds = 1;
+    NSString *stringEquivalent = [SVPlaybackController formattedStringRepresentationOfSeconds:numberOfSeconds];
+    STAssertTrue([stringEquivalent isEqualToString:@"0:00:01"], @"Expected 0:00:01, Got: %@", stringEquivalent);
 }
 
 @end
