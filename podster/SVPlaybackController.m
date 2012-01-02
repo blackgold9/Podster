@@ -8,6 +8,7 @@
 
 #import "SVPlaybackController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "OBSlider.h"
 @implementation SVPlaybackController {
     AVPlayer *player;
     id playerObserver;
@@ -51,14 +52,22 @@
 {
     [super viewDidLoad];
 
-    player = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://localhost:5000/cheating.mp3"]];
+    player = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://serve.castfire.com/audio/829683/829683_2011-12-29-212623.128.mp3"]];
     [player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
-    playerObserver = [player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) {
-        CMTime duration = player.currentItem.duration;
-        NSInteger remaining = duration.value - time.value;
-
+    __weak SVPlaybackController  *weakSelf = self;
+    playerObserver = [player addPeriodicTimeObserverForInterval:CMTimeMake(1, 2) queue:NULL usingBlock:^(CMTime time) {
+        CMTime duration = weakSelf->player.currentItem.duration;
+        NSInteger remaining = (duration.value / duration.timescale) - (time.value / time.timescale);
+        weakSelf.timeElapsedLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:(time.value / time.timescale)];
+        weakSelf.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:remaining];
+        if(!self.progressSlider.isTracking) {
+            self.progressSlider.value = (float) (time.value / time.timescale) / (duration.value / duration.timescale);
+        }
+        
     }];
-    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive: YES error: nil];
+      
     
     
 }
@@ -88,24 +97,64 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ((__bridge id)context == self) {
-        if ([keyPath isEqualToString:@"status"]) {
-            if (object == player) {
-                [player play];
-                NSLog(@"Started Playback");
+        if (object == player) {
+            if ([keyPath isEqualToString:@"status"]) {
+        
+                if (player.status == AVPlayerStatusReadyToPlay) {
+                    [player play];
+                    NSLog(@"Started Playback");
+                } else {
+                    NSLog(@"Error downloing");
+                }
             }
         }
     }
 }
 - (IBAction)playTapped:(id)sender {
+    if (player.rate == 0) {
+        [player play];
+    } else {
+        [player pause];
+    }
+}
+- (IBAction)sliderChanged:(id)sender {
+    OBSlider *slider = sender;
+    if (slider.isTracking) {
+
+        CMTime duration = [player.currentItem duration];
+        NSInteger durationInSeconds = duration.value / duration.timescale;
+        NSInteger currentSeconds = (float)slider.value * durationInSeconds;
+        self.timeElapsedLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:currentSeconds];
+        self.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:durationInSeconds - currentSeconds];
+
+        [player seekToTime:CMTimeMake(currentSeconds, 1)];
+        
+    }
 }
 
+- (IBAction)skipForwardTapped:(id)sender {
+    CMTime ammount = CMTimeMake(30, 1);
+    [player seekToTime:CMTimeAdd(ammount, player.currentTime)];
+}
+
+- (IBAction)skipBackTapped:(id)sender {
+    CMTime ammount = CMTimeMake(7, 1);
+    [player seekToTime:CMTimeSubtract(player.currentTime, ammount)];
+}
 #pragma mark - helpers
+
+
 +(NSString *)formattedStringRepresentationOfSeconds:(NSInteger)totalSeconds
 {
     NSInteger hourInSeconds = 3600;
     NSInteger hours = totalSeconds / hourInSeconds;
     NSInteger minutes = (totalSeconds % hourInSeconds) / 60;
     NSInteger seconds = totalSeconds % 60;
-    return [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes,seconds];
+    if( hours > 0 ) {
+        return [NSString stringWithFormat:@"%d:%02d:%02d", hours, minutes,seconds];
+    } else {
+        return [NSString stringWithFormat:@"%02d:%02d", minutes,seconds];
+
+    }
 }
 @end

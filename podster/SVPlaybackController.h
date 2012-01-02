@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class OBSlider;
 @interface SVPlaybackController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *skipForwardButton;
 @property (weak, nonatomic) IBOutlet UIButton *skipBackButton;
 - (IBAction)playTapped:(id)sender;
 @property (weak, nonatomic) IBOutletCollection(UIView) NSArray *chromeViews;
-@property (weak, nonatomic) IBOutlet UISlider *progressSlider;
+@property (weak, nonatomic) IBOutlet OBSlider *progressSlider;
 @property (weak, nonatomic) IBOutlet UILabel *timeRemainingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeElapsedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+- (IBAction)sliderChanged:(id)sender;
+- (IBAction)skipForwardTapped:(id)sender;
+- (IBAction)skipBackTapped:(id)sender;
 
 +(NSString *)formattedStringRepresentationOfSeconds:(NSInteger)seconds;
 @end

@@ -18,6 +18,10 @@
 		4B4486A414B012AE00D2F182 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */; };
 		4B4486A514B012B400D2F182 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */; };
 		4B4486A614B012BF00D2F182 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F214A5BBBD00D26F4C /* Security.framework */; };
+		4B5CE90014B0E10400E17299 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE8FF14B0E10400E17299 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4B5CE90114B0E10400E17299 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE8FF14B0E10400E17299 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4B5CE90414B1161E00E17299 /* SVPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */; };
+		4B5CE90514B1161E00E17299 /* SVPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */; };
 		4B71F79014A5B08C00D26F4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F78F14A5B08C00D26F4C /* UIKit.framework */; };
 		4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79114A5B08C00D26F4C /* Foundation.framework */; };
 		4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79314A5B08C00D26F4C /* CoreGraphics.framework */; };
@@ -74,6 +78,10 @@
 		4B71F82214A6E95B00D26F4C /* SVTagListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVTagListController.m */; };
 		4B71F82514A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */; };
 		4B71F82614A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */; };
+		4B71F82614A7060B00D26F4E /* SVPodcastEpisode.m in Resources */ = {isa = PBXBuildFile; fileRef = 4B71F82614A7060B00D26F4D /* SVPodcastEpisode.m */; };
+		4B71F82614A7060B00D26F4F /* SVPodcastEpisode.m in Resources */ = {isa = PBXBuildFile; fileRef = 4B71F82614A7060B00D26F4D /* SVPodcastEpisode.m */; };
+		4B71F82614A7060B00D26F51 /* SVPodcastEpisode.h in Resources */ = {isa = PBXBuildFile; fileRef = 4B71F82614A7060B00D26F50 /* SVPodcastEpisode.h */; };
+		4B71F82614A7060B00D26F52 /* SVPodcastEpisode.h in Resources */ = {isa = PBXBuildFile; fileRef = 4B71F82614A7060B00D26F50 /* SVPodcastEpisode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +101,10 @@
 		4B189B3614AFAD13001E378A /* SVPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlaybackController.m; sourceTree = "<group>"; };
 		4B189B3914AFDEE6001E378A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4B4486A114B0120700D2F182 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4B5CE8FE14B0E10400E17299 /* OBSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSlider.h; sourceTree = "<group>"; };
+		4B5CE8FF14B0E10400E17299 /* OBSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBSlider.m; sourceTree = "<group>"; };
+		4B5CE90214B1161D00E17299 /* SVPlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackManager.h; sourceTree = "<group>"; };
+		4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlaybackManager.m; sourceTree = "<group>"; };
 		4B71F78B14A5B08C00D26F4C /* podster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B71F78F14A5B08C00D26F4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B71F79114A5B08C00D26F4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -157,6 +169,8 @@
 		4B71F82014A6E95B00D26F4C /* SVTagListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVTagListController.m; sourceTree = "<group>"; };
 		4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcastsForTagViewController.h; path = ../SVPodcastsForTagViewController.h; sourceTree = "<group>"; };
 		4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcastsForTagViewController.m; path = ../SVPodcastsForTagViewController.m; sourceTree = "<group>"; };
+		4B71F82614A7060B00D26F4D /* SVPodcastEpisode.m */ = {isa = PBXFileReference; lastKnownFileType = file.m; path = SVPodcastEpisode.m; sourceTree = "<group>"; };
+		4B71F82614A7060B00D26F50 /* SVPodcastEpisode.h */ = {isa = PBXFileReference; lastKnownFileType = file.h; path = SVPodcastEpisode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,14 +207,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B5CE8FD14B0E0ED00E17299 /* OBSlider */ = {
+			isa = PBXGroup;
+			children = (
+				4B5CE8FE14B0E10400E17299 /* OBSlider.h */,
+				4B5CE8FF14B0E10400E17299 /* OBSlider.m */,
+			);
+			name = OBSlider;
+			sourceTree = "<group>";
+		};
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
-				4B4486A114B0120700D2F182 /* CoreMedia.framework */,
-				4B189B3914AFDEE6001E378A /* AVFoundation.framework */,
-				4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */,
-				4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */,
-				4B71F7F214A5BBBD00D26F4C /* Security.framework */,
 				4B71F7C514A5B09B00D26F4C /* 3rd Party */,
 				4B71F79514A5B08C00D26F4C /* podster */,
 				4B71F7B314A5B08C00D26F4C /* podsterTests */,
@@ -221,6 +239,11 @@
 		4B71F78E14A5B08C00D26F4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B4486A114B0120700D2F182 /* CoreMedia.framework */,
+				4B189B3914AFDEE6001E378A /* AVFoundation.framework */,
+				4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */,
+				4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */,
+				4B71F7F214A5BBBD00D26F4C /* Security.framework */,
 				4B71F78F14A5B08C00D26F4C /* UIKit.framework */,
 				4B71F79114A5B08C00D26F4C /* Foundation.framework */,
 				4B71F79314A5B08C00D26F4C /* CoreGraphics.framework */,
@@ -232,6 +255,8 @@
 		4B71F79514A5B08C00D26F4C /* podster */ = {
 			isa = PBXGroup;
 			children = (
+				4B71F82614A7060B00D26F50 /* SVPodcastEpisode.h */,
+				4B71F82614A7060B00D26F4D /* SVPodcastEpisode.m */,
 				4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */,
 				4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */,
 				4B71F79E14A5B08C00D26F4C /* SVAppDelegate.h */,
@@ -250,6 +275,8 @@
 				4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */,
 				4B189B3514AFAD12001E378A /* SVPlaybackController.h */,
 				4B189B3614AFAD13001E378A /* SVPlaybackController.m */,
+				4B5CE90214B1161D00E17299 /* SVPlaybackManager.h */,
+				4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -287,6 +314,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B5CE8FD14B0E0ED00E17299 /* OBSlider */,
 				4B71F80114A6D7F500D26F4C /* MWFeedParser */,
 				4B71F80014A6D7E300D26F4C /* GDataXMLNode */,
 				4B71F7C614A5B2E100D26F4C /* MKNetworkKit */,
@@ -437,6 +465,8 @@
 			files = (
 				4B71F79A14A5B08C00D26F4C /* InfoPlist.strings in Resources */,
 				4B71F7A314A5B08C00D26F4C /* MainStoryboard.storyboard in Resources */,
+				4B71F82614A7060B00D26F4E /* SVPodcastEpisode.m in Resources */,
+				4B71F82614A7060B00D26F51 /* SVPodcastEpisode.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +475,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B71F7B814A5B08C00D26F4C /* InfoPlist.strings in Resources */,
+				4B71F82614A7060B00D26F4F /* SVPodcastEpisode.m in Resources */,
+				4B71F82614A7060B00D26F52 /* SVPodcastEpisode.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +528,8 @@
 				4B71F82514A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */,
 				4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */,
 				4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */,
+				4B5CE90014B0E10400E17299 /* OBSlider.m in Sources */,
+				4B5CE90414B1161E00E17299 /* SVPlaybackManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +560,8 @@
 				4B71F82614A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */,
 				4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */,
 				4B189B3814AFAD13001E378A /* SVPlaybackController.m in Sources */,
+				4B5CE90114B0E10400E17299 /* OBSlider.m in Sources */,
+				4B5CE90514B1161E00E17299 /* SVPlaybackManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
