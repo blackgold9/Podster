@@ -14,12 +14,14 @@ extern const struct SVPodcastAttributes {
 
 extern const struct SVPodcastRelationships {
 	__unsafe_unretained NSString *items;
+	__unsafe_unretained NSString *subscription;
 } SVPodcastRelationships;
 
 extern const struct SVPodcastFetchedProperties {
 } SVPodcastFetchedProperties;
 
 @class SVPodcastEntry;
+@class SVSubscription;
 
 
 
@@ -87,6 +89,13 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) SVSubscription* subscription;
+
+//- (BOOL)validateSubscription:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @end
 
 @interface _SVPodcast (CoreDataGeneratedAccessors)
@@ -134,6 +143,11 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSMutableSet*)primitiveItems;
 - (void)setPrimitiveItems:(NSMutableSet*)value;
+
+
+
+- (SVSubscription*)primitiveSubscription;
+- (void)setPrimitiveSubscription:(SVSubscription*)value;
 
 
 @end

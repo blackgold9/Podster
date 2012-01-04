@@ -56,6 +56,10 @@
 		4B2E524014B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E523414B3BBB80030B7C1 /* SVPodcastEntry.m */; };
 		4B2E524414B3BF260030B7C1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2E524314B3BF260030B7C1 /* CoreData.framework */; };
 		4B2E524514B3BF2E0030B7C1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2E524314B3BF260030B7C1 /* CoreData.framework */; };
+		4B2E524B14B3E1220030B7C1 /* _SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524814B3E1220030B7C1 /* _SVSubscription.m */; };
+		4B2E524C14B3E1220030B7C1 /* _SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524814B3E1220030B7C1 /* _SVSubscription.m */; };
+		4B2E524D14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
+		4B2E524E14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
 		4B44869F14B011C000D2F182 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B189B3914AFDEE6001E378A /* AVFoundation.framework */; };
 		4B4486A214B0120700D2F182 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4486A114B0120700D2F182 /* CoreMedia.framework */; };
 		4B4486A314B0120D00D2F182 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4486A114B0120700D2F182 /* CoreMedia.framework */; };
@@ -182,6 +186,10 @@
 		4B2E523314B3BBB80030B7C1 /* SVPodcastEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcastEntry.h; path = models/SVPodcastEntry.h; sourceTree = "<group>"; };
 		4B2E523414B3BBB80030B7C1 /* SVPodcastEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcastEntry.m; path = models/SVPodcastEntry.m; sourceTree = "<group>"; };
 		4B2E524314B3BF260030B7C1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4B2E524714B3E1210030B7C1 /* _SVSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _SVSubscription.h; path = models/_SVSubscription.h; sourceTree = "<group>"; };
+		4B2E524814B3E1220030B7C1 /* _SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _SVSubscription.m; path = models/_SVSubscription.m; sourceTree = "<group>"; };
+		4B2E524914B3E1220030B7C1 /* SVSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVSubscription.h; path = models/SVSubscription.h; sourceTree = "<group>"; };
+		4B2E524A14B3E1220030B7C1 /* SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVSubscription.m; path = models/SVSubscription.m; sourceTree = "<group>"; };
 		4B4486A114B0120700D2F182 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4B5CE8FE14B0E10400E17299 /* OBSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSlider.h; sourceTree = "<group>"; };
 		4B5CE8FF14B0E10400E17299 /* OBSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBSlider.m; sourceTree = "<group>"; };
@@ -296,6 +304,8 @@
 				4B2E523314B3BBB80030B7C1 /* SVPodcastEntry.h */,
 				4B2E523414B3BBB80030B7C1 /* SVPodcastEntry.m */,
 				4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */,
+				4B2E524914B3E1220030B7C1 /* SVSubscription.h */,
+				4B2E524A14B3E1220030B7C1 /* SVSubscription.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -357,6 +367,8 @@
 		4B2E524214B3BBBF0030B7C1 /* generated */ = {
 			isa = PBXGroup;
 			children = (
+				4B2E524714B3E1210030B7C1 /* _SVSubscription.h */,
+				4B2E524814B3E1220030B7C1 /* _SVSubscription.m */,
 				4B2E522914B3BBB80030B7C1 /* _SVDownload.h */,
 				4B2E522A14B3BBB80030B7C1 /* _SVDownload.m */,
 				4B2E522B14B3BBB80030B7C1 /* _SVPodcast.h */,
@@ -707,6 +719,8 @@
 				4B2E523914B3BBB80030B7C1 /* _SVPodcastEntry.m in Sources */,
 				4B2E523D14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E523F14B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
+				4B2E524B14B3E1220030B7C1 /* _SVSubscription.m in Sources */,
+				4B2E524D14B3E1220030B7C1 /* SVSubscription.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +773,8 @@
 				4B2E523A14B3BBB80030B7C1 /* _SVPodcastEntry.m in Sources */,
 				4B2E523E14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E524014B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
+				4B2E524C14B3E1220030B7C1 /* _SVSubscription.m in Sources */,
+				4B2E524E14B3E1220030B7C1 /* SVSubscription.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

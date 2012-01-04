@@ -7,6 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class SVPodcast;
+@class SVPodcastEntry;
 @interface SVDownloadManager : NSObject
++ (id)sharedInstance;
+- (void)downloadEntry:(SVPodcastEntry *)entry;
+- (NSArray *)downloadQueue;
 @end

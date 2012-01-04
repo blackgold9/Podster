@@ -13,6 +13,7 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 
 const struct SVPodcastRelationships SVPodcastRelationships = {
 	.items = @"items",
+	.subscription = @"subscription",
 };
 
 const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
@@ -97,6 +98,10 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	[self didAccessValueForKey:@"items"];
 	return result;
 }
+	
+
+@dynamic subscription;
+
 	
 
 
