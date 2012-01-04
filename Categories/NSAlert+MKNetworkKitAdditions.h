@@ -1,5 +1,5 @@
 //
-//  NSString+MKNetworkKitAdditions.h
+//  NSAlert+MKNetworkKitAdditions.h
 //  MKNetworkKitDemo
 //
 //  Created by Mugunth Kumar (@mugunthkumar) on 11/11/11.
@@ -23,11 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
-@interface NSString (MKNetworkKitAdditions)
-
-- (NSString *) md5;
-+ (NSString*) uniqueString;
-- (NSString*) urlEncodedString;
+@interface NSAlert (MKNetworkKitAdditions)
++(NSAlert*) showWithError:(NSError*) networkError;
 @end

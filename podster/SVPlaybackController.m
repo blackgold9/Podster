@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "OBSlider.h"
 #import "SVPodcast.h"
-#import "SVPodcastEpisodeOld.h"
+#import "SVPodcastEntry.h"
 #import "SVPlaybackManager.h"
 @implementation SVPlaybackController {
     AVPlayer *player;

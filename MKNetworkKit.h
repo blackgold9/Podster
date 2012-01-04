@@ -30,11 +30,11 @@
 #warning "MKNetworkKit uses features only available in iOS SDK 4.0 and later."
 #endif
 
-#if TARGET_OS_IPHONE
 #import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #elif TARGET_OS_MAC
-#import <Cocoa/Cocoa.h>
 #import <AppKit/AppKit.h>
 #endif
 
@@ -50,7 +50,6 @@
 #import "Categories/NSString+MKNetworkKitAdditions.h"
 #import "Categories/NSDictionary+RequestEncoding.h"
 #import "Categories/NSDate+RFC1123.h"
-#import "Categories/NSData+Base64.h"
 
 #if TARGET_OS_IPHONE
 #import "Categories/UIAlertView+MKNetworkKitAdditions.h"
@@ -68,12 +67,6 @@
 #define kMKNetworkKitDefaultCacheDuration 60 // 1 minute
 #define kMKNetworkKitDefaultImageHeadRequestDuration 3600*24*1 // 1 day (HEAD requests with eTag are sent only after expiry of this. Not that these are not RFC compliant, but needed for performance tuning)
 #define kMKNetworkKitDefaultImageCacheDuration 3600*24*7 // 1 day
-
-// if your server takes longer than 30 seconds to provide real data,
-// you should hire a better server developer.
-// on iOS (or any mobile device), 30 seconds is already considered high.
-
-#define kMKNetworkKitRequestTimeOutInSeconds 30
 #endif
 
 
