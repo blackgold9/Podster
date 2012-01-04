@@ -5,6 +5,7 @@
 
 
 extern const struct SVPodcastEntryAttributes {
+	__unsafe_unretained NSString *datePublished;
 	__unsafe_unretained NSString *downloadComplete;
 	__unsafe_unretained NSString *guid;
 	__unsafe_unretained NSString *imageURL;
@@ -39,6 +40,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
+
 @interface SVPodcastEntryID : NSManagedObjectID {}
 @end
 
@@ -47,6 +49,14 @@ extern const struct SVPodcastEntryFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SVPodcastEntryID*)objectID;
+
+
+
+
+@property (nonatomic, strong) NSDate *datePublished;
+
+
+//- (BOOL)validateDatePublished:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -174,6 +184,12 @@ extern const struct SVPodcastEntryFetchedProperties {
 @end
 
 @interface _SVPodcastEntry (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSDate*)primitiveDatePublished;
+- (void)setPrimitiveDatePublished:(NSDate*)value;
+
+
 
 
 - (NSNumber*)primitiveDownloadComplete;

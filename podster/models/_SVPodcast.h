@@ -6,6 +6,7 @@
 
 extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *feedURL;
+	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *logoURL;
 	__unsafe_unretained NSString *summary;
 	__unsafe_unretained NSString *title;
@@ -29,6 +30,7 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+
 @interface SVPodcastID : NSManagedObjectID {}
 @end
 
@@ -45,6 +47,14 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateFeedURL:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSDate *lastUpdated;
+
+
+//- (BOOL)validateLastUpdated:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -112,6 +122,12 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveFeedURL;
 - (void)setPrimitiveFeedURL:(NSString*)value;
+
+
+
+
+- (NSDate*)primitiveLastUpdated;
+- (void)setPrimitiveLastUpdated:(NSDate*)value;
 
 
 

@@ -4,6 +4,7 @@
 #import "_SVPodcastEntry.h"
 
 const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
+	.datePublished = @"datePublished",
 	.downloadComplete = @"downloadComplete",
 	.guid = @"guid",
 	.imageURL = @"imageURL",
@@ -73,6 +74,13 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic datePublished;
+
+
 
 
 

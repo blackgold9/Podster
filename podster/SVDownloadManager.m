@@ -8,6 +8,9 @@
 #define kDownloadsDirectory @"PodcatcherDownloads"
 
 #import "SVDownloadManager.h"
+#import "SVPodcastEntry.h"
+#import "SVPodcast.h"
+#import "SVSubscription.h"
 #include <sys/xattr.h>
 
 @interface SVDownloadManager()
@@ -34,13 +37,41 @@
     
     return self;
 }
+- (NSArray *)entriesMarkedForDownload
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"markedForDownload == YES"];
+    NSArray *markedForDownload = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                                        ascending:NO
+                                                    withPredicate:predicate];
+    return markedForDownload;
+}
+
+- (NSArray *)autoDownloadEntriesForSubscription:(SVSubscription *)subscription
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"podcast == %@", subscription.podcast];
+    NSArray *items = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                           ascending:subscription.newestFirstValue
+                                       withPredicate:predicate];
+
+    NSUInteger numberToFetch = MAX([subscription.autoDownloadCount unsignedIntegerValue], items.count);
+    return [items subarrayWithRange:NSMakeRange(0, numberToFetch)];
+}
+
+
 -(void)downloadEntry:(SVPodcastEntry *)entry
 {
-   
+    NSMutableSet *entries = [NSMutableSet set];
+    NSArray *subscriptions = [SVSubscription MR_findAll];
+
+   for(SVSubscription *subscription in subscriptions) {
+
+   }
+
 }
 
 - (NSArray *)downloadQueue
 {
+    SVSubscription *sub = nil;
     return nil;
 }
 
