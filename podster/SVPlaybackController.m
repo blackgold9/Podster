@@ -9,6 +9,9 @@
 #import "SVPlaybackController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "OBSlider.h"
+#import "SVPodcast.h"
+#import "SVPodcastEpisodeOld.h"
+#import "SVPlaybackManager.h"
 @implementation SVPlaybackController {
     AVPlayer *player;
     id playerObserver;
@@ -52,26 +55,28 @@
 {
     [super viewDidLoad];
 
-    player = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://serve.castfire.com/audio/829683/829683_2011-12-29-212623.128.mp3"]];
+
+
+    player = [[SVPlaybackManager sharedInstance] player];
+    if (player.status == AVPlayerStatusReadyToPlay) {
+        [player play];
+    }
     [player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     __weak SVPlaybackController  *weakSelf = self;
     playerObserver = [player addPeriodicTimeObserverForInterval:CMTimeMake(1, 2) queue:NULL usingBlock:^(CMTime time) {
-        CMTime duration = weakSelf->player.currentItem.duration;
-        NSInteger remaining = (duration.value / duration.timescale) - (time.value / time.timescale);
-        weakSelf.timeElapsedLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:(time.value / time.timescale)];
-        weakSelf.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:remaining];
-        if(!self.progressSlider.isTracking) {
-            self.progressSlider.value = (float) (time.value / time.timescale) / (duration.value / duration.timescale);
+        if (weakSelf == nil) {
+            return;
         }
-        
+        CMTime duration = weakSelf->player.currentItem.duration;
+        CMTimeValue currentTimeInSeconds = time.value / time.timescale;
+        NSInteger remaining = (duration.value / duration.timescale) - (currentTimeInSeconds);
+        weakSelf.timeElapsedLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:(currentTimeInSeconds)];
+        weakSelf.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:remaining];
+        if(!weakSelf.progressSlider.isTracking) {
+            weakSelf.progressSlider.value = (float) (currentTimeInSeconds) / (duration.value / duration.timescale);
+        }
     }];
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setActive: YES error: nil];
-      
-    
-    
 }
-
 
 - (void)viewDidUnload
 {
@@ -82,6 +87,7 @@
     [self setSkipBackButton:nil];
     [self setSkipForwardButton:nil];
     [super viewDidUnload];
+    NSLog(@"Removing observers");
     [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
     [player removeTimeObserver:playerObserver];
     // Release any retained subviews of the main view.

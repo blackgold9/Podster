@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Podcast" representedClassName="SVPodcast" syncable="YES">
+        <attribute name="feedURL" attributeType="String" syncable="YES"/>
+        <attribute name="logoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="websiteURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PodcastEntry" inverseName="podcast" inverseEntity="PodcastEntry" syncable="YES"/>
+    </entity>
+    <entity name="PodcastEntry" representedClassName="SVPodcastEntry" syncable="YES">
+        <attribute name="downloadComplete" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="guid" attributeType="String" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isVideo" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="markedForDownload" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="mediaURL" attributeType="String" syncable="YES"/>
+        <attribute name="positionInSeconds" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="sanitizedSummary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="totalBytes" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <relationship name="download" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" syncable="YES"/>
+        <relationship name="podcast" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="items" inverseEntity="Podcast" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Podcast" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="240"/>
+    </elements>
+</model>

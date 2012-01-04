@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
  //   [[SVGPodderClient sharedInstance] useCache];
     return YES;
 }

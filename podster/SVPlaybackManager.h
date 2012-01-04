@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 #import "SVPodcast.h"
-#import "SVPodcastEpisode.h"
+#import "SVPodcastEntry.h"
 @interface SVPlaybackManager : NSObject
 @property (strong) SVPodcast *currentPodcast;
-@property (strong) SVPodcastEpisode *currentEpisode;
+@property (strong) SVPodcastEntry *currentEpisode;
 + (SVPlaybackManager *)sharedInstance;
+
+- (AVPlayer *)player;
+
 - (BOOL)startedPlayback;
-- (void)playEpisode:(SVPodcastEpisode *)episode ofPodcast:(SVPodcast *)podcast;
+- (void)playEpisode:(SVPodcastEntry *)episode ofPodcast:(SVPodcast *)podcast;
 @end

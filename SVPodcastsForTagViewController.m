@@ -53,9 +53,6 @@
                                                     [UIAlertView showWithError:error];
                                                 }];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -97,14 +94,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return isLoading ? 1 : podcasts.count;
 }
@@ -115,10 +110,10 @@
     if (isLoading) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"LoadingCell"];
     } else {
-        SVPodcast *podcast = [podcasts objectAtIndex:indexPath.row];    
+        SVPodcast *podcast = [podcasts objectAtIndex:indexPath.row];
         cell = [tableView dequeueReusableCellWithIdentifier:@"PodcastCell"];
         cell.textLabel.text = podcast.title;
-        cell.detailTextLabel.text = podcast.podcastDescription == nil ? @"": podcast.podcastDescription;
+        cell.detailTextLabel.text = podcast.summary == nil ? @"": podcast.summary;
     }
     
     return cell;
@@ -170,10 +165,12 @@
     [self performSegueWithIdentifier:@"showPodcastDetails" sender:self];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)prepareForSegue:(UIStoryboardSegue *)segue 
+                sender:(id)sender
 {
     SVPodcastDetailsViewController *destination = segue.destinationViewController;
     SVPodcast *podcast = (SVPodcast *)[podcasts objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    
     destination.podcast = podcast;
 }
 @end

@@ -62,9 +62,12 @@
          
          NSArray *podcastsData= [completedOperation responseJSON]; 
          NSMutableArray *podcasts = [NSMutableArray new];
-         for(NSDictionary *podcast in podcastsData)
+         for(NSDictionary *podcastDictionary in podcastsData)
          {
-             [podcasts addObject:[SVPodcast podcastFromDictionary:podcast]];
+             SVPodcast *podcast =  [SVPodcast MR_createEntity];
+             [podcast populateWithGPodderDictionary:podcastDictionary];
+             [podcasts addObject:podcast];
+
              
          }
          
@@ -96,9 +99,11 @@
          
          NSArray *podcastsData= [completedOperation responseJSON]; 
          NSMutableArray *podcasts = [NSMutableArray new];
-         for(NSDictionary *podcast in podcastsData)
+         for(NSDictionary *podcastDictionary in podcastsData)
          {
-             [podcasts addObject:[SVPodcast podcastFromDictionary:podcast]];
+             SVPodcast *podcast =  [SVPodcast MR_createEntity];
+             [podcast populateWithGPodderDictionary:podcastDictionary];
+             [podcasts addObject:podcast];
              
          }
          
