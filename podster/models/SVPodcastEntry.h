@@ -2,4 +2,5 @@
 
 @interface SVPodcastEntry : _SVPodcastEntry {}
 // Custom logic goes here.
+-(NSString *)identifier;
 @end

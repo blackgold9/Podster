@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Download" representedClassName="SVDownload" syncable="YES">
+        <attribute name="downloadedBytes" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Float" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="totalBytes" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="entry" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PodcastEntry" inverseName="download" inverseEntity="PodcastEntry" syncable="YES"/>
+    </entity>
     <entity name="Podcast" representedClassName="SVPodcast" syncable="YES">
         <attribute name="feedURL" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -23,6 +31,7 @@
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="totalBytes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="download" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Download" inverseName="entry" inverseEntity="Download" syncable="YES"/>
         <relationship name="podcast" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="items" inverseEntity="Podcast" syncable="YES"/>
     </entity>
     <entity name="Subscription" representedClassName="SVSubscription" syncable="YES">
@@ -31,8 +40,9 @@
         <relationship name="podcast" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="subscription" inverseEntity="Podcast" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Podcast" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="240"/>
+        <element name="Download" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Podcast" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="255"/>
         <element name="Subscription" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

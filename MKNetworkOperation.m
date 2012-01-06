@@ -53,7 +53,7 @@ typedef enum {
 
 @property (nonatomic, assign) MKNetworkOperationState state;
 @property (nonatomic, assign) BOOL isCancelled;
-
+@property (nonatomic, assign) NSInteger startPoint;
 @property (strong, nonatomic) NSMutableData *mutableData;
 
 @property (nonatomic, retain) NSMutableArray *uploadProgressChangedHandlers;
@@ -104,7 +104,7 @@ typedef enum {
 
 @synthesize uploadProgressChangedHandlers = _uploadProgressChangedHandlers;
 @synthesize downloadProgressChangedHandlers = _downloadProgressChangedHandlers;
-
+@synthesize startPoint = _startPoint;
 @synthesize downloadStreams = _downloadStreams;
 
 @synthesize cachedResponse = _cachedResponse;
@@ -894,6 +894,17 @@ typedef enum {
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     
+    if ([self.mutableData length] == 0) {
+        // This is the first batch of data
+        // Check for a range header and make changes as neccesary
+        NSString *rangeString = [[self request] valueForHTTPHeaderField:@"Range"];
+        if ([rangeString hasPrefix:@"bytes="] && [rangeString hasSuffix:@"-"]) {
+            NSString *bytesText = [rangeString substringWithRange:NSMakeRange(6, [rangeString length] - 7)];
+            self.startPoint = [bytesText integerValue];
+            DLog(@"Resuming at %d bytes", self.startPoint);
+        }
+    }
+    
     [self.mutableData appendData:data];
     
     for(NSOutputStream *stream in self.downloadStreams) {
@@ -908,7 +919,7 @@ typedef enum {
         
         if([self.response expectedContentLength] > 0) {
             
-            double progress = (double)[self.mutableData length] / (double)[self.response expectedContentLength];
+            double progress = (double)(self.startPoint + [self.mutableData length]) / (double)(self.startPoint + [self.response expectedContentLength]);
             downloadProgressBlock(progress);
         }        
     }

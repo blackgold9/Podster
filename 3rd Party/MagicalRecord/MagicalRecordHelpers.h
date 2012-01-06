@@ -29,7 +29,6 @@ typedef void (^CoreDataBlock)(NSManagedObjectContext *context);
 + (SEL) errorHandlerAction;
 + (id) errorHandlerTarget;
 
-+ (void) setDefaultModelForTestCase:(Class)class;
 + (void) setDefaultModelNamed:(NSString *)modelName;
 + (NSString *) defaultStoreName;
 

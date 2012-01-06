@@ -19,6 +19,7 @@ const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
 };
 
 const struct SVPodcastEntryRelationships SVPodcastEntryRelationships = {
+	.download = @"download",
 	.podcast = @"podcast",
 };
 
@@ -256,6 +257,10 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 
 
+
+@dynamic download;
+
+	
 
 @dynamic podcast;
 

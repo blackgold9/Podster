@@ -6,7 +6,10 @@
 
 extern const struct SVDownloadAttributes {
 	__unsafe_unretained NSString *downloadedBytes;
-	__unsafe_unretained NSString *path;
+	__unsafe_unretained NSString *filePath;
+	__unsafe_unretained NSString *position;
+	__unsafe_unretained NSString *progress;
+	__unsafe_unretained NSString *totalBytes;
 } SVDownloadAttributes;
 
 extern const struct SVDownloadRelationships {
@@ -17,6 +20,9 @@ extern const struct SVDownloadFetchedProperties {
 } SVDownloadFetchedProperties;
 
 @class SVPodcastEntry;
+
+
+
 
 
 
@@ -45,10 +51,46 @@ extern const struct SVDownloadFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString *path;
+@property (nonatomic, strong) NSString *filePath;
 
 
-//- (BOOL)validatePath:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateFilePath:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *position;
+
+
+@property int positionValue;
+- (int)positionValue;
+- (void)setPositionValue:(int)value_;
+
+//- (BOOL)validatePosition:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *progress;
+
+
+@property float progressValue;
+- (float)progressValue;
+- (void)setProgressValue:(float)value_;
+
+//- (BOOL)validateProgress:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *totalBytes;
+
+
+@property int totalBytesValue;
+- (int)totalBytesValue;
+- (void)setTotalBytesValue:(int)value_;
+
+//- (BOOL)validateTotalBytes:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -79,8 +121,35 @@ extern const struct SVDownloadFetchedProperties {
 
 
 
-- (NSString*)primitivePath;
-- (void)setPrimitivePath:(NSString*)value;
+- (NSString*)primitiveFilePath;
+- (void)setPrimitiveFilePath:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitivePosition;
+- (void)setPrimitivePosition:(NSNumber*)value;
+
+- (int)primitivePositionValue;
+- (void)setPrimitivePositionValue:(int)value_;
+
+
+
+
+- (NSNumber*)primitiveProgress;
+- (void)setPrimitiveProgress:(NSNumber*)value;
+
+- (float)primitiveProgressValue;
+- (void)setPrimitiveProgressValue:(float)value_;
+
+
+
+
+- (NSNumber*)primitiveTotalBytes;
+- (void)setPrimitiveTotalBytes:(NSNumber*)value;
+
+- (int)primitiveTotalBytesValue;
+- (void)setPrimitiveTotalBytesValue:(int)value_;
 
 
 

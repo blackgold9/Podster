@@ -10,6 +10,7 @@
 #import "SVDownloadManager.h"
 #import "SVPodcastEntry.h"
 #import "SVPodcast.h"
+#import "SVDownload.h"
 #import "SVSubscription.h"
 #include <sys/xattr.h>
 
@@ -17,7 +18,11 @@
 -(NSString *)downloadsPath;
 -(void)ensureDownloadsDirectory;
 @end
-@implementation SVDownloadManager
+@implementation SVDownloadManager {
+    NSMutableArray *downloads;
+    NSInteger currentProgressPercentage;
+    MKNetworkEngine *downloadEngine;
+}
 + (id)sharedInstance
 {
     static SVDownloadManager *manager;
@@ -32,49 +37,86 @@
 {
     self = [super init];
     if (self) {
+        downloads = [NSMutableArray array];
         [self ensureDownloadsDirectory];
+        currentProgressPercentage = 0;
+        downloadEngine = [[MKNetworkEngine alloc] initWithHostName:nil
+                                                customHeaderFields:nil];
     }
     
     return self;
 }
-- (NSArray *)entriesMarkedForDownload
-{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"markedForDownload == YES"];
-    NSArray *markedForDownload = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                                        ascending:NO
-                                                    withPredicate:predicate];
-    return markedForDownload;
-}
-
-- (NSArray *)autoDownloadEntriesForSubscription:(SVSubscription *)subscription
-{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"podcast == %@", subscription.podcast];
-    NSArray *items = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                           ascending:subscription.newestFirstValue
-                                       withPredicate:predicate];
-
-    NSUInteger numberToFetch = MAX([subscription.autoDownloadCount unsignedIntegerValue], items.count);
-    return [items subarrayWithRange:NSMakeRange(0, numberToFetch)];
-}
-
 
 -(void)downloadEntry:(SVPodcastEntry *)entry
 {
-    NSMutableSet *entries = [NSMutableSet set];
-    NSArray *subscriptions = [SVSubscription MR_findAll];
+    NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
+    NSUInteger start = 0;
+    NSDictionary *headers = nil;
+    NSString *filePath = [[self downloadsPath] stringByAppendingPathComponent:[entry identifier]];
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    if (fileExists) {
+        start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
+        headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
+    }
+    
+    SVDownload *lastDownlaod = [SVDownload MR_findFirstWithPredicate:nil
+                                                            sortedBy:@"position"
+                                                           ascending:YES];
+    NSInteger position = 0;
+    if (lastDownlaod) {
+        position = lastDownlaod.positionValue + 1;
+    }
+    
+    [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+        SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
+        SVDownload *download = localEntry.download;
+        localEntry.download.positionValue = position;
+        if (!download) {
+            localEntry.download = [SVDownload MR_createEntity];
+        }
+        download.filePath = [[self downloadsPath] stringByAppendingPathComponent:[localEntry identifier]];
+        MKNetworkOperation *op = [downloadEngine operationWithURLString:entry.mediaURL];
+        if (headers){ 
+            NSLog(@"Set custom headers: %@", headers);
+            [op addHeaders:headers];
+        }
+        
+        [op setDownloadStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
+        [op onDownloadProgressChanged:^(double progress) {
+            NSInteger percentage = (NSInteger)(progress * 100);
+            if (currentProgressPercentage != percentage) {
+                currentProgressPercentage = percentage;
+                NSLog(@"Download Progress: %d" , currentProgressPercentage);
+                NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[entry identifier], @"identifier",[NSNumber numberWithDouble:progress], @"progress",  nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
+                [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+                    localEntry.download.progressValue = progress;  
+                } saveParentContext:NO];
+            }
+        }];
+        
+        [op onCompletion:^(MKNetworkOperation *completedOperation) {
+            [downloads removeObject:download];
+            [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *innerContext) {
+                localEntry.downloadCompleteValue = YES;
+                [localEntry.download MR_deleteInContext:innerContext];                
+            }];
+        } onError:^(NSError *error) {
+            NSLog(@"Download failed with Error: %@", error);
+        }];
 
-   for(SVSubscription *subscription in subscriptions) {
-
-   }
+                
+  
+        [downloadEngine enqueueOperation:op];
+        [downloads addObject:localEntry.download];
+    }];
 
 }
 
 - (NSArray *)downloadQueue
 {
-    SVSubscription *sub = nil;
-    return nil;
+    
 }
-
 -(NSString *)downloadsPath
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);

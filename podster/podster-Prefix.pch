@@ -9,9 +9,10 @@
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
+#define MR_SHORTHAND
+#import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #import "MKNetworkKit.h"
 #import "CoreData+MagicalRecord.h"
-#define MR_SHORTHAND
+
 #endif

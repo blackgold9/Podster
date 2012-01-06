@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B08537314B4315300847BAA /* SVDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B08537214B4315300847BAA /* SVDownload.m */; };
+		4B08537414B4315300847BAA /* SVDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B08537214B4315300847BAA /* SVDownload.m */; };
 		4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
@@ -83,8 +85,6 @@
 		4B71F7B014A5B08C00D26F4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79114A5B08C00D26F4C /* Foundation.framework */; };
 		4B71F7B814A5B08C00D26F4C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B71F7B614A5B08C00D26F4C /* InfoPlist.strings */; };
 		4B71F7BB14A5B08C00D26F4C /* podsterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7BA14A5B08C00D26F4C /* podsterTests.m */; };
-		4B71F7DE14A5B62E00D26F4C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CB14A5B62E00D26F4C /* NSData+Base64.m */; };
-		4B71F7DF14A5B62E00D26F4C /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CB14A5B62E00D26F4C /* NSData+Base64.m */; };
 		4B71F7E014A5B62E00D26F4C /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */; };
 		4B71F7E114A5B62E00D26F4C /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */; };
 		4B71F7E214A5B62E00D26F4C /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7CF14A5B62E00D26F4C /* NSDictionary+RequestEncoding.m */; };
@@ -124,6 +124,10 @@
 		4B71F82214A6E95B00D26F4C /* SVTagListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVTagListController.m */; };
 		4B71F82514A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */; };
 		4B71F82614A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */; };
+		4B86242D14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
+		4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
+		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
+		4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +141,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B08537114B4315300847BAA /* SVDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVDownload.h; path = models/SVDownload.h; sourceTree = "<group>"; };
+		4B08537214B4315300847BAA /* SVDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVDownload.m; path = models/SVDownload.m; sourceTree = "<group>"; };
 		4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastDetailsViewController.h; sourceTree = "<group>"; };
 		4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastDetailsViewController.m; sourceTree = "<group>"; };
 		4B189B3514AFAD12001E378A /* SVPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackController.h; sourceTree = "<group>"; };
@@ -214,8 +220,6 @@
 		4B71F7B714A5B08C00D26F4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B71F7B914A5B08C00D26F4C /* podsterTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = podsterTests.h; sourceTree = "<group>"; };
 		4B71F7BA14A5B08C00D26F4C /* podsterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = podsterTests.m; sourceTree = "<group>"; };
-		4B71F7CA14A5B62E00D26F4C /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		4B71F7CB14A5B62E00D26F4C /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		4B71F7CC14A5B62E00D26F4C /* NSDate+RFC1123.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RFC1123.h"; sourceTree = "<group>"; };
 		4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RFC1123.m"; sourceTree = "<group>"; };
 		4B71F7CE14A5B62E00D26F4C /* NSDictionary+RequestEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+RequestEncoding.h"; sourceTree = "<group>"; };
@@ -257,6 +261,10 @@
 		4B71F82014A6E95B00D26F4C /* SVTagListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVTagListController.m; sourceTree = "<group>"; };
 		4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcastsForTagViewController.h; path = ../SVPodcastsForTagViewController.h; sourceTree = "<group>"; };
 		4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcastsForTagViewController.m; path = ../SVPodcastsForTagViewController.m; sourceTree = "<group>"; };
+		4B86242B14B576A900A4B320 /* SVDownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadsViewController.h; sourceTree = "<group>"; };
+		4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadsViewController.m; sourceTree = "<group>"; };
+		4B86242F14B57C7500A4B320 /* SVDownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadCell.h; sourceTree = "<group>"; };
+		4B86243014B57C7500A4B320 /* SVDownloadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				4B2E524214B3BBBF0030B7C1 /* generated */,
+				4B08537114B4315300847BAA /* SVDownload.h */,
+				4B08537214B4315300847BAA /* SVDownload.m */,
 				4B2E523114B3BBB80030B7C1 /* SVPodcast.h */,
 				4B2E523214B3BBB80030B7C1 /* SVPodcast.m */,
 				4B2E523314B3BBB80030B7C1 /* SVPodcastEntry.h */,
@@ -434,6 +444,8 @@
 				4B71F79E14A5B08C00D26F4C /* SVAppDelegate.h */,
 				4B71F79F14A5B08C00D26F4C /* SVAppDelegate.m */,
 				4B71F7A114A5B08C00D26F4C /* MainStoryboard.storyboard */,
+				4B86242F14B57C7500A4B320 /* SVDownloadCell.h */,
+				4B86243014B57C7500A4B320 /* SVDownloadCell.m */,
 				4B71F7A414A5B08C00D26F4C /* SVViewController.h */,
 				4B71F7A514A5B08C00D26F4C /* SVViewController.m */,
 				4B71F79614A5B08C00D26F4C /* Supporting Files */,
@@ -444,11 +456,14 @@
 				4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */,
 				4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */,
 				4B189B3514AFAD12001E378A /* SVPlaybackController.h */,
+				4B86243314B587AB00A4B320 /* New Group */,
 				4B189B3614AFAD13001E378A /* SVPlaybackController.m */,
 				4B5CE90214B1161D00E17299 /* SVPlaybackManager.h */,
 				4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */,
 				4B2E51CB14B2C85D0030B7C1 /* SVDownloadManager.h */,
 				4B2E51CC14B2C85D0030B7C1 /* SVDownloadManager.m */,
+				4B86242B14B576A900A4B320 /* SVDownloadsViewController.h */,
+				4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -512,8 +527,6 @@
 		4B71F7C714A5B62E00D26F4C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				4B71F7CA14A5B62E00D26F4C /* NSData+Base64.h */,
-				4B71F7CB14A5B62E00D26F4C /* NSData+Base64.m */,
 				4B71F7CC14A5B62E00D26F4C /* NSDate+RFC1123.h */,
 				4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */,
 				4B71F7CE14A5B62E00D26F4C /* NSDictionary+RequestEncoding.h */,
@@ -564,6 +577,13 @@
 				4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */,
 			);
 			name = MWFeedParser;
+			sourceTree = "<group>";
+		};
+		4B86243314B587AB00A4B320 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -675,7 +695,6 @@
 				4B71F79C14A5B08C00D26F4C /* main.m in Sources */,
 				4B71F7A014A5B08C00D26F4C /* SVAppDelegate.m in Sources */,
 				4B71F7A614A5B08C00D26F4C /* SVViewController.m in Sources */,
-				4B71F7DE14A5B62E00D26F4C /* NSData+Base64.m in Sources */,
 				4B71F7E014A5B62E00D26F4C /* NSDate+RFC1123.m in Sources */,
 				4B71F7E214A5B62E00D26F4C /* NSDictionary+RequestEncoding.m in Sources */,
 				4B71F7E414A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m in Sources */,
@@ -721,6 +740,9 @@
 				4B2E523F14B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
 				4B2E524B14B3E1220030B7C1 /* _SVSubscription.m in Sources */,
 				4B2E524D14B3E1220030B7C1 /* SVSubscription.m in Sources */,
+				4B08537314B4315300847BAA /* SVDownload.m in Sources */,
+				4B86242D14B576A900A4B320 /* SVDownloadsViewController.m in Sources */,
+				4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,7 +751,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B71F7BB14A5B08C00D26F4C /* podsterTests.m in Sources */,
-				4B71F7DF14A5B62E00D26F4C /* NSData+Base64.m in Sources */,
 				4B71F7E114A5B62E00D26F4C /* NSDate+RFC1123.m in Sources */,
 				4B71F7E314A5B62E00D26F4C /* NSDictionary+RequestEncoding.m in Sources */,
 				4B71F7E514A5B62E00D26F4C /* NSString+MKNetworkKitAdditions.m in Sources */,
@@ -775,6 +796,9 @@
 				4B2E524014B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
 				4B2E524C14B3E1220030B7C1 /* _SVSubscription.m in Sources */,
 				4B2E524E14B3E1220030B7C1 /* SVSubscription.m in Sources */,
+				4B08537414B4315300847BAA /* SVDownload.m in Sources */,
+				4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */,
+				4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

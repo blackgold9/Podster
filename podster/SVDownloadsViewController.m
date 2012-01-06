@@ -1,26 +1,25 @@
 //
-//  SVPodcastsForTagViewController.m
+//  SVDownloadsViewController.m
 //  podster
 //
-//  Created by Vanterpool, Stephen on 12/24/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Vanterpool, Stephen on 1/4/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "SVPodcastsForTagViewController.h"
+#import "SVDownloadsViewController.h"
+#import "SVDownload.h"
+#import "SVDownloadCell.h"
 #import "SVPodcast.h"
-#import "SVGPodderClient.h"
-#import "SVPodcastDetailsViewController.h"
-@implementation SVPodcastsForTagViewController {
-    BOOL isLoading;
-    NSArray *podcasts;
+#import "SVPodcastEntry.h"
+@implementation SVDownloadsViewController {
+    NSFetchedResultsController *fetcher;
 }
-@synthesize podcastTag;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        podcasts = [NSArray array];
     }
     return self;
 }
@@ -38,20 +37,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    isLoading = YES;
-    self.navigationItem.title = [NSString stringWithFormat:@"Tagged \"%@\"", self.podcastTag];
-    [[SVGPodderClient sharedInstance] getPodcastsForTag:self.podcastTag 
-                                              withLimit:50
-                                           onCompletion:^(NSArray *downloadedPodcasts) {
-                                               podcasts = downloadedPodcasts;
-                                               isLoading = NO;
-                                               [self.tableView reloadData];
-                                           } 
-                                                onError:^(NSError *error) {
-                                                    [UIAlertView showWithError:error];
-                                                }];
-
+    fetcher = [SVDownload MR_fetchAllSortedBy:@"position" 
+                                    ascending:YES
+                                withPredicate:nil
+                                      groupBy:nil 
+                                     delegate:self];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -65,12 +59,17 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+ [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self.tableView reloadData];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"DownloadProgressChanged" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -86,38 +85,56 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-	return YES;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return [[fetcher sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return isLoading ? 1 : podcasts.count;
+    return [[fetcher fetchedObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
-    if (isLoading) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LoadingCell"];
-    } else {
-        SVPodcast *podcast = [podcasts objectAtIndex:indexPath.row];
-        cell = [tableView dequeueReusableCellWithIdentifier:@"PodcastCell"];
-        cell.textLabel.text = podcast.title;
-        cell.detailTextLabel.text = podcast.summary == nil ? @"": podcast.summary;
+    static NSString *CellIdentifier = @"downloadCell";
+    
+    SVDownloadCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[SVDownloadCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
+    SVDownload *download = [fetcher objectAtIndexPath:indexPath];
+    cell.titleLabel.text = download.entry.title;
+    cell.progressBar.progress = download.progressValue;
     
     return cell;
 }
 
+
+-(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    if (type == NSFetchedResultsChangeUpdate) {
+        SVDownload *download = [fetcher objectAtIndexPath:indexPath];
+        SVDownloadCell *cell = (SVDownloadCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        if (cell) {
+            cell.progressBar.progress = download.progressValue;
+        }
+    } else if(type == NSFetchedResultsChangeInsert) {
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else if(type ==NSFetchedResultsChangeDelete) {
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -161,15 +178,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"showPodcastDetails" sender:self];
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue 
-                sender:(id)sender
-{
-    SVPodcastDetailsViewController *destination = segue.destinationViewController;
-    SVPodcast *podcast = (SVPodcast *)[podcasts objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-    
-    destination.podcast = podcast;
-}
 @end

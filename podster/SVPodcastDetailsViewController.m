@@ -16,6 +16,8 @@
 #import "SVPodcastEntry.h"
 #import "SVPlaybackManager.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SVDownloadManager.h"
+
 @implementation SVPodcastDetailsViewController {
     BOOL isLoading;
     NSMutableArray *feedItems;
@@ -103,12 +105,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SVPodcastEntry *episode = [feedItems objectAtIndex:indexPath.row];
-    [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:podcast];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
-    NSParameterAssert(controller);
-    [[self navigationController] pushViewController:controller animated:YES];
-
+//    [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:podcast];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+//    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
+//    NSParameterAssert(controller);
+//    [[self navigationController] pushViewController:controller animated:YES];
+    NSLog(@"Selected episode %@", episode);
+    [[SVDownloadManager sharedInstance] downloadEntry:episode];
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -145,15 +148,18 @@
 
 -(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
 {
-    if (!feedItems) {
-        feedItems = [NSMutableArray array];
-    }
-    SVPodcastEntry *episode = [SVPodcastEntry MR_createEntity];
-    episode.title = item.title;
-    episode.summary = item.summary;
-    episode.mediaURL = [item.enclosures.lastObject objectForKey:@"url"];
-    [feedItems addObject:episode];
-    
+    [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+        SVPodcastEntry *episode = [SVPodcastEntry MR_findFirstByAttribute:SVPodcastEntryAttributes.guid withValue:item.identifier inContext:localContext];
+        if (!episode) {
+            episode = [SVPodcastEntry MR_createInContext:localContext];
+        }
+        
+        episode.title = item.title;
+        episode.summary = item.summary;
+        episode.mediaURL = [item.enclosures.lastObject objectForKey:@"url"];
+        episode.guid = item.identifier;
+        episode.podcast = [self.podcast MR_inContext:localContext];
+    }];
 }
 
 -(void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error
@@ -168,7 +174,14 @@
 
 -(void)feedParserDidFinish:(MWFeedParser *)parser
 {
-    isLoading = NO;
-    [self.tableView reloadData]; 
+    // We do this in the core data background block to get on the same queue that is creating the entries
+    // That way we know we're done parsing before we reload data
+    [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            feedItems = [NSMutableArray arrayWithArray: [SVPodcastEntry MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"podcast = %@", self.podcast]]];
+            isLoading = NO;
+            [self.tableView reloadData];  
+        });
+    }];
 }
 @end

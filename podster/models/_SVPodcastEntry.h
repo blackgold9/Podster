@@ -20,12 +20,14 @@ extern const struct SVPodcastEntryAttributes {
 } SVPodcastEntryAttributes;
 
 extern const struct SVPodcastEntryRelationships {
+	__unsafe_unretained NSString *download;
 	__unsafe_unretained NSString *podcast;
 } SVPodcastEntryRelationships;
 
 extern const struct SVPodcastEntryFetchedProperties {
 } SVPodcastEntryFetchedProperties;
 
+@class SVDownload;
 @class SVPodcast;
 
 
@@ -170,6 +172,13 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
+@property (nonatomic, strong) SVDownload* download;
+
+//- (BOOL)validateDownload:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) SVPodcast* podcast;
 
 //- (BOOL)validatePodcast:(id*)value_ error:(NSError**)error_;
@@ -271,6 +280,11 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (void)setPrimitiveTotalBytesValue:(int)value_;
 
 
+
+
+
+- (SVDownload*)primitiveDownload;
+- (void)setPrimitiveDownload:(SVDownload*)value;
 
 
 
