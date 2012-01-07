@@ -48,7 +48,9 @@
 
 static NSOperationQueue *_sharedNetworkQueue;
 
-@implementation MKNetworkEngine
+@implementation MKNetworkEngine {
+    NSInteger maximumConcurrentOperationsOverride;
+}
 @synthesize hostName = _hostName;
 @synthesize reachability = _reachability;
 @synthesize customHeaders = _customHeaders;
@@ -73,7 +75,6 @@ static NSOperationQueue *_sharedNetworkQueue;
             _sharedNetworkQueue = [[NSOperationQueue alloc] init];
             [_sharedNetworkQueue addObserver:[self self] forKeyPath:@"operationCount" options:0 context:NULL];
             [_sharedNetworkQueue setMaxConcurrentOperationCount:6];
-            
         });
     }            
 }
@@ -81,7 +82,7 @@ static NSOperationQueue *_sharedNetworkQueue;
 - (id) initWithHostName:(NSString*) hostName customHeaderFields:(NSDictionary*) headers {
     
     if((self = [super init])) {        
-        
+        maximumConcurrentOperationsOverride = NSIntegerMax;
         if(hostName) {
             [[NSNotificationCenter defaultCenter] addObserver:self 
                                                      selector:@selector(reachabilityChanged:) 
@@ -153,14 +154,14 @@ static NSOperationQueue *_sharedNetworkQueue;
     if([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
     {
         DLog(@"Server [%@] is reachable via Wifi", self.hostName);
-        [_sharedNetworkQueue setMaxConcurrentOperationCount:6];
+        [_sharedNetworkQueue setMaxConcurrentOperationCount:MIN(6, maximumConcurrentOperationsOverride)];
         
         [self checkAndRestoreFrozenOperations];
     }
     else if([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
     {
         DLog(@"Server [%@] is reachable only via cellular data", self.hostName);
-        [_sharedNetworkQueue setMaxConcurrentOperationCount:2];
+        [_sharedNetworkQueue setMaxConcurrentOperationCount:MIN(2, maximumConcurrentOperationsOverride)];
         [self checkAndRestoreFrozenOperations];
     }
     else if([self.reachability currentReachabilityStatus] == NotReachable)
@@ -216,6 +217,13 @@ static NSOperationQueue *_sharedNetworkQueue;
         if(error)
             DLog(@"%@", error);
     }
+}
+
+- (void)overrideConcurrentOperations:(NSInteger)concurrentOperations
+{
+    maximumConcurrentOperationsOverride = concurrentOperations;
+    NSInteger newLimit = MIN([_sharedNetworkQueue maxConcurrentOperationCount], maximumConcurrentOperationsOverride);
+    [_sharedNetworkQueue setMaxConcurrentOperationCount:newLimit];
 }
 
 -(NSString*) readonlyHostName {

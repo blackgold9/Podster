@@ -2,44 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVDownloadCell.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVDownloadCell.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVDownloadsViewController.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVDownloadsViewController.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/models/SVDownload.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/models/SVDownload.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore.xcdatamodel/contents" afterPath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore.xcdatamodel/contents" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalDataImport.h" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalDataImport.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalDataImport.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalDataImport.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalRecord.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalRecord.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext+MagicalRecord.h" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext+MagicalRecord.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext+MagicalRecord.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext+MagicalRecord.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStore+MagicalRecord.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStore+MagicalRecord.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/CoreData+MagicalRecord.h" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/CoreData+MagicalRecord.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/MRCoreDataAction.h" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/MRCoreDataAction.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/MRCoreDataAction.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/MRCoreDataAction.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/MagicalRecordHelpers.h" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/MagicalRecordHelpers.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/MagicalRecordHelpers.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/MagicalRecordHelpers.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/MagicalRecordShorthand.h" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/MagicalRecordShorthand.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MKNetworkOperation.m" afterPath="$PROJECT_DIR$/MKNetworkOperation.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SVPodcastsForTagViewController.m" afterPath="$PROJECT_DIR$/SVPodcastsForTagViewController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadManager.h" afterPath="$PROJECT_DIR$/podster/SVDownloadManager.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadManager.m" afterPath="$PROJECT_DIR$/podster/SVDownloadManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVGPodderClient.m" afterPath="$PROJECT_DIR$/podster/SVGPodderClient.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" afterPath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/main.m" afterPath="$PROJECT_DIR$/podster/main.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcastEntry.h" afterPath="$PROJECT_DIR$/podster/models/SVPodcastEntry.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/_SVDownload.h" afterPath="$PROJECT_DIR$/podster/models/_SVDownload.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/_SVDownload.m" afterPath="$PROJECT_DIR$/podster/models/_SVDownload.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/_SVPodcastEntry.h" afterPath="$PROJECT_DIR$/podster/models/_SVPodcastEntry.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/_SVPodcastEntry.m" afterPath="$PROJECT_DIR$/podster/models/_SVPodcastEntry.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Prefix.pch" afterPath="$PROJECT_DIR$/podster/podster-Prefix.pch" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -240,12 +209,12 @@
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="preferences.lookFeel" />
+    <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.podster - Debug">
     <configuration default="false" name="podster - Debug" type="AppleRunConfiguration" factoryName="Application" temporary="true" PROJECT_NAME="podster" TARGET_NAME="podster" CONFIG_NAME="Debug" SDK_NAME="iphonesimulator5.0" ARCH_ID="Standard" DEVICE="IPHONE" DEBUGGER="GDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">

@@ -4,12 +4,13 @@
         <attribute name="downloadedBytes" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="progress" optional="YES" attributeType="Float" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="state" attributeType="Integer 16" minValueString="0" maxValueString="3" defaultValueString="0" syncable="YES"/>
         <attribute name="totalBytes" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="entry" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PodcastEntry" inverseName="download" inverseEntity="PodcastEntry" syncable="YES"/>
     </entity>
     <entity name="Podcast" representedClassName="SVPodcast" syncable="YES">
-        <attribute name="feedURL" attributeType="String" syncable="YES"/>
+        <attribute name="feedURL" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="logoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,7 +22,7 @@
     <entity name="PodcastEntry" representedClassName="SVPodcastEntry" syncable="YES">
         <attribute name="datePublished" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="downloadComplete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
-        <attribute name="guid" attributeType="String" syncable="YES"/>
+        <attribute name="guid" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isVideo" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="markedForDownload" optional="YES" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
@@ -40,8 +41,8 @@
         <relationship name="podcast" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="subscription" inverseEntity="Podcast" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Download" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Podcast" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="Download" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Podcast" positionX="160" positionY="192" width="128" height="165"/>
         <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="255"/>
         <element name="Subscription" positionX="160" positionY="192" width="128" height="90"/>
     </elements>

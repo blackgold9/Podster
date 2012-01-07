@@ -12,5 +12,5 @@
 @interface SVDownloadManager : NSObject
 + (id)sharedInstance;
 - (void)downloadEntry:(SVPodcastEntry *)entry;
-- (NSArray *)downloadQueue;
+- (void)resumeDownloads;
 @end

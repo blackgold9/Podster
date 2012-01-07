@@ -199,6 +199,15 @@
 -(void) enqueueOperation:(MKNetworkOperation*) operation forceReload:(BOOL) forceReload;
 
 /*!
+ * @abstract Manually override the number of conncurrent connections allowed
+ * 
+ * @discussion
+ * Sets the number of concurrent connections to the number supplied.
+ * Ordinarliy, the number is dynamically assigned based on connectivity type.
+ */
+-(void) overrideConcurrentOperations:(NSInteger)concurrentOperations;
+
+/*!
  *  @abstract HostName of the engine
  *  @property readonlyHostName
  *  

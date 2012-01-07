@@ -23,6 +23,7 @@
     NSMutableArray *feedItems;
     MWFeedInfo *feedInfo;
     MWFeedParser *parser;
+    MKNetworkOperation *op;
     
     
 }
@@ -70,7 +71,7 @@
     self.descriptionLabel.text = self.podcast.summary;
     isLoading = YES;
     [self.tableView reloadData];
-    MKNetworkOperation *op = [[SVGPodderClient sharedInstance] operationWithURLString:self.podcast.feedURL];
+    op = [[SVGPodderClient sharedInstance] operationWithURLString:self.podcast.feedURL];
     [op onCompletion:^(MKNetworkOperation *completedOperation) {
         parser = [[MWFeedParser alloc] initWithFeedData:[completedOperation responseData] textEncodingName:@"NSUnicodeStringEncoding"];
         parser.delegate = self;
@@ -95,6 +96,13 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    if (op) {
+        [op cancel];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -142,14 +150,14 @@
 -(void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info
 {
     feedInfo = info;
-    
-    
 }
 
 -(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
 {
     [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
-        SVPodcastEntry *episode = [SVPodcastEntry MR_findFirstByAttribute:SVPodcastEntryAttributes.guid withValue:item.identifier inContext:localContext];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryAttributes.guid, item.identifier];
+        SVPodcastEntry *episode = [SVPodcastEntry findFirstWithPredicate:predicate
+                                                               inContext:localContext];
         if (!episode) {
             episode = [SVPodcastEntry MR_createInContext:localContext];
         }

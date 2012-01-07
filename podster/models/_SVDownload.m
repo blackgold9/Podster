@@ -8,6 +8,7 @@ const struct SVDownloadAttributes SVDownloadAttributes = {
 	.filePath = @"filePath",
 	.position = @"position",
 	.progress = @"progress",
+	.state = @"state",
 	.totalBytes = @"totalBytes",
 };
 
@@ -54,6 +55,10 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 	}
 	if ([key isEqualToString:@"progressValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"progress"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"stateValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"state"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"totalBytesValue"]) {
@@ -146,6 +151,32 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 
 - (void)setPrimitiveProgressValue:(float)value_ {
 	[self setPrimitiveProgress:[NSNumber numberWithFloat:value_]];
+}
+
+
+
+
+
+@dynamic state;
+
+
+
+- (short)stateValue {
+	NSNumber *result = [self state];
+	return [result shortValue];
+}
+
+- (void)setStateValue:(short)value_ {
+	[self setState:[NSNumber numberWithShort:value_]];
+}
+
+- (short)primitiveStateValue {
+	NSNumber *result = [self primitiveState];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveStateValue:(short)value_ {
+	[self setPrimitiveState:[NSNumber numberWithShort:value_]];
 }
 
 

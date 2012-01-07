@@ -456,7 +456,6 @@
 				4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */,
 				4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */,
 				4B189B3514AFAD12001E378A /* SVPlaybackController.h */,
-				4B86243314B587AB00A4B320 /* New Group */,
 				4B189B3614AFAD13001E378A /* SVPlaybackController.m */,
 				4B5CE90214B1161D00E17299 /* SVPlaybackManager.h */,
 				4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */,
@@ -577,13 +576,6 @@
 				4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */,
 			);
 			name = MWFeedParser;
-			sourceTree = "<group>";
-		};
-		4B86243314B587AB00A4B320 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

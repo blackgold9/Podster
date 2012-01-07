@@ -8,6 +8,7 @@
 
 #import "SVAppDelegate.h"
 #import "SVGPodderClient.h"
+#import "SVDownloadManager.h"
 @implementation SVAppDelegate
 {
     MKNetworkEngine *engine;
@@ -18,6 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
+    [[SVDownloadManager sharedInstance] resumeDownloads];
  //   [[SVGPodderClient sharedInstance] useCache];
     return YES;
 }
