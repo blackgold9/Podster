@@ -31,6 +31,7 @@
 @synthesize descriptionLabel;
 @synthesize tableView = _tableView;
 @synthesize metadataView;
+@synthesize imageView;
 @synthesize podcast;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -93,6 +94,7 @@
     [self setDescriptionLabel:nil];
     [self setTableView:nil];
     [self setMetadataView:nil];
+    [self setImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -149,7 +151,12 @@
 
 -(void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info
 {
-    feedInfo = info;
+    feedInfo = info;    
+    [[SVGPodderClient sharedInstance] imageAtURL:[NSURL URLWithString:info.imageURL]
+                                                             onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
+                                                                
+                                                                 imageView.image = fetchedImage;
+                                                             }];
 }
 
 -(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
@@ -162,10 +169,14 @@
             episode = [SVPodcastEntry MR_createInContext:localContext];
         }
         
+        NSParameterAssert(episode);
         episode.title = item.title;
+        NSParameterAssert(episode.title);
         episode.summary = item.summary;
         episode.mediaURL = [item.enclosures.lastObject objectForKey:@"url"];
+        NSParameterAssert(episode.mediaURL);
         episode.guid = item.identifier;
+        NSParameterAssert(episode.guid);
         episode.podcast = [self.podcast MR_inContext:localContext];
     }];
 }

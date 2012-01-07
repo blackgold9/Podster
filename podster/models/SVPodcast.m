@@ -1,20 +1,19 @@
 #import "SVPodcast.h"
-
+#import "NSDictionary+safeGetters.h"
 @implementation SVPodcast
 
 // Custom logic goes here.
 -(void)populateWithGPodderDictionary:(NSDictionary *)dictionary
 {
 
-    self.title = [dictionary valueForKey:@"title"];
+    self.title = [dictionary stringForKey:@"title"];
     self.title = [self.title capitalizedString];
-    
-    self.summary = [dictionary valueForKey:@"description"];
-    self.feedURL = [dictionary valueForKey:@"url"];
-    self.websiteURL = [dictionary valueForKey:@"website"];
-    if ([dictionary objectForKey:@"logo_url"] != [NSNull null]) {
-        self.logoURL = [dictionary valueForKey:@"logo_url"];        
-    }
+    NSParameterAssert(self.title);
+    self.summary = [dictionary stringForKey:@"description"];
+    self.feedURL = [dictionary stringForKey:@"url"];
+    NSParameterAssert(self.feedURL);
+    self.websiteURL = [dictionary stringForKey:@"website"];
+    self.logoURL = [dictionary stringForKey:@"logo_url"];        
 
 }
 -(NSString *)description

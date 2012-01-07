@@ -26,7 +26,7 @@
 #import "MKNetworkOperation.h"
 #import "NSDictionary+RequestEncoding.h"
 #import "NSString+MKNetworkKitAdditions.h"
-
+#import "JSONKit.h"
 
 // Should there be a cancelled state? or something similar.
 typedef enum {
@@ -476,9 +476,9 @@ typedef enum {
                                       [self curlCommandLineString]];
     
     NSString *responseString = [self responseString];    
-    if([responseString length] > 0) {
-        [displayString appendFormat:@"\n--------\nResponse\n--------\n%@\n", responseString];
-    }
+//    if([responseString length] > 0) {
+//        [displayString appendFormat:@"\n--------\nResponse\n--------\n%@\n", responseString];
+//    }
     
     return displayString;
 }
@@ -1018,10 +1018,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 
 #ifdef __IPHONE_5_0
 -(id) responseJSON {
-    
-    NSError *error = nil;
-    id returnValue = [NSJSONSerialization JSONObjectWithData:[self mutableData] options:0 error:&error];    
-    DLog(@"JSON Parsing Error: %@", error);
+    id returnValue = [[self mutableData] objectFromJSONData];
     return returnValue;
 }
 #endif

@@ -56,5 +56,6 @@
 @property (nonatomic, copy) NSString *summary;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSArray *enclosures;
-
+@property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, copy) NSString *duration;
 @end

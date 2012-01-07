@@ -33,7 +33,7 @@
 #import "NSDate+InternetDateTime.h"
 
 // NSXMLParser Logging
-#if 0 // Set to 1 to enable XML parsing logs
+#if 1 // Set to 1 to enable XML parsing logs
 #define MWXMLLog(x, ...) NSLog(x, ## __VA_ARGS__);
 #else
 #define MWXMLLog(x, ...)
@@ -613,6 +613,10 @@
                         else if ([currentPath isEqualToString:@"/rss/channel/item/pubDate"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/item/enclosure"]) { [self createEnclosureFromAttributes:currentElementAttributes andAddToItem:item]; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/item/dc:date"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC3339]; processed = YES; }
+                        else if ([currentPath isEqualToString:@"/rss/channel/item/itunes:image"]) {
+                            if ([currentElementAttributes valueForKey:@"href"]) item.imageURL = [currentElementAttributes valueForKey:@"href"]; processed = YES; }
+                        else if ([currentPath isEqualToString:@"/rss/channel/item/itunes:duration"]) {
+                            if ([currentElementAttributes valueForKey:@"href"]) item.duration =  processedText; processed = YES; }
                     }
                     
                     // Info
@@ -620,6 +624,17 @@
                         if ([currentPath isEqualToString:@"/rss/channel/title"]) { if (processedText.length > 0) info.title = processedText; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/description"]) { if (processedText.length > 0) info.summary = processedText; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/link"]) { if (processedText.length > 0) info.link = processedText; processed = YES; }
+                        else if ([currentPath isEqualToString:@"/rss/channel/itunes:image"]) {
+
+                            NSLog(@"Found feed  image");
+                            if ([currentElementAttributes valueForKey:@"href"]) {
+                                
+                                info.imageURL = [currentElementAttributes valueForKey:@"href"]; processed = YES; }   
+                            
+                            }
+                        else if ([currentPath isEqualToString:@"/rss/channel/itunes:summary"]) { if (processedText.length > 0) info.summary = processedText; processed = YES; }
+                        else if ([currentPath isEqualToString:@"/rss/channel/itunes:author"]) { if (processedText.length > 0) info.author = processedText; processed = YES; }
+                        else if ([currentPath isEqualToString:@"/rss/channel/itunes:subtitle"]) { if (processedText.length > 0) info.subTitle = processedText; processed = YES; }
                     }
                     
                     break;

@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *metadataView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (strong) SVPodcast *podcast;
 @end

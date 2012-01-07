@@ -181,19 +181,23 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podcast Title" lineBreakMode="tailTruncation" minimumFontSize="10" id="pCs-j8-aWo">
-                                        <rect key="frame" x="20" y="0.0" width="280" height="30"/>
+                                        <rect key="frame" x="87" y="0.0" width="213" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" minimumFontSize="10" id="McF-Qx-rxl">
-                                        <rect key="frame" x="20" y="29" width="285" height="50"/>
+                                        <rect key="frame" x="87" y="29" width="218" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="uzv-F6-J3U">
+                                        <rect key="frame" x="9" y="0.0" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -203,6 +207,7 @@
                     <navigationItem key="navigationItem" title="Details" id="51T-lo-c3z"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="McF-Qx-rxl" id="kLl-qb-okb"/>
+                        <outlet property="imageView" destination="uzv-F6-J3U" id="AvW-IH-c03"/>
                         <outlet property="metadataView" destination="ZhJ-GG-EuI" id="6b5-qE-fTW"/>
                         <outlet property="tableView" destination="zBW-st-oQR" id="gfx-Wz-qt4"/>
                         <outlet property="titleLabel" destination="pCs-j8-aWo" id="b1J-MP-fhH"/>
@@ -215,7 +220,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VUI-LN-c0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="26J-96-AOr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="pOg-hU-TMe"/>
+                    <tabBarItem key="tabBarItem" title="Directory" id="pOg-hU-TMe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="9zW-vo-jbL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -228,13 +233,13 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-9" y="22"/>
+            <point key="canvasLocation" x="-6" y="22"/>
         </scene>
         <scene sceneID="Fhi-AY-8xg">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kng-u2-k4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController definesPresentationContext="YES" id="tvw-Nn-zji" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="bgl-wb-ipk">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -289,7 +294,7 @@
                             <outlet property="delegate" destination="rEE-UE-MFV" id="NaS-T8-EXU"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="KoE-9I-3mU"/>
+                    <tabBarItem key="tabBarItem" systemItem="downloads" id="KoE-9I-3mU"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="-79" y="678"/>

@@ -34,7 +34,9 @@
 @implementation MWFeedInfo
 
 @synthesize title, link, summary;
-
+@synthesize imageURL = _imageURL;
+@synthesize author = _author;
+@synthesize subTitle = _subTitle;
 #pragma mark NSObject
 
 - (NSString *)description {
@@ -53,6 +55,9 @@
 		title = [decoder decodeObjectForKey:@"title"];
 		link = [decoder decodeObjectForKey:@"link"];
 		summary = [decoder decodeObjectForKey:@"summary"];
+        _imageURL = [decoder decodeObjectForKey:@"imageURL"];
+        _author = [decoder decodeObjectForKey:@"author"];
+        _subTitle = [decoder decodeObjectForKey:@"subTitle"];
 	}
 	return self;
 }
@@ -61,6 +66,9 @@
 	if (title) [encoder encodeObject:title forKey:@"title"];
 	if (link) [encoder encodeObject:link forKey:@"link"];
 	if (summary) [encoder encodeObject:summary forKey:@"summary"];
+    if (self.imageURL) [encoder encodeObject:self.imageURL forKey:@"imageURL"];
+    if (_author) [encoder encodeObject:_author forKey:@"author"];
+    if (_subTitle) [encoder encodeObject:_subTitle forKey:@"subTitle"];
 }
 
 @end

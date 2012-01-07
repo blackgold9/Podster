@@ -128,6 +128,10 @@
 		4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
 		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
 		4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
+		4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */; };
+		4BD1C22414B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +269,10 @@
 		4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadsViewController.m; sourceTree = "<group>"; };
 		4B86242F14B57C7500A4B320 /* SVDownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadCell.h; sourceTree = "<group>"; };
 		4B86243014B57C7500A4B320 /* SVDownloadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadCell.m; sourceTree = "<group>"; };
+		4BD1C21D14B7D05E00E8C942 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		4BD1C21E14B7D05E00E8C942 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeGetters.h"; sourceTree = "<group>"; };
+		4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safeGetters.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,6 +471,8 @@
 				4B2E51CC14B2C85D0030B7C1 /* SVDownloadManager.m */,
 				4B86242B14B576A900A4B320 /* SVDownloadsViewController.h */,
 				4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */,
+				4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */,
+				4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -500,6 +510,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4BD1C21B14B7D03000E8C942 /* JSONKit */,
 				4B2E51DD14B3B5270030B7C1 /* MagicalRecord */,
 				4B5CE8FD14B0E0ED00E17299 /* OBSlider */,
 				4B71F80114A6D7F500D26F4C /* MWFeedParser */,
@@ -576,6 +587,15 @@
 				4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */,
 			);
 			name = MWFeedParser;
+			sourceTree = "<group>";
+		};
+		4BD1C21B14B7D03000E8C942 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				4BD1C21D14B7D05E00E8C942 /* JSONKit.h */,
+				4BD1C21E14B7D05E00E8C942 /* JSONKit.m */,
+			);
+			name = JSONKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -735,6 +755,8 @@
 				4B08537314B4315300847BAA /* SVDownload.m in Sources */,
 				4B86242D14B576A900A4B320 /* SVDownloadsViewController.m in Sources */,
 				4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */,
+				4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */,
+				4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,6 +813,8 @@
 				4B08537414B4315300847BAA /* SVDownload.m in Sources */,
 				4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */,
 				4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */,
+				4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */,
+				4BD1C22414B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

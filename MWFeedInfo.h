@@ -40,5 +40,9 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *link;
 @property (nonatomic, copy) NSString *summary;
+@property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, copy) NSString *author;
+@property (nonatomic, copy) NSString *subTitle;
+
 
 @end

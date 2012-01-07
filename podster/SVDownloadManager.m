@@ -19,6 +19,7 @@
 -(void)ensureDownloadsDirectory;
 @end
 @implementation SVDownloadManager {
+    NSMutableDictionary *operationLookup;
     NSInteger currentProgressPercentage;
     MKNetworkEngine *downloadEngine;
 }
@@ -40,7 +41,7 @@
         currentProgressPercentage = 0;
         downloadEngine = [[MKNetworkEngine alloc] initWithHostName:nil
                                                 customHeaderFields:nil];
-
+        operationLookup = [NSMutableDictionary dictionary];
     }
     
     return self;
@@ -55,6 +56,21 @@
             [self downloadEntry:download.entry];
         }
 
+    }];
+}
+
+- (void)pauseDownloadForEntry:(SVPodcastEntry *)entry
+{
+    NSParameterAssert(entry.mediaURL);
+    MKNetworkOperation *op = [operationLookup objectForKey:entry.mediaURL];
+    if (op) {
+        [op cancel];
+        [operationLookup removeObjectForKey:entry.mediaURL];
+    }
+    
+    [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+        SVPodcastEntry *localEntry = [entry inContext:localContext];
+        localEntry.download.stateValue = SVDownloadStatePaused;
     }];
 }
 
