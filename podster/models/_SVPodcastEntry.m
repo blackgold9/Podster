@@ -6,6 +6,7 @@
 const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
 	.datePublished = @"datePublished",
 	.downloadComplete = @"downloadComplete",
+	.duration = @"duration",
 	.guid = @"guid",
 	.imageURL = @"imageURL",
 	.isVideo = @"isVideo",
@@ -107,6 +108,13 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 - (void)setPrimitiveDownloadCompleteValue:(BOOL)value_ {
 	[self setPrimitiveDownloadComplete:[NSNumber numberWithBool:value_]];
 }
+
+
+
+
+
+@dynamic duration;
+
 
 
 

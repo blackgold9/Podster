@@ -77,7 +77,7 @@
                     NSLog(@"Podcast already existed");
                 }
                 
-                [podcast populateWithGPodderDictionary:podcastDictionary];
+                //[podcast populateWithGPodderDictionary:podcastDictionary];
                 [podcasts addObject:podcast];
                 
                 
@@ -127,7 +127,7 @@
          for(NSDictionary *podcastDictionary in podcastsData)
          {
              SVPodcast *podcast =  [SVPodcast MR_createEntity];
-             [podcast populateWithGPodderDictionary:podcastDictionary];
+            // [podcast populateWithGPodderDictionary:podcastDictionary];
              [podcasts addObject:podcast];
              
          }

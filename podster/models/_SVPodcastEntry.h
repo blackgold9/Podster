@@ -7,6 +7,7 @@
 extern const struct SVPodcastEntryAttributes {
 	__unsafe_unretained NSString *datePublished;
 	__unsafe_unretained NSString *downloadComplete;
+	__unsafe_unretained NSString *duration;
 	__unsafe_unretained NSString *guid;
 	__unsafe_unretained NSString *imageURL;
 	__unsafe_unretained NSString *isVideo;
@@ -29,6 +30,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 @class SVDownload;
 @class SVPodcast;
+
 
 
 
@@ -71,6 +73,14 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (void)setDownloadCompleteValue:(BOOL)value_;
 
 //- (BOOL)validateDownloadComplete:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSString *duration;
+
+
+//- (BOOL)validateDuration:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -206,6 +216,12 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 - (BOOL)primitiveDownloadCompleteValue;
 - (void)setPrimitiveDownloadCompleteValue:(BOOL)value_;
+
+
+
+
+- (NSString*)primitiveDuration;
+- (void)setPrimitiveDuration:(NSString*)value;
 
 
 

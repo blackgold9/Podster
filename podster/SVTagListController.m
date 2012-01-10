@@ -9,16 +9,18 @@
 #import "SVTagListController.h"
 #import "SVGPodderClient.h"
 #import "SVPodcastsForTagViewController.h"
+#import "SVPodcatcherClient.h"
+#import "SVCategory.h"
 @implementation SVTagListController {
     BOOL isLoading;
-    NSArray *tags;
+    NSArray *categories;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        tags = [NSArray array];
+        categories = [NSArray array];
     }
     return self;
 }
@@ -38,14 +40,15 @@
     [super viewDidLoad];
 
     isLoading = YES;
-    [[self tableView] reloadData];
-    [[SVGPodderClient sharedInstance] getTopTagsWithLimit:100 onCompletion:^(NSArray *downloadedTags) {
-        isLoading = NO;     
-        self->tags = downloadedTags;
-        [[self tableView] reloadData];
-    } onError:^(NSError *error) {
-        
+    [[SVPodcatcherClient sharedInstance] categoriesInLanguage:nil
+                                                 onCompletion:^void(NSArray *returnedCategories) {
+                                                     isLoading = NO;
+                                                     self->categories = returnedCategories;
+                                                     [[self tableView] reloadData];
+                                                 } onError:^void(NSError *error) {
+
     }];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -97,7 +100,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return isLoading ? 1 : tags.count;
+    return isLoading ? 1 : categories.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,16 +110,18 @@
        cell = [tableView dequeueReusableCellWithIdentifier:@"LoadingCell"];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"TagCell"];
-        cell.textLabel.text = [tags objectAtIndex:indexPath.row];
     }
+    SVCategory *category = (SVCategory *)[categories objectAtIndex:indexPath.row];
     
+    cell.textLabel.text = category.name;
+
     return cell;
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     SVPodcastsForTagViewController *controller =  segue.destinationViewController;
 
-    controller.podcastTag = (NSString *)[tags objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+    controller.category = [categories objectAtIndex:self.tableView.indexPathForSelectedRow.row];
 }
 /*
 // Override to support conditional editing of the table view.

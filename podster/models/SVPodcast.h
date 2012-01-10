@@ -1,5 +1,8 @@
 #import "_SVPodcast.h"
 
+@class MWFeedInfo;
+
 @interface SVPodcast : _SVPodcast {}
--(void)populateWithGPodderDictionary:(NSDictionary *)dictionary;
+-(void)populateWithDictionary:(NSDictionary *)dictionary;
+-(void)updatePodcastWithFeedInfo:(MWFeedInfo *)info;
 @end

@@ -476,9 +476,9 @@ typedef enum {
                                       [self curlCommandLineString]];
     
     NSString *responseString = [self responseString];    
-//    if([responseString length] > 0) {
-//        [displayString appendFormat:@"\n--------\nResponse\n--------\n%@\n", responseString];
-//    }
+    if([responseString length] > 0) {
+        [displayString appendFormat:@"\n--------\nResponse\n--------\n%@\n", responseString];
+    }
     
     return displayString;
 }

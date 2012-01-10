@@ -8,13 +8,13 @@
 
 #import "SVPodcastsForTagViewController.h"
 #import "SVPodcast.h"
-#import "SVGPodderClient.h"
+#import "SVPodcatcherClient.h"
 #import "SVPodcastDetailsViewController.h"
 @implementation SVPodcastsForTagViewController {
     BOOL isLoading;
     NSArray *podcasts;
 }
-@synthesize podcastTag;
+@synthesize category;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -33,25 +33,31 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+-(void)dealloc
+{
+    LOG_GENERAL(4, @"Dealloc");
+    
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+       
     isLoading = YES;
-    self.navigationItem.title = [NSString stringWithFormat:@"Tagged \"%@\"", self.podcastTag];
-    [[SVGPodderClient sharedInstance] getPodcastsForTag:self.podcastTag 
-                                              withLimit:50
-                                           onCompletion:^(NSArray *downloadedPodcasts) {
-                                               podcasts = downloadedPodcasts;
-                                               isLoading = NO;
-                                               [self.tableView reloadData];
-                                           } 
-                                                onError:^(NSError *error) {
-                                                    [UIAlertView showWithError:error];
-                                                }];
-
+    self.navigationItem.title = self.category.name;
+    [[SVPodcatcherClient sharedInstance] podcastsByCategory:self.category.categoryId
+                                            startingAtIndex:0
+                                                      limit:50
+                                               onCompletion:^(NSArray *returnedPodcasts) {
+                                                   podcasts = returnedPodcasts;
+                                                   isLoading = NO;
+                                                   [self.tableView reloadData];
+                                                   
+                                               } onError:^(NSError *error) {
+                                                   [UIAlertView showWithError:error]; 
+                                               }];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }

@@ -22,6 +22,7 @@
     <entity name="PodcastEntry" representedClassName="SVPodcastEntry" syncable="YES">
         <attribute name="datePublished" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="downloadComplete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="guid" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isVideo" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -41,9 +42,9 @@
         <relationship name="podcast" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="subscription" inverseEntity="Podcast" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Download" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Download" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Podcast" positionX="160" positionY="192" width="128" height="165"/>
-        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="255"/>
+        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="270"/>
         <element name="Subscription" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

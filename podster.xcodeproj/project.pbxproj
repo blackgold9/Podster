@@ -68,6 +68,10 @@
 		4B4486A414B012AE00D2F182 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */; };
 		4B4486A514B012B400D2F182 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */; };
 		4B4486A614B012BF00D2F182 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F214A5BBBD00D26F4C /* Security.framework */; };
+		4B4B5F4114BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */; };
+		4B4B5F4214BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */; };
+		4B4B5F4614BBB24900C40A95 /* SVFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */; };
+		4B4B5F4714BBB24900C40A95 /* SVFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */; };
 		4B5CE90014B0E10400E17299 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE8FF14B0E10400E17299 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B5CE90114B0E10400E17299 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE8FF14B0E10400E17299 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B5CE90414B1161E00E17299 /* SVPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */; };
@@ -132,6 +136,12 @@
 		4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */; };
 		4BD1C22414B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */; };
+		4BD1C22914B8BDEF00E8C942 /* LoggerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22714B8BDEF00E8C942 /* LoggerClient.m */; };
+		4BD1C22A14B8BDEF00E8C942 /* LoggerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22714B8BDEF00E8C942 /* LoggerClient.m */; };
+		4BD1C22D14B8EFDB00E8C942 /* SVPodcatcherClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22C14B8EFDB00E8C942 /* SVPodcatcherClient.m */; };
+		4BD1C22E14B8EFDB00E8C942 /* SVPodcatcherClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22C14B8EFDB00E8C942 /* SVPodcatcherClient.m */; };
+		4BD1C22E14B8EFDB00E8C944 /* SVCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22E14B8EFDB00E8C943 /* SVCategory.m */; };
+		4BD1C22E14B8EFDB00E8C945 /* SVCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22E14B8EFDB00E8C943 /* SVCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,6 +211,10 @@
 		4B2E524914B3E1220030B7C1 /* SVSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVSubscription.h; path = models/SVSubscription.h; sourceTree = "<group>"; };
 		4B2E524A14B3E1220030B7C1 /* SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVSubscription.m; path = models/SVSubscription.m; sourceTree = "<group>"; };
 		4B4486A114B0120700D2F182 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4B4B5F3F14BB9FBF00C40A95 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		4B4B5F4414BBB24900C40A95 /* SVFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFeedParser.h; sourceTree = "<group>"; };
+		4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVFeedParser.m; sourceTree = "<group>"; };
 		4B5CE8FE14B0E10400E17299 /* OBSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSlider.h; sourceTree = "<group>"; };
 		4B5CE8FF14B0E10400E17299 /* OBSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBSlider.m; sourceTree = "<group>"; };
 		4B5CE90214B1161D00E17299 /* SVPlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackManager.h; sourceTree = "<group>"; };
@@ -273,6 +287,13 @@
 		4BD1C21E14B7D05E00E8C942 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeGetters.h"; sourceTree = "<group>"; };
 		4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safeGetters.m"; sourceTree = "<group>"; };
+		4BD1C22614B8BDEF00E8C942 /* LoggerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerClient.h; sourceTree = "<group>"; };
+		4BD1C22714B8BDEF00E8C942 /* LoggerClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerClient.m; sourceTree = "<group>"; };
+		4BD1C22814B8BDEF00E8C942 /* LoggerCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerCommon.h; sourceTree = "<group>"; };
+		4BD1C22B14B8EFDA00E8C942 /* SVPodcatcherClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcatcherClient.h; path = engines/SVPodcatcherClient.h; sourceTree = "<group>"; };
+		4BD1C22C14B8EFDB00E8C942 /* SVPodcatcherClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcatcherClient.m; path = engines/SVPodcatcherClient.m; sourceTree = "<group>"; };
+		4BD1C22E14B8EFDB00E8C943 /* SVCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVCategory.m; path = data/SVCategory.m; sourceTree = "<group>"; };
+		4BD1C22E14B8EFDB00E8C946 /* SVCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVCategory.h; path = data/SVCategory.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +335,8 @@
 		4B2E51D814B3A43C0030B7C1 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				4BD1C22E14B8EFDB00E8C946 /* SVCategory.h */,
+				4BD1C22E14B8EFDB00E8C943 /* SVCategory.m */,
 				4B2E524214B3BBBF0030B7C1 /* generated */,
 				4B08537114B4315300847BAA /* SVDownload.h */,
 				4B08537214B4315300847BAA /* SVDownload.m */,
@@ -473,6 +496,12 @@
 				4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */,
 				4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */,
 				4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */,
+				4BD1C22B14B8EFDA00E8C942 /* SVPodcatcherClient.h */,
+				4BD1C22C14B8EFDB00E8C942 /* SVPodcatcherClient.m */,
+				4B4B5F3F14BB9FBF00C40A95 /* NSString+URLEncoding.h */,
+				4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */,
+				4B4B5F4414BBB24900C40A95 /* SVFeedParser.h */,
+				4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -510,6 +539,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4BD1C22514B8BDE100E8C942 /* NSLogger */,
 				4BD1C21B14B7D03000E8C942 /* JSONKit */,
 				4B2E51DD14B3B5270030B7C1 /* MagicalRecord */,
 				4B5CE8FD14B0E0ED00E17299 /* OBSlider */,
@@ -596,6 +626,16 @@
 				4BD1C21E14B7D05E00E8C942 /* JSONKit.m */,
 			);
 			name = JSONKit;
+			sourceTree = "<group>";
+		};
+		4BD1C22514B8BDE100E8C942 /* NSLogger */ = {
+			isa = PBXGroup;
+			children = (
+				4BD1C22614B8BDEF00E8C942 /* LoggerClient.h */,
+				4BD1C22714B8BDEF00E8C942 /* LoggerClient.m */,
+				4BD1C22814B8BDEF00E8C942 /* LoggerCommon.h */,
+			);
+			name = NSLogger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -757,6 +797,11 @@
 				4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 				4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */,
 				4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
+				4BD1C22914B8BDEF00E8C942 /* LoggerClient.m in Sources */,
+				4BD1C22D14B8EFDB00E8C942 /* SVPodcatcherClient.m in Sources */,
+				4BD1C22E14B8EFDB00E8C944 /* SVCategory.m in Sources */,
+				4B4B5F4114BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */,
+				4B4B5F4614BBB24900C40A95 /* SVFeedParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,6 +860,11 @@
 				4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 				4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */,
 				4BD1C22414B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
+				4BD1C22A14B8BDEF00E8C942 /* LoggerClient.m in Sources */,
+				4BD1C22E14B8EFDB00E8C942 /* SVPodcatcherClient.m in Sources */,
+				4BD1C22E14B8EFDB00E8C945 /* SVCategory.m in Sources */,
+				4B4B5F4214BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */,
+				4B4B5F4714BBB24900C40A95 /* SVFeedParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

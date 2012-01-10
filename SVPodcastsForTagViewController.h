@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SVCategory.h"
 @interface SVPodcastsForTagViewController : UITableViewController
-@property (strong) NSString *podcastTag;
+@property (strong) SVCategory *category;
 @end

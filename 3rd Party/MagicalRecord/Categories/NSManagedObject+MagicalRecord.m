@@ -25,15 +25,20 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
-	NSError *error = nil;
-	
-	NSArray *results = [context executeFetchRequest:request error:&error];
+		
+	__block NSArray *results = nil;
     
-    if (results == nil) 
-    {
-        [MagicalRecordHelpers handleErrors:error];
-    }
-	return results;	
+    [context performBlockAndWait:^{
+        NSError *error = nil;
+        
+        results = [context executeFetchRequest:request error:&error]; 
+        if (results == nil) 
+        {
+            [MagicalRecordHelpers handleErrors:error];
+        }
+
+    }];
+   	return results;	
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request
@@ -765,6 +770,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
+    NSAssert(![[self objectID] isTemporaryID], @"object does not have a permanent id");
     NSError *error = nil;
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
     [MagicalRecordHelpers handleErrors:error];
