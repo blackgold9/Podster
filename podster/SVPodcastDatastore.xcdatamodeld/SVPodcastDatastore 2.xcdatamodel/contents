@@ -20,6 +20,7 @@
         <relationship name="subscription" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Subscription" inverseName="podcast" inverseEntity="Subscription" syncable="YES"/>
     </entity>
     <entity name="PodcastEntry" representedClassName="SVPodcastEntry" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="datePublished" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="downloadComplete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
@@ -29,7 +30,6 @@
         <attribute name="markedForDownload" optional="YES" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="mediaURL" attributeType="String" syncable="YES"/>
         <attribute name="positionInSeconds" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="sanitizedSummary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="totalBytes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>

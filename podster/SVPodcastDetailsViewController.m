@@ -17,6 +17,7 @@
 #import "SVPlaybackManager.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SVDownloadManager.h"
+#import "SVPodcastSearchResult.h"
 
 @implementation SVPodcastDetailsViewController {
     BOOL isLoading;
@@ -54,8 +55,23 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - View lifecycle
+-(void)setPodcast:(SVPodcastSearchResult *)podcast
+{
+    NSParameterAssert(podcast);
+    NSAssert(podcast.feedURL, @"The podcast did not have a feed url");
+    _podcast = podcast;
+}
 
+-(SVPodcastSearchResult *)podcast
+{
+    return _podcast;
+}
+
+#pragma mark - View lifecycle
+-(void)dealloc
+{
+    LOG_GENERAL(2, @"dealloc");
+}
 - (void)loadFeedImage
 {
     [[SVPodcatcherClient sharedInstance] imageAtURL:[NSURL URLWithString:localPodcast.logoURL]
@@ -82,8 +98,10 @@
     localContext.parentContext = [NSManagedObjectContext defaultContext];
     [localContext performBlockAndWait:^{
                     LOG_GENERAL(2, @"Lookuing up podcast in data store");
-    localPodcast = [SVPodcast findFirstWithPredicate:[NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL] 
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
+        localPodcast = [SVPodcast findFirstWithPredicate:predicate
                                            inContext:localContext];
+        LOG_GENERAL(2, @"Retrived: %@", localPodcast);
         if (!localPodcast) {
             LOG_GENERAL(2, @"Podcast didn't exist, creating it");
             localPodcast =[SVPodcast createInContext:localContext];
@@ -91,10 +109,10 @@
             localPodcast.summary = self.podcast.summary;
             localPodcast.logoURL = self.podcast.logoURL;
             localPodcast.feedURL = self.podcast.feedURL;
-            [localContext save];
         }
-      
     }];
+    
+    
     NSAssert([localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:localPodcast] error:nil], @"Object should have id");
     __weak SVPodcastDetailsViewController *blockSelf = self;
 
@@ -145,15 +163,35 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
+// Return YES for supported orientations
 	return YES;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // NEed to save now
-    [localContext save];
-    [[localContext parentContext] save];
-    SVPodcastEntry *episode = [fetcher objectAtIndexPath:indexPath];
+    __block SVPodcastEntry *entry = nil;
+    [localContext performBlockAndWait:^{
+        entry = [fetcher objectAtIndexPath:indexPath];
+        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
+        LOG_GENERAL(2, @"Saving local context");
+        [localContext save];
+        LOG_GENERAL(2, @"local context saved");
+        NSManagedObjectContext *parent = [localContext parentContext];
+        NSAssert(parent == [NSManagedObjectContext defaultContext], @"Parent shoudl be the main context");
+        [parent performBlockAndWait:^{
+            LOG_GENERAL(2, @"Saving parent context");
+            [parent save];
+            NSAssert(parent == [NSManagedObjectContext defaultContext], @"parent Context should be the default");
+            LOG_GENERAL(2, @"Parent Context Saved");
+        }];
+    }];
+
+    NSError *error;
+    [fetcher performFetch:&error];
+    NSAssert(error == nil, @"there should be no error");
+    SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
+    [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
+    SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
 //    [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:podcast];
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
 //    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];

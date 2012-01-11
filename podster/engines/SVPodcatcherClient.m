@@ -13,6 +13,7 @@
 #import "GTMNSString+HTML.h"
 #import "SVPodcastEntry.h"
 #import "SVFeedParser.h"
+#import "SVPodcastSearchResult.h"
 @implementation SVPodcatcherClient
 + (id)sharedInstance
 {
@@ -84,10 +85,11 @@
            NSArray *returnedData = [completedOperation responseJSON];
            NSMutableArray *podcasts = [NSMutableArray array];
            for(NSDictionary *dict in returnedData) {
-               SVPodcast *podcast = [[SVPodcast alloc] initWithEntity:[SVPodcast entityDescription] insertIntoManagedObjectContext:nil];
-               [podcast populateWithDictionary:dict];
-               [podcasts addObject:podcast];
+               SVPodcastSearchResult *result = [SVPodcastSearchResult new];
+               [result populateWithDictionary:dict];
+               [podcasts addObject:result];
            }
+        
            completion(podcasts);
        } onError:^(NSError *error) {
            LOG_NETWORK(1, @"feedsByCategory faild with error: %@", error);
@@ -106,8 +108,11 @@
 {
     NSParameterAssert(podcast);
     NSParameterAssert(context);
-    NSAssert(podcast.feedURL, @"The podcast did not have a feed url");
-    NSAssert(podcast.managedObjectContext == context, @"The podcast should be in supplied context");
+    [context performBlockAndWait:^{
+        NSAssert(podcast.feedURL, @"The podcast did not have a feed url");
+        NSAssert(podcast.managedObjectContext == context, @"The podcast should be in supplied context");
+        
+    }];
 
     NSManagedObjectContext *localContext= [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     localContext.parentContext = context;

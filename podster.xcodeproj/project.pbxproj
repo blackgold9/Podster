@@ -72,10 +72,14 @@
 		4B4B5F4214BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */; };
 		4B4B5F4614BBB24900C40A95 /* SVFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */; };
 		4B4B5F4714BBB24900C40A95 /* SVFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */; };
+		4B4B5FD114BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */; };
+		4B4B5FD214BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */; };
 		4B5CE90014B0E10400E17299 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE8FF14B0E10400E17299 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B5CE90114B0E10400E17299 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE8FF14B0E10400E17299 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B5CE90414B1161E00E17299 /* SVPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */; };
 		4B5CE90514B1161E00E17299 /* SVPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */; };
+		4B6D48FB14BD656B00E7B11F /* SVDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */; };
+		4B6D48FC14BD656B00E7B11F /* SVDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */; };
 		4B71F79014A5B08C00D26F4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F78F14A5B08C00D26F4C /* UIKit.framework */; };
 		4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79114A5B08C00D26F4C /* Foundation.framework */; };
 		4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79314A5B08C00D26F4C /* CoreGraphics.framework */; };
@@ -215,10 +219,15 @@
 		4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		4B4B5F4414BBB24900C40A95 /* SVFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFeedParser.h; sourceTree = "<group>"; };
 		4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVFeedParser.m; sourceTree = "<group>"; };
+		4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 2.xcdatamodel"; sourceTree = "<group>"; };
+		4B4B5FCF14BCD7D800C40A95 /* SVPodcastSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastSearchResult.h; sourceTree = "<group>"; };
+		4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastSearchResult.m; sourceTree = "<group>"; };
 		4B5CE8FE14B0E10400E17299 /* OBSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSlider.h; sourceTree = "<group>"; };
 		4B5CE8FF14B0E10400E17299 /* OBSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBSlider.m; sourceTree = "<group>"; };
 		4B5CE90214B1161D00E17299 /* SVPlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackManager.h; sourceTree = "<group>"; };
 		4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlaybackManager.m; sourceTree = "<group>"; };
+		4B6D48F914BD656B00E7B11F /* SVDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadOperation.h; sourceTree = "<group>"; };
+		4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadOperation.m; sourceTree = "<group>"; };
 		4B71F78B14A5B08C00D26F4C /* podster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B71F78F14A5B08C00D26F4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B71F79114A5B08C00D26F4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -347,6 +356,8 @@
 				4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */,
 				4B2E524914B3E1220030B7C1 /* SVSubscription.h */,
 				4B2E524A14B3E1220030B7C1 /* SVSubscription.m */,
+				4B4B5FCF14BCD7D800C40A95 /* SVPodcastSearchResult.h */,
+				4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -432,7 +443,6 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
-				4B2E524314B3BF260030B7C1 /* CoreData.framework */,
 				4B71F7C514A5B09B00D26F4C /* 3rd Party */,
 				4B71F79514A5B08C00D26F4C /* podster */,
 				4B71F7B314A5B08C00D26F4C /* podsterTests */,
@@ -453,6 +463,7 @@
 		4B71F78E14A5B08C00D26F4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B2E524314B3BF260030B7C1 /* CoreData.framework */,
 				4B4486A114B0120700D2F182 /* CoreMedia.framework */,
 				4B189B3914AFDEE6001E378A /* AVFoundation.framework */,
 				4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */,
@@ -502,6 +513,8 @@
 				4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */,
 				4B4B5F4414BBB24900C40A95 /* SVFeedParser.h */,
 				4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */,
+				4B6D48F914BD656B00E7B11F /* SVDownloadOperation.h */,
+				4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -802,6 +815,8 @@
 				4BD1C22E14B8EFDB00E8C944 /* SVCategory.m in Sources */,
 				4B4B5F4114BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */,
 				4B4B5F4614BBB24900C40A95 /* SVFeedParser.m in Sources */,
+				4B4B5FD114BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */,
+				4B6D48FB14BD656B00E7B11F /* SVDownloadOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,6 +880,8 @@
 				4BD1C22E14B8EFDB00E8C945 /* SVCategory.m in Sources */,
 				4B4B5F4214BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */,
 				4B4B5F4714BBB24900C40A95 /* SVFeedParser.m in Sources */,
+				4B4B5FD214BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */,
+				4B6D48FC14BD656B00E7B11F /* SVDownloadOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,6 +975,10 @@
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "podster/podster-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -971,6 +992,10 @@
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "podster/podster-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -989,6 +1014,10 @@
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "podsterTests/podsterTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1008,6 +1037,10 @@
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "podsterTests/podsterTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -1051,9 +1084,10 @@
 		4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */;
+			currentVersion = 4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

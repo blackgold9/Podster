@@ -11,6 +11,7 @@
 #import "SVPodcastEntry.h"
 #import "SVPodcast.h"
 #import "SVDownload.h"
+#import "SVDownloadOperation.h"
 #import "SVSubscription.h"
 #include <sys/xattr.h>
 
@@ -22,6 +23,8 @@
     NSMutableDictionary *operationLookup;
     NSInteger currentProgressPercentage;
     MKNetworkEngine *downloadEngine;
+    NSInteger maxConcurrentDownloads;
+    NSOperationQueue *queue;
 }
 + (id)sharedInstance
 {
@@ -42,6 +45,10 @@
         downloadEngine = [[MKNetworkEngine alloc] initWithHostName:nil
                                                 customHeaderFields:nil];
         operationLookup = [NSMutableDictionary dictionary];
+        maxConcurrentDownloads = 2;
+        queue = [NSOperationQueue new];
+        [queue setMaxConcurrentOperationCount:1];
+        queue.name = @"com.vantertech.podster.downloads";
     }
     
     return self;
@@ -74,8 +81,31 @@
     }];
 }
 
+-(SVDownload *)nextUpDownload
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %d", SVDownloadAttributes.state, SVDownloadStatePending];
+    SVDownload *nextUp = [SVDownload findFirstWithPredicate:predicate
+                                                   sortedBy:SVDownloadAttributes.position
+                                                  ascending:YES];
+    return nextUp;
+}
+
+-(void)startNextDownloadIfNeccesary
+{
+    LOG_DOWNLOADS(2, @"Checking for next download");
+    SVDownload *nextUp = [self nextUpDownload];
+    if (nextUp) {
+        LOG_DOWNLOADS(2, @"Found something else to download. Starting!");
+        [self downloadEntry:nextUp.entry];
+    } else {
+        LOG_DOWNLOADS(2, @"Nothing else pending");
+    }
+}
+
 -(void)downloadEntry:(SVPodcastEntry *)entry
 {
+    LOG_DOWNLOADS(2, @"Downloading entry %@", entry);
+    NSParameterAssert(entry);
     NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
     NSUInteger start = 0;
     NSDictionary *headers = nil;
@@ -93,11 +123,11 @@
     if (lastDownlaod) {
         position = lastDownlaod.positionValue + 1;
     }
-    
-    [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+    __block SVDownload *download = nil;
+    [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) {
 
         SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
-        SVDownload *download = localEntry.download;
+        download = localEntry.download;
         localEntry.download.positionValue = position;
         if (!download) {
             download = [SVDownload createInContext:localContext];
@@ -111,44 +141,11 @@
             return;
         }
         
-        MKNetworkOperation *op = [downloadEngine operationWithURLString:entry.mediaURL];
-        if (headers){ 
-            NSLog(@"Set custom headers: %@", headers);
-            [op addHeaders:headers];
-        }
-        [op setDownloadStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
-        [op onDownloadProgressChanged:^(double progress) {
-            NSInteger percentage = (NSInteger)(progress * 100);
-            if (currentProgressPercentage != percentage) {
-                currentProgressPercentage = percentage;
-                NSLog(@"Download Progress: %d" , currentProgressPercentage);
-                NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[entry identifier], @"identifier",[NSNumber numberWithDouble:progress], @"progress",  nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
-                [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *innerContext) {
-                    SVPodcastEntry *innerEntry = (SVPodcastEntry *)[localEntry inContext:innerContext];
-                    innerEntry.download.stateValue = SVDownloadStateDownloading;
-                    innerEntry.download.progressValue = progress;
-                } saveParentContext:NO];
-            }
-        }];
-        
-        [op onCompletion:^(MKNetworkOperation *completedOperation) {
-            [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *innerContext) {
-                SVPodcastEntry *innerEntry = (SVPodcastEntry *)[localEntry inContext:innerContext];
-                innerEntry.downloadCompleteValue = YES;
-                [innerEntry.download deleteInContext:innerContext];                
-            }];
-        } onError:^(NSError *error) {
-            NSLog(@"Download failed with Error: %@", error);
-            [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *innerContext) {
-                SVPodcastEntry *innerEntry = (SVPodcastEntry *)[localEntry inContext:innerContext];
-                innerEntry.download.stateValue = SVDownloadStateFailed;
-            } saveParentContext:YES];
-
-        }];
-
-        [downloadEngine enqueueOperation:op];
     }];
+    SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID 
+                                                                   downloadBasePath:[self downloadsPath]];
+    [queue addOperation:op];
+
 }
 
 -(NSString *)downloadsPath

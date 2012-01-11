@@ -19,7 +19,7 @@
                                             NULL,
                                             (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                             kCFStringEncodingUTF8);
-    return (__bridge NSString *)escaped;
+    return (__bridge_transfer NSString *)escaped;
 }
 
 - (NSString*)stringByUnescapingFromURLArgument {

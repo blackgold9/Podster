@@ -175,7 +175,7 @@
 {
     SVPodcastDetailsViewController *destination = segue.destinationViewController;
     SVPodcast *podcast = (SVPodcast *)[podcasts objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-    
+    NSAssert(podcast.feedURL != nil, @"feedURL should not be nil");
     destination.podcast = podcast;
 }
 @end
