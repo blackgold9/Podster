@@ -24,7 +24,18 @@
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     [[SVDownloadManager sharedInstance] resumeDownloads];
- //   [[SVGPodderClient sharedInstance] useCache];
+  UIColor *colorOne = [UIColor colorWithRed:0.101 green:0.101 blue:0.101 alpha:1.0];
+  UIColor *colorTwo = [UIColor colorWithRed:0.917 green:0.917 blue:0.917 alpha:1.0];
+  UIColor *colorThree = [UIColor colorWithRed:0.8 green:0.792 blue:0.678 alpha:1.0];
+  UIColor *colorFour = [UIColor colorWithRed:0.654 green:0.639 blue:0.494 alpha:1.0];
+  UIColor *colorFive = [UIColor colorWithRed:0.007 green:0.152 blue:0.2 alpha:1.0];
+  [[UINavigationBar appearance] setTintColor:colorFive];
+    [[UIToolbar appearance] setTintColor:colorFive];
+    [[UIBarButtonItem appearance] setTintColor:colorFive];
+  NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorTwo
+                                                                forKey:UITextAttributeTextColor];
+  [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];
+  [[SVGPodderClient sharedInstance] useCache];
     return YES;
 }
 	

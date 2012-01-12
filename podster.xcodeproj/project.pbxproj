@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		4B08537314B4315300847BAA /* SVDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B08537214B4315300847BAA /* SVDownload.m */; };
 		4B08537414B4315300847BAA /* SVDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B08537214B4315300847BAA /* SVDownload.m */; };
+		4B10CFA414BE7A5300DF4DBD /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFA214BE7A5300DF4DBD /* reload.png */; };
+		4B10CFA514BE7A5300DF4DBD /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFA214BE7A5300DF4DBD /* reload.png */; };
+		4B10CFA614BE7A5300DF4DBD /* reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFA314BE7A5300DF4DBD /* reload@2x.png */; };
+		4B10CFA714BE7A5300DF4DBD /* reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFA314BE7A5300DF4DBD /* reload@2x.png */; };
+		4B10CFAB14BE7B4800DF4DBD /* downloads.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFA914BE7B4800DF4DBD /* downloads.png */; };
+		4B10CFAC14BE7B4800DF4DBD /* downloads.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFA914BE7B4800DF4DBD /* downloads.png */; };
+		4B10CFAD14BE7B4800DF4DBD /* downloads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFAA14BE7B4800DF4DBD /* downloads@2x.png */; };
+		4B10CFAE14BE7B4800DF4DBD /* downloads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFAA14BE7B4800DF4DBD /* downloads@2x.png */; };
+		4B10CFB114BE804D00DF4DBD /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B10CFB014BE804D00DF4DBD /* UIColor+Hex.m */; };
+		4B10CFB214BE804D00DF4DBD /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B10CFB014BE804D00DF4DBD /* UIColor+Hex.m */; };
 		4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
@@ -174,6 +184,12 @@
 /* Begin PBXFileReference section */
 		4B08537114B4315300847BAA /* SVDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVDownload.h; path = models/SVDownload.h; sourceTree = "<group>"; };
 		4B08537214B4315300847BAA /* SVDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVDownload.m; path = models/SVDownload.m; sourceTree = "<group>"; };
+		4B10CFA214BE7A5300DF4DBD /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
+		4B10CFA314BE7A5300DF4DBD /* reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reload@2x.png"; sourceTree = "<group>"; };
+		4B10CFA914BE7B4800DF4DBD /* downloads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downloads.png; sourceTree = "<group>"; };
+		4B10CFAA14BE7B4800DF4DBD /* downloads@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downloads@2x.png"; sourceTree = "<group>"; };
+		4B10CFAF14BE804D00DF4DBD /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		4B10CFB014BE804D00DF4DBD /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastDetailsViewController.h; sourceTree = "<group>"; };
 		4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastDetailsViewController.m; sourceTree = "<group>"; };
 		4B189B3514AFAD12001E378A /* SVPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackController.h; sourceTree = "<group>"; };
@@ -372,6 +388,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B20DEC814BE75B30042DC9D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4B10CFA914BE7B4800DF4DBD /* downloads.png */,
+				4B10CFAA14BE7B4800DF4DBD /* downloads@2x.png */,
+				4B10CFA214BE7A5300DF4DBD /* reload.png */,
+				4B10CFA314BE7A5300DF4DBD /* reload@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		4B2E51D814B3A43C0030B7C1 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +560,7 @@
 		4B71F79514A5B08C00D26F4C /* podster */ = {
 			isa = PBXGroup;
 			children = (
+				4B20DEC814BE75B30042DC9D /* Images */,
 				4B6D494114BE529100E7B11F /* podster.entitlements */,
 				4B2E51D814B3A43C0030B7C1 /* data */,
 				4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */,
@@ -571,6 +599,8 @@
 				4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */,
 				4B6D491714BE3E5B00E7B11F /* SVMyPodcastsViewController.h */,
 				4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */,
+				4B10CFAF14BE804D00DF4DBD /* UIColor+Hex.h */,
+				4B10CFB014BE804D00DF4DBD /* UIColor+Hex.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -780,6 +810,10 @@
 			files = (
 				4B71F79A14A5B08C00D26F4C /* InfoPlist.strings in Resources */,
 				4B71F7A314A5B08C00D26F4C /* MainStoryboard.storyboard in Resources */,
+				4B10CFA414BE7A5300DF4DBD /* reload.png in Resources */,
+				4B10CFA614BE7A5300DF4DBD /* reload@2x.png in Resources */,
+				4B10CFAB14BE7B4800DF4DBD /* downloads.png in Resources */,
+				4B10CFAD14BE7B4800DF4DBD /* downloads@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +822,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B71F7B814A5B08C00D26F4C /* InfoPlist.strings in Resources */,
+				4B10CFA514BE7A5300DF4DBD /* reload.png in Resources */,
+				4B10CFA714BE7A5300DF4DBD /* reload@2x.png in Resources */,
+				4B10CFAC14BE7B4800DF4DBD /* downloads.png in Resources */,
+				4B10CFAE14BE7B4800DF4DBD /* downloads@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,6 +918,7 @@
 				4B6D493A14BE460C00E7B11F /* GMGridViewLayoutStrategies.m in Sources */,
 				4B6D493C14BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				4B6D493E14BE460C00E7B11F /* UIView+GMGridViewAdditions.m in Sources */,
+				4B10CFB114BE804D00DF4DBD /* UIColor+Hex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,6 +990,7 @@
 				4B6D493B14BE460C00E7B11F /* GMGridViewLayoutStrategies.m in Sources */,
 				4B6D493D14BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				4B6D493F14BE460C00E7B11F /* UIView+GMGridViewAdditions.m in Sources */,
+				4B10CFB214BE804D00DF4DBD /* UIColor+Hex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
