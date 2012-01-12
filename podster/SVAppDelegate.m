@@ -15,10 +15,14 @@
 }
 
 @synthesize window = _window;
-
+-(void)handleCoreDataError:(NSError *)error
+{
+    LOG_GENERAL(0, @"Core data error: %@", error);
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
+    [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     [[SVDownloadManager sharedInstance] resumeDownloads];
  //   [[SVGPodderClient sharedInstance] useCache];
     return YES;

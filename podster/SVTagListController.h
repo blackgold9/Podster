@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface SVTagListController : UITableViewController
 
+- (IBAction)cancelButtonTapped:(id)sender;
 @end

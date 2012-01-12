@@ -80,6 +80,19 @@
 		4B5CE90514B1161E00E17299 /* SVPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */; };
 		4B6D48FB14BD656B00E7B11F /* SVDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */; };
 		4B6D48FC14BD656B00E7B11F /* SVDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */; };
+		4B6D491914BE3E5B00E7B11F /* SVMyPodcastsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */; };
+		4B6D491A14BE3E5B00E7B11F /* SVMyPodcastsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */; };
+		4B6D491C14BE437F00E7B11F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B6D491B14BE437F00E7B11F /* QuartzCore.framework */; };
+		4B6D493614BE460C00E7B11F /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D492914BE460C00E7B11F /* GMGridView.m */; };
+		4B6D493714BE460C00E7B11F /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D492914BE460C00E7B11F /* GMGridView.m */; };
+		4B6D493814BE460C00E7B11F /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D492F14BE460C00E7B11F /* GMGridViewCell.m */; };
+		4B6D493914BE460C00E7B11F /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D492F14BE460C00E7B11F /* GMGridViewCell.m */; };
+		4B6D493A14BE460C00E7B11F /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D493114BE460C00E7B11F /* GMGridViewLayoutStrategies.m */; };
+		4B6D493B14BE460C00E7B11F /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D493114BE460C00E7B11F /* GMGridViewLayoutStrategies.m */; };
+		4B6D493C14BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D493314BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m */; };
+		4B6D493D14BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D493314BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m */; };
+		4B6D493E14BE460C00E7B11F /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D493514BE460C00E7B11F /* UIView+GMGridViewAdditions.m */; };
+		4B6D493F14BE460C00E7B11F /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D493514BE460C00E7B11F /* UIView+GMGridViewAdditions.m */; };
 		4B71F79014A5B08C00D26F4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F78F14A5B08C00D26F4C /* UIKit.framework */; };
 		4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79114A5B08C00D26F4C /* Foundation.framework */; };
 		4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79314A5B08C00D26F4C /* CoreGraphics.framework */; };
@@ -228,6 +241,23 @@
 		4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlaybackManager.m; sourceTree = "<group>"; };
 		4B6D48F914BD656B00E7B11F /* SVDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadOperation.h; sourceTree = "<group>"; };
 		4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadOperation.m; sourceTree = "<group>"; };
+		4B6D491714BE3E5B00E7B11F /* SVMyPodcastsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMyPodcastsViewController.h; sourceTree = "<group>"; };
+		4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVMyPodcastsViewController.m; sourceTree = "<group>"; };
+		4B6D491B14BE437F00E7B11F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4B6D492714BE460C00E7B11F /* GMGridView-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridView-Constants.h"; sourceTree = "<group>"; };
+		4B6D492814BE460C00E7B11F /* GMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridView.h; sourceTree = "<group>"; };
+		4B6D492914BE460C00E7B11F /* GMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridView.m; sourceTree = "<group>"; };
+		4B6D492D14BE460C00E7B11F /* GMGridViewCell+Extended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridViewCell+Extended.h"; sourceTree = "<group>"; };
+		4B6D492E14BE460C00E7B11F /* GMGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewCell.h; sourceTree = "<group>"; };
+		4B6D492F14BE460C00E7B11F /* GMGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewCell.m; sourceTree = "<group>"; };
+		4B6D493014BE460C00E7B11F /* GMGridViewLayoutStrategies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewLayoutStrategies.h; sourceTree = "<group>"; };
+		4B6D493114BE460C00E7B11F /* GMGridViewLayoutStrategies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewLayoutStrategies.m; sourceTree = "<group>"; };
+		4B6D493214BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+GMGridViewAdditions.h"; sourceTree = "<group>"; };
+		4B6D493314BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		4B6D493414BE460C00E7B11F /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
+		4B6D493514BE460C00E7B11F /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		4B6D494014BE499C00E7B11F /* ActsAsPodcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActsAsPodcast.h; sourceTree = "<group>"; };
+		4B6D494114BE529100E7B11F /* podster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = podster.entitlements; sourceTree = "<group>"; };
 		4B71F78B14A5B08C00D26F4C /* podster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B71F78F14A5B08C00D26F4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B71F79114A5B08C00D26F4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -310,6 +340,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B6D491C14BE437F00E7B11F /* QuartzCore.framework in Frameworks */,
 				4B2E524414B3BF260030B7C1 /* CoreData.framework in Frameworks */,
 				4B4486A314B0120D00D2F182 /* CoreMedia.framework in Frameworks */,
 				4B189B3A14AFDEE6001E378A /* AVFoundation.framework in Frameworks */,
@@ -358,6 +389,7 @@
 				4B2E524A14B3E1220030B7C1 /* SVSubscription.m */,
 				4B4B5FCF14BCD7D800C40A95 /* SVPodcastSearchResult.h */,
 				4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */,
+				4B6D494014BE499C00E7B11F /* ActsAsPodcast.h */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -440,9 +472,30 @@
 			name = OBSlider;
 			sourceTree = "<group>";
 		};
+		4B6D492614BE460C00E7B11F /* GMGridView */ = {
+			isa = PBXGroup;
+			children = (
+				4B6D492714BE460C00E7B11F /* GMGridView-Constants.h */,
+				4B6D492814BE460C00E7B11F /* GMGridView.h */,
+				4B6D492914BE460C00E7B11F /* GMGridView.m */,
+				4B6D492D14BE460C00E7B11F /* GMGridViewCell+Extended.h */,
+				4B6D492E14BE460C00E7B11F /* GMGridViewCell.h */,
+				4B6D492F14BE460C00E7B11F /* GMGridViewCell.m */,
+				4B6D493014BE460C00E7B11F /* GMGridViewLayoutStrategies.h */,
+				4B6D493114BE460C00E7B11F /* GMGridViewLayoutStrategies.m */,
+				4B6D493214BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.h */,
+				4B6D493314BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m */,
+				4B6D493414BE460C00E7B11F /* UIView+GMGridViewAdditions.h */,
+				4B6D493514BE460C00E7B11F /* UIView+GMGridViewAdditions.m */,
+			);
+			name = GMGridView;
+			path = "3rd Party/GMGridView";
+			sourceTree = "<group>";
+		};
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
+				4B6D491B14BE437F00E7B11F /* QuartzCore.framework */,
 				4B71F7C514A5B09B00D26F4C /* 3rd Party */,
 				4B71F79514A5B08C00D26F4C /* podster */,
 				4B71F7B314A5B08C00D26F4C /* podsterTests */,
@@ -480,6 +533,7 @@
 		4B71F79514A5B08C00D26F4C /* podster */ = {
 			isa = PBXGroup;
 			children = (
+				4B6D494114BE529100E7B11F /* podster.entitlements */,
 				4B2E51D814B3A43C0030B7C1 /* data */,
 				4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */,
 				4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */,
@@ -515,6 +569,8 @@
 				4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */,
 				4B6D48F914BD656B00E7B11F /* SVDownloadOperation.h */,
 				4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */,
+				4B6D491714BE3E5B00E7B11F /* SVMyPodcastsViewController.h */,
+				4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -552,6 +608,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B6D492614BE460C00E7B11F /* GMGridView */,
 				4BD1C22514B8BDE100E8C942 /* NSLogger */,
 				4BD1C21B14B7D03000E8C942 /* JSONKit */,
 				4B2E51DD14B3B5270030B7C1 /* MagicalRecord */,
@@ -817,6 +874,12 @@
 				4B4B5F4614BBB24900C40A95 /* SVFeedParser.m in Sources */,
 				4B4B5FD114BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */,
 				4B6D48FB14BD656B00E7B11F /* SVDownloadOperation.m in Sources */,
+				4B6D491914BE3E5B00E7B11F /* SVMyPodcastsViewController.m in Sources */,
+				4B6D493614BE460C00E7B11F /* GMGridView.m in Sources */,
+				4B6D493814BE460C00E7B11F /* GMGridViewCell.m in Sources */,
+				4B6D493A14BE460C00E7B11F /* GMGridViewLayoutStrategies.m in Sources */,
+				4B6D493C14BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
+				4B6D493E14BE460C00E7B11F /* UIView+GMGridViewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,6 +945,12 @@
 				4B4B5F4714BBB24900C40A95 /* SVFeedParser.m in Sources */,
 				4B4B5FD214BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */,
 				4B6D48FC14BD656B00E7B11F /* SVDownloadOperation.m in Sources */,
+				4B6D491A14BE3E5B00E7B11F /* SVMyPodcastsViewController.m in Sources */,
+				4B6D493714BE460C00E7B11F /* GMGridView.m in Sources */,
+				4B6D493914BE460C00E7B11F /* GMGridViewCell.m in Sources */,
+				4B6D493B14BE460C00E7B11F /* GMGridViewLayoutStrategies.m in Sources */,
+				4B6D493D14BE460C00E7B11F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
+				4B6D493F14BE460C00E7B11F /* UIView+GMGridViewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

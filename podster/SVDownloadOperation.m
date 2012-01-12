@@ -38,7 +38,7 @@
     NSInteger percentage = (NSInteger)(progress * 100);
     if (currentProgressPercentage != percentage) {
         currentProgressPercentage = percentage;
-        LOG_DOWNLOADS(2, @"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
+        LOG_DOWNLOADS(4, @"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
         NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry identifier], @"identifier",[NSNumber numberWithDouble:progress], @"progress",  nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
         [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *innerContext) {

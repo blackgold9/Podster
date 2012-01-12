@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MWFeedParser.h"
+#import "ActsAsPodcast.h"
 @class SVPodcastSearchResult;
 @interface SVPodcastDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -16,5 +17,5 @@
 @property (weak, nonatomic) IBOutlet UIView *metadataView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (weak) SVPodcastSearchResult *podcast;
+@property (weak) id<ActsAsPodcast> podcast;
 @end

@@ -7,13 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ActsAsPodcast.h"
+@interface SVPodcastSearchResult : NSObject<ActsAsPodcast>
 
-@interface SVPodcastSearchResult : NSObject
-@property (copy) NSString *title;
-@property (copy) NSString *feedURL;
-@property (copy) NSString *imageURL;
-@property (copy) NSString *summary;
-@property (copy) NSString *websiteURL;
-@property (copy) NSString *logoURL;
 -(void)populateWithDictionary:(NSDictionary *)dictionary;
 @end

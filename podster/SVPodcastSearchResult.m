@@ -9,7 +9,7 @@
 #import "SVPodcastSearchResult.h"
 #import "NSDictionary+safeGetters.h"
 @implementation SVPodcastSearchResult
-@synthesize title, imageURL, summary, feedURL, websiteURL, logoURL;
+@synthesize title, summary, feedURL, websiteURL, logoURL;
 // Custom logic goes here.
 -(void)populateWithDictionary:(NSDictionary *)dictionary
 {

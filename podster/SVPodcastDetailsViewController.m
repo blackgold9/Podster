@@ -18,6 +18,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SVDownloadManager.h"
 #import "SVPodcastSearchResult.h"
+#import "ActsAsPodcast.h"
 
 @implementation SVPodcastDetailsViewController {
     BOOL isLoading;
@@ -55,14 +56,14 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
--(void)setPodcast:(SVPodcastSearchResult *)podcast
+-(void)setPodcast:(id<ActsAsPodcast>)podcast
 {
     NSParameterAssert(podcast);
     NSAssert(podcast.feedURL, @"The podcast did not have a feed url");
     _podcast = podcast;
 }
 
--(SVPodcastSearchResult *)podcast
+-(id<ActsAsPodcast>)podcast
 {
     return _podcast;
 }

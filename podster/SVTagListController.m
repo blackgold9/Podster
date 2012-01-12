@@ -169,4 +169,9 @@
     [self performSegueWithIdentifier:@"podcastsForTag" sender:self];
 }
 
+- (IBAction)cancelButtonTapped:(id)sender {
+    if ([self parentViewController]) {
+        [[self parentViewController] dismissModalViewControllerAnimated:YES];
+    }
+}
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="tvw-Nn-zji">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -10,7 +10,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vp7-3z-zqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController title="Popular Tags" id="DOf-8L-uXT" customClass="SVTagListController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Acv-6u-gG0">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -53,20 +53,26 @@
                             <outlet property="delegate" destination="DOf-8L-uXT" id="kog-X3-Lxw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Popular Tags" id="n13-tc-pwE"/>
+                    <navigationItem key="navigationItem" title="Popular Tags" id="n13-tc-pwE">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hNF-dI-MYy">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="DOf-8L-uXT" id="U8o-i7-gfo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="7eF-mi-Iw1" kind="push" identifier="podcastsForTag" id="khh-F1-tm9"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="517" y="22"/>
+            <point key="canvasLocation" x="1043" y="22"/>
         </scene>
         <scene sceneID="w0A-9D-Yl8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcO-Yx-a7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="7eF-mi-Iw1" customClass="SVPodcastsForTagViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czt-4I-mD4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -84,7 +90,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="EKE-e3-0Rq">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EKE-e3-0Rq">
                                             <rect key="frame" x="10" y="24" width="47" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -122,18 +128,18 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="955" y="-35"/>
+            <point key="canvasLocation" x="1481" y="-35"/>
         </scene>
         <scene sceneID="3VK-cs-szj">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq8-FL-BUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Podcast Details" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hra-2Y-S1w">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zBW-st-oQR">
-                                <rect key="frame" x="0.0" y="85" width="320" height="282"/>
+                                <rect key="frame" x="0.0" y="85" width="320" height="331"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -221,51 +227,47 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1627" y="-20"/>
+            <point key="canvasLocation" x="2153" y="-20"/>
         </scene>
-        <scene sceneID="ZDN-2e-kMJ">
+        <scene sceneID="Jy6-LT-bcN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VUI-LN-c0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="26J-96-AOr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Directory" id="pOg-hU-TMe"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="9zW-vo-jbL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h4N-MX-IMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="MyPodcasts" title="My Podcasts" modalTransitionStyle="flipHorizontal" id="04a-hT-U9C" customClass="SVMyPodcastsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ev5-gc-u6u">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="Fxc-dX-VW2" customClass="GMGridView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1019607931" green="0.1019607931" blue="0.1019607931" alpha="1" colorSpace="deviceRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="My Podcasts" id="X5d-qX-t2x">
+                        <barButtonItem key="backBarButtonItem" title="Podcasts" id="ICS-fb-46y"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Zj5-ud-sf1">
+                            <connections>
+                                <segue destination="HKN-iT-AvW" kind="modal" identifier="showAddPodcast" id="5zf-j2-wpX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <connections>
-                        <segue destination="DOf-8L-uXT" kind="relationship" relationship="rootViewController" id="ODf-ek-xo2"/>
+                        <outlet property="gridView" destination="Fxc-dX-VW2" id="l3J-Oj-TMz"/>
+                        <segue destination="Xyd-co-oUC" kind="push" identifier="showPodcast" id="fze-37-ETh"/>
                     </connections>
-                </navigationController>
+                </viewController>
             </objects>
-            <point key="canvasLocation" x="-6" y="22"/>
-        </scene>
-        <scene sceneID="Fhi-AY-8xg">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kng-u2-k4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tabBarController definesPresentationContext="YES" id="tvw-Nn-zji" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="bgl-wb-ipk">
-                        <rect key="frame" x="129" y="330" width="163" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="26J-96-AOr" kind="relationship" relationship="viewControllers" id="WRd-Yd-2xg"/>
-                        <segue destination="rEE-UE-MFV" kind="relationship" relationship="viewControllers" id="8CL-5i-SZS"/>
-                    </connections>
-                </tabBarController>
-            </objects>
-            <point key="canvasLocation" x="-533" y="111"/>
+            <point key="canvasLocation" x="-18" y="774"/>
         </scene>
         <scene sceneID="0zk-oC-zmJ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1T9-Wy-cdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="rEE-UE-MFV" customClass="SVDownloadsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vcv-VP-nrK">
-                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -304,7 +306,7 @@
                     <tabBarItem key="tabBarItem" systemItem="downloads" id="KoE-9I-3mU"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-79" y="678"/>
+            <point key="canvasLocation" x="447" y="678"/>
         </scene>
         <scene sceneID="iM8-22-u5p">
             <objects>
@@ -406,10 +408,59 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="524" y="614"/>
+            <point key="canvasLocation" x="1050" y="614"/>
+        </scene>
+        <scene sceneID="GTp-18-0Rf">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w0Q-rf-d8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="rH6-DC-ajB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="Blb-kj-jA3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" barStyle="blackTranslucent" id="kT4-sj-v5b">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="04a-hT-U9C" kind="relationship" relationship="rootViewController" id="Hkr-SI-Y1d"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-544" y="774"/>
+        </scene>
+        <scene sceneID="mam-K3-Myx">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eNf-AJ-ixJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="HKN-iT-AvW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="tYp-Lf-HuM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DOf-8L-uXT" kind="relationship" relationship="rootViewController" id="dcP-PY-9mf"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="517" y="22"/>
         </scene>
     </scenes>
     <classes>
+        <class className="GMGridView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GMGridView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="actionDelegate" candidateClass="NSObject"/>
+                <relationship kind="outlet" name="dataSource" candidateClass="NSObject"/>
+                <relationship kind="outlet" name="layoutStrategy"/>
+                <relationship kind="outlet" name="mainSuperView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="sortingDelegate" candidateClass="NSObject"/>
+                <relationship kind="outlet" name="transformDelegate" candidateClass="NSObject"/>
+            </relationships>
+        </class>
         <class className="OBSlider" superclassName="UISlider">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>
         </class>
@@ -422,6 +473,12 @@
         </class>
         <class className="SVDownloadsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVDownloadsViewController.h"/>
+        </class>
+        <class className="SVMyPodcastsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVMyPodcastsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
+            </relationships>
         </class>
         <class className="SVPlaybackController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPlaybackController.h"/>
@@ -454,11 +511,17 @@
         </class>
         <class className="SVTagListController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVTagListController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonTapped:"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="fze-37-ETh"/>
+    </inferredMetricsTieBreakers>
 </document>
