@@ -18,25 +18,25 @@
     NSManagedObjectContext *localContext;
     BOOL shouldSaveParentContext;
     MWFeedParser *feedParser;
+    NSString *feedURL;
     dispatch_queue_t originalQueue;
 }
 @synthesize errorCallback, completionCallback;
 + (id)parseData:(NSData *)data
-     forPodcast:(SVPodcast *)podcast
+forPodcastAtURL:(NSString *)feedURL
              inContext:(NSManagedObjectContext *)context
             onComplete:(CompletionBlock)complete
                onError:(MKNKErrorBlock)error
 {
-    NSParameterAssert(podcast);
+    NSParameterAssert(feedURL);
     NSParameterAssert(context);
     NSParameterAssert(data);
-    NSAssert([podcast managedObjectContext]== context, @"Context should match at this point");
     SVFeedParser *parser = [SVFeedParser new];
     parser->originalQueue = dispatch_get_current_queue();
     parser.completionCallback = complete;
     parser.errorCallback = error;
     parser->localContext = context;
-parser->localPodcast = podcast;
+    parser->feedURL = feedURL;
     parser->feedParser = [[MWFeedParser alloc] initWithFeedData:data textEncodingName:@"NSUnicodeStringEncoding"];
     parser->feedParser.delegate = parser;
     [parser->feedParser parse];
@@ -45,7 +45,14 @@ parser->localPodcast = podcast;
 }
 -(void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info
 {
-    [localContext performBlock:^void() {
+    [localContext performBlockAndWait:^void() {
+
+        localPodcast = [SVPodcast findFirstWithPredicate:        [NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
+                                             inContext:localContext];
+        if (!localPodcast) {
+            localPodcast = [SVPodcast createInContext:localContext];
+        }
+        
         [localPodcast updatePodcastWithFeedInfo:info];
     }];
 }

@@ -9,13 +9,15 @@
 #endif
 
 #ifdef __OBJC__
-#define MR_SHORTHAND
-#import <UIKit/UIKit.h>
+#define MR_SHORTHAND 1
+#define ALLOW_IPHONE_SPECIAL_CASES 1
+    #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-#import "LoggerCommon.h"
-#import "LoggerClient.h"
-#import "MKNetworkKit.h"
-#import "CoreData+MagicalRecord.h"
+    #import "LoggerCommon.h"
+    #import "LoggerClient.h"
+    #import "MKNetworkKit.h"
+    #import "CoreData+MagicalRecord.h"
+    #import "NSString+SVHelpers.h"
 
 #endif
 #ifdef DEBUG

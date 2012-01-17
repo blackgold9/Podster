@@ -26,19 +26,15 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request inContext:(NSManagedObjectContext *)context
 {
 		
-	__block NSArray *results = nil;
+	NSError *error = nil;
+	
+	NSArray *results = [context executeFetchRequest:request error:&error];
     
-    [context performBlockAndWait:^{
-        NSError *error = nil;
-        
-        results = [context executeFetchRequest:request error:&error]; 
-        if (results == nil) 
-        {
-            [MagicalRecordHelpers handleErrors:error];
-        }
-
-    }];
-   	return results;	
+    if (results == nil) 
+    {
+        [MagicalRecordHelpers handleErrors:error];
+    }
+	return results;	
 }
 
 + (NSArray *) MR_executeFetchRequest:(NSFetchRequest *)request

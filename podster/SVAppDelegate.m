@@ -8,6 +8,7 @@
 
 #import "SVAppDelegate.h"
 #import "SVGPodderClient.h"
+#import "UIColor+Hex.h"
 #import "SVDownloadManager.h"
 @implementation SVAppDelegate
 {
@@ -19,22 +20,32 @@
 {
     LOG_GENERAL(0, @"Core data error: %@", error);
 }
+- (void)configureTheming
+{
+    UIColor *colorOne = [UIColor colorWithHex:0x1E1E27];
+    UIColor *colorTwo = [UIColor colorWithHex:0x65F4FF];
+    UIColor *colorThree = [UIColor colorWithHex:0x41EA29];
+    UIColor *colorFour = [UIColor colorWithHex:0xC0C0E8];
+    
+    UIColor *colorFive = [UIColor colorWithHex:0x000000];
+        UIImage *image = [UIImage imageNamed:@"nav-bar.png"];
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setTintColor:colorOne];
+    [[UIToolbar appearance] setTintColor:colorOne];
+    [[UIBarButtonItem appearance] setTintColor:colorOne];
+
+    NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorFour
+                                                                  forKey:UITextAttributeTextColor];
+   // [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];
+    
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     [[SVDownloadManager sharedInstance] resumeDownloads];
-  UIColor *colorOne = [UIColor colorWithRed:0.101 green:0.101 blue:0.101 alpha:1.0];
-  UIColor *colorTwo = [UIColor colorWithRed:0.917 green:0.917 blue:0.917 alpha:1.0];
-  UIColor *colorThree = [UIColor colorWithRed:0.8 green:0.792 blue:0.678 alpha:1.0];
-  UIColor *colorFour = [UIColor colorWithRed:0.654 green:0.639 blue:0.494 alpha:1.0];
-  UIColor *colorFive = [UIColor colorWithRed:0.007 green:0.152 blue:0.2 alpha:1.0];
-  [[UINavigationBar appearance] setTintColor:colorFive];
-    [[UIToolbar appearance] setTintColor:colorFive];
-    [[UIBarButtonItem appearance] setTintColor:colorFive];
-  NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorTwo
-                                                                forKey:UITextAttributeTextColor];
-  [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];
+    [self configureTheming];
   [[SVGPodderClient sharedInstance] useCache];
     return YES;
 }

@@ -53,9 +53,10 @@ typedef void (^PodcastItemsResponseBlock)(NSArray *entries);
                           onCompletion:(PodcastListResponeBlock)completion 
                                onError:(MKNKErrorBlock)errorBlock;
 
-- (MKNetworkOperation *)downloadAndPopulatePodcastWithFeedURL:(SVPodcast *)podcast inContext:(NSManagedObjectContext *)context onCompletion:(void (^)(void))onComplete onError:(MKNKErrorBlock)onError;
-
-
+-(MKNetworkOperation *)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
+                                                   inContext:(NSManagedObjectContext *)context
+                                                onCompletion:(void (^)(void))onComplete
+                                                     onError:(MKNKErrorBlock)onError;
 
 #pragma mark - podcast downloading
 

@@ -39,12 +39,13 @@
     <entity name="Subscription" representedClassName="SVSubscription" syncable="YES">
         <attribute name="autoDownloadCount" attributeType="Integer 32" defaultValueString="1" syncable="YES"/>
         <attribute name="newestFirst" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="shouldAutoDownload" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="podcast" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="subscription" inverseEntity="Podcast" syncable="YES"/>
     </entity>
     <elements>
         <element name="Download" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Podcast" positionX="160" positionY="192" width="128" height="165"/>
         <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="270"/>
-        <element name="Subscription" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Subscription" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

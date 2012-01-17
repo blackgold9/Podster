@@ -12,6 +12,8 @@
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 #import "SVPlaybackManager.h"
+#import "SVPodcatcherClient.h"
+#import <QuartzCore/QuartzCore.h>
 @implementation SVPlaybackController {
     AVPlayer *player;
     id playerObserver;
@@ -19,6 +21,7 @@
 @synthesize skipForwardButton;
 @synthesize skipBackButton;
 @synthesize chromeViews;
+@synthesize artworkImage;
 @synthesize progressSlider;
 @synthesize timeRemainingLabel;
 @synthesize timeElapsedLabel;
@@ -41,7 +44,10 @@
 }
 
 #pragma mark - View lifecycle
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    LOG_GENERAL(2, @"View did appear");
+}
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
@@ -53,15 +59,28 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    LOG_GENERAL(4, @"Super viewdidload");
     [super viewDidLoad];
 
+    LOG_NETWORK(4, @"Triggering albumart image load");
+    NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
+                       
+    [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
+        LOG_NETWORK(4, @"Album art recieved");
+        CATransition *transition = [CATransition animation];
+        [self.artworkImage.layer addAnimation:transition forKey:nil];
 
+        self.artworkImage.image = fetchedImage;
+        
+    }];
 
     player = [[SVPlaybackManager sharedInstance] player];
     if (player.status == AVPlayerStatusReadyToPlay) {
+        LOG_GENERAL(4, @"Wasn't yet playing, kicking it off");
         [player play];
     }
     [player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
+    [player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     __weak SVPlaybackController  *weakSelf = self;
     playerObserver = [player addPeriodicTimeObserverForInterval:CMTimeMake(1, 2) queue:NULL usingBlock:^(CMTime time) {
         if (weakSelf == nil) {
@@ -86,9 +105,11 @@
     [self setPlayButton:nil];
     [self setSkipBackButton:nil];
     [self setSkipForwardButton:nil];
+    [self setArtworkImage:nil];
     [super viewDidUnload];
     NSLog(@"Removing observers");
     [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
+    [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
     [player removeTimeObserver:playerObserver];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -111,6 +132,12 @@
                     NSLog(@"Started Playback");
                 } else {
                     NSLog(@"Error downloing");
+                }
+            } else if ([keyPath isEqualToString:@"rate"]){
+                if (player.rate == 0) {
+                    self.playButton.selected = NO;
+                } else {
+                    self.playButton.selected = YES;
                 }
             }
         }

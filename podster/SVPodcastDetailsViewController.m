@@ -11,6 +11,7 @@
 #import "MWFeedParser.h"
 #import "MWFeedInfo.h"
 #import "SVPodcast.h"
+#import "SVPodcastEntry.h"
 #import "SVPodcatcherClient.h"
 #import "UIAlertView+MKNetworkKitAdditions.h"
 #import "SVPodcastEntry.h"
@@ -19,7 +20,11 @@
 #import "SVDownloadManager.h"
 #import "SVPodcastSearchResult.h"
 #import "ActsAsPodcast.h"
-
+#import "NSString+MW_HTML.h"
+#import "SVEpisodeListCell.h"
+#import "GTMNSString+HTML.h"
+#import "SVEpisodeDetails.h"
+#import "SVPlaybackManager.h"
 @implementation SVPodcastDetailsViewController {
     BOOL isLoading;
     NSMutableArray *feedItems;
@@ -73,6 +78,35 @@
 {
     LOG_GENERAL(2, @"dealloc");
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showEpisodeDetails"]) {
+        SVEpisodeDetailsViewController *details = segue.destinationViewController;
+        details.episode = (SVPodcastEntry *)[fetcher objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+    } else if ([[segue identifier] isEqualToString:@"playPodcastEpisode"]) {
+        // NEed to save now
+        __block SVPodcastEntry *entry = nil;
+        [localContext performBlockAndWait:^{
+            entry = [fetcher objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+            [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
+            LOG_GENERAL(2, @"Saving local context");
+            [localContext save];
+            LOG_GENERAL(2, @"local context saved");
+        }];
+        
+        NSError *error;
+        [fetcher performFetch:&error];
+        NSAssert(error == nil, @"there should be no error");
+        SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
+        SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
+        NSLog(@"Selected episode %@", episode);
+        
+        // Download episode
+        //[[SVDownloadManager sharedInstance] downloadEntry:episode];
+    }
+}
 - (void)loadFeedImage
 {
     [[SVPodcatcherClient sharedInstance] imageAtURL:[NSURL URLWithString:localPodcast.logoURL]
@@ -81,13 +115,16 @@
                                            imageView.image = fetchedImage;
                                        }];
 }
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 //    self.metadataView.layer.shadowPath = CGPathCreateWithRect(self.metadataView.frame, NULL);
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
-    
     self.titleLabel.text = self.podcast.title;
     self.descriptionLabel.text = self.podcast.summary;
     [[SVPodcatcherClient sharedInstance] imageAtURL:[NSURL URLWithString:self.podcast.logoURL] onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
@@ -95,8 +132,7 @@
     }];
     isLoading = YES;
 
-    localContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    localContext.parentContext = [NSManagedObjectContext defaultContext];
+    localContext = [NSManagedObjectContext defaultContext];
     [localContext performBlockAndWait:^{
                     LOG_GENERAL(2, @"Lookuing up podcast in data store");
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
@@ -114,24 +150,20 @@
     }];
     
     
-    NSAssert([localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:localPodcast] error:nil], @"Object should have id");
+   // NSAssert([localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:localPodcast] error:nil], @"Object should have id");
     __weak SVPodcastDetailsViewController *blockSelf = self;
 
     void (^loadCompleteHandler)() = ^{
         blockSelf->isLoading = NO;
         [self loadFeedImage];
-
-        if (shouldSave) {
-            LOG_GENERAL(2, @"Saving local context");
-            [localContext performBlock:^void() {
-                [localContext save];
-            }];
-        }
-
+        LOG_GENERAL(2, @"Saving local context");
+        [localContext performBlock:^void() {
+            [localContext save];
+        }];
         LOG_GENERAL(2, @"Done loading entries");
     };
 
-    op = [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast
+    op = [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
                                                                           inContext:localContext
                                                                        onCompletion:loadCompleteHandler
                                                                             onError:^(NSError *error) {
@@ -177,41 +209,39 @@
         LOG_GENERAL(2, @"Saving local context");
         [localContext save];
         LOG_GENERAL(2, @"local context saved");
-        NSManagedObjectContext *parent = [localContext parentContext];
-        NSAssert(parent == [NSManagedObjectContext defaultContext], @"Parent shoudl be the main context");
-        [parent performBlockAndWait:^{
-            LOG_GENERAL(2, @"Saving parent context");
-            [parent save];
-            NSAssert(parent == [NSManagedObjectContext defaultContext], @"parent Context should be the default");
-            LOG_GENERAL(2, @"Parent Context Saved");
-        }];
     }];
-
+    
     NSError *error;
     [fetcher performFetch:&error];
     NSAssert(error == nil, @"there should be no error");
     SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
     [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
     SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
-//    [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:podcast];
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-//    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
-//    NSParameterAssert(controller);
-//    [[self navigationController] pushViewController:controller animated:YES];
-    NSLog(@"Selected episode %@", episode);
+
+    LOG_GENERAL(3, @"Triggering playback");
+    [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
+    NSParameterAssert(controller);
     
-    [[SVDownloadManager sharedInstance] downloadEntry:episode];
+    LOG_GENERAL(3, @"Navigating to player");
+    [[self navigationController] pushViewController:controller animated:YES];
+    
+    
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+   
 
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
     
-        cell = [tableView dequeueReusableCellWithIdentifier:@"episodeCell"];
+      SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView dequeueReusableCellWithIdentifier:@"episodeCell"];
         SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
-        cell.textLabel.text = episode.title;
-        cell.detailTextLabel.text = episode.summary;
-    
+    [cell bind:episode];    
     
     return cell;
     

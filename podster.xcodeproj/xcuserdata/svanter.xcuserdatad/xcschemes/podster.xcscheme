@@ -67,8 +67,8 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "NSZombieEnable"
-            value = "1"
+            key = "NSZombieEnabled"
+            value = "YES"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable

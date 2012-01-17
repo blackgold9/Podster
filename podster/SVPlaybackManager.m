@@ -47,17 +47,23 @@
 - (void)playEpisode:(SVPodcastEntry *)episode
           ofPodcast:(SVPodcast *)podcast{
     
+    LOG_GENERAL(4, @"Assigning new current podcast/episode");
+    self.currentEpisode = [episode inContext:[NSManagedObjectContext defaultContext]];;
+    self.currentPodcast = [podcast inContext:[NSManagedObjectContext defaultContext]];;
     NSParameterAssert(episode);
     NSParameterAssert(podcast);
     NSAssert(episode.mediaURL != nil, @"The podcast must have a mediaURL");
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+    });
+    LOG_GENERAL(4, @"Setting up audio session");
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive: YES error: nil];
     if (!_player) {
         _player = [AVPlayer playerWithURL:[NSURL URLWithString:episode.mediaURL]];
         [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     }
-    
+    LOG_GENERAL(4, @"Triggering playback");
     [_player replaceCurrentItemWithPlayerItem:[[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]]];
     
    
@@ -71,9 +77,9 @@
 
                 if (_player.status == AVPlayerStatusReadyToPlay) {
                     [_player play];
-                    NSLog(@"Started Playback");
+                    LOG_NETWORK(2,@"Started Playback");
                 } else {
-                    NSLog(@"Error downloing");
+                    LOG_NETWORK(1,@"Error downloing");
                 }
             }
         }

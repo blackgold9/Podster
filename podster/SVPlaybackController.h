@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *skipBackButton;
 - (IBAction)playTapped:(id)sender;
 @property (weak, nonatomic) IBOutletCollection(UIView) NSArray *chromeViews;
+@property (weak, nonatomic) IBOutlet UIImageView *artworkImage;
 @property (weak, nonatomic) IBOutlet OBSlider *progressSlider;
 @property (weak, nonatomic) IBOutlet UILabel *timeRemainingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeElapsedLabel;

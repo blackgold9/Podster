@@ -29,7 +29,7 @@
 
 #import "MWFeedParser.h"
 #import "MWFeedParser_Private.h"
-#import "NSString+HTML.h"
+#import "NSString+MW_HTML.h"
 #import "NSDate+InternetDateTime.h"
 
 // NSXMLParser Logging
@@ -595,9 +595,13 @@
         // Store data
         BOOL processed = NO;
         if (currentText) {
-            
-            // Remove newlines and whitespace from currentText
-            NSString *processedText = [currentText stringByRemovingNewLinesAndWhitespace];
+            NSString *processedText = nil;
+            if (![elementName hasSuffix:@"summary"] && ![elementName hasSuffix:@"content"]){
+                // Remove newlines and whitespace from currentText if its not the rich text of the summary
+               processedText = [currentText stringByRemovingNewLinesAndWhitespace]; 
+            } else {
+                processedText = currentText;
+            }
             
             // Process
             switch (feedType) {
@@ -608,7 +612,7 @@
                         if ([currentPath isEqualToString:@"/rss/channel/item/title"]) { if (processedText.length > 0) item.title = processedText; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/item/link"]) { if (processedText.length > 0) item.link = processedText; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/item/guid"]) { if (processedText.length > 0) item.identifier = processedText; processed = YES; }
-                        else if ([currentPath isEqualToString:@"/rss/channel/item/description"]) { if (processedText.length > 0) item.summary = processedText; processed = YES; }
+                        else if ([currentPath isEqualToString:@"/rss/channel/item/description"]) { if (processedText.length > 0 && item.summary == nil) item.summary = processedText; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/item/content:encoded"]) { if (processedText.length > 0) item.content = processedText; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/item/pubDate"]) { if (processedText.length > 0) item.date = [NSDate dateFromInternetDateTimeString:processedText formatHint:DateFormatHintRFC822]; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/item/enclosure"]) { [self createEnclosureFromAttributes:currentElementAttributes andAddToItem:item]; processed = YES; }
@@ -616,7 +620,9 @@
                         else if ([currentPath isEqualToString:@"/rss/channel/item/itunes:image"]) {
                             if ([currentElementAttributes valueForKey:@"href"]) item.imageURL = [currentElementAttributes valueForKey:@"href"]; processed = YES; }
                         else if ([currentPath isEqualToString:@"/rss/channel/item/itunes:duration"]) {
-                            if ([currentElementAttributes valueForKey:@"href"]) item.duration =  processedText; processed = YES; }
+                            if (processedText.length > 0) item.duration =  processedText; processed = YES; }
+                        else if ([currentPath isEqualToString:@"/rss/channel/item/itunes:summary"]) {
+                            if (processedText.length > 0) item.summary =  processedText; processed = YES; }
                     }
                     
                     // Info

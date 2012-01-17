@@ -101,33 +101,28 @@
     return op;
 }
 
--(MKNetworkOperation *)downloadAndPopulatePodcastWithFeedURL:(SVPodcast *)podcast
+-(MKNetworkOperation *)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
                                                    inContext:(NSManagedObjectContext *)context
                                                 onCompletion:(void (^)(void))onComplete
                                                      onError:(MKNKErrorBlock)onError
 {
-    NSParameterAssert(podcast);
+    NSParameterAssert(feedURL);
     NSParameterAssert(context);
-    [context performBlockAndWait:^{
-        NSAssert(podcast.feedURL, @"The podcast did not have a feed url");
-        NSAssert(podcast.managedObjectContext == context, @"The podcast should be in supplied context");
-        
-    }];
 
     NSManagedObjectContext *localContext= [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     localContext.parentContext = context;
-         SVPodcast *localPodcast = [podcast inContext:localContext];
    
-    MKNetworkOperation *op = [self operationWithURLString:podcast.feedURL];
+    MKNetworkOperation *op = [self operationWithURLString:feedURL];
     [op onCompletion:^void(MKNetworkOperation *completedOperation) {
         [SVFeedParser parseData:[completedOperation responseData]
-                     forPodcast:localPodcast
+                     forPodcastAtURL:feedURL
                       inContext:localContext
                      onComplete:^{
-                            onComplete();
+                         [localContext save];
+                         onComplete();
                      } onError:^(NSError *error) {
-
-        }];
+                         LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
+                     }];
 
     } onError:^void(NSError *error) {
         LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed");

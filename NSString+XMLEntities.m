@@ -28,7 +28,7 @@
 //
 
 #import "NSString+XMLEntities.h"
-
+#import "NSString+MW_HTML.h"
 // THIS CLASS IS DEPRECIATED 03/08/2010
 // REPLACED BY NSString+HTML
 
