@@ -8,7 +8,7 @@
         <scene sceneID="1fO-IR-PVg">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vp7-3z-zqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController title="Popular Tags" id="DOf-8L-uXT" customClass="SVTagListController" sceneMemberID="viewController">
+                <tableViewController title="Popular Tags" id="DOf-8L-uXT" customClass="SVPodcastDirectoryViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Acv-6u-gG0">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -78,7 +78,7 @@
         <scene sceneID="w0A-9D-Yl8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcO-Yx-a7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="podcastSearchResults" id="7eF-mi-Iw1" customClass="SVPodcastsForTagViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="podcastSearchResults" id="7eF-mi-Iw1" customClass="SVPodcastsSearchResultsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czt-4I-mD4">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

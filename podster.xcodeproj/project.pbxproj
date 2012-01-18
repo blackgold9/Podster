@@ -272,10 +272,10 @@
 		4B71F81C14A6D84C00D26F4C /* NSString+MW_HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F80E14A6D84C00D26F4C /* NSString+MW_HTML.m */; };
 		4B71F81D14A6D84C00D26F4C /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */; };
 		4B71F81E14A6D84C00D26F4C /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */; };
-		4B71F82114A6E95B00D26F4C /* SVTagListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVTagListController.m */; };
-		4B71F82214A6E95B00D26F4C /* SVTagListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVTagListController.m */; };
-		4B71F82514A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */; };
-		4B71F82614A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */; };
+		4B71F82114A6E95B00D26F4C /* SVPodcastDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVPodcastDirectoryViewController.m */; };
+		4B71F82214A6E95B00D26F4C /* SVPodcastDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVPodcastDirectoryViewController.m */; };
+		4B71F82514A7060B00D26F4C /* SVPodcastsSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsSearchResultsViewController.m */; };
+		4B71F82614A7060B00D26F4C /* SVPodcastsSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsSearchResultsViewController.m */; };
 		4B86242D14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
 		4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
 		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
@@ -552,10 +552,10 @@
 		4B71F80E14A6D84C00D26F4C /* NSString+MW_HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MW_HTML.m"; sourceTree = "<group>"; };
 		4B71F80F14A6D84C00D26F4C /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
 		4B71F81014A6D84C00D26F4C /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
-		4B71F81F14A6E95A00D26F4C /* SVTagListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVTagListController.h; sourceTree = "<group>"; };
-		4B71F82014A6E95B00D26F4C /* SVTagListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVTagListController.m; sourceTree = "<group>"; };
-		4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcastsForTagViewController.h; path = ../SVPodcastsForTagViewController.h; sourceTree = "<group>"; };
-		4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcastsForTagViewController.m; path = ../SVPodcastsForTagViewController.m; sourceTree = "<group>"; };
+		4B71F81F14A6E95A00D26F4C /* SVPodcastDirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastDirectoryViewController.h; sourceTree = "<group>"; };
+		4B71F82014A6E95B00D26F4C /* SVPodcastDirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastDirectoryViewController.m; sourceTree = "<group>"; };
+		4B71F82314A7060A00D26F4C /* SVPodcastsSearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcastsSearchResultsViewController.h; path = ../SVPodcastsSearchResultsViewController.h; sourceTree = "<group>"; };
+		4B71F82414A7060A00D26F4C /* SVPodcastsSearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcastsSearchResultsViewController.m; path = ../SVPodcastsSearchResultsViewController.m; sourceTree = "<group>"; };
 		4B86242B14B576A900A4B320 /* SVDownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadsViewController.h; sourceTree = "<group>"; };
 		4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadsViewController.m; sourceTree = "<group>"; };
 		4B86242F14B57C7500A4B320 /* SVDownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadCell.h; sourceTree = "<group>"; };
@@ -620,10 +620,10 @@
 		4B10D00314BF786E00DF4DBD /* View controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4B71F82314A7060A00D26F4C /* SVPodcastsForTagViewController.h */,
-				4B71F82414A7060A00D26F4C /* SVPodcastsForTagViewController.m */,
-				4B71F81F14A6E95A00D26F4C /* SVTagListController.h */,
-				4B71F82014A6E95B00D26F4C /* SVTagListController.m */,
+				4B71F82314A7060A00D26F4C /* SVPodcastsSearchResultsViewController.h */,
+				4B71F82414A7060A00D26F4C /* SVPodcastsSearchResultsViewController.m */,
+				4B71F81F14A6E95A00D26F4C /* SVPodcastDirectoryViewController.h */,
+				4B71F82014A6E95B00D26F4C /* SVPodcastDirectoryViewController.m */,
 				4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */,
 				4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */,
 				4B189B3514AFAD12001E378A /* SVPlaybackController.h */,
@@ -1287,8 +1287,8 @@
 				4B71F81914A6D84C00D26F4C /* NSDate+InternetDateTime.m in Sources */,
 				4B71F81B14A6D84C00D26F4C /* NSString+MW_HTML.m in Sources */,
 				4B71F81D14A6D84C00D26F4C /* NSString+XMLEntities.m in Sources */,
-				4B71F82114A6E95B00D26F4C /* SVTagListController.m in Sources */,
-				4B71F82514A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */,
+				4B71F82114A6E95B00D26F4C /* SVPodcastDirectoryViewController.m in Sources */,
+				4B71F82514A7060B00D26F4C /* SVPodcastsSearchResultsViewController.m in Sources */,
 				4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */,
 				4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */,
 				4B5CE90014B0E10400E17299 /* OBSlider.m in Sources */,
@@ -1395,8 +1395,8 @@
 				4B71F81A14A6D84C00D26F4C /* NSDate+InternetDateTime.m in Sources */,
 				4B71F81C14A6D84C00D26F4C /* NSString+MW_HTML.m in Sources */,
 				4B71F81E14A6D84C00D26F4C /* NSString+XMLEntities.m in Sources */,
-				4B71F82214A6E95B00D26F4C /* SVTagListController.m in Sources */,
-				4B71F82614A7060B00D26F4C /* SVPodcastsForTagViewController.m in Sources */,
+				4B71F82214A6E95B00D26F4C /* SVPodcastDirectoryViewController.m in Sources */,
+				4B71F82614A7060B00D26F4C /* SVPodcastsSearchResultsViewController.m in Sources */,
 				4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */,
 				4B189B3814AFAD13001E378A /* SVPlaybackController.m in Sources */,
 				4B5CE90114B0E10400E17299 /* OBSlider.m in Sources */,

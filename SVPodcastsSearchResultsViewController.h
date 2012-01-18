@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SVCategory.h"
-@interface SVPodcastsForTagViewController : UITableViewController
-@property (strong) SVCategory *category;
-@property (strong) NSString *searchString;
+
+@interface SVPodcastsSearchResultsViewController : UITableViewController
+@property(strong) SVCategory *category;
+@property(strong) NSString *searchString;
 @end

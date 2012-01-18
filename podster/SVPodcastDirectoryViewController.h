@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SVTagListController : UITableViewController<UISearchBarDelegate>
+@interface SVPodcastDirectoryViewController : UITableViewController <UISearchBarDelegate>
 
 - (IBAction)cancelButtonTapped:(id)sender;
 @end
