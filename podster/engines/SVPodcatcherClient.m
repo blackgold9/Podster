@@ -14,6 +14,8 @@
 #import "SVPodcastEntry.h"
 #import "SVFeedParser.h"
 #import "SVPodcastSearchResult.h"
+#import "UIDevice+IdentifierAddition.h"
+
 @implementation SVPodcatcherClient
 + (id)sharedInstance
 {
@@ -21,6 +23,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         client = [[SVPodcatcherClient alloc] initWithHostName:@"podstore.herokuapp.com" customHeaderFields:nil];
+      //  client = [[SVPodcatcherClient alloc] initWithHostName:@"localhost:3000" customHeaderFields:nil];
     });
     
     return client;
@@ -101,6 +104,33 @@
     return op;
 }
 
+-(MKNetworkOperation *)searchForPodcastsMatchingQuery:(NSString *)query
+                                         onCompletion:(PodcastListResponeBlock)completion 
+                                              onError:(MKNKErrorBlock)errorHandler
+{
+    NSParameterAssert(query);
+    NSParameterAssert(completion);
+    NSParameterAssert(errorHandler);
+    NSString *queryPath = [NSString stringWithFormat:@"feeds.json?query=%@", [query urlEncodedString]];
+    MKNetworkOperation *op = [self operationWithPath:queryPath];
+    [op onCompletion:^(MKNetworkOperation *completedOperation) {
+        NSArray *returnedData = [completedOperation responseJSON];
+        NSMutableArray *podcasts = [NSMutableArray array];
+        for(NSDictionary *dict in returnedData) {
+            SVPodcastSearchResult *result = [SVPodcastSearchResult new];
+            [result populateWithDictionary:dict];
+            [podcasts addObject:result];
+        }
+        
+        completion(podcasts);
+    } onError:^(NSError *error) {
+        errorHandler(error);
+    }];
+    
+    [self enqueueOperation:op];
+    return op;
+}
+
 -(MKNetworkOperation *)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
                                                    inContext:(NSManagedObjectContext *)context
                                                 onCompletion:(void (^)(void))onComplete
@@ -122,6 +152,7 @@
                          onComplete();
                      } onError:^(NSError *error) {
                          LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
+                         onError(error);
                      }];
 
     } onError:^void(NSError *error) {
@@ -131,8 +162,54 @@
     return op;
 
 }
+#pragma mark - push related
+-(MKNetworkOperation *)registerForPushNotificationsWithToken:(NSString *)token
+                                          andDeviceIdentifer:(NSString *)deviceId
+                                                onCompletion:(void (^)(void))onComplete
+                                                     onError:(MKNKErrorBlock)onError;
+{ 
+    NSParameterAssert(token);
+    NSParameterAssert(deviceId);
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:token, @"deviceToken",  deviceId, @"deviceId",@"ios", @"platform", nil];
+    MKNetworkOperation *op = [self operationWithPath:@"devices/register.json" 
+                                              params:params 
+                                          httpMethod:@"POST"];    
+    [op onCompletion:^(MKNetworkOperation *completedOperation) {
+        onComplete();
+    } onError:^(NSError *error) {
+        LOG_NETWORK(1, @"registerForPushNotification failed with error: %@", error);
+        onError(error);
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
 
-        
+    
+}
+ 
+-(MKNetworkOperation *)notifyOfSubscriptionToFeed:(NSString *)feedURL 
+                                     withDeviceId:(NSString *)deviceId
+                                     onCompletion:(void (^)(void))completion 
+                                          onError:(MKNKErrorBlock)onError
+{
+    NSParameterAssert(feedURL);
+    NSParameterAssert(deviceId);
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
+    MKNetworkOperation *op = [self operationWithPath:@"devices/subscribe.json" 
+                                              params:params 
+                                          httpMethod:@"POST"];    
+    [op onCompletion:^(MKNetworkOperation *completedOperation) {
+        completion();
+    } onError:^(NSError *error) {
+        LOG_NETWORK(1, @"subscribe failed with error: %@", error);
+        onError(error);
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
 
 
 @end

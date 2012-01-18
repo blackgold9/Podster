@@ -15,6 +15,7 @@
     NSArray *podcasts;
 }
 @synthesize category;
+@synthesize searchString;
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -45,19 +46,37 @@
 {
     [super viewDidLoad];
        
-    isLoading = YES;
-    self.navigationItem.title = self.category.name;
-    [[SVPodcatcherClient sharedInstance] podcastsByCategory:self.category.categoryId
-                                            startingAtIndex:0
-                                                      limit:50
-                                               onCompletion:^(NSArray *returnedPodcasts) {
-                                                   podcasts = returnedPodcasts;
-                                                   isLoading = NO;
-                                                   [self.tableView reloadData];
-                                                   
-                                               } onError:^(NSError *error) {
-                                                   [UIAlertView showWithError:error]; 
-                                               }];
+
+    
+    if (self.searchString) {
+        isLoading = YES;
+        self.navigationItem.title = self.searchString;
+        LOG_GENERAL(2, @"A search string was entered");
+        [[SVPodcatcherClient sharedInstance] searchForPodcastsMatchingQuery:self.searchString onCompletion:^(NSArray *returnedPodcasts) {
+            LOG_GENERAL(2, @"%d search resutls returned", returnedPodcasts.count);
+            podcasts = returnedPodcasts;
+            isLoading = NO;
+            [self.tableView reloadData];
+            
+            
+        } onError:^(NSError *error) {
+            LOG_GENERAL(2, @"search failed with error: %@", error);
+        }];
+    } else {
+        isLoading = YES;
+        self.navigationItem.title = self.category.name;
+        [[SVPodcatcherClient sharedInstance] podcastsByCategory:self.category.categoryId
+                                                startingAtIndex:0
+                                                          limit:50
+                                                   onCompletion:^(NSArray *returnedPodcasts) {
+                                                       podcasts = returnedPodcasts;
+                                                       isLoading = NO;
+                                                       [self.tableView reloadData];
+                                                       
+                                                   } onError:^(NSError *error) {
+                                                       [UIAlertView showWithError:error]; 
+                                                   }];
+    }
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }

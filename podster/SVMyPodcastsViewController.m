@@ -12,6 +12,7 @@
 #import "SVPodcatcherClient.h"
 #import "SVPodcast.h"
 #import "SVPodcastDetailsViewController.h"
+#import "SVSubscription.h"
 
 @implementation SVMyPodcastsViewController {
     NSFetchedResultsController *fetcher;
@@ -20,7 +21,7 @@
 @synthesize gridView;
 - (NSFetchedResultsController *)fetcher {
     if (!fetcher) {
-        fetcher = [SVPodcast fetchAllSortedBy:SVPodcastAttributes.lastUpdated ascending:NO withPredicate:nil groupBy:nil delegate:self];
+        fetcher = [SVSubscription fetchAllSortedBy:@"podcast.lastUpdated" ascending:NO withPredicate:nil groupBy:nil delegate:self];
     }
     
     return fetcher;
@@ -69,7 +70,7 @@
 { 
     if ([segue.identifier isEqualToString:@"showPodcast"]) {
         SVPodcastDetailsViewController *destination= segue.destinationViewController; 
-        destination.podcast = [[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:tappedIndex inSection:0]];
+        destination.podcast = ((SVSubscription *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:tappedIndex inSection:0]]).podcast;
     }
 }
 
@@ -103,7 +104,7 @@
 
 -(GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
 {
-    SVPodcast *currentPodcast = [[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];    
+    SVPodcast *currentPodcast = ((SVSubscription *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]]).podcast;    
     CGSize size = [self GMGridView:self.gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
     
     GMGridViewCell *cell = [self.gridView dequeueReusableCell];

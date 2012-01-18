@@ -25,6 +25,11 @@
 #import "GTMNSString+HTML.h"
 #import "SVEpisodeDetails.h"
 #import "SVPlaybackManager.h"
+#import "SVPlaybackController.h"
+#import "SVSubscription.h"
+@interface SVPodcastDetailsViewController ()
+- (BOOL)isSubscribed;
+@end
 @implementation SVPodcastDetailsViewController {
     BOOL isLoading;
     NSMutableArray *feedItems;
@@ -42,6 +47,7 @@
 @synthesize tableView = _tableView;
 @synthesize metadataView;
 @synthesize imageView;
+@synthesize subscribeButton;
 @synthesize podcast = _podcast;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,6 +74,48 @@
     _podcast = podcast;
 }
 
+- (IBAction)subscribeTapped:(id)sender {
+    // TODO: Clean this crap up. Better user feedback.
+    [localContext performBlock:^{
+        SVSubscription *subscription = localPodcast.subscription;
+        
+        if(!subscription) {
+               self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
+            subscription = [SVSubscription createInContext:localContext];
+            localPodcast.subscription = subscription;
+    
+            
+            if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
+                NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
+                [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:localPodcast.feedURL withDeviceId:deviceId onCompletion:^{
+                    LOG_GENERAL(2, @"Registered for notifications on feed");
+                } onError:^(NSError *error) {
+                    LOG_GENERAL(1, @"Registration failed with error: %@", error);
+                }];
+            }
+        } else {
+            [subscription deleteInContext:localContext];
+            if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
+                NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
+                [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:localPodcast.feedURL withDeviceId:deviceId onCompletion:^{
+                    LOG_GENERAL(2, @"unsubscribe for notifications on feed");
+                } onError:^(NSError *error) {
+                    LOG_GENERAL(1, @"unsubscribe failed with error: %@", error);
+                }];
+            }
+        }
+        [localContext save];
+        if(localContext.parentContext) {
+            
+            [[localContext parentContext] performBlock:^{
+                [[localContext parentContext] save];                
+            }];
+
+        }
+
+    }];
+}
+
 -(id<ActsAsPodcast>)podcast
 {
     return _podcast;
@@ -79,29 +127,38 @@
     LOG_GENERAL(2, @"dealloc");
 }
 
+- (SVPodcastEntry *)saveAndReturnItemAtIndexPath:(NSIndexPath*)indexPath
+{
+    // NEed to save now
+    __block SVPodcastEntry *entry = nil;
+    [localContext performBlockAndWait:^{
+        entry = [fetcher objectAtIndexPath:indexPath];
+        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
+        LOG_GENERAL(2, @"Saving local context");
+        [localContext save];
+        LOG_GENERAL(2, @"local context saved");
+    }];
+    
+    NSError *error;
+    [fetcher performFetch:&error];
+    NSAssert(error == nil, @"there should be no error");
+    SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
+    [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
+    return fetcherEpisode;
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showEpisodeDetails"]) {
         SVEpisodeDetailsViewController *details = segue.destinationViewController;
-        details.episode = (SVPodcastEntry *)[fetcher objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
-    } else if ([[segue identifier] isEqualToString:@"playPodcastEpisode"]) {
-        // NEed to save now
-        __block SVPodcastEntry *entry = nil;
-        [localContext performBlockAndWait:^{
-            entry = [fetcher objectAtIndexPath:self.tableView.indexPathForSelectedRow];
-            [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
-            LOG_GENERAL(2, @"Saving local context");
-            [localContext save];
-            LOG_GENERAL(2, @"local context saved");
-        }];
         
-        NSError *error;
-        [fetcher performFetch:&error];
-        NSAssert(error == nil, @"there should be no error");
-        SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:self.tableView.indexPathForSelectedRow];
-        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
+        details.episode = (SVPodcastEntry *)[self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
+    } else if ([[segue identifier] isEqualToString:@"playPodcastEpisode"]) {
+        SVPodcastEntry *fetcherEpisode;
+        fetcherEpisode = [self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
         SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
         NSLog(@"Selected episode %@", episode);
+        [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
         
         // Download episode
         //[[SVDownloadManager sharedInstance] downloadEntry:episode];
@@ -133,6 +190,7 @@
     isLoading = YES;
 
     localContext = [NSManagedObjectContext defaultContext];
+
     [localContext performBlockAndWait:^{
                     LOG_GENERAL(2, @"Lookuing up podcast in data store");
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
@@ -149,6 +207,9 @@
         }
     }];
     
+    if ([self isSubscribed]) {
+        self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
+    }
     
    // NSAssert([localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:localPodcast] error:nil], @"Object should have id");
     __weak SVPodcastDetailsViewController *blockSelf = self;
@@ -182,6 +243,7 @@
     [self setTableView:nil];
     [self setMetadataView:nil];
     [self setImageView:nil];
+    [self setSubscribeButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -201,38 +263,39 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // NEed to save now
-    __block SVPodcastEntry *entry = nil;
-    [localContext performBlockAndWait:^{
-        entry = [fetcher objectAtIndexPath:indexPath];
-        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
-        LOG_GENERAL(2, @"Saving local context");
-        [localContext save];
-        LOG_GENERAL(2, @"local context saved");
-    }];
-    
-    NSError *error;
-    [fetcher performFetch:&error];
-    NSAssert(error == nil, @"there should be no error");
-    SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
-    [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
-    SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
-
-    LOG_GENERAL(3, @"Triggering playback");
-    [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
-    NSParameterAssert(controller);
-    
-    LOG_GENERAL(3, @"Navigating to player");
-    [[self navigationController] pushViewController:controller animated:YES];
+//    // NEed to save now
+//    __block SVPodcastEntry *entry = nil;
+//    [localContext performBlockAndWait:^{
+//        entry = [fetcher objectAtIndexPath:indexPath];
+//        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
+//        LOG_GENERAL(2, @"Saving local context");
+//        [localContext save];
+//        LOG_GENERAL(2, @"local context saved");
+//    }];
+//    
+//    NSError *error;
+//    [fetcher performFetch:&error];
+//    NSAssert(error == nil, @"there should be no error");
+//    SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
+//    [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
+//    SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
+//
+//    LOG_GENERAL(3, @"Triggering playback");
+//    [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+//    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
+//    NSParameterAssert(controller);
+//    
+//    LOG_GENERAL(3, @"Navigating to player");
+//    [[self navigationController] pushViewController:controller animated:YES];
     
     
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-   
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+    [self performSegueWithIdentifier:@"showEpisodeDetails" sender:self];
 
 }
 
@@ -291,5 +354,15 @@
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[fetcher sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
+}
+#pragma mark - utilities
+- (BOOL)isSubscribed
+{
+    __block BOOL subscribed;
+    [localContext performBlockAndWait:^{
+        subscribed = localPodcast.subscription != nil;
+    }];
+    
+    return subscribed;
 }
 @end

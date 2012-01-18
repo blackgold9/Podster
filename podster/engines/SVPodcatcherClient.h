@@ -24,19 +24,16 @@ typedef void (^PodcastItemsResponseBlock)(NSArray *entries);
                                     onError:(MKNKErrorBlock)error;
 
 -(MKNetworkOperation *)searchForPodcastsMatchingQuery:(NSString *)query
-                                           inLanguage:(NSString *)language
-                                         onCompletion:(PodcastListResponeBlock)completion
-                                              onError:(MKNKErrorBlock)error;
--(MKNetworkOperation *)searchForPodcastsMatchingQuery:(NSString *)query
-                                           inLanguage:(NSString *)language
                                          onCompletion:(PodcastListResponeBlock)completion
                                               onError:(MKNKErrorBlock)error;
 
 - (MKNetworkOperation *)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL
-                                      onCompletion:(void(^)(void))completion
-                                           onError:(MKNKErrorBlock)error;
+                                          withDeviceId:(NSString *)deviceId
+                                          onCompletion:(void(^)(void))completion
+                                               onError:(MKNKErrorBlock)error;
 
 - (MKNetworkOperation *)notifyOfSubscriptionToFeed:(NSString *)feedURL
+                                      withDeviceId:(NSString *)deviceId
                                       onCompletion:(void(^)(void))completion
                                            onError:(MKNKErrorBlock)error;
 
@@ -55,6 +52,11 @@ typedef void (^PodcastItemsResponseBlock)(NSArray *entries);
 
 -(MKNetworkOperation *)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
                                                    inContext:(NSManagedObjectContext *)context
+                                                onCompletion:(void (^)(void))onComplete
+                                                     onError:(MKNKErrorBlock)onError;
+
+-(MKNetworkOperation *)registerForPushNotificationsWithToken:(NSString *)token
+                                          andDeviceIdentifer:(NSString *)deviceId
                                                 onCompletion:(void (^)(void))onComplete
                                                      onError:(MKNKErrorBlock)onError;
 

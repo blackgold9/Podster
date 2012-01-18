@@ -14,6 +14,7 @@
 @property (nonatomic, copy) CompletionBlock completionCallback;
 @end
 @implementation SVFeedParser {
+    BOOL failed;
     SVPodcast *localPodcast;
     NSManagedObjectContext *localContext;
     BOOL shouldSaveParentContext;
@@ -31,15 +32,20 @@ forPodcastAtURL:(NSString *)feedURL
     NSParameterAssert(feedURL);
     NSParameterAssert(context);
     NSParameterAssert(data);
+
     SVFeedParser *parser = [SVFeedParser new];
     parser->originalQueue = dispatch_get_current_queue();
     parser.completionCallback = complete;
     parser.errorCallback = error;
     parser->localContext = context;
     parser->feedURL = feedURL;
+    parser->failed = NO;
     parser->feedParser = [[MWFeedParser alloc] initWithFeedData:data textEncodingName:@"NSUnicodeStringEncoding"];
     parser->feedParser.delegate = parser;
-    [parser->feedParser parse];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [parser->feedParser parse];
+    });
+
 
     return parser;
 }
@@ -60,6 +66,12 @@ forPodcastAtURL:(NSString *)feedURL
 -(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
 {
     if (item.enclosures.count == 0) {
+        [parser stopParsing];
+        NSError *badFeed = [[NSError alloc] initWithDomain:@"SVParsing" code:100 userInfo:[NSDictionary dictionaryWithObject:@"This podcast feed appears invalid" forKey:NSLocalizedDescriptionKey]];
+        failed = YES;
+        dispatch_async(originalQueue, ^void() {
+            self.errorCallback(badFeed);
+        });
         //TODO: Report parsing error with url
         return;
     }
@@ -110,19 +122,19 @@ forPodcastAtURL:(NSString *)feedURL
 
 -(void)feedParserDidFinish:(MWFeedParser *)parser
 {
-
-    [localContext performBlock:^void() {
-        LOG_PARSING(2, @"Saving local context");
-         [localContext MR_saveWithErrorHandler:^(NSError *error) {
-             self.errorCallback(error);
-             LOG_PARSING(0, @"Could not save parsed feed data. Core data reported error: %@", error);
-         }];
-        dispatch_async(originalQueue, ^void() {
-            self.completionCallback();
-        });
-    }];
-
-   
+    if (!failed) {
+        
+        [localContext performBlock:^void() {
+            LOG_PARSING(2, @"Saving local context");
+            [localContext MR_saveWithErrorHandler:^(NSError *error) {
+                self.errorCallback(error);
+                LOG_PARSING(0, @"Could not save parsed feed data. Core data reported error: %@", error);
+            }];
+            dispatch_async(originalQueue, ^void() {
+                self.completionCallback();
+            });
+        }];
+    }
 }
 
 @end

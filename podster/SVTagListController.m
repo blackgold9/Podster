@@ -88,7 +88,14 @@
     // Return YES for supported orientations
 	return YES;
 }
-
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    UIStoryboard *mainStoryboard= [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    SVPodcastsForTagViewController *destination = [mainStoryboard instantiateViewControllerWithIdentifier:@"podcastSearchResults"];
+    destination.navigationItem.title = searchBar.text;
+    destination.searchString = searchBar.text;
+    [self.navigationController pushViewController:destination animated:YES];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -109,7 +116,7 @@
     if (isLoading) {
        cell = [tableView dequeueReusableCellWithIdentifier:@"LoadingCell"];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"TagCell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryCell"];
     }
     SVCategory *category = (SVCategory *)[categories objectAtIndex:indexPath.row];
     

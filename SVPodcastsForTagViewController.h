@@ -10,4 +10,5 @@
 #import "SVCategory.h"
 @interface SVPodcastsForTagViewController : UITableViewController
 @property (strong) SVCategory *category;
+@property (strong) NSString *searchString;
 @end

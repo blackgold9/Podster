@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *metadataView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+- (IBAction)subscribeTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *subscribeButton;
 @property (weak) id<ActsAsPodcast> podcast;
 @end

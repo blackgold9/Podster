@@ -13,9 +13,17 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" placeholder="Search for a specific Podcast" id="0a3-iW-gYY">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="DOf-8L-uXT" id="Ydd-ee-Vph"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TagCell" textLabel="9qz-84-Zxj" style="IBUITableViewCellStyleDefault" id="fNV-Cl-f46">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CategoryCell" textLabel="9qz-84-Zxj" style="IBUITableViewCellStyleDefault" id="fNV-Cl-f46">
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
@@ -33,7 +41,7 @@
                                 </view>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LoadingCell" id="ruJ-Ri-jDM">
-                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -53,7 +61,7 @@
                             <outlet property="delegate" destination="DOf-8L-uXT" id="kog-X3-Lxw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Popular Tags" id="n13-tc-pwE">
+                    <navigationItem key="navigationItem" title="Find a Podcast" id="n13-tc-pwE">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hNF-dI-MYy">
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="DOf-8L-uXT" id="U8o-i7-gfo"/>
@@ -70,7 +78,7 @@
         <scene sceneID="w0A-9D-Yl8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcO-Yx-a7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="7eF-mi-Iw1" customClass="SVPodcastsForTagViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="podcastSearchResults" id="7eF-mi-Iw1" customClass="SVPodcastsForTagViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czt-4I-mD4">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,7 +141,7 @@
         <scene sceneID="3VK-cs-szj">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq8-FL-BUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController title="Podcast Details" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sho" title="Podcast Details" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hra-2Y-S1w">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -143,11 +151,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="LoadingCell" rowHeight="88" id="560-y5-rd4">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LoadingCell" rowHeight="88" id="560-y5-rd4">
                                         <rect key="frame" x="0.0" y="22" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="gray" id="nEF-ki-4ni">
@@ -157,6 +165,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="Ud2-Hj-ZkH" kind="push" identifier="showEpisodeDetails" id="3ns-xP-ogr"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="episodeCell" rowHeight="88" id="J7U-bG-OW1" customClass="SVEpisodeListCell">
                                         <rect key="frame" x="0.0" y="110" width="320" height="88"/>
@@ -255,12 +266,19 @@
                     <toolbarItems>
                         <barButtonItem image="downloads.png" id="blw-o0-X87"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Details" id="51T-lo-c3z"/>
+                    <navigationItem key="navigationItem" title="Details" id="51T-lo-c3z">
+                        <barButtonItem key="rightBarButtonItem" image="heart.png" id="tJ0-3t-8nC">
+                            <connections>
+                                <action selector="subscribeTapped:" destination="Xyd-co-oUC" id="AhE-Dv-oSI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="McF-Qx-rxl" id="kLl-qb-okb"/>
                         <outlet property="imageView" destination="uzv-F6-J3U" id="AvW-IH-c03"/>
                         <outlet property="metadataView" destination="ZhJ-GG-EuI" id="6b5-qE-fTW"/>
+                        <outlet property="subscribeButton" destination="tJ0-3t-8nC" id="vCs-wI-d6p"/>
                         <outlet property="tableView" destination="zBW-st-oQR" id="gfx-Wz-qt4"/>
                         <outlet property="titleLabel" destination="pCs-j8-aWo" id="b1J-MP-fhH"/>
                     </connections>
@@ -273,7 +291,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ny0-NL-oHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="episodeDetails" id="Ud2-Hj-ZkH" customClass="SVEpisodeDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6CF-NT-Z7D">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" minimumFontSize="10" id="sd0-Ab-VTv">
@@ -314,7 +332,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="kiP-A3-gBF" customClass="DTAttributedTextView">
-                                <rect key="frame" x="20" y="170" width="280" height="270"/>
+                                <rect key="frame" x="21" y="135" width="280" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -331,45 +349,6 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2668" y="61"/>
-        </scene>
-        <scene sceneID="bE2-hE-hhS">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BWa-5S-HY2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="CqZ-Ze-091" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5Gd-6w-Sr6">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search" id="gly-MV-6io">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                                <connections>
-                                    <outlet property="delegate" destination="CqZ-Ze-091" id="zeO-lM-6e0"/>
-                                </connections>
-                            </searchBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="Hsu-RU-7eJ" id="ABY-hW-Lgc"/>
-                    </connections>
-                </viewController>
-                <searchDisplayController id="Hsu-RU-7eJ">
-                    <connections>
-                        <outlet property="delegate" destination="CqZ-Ze-091" id="Cpm-C1-Obs"/>
-                        <outlet property="searchBar" destination="gly-MV-6io" id="qa7-bE-Qnf"/>
-                        <outlet property="searchContentsController" destination="CqZ-Ze-091" id="Ub1-ea-zks"/>
-                        <outlet property="searchResultsDataSource" destination="CqZ-Ze-091" id="EN0-6x-iZQ"/>
-                        <outlet property="searchResultsDelegate" destination="CqZ-Ze-091" id="2Co-1Q-0cf"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="2122" y="622"/>
         </scene>
         <scene sceneID="Jy6-LT-bcN">
             <objects>
@@ -624,6 +603,7 @@
         <image name="down.png" width="24" height="13"/>
         <image name="download.png" width="48" height="42"/>
         <image name="downloads.png" width="24" height="24"/>
+        <image name="heart.png" width="26" height="26"/>
         <image name="listen.png" width="48" height="39"/>
         <image name="skipback.png" width="24" height="24"/>
         <image name="skipforward.png" width="24" height="24"/>
@@ -706,9 +686,11 @@
         <class className="SVPodcastDetailsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDetailsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="subscribeTapped:"/>
                 <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="metadataView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="subscribeButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>
