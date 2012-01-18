@@ -2,34 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/heart-highlighted.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/heart-highlighted@2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/heart.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/heart@2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/NSString+MD5Addition.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/NSString+MD5Addition.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UIDevice+IdentifierAddition.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UIDevice+IdentifierAddition.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SVPodcastsForTagViewController.h" afterPath="$PROJECT_DIR$/SVPodcastsForTagViewController.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SVPodcastsForTagViewController.m" afterPath="$PROJECT_DIR$/SVPodcastsForTagViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/xcschememanagement.plist" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/xcschememanagement.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVFeedParser.m" afterPath="$PROJECT_DIR$/podster/SVFeedParser.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVMyPodcastsViewController.m" afterPath="$PROJECT_DIR$/podster/SVMyPodcastsViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackManager.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.h" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVTagListController.h" afterPath="$PROJECT_DIR$/podster/SVTagListController.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVTagListController.m" afterPath="$PROJECT_DIR$/podster/SVTagListController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" afterPath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.h" afterPath="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.m" afterPath="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Prefix.pch" afterPath="$PROJECT_DIR$/podster/podster-Prefix.pch" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
