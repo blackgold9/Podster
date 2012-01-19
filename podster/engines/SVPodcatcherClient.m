@@ -205,6 +205,31 @@
         LOG_NETWORK(1, @"subscribe failed with error: %@", error);
         onError(error);
     }];
+    op.freezable = YES;
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+-(MKNetworkOperation *)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL 
+                                         withDeviceId:(NSString *)deviceId
+                                         onCompletion:(void (^)(void))completion 
+                                              onError:(MKNKErrorBlock)onError
+{
+    NSParameterAssert(feedURL);
+    NSParameterAssert(deviceId);
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
+    MKNetworkOperation *op = [self operationWithPath:@"devices/unsubscribe.json" 
+                                              params:params 
+                                          httpMethod:@"POST"];    
+    [op onCompletion:^(MKNetworkOperation *completedOperation) {
+        completion();
+    } onError:^(NSError *error) {
+        LOG_NETWORK(1, @"unsubscribe failed with error: %@", error);
+        onError(error);
+    }];
+    op.freezable = YES;
     
     [self enqueueOperation:op];
     

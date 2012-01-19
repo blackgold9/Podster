@@ -33,13 +33,14 @@
         UIImage *image = [UIImage imageNamed:@"nav-bar.png"];
     [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 //    [[UINavigationBar appearance] setTintColor:colorOne];
+    [[UISegmentedControl appearance] setTintColor:colorOne];
     [[UIToolbar appearance] setTintColor:colorOne];
     [[UIBarButtonItem appearance] setTintColor:colorOne];
 
     NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorFour
                                                                   forKey:UITextAttributeTextColor];
    // [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];
-    
+    [[UISearchBar appearance] setBarStyle:UIBarStyleBlack];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

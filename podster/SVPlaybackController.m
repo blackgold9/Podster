@@ -47,6 +47,24 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     LOG_GENERAL(2, @"View did appear");
+    LOG_NETWORK(4, @"Triggering albumart image load");
+    NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                LOG_NETWORK(4, @"Album art recieved");
+                CATransition *transition = [CATransition animation];
+                [self.artworkImage.layer addAnimation:transition forKey:nil];
+                
+                self.artworkImage.image = fetchedImage;
+
+            });
+            
+        }];
+    });
+   
+
 }
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -62,18 +80,7 @@
     LOG_GENERAL(4, @"Super viewdidload");
     [super viewDidLoad];
 
-    LOG_NETWORK(4, @"Triggering albumart image load");
-    NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
-                       
-    [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-        LOG_NETWORK(4, @"Album art recieved");
-        CATransition *transition = [CATransition animation];
-        [self.artworkImage.layer addAnimation:transition forKey:nil];
-
-        self.artworkImage.image = fetchedImage;
-        
-    }];
-
+    
     player = [[SVPlaybackManager sharedInstance] player];
     if (player.status == AVPlayerStatusReadyToPlay) {
         LOG_GENERAL(4, @"Wasn't yet playing, kicking it off");

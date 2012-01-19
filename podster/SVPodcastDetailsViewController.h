@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MWFeedParser.h"
 #import "ActsAsPodcast.h"
+#import "SVViewController.h"
 @class SVPodcastSearchResult;
-@interface SVPodcastDetailsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface SVPodcastDetailsViewController : SVViewController<UITableViewDataSource,UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

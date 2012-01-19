@@ -77,7 +77,12 @@ forPodcastAtURL:(NSString *)feedURL
     }
     [localContext performBlockAndWait:^void() {
         LOG_PARSING(4, @"Processing feed item %@", item);
-        NSPredicate *matchesGuid = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryAttributes.guid, item.identifier];
+        NSString *guid = item.identifier;
+        if (!guid) {
+            guid = [item.enclosures.lastObject objectForKey:@"url"];
+        }
+        NSAssert(guid != nil, @"Guid should not be nil at this point");
+        NSPredicate *matchesGuid = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryAttributes.guid, guid];
         NSPredicate *inPodcast =[NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryRelationships.podcast, localPodcast ];
         SVPodcastEntry *episode = [SVPodcastEntry findFirstWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:matchesGuid,inPodcast,nil]]
                                                                inContext:localContext];
@@ -98,6 +103,9 @@ forPodcastAtURL:(NSString *)feedURL
         episode.mediaURL = [item.enclosures.lastObject objectForKey:@"url"];
         NSParameterAssert(episode.mediaURL);
         episode.guid = item.identifier;
+        if(!item.identifier) {
+            episode.guid = episode.mediaURL;
+        }
         NSParameterAssert(episode.guid);
         episode.imageURL = item.imageURL;
         episode.datePublished = item.date;

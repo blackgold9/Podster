@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "GMGridView.h"
+#import "SVViewController.h"
+#import "JMTabView.h"
 
-@interface SVMyPodcastsViewController : UIViewController<GMGridViewDataSource, GMGridViewActionDelegate, NSFetchedResultsControllerDelegate>
+@interface SVMyPodcastsViewController : SVViewController<GMGridViewDataSource,JMTabViewDelegate, GMGridViewActionDelegate, NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet GMGridView *gridView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *viewModeToggleButton;
+- (IBAction)viewModeToggleTapped:(id)sender;
 
 @end

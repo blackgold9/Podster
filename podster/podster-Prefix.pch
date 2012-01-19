@@ -11,6 +11,7 @@
 #ifdef __OBJC__
 #define MR_SHORTHAND 1
 #define ALLOW_IPHONE_SPECIAL_CASES 1
+#define DEFAULT_GRID_CELL_SIZE CGSizeMake(150, 150)
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "LoggerCommon.h"

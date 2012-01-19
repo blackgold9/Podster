@@ -78,7 +78,7 @@
         <scene sceneID="w0A-9D-Yl8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcO-Yx-a7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="podcastSearchResults" id="7eF-mi-Iw1" customClass="SVPodcastsSearchResultsViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="searchResultsController" id="7eF-mi-Iw1" customClass="SVPodcastsSearchResultsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czt-4I-mD4">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +141,7 @@
         <scene sceneID="3VK-cs-szj">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq8-FL-BUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="sho" title="Podcast Details" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="podcastDetailsController" title="Podcast Details" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hra-2Y-S1w">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -263,9 +263,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem image="downloads.png" id="blw-o0-X87"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Details" id="51T-lo-c3z">
                         <barButtonItem key="rightBarButtonItem" image="heart.png" id="tJ0-3t-8nC">
                             <connections>
@@ -358,11 +356,11 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000013" contentMode="scaleToFill" image="bg-gunmetal.jpg" id="r5t-Du-EsY">
+                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000013" contentMode="scaleToFill" image="bg-gunmetal.png" id="r5t-Du-EsY">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" id="Fxc-dX-VW2" customClass="GMGridView">
+                            <view contentMode="scaleToFill" id="Fxc-dX-VW2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -370,25 +368,36 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1019607931" green="0.1019607931" blue="0.1019607931" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem image="downloads.png" id="eGf-WK-90d">
-                            <connections>
-                                <segue destination="rEE-UE-MFV" kind="push" id="Gmk-tD-kNW"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" title="My Podcasts" id="X5d-qX-t2x">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="X5d-qX-t2x">
+                        <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="Podcasts" id="ICS-fb-46y"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="Zj5-ud-sf1">
                             <connections>
                                 <segue destination="HKN-iT-AvW" kind="modal" identifier="showAddPodcast" id="5zf-j2-wpX"/>
                             </connections>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="2RS-wH-CkT">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Discover"/>
+                                <segment title="Favorites"/>
+                            </segments>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="Toggle" id="HVZ-xS-Fgc">
+                            <connections>
+                                <action selector="viewModeToggleTapped:" destination="04a-hT-U9C" id="1Of-N2-Beu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="containerView" destination="Fxc-dX-VW2" id="I68-wO-ieE"/>
                         <outlet property="gridView" destination="Fxc-dX-VW2" id="l3J-Oj-TMz"/>
+                        <outlet property="segmentedControl" destination="2RS-wH-CkT" id="mlU-nC-Pej"/>
+                        <outlet property="viewModeToggleButton" destination="HVZ-xS-Fgc" id="cED-v5-g5F"/>
                         <segue destination="Xyd-co-oUC" kind="push" identifier="showPodcast" id="fze-37-ETh"/>
                     </connections>
                 </viewController>
@@ -400,7 +409,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1T9-Wy-cdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="rEE-UE-MFV" customClass="SVDownloadsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vcv-VP-nrK">
-                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -594,15 +603,102 @@
             </objects>
             <point key="canvasLocation" x="517" y="22"/>
         </scene>
+        <scene sceneID="JQt-u6-o4T">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Twn-P0-pDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="subscriptionGridController" title="Subscripton Grid View" id="1nk-N3-2Nt" customClass="SVSubscriptionGridViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lkc-WF-bF9">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-gunmetal.png" id="eoG-lR-kk9">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="82k-9o-qR8" customClass="GMGridView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="actionDelegate" destination="1nk-N3-2Nt" id="SfT-XE-vD7"/>
+                                    <outlet property="dataSource" destination="1nk-N3-2Nt" id="WHT-C6-3Yy"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="gridView" destination="82k-9o-qR8" id="3TK-Bz-G11"/>
+                        <outlet property="view" destination="lkc-WF-bF9" id="bHK-7b-akA"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-510" y="1540"/>
+        </scene>
+        <scene sceneID="szf-9S-t5T">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tpy-6l-td3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="categoryListView" id="sDD-bl-slx" customClass="SVCategoryListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fjO-8G-iUa">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" placeholder="Search for a specific podcast" id="IfC-EV-j6b">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="sDD-bl-slx" id="ydF-cn-4pp"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" textLabel="9Qm-6c-9GP" imageView="Rhx-Qg-SaG" style="IBUITableViewCellStyleDefault" id="bB9-HR-0Kx">
+                                <rect key="frame" x="0.0" y="80" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Qm-6c-9GP">
+                                            <rect key="frame" x="44" y="0.0" width="226" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="heart.png" id="Rhx-Qg-SaG">
+                                            <rect key="frame" x="8" y="8" width="26" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sDD-bl-slx" id="k4j-wS-B13"/>
+                            <outlet property="delegate" destination="sDD-bl-slx" id="TVD-rX-ZUc"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-131" y="1556"/>
+        </scene>
+        <scene sceneID="r0u-81-C9Q">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jVU-aM-ogi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="0TA-kJ-dJO" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="561" y="1555"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="bg-gunmetal.jpg" width="320" height="480"/>
+        <image name="bg-gunmetal.png" width="320" height="480"/>
         <image name="bigPause.png" width="100" height="100"/>
         <image name="bigplay.png" width="100" height="100"/>
         <image name="clockSmall.png" width="12" height="12"/>
         <image name="down.png" width="24" height="13"/>
         <image name="download.png" width="48" height="42"/>
-        <image name="downloads.png" width="24" height="24"/>
         <image name="heart.png" width="26" height="26"/>
         <image name="listen.png" width="48" height="39"/>
         <image name="skipback.png" width="24" height="24"/>
@@ -630,6 +726,9 @@
         <class className="OBSlider" superclassName="UISlider">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>
         </class>
+        <class className="SVCategoryListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVCategoryListViewController.h"/>
+        </class>
         <class className="SVDownloadCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVDownloadCell.h"/>
             <relationships>
@@ -640,7 +739,7 @@
         <class className="SVDownloadsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVDownloadsViewController.h"/>
         </class>
-        <class className="SVEpisodeDetailsViewController" superclassName="UIViewController">
+        <class className="SVEpisodeDetailsViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeDetailsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="downloadTapped:"/>
@@ -660,10 +759,14 @@
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="SVMyPodcastsViewController" superclassName="UIViewController">
+        <class className="SVMyPodcastsViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVMyPodcastsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="viewModeToggleTapped:"/>
+                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="viewModeToggleButton" candidateClass="UIBarButtonItem"/>
             </relationships>
         </class>
         <class className="SVPlaybackController" superclassName="UIViewController">
@@ -683,7 +786,7 @@
                 <relationship kind="outletCollection" name="chromeViews" candidateClass="UIView"/>
             </relationships>
         </class>
-        <class className="SVPodcastDetailsViewController" superclassName="UIViewController">
+        <class className="SVPodcastDetailsViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDetailsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="subscribeTapped:"/>
@@ -695,14 +798,23 @@
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="SVPodcastsForTagViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastsForTagViewController.h"/>
-        </class>
-        <class className="SVTagListController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVTagListController.h"/>
+        <class className="SVPodcastDirectoryViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDirectoryViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancelButtonTapped:"/>
             </relationships>
+        </class>
+        <class className="SVPodcastsSearchResultsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastsSearchResultsViewController.h"/>
+        </class>
+        <class className="SVSubscriptionGridViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVSubscriptionGridViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
+            </relationships>
+        </class>
+        <class className="SVViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -711,6 +823,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fze-37-ETh"/>
+        <segue reference="1h9-6I-oKZ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,12 +13,34 @@
 #import "SVPodcast.h"
 #import "SVPodcastDetailsViewController.h"
 #import "SVSubscription.h"
+#import "JMTabView.h"
+#import "JMTabItem.h"
+#import "SVCategoryGridViewController.h"
+#import "SVCategoryListViewController.h"
+#import "SVSubscriptionGridViewController.h"
+@interface SVMyPodcastsViewController ()
+-(SVCategoryListViewController *)categoryListController;
+-(SVCategoryGridViewController *)categoryGridController;
+-(SVSubscriptionGridViewController *)subscriptionGridController;
 
+@end
 @implementation SVMyPodcastsViewController {
     NSFetchedResultsController *fetcher;
     NSInteger tappedIndex;
+    JMTabView *tabView;
+    NSUInteger currentMode;
+    SVCategoryGridViewController *categoryGrid;
+    SVCategoryListViewController *categoryListController;
+    SVSubscriptionGridViewController *subscriptionGridController;
+    
+    UIViewController *currentController;
+    BOOL showCategoryGrid;
+    BOOL showSubscriptionGrid;
 }
 @synthesize gridView;
+@synthesize segmentedControl;
+@synthesize containerView;
+@synthesize viewModeToggleButton;
 - (NSFetchedResultsController *)fetcher {
     if (!fetcher) {
         fetcher = [SVSubscription fetchAllSortedBy:@"podcast.lastUpdated" ascending:NO withPredicate:nil groupBy:nil delegate:self];
@@ -30,7 +52,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+        showCategoryGrid = YES;
+        showSubscriptionGrid = YES;        
     }
     return self;
 }
@@ -52,19 +75,67 @@
 }
 */
 
+- (UIViewController *)viewControllerForModeIndex:(NSUInteger)index
+{
+    UIViewController *controller = nil;
+    if(index == 0) {
+        // We're in category mode
+        controller =  currentController == [self categoryGridController] ? [self categoryListController] : [self categoryGridController];
+    } else {
+        controller = [self subscriptionGridController];
+    }
+    return controller;
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.gridView.style = GMGridViewStyleSwap;
-    self.gridView.itemSpacing = 10;
+//    self.gridView.style = GMGridViewStyleSwap;
+//    self.gridView.itemSpacing = 10;
+//
+//
+//    self.gridView.actionDelegate = self;
+//    self.gridView.dataSource = self;
+    currentMode = 0;
+    currentController =  [self viewControllerForModeIndex:currentMode];
+    [self addChildViewController:currentController];
+    currentController.view.frame = self.containerView.frame;
+    [self.containerView addSubview:currentController.view];
 
-
-    self.gridView.actionDelegate = self;
-    self.gridView.dataSource = self;
+    tabView = [[JMTabView alloc] initWithFrame:CGRectMake(0, 0, 150, 32)];
+    self.navigationItem.titleView  = tabView;
+    tabView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin;
+    [tabView addTabItemWithTitle:@"Discover" icon:nil];
+    
+    [tabView addTabItemWithTitle:@"Favorites" icon:nil];
+    [tabView setBackgroundLayer:nil];
+    [tabView setItemSpacing:10];
+    tabView.delegate = self;
+    [tabView setSelectedIndex:0];
+    
 }
 
+-(void)tabView:(JMTabView *)tabView didSelectTabAtIndex:(NSUInteger)itemIndex
+{
+    currentMode = itemIndex;
+    UIViewController *next = [self viewControllerForModeIndex:itemIndex];
+    
+    [self addChildViewController:next];
+    next.view.frame = self.containerView.frame;
+    [currentController willMoveToParentViewController:nil];
+    [self transitionFromViewController:currentController
+                      toViewController:next
+                              duration:0.25
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:nil
+    completion:^(BOOL finished) {
+        [currentController removeFromParentViewController];
+        currentController = next;
+    }];
+   
+
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 { 
@@ -77,6 +148,9 @@
 - (void)viewDidUnload
 {
     [self setGridView:nil];
+    [self setViewModeToggleButton:nil];
+    [self setContainerView:nil];
+    [self setSegmentedControl:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -150,36 +224,53 @@
     return cell;
 }
 
--(void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+-(SVCategoryListViewController *)categoryListController
 {
-    
-}
-
--(void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [self.gridView insertObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [self.gridView removeObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade];
-            break;
-        default:
-            break;
+    if (!categoryListController) {
+        categoryListController = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"categoryListView"];
     }
     
+    return categoryListController;
 }
--(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
+
+-(SVCategoryGridViewController *)categoryGridController
 {
-    tappedIndex = position;
-    [self performSegueWithIdentifier:@"showPodcast" sender:self];
-
+    if (!categoryGrid)
+    {
+        categoryGrid =  [[SVCategoryGridViewController alloc] initWithNibName:nil bundle:nil];
+        [self addChildViewController:categoryGrid];
+    }
     
+    return categoryGrid;
 }
 
+-(SVSubscriptionGridViewController *)subscriptionGridController
+{
+    if(!subscriptionGridController) {
+        subscriptionGridController = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"subscriptionGridController"]; 
+        subscriptionGridController.fetcher = [SVSubscription fetchAllSortedBy:@"podcast.lastUpdated" ascending:NO withPredicate:nil groupBy:nil delegate:self];
+    }
+    
+    return subscriptionGridController;
+}
+
+- (IBAction)viewModeToggleTapped:(id)sender {
+    if(currentMode == 0) {
+        UIViewController *nextController =[self viewControllerForModeIndex:tappedIndex];
+        nextController.view.frame = currentController.view.frame; 
+        [currentController willMoveToParentViewController:nil];
+        [self addChildViewController:nextController];
+        [self transitionFromViewController:currentController
+                          toViewController:nextController 
+                                  duration:0.5
+                                   options:UIViewAnimationOptionTransitionFlipFromLeft
+                                animations:nil
+                                completion:^(BOOL finished) {
+                                    [currentController removeFromParentViewController];
+                                    currentController = nextController;
+                                }];
+        
+        
+    }
+}
 @end
