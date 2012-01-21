@@ -9,7 +9,7 @@
 #import "SVCategoryListViewController.h"
 #import "SVPodcatcherClient.h"
 #import "SVCategory.h"
-
+#import "SVPodcastsSearchResultsViewController.h"
 
 @implementation SVCategoryListViewController {
     NSArray *categories;
@@ -169,19 +169,29 @@
 }
 */
 
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    LOG_GENERAL(2, @"User tapped search");
+    SVPodcastsSearchResultsViewController *controller =[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"searchResultsController"];
+    
+    
+    controller.searchString = searchBar.text;
+    [searchBar resignFirstResponder];
+    searchBar.text = @"";
+    [self.navigationController pushViewController:controller animated:YES];
 
+    
+}
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
+    LOG_GENERAL(2, @"USer tapped a category");
+    SVPodcastsSearchResultsViewController *controller =[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"searchResultsController"];
+    
+    
+    controller.category = [categories objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:controller animated:YES];}
 
 @end

@@ -7,6 +7,7 @@
 extern const struct SVSubscriptionAttributes {
 	__unsafe_unretained NSString *autoDownloadCount;
 	__unsafe_unretained NSString *newestFirst;
+	__unsafe_unretained NSString *shouldAutoDownload;
 } SVSubscriptionAttributes;
 
 extern const struct SVSubscriptionRelationships {
@@ -17,6 +18,7 @@ extern const struct SVSubscriptionFetchedProperties {
 } SVSubscriptionFetchedProperties;
 
 @class SVPodcast;
+
 
 
 
@@ -57,6 +59,18 @@ extern const struct SVSubscriptionFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber *shouldAutoDownload;
+
+
+@property BOOL shouldAutoDownloadValue;
+- (BOOL)shouldAutoDownloadValue;
+- (void)setShouldAutoDownloadValue:(BOOL)value_;
+
+//- (BOOL)validateShouldAutoDownload:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @property (nonatomic, strong) SVPodcast* podcast;
 
@@ -88,6 +102,15 @@ extern const struct SVSubscriptionFetchedProperties {
 
 - (BOOL)primitiveNewestFirstValue;
 - (void)setPrimitiveNewestFirstValue:(BOOL)value_;
+
+
+
+
+- (NSNumber*)primitiveShouldAutoDownload;
+- (void)setPrimitiveShouldAutoDownload:(NSNumber*)value;
+
+- (BOOL)primitiveShouldAutoDownloadValue;
+- (void)setPrimitiveShouldAutoDownloadValue:(BOOL)value_;
 
 
 

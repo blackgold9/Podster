@@ -11,4 +11,5 @@
 @interface SVCategory : NSObject
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger categoryId;
+@property (nonatomic, copy) NSURL *imageURL;
 @end

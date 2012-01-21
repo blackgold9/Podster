@@ -63,6 +63,9 @@
                    cat.name = cat.name ? [cat.name gtm_stringByUnescapingFromHTML] : @"Debug: No Title";
                    cat.categoryId = [[dict valueForKey:@"id"] integerValue];
                    [categories addObject:cat];
+                   if ([dict valueForKey:@"image_url"] != [NSNull null]) {
+                       cat.imageURL =[NSURL URLWithString:[dict valueForKey:@"image_url"]];
+                   }
                }
                completion(categories);
            } onError:^(NSError *error) {

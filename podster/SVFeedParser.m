@@ -109,7 +109,7 @@ forPodcastAtURL:(NSString *)feedURL
         NSParameterAssert(episode.guid);
         episode.imageURL = item.imageURL;
         episode.datePublished = item.date;
-        episode.duration = item.duration;
+        episode.durationValue = [item.duration secondsFromDurationString];
         episode.podcast = localPodcast;
     }];
 }

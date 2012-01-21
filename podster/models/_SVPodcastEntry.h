@@ -5,6 +5,7 @@
 
 
 extern const struct SVPodcastEntryAttributes {
+	__unsafe_unretained NSString *content;
 	__unsafe_unretained NSString *datePublished;
 	__unsafe_unretained NSString *downloadComplete;
 	__unsafe_unretained NSString *duration;
@@ -14,7 +15,6 @@ extern const struct SVPodcastEntryAttributes {
 	__unsafe_unretained NSString *markedForDownload;
 	__unsafe_unretained NSString *mediaURL;
 	__unsafe_unretained NSString *positionInSeconds;
-	__unsafe_unretained NSString *sanitizedSummary;
 	__unsafe_unretained NSString *summary;
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *totalBytes;
@@ -57,6 +57,14 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString *content;
+
+
+//- (BOOL)validateContent:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSDate *datePublished;
 
 
@@ -77,8 +85,12 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString *duration;
+@property (nonatomic, strong) NSNumber *duration;
 
+
+@property int durationValue;
+- (int)durationValue;
+- (void)setDurationValue:(int)value_;
 
 //- (BOOL)validateDuration:(id*)value_ error:(NSError**)error_;
 
@@ -145,14 +157,6 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString *sanitizedSummary;
-
-
-//- (BOOL)validateSanitizedSummary:(id*)value_ error:(NSError**)error_;
-
-
-
-
 @property (nonatomic, strong) NSString *summary;
 
 
@@ -205,6 +209,12 @@ extern const struct SVPodcastEntryFetchedProperties {
 @interface _SVPodcastEntry (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSString*)primitiveContent;
+- (void)setPrimitiveContent:(NSString*)value;
+
+
+
+
 - (NSDate*)primitiveDatePublished;
 - (void)setPrimitiveDatePublished:(NSDate*)value;
 
@@ -220,8 +230,11 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-- (NSString*)primitiveDuration;
-- (void)setPrimitiveDuration:(NSString*)value;
+- (NSNumber*)primitiveDuration;
+- (void)setPrimitiveDuration:(NSNumber*)value;
+
+- (int)primitiveDurationValue;
+- (void)setPrimitiveDurationValue:(int)value_;
 
 
 
@@ -267,12 +280,6 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 - (int)primitivePositionInSecondsValue;
 - (void)setPrimitivePositionInSecondsValue:(int)value_;
-
-
-
-
-- (NSString*)primitiveSanitizedSummary;
-- (void)setPrimitiveSanitizedSummary:(NSString*)value;
 
 
 

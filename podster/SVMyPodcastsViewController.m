@@ -18,24 +18,23 @@
 #import "SVCategoryGridViewController.h"
 #import "SVCategoryListViewController.h"
 #import "SVSubscriptionGridViewController.h"
+#import "SVSubscriptionListViewController.h"
 @interface SVMyPodcastsViewController ()
 -(SVCategoryListViewController *)categoryListController;
 -(SVCategoryGridViewController *)categoryGridController;
 -(SVSubscriptionGridViewController *)subscriptionGridController;
-
+-(SVSubscriptionListViewController *)subscriptionListController;
 @end
 @implementation SVMyPodcastsViewController {
     NSFetchedResultsController *fetcher;
-    NSInteger tappedIndex;
     JMTabView *tabView;
     NSUInteger currentMode;
     SVCategoryGridViewController *categoryGrid;
     SVCategoryListViewController *categoryListController;
     SVSubscriptionGridViewController *subscriptionGridController;
-    
+    SVSubscriptionListViewController *subscriptionListController;
     UIViewController *currentController;
-    BOOL showCategoryGrid;
-    BOOL showSubscriptionGrid;
+    BOOL showGrid;
 }
 @synthesize gridView;
 @synthesize segmentedControl;
@@ -52,8 +51,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        showCategoryGrid = YES;
-        showSubscriptionGrid = YES;        
+        showGrid = YES;
     }
     return self;
 }
@@ -75,14 +73,14 @@
 }
 */
 
-- (UIViewController *)viewControllerForModeIndex:(NSUInteger)index
+- (UIViewController *)viewControllerForModeIndex:(NSUInteger)index gridMode:(BOOL)gridMode
 {
     UIViewController *controller = nil;
     if(index == 0) {
         // We're in category mode
-        controller =  currentController == [self categoryGridController] ? [self categoryListController] : [self categoryGridController];
+        controller =  gridMode ? [self categoryGridController] :[self categoryListController];
     } else {
-        controller = [self subscriptionGridController];
+        controller = gridMode ? [self subscriptionGridController] : [self subscriptionListController];
     }
     return controller;
 }
@@ -97,8 +95,10 @@
 //
 //    self.gridView.actionDelegate = self;
 //    self.gridView.dataSource = self;
+    showGrid =  YES;
     currentMode = 0;
-    currentController =  [self viewControllerForModeIndex:currentMode];
+    currentController =  [self viewControllerForModeIndex:currentMode gridMode:showGrid];
+    self.viewModeToggleButton.image = [UIImage imageNamed:@"list-icon.png"];
     [self addChildViewController:currentController];
     currentController.view.frame = self.containerView.frame;
     [self.containerView addSubview:currentController.view];
@@ -112,37 +112,40 @@
     [tabView setBackgroundLayer:nil];
     [tabView setItemSpacing:10];
     tabView.delegate = self;
-    [tabView setSelectedIndex:0];
+    [tabView setSelectedIndex:currentMode];
+    
+    UIImage *image = showGrid ? [UIImage imageNamed:@"list-button.png"]: [UIImage imageNamed:@"grid-button.png"];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button setImage:image forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 30, 30);
+    [button addTarget:self action:@selector(viewModeToggleTapped:) forControlEvents:UIControlEventTouchUpInside];
+ self.viewModeToggleButton =  [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationItem setRightBarButtonItem:self.viewModeToggleButton animated:YES];
+    
     
 }
 
 -(void)tabView:(JMTabView *)tabView didSelectTabAtIndex:(NSUInteger)itemIndex
 {
-    currentMode = itemIndex;
-    UIViewController *next = [self viewControllerForModeIndex:itemIndex];
-    
-    [self addChildViewController:next];
-    next.view.frame = self.containerView.frame;
-    [currentController willMoveToParentViewController:nil];
-    [self transitionFromViewController:currentController
-                      toViewController:next
-                              duration:0.25
-                               options:UIViewAnimationOptionTransitionCrossDissolve
-                            animations:nil
-    completion:^(BOOL finished) {
-        [currentController removeFromParentViewController];
-        currentController = next;
-    }];
-   
 
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{ 
-    if ([segue.identifier isEqualToString:@"showPodcast"]) {
-        SVPodcastDetailsViewController *destination= segue.destinationViewController; 
-        destination.podcast = ((SVSubscription *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:tappedIndex inSection:0]]).podcast;
+    if (currentMode !=itemIndex) {
+        currentMode = itemIndex;
+        UIViewController *next = [self viewControllerForModeIndex:itemIndex gridMode:showGrid];
+        
+        [self addChildViewController:next];
+        next.view.frame = self.containerView.frame;
+        [currentController willMoveToParentViewController:nil];
+        [self transitionFromViewController:currentController
+                          toViewController:next
+                                  duration:0.25
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:nil
+                                completion:^(BOOL finished) {
+                                    [currentController removeFromParentViewController];
+                                    currentController = next;
+                                }];
     }
+
 }
 
 - (void)viewDidUnload
@@ -162,67 +165,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
-
--(NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
-{
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[[self fetcher] sections] objectAtIndex:0];
-    LOG_GENERAL(2, @"Displaying %d podcats",  [sectionInfo numberOfObjects]);
-    return [sectionInfo numberOfObjects];
-}
-
--(CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-   return CGSizeMake(150, 150); 
-}
-
--(GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
-{
-    SVPodcast *currentPodcast = ((SVSubscription *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]]).podcast;    
-    CGSize size = [self GMGridView:self.gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
-    
-    GMGridViewCell *cell = [self.gridView dequeueReusableCell];
-    
-    if (!cell) 
-    {
-        cell = [[GMGridViewCell alloc] init];
-        //        cell.deleteButtonIcon = [UIImage imageNamed:@"close_x.png"];
-        //      cell.deleteButtonOffset = CGPointMake(-15, -15);
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        view.backgroundColor = [UIColor redColor];
-        view.layer.masksToBounds = NO;
-       //view.layer.cornerRadius = 8;
-        view.layer.shadowColor = [UIColor whiteColor].CGColor;
-        view.layer.shadowOpacity = 0.5;
-        view.layer.shadowOffset = CGSizeMake(0, 0);
-        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
-        view.layer.shadowRadius = 3;
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
-        imageView.tag = 1906;
-        [view addSubview:imageView];
-        
-        cell.contentView = view;
-    }
-    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
-    imageView.image = nil;
-    NSURL *imageURL = [NSURL URLWithString: currentPodcast.logoURL];
-    [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
-                                       onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-                                           if (url == imageURL) {
-                                               CATransition *transition = [CATransition animation];
-                                               
-                                              
-                                               [imageView.layer addAnimation:transition forKey:nil];
-                                               
-                                               imageView.image = fetchedImage;
-                                               if (!fetchedImage) {
-                                                   LOG_NETWORK(1, @"Error loading image for url: %@", url);
-                                               }
-                                           }
-                                       }];
-    return cell;
-}
 
 -(SVCategoryListViewController *)categoryListController
 {
@@ -254,23 +196,42 @@
     return subscriptionGridController;
 }
 
-- (IBAction)viewModeToggleTapped:(id)sender {
-    if(currentMode == 0) {
-        UIViewController *nextController =[self viewControllerForModeIndex:tappedIndex];
-        nextController.view.frame = currentController.view.frame; 
-        [currentController willMoveToParentViewController:nil];
-        [self addChildViewController:nextController];
-        [self transitionFromViewController:currentController
-                          toViewController:nextController 
-                                  duration:0.5
-                                   options:UIViewAnimationOptionTransitionFlipFromLeft
-                                animations:nil
-                                completion:^(BOOL finished) {
-                                    [currentController removeFromParentViewController];
-                                    currentController = nextController;
-                                }];
-        
-        
+-(SVSubscriptionListViewController *)subscriptionListController
+{
+    if (!subscriptionListController) {
+        subscriptionListController = [[SVSubscriptionListViewController alloc] initWithNibName:@"SVSubscriptionListViewController" bundle:nil];
+         subscriptionListController.fetcher = [SVSubscription fetchAllSortedBy:@"podcast.lastUpdated" ascending:NO withPredicate:nil groupBy:nil delegate:self];
     }
+    
+    return subscriptionListController;
+}
+
+- (IBAction)viewModeToggleTapped:(id)sender {
+  //  [TestFlight passCheckpoint:@"FLIPPED_HOME_VIEW"];
+    showGrid = !showGrid;
+    UIViewController *nextController =[self viewControllerForModeIndex:currentMode gridMode:showGrid];
+    nextController.view.frame = currentController.view.frame; 
+    [currentController willMoveToParentViewController:nil];
+    [self addChildViewController:nextController];
+    [self transitionFromViewController:currentController
+                      toViewController:nextController 
+                              duration:0.5
+                               options:UIViewAnimationOptionTransitionFlipFromLeft
+                            animations:nil
+                            completion:^(BOOL finished) {
+                                [currentController removeFromParentViewController];
+                                currentController = nextController;
+                            }];
+    [UIView transitionWithView:self.viewModeToggleButton.customView
+                      duration:0.5 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+                          UIButton *button = (UIButton *)self.viewModeToggleButton.customView;
+                              UIImage *image = showGrid ? [UIImage imageNamed:@"list-button.png"]: [UIImage imageNamed:@"grid-button.png"];
+                          [button setImage:image forState:UIControlStateNormal];
+                      }
+                    completion:^(BOOL finished) {
+                        
+                    }];
+        
+        
 }
 @end

@@ -2,26 +2,143 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVCategoryGridViewController.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVCategoryGridViewController.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVCategoryListViewController.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVCategoryListViewController.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVHomeStoryboard.storyboard" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/CrashReporter" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Headers" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Resources" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/CrashReporter" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/Current" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/IconGradient.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/IconGradient@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/authorize_denied.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/authorize_denied@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/authorize_request.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/authorize_request@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/buttonHighlight.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/buttonHighlight@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/gear.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/gear@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/back-btn-big.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/back-btn-big@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/grid-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/grid-icon@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/list-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/list-icon@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/list-item.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/list-item@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/nav-bar-btn-stretch.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/nav-bar-btn-stretch@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/settings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/settings@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/slider-bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/slider-bg@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/slider-cap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/slider-cap@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/slider-fill.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/slider-fill@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWApp.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWApp.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWGlobal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWGlobal.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWHockeyManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWHockeyManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWHockeySettingsViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWHockeySettingsViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWHockeyViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWHockeyViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWQuincyManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/BWQuincyManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/CrashReporter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReport.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportApplicationInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportBinaryImageInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportExceptionInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportMachineInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportProcessInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportProcessorInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportSignalInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportSystemInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportTextFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReportThreadInfo.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Headers/PLCrashReporter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CrashReporter.framework/Versions/A/Resources/Info.plist" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/NSString+HockeyAdditions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/NSString+HockeyAdditions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/PSAppStoreHeader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/PSAppStoreHeader.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/PSStoreButton.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/PSStoreButton.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/PSWebTableViewCell.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/PSWebTableViewCell.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/UIImage+HockeyAdditions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Helper/UIImage+HockeyAdditions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/de.lproj/Hockey.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/en.lproj/Hockey.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/it.lproj/Hockey.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Hockey.bundle/sv.lproj/Hockey.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/de.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/de.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/en.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/en.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/es.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/es.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/fr.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/fr.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/it.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/it.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/ja.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/ja.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/nl.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/nl.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/pt-PT.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/pt-PT.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/pt.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/pt.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/ru.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/ru.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/sv.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/sv.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/tr.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/tr.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/zh_CN.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/zh_CN.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/zh_TW.lproj/Quincy.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Quincy.bundle/zh_TW.lproj/QuincyAlternate.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVPodcastListCell.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVPodcastListCell.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVPodcastListCell.xib" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVSubscriptionListViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVSubscriptionListViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVSubscriptionListViewController.xib" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/podster/podster.entitlements" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 2.xcdatamodel/contents" afterPath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 2.xcdatamodel/contents" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SVPodcastsSearchResultsViewController.h" afterPath="$PROJECT_DIR$/SVPodcastsSearchResultsViewController.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SVPodcastsSearchResultsViewController.m" afterPath="$PROJECT_DIR$/SVPodcastsSearchResultsViewController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/beta.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/beta.xcscheme" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/NSString+SVHelpers.h" afterPath="$PROJECT_DIR$/podster/NSString+SVHelpers.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/NSString+SVHelpers.m" afterPath="$PROJECT_DIR$/podster/NSString+SVHelpers.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVEpisodeDetails.h" afterPath="$PROJECT_DIR$/podster/SVEpisodeDetails.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVCategoryGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVCategoryGridViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVCategoryListViewController.m" afterPath="$PROJECT_DIR$/podster/SVCategoryListViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadsViewController.m" afterPath="$PROJECT_DIR$/podster/SVDownloadsViewController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVFeedParser.m" afterPath="$PROJECT_DIR$/podster/SVFeedParser.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVMyPodcastsViewController.h" afterPath="$PROJECT_DIR$/podster/SVMyPodcastsViewController.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVMyPodcastsViewController.m" afterPath="$PROJECT_DIR$/podster/SVMyPodcastsViewController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackController.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.h" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVViewController.m" afterPath="$PROJECT_DIR$/podster/SVViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackManager.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/data/SVCategory.h" afterPath="$PROJECT_DIR$/podster/data/SVCategory.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/data/SVCategory.m" afterPath="$PROJECT_DIR$/podster/data/SVCategory.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" afterPath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.m" afterPath="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Prefix.pch" afterPath="$PROJECT_DIR$/podster/podster-Prefix.pch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Info.plist" afterPath="$PROJECT_DIR$/podster/podster-Info.plist" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,100 +158,6 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="podster" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="SVPodcastDetailsViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="21" selection-start="5752" selection-end="5752" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVCategoryGridViewController.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVCategoryGridViewController.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="53" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVCategory.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/data/SVCategory.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVCategoryListViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVCategoryListViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="33" selection-start="5457" selection-end="5459" vertical-scroll-proportion="-95.30769">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVCategoryGridViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVCategoryGridViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="111" selection-start="806" selection-end="1871" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="126" selection-start="2501" selection-end="2529" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVPodcastsSearchResultsViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SVPodcastsSearchResultsViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="64" selection-start="2048" selection-end="2076" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVPodcastsSearchResultsViewController.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SVPodcastsSearchResultsViewController.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="8" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVPodcastDirectoryViewController.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVPodcastDirectoryViewController.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="67" selection-start="231" selection-end="252" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVMyPodcastsViewController.m" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/podster/SVMyPodcastsViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="97" selection-start="2939" selection-end="2939" vertical-scroll-proportion="0.5908257">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -323,13 +346,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="preferences.lookFeel" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="preferences.lookFeel" />
     <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="RunManager" selected="Application.podster - Debug">
     <configuration default="false" name="podster - Debug" type="AppleRunConfiguration" factoryName="Application" temporary="true" PROJECT_NAME="podster" TARGET_NAME="podster" CONFIG_NAME="Debug" SDK_NAME="iphonesimulator5.0" ARCH_ID="Standard" DEVICE="IPHONE" DEBUGGER="GDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
@@ -381,12 +404,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="687" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32767403" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.21005917" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.60101867" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39898133" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -490,16 +513,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="60" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="13" column="60" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDirectoryViewController.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="67" selection-start="231" selection-end="252" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="11" column="67" selection-start="231" selection-end="252" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SVPodcastsSearchResultsViewController.h">
@@ -516,9 +535,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="126" selection-start="2501" selection-end="2529" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="93" column="126" selection-start="2501" selection-end="2529" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/data/SVCategory.h">
@@ -556,7 +573,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVMyPodcastsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="97" selection-start="2939" selection-end="2939" vertical-scroll-proportion="0.5908257">
+        <state line="131" column="97" selection-start="4635" selection-end="4635" vertical-scroll-proportion="0.5908257">
           <folding />
         </state>
       </provider>

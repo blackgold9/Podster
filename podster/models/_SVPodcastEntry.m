@@ -4,6 +4,7 @@
 #import "_SVPodcastEntry.h"
 
 const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
+	.content = @"content",
 	.datePublished = @"datePublished",
 	.downloadComplete = @"downloadComplete",
 	.duration = @"duration",
@@ -13,7 +14,6 @@ const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
 	.markedForDownload = @"markedForDownload",
 	.mediaURL = @"mediaURL",
 	.positionInSeconds = @"positionInSeconds",
-	.sanitizedSummary = @"sanitizedSummary",
 	.summary = @"summary",
 	.title = @"title",
 	.totalBytes = @"totalBytes",
@@ -57,6 +57,10 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 		NSSet *affectingKey = [NSSet setWithObject:@"downloadComplete"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
+	if ([key isEqualToString:@"durationValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"duration"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 	if ([key isEqualToString:@"isVideoValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"isVideo"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -76,6 +80,13 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic content;
+
+
 
 
 
@@ -115,6 +126,25 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 @dynamic duration;
 
+
+
+- (int)durationValue {
+	NSNumber *result = [self duration];
+	return [result intValue];
+}
+
+- (void)setDurationValue:(int)value_ {
+	[self setDuration:[NSNumber numberWithInt:value_]];
+}
+
+- (int)primitiveDurationValue {
+	NSNumber *result = [self primitiveDuration];
+	return [result intValue];
+}
+
+- (void)setPrimitiveDurationValue:(int)value_ {
+	[self setPrimitiveDuration:[NSNumber numberWithInt:value_]];
+}
 
 
 
@@ -214,13 +244,6 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 - (void)setPrimitivePositionInSecondsValue:(int)value_ {
 	[self setPrimitivePositionInSeconds:[NSNumber numberWithInt:value_]];
 }
-
-
-
-
-
-@dynamic sanitizedSummary;
-
 
 
 

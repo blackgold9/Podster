@@ -112,26 +112,27 @@
 
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:42];
     titleLabel.text = category.name;
-    // TODO: Re-enable this when service returns image for category
-//    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
-//    imageView.image = nil;
-//    NSURL *imageURL = [NSURL URLWithString: currentPodcast.logoURL];
-//    [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
-//                                       onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-//                                           if (url == imageURL) {
-//                                               CATransition *transition = [CATransition animation];
-//
-//
-//                                               [imageView.layer addAnimation:transition forKey:nil];
-//
-//                                               imageView.image = fetchedImage;
-//                                               if (!fetchedImage) {
-//                                                   LOG_NETWORK(1, @"Error loading image for url: %@", url);
-//                                               }
-//                                           }
-//                                       }];
+    
+    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
+    imageView.image = nil;
+    if (category.imageURL) {
+        [[SVPodcatcherClient sharedInstance] imageAtURL:category.imageURL
+                                           onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
+                                               if (url == category.imageURL) {
+                                                   CATransition *transition = [CATransition animation];
+                                                   
+                                                   
+                                                   [imageView.layer addAnimation:transition forKey:nil];
+                                                   
+                                                   imageView.image = fetchedImage;
+                                                   if (!fetchedImage) {
+                                                       LOG_NETWORK(1, @"Error loading image for url: %@", url);
+                                                   }
+                                               }
+                                           }];
+    }
     return cell;
-
+    
 
 }
 
@@ -188,6 +189,8 @@
     
     
     controller.searchString = searchBar.text;
+    [searchBar resignFirstResponder];
+    searchBar.text = @"";
     [self.navigationController pushViewController:controller animated:YES];
 }
 @end

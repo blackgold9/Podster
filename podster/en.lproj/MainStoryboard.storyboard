@@ -372,11 +372,6 @@
                     <navigationItem key="navigationItem" id="X5d-qX-t2x">
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="Podcasts" id="ICS-fb-46y"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Zj5-ud-sf1">
-                            <connections>
-                                <segue destination="HKN-iT-AvW" kind="modal" identifier="showAddPodcast" id="5zf-j2-wpX"/>
-                            </connections>
-                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="2RS-wH-CkT">
                             <rect key="frame" x="96" y="7" width="128" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -385,11 +380,6 @@
                                 <segment title="Favorites"/>
                             </segments>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" title="Toggle" id="HVZ-xS-Fgc">
-                            <connections>
-                                <action selector="viewModeToggleTapped:" destination="04a-hT-U9C" id="1Of-N2-Beu"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -397,7 +387,6 @@
                         <outlet property="containerView" destination="Fxc-dX-VW2" id="I68-wO-ieE"/>
                         <outlet property="gridView" destination="Fxc-dX-VW2" id="l3J-Oj-TMz"/>
                         <outlet property="segmentedControl" destination="2RS-wH-CkT" id="mlU-nC-Pej"/>
-                        <outlet property="viewModeToggleButton" destination="HVZ-xS-Fgc" id="cED-v5-g5F"/>
                         <segue destination="Xyd-co-oUC" kind="push" identifier="showPodcast" id="fze-37-ETh"/>
                     </connections>
                 </viewController>
@@ -823,6 +812,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1h9-6I-oKZ"/>
+        <segue reference="fze-37-ETh"/>
     </inferredMetricsTieBreakers>
 </document>

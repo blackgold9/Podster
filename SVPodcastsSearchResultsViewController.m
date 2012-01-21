@@ -10,10 +10,12 @@
 #import "SVPodcast.h"
 #import "SVPodcatcherClient.h"
 #import "SVPodcastDetailsViewController.h"
-
+#import "SVPodcastListCell.h"
+#import "ActsAsPodcast.h"
 @implementation SVPodcastsSearchResultsViewController {
     BOOL isLoading;
     NSArray *podcasts;
+    UINib *nib;
 }
 @synthesize category;
 @synthesize searchString;
@@ -40,14 +42,23 @@
 }
 
 #pragma mark - View lifecycle
-
+- (UINib *)listNib
+{
+    if (!nib) {
+        nib = [UINib nibWithNibName:@"SVPodcastListCell" bundle:nil];
+    }
+    return nib;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-
+    self.tableView.rowHeight = 88;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (self.searchString) {
+    //    [TestFlight passCheckpoint:@"SEARCH"];
         isLoading = YES;
         self.navigationItem.title = self.searchString;
+        
         LOG_GENERAL(2, @"A search string was entered");
         [[SVPodcatcherClient sharedInstance] searchForPodcastsMatchingQuery:self.searchString onCompletion:^(NSArray *returnedPodcasts) {
             LOG_GENERAL(2, @"%d search resutls returned", returnedPodcasts.count);
@@ -60,6 +71,7 @@
             LOG_GENERAL(2, @"search failed with error: %@", error);
         }];
     } else {
+      //  [TestFlight passCheckpoint:@"BROWSE_CATEGORY"];
         isLoading = YES;
         self.navigationItem.title = self.category.name;
         [[SVPodcatcherClient sharedInstance] podcastsByCategory:self.category.categoryId
@@ -80,6 +92,7 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    nib = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -117,19 +130,24 @@
     return isLoading ? 1 : podcasts.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
-    if (isLoading) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LoadingCell"];
-    } else {
-        SVPodcast *podcast = [podcasts objectAtIndex:(NSUInteger) indexPath.row];
-        cell = [tableView dequeueReusableCellWithIdentifier:@"PodcastCell"];
-        cell.textLabel.text = podcast.title;
-        cell.detailTextLabel.text = podcast.summary == nil ? @"" : podcast.summary;
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    SVPodcastListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"podcastListCell"];
+    if (!cell) {
+        cell = [SVPodcastListCell cellForTableView:tableView fromNib:[self listNib]];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item.png"]];
     }
-
+    
+        [cell bind:(id<ActsAsPodcast>)[podcasts objectAtIndex:indexPath.row]];
+    
+    
+    
     return cell;
+    
 }
+
 
 /*
 // Override to support conditional editing of the table view.

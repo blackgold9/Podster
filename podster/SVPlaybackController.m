@@ -85,6 +85,8 @@
     if (player.status == AVPlayerStatusReadyToPlay) {
         LOG_GENERAL(4, @"Wasn't yet playing, kicking it off");
         [player play];
+    } else {
+        LOG_GENERAL(4, @"Player already playing");
     }
     [player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     [player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
@@ -136,9 +138,9 @@
         
                 if (player.status == AVPlayerStatusReadyToPlay) {
                     [player play];
-                    NSLog(@"Started Playback");
+                    LOG_GENERAL(3, @"Started Playback");
                 } else {
-                    NSLog(@"Error downloing");
+                    LOG_GENERAL(3, @"Error downloing");
                 }
             } else if ([keyPath isEqualToString:@"rate"]){
                 if (player.rate == 0) {

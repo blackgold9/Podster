@@ -80,6 +80,7 @@
         SVSubscription *subscription = localPodcast.subscription;
         
         if(!subscription) {
+         //   [TestFlight passCheckpoint:@"SUBSCRIBED"];
                self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
             subscription = [SVSubscription createInContext:localContext];
             localPodcast.subscription = subscription;
@@ -94,6 +95,7 @@
                 }];
             }
         } else {
+          //  [TestFlight passCheckpoint:@"UNSUBSCRIBED"];
             [subscription deleteInContext:localContext];
             if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
                 NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
@@ -130,6 +132,7 @@
 - (SVPodcastEntry *)saveAndReturnItemAtIndexPath:(NSIndexPath*)indexPath
 {
     // NEed to save now
+    LOG_GENERAL(3, @"Starting save operation");
     __block SVPodcastEntry *entry = nil;
     [localContext performBlockAndWait:^{
         entry = [fetcher objectAtIndexPath:indexPath];
@@ -144,6 +147,7 @@
     NSAssert(error == nil, @"there should be no error");
     SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
     [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
+    LOG_GENERAL(3, @"Save complete");
     return fetcherEpisode;
 }
 
@@ -220,6 +224,12 @@
         LOG_GENERAL(2, @"Saving local context");
         [localContext performBlock:^void() {
             [localContext save];
+            NSManagedObjectContext *parentContext = localContext.parentContext;
+            if (parentContext) {
+                [parentContext performBlock:^{
+                    [parentContext save];
+                }];
+            }
         }];
         LOG_GENERAL(2, @"Done loading entries");
     };

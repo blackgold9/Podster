@@ -6,6 +6,7 @@
 const struct SVSubscriptionAttributes SVSubscriptionAttributes = {
 	.autoDownloadCount = @"autoDownloadCount",
 	.newestFirst = @"newestFirst",
+	.shouldAutoDownload = @"shouldAutoDownload",
 };
 
 const struct SVSubscriptionRelationships SVSubscriptionRelationships = {
@@ -47,6 +48,10 @@ const struct SVSubscriptionFetchedProperties SVSubscriptionFetchedProperties = {
 	}
 	if ([key isEqualToString:@"newestFirstValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"newestFirst"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"shouldAutoDownloadValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"shouldAutoDownload"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 
@@ -102,6 +107,32 @@ const struct SVSubscriptionFetchedProperties SVSubscriptionFetchedProperties = {
 
 - (void)setPrimitiveNewestFirstValue:(BOOL)value_ {
 	[self setPrimitiveNewestFirst:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
+@dynamic shouldAutoDownload;
+
+
+
+- (BOOL)shouldAutoDownloadValue {
+	NSNumber *result = [self shouldAutoDownload];
+	return [result boolValue];
+}
+
+- (void)setShouldAutoDownloadValue:(BOOL)value_ {
+	[self setShouldAutoDownload:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveShouldAutoDownloadValue {
+	NSNumber *result = [self primitiveShouldAutoDownload];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveShouldAutoDownloadValue:(BOOL)value_ {
+	[self setPrimitiveShouldAutoDownload:[NSNumber numberWithBool:value_]];
 }
 
 

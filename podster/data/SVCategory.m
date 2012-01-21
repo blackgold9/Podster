@@ -12,5 +12,5 @@
 
 }
 
-@synthesize categoryId, name;
+@synthesize categoryId, name,imageURL;
 @end

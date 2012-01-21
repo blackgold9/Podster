@@ -59,7 +59,7 @@
 
 - (void)playEpisode:(SVPodcastEntry *)episode
           ofPodcast:(SVPodcast *)podcast{
-    
+  //  [TestFlight passCheckpoint:@"PLAYED_EPSISODE"];
     LOG_GENERAL(4, @"Assigning new current podcast/episode");
     self.currentEpisode = [episode inContext:[NSManagedObjectContext defaultContext]];;
     self.currentPodcast = [podcast inContext:[NSManagedObjectContext defaultContext]];;

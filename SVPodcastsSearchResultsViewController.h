@@ -11,5 +11,5 @@
 
 @interface SVPodcastsSearchResultsViewController : UITableViewController
 @property(strong) SVCategory *category;
-@property(strong) NSString *searchString;
+@property(copy) NSString *searchString;
 @end

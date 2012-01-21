@@ -25,4 +25,18 @@
         
     }
 }
+-(NSInteger)secondsFromDurationString
+{
+    NSInteger output = 0;
+    NSArray *components = [[[self componentsSeparatedByString:@":"] reverseObjectEnumerator] allObjects];
+    output = [[components objectAtIndex:0] integerValue];
+    if (components.count > 1) {
+        output += [[components objectAtIndex:1] integerValue] * 60;
+    }
+    if (components.count >2) {
+        output += [[components objectAtIndex:2] integerValue] * 3600;
+    }
+    return output;
+    
+}
 @end

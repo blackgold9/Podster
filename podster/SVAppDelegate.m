@@ -12,6 +12,8 @@
 #import "SVDownloadManager.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "SVPodcatcherClient.h"
+#import "BWHockeyManager.h"
+#import "BWQuincyManager.h"
 @implementation SVAppDelegate
 {
     MKNetworkEngine *engine;
@@ -45,6 +47,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#if defined (CONFIGURATION_Ad_Hoc)
+    [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
+    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
+    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
+
+#endif
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     [[SVDownloadManager sharedInstance] resumeDownloads];
@@ -54,12 +62,18 @@
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert];
     return YES;
 }
-
+NSString *uuid(){
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    return uuidString;
+}
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
     NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
     if (!deviceId)
     {
-        deviceId = [[UIDevice currentDevice] uniqueDeviceIdentifier];
+        LOG_GENERAL(2, @"No stored device id, creating and storing one");
+        deviceId = uuid();
         [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -82,6 +96,7 @@
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     LOG_GENERAL(1,@"Error in registration. Error: %@", err);
+    [UIAlertView showWithError:err];
 }
 	
 - (void)applicationWillResignActive:(UIApplication *)application
