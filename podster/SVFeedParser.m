@@ -75,7 +75,7 @@ forPodcastAtURL:(NSString *)feedURL
         //TODO: Report parsing error with url
         return;
     }
-    [localContext performBlockAndWait:^void() {
+    [localContext performBlock:^void() {
         LOG_PARSING(4, @"Processing feed item %@", item);
         NSString *guid = item.identifier;
         if (!guid) {
@@ -111,6 +111,12 @@ forPodcastAtURL:(NSString *)feedURL
         episode.datePublished = item.date;
         episode.durationValue = [item.duration secondsFromDurationString];
         episode.podcast = localPodcast;
+        [localContext save];
+        if (localContext.parentContext) {
+            [localContext.parentContext performBlock:^{
+                [localContext.parentContext save];
+            }];
+        }
     }];
 }
 

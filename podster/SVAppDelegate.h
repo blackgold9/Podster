@@ -11,5 +11,6 @@
 @interface SVAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+- (void)startListening;
+- (void)stopListening;
 @end

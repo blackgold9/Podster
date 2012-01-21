@@ -152,6 +152,9 @@
 		4B141FAA14C9433A00028CE4 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FA514C9433A00028CE4 /* CrashReporter.framework */; };
 		4B141FAB14C9433A00028CE4 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B141FA614C9433A00028CE4 /* Quincy.bundle */; };
 		4B141FAC14C9433A00028CE4 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B141FA614C9433A00028CE4 /* Quincy.bundle */; };
+		4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
+		4B141FBB14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
+		4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */; };
 		4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
@@ -534,6 +537,9 @@
 		4B141FA514C9433A00028CE4 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		4B141FA614C9433A00028CE4 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
 		4B141FB314CA9AFD00028CE4 /* SVPodcastDatastore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 3.xcdatamodel"; sourceTree = "<group>"; };
+		4B141FB814CB220000028CE4 /* SVCustomApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomApplication.h; sourceTree = "<group>"; };
+		4B141FB914CB220100028CE4 /* SVCustomApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomApplication.m; sourceTree = "<group>"; };
+		4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastDetailsViewController.h; sourceTree = "<group>"; };
 		4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastDetailsViewController.m; sourceTree = "<group>"; };
 		4B189B3514AFAD12001E378A /* SVPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackController.h; sourceTree = "<group>"; };
@@ -766,6 +772,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */,
 				4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */,
 				4B10D0A614BFB44500DF4DBD /* CoreText.framework in Frameworks */,
 				4B6D491C14BE437F00E7B11F /* QuartzCore.framework in Frameworks */,
@@ -1154,6 +1161,7 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
+				4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */,
 				4B68583814C8AF5900496A38 /* libz.dylib */,
 				4BEDB18814C004E200264CCC /* ImageIO.framework */,
 				4B10D0A514BFB44500DF4DBD /* CoreText.framework */,
@@ -1226,6 +1234,8 @@
 				4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */,
 				4B10CFAF14BE804D00DF4DBD /* UIColor+Hex.h */,
 				4B10CFB014BE804D00DF4DBD /* UIColor+Hex.m */,
+				4B141FB814CB220000028CE4 /* SVCustomApplication.h */,
+				4B141FB914CB220100028CE4 /* SVCustomApplication.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -1769,6 +1779,7 @@
 				4B141F9C14C942FF00028CE4 /* PSWebTableViewCell.m in Sources */,
 				4B141F9E14C942FF00028CE4 /* UIImage+HockeyAdditions.m in Sources */,
 				4B141FA714C9433A00028CE4 /* BWQuincyManager.m in Sources */,
+				4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1902,6 +1913,7 @@
 				4B141F9D14C942FF00028CE4 /* PSWebTableViewCell.m in Sources */,
 				4B141F9F14C942FF00028CE4 /* UIImage+HockeyAdditions.m in Sources */,
 				4B141FA814C9433A00028CE4 /* BWQuincyManager.m in Sources */,
+				4B141FBB14CB220200028CE4 /* SVCustomApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

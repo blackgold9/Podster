@@ -14,6 +14,8 @@
 #import "SVPodcatcherClient.h"
 #import "BWHockeyManager.h"
 #import "BWQuincyManager.h"
+#import <AVFoundation/AVFoundation.h>
+#import "SVPlaybackManager.h"
 @implementation SVAppDelegate
 {
     MKNetworkEngine *engine;
@@ -53,6 +55,7 @@
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
 
 #endif
+
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     [[SVDownloadManager sharedInstance] resumeDownloads];
@@ -138,6 +141,43 @@ NSString *uuid(){
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+#pragma mark - remote control
+-(void)startListening
+{
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+}
+
+-(void)stopListening
+{
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [self resignFirstResponder];
+}
+-(BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+- (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
+    AVPlayer *_player = [[SVPlaybackManager sharedInstance] player];
+    if (receivedEvent.type == UIEventTypeRemoteControl) {
+        
+        switch (receivedEvent.subtype) {
+                
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+                if( _player) {
+                    if ( _player.rate != 0) {
+                        _player.rate = 0;
+                    } else {
+                        _player.rate = 1;
+                    }
+                }
+                break;
+                
+            default:
+                break;
+        }
+    }
 }
 
 @end

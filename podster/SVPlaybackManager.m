@@ -10,6 +10,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
+#import "SVAppDelegate.h"
+#import <MediaPlayer/MediaPlayer.h>
 @implementation SVPlaybackManager {
     AVPlayer *_player;
     dispatch_queue_t monitorQueue;
@@ -59,7 +61,6 @@
 
 - (void)playEpisode:(SVPodcastEntry *)episode
           ofPodcast:(SVPodcast *)podcast{
-  //  [TestFlight passCheckpoint:@"PLAYED_EPSISODE"];
     LOG_GENERAL(4, @"Assigning new current podcast/episode");
     self.currentEpisode = [episode inContext:[NSManagedObjectContext defaultContext]];;
     self.currentPodcast = [podcast inContext:[NSManagedObjectContext defaultContext]];;
@@ -74,16 +75,23 @@
     [[AVAudioSession sharedInstance] setActive: YES error: nil];
     if (!_player) {
         _player = [AVPlayer playerWithURL:[NSURL URLWithString:episode.mediaURL]];
+        
         monitorQueue = dispatch_queue_create("com.vantertech.podster.playbackmonitor", DISPATCH_QUEUE_SERIAL);
         [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
         [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
 
-        
+        [(SVAppDelegate *)[[UIApplication sharedApplication] delegate] startListening];
+     
         [self startPositionMonitoring];
     }
     
+    
+    
     LOG_GENERAL(4, @"Triggering playback");
     [_player replaceCurrentItemWithPlayerItem:[[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]]];
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title,MPMediaItemPropertyTitle, podcast.title, MPMediaItemPropertyAlbumTitle , nil];
+    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:params];
     // Check if there was a previous position
     if (episode.positionInSecondsValue > 0) {
         LOG_GENERAL(2, @"Resuming at %d seconds", episode.positionInSecondsValue);

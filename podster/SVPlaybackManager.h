@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
-@interface SVPlaybackManager : NSObject
+@interface SVPlaybackManager : UIResponder
 @property (strong) SVPodcast *currentPodcast;
 @property (strong) SVPodcastEntry *currentEpisode;
 + (SVPlaybackManager *)sharedInstance;

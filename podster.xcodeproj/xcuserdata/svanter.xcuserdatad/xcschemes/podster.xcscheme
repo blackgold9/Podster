@@ -79,7 +79,7 @@
          <EnvironmentVariable
             key = "NSAutoreleaseHaltOnNoPool"
             value = "YES"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
