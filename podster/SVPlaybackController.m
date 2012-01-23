@@ -82,12 +82,6 @@
 
     
     player = [[SVPlaybackManager sharedInstance] player];
-    if (player.status == AVPlayerStatusReadyToPlay) {
-        LOG_GENERAL(4, @"Wasn't yet playing, kicking it off");
-        [player play];
-    } else {
-        LOG_GENERAL(4, @"Player already playing");
-    }
     [player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     [player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     __weak SVPlaybackController  *weakSelf = self;

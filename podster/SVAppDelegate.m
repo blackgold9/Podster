@@ -62,7 +62,7 @@
     [self configureTheming];
   [[SVGPodderClient sharedInstance] useCache];
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound];
     return YES;
 }
 NSString *uuid(){

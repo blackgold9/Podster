@@ -175,7 +175,7 @@
  *  The hostname of the engine is *NOT* prefixed.
  *  The image is returned to the caller via MKNKImageBlock callback block. 
  */
-- (void)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock;
+- (MKNetworkOperation*)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock;
 /*!
  *  @abstract Enqueues your operation into the shared queue
  *  
@@ -248,4 +248,12 @@
  *  The cacheMemoryCost and cacheDirectoryName will be used when you turn caching on using this method.
  */
 -(void) useCache;
+
+/*!
+ * @abstract Cancel operations with a specific tag
+ *
+ * @discussion
+ * This method enumerates through all operations in the queue, and cancels any matching the given tag
+ */
+-(void)cancelAllOperationsWithTag:(NSInteger)tag;
 @end

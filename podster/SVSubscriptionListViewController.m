@@ -13,6 +13,7 @@
 #import "ActsAsPodcast.h"
 #import "SVPodcatcherClient.h"
 #import "SVPodcast.h"
+#import "SVPodcastDetailsViewController.h"
 @implementation SVSubscriptionListViewController
 {
     UINib *nib;
@@ -123,6 +124,16 @@
   
     return cell;
     
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    SVPodcast *podcast =  ((SVSubscription *)[self.fetcher objectAtIndexPath:indexPath]).podcast;
+    
+    SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
+    controller.podcast = podcast;
+    [self.navigationController pushViewController:controller animated:YES];
+
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

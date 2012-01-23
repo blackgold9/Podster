@@ -155,6 +155,8 @@
 		4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
 		4B141FBB14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
 		4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */; };
+		4B141FC014CCCAB500028CE4 /* SVGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FBF14CCCAB500028CE4 /* SVGridCell.m */; };
+		4B141FC114CCCAB500028CE4 /* SVGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FBF14CCCAB500028CE4 /* SVGridCell.m */; };
 		4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
@@ -540,6 +542,8 @@
 		4B141FB814CB220000028CE4 /* SVCustomApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomApplication.h; sourceTree = "<group>"; };
 		4B141FB914CB220100028CE4 /* SVCustomApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomApplication.m; sourceTree = "<group>"; };
 		4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		4B141FBE14CCCAB500028CE4 /* SVGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGridCell.h; sourceTree = "<group>"; };
+		4B141FBF14CCCAB500028CE4 /* SVGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGridCell.m; sourceTree = "<group>"; };
 		4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastDetailsViewController.h; sourceTree = "<group>"; };
 		4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastDetailsViewController.m; sourceTree = "<group>"; };
 		4B189B3514AFAD12001E378A /* SVPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackController.h; sourceTree = "<group>"; };
@@ -847,6 +851,8 @@
 				4B91BF9B14C7F39F00B33776 /* SVPodcastListCell.h */,
 				4B91BF9C14C7F39F00B33776 /* SVPodcastListCell.m */,
 				4B91BF9F14C7FB6800B33776 /* SVPodcastListCell.xib */,
+				4B141FBE14CCCAB500028CE4 /* SVGridCell.h */,
+				4B141FBF14CCCAB500028CE4 /* SVGridCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -1161,11 +1167,7 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
-				4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */,
 				4B68583814C8AF5900496A38 /* libz.dylib */,
-				4BEDB18814C004E200264CCC /* ImageIO.framework */,
-				4B10D0A514BFB44500DF4DBD /* CoreText.framework */,
-				4B6D491B14BE437F00E7B11F /* QuartzCore.framework */,
 				4B71F7C514A5B09B00D26F4C /* 3rd Party */,
 				4B71F79514A5B08C00D26F4C /* podster */,
 				4B71F7B314A5B08C00D26F4C /* podsterTests */,
@@ -1186,6 +1188,10 @@
 		4B71F78E14A5B08C00D26F4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */,
+				4BEDB18814C004E200264CCC /* ImageIO.framework */,
+				4B10D0A514BFB44500DF4DBD /* CoreText.framework */,
+				4B6D491B14BE437F00E7B11F /* QuartzCore.framework */,
 				4B2E524314B3BF260030B7C1 /* CoreData.framework */,
 				4B4486A114B0120700D2F182 /* CoreMedia.framework */,
 				4B189B3914AFDEE6001E378A /* AVFoundation.framework */,
@@ -1780,6 +1786,7 @@
 				4B141F9E14C942FF00028CE4 /* UIImage+HockeyAdditions.m in Sources */,
 				4B141FA714C9433A00028CE4 /* BWQuincyManager.m in Sources */,
 				4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */,
+				4B141FC014CCCAB500028CE4 /* SVGridCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1914,6 +1921,7 @@
 				4B141F9F14C942FF00028CE4 /* UIImage+HockeyAdditions.m in Sources */,
 				4B141FA814C9433A00028CE4 /* BWQuincyManager.m in Sources */,
 				4B141FBB14CB220200028CE4 /* SVCustomApplication.m in Sources */,
+				4B141FC114CCCAB500028CE4 /* SVGridCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

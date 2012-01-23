@@ -81,6 +81,7 @@ typedef enum {
 @synthesize stringEncoding = _stringEncoding;
 @dynamic freezable;
 @synthesize uniqueId = _uniqueId; // freezable operations have a unique id
+@synthesize tag = _tag;
 
 @synthesize connection = _connection;
 
@@ -264,7 +265,7 @@ typedef enum {
     [encoder encodeObject:self.username forKey:@"username"];
     [encoder encodeObject:self.password forKey:@"password"];
     [encoder encodeObject:self.clientCertificate forKey:@"clientCertificate"];
-    
+    [encoder encodeInteger:self.tag forKey:@"tag"];
     self.state = MKNetworkOperationStateReady;
     [encoder encodeInt32:_state forKey:@"state"];
     [encoder encodeBool:self.isCancelled forKey:@"isCancelled"];
@@ -291,7 +292,7 @@ typedef enum {
         [self setState:[decoder decodeInt32ForKey:@"state"]];
         self.isCancelled = [decoder decodeBoolForKey:@"isCancelled"];
         self.mutableData = [decoder decodeObjectForKey:@"mutableData"];
-        
+        self.tag = [decoder decodeIntegerForKey:@"tag"];
         self.downloadStreams = [decoder decodeObjectForKey:@"downloadStreams"];
     }
     return self;
@@ -323,7 +324,7 @@ typedef enum {
     [theCopy setDownloadStreams:[self.downloadStreams copy]];
     [theCopy setCachedResponse:[self.cachedResponse copy]];
     [theCopy setCacheHandlingBlock:self.cacheHandlingBlock];
-    
+    [theCopy setTag:self.tag];
     return theCopy;
 }
 
@@ -704,7 +705,8 @@ typedef enum {
 
 -(void) cancel {
     
-    if([self isFinished]) return;
+    if([self isFinished]) 
+        return;
     
     [self.responseBlocks removeAllObjects];
     self.responseBlocks = nil;
@@ -726,7 +728,7 @@ typedef enum {
     self.authHandler = nil;    
     self.mutableData = nil;
     self.isCancelled = YES; 
-    
+    self.state = MKNetworkOperationStateFinished;
     [super cancel];
 }
 

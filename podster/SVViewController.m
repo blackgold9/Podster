@@ -30,11 +30,17 @@
     localManager = [SVPlaybackManager sharedInstance];
     [localManager addObserver:self forKeyPath:@"currentPodcast" options:NSKeyValueObservingOptionNew context:nil];
 }
+-(void)dealloc
+{
+    [localManager removeObserver:self forKeyPath:@"currentPodcast"];
+
+}
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
     [localManager removeObserver:self forKeyPath:@"currentPodcast"];
+    [super viewDidUnload];
+
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

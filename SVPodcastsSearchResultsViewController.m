@@ -12,6 +12,7 @@
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcastListCell.h"
 #import "ActsAsPodcast.h"
+#import <QuartzCore/QuartzCore.h>
 @implementation SVPodcastsSearchResultsViewController {
     BOOL isLoading;
     NSArray *podcasts;
@@ -51,7 +52,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    [self.tableView registerNib:[self listNib] forCellReuseIdentifier:@"SVPodcastListCell"];
     self.tableView.rowHeight = 88;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (self.searchString) {
@@ -134,14 +136,11 @@
 {
     
     
-    SVPodcastListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"podcastListCell"];
-    if (!cell) {
-        cell = [SVPodcastListCell cellForTableView:tableView fromNib:[self listNib]];
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item.png"]];
-    }
-    
-        [cell bind:(id<ActsAsPodcast>)[podcasts objectAtIndex:indexPath.row]];
-    
+    SVPodcastListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SVPodcastListCell"];
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item.png"]];
+
+    id<ActsAsPodcast> podcast = [podcasts objectAtIndex:indexPath.row];
+    [cell bind:podcast];
     
     
     return cell;

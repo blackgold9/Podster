@@ -12,11 +12,24 @@
 #import "SVPodcast.h"
 #import <QuartzCore/QuartzCore.h>
 @implementation SVPodcastListCell
+{
+    MKNetworkOperation *op;
+}
 @synthesize titleLabel = _titleLabel;
 @synthesize summaryLabel = _summaryLabel;
 @synthesize logoImageView = _logoImageView;
 + (NSString *)cellIdentifier {
     return NSStringFromClass([self class]);
+   }
+
+-(void)prepareForReuse
+{
+    if (op) {
+        [op cancel];
+        LOG_NETWORK(3, @"Cancelled network operation");
+    }
+    self.logoImageView.image = nil;
+    [super prepareForReuse];
 }
 
 + (id)cellForTableView:(UITableView *)tableView fromNib:(UINib *)nib {
@@ -50,21 +63,24 @@
 
 -(void)bind:(id<ActsAsPodcast>)podcast
 {
+    
     self.titleLabel.text = [podcast title];
     self.summaryLabel.text = [podcast summary];
-    self.logoImageView.image = nil;
     self.logoImageView.backgroundColor = [UIColor grayColor];
     NSURL *imageURL = [NSURL URLWithString:[podcast logoURL]];
-    [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
+    op = [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
                                        onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-                                           if (url == imageURL) {
+                                           if ([[url absoluteString] isEqualToString:[imageURL absoluteString]]) {
                                                if(!isInCache) {
+                                                   LOG_NETWORK(3, @"Image was not cached");
                                                    CATransition *transition = [CATransition animation];
                                                    
                                                    
                                                    [self.logoImageView.layer addAnimation:transition forKey:nil];
+                                               } else {
+                                                   LOG_NETWORK(3, @"Image was cached");                                                   
                                                }
-                                               
+
                                                self.logoImageView.image = fetchedImage;
                                                if (!fetchedImage) {
                                                    LOG_NETWORK(1, @"Error loading image for url: %@", url);

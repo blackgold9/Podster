@@ -11,11 +11,12 @@
 #import "SVPodcatcherClient.h"
 #import "SVCategory.h"
 #import "SVPodcastsSearchResultsViewController.h"
-
+#import "SVGridCell.h"
 @implementation SVCategoryGridViewController
 {
     BOOL _loading;
     NSArray *categories;
+    NSMutableSet *imageOperations;
 }
 
 @synthesize searchBar = _searchBar;
@@ -28,6 +29,7 @@
     if (self) {
         _loading = YES;
         categories = [NSArray array];   
+        imageOperations = [NSMutableSet set];
     }
     
     return self;
@@ -50,6 +52,7 @@
 
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -60,6 +63,11 @@
 
 #pragma mark - View lifecycle
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[SVPodcatcherClient sharedInstance] cancelAllOperationsWithTag:IMAGE_LOAD_OPERATION_TAG];
+    
+}
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView {
@@ -75,11 +83,11 @@
     
     CGSize size = [self GMGridView:self.gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
     
-    GMGridViewCell *cell = [self.gridView dequeueReusableCell];
+    SVGridCell *cell = (SVGridCell *)[self.gridView dequeueReusableCell];
      
     if (!cell) 
     {
-        cell = [[GMGridViewCell alloc] init];
+        cell = [[SVGridCell alloc] init];
         //        cell.deleteButtonIcon = [UIImage imageNamed:@"close_x.png"];
         //      cell.deleteButtonOffset = CGPointMake(-15, -15);
         
@@ -116,20 +124,24 @@
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
     imageView.image = nil;
     if (category.imageURL) {
-        [[SVPodcatcherClient sharedInstance] imageAtURL:category.imageURL
-                                           onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-                                               if (url == category.imageURL) {
-                                                   CATransition *transition = [CATransition animation];
-                                                   
-                                                   
-                                                   [imageView.layer addAnimation:transition forKey:nil];
-                                                   
-                                                   imageView.image = fetchedImage;
-                                                   if (!fetchedImage) {
-                                                       LOG_NETWORK(1, @"Error loading image for url: %@", url);
-                                                   }
-                                               }
-                                           }];
+        MKNetworkOperation *op;
+        op =[[SVPodcatcherClient sharedInstance] imageAtURL:category.imageURL
+                                               onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
+                                                   if (url == category.imageURL) {
+                                                       CATransition *transition = [CATransition animation];
+                                                       
+                                                       
+                                                       [imageView.layer addAnimation:transition forKey:nil];
+                                                       
+                                                       imageView.image = fetchedImage;
+                                                       if (!fetchedImage) {
+                                                           LOG_NETWORK(1, @"Error loading image for url: %@", url);
+                                                       }
+                                                   }                                              
+                                               }];
+        op.tag = IMAGE_LOAD_OPERATION_TAG;
+        cell.operation = op;
+        
     }
     return cell;
     

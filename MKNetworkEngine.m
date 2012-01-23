@@ -371,10 +371,10 @@ static NSOperationQueue *_sharedNetworkQueue;
         [self freezeOperations];
 }
 
-- (void)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock
+- (MKNetworkOperation*)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock
 {
     if (url == nil) {
-        return;
+        return nil;
     }
     
     MKNetworkOperation *op = [self operationWithURLString:[url absoluteString]];
@@ -391,8 +391,9 @@ static NSOperationQueue *_sharedNetworkQueue;
          
          DLog(@"%@", error);
      }];    
-    
+    op.queuePriority = NSOperationQueuePriorityLow;
     [self enqueueOperation:op];
+    return op;
 }
 
 #pragma -
@@ -513,4 +514,17 @@ static NSOperationQueue *_sharedNetworkQueue;
     
 }
 
+-(void)cancelAllOperationsWithTag:(NSInteger)tag
+{
+    __block int count = 0;
+    [_sharedNetworkQueue.operations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MKNetworkOperation *op = obj;
+        if(op.tag == tag) {
+            [op cancel];
+            count += 1;
+        }
+    }];
+    
+    DLog(@"Cancelled %d operations", count);
+}
 @end
