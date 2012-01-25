@@ -26,7 +26,9 @@
 {
     if (op) {
         [op cancel];
-        LOG_NETWORK(3, @"Cancelled network operation");
+        op = nil;
+        LOG_NETWORK(3, @"Cancelled network operation");;
+
     }
     self.logoImageView.image = nil;
     [super prepareForReuse];
@@ -67,7 +69,8 @@
     self.titleLabel.text = [podcast title];
     self.summaryLabel.text = [podcast summary];
     self.logoImageView.backgroundColor = [UIColor grayColor];
-    NSURL *imageURL = [NSURL URLWithString:[podcast logoURL]];
+    if ([podcast logoURL] != nil) {
+    NSURL *imageURL = [NSURL URLWithString:[podcast thumbLogoURL]];
     op = [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
                                        onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
                                            if ([[url absoluteString] isEqualToString:[imageURL absoluteString]]) {
@@ -87,7 +90,7 @@
                                                }
                                            }
                                        }];
-
+    }
 
 }
 @end

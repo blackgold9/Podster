@@ -143,11 +143,12 @@
     [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
                                        onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
                                            if (url == imageURL) {
-                                               CATransition *transition = [CATransition animation];
-                                               
-                                               
-                                               [imageView.layer addAnimation:transition forKey:nil];
-                                               
+                                               if (!isInCache) {
+                                                   CATransition *transition = [CATransition animation];
+                                                   
+                                                   
+                                                   [imageView.layer addAnimation:transition forKey:nil];
+                                               }
                                                imageView.image = fetchedImage;
                                                if (!fetchedImage) {
                                                    LOG_NETWORK(1, @"Error loading image for url: %@", url);

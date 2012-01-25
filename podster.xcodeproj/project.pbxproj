@@ -401,8 +401,6 @@
 		4BD1C22E14B8EFDB00E8C945 /* SVCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22E14B8EFDB00E8C943 /* SVCategory.m */; };
 		4BD733CE14C535E800B8EF52 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD733CB14C535E600B8EF52 /* NSString+MD5Addition.m */; };
 		4BD733CF14C535E800B8EF52 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD733CB14C535E600B8EF52 /* NSString+MD5Addition.m */; };
-		4BD733D014C535E800B8EF52 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD733CD14C535E700B8EF52 /* UIDevice+IdentifierAddition.m */; };
-		4BD733D114C535E800B8EF52 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD733CD14C535E700B8EF52 /* UIDevice+IdentifierAddition.m */; };
 		4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEDB18814C004E200264CCC /* ImageIO.framework */; };
 /* End PBXBuildFile section */
 
@@ -753,6 +751,7 @@
 		4B91BFC614C8009700B33776 /* SVSubscriptionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSubscriptionListViewController.h; sourceTree = "<group>"; };
 		4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSubscriptionListViewController.m; sourceTree = "<group>"; };
 		4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVSubscriptionListViewController.xib; sourceTree = "<group>"; };
+		4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 4.xcdatamodel"; sourceTree = "<group>"; };
 		4BD1C21D14B7D05E00E8C942 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		4BD1C21E14B7D05E00E8C942 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeGetters.h"; sourceTree = "<group>"; };
@@ -766,8 +765,6 @@
 		4BD1C22E14B8EFDB00E8C946 /* SVCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVCategory.h; path = data/SVCategory.h; sourceTree = "<group>"; };
 		4BD733CA14C535E200B8EF52 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
 		4BD733CB14C535E600B8EF52 /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
-		4BD733CC14C535E700B8EF52 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
-		4BD733CD14C535E700B8EF52 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		4BEDB18814C004E200264CCC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -1284,8 +1281,6 @@
 				4B91BF4E14C77B5800B33776 /* JMTabView */,
 				4BD733CA14C535E200B8EF52 /* NSString+MD5Addition.h */,
 				4BD733CB14C535E600B8EF52 /* NSString+MD5Addition.m */,
-				4BD733CC14C535E700B8EF52 /* UIDevice+IdentifierAddition.h */,
-				4BD733CD14C535E700B8EF52 /* UIDevice+IdentifierAddition.m */,
 				4B10D02B14BFB3B700DF4DBD /* DTCoreText */,
 				4B6D492614BE460C00E7B11F /* GMGridView */,
 				4BD1C22514B8BDE100E8C942 /* NSLogger */,
@@ -1759,7 +1754,6 @@
 				4B10D0A114BFB43400DF4DBD /* UIColor+HTML.m in Sources */,
 				4B10D0A314BFB43400DF4DBD /* UIDevice+DTVersion.m in Sources */,
 				4BD733CE14C535E800B8EF52 /* NSString+MD5Addition.m in Sources */,
-				4BD733D014C535E800B8EF52 /* UIDevice+IdentifierAddition.m in Sources */,
 				4B91BF6514C77B6600B33776 /* UIColor+Hex.m in Sources */,
 				4B91BF6714C77B6600B33776 /* UIView+InnerShadow.m in Sources */,
 				4B91BF6914C77B6600B33776 /* UIView+Positioning.m in Sources */,
@@ -1894,7 +1888,6 @@
 				4B10D0A214BFB43400DF4DBD /* UIColor+HTML.m in Sources */,
 				4B10D0A414BFB43400DF4DBD /* UIDevice+DTVersion.m in Sources */,
 				4BD733CF14C535E800B8EF52 /* NSString+MD5Addition.m in Sources */,
-				4BD733D114C535E800B8EF52 /* UIDevice+IdentifierAddition.m in Sources */,
 				4B91BF6614C77B6600B33776 /* UIColor+Hex.m in Sources */,
 				4B91BF6814C77B6600B33776 /* UIView+InnerShadow.m in Sources */,
 				4B91BF6A14C77B6600B33776 /* UIView+Positioning.m in Sources */,
@@ -1989,6 +1982,8 @@
 		4B141FB114C9476100028CE4 /* Ad_Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2005,6 +2000,8 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Ad_Hoc;
@@ -2085,6 +2082,8 @@
 		4B71F7BF14A5B08C00D26F4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2104,6 +2103,8 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2111,6 +2112,7 @@
 		4B71F7C014A5B08C00D26F4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2127,6 +2129,7 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2218,11 +2221,12 @@
 		4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */,
 				4B141FB314CA9AFD00028CE4 /* SVPodcastDatastore 3.xcdatamodel */,
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4B141FB314CA9AFD00028CE4 /* SVPodcastDatastore 3.xcdatamodel */;
+			currentVersion = 4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

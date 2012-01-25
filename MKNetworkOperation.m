@@ -642,6 +642,10 @@ typedef enum {
 
 - (void) start
 {
+    if(![NSThread isMainThread]){
+        [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
+        return;
+    }
     
 #if TARGET_OS_IPHONE
     self.backgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
@@ -657,11 +661,6 @@ typedef enum {
     }];
     
 #endif
-    
-    if(![NSThread isMainThread]){
-        [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
-        return;
-    }
     if(!self.isCancelled) {
         
         if ([self.request.HTTPMethod isEqualToString:@"POST"] || [self.request.HTTPMethod isEqualToString:@"PUT"]) {            
@@ -948,8 +947,9 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
         [stream close];
     
     if (self.response.statusCode >= 200 && self.response.statusCode < 300) {
-        
-        [self notifyCache];        
+        if (self.cacheHandlingBlock) {
+            [self notifyCache];        
+        }
         [self operationSucceeded];
         
     } 
@@ -1020,7 +1020,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 
 #ifdef __IPHONE_5_0
 -(id) responseJSON {
-    id returnValue = [[self mutableData] objectFromJSONData];
+    id returnValue = [[self responseData] objectFromJSONData];
     return returnValue;
 }
 #endif

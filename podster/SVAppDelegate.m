@@ -10,16 +10,19 @@
 #import "SVGPodderClient.h"
 #import "UIColor+Hex.h"
 #import "SVDownloadManager.h"
-#import "UIDevice+IdentifierAddition.h"
 #import "SVPodcatcherClient.h"
 #import "BWHockeyManager.h"
 #import "BWQuincyManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import "SVPlaybackManager.h"
+#import "SVPodcastDetailsViewController.h"
+#import "SVPodcast.h"
 @implementation SVAppDelegate
 {
     MKNetworkEngine *engine;
 }
+
+NSString *uuid();
 
 @synthesize window = _window;
 -(void)handleCoreDataError:(NSError *)error
@@ -41,8 +44,8 @@
     [[UIToolbar appearance] setTintColor:colorOne];
     [[UIBarButtonItem appearance] setTintColor:colorOne];
 
-    NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorFour
-                                                                  forKey:UITextAttributeTextColor];
+   // NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorFour
+   //                                                               forKey:UITextAttributeTextColor];
    // [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];
     [[UISearchBar appearance] setBarStyle:UIBarStyleBlack];
 }
@@ -58,13 +61,20 @@
 
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
-    [[SVDownloadManager sharedInstance] resumeDownloads];
-    [self configureTheming];
-  [[SVGPodderClient sharedInstance] useCache];
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge |UIRemoteNotificationTypeSound];
+    [[SVPodcatcherClient sharedInstance] useCache];
+    
+    //[[SVDownloadManager sharedInstance] resumeDownloads];
+    [self configureTheming];
+
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
+                                                                           UIRemoteNotificationTypeBadge|
+                                                                           UIRemoteNotificationTypeSound)];
     return YES;
 }
+
+
+
 NSString *uuid(){
     CFUUIDRef theUUID = CFUUIDCreate(NULL);
     NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, theUUID);
@@ -89,7 +99,8 @@ NSString *uuid(){
                                                             andDeviceIdentifer:deviceId
                                                                   onCompletion:^{
                                                                       LOG_GENERAL(2, @"Registered for notifications with podstore");    
-                                                                      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"notificationsEnabled"];
+                                                                      [[NSUserDefaults standardUserDefaults] setBool:YES 
+                                                                                                              forKey:@"notificationsEnabled"];
                                                                       [[NSUserDefaults standardUserDefaults] synchronize];
 
                                                                   } onError:^(NSError *error) {
@@ -97,6 +108,24 @@ NSString *uuid(){
                                                                   }]; // custom method
 }
 
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    if (application.applicationState != UIApplicationStateActive) {
+        NSString *url= [userInfo valueForKey:@"url"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, url];
+        SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
+        if (podcast) {
+            SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
+            controller.podcast = podcast;
+            UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+            [nav pushViewController:controller animated:NO];
+        }
+    }
+    
+   // [self.navigationController pushViewController:controller animated:YES];
+
+    
+}
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     LOG_GENERAL(1,@"Error in registration. Error: %@", err);
     [UIAlertView showWithError:err];

@@ -7,7 +7,10 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.feedURL = @"feedURL",
 	.lastUpdated = @"lastUpdated",
 	.logoURL = @"logoURL",
+	.smallLogoURL = @"smallLogoURL",
 	.summary = @"summary",
+	.thumbLogoURL = @"thumbLogoURL",
+	.tinyLogoURL = @"tinyLogoURL",
 	.title = @"title",
 	.websiteURL = @"websiteURL",
 };
@@ -74,7 +77,28 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
+@dynamic smallLogoURL;
+
+
+
+
+
+
 @dynamic summary;
+
+
+
+
+
+
+@dynamic thumbLogoURL;
+
+
+
+
+
+
+@dynamic tinyLogoURL;
 
 
 

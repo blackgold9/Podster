@@ -14,7 +14,6 @@
 #import "SVPodcastEntry.h"
 #import "SVFeedParser.h"
 #import "SVPodcastSearchResult.h"
-#import "UIDevice+IdentifierAddition.h"
 
 @implementation SVPodcatcherClient
 + (id)sharedInstance

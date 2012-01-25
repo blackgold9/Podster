@@ -11,15 +11,18 @@
 @implementation NSString (URLEncoding)
 
 - (NSString*)stringByEscapingForURLArgument {
-    // Encode all the reserved characters, per RFC 3986
-    // (<http://www.ietf.org/rfc/rfc3986.txt>)
-    CFStringRef escaped = 
-    CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                            (__bridge CFStringRef)self,
-                                            NULL,
-                                            (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                            kCFStringEncodingUTF8);
-    return (__bridge_transfer NSString *)escaped;
+    CFStringRef encodedCFString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
+                                                                          (__bridge CFStringRef) self, 
+                                                                          nil,
+                                                                          CFSTR("?!@#$^&%*+,:;='\"`<>()[]{}/\\|~ "), 
+                                                                          kCFStringEncodingUTF8);
+    
+    NSString *encodedString = [[NSString alloc] initWithString:(__bridge_transfer NSString*) encodedCFString];    
+    
+    if(!encodedString)
+        encodedString = @"";    
+    
+    return encodedString;
 }
 
 - (NSString*)stringByUnescapingFromURLArgument {

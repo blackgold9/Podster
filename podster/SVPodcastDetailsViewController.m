@@ -239,7 +239,6 @@
                                                                        onCompletion:loadCompleteHandler
                                                                             onError:^(NSError *error) {
                 [UIAlertView showWithError:error];
-
             }];
 
     fetcher = [SVPodcastEntry fetchAllSortedBy:SVPodcastEntryAttributes.datePublished ascending:NO withPredicate:[NSPredicate predicateWithFormat:@"podcast.feedURL == %@", localPodcast.feedURL] groupBy:nil delegate:self inContext:localContext];
