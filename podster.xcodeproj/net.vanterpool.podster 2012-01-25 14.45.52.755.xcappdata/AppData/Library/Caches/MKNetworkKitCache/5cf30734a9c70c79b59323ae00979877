@@ -1,0 +1,1520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:npr="http://www.npr.org/rss/" xmlns:nprml="http://api.npr.org/nprml" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>NPR: Snap Judgment Podcast</title>
+    <link>http://www.snapjudgment.org</link>
+    <description><![CDATA[Snap Judgment is the smoking-hot new show from NPR.  Winner of the Public Radio Talent Quest, Glynn Washington delivers a raw, musical brand of storytelling, daring listeners to see the world through the eyes of another.]]></description>
+    <copyright>Copyright 2010 NPR - For Personal Use Only</copyright>
+    <generator>NPR API RSS Generator 0.94</generator>
+    <language>en</language>
+    <itunes:summary><![CDATA[Snap Judgment is the smoking-hot new show from NPR.  Winner of the Public Radio Talent Quest, Glynn Washington delivers a raw, musical brand of storytelling, daring listeners to see the world through the eyes of another.]]></itunes:summary>
+    <itunes:subtitle>Snap Judgment is the smoking-hot new show from NPR.  Winner of the Public Radio Talent Quest, Glynn Washington delivers a raw, musical brand of storytelling, daring listeners to see the world through the eyes of another.</itunes:subtitle>
+    <itunes:keywords>glynn,judgment,npr,snap,storytelling,washington,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+    <itunes:author>NPR</itunes:author>
+    <itunes:owner>
+      <itunes:email/>
+      <itunes:name/>
+    </itunes:owner>
+    <itunes:category text="Arts"/>
+    <itunes:category text="Society &amp; Culture"/>
+    <itunes:category text="Arts">
+      <itunes:category text="Performing Arts"/>
+    </itunes:category>
+    <itunes:category text="Society &amp; Culture">
+      <itunes:category text="Personal Journals"/>
+    </itunes:category>
+    <itunes:image href="http://media.npr.org/images/podcasts/primary/icon_510294.jpg"/>
+    <itunes:explicit>no</itunes:explicit>
+    <image>
+      <url>http://media.npr.org/images/podcasts/thumbnail/icon_510294.jpg</url>
+      <title>NPR: Snap Judgment Podcast</title>
+      <link>http://www.snapjudgment.org</link>
+    </image>
+    <lastBuildDate>Fri, 20 Jan 2012 19:14:18 -0500</lastBuildDate>
+    <item>
+      <title>Snap Judgment #302 - Hand of Fate</title>
+      <description><![CDATA[<p><span style="font-size: 15px; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.8629101479320005">This week Snap Judgment proudly presents stories featuring unexplainable coincidences, the stars aligning, and unbelievable destinies, for both good and ill...</span></p>]]></description>
+      <pubDate>Fri, 20 Jan 2012 19:14:18 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/145546388/npr_145546388.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 15px; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.8629101479320005">This week Snap Judgment proudly presents stories featuring unexplainable coincidences, the stars aligning, and unbelievable destinies, for both good and ill...</span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/145546388/npr_145546388.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #301 - Close Knit</title>
+      <description><![CDATA[<p><span style="font-size: medium;">Amazing stories about the ties that bind.</span></p>]]></description>
+      <pubDate>Fri, 13 Jan 2012 20:33:22 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/145202124/npr_145202124.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">Amazing stories about the ties that bind.</span></p>]]></itunes:summary>
+      <itunes:keywords>stories,story,npr,storytelling,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/145202124/npr_145202124.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #205 - Ain't No Sunshine</title>
+      <description><![CDATA[<p><span style="font-size: medium;">For some couples, it&#8217;s simply not enough to say, &#8220;I love you.&#8221;</span></p><p><span style="font-size: medium;">On this episode, we meet people who have tasted Cupid&#8217;s sting, and hear about the decisions born from that surrender of the heart.</span></p>]]></description>
+      <pubDate>Fri, 06 Jan 2012 20:31:19 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/144814497/npr_144814497.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">For some couples, it&#8217;s simply not enough to say, &#8220;I love you.&#8221;</span></p><p><span style="font-size: medium;">On this episode, we meet people who have tasted Cupid&#8217;s sting, and hear about the decisions born from that surrender of the heart.</span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,judgment,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>59:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/144814497/npr_144814497.mp3" length="56673891" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #231 - "Look Back 2011"</title>
+      <description><![CDATA[<p><span style="font-size: medium;"><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.604178871566413">This past year&#160;</span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">one person after another</span> <span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">has rocked an amazing story </span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">on the Snap Judgment microphone.</span> <span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">So today we </span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">look back at our storytellers </span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">that made us see the world in a whole different way.</span></span><br /><span style="font-size: medium;"><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">From PRX and NPR,</span>&#160; <span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">Snap Judgment proudly presents...</span> <span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">&#8220;The Look Back Episode.&#8221;</span></span></p>]]></description>
+      <pubDate>Fri, 30 Dec 2011 16:23:36 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/144493077/npr_144493077.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;"><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.604178871566413">This past year&#160;</span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">one person after another</span> <span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">has rocked an amazing story </span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">on the Snap Judgment microphone.</span> <span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">So today we </span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">look back at our storytellers </span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">that made us see the world in a whole different way.</span></span><br /><span style="font-size: medium;"><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">From PRX and NPR,</span>&#160; <span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">Snap Judgment proudly presents...</span> <span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">&#8220;The Look Back Episode.&#8221;</span></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/144493077/npr_144493077.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #206 - Fame</title>
+      <description><![CDATA[<p><span style="font-size: medium;">Some will die for it. &#160;Or kill for it. &#160;Run away, mock, ridicule, and cry for it.</span><br /><span style="font-size: medium;"> But if you want to live forever, you better get some "Fame."&#160; This week Snap struts down the red carpet, past the paparazzi, and straight to the VIP lounge. &#160;Stories about how to get famous, what it tastes like, and what happens after the fall. </span></p>]]></description>
+      <pubDate>Fri, 23 Dec 2011 15:14:36 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/144194578/npr_144194578.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">Some will die for it. &#160;Or kill for it. &#160;Run away, mock, ridicule, and cry for it.</span><br /><span style="font-size: medium;"> But if you want to live forever, you better get some "Fame."&#160; This week Snap struts down the red carpet, past the paparazzi, and straight to the VIP lounge. &#160;Stories about how to get famous, what it tastes like, and what happens after the fall. </span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,judgment,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/144194578/npr_144194578.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #230 - Fight of Your Life</title>
+      <description><![CDATA[<p><span style="font-size: medium;">Everybody has these little conflicts, these little spats, but in the end ...not much is at stake. But what happens when everything is on the line? On the next Snap Judgment... "Fight of Your Life." </span></p>]]></description>
+      <pubDate>Fri, 16 Dec 2011 19:39:26 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/143870045/npr_143870045.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">Everybody has these little conflicts, these little spats, but in the end ...not much is at stake. But what happens when everything is on the line? On the next Snap Judgment... "Fight of Your Life." </span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/143870045/npr_143870045.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #102 - Tales from the Library</title>
+      <description><![CDATA[<p><span style="font-size: medium;">The whole range of human experience isn't just cataloged in a library--it actually takes place inside. Roam the stacks with Snap Judgment, and we'll teach you to hypnotize your friends, jump start your career and stop fanatics from burning your books.</span></p>]]></description>
+      <pubDate>Fri, 09 Dec 2011 18:36:42 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/143471652/npr_143471652.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">The whole range of human experience isn't just cataloged in a library--it actually takes place inside. Roam the stacks with Snap Judgment, and we'll teach you to hypnotize your friends, jump start your career and stop fanatics from burning your books.</span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,judgment,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/143471652/npr_143471652.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap LIVE! #229: Dig Deep</title>
+      <description><![CDATA[<p><span style="font-size: 15px; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.660108129104073">This week, enjoy the best seat in the house as Glynn Washington and the nation&#8217;s finest storytellers &#8220;Dig Deep&#8221; to reveal stories that cut to the core. Snap Judgment, LIVE! rocks Washington DC&#8217;s Harman Center with a sold-out show before a screaming audience. &#160;</span><br /><span style="font-size: 15px; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></description>
+      <pubDate>Fri, 02 Dec 2011 21:22:43 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/143074218/npr_143074218.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 15px; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.660108129104073">This week, enjoy the best seat in the house as Glynn Washington and the nation&#8217;s finest storytellers &#8220;Dig Deep&#8221; to reveal stories that cut to the core. Snap Judgment, LIVE! rocks Washington DC&#8217;s Harman Center with a sold-out show before a screaming audience. &#160;</span><br /><span style="font-size: 15px; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,glen,glenn,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:9</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/143074218/npr_143074218.mp3" length="51041891" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #228 - Gratitude</title>
+      <description><![CDATA[<p><span style="font-size: medium;"><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.4930320110270461">&#8216;Tis the season to consider those things that we are most thankful for.&#160; This week Snap Judgment is taking a look back on some of the stories from the year that touch on this theme of gratitude, because we are all so thankful.</span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.4930320110270461"><br /></span></span><span style="font-size: medium;"><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.4930320110270461"><br style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.4930320110270461" /></span></span></p>]]></description>
+      <pubDate>Sat, 26 Nov 2011 03:03:05 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/142790585/npr_142790585.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;"><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.4930320110270461">&#8216;Tis the season to consider those things that we are most thankful for.&#160; This week Snap Judgment is taking a look back on some of the stories from the year that touch on this theme of gratitude, because we are all so thankful.</span><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.4930320110270461"><br /></span></span><span style="font-size: medium;"><span style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.4930320110270461"><br style="font-family: Times New Roman; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.4930320110270461" /></span></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,glen,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/142790585/npr_142790585.mp3" length="50914831" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #227: All In It Together</title>
+      <description><![CDATA[<p><span style="font-size: 15px; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.27045507308854455">Most of us go through life doing our own thing. We are trained to be independent, to need no one. But then one day you realize those random people around you, the strangers you're simply too busy to give a second glance, they're actually on your team. On the next Snap Judgment... "All In It Together." Amazing stories about unexpected community. </span></p>]]></description>
+      <pubDate>Fri, 18 Nov 2011 19:50:09 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/142530707/npr_142530707.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 15px; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.27045507308854455">Most of us go through life doing our own thing. We are trained to be independent, to need no one. But then one day you realize those random people around you, the strangers you're simply too busy to give a second glance, they're actually on your team. On the next Snap Judgment... "All In It Together." Amazing stories about unexpected community. </span></p>]]></itunes:summary>
+      <itunes:keywords>glen,glenn,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/142530707/npr_142530707.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #120: Snap Judgment LIVE! - True Confessions</title>
+      <description><![CDATA[<p><span style="font-size: medium;">Storytellers from across the nation reveal their true confessions to a theater audience for another episode of Snap Judgment LIVE. Glynn Washington brings hosts the courageous confessors as they unveil their darkest secrets at San Francisco's Brava Theater</span></p>]]></description>
+      <pubDate>Thu, 10 Nov 2011 16:08:13 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/142221941/npr_142221941.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">Storytellers from across the nation reveal their true confessions to a theater audience for another episode of Snap Judgment LIVE. Glynn Washington brings hosts the courageous confessors as they unveil their darkest secrets at San Francisco's Brava Theater</span></p>]]></itunes:summary>
+      <itunes:keywords>NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:45</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/142221941/npr_142221941.mp3" length="51616167" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #207: Ka-Ching!</title>
+      <description><![CDATA[<p>Snap Judgment makes the big score, loses everything, and lets it ride on "snake eyes".&#160; Stories about cold cash money and the things people do to get it . . .</p>]]></description>
+      <pubDate>Fri, 04 Nov 2011 20:39:54 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/142042666/npr_142042666.mp3</guid>
+      <itunes:summary><![CDATA[<p>Snap Judgment makes the big score, loses everything, and lets it ride on "snake eyes".&#160; Stories about cold cash money and the things people do to get it . . .</p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,glen,glenn,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>54:5</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/142042666/npr_142042666.mp3" length="51939249" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #226- Spooked II: The Return of the Fallen</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.3277241182195738">Be afraid. &#160;Be VERY afraid. &#160;Just in time for Halloween, Snap Judgment proudly presents, &#8220;Spooked II: &#160;Return of the Fallen.&#8221; &#160;Real stories about lost souls, and the horror they inflict on the living.<br /></span></p>]]></description>
+      <pubDate>Fri, 28 Oct 2011 17:29:16 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/141812073/npr_141812073.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.3277241182195738">Be afraid. &#160;Be VERY afraid. &#160;Just in time for Halloween, Snap Judgment proudly presents, &#8220;Spooked II: &#160;Return of the Fallen.&#8221; &#160;Real stories about lost souls, and the horror they inflict on the living.<br /></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,glen,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>54:44</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/141812073/npr_141812073.mp3" length="52556157" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #225- Lost In Translation</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.27352143033599985">This week, Snap Judgment proudly presents stories from people, who for one reason or another, couldn&#8217;t quite get their point across . . .</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></description>
+      <pubDate>Fri, 21 Oct 2011 21:54:59 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/141607301/npr_141607301.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.27352143033599985">This week, Snap Judgment proudly presents stories from people, who for one reason or another, couldn&#8217;t quite get their point across . . .</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>52:49</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/141607301/npr_141607301.mp3" length="50708359" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #116- Breaking In</title>
+      <description><![CDATA[<p>Everyone&#8217;s been there. Standing on the outside, feeling like a fish in an aquarium, looking in at something--whether it&#8217;s a group of friends, a lifestyle or a job--and thinking, &#8220;That right there, that&#8217;s where I want to be.&#8221; &#160;But in order for them to let you in, they&#8217;ve gotta notice you. Today, Snap Judgment proudly presents stories about people finding unusual ways to break in to their dreams.</p>]]></description>
+      <pubDate>Fri, 14 Oct 2011 15:28:15 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/141361387/npr_141361387.mp3</guid>
+      <itunes:summary><![CDATA[<p>Everyone&#8217;s been there. Standing on the outside, feeling like a fish in an aquarium, looking in at something--whether it&#8217;s a group of friends, a lifestyle or a job--and thinking, &#8220;That right there, that&#8217;s where I want to be.&#8221; &#160;But in order for them to let you in, they&#8217;ve gotta notice you. Today, Snap Judgment proudly presents stories about people finding unusual ways to break in to their dreams.</p>]]></itunes:summary>
+      <itunes:keywords>NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/141361387/npr_141361387.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>SnapJudgment #224 - Over the Line</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.016770726573126504">This week Snap Judgment presents stories from people who had every reason to expect one thing, but get something else entirely.</span></p>]]></description>
+      <pubDate>Fri, 07 Oct 2011 17:02:01 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/141163867/npr_141163867.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: bold; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.016770726573126504">This week Snap Judgment presents stories from people who had every reason to expect one thing, but get something else entirely.</span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/141163867/npr_141163867.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #223 - It Wasn't Me</title>
+      <description><![CDATA[<p><span style="font-size: medium;">Snap Judgment proudly presents, &#8220;It Wasn't Me." Amazing stories about the wrong guy, at the wrong time, doing the wrong thing!</span></p>]]></description>
+      <pubDate>Fri, 30 Sep 2011 21:02:26 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140968378/npr_140968378.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">Snap Judgment proudly presents, &#8220;It Wasn't Me." Amazing stories about the wrong guy, at the wrong time, doing the wrong thing!</span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,judgment,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>52:31</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140968378/npr_140968378.mp3" length="50433760" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #106 - Utopia</title>
+      <description><![CDATA[<p><span style="font-size: medium;"><span style="font-family: Helvetica;" face="Helvetica">Snap Judgment searches for that perfect place just around the bend--our own Shangri-La.&#160; The lucky few who find Utopia often discover it surrounded by enemies, clamoring to tear it down.</span></span></p>]]></description>
+      <pubDate>Fri, 23 Sep 2011 20:49:58 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140758501/npr_140758501.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;"><span style="font-family: Helvetica;" face="Helvetica">Snap Judgment searches for that perfect place just around the bend--our own Shangri-La.&#160; The lucky few who find Utopia often discover it surrounded by enemies, clamoring to tear it down.</span></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,utopia,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>54:28</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140758501/npr_140758501.mp3" length="52307053" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #222 - Toxic</title>
+      <description><![CDATA[<p><span style="font-size: medium; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.06171626910206984">Did you ever feel less than pure.... that maybe there&#8217;s something in the water?</span><br /><span style="font-size: medium; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">Or maybe the food doesn&#8217;t taste quite right... and why are you itching?</span><br /><span style="font-size: medium; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">Snap Judgment, from PRX and NPR, proudly presents &#8220;Toxic."</span><br /><span style="font-size: medium; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></description>
+      <pubDate>Fri, 16 Sep 2011 21:41:08 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140550717/npr_140550717.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.06171626910206984">Did you ever feel less than pure.... that maybe there&#8217;s something in the water?</span><br /><span style="font-size: medium; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">Or maybe the food doesn&#8217;t taste quite right... and why are you itching?</span><br /><span style="font-size: medium; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">Snap Judgment, from PRX and NPR, proudly presents &#8220;Toxic."</span><br /><span style="font-size: medium; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,toxic,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:24</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140550717/npr_140550717.mp3" length="51269261" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #107 - Superheroes: Origin Stories</title>
+      <description><![CDATA[<p><object type="application/x-shockwave-flash" data="http://snapjudgment.org/sites/all/modules/swftools/shared/1pixelout/player.swf" height="24" width="290"><param name="allowScriptAccess" value="sameDomain" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#FFFFFF" /><param name="scale" value="showall" /><param name="quality" value="autohigh" /><param name="align" value="l" /><param name="allowfullscreen" value="true" /><param name="base" value="http://snapjudgment.org/sites/default/files/" /><param name="play" value="false" /><param name="menu" value="true" /><param name="loop" value="false" /><param name="flashvars" value="playerID=13156169611&#38;autostart=no&#38;loop=no&#38;bg=eceadb&#38;leftbg=cccccc&#38;rightbg=b4b4b4&#38;rightbghover=9999999&#38;lefticon=333333&#38;righticon=333333&#38;righticonhover=ffffff&#38;text=666666&#38;slider=ffffff&#38;loader=009900&#38;track=ffffff&#38;alt_bg=eceadb&#38;alt_leftbg=cccccc&#38;alt_rightbg=b4b4b4&#38;alt_rightbghover=9999999&#38;alt_lefticon=333333&#38;alt_righticon=333333&#38;alt_righticonhover=ffffff&#38;alt_text=666666&#38;alt_slider=ffffff&#38;alt_loader=009900&#38;alt_track=ffffff&#38;alt_autostart=no&#38;alt_loop=no&#38;soundFile=http:%2F%2Fsnapjudgment.org%2Fsites%2Fdefault%2Ffiles%2Faudio%2F467%2Fmeds_web_preview%2Fsnap_107_superheroes_full_episode.mp3" /><!--<![endif]--> <!--[if gte IE 7]>--> </object> <!--<![endif]--></p><p><span style="font-size: medium;">Stories of mere mortals rising above adversity to become mighty.&#160; Lives will be in danger, heroes will be born.&#160; Plus, what's a comic book without an evil villain?</span></p>]]></description>
+      <pubDate>Fri, 09 Sep 2011 22:40:08 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140353012/npr_140353012.mp3</guid>
+      <itunes:summary><![CDATA[<p><object type="application/x-shockwave-flash" data="http://snapjudgment.org/sites/all/modules/swftools/shared/1pixelout/player.swf" height="24" width="290"><param name="allowScriptAccess" value="sameDomain" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#FFFFFF" /><param name="scale" value="showall" /><param name="quality" value="autohigh" /><param name="align" value="l" /><param name="allowfullscreen" value="true" /><param name="base" value="http://snapjudgment.org/sites/default/files/" /><param name="play" value="false" /><param name="menu" value="true" /><param name="loop" value="false" /><param name="flashvars" value="playerID=13156169611&#38;autostart=no&#38;loop=no&#38;bg=eceadb&#38;leftbg=cccccc&#38;rightbg=b4b4b4&#38;rightbghover=9999999&#38;lefticon=333333&#38;righticon=333333&#38;righticonhover=ffffff&#38;text=666666&#38;slider=ffffff&#38;loader=009900&#38;track=ffffff&#38;alt_bg=eceadb&#38;alt_leftbg=cccccc&#38;alt_rightbg=b4b4b4&#38;alt_rightbghover=9999999&#38;alt_lefticon=333333&#38;alt_righticon=333333&#38;alt_righticonhover=ffffff&#38;alt_text=666666&#38;alt_slider=ffffff&#38;alt_loader=009900&#38;alt_track=ffffff&#38;alt_autostart=no&#38;alt_loop=no&#38;soundFile=http:%2F%2Fsnapjudgment.org%2Fsites%2Fdefault%2Ffiles%2Faudio%2F467%2Fmeds_web_preview%2Fsnap_107_superheroes_full_episode.mp3" /><!--<![endif]--> <!--[if gte IE 7]>--> </object> <!--<![endif]--></p><p><span style="font-size: medium;">Stories of mere mortals rising above adversity to become mighty.&#160; Lives will be in danger, heroes will be born.&#160; Plus, what's a comic book without an evil villain?</span></p>]]></itunes:summary>
+      <itunes:keywords>superhero,npr,storytelling,washington,judgment,snap,glynn,prx,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:2</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140353012/npr_140353012.mp3" length="50920683" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #202 - Abuducted</title>
+      <description><![CDATA[<p><span style="font-size: medium;">Desperate times call for desperate measures, and for those willing to do anything, human lives are an excellent bargaining tool. This week, Snap Judgment presents stories about abductions and the toll they take on survivors.</span></p>]]></description>
+      <pubDate>Fri, 02 Sep 2011 20:52:47 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140158855/npr_140158855.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">Desperate times call for desperate measures, and for those willing to do anything, human lives are an excellent bargaining tool. This week, Snap Judgment presents stories about abductions and the toll they take on survivors.</span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:43</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/140158855/npr_140158855.mp3" length="51581476" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #221 - Nemesis</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.9258376945040026">Stories about those out to deliberately, methodically, and callously destroy everything you hold dear - and decimate all that you cherish . . . </span></p>]]></description>
+      <pubDate>Fri, 26 Aug 2011 23:36:54 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139984832/npr_139984832.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.9258376945040026">Stories about those out to deliberately, methodically, and callously destroy everything you hold dear - and decimate all that you cherish . . . </span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,nemesis,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:31</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139984832/npr_139984832.mp3" length="51380856" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #220 - Spaceman</title>
+      <description><![CDATA[<div class="views-field-body">
+<div class="field-content">
+<p><span style="font-size: medium;">Hold on tight because Snap Judgment is going where no other public radio program has gone before - space, the final frontier. This week we meet astronauts, aliens, and abductees that bring you the real stories and encounters with the extra-terrestrials.</span></p>
+</div>
+</div>
+<div class="views-field-title-1"><span class="field-content"><br /></span></div>]]></description>
+      <pubDate>Sat, 20 Aug 2011 04:05:34 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139813284/npr_139813284.mp3</guid>
+      <itunes:summary><![CDATA[<div class="views-field-body">
+<div class="field-content">
+<p><span style="font-size: medium;">Hold on tight because Snap Judgment is going where no other public radio program has gone before - space, the final frontier. This week we meet astronauts, aliens, and abductees that bring you the real stories and encounters with the extra-terrestrials.</span></p>
+</div>
+</div>
+<div class="views-field-title-1"><span class="field-content"><br /></span></div>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,aliens,washington,judgment,judgement,snap,glynn,spaceman,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:41</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139813284/npr_139813284.mp3" length="51548039" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Mixtape  - Music from Spaceman</title>
+      <description><![CDATA[<h1>The Snap Spaceman Mixalot Dirty Downtown Upstairs Soundmix</h1>
+<p><span style="font-size: medium;">Get ready for the "Spaceman" epsiode!</span></p>
+<p></p>
+<p><span style="font-size: medium;">Produced by Pat Mesiti-Miller<br /></span></p>
+<p><span style="font-size: medium;"><br /></span></p>]]></description>
+      <pubDate>Fri, 19 Aug 2011 18:09:22 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139804938/npr_139804938.mp3</guid>
+      <itunes:summary><![CDATA[<h1>The Snap Spaceman Mixalot Dirty Downtown Upstairs Soundmix</h1>
+<p><span style="font-size: medium;">Get ready for the "Spaceman" epsiode!</span></p>
+<p></p>
+<p><span style="font-size: medium;">Produced by Pat Mesiti-Miller<br /></span></p>
+<p><span style="font-size: medium;"><br /></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,judgment,pat,mixtape,snap,glynn,mesitimiller,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>30:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139804938/npr_139804938.mp3" length="28834883" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #203: One of Our Own</title>
+      <description><![CDATA[<p><span style="font-size: medium;">Some say blood is thicker than water. Maybe, and maybe not, but on this episode we explore the different ways people create that special alchemy called family.</span></p>]]></description>
+      <pubDate>Fri, 12 Aug 2011 21:47:12 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139592640/npr_139592640.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">Some say blood is thicker than water. Maybe, and maybe not, but on this episode we explore the different ways people create that special alchemy called family.</span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>53:1</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139592640/npr_139592640.mp3" length="50913995" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #201 - Hungry</title>
+      <description><![CDATA[<p><span style="font-size: medium;">Snap Judgment churns your stomach, tempts you with a phat dessert, then leads you to the brink of starvation with stories of hunger, thirst, cruelty and largess.</span></p>
+<p></p>
+<p><span style="font-size: medium;">Visit <a target="_blank" title="SnapJudgment.org" href="snapjudgment.org">snapjudgment.org</a> for more stories.<br /></span></p>]]></description>
+      <pubDate>Fri, 05 Aug 2011 17:56:56 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139036007/npr_139036007.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: medium;">Snap Judgment churns your stomach, tempts you with a phat dessert, then leads you to the brink of starvation with stories of hunger, thirst, cruelty and largess.</span></p>
+<p></p>
+<p><span style="font-size: medium;">Visit <a target="_blank" title="SnapJudgment.org" href="snapjudgment.org">snapjudgment.org</a> for more stories.<br /></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/139036007/npr_139036007.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #219: Careful What You Wish For</title>
+      <description><![CDATA[<p><span class="piece-description-lead">A show dedicated to those who knew what they wanted and then went out and got it, only to find out they got more than they bargained for. Snap Judgment proudly presents "Careful What You Wish For." </span></p>]]></description>
+      <pubDate>Sat, 30 Jul 2011 03:48:06 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/138845424/npr_138845424.mp3</guid>
+      <itunes:summary><![CDATA[<p><span class="piece-description-lead">A show dedicated to those who knew what they wanted and then went out and got it, only to find out they got more than they bargained for. Snap Judgment proudly presents "Careful What You Wish For." </span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,glen,glenn,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/138845424/npr_138845424.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #218: Adaptation</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.32898408504703724">Snap Judgment Proudly Presents &#8220;Adaptation,&#8221;&#160; stories about the metamorphosis people go through when struggling to adapt to forces beyond their control.</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></description>
+      <pubDate>Fri, 22 Jul 2011 23:14:39 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/138630250/npr_138630250.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.32898408504703724">Snap Judgment Proudly Presents &#8220;Adaptation,&#8221;&#160; stories about the metamorphosis people go through when struggling to adapt to forces beyond their control.</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,glen,glenn,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/138630250/npr_138630250.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #217: SNAP LIVE! - Drama Momma</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.06018716310153405">This week, &#8220;Snap Judgment, LIVE!&#8221; rocks a storytelling extravaganza that will leave you breathless. &#160;The nation&#8217;s finest storytellers take the Snap stage to give their take on family conflict. &#160;We call it &#8220;Drama Momma&#8221;, and critics are calling it, &#8220;amazing . . . a reinvention of radio.&#8221;</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">We can&#8217;t wait for you to hear it! &#160;</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></description>
+      <pubDate>Sat, 16 Jul 2011 04:05:15 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/138181310/npr_138181310.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.06018716310153405">This week, &#8220;Snap Judgment, LIVE!&#8221; rocks a storytelling extravaganza that will leave you breathless. &#160;The nation&#8217;s finest storytellers take the Snap stage to give their take on family conflict. &#160;We call it &#8220;Drama Momma&#8221;, and critics are calling it, &#8220;amazing . . . a reinvention of radio.&#8221;</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;">We can&#8217;t wait for you to hear it! &#160;</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></itunes:summary>
+      <itunes:keywords>alex,live,drama,npr,storytelling,washington,judgment,momma,snap,glynn,mandel,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/138181310/npr_138181310.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #110: Magic Doors</title>
+      <description><![CDATA[<p>Snap Judgment host Glynn Washington chases the inexplicable on a magical mystery tour through India, Morocco, Indonesia, and Senegal - before finally crashing into his own midwestern roots.</p>]]></description>
+      <pubDate>Fri, 08 Jul 2011 17:32:52 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137712936/npr_137712936.mp3</guid>
+      <itunes:summary><![CDATA[<p>Snap Judgment host Glynn Washington chases the inexplicable on a magical mystery tour through India, Morocco, Indonesia, and Senegal - before finally crashing into his own midwestern roots.</p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,glen,glenn,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137712936/npr_137712936.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #216: G.I.</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.6518740982522523">Some people are born into it, others have a calling, still others, well the world just gives them no choice. On the next Snap Judgment we proudly present, "G.I." Stories about the men and women who fight our wars. </span></p>]]></description>
+      <pubDate>Fri, 01 Jul 2011 22:27:25 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137566538/npr_137566538.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-style: normal; font-variant: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.6518740982522523">Some people are born into it, others have a calling, still others, well the world just gives them no choice. On the next Snap Judgment we proudly present, "G.I." Stories about the men and women who fight our wars. </span></p>]]></itunes:summary>
+      <itunes:keywords>story,npr,storytelling,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137566538/npr_137566538.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #117: Spooked</title>
+      <description><![CDATA[<p>Sometimes, lying in bed in the dead of night, you may get the sense that you are not alone. &#160;You tell yourself, &#8220;There&#8217;s nothing there. There&#8217;s nothing there.&#8221; &#160;But something shapeless and dark and afraid inside of you knows that somebody, or something, is watching. &#160;This week, Snap Judgment travels around the globe to investigate what lies beyond.&#160;&#160;</p>]]></description>
+      <pubDate>Fri, 24 Jun 2011 15:51:40 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137401178/npr_137401178.mp3</guid>
+      <itunes:summary><![CDATA[<p>Sometimes, lying in bed in the dead of night, you may get the sense that you are not alone. &#160;You tell yourself, &#8220;There&#8217;s nothing there. There&#8217;s nothing there.&#8221; &#160;But something shapeless and dark and afraid inside of you knows that somebody, or something, is watching. &#160;This week, Snap Judgment travels around the globe to investigate what lies beyond.&#160;&#160;</p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,glen,glenn,judgment,judgement,snap,glynn,washinston,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137401178/npr_137401178.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #216: Big Poppa</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.9742795981718931">This week, Snap Judgment proudly presents our &#8220;Big Poppa&#8221; special, exploring the unique relationship between fathers and children. &#160;Stories about Father Figures, Doting Dads, Protective Pops and even those not in the running for &#8220;Father Of The Year.&#8221;</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></description>
+      <pubDate>Fri, 17 Jun 2011 17:09:28 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137256236/npr_137256236.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.9742795981718931">This week, Snap Judgment proudly presents our &#8220;Big Poppa&#8221; special, exploring the unique relationship between fathers and children. &#160;Stories about Father Figures, Doting Dads, Protective Pops and even those not in the running for &#8220;Father Of The Year.&#8221;</span><br /><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; text-decoration: none; vertical-align: baseline;"></span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,glen,glenn,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137256236/npr_137256236.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #214: Crossing Borders</title>
+      <description><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.20234743053542403">There are lines in the sand, lines on a map, lines even in our own neighborhoods that we learn early on one should never cross. But on the next Snap Judgment it is time to step over those lines. In this episode we are "Crossing Borders." &#160;&#160;&#160; </span></p>]]></description>
+      <pubDate>Fri, 10 Jun 2011 17:55:24 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137114931/npr_137114931.mp3</guid>
+      <itunes:summary><![CDATA[<p><span style="font-size: 11pt; font-family: Arial; color: #000000; background-color: transparent; font-weight: normal; font-style: normal; text-decoration: none; vertical-align: baseline;" id="internal-source-marker_0.20234743053542403">There are lines in the sand, lines on a map, lines even in our own neighborhoods that we learn early on one should never cross. But on the next Snap Judgment it is time to step over those lines. In this episode we are "Crossing Borders." &#160;&#160;&#160; </span></p>]]></itunes:summary>
+      <itunes:keywords>npr,storytelling,washington,judgment,judgement,snap,glynn,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/137114931/npr_137114931.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #119: Wild Kingdom LIVE</title>
+      <description><![CDATA[Snap Judgment storytellers step up to the stage once again for an installment of Snap Judgment, LIVE!  Get ready for bold, brave tales of animal encounters in front of a live audience.  We saved you the best seat, with host Glynn Washington at San Francisco's Brava Theater.]]></description>
+      <pubDate>Fri, 03 Jun 2011 14:05:33 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136926692/npr_136926692.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment storytellers step up to the stage once again for an installment of Snap Judgment, LIVE!  Get ready for bold, brave tales of animal encounters in front of a live audience.  We saved you the best seat, with host Glynn Washington at San Francisco's Brava Theater.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136926692/npr_136926692.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #103: Drop Everything</title>
+      <description><![CDATA[We know you're busy. Real busy. Doing all that "stuff." And after you do the stuff, they want you to document the stuff. Then you better file the stuff. But then, you get the midnight phone call. In a moment, everything changes. Turns out, all that stuff doesn't matter because it's "Drop Everything" time.]]></description>
+      <pubDate>Fri, 27 May 2011 16:56:21 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136726588/npr_136726588.mp3</guid>
+      <itunes:summary><![CDATA[We know you're busy. Real busy. Doing all that "stuff." And after you do the stuff, they want you to document the stuff. Then you better file the stuff. But then, you get the midnight phone call. In a moment, everything changes. Turns out, all that stuff doesn't matter because it's "Drop Everything" time.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136726588/npr_136726588.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #213: Blood and Faith</title>
+      <description><![CDATA[Every single day, people dive into the unknown, demanding that the universe catch them. Only those willing to make the ultimate sacrifice take that leap.  
+This week on Snap Judgment, we leap... with stories of people who have enough faith to put EVERYTHING on the line, no matter the consequences.]]></description>
+      <pubDate>Fri, 20 May 2011 12:53:13 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136500404/npr_136500404.mp3</guid>
+      <itunes:summary><![CDATA[Every single day, people dive into the unknown, demanding that the universe catch them. Only those willing to make the ultimate sacrifice take that leap.  
+This week on Snap Judgment, we leap... with stories of people who have enough faith to put EVERYTHING on the line, no matter the consequences.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136500404/npr_136500404.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #121a: Invisible Cities</title>
+      <description><![CDATA[Sometimes one slip, one wrong turn or one misplaced word opens a glimpse to the parallel universe humming right beside All-You-Thought-You-Knew.  This week, Snap Judgment proudly presents "Invisible Cities" where we tear aside the flimsy curtain hiding the city's secrets, and dive into the other world next door.]]></description>
+      <pubDate>Fri, 13 May 2011 15:09:22 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136282553/npr_136282553.mp3</guid>
+      <itunes:summary><![CDATA[Sometimes one slip, one wrong turn or one misplaced word opens a glimpse to the parallel universe humming right beside All-You-Thought-You-Knew.  This week, Snap Judgment proudly presents "Invisible Cities" where we tear aside the flimsy curtain hiding the city's secrets, and dive into the other world next door.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136282553/npr_136282553.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #212: Fighting Back</title>
+      <description><![CDATA[Real stories about real people who decided they were sick and tired and weren't going to take it anymore . . .]]></description>
+      <pubDate>Fri, 06 May 2011 20:37:30 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136072061/npr_136072061.mp3</guid>
+      <itunes:summary><![CDATA[Real stories about real people who decided they were sick and tired and weren't going to take it anymore . . .]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/136072061/npr_136072061.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #118: The Man</title>
+      <description><![CDATA[Snap Judgment attacks the most powerful enemy in the history of modern civilization.  That's right, we're taking on "The Man."]]></description>
+      <pubDate>Fri, 29 Apr 2011 16:07:03 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135846105/npr_135846105.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment attacks the most powerful enemy in the history of modern civilization.  That's right, we're taking on "The Man."]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135846105/npr_135846105.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #211: Behind The Wheel</title>
+      <description><![CDATA[The road is an amazing thing.  Drive long enough and you can escape even yourself.  Buckle up, as Snap Judgment crashes a ghost car, slams into a cotton field, and rides shotgun with the King of Turkey.]]></description>
+      <pubDate>Fri, 22 Apr 2011 16:13:37 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135638746/npr_135638746.mp3</guid>
+      <itunes:summary><![CDATA[The road is an amazing thing.  Drive long enough and you can escape even yourself.  Buckle up, as Snap Judgment crashes a ghost car, slams into a cotton field, and rides shotgun with the King of Turkey.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135638746/npr_135638746.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #210: Grey Zone</title>
+      <description><![CDATA[Today we cross over Checkpoint Charlie into the "Grey Zone."  Stories about people who for some reason or another are forced into the world of dark cloaks and twisted allegiances.]]></description>
+      <pubDate>Fri, 15 Apr 2011 16:18:59 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135447211/npr_135447211.mp3</guid>
+      <itunes:summary><![CDATA[Today we cross over Checkpoint Charlie into the "Grey Zone."  Stories about people who for some reason or another are forced into the world of dark cloaks and twisted allegiances.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135447211/npr_135447211.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #114a: Busted</title>
+      <description><![CDATA[Glynn Washington has never committed a crime, but that hasn't stopped them from slapping the cuffs on several times. Clack clack, hands behind the back.  So as a public service, we at Snap Judgment proudly bring you the Busted episode, because whether you did it or not, nobody likes to get caught.]]></description>
+      <pubDate>Fri, 08 Apr 2011 14:55:54 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135244795/npr_135244795.mp3</guid>
+      <itunes:summary><![CDATA[Glynn Washington has never committed a crime, but that hasn't stopped them from slapping the cuffs on several times. Clack clack, hands behind the back.  So as a public service, we at Snap Judgment proudly bring you the Busted episode, because whether you did it or not, nobody likes to get caught.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135244795/npr_135244795.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #209: Road Trip</title>
+      <description><![CDATA[A man can only toil so long sitting at the same desk day after day. After a while, the itch comes--to expand, to learn, to leave on the long, proud highway. This week, stories of people taking trains, planes and automobiles to go--not for the destination, but for the journey.]]></description>
+      <pubDate>Fri, 01 Apr 2011 17:15:19 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135049476/npr_135049476.mp3</guid>
+      <itunes:summary><![CDATA[A man can only toil so long sitting at the same desk day after day. After a while, the itch comes--to expand, to learn, to leave on the long, proud highway. This week, stories of people taking trains, planes and automobiles to go--not for the destination, but for the journey.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/135049476/npr_135049476.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #208: Tricksy</title>
+      <description><![CDATA[Snap Judgment proudly presents "Tricksy."  White lies, cold-blooded deceptions, and whoppers.  Some lies you tell to others, but most folks save the best ones for themselves.]]></description>
+      <pubDate>Fri, 25 Mar 2011 18:24:34 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134865833/npr_134865833.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment proudly presents "Tricksy."  White lies, cold-blooded deceptions, and whoppers.  Some lies you tell to others, but most folks save the best ones for themselves.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134865833/npr_134865833.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #115a: Hacked</title>
+      <description><![CDATA[In this technological era, you can live a full life without ever looking away from your computer screen. Talk to friends, read a book, order your groceries, diagnose your abdominal pains...all in a world made of zeroes and ones. And if you know the language--if you're a hacker--then this brave new world is yours for the taking. In this episode, Snap Judgment examines power in cyberspace and the impact it has on relationships in meat space.]]></description>
+      <pubDate>Fri, 18 Mar 2011 18:29:59 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134667662/npr_134667662.mp3</guid>
+      <itunes:summary><![CDATA[In this technological era, you can live a full life without ever looking away from your computer screen. Talk to friends, read a book, order your groceries, diagnose your abdominal pains...all in a world made of zeroes and ones. And if you know the language--if you're a hacker--then this brave new world is yours for the taking. In this episode, Snap Judgment examines power in cyberspace and the impact it has on relationships in meat space.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134667662/npr_134667662.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #105: Warning Signs</title>
+      <description><![CDATA[Before the universe knocks you upside the head, it usually gives you a sign. Snap Judgment tells stories of people who pay heed to those signs...or not.]]></description>
+      <pubDate>Fri, 11 Mar 2011 20:44:16 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134475565/npr_134475565.mp3</guid>
+      <itunes:summary><![CDATA[Before the universe knocks you upside the head, it usually gives you a sign. Snap Judgment tells stories of people who pay heed to those signs...or not.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134475565/npr_134475565.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #207: Ka-Ching!</title>
+      <description><![CDATA[Snap Judgment makes the big score, loses everything and lets it ride on snake eyes.  Stories about cold cash money and what people will do for it.]]></description>
+      <pubDate>Fri, 04 Mar 2011 16:21:41 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134271926/npr_134271926.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment makes the big score, loses everything and lets it ride on snake eyes.  Stories about cold cash money and what people will do for it.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134271926/npr_134271926.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #206: FAME!</title>
+      <description><![CDATA[Snap Judgment #206: FAME!
+Some will die for it.  Or kill for it.  Run away, mock, ridicule, and cry for it.  
+But if you want to live forever, you better get some Fame.  This week Snap struts down the red carpet, past the paparazzi and straight to the VIP lounge.  Stories about how to get it, what it tastes like, and what happens after the fall. Don't miss the Snap Exclusive with Jane Bainter the muse for Jane's Addiction.]]></description>
+      <pubDate>Fri, 25 Feb 2011 23:14:39 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134074798/npr_134074798.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment #206: FAME!
+Some will die for it.  Or kill for it.  Run away, mock, ridicule, and cry for it.  
+But if you want to live forever, you better get some Fame.  This week Snap struts down the red carpet, past the paparazzi and straight to the VIP lounge.  Stories about how to get it, what it tastes like, and what happens after the fall. Don't miss the Snap Exclusive with Jane Bainter the muse for Jane's Addiction.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/134074798/npr_134074798.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #111a: LIVE - The Hard Way</title>
+      <description><![CDATA[Snap Judgment takes "Storytelling with a Beat" to the stage for our first ever LIVE show from June, 2010! No notes, no do-overs, no safety net, simply some of the nation's best storytellers join host Glynn Washington and rock San Francisco's Brava Theatre.  Hear the electrifying performances from your own front row seat (wherever you are).]]></description>
+      <pubDate>Fri, 18 Feb 2011 14:19:51 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133871798/npr_133871798.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment takes "Storytelling with a Beat" to the stage for our first ever LIVE show from June, 2010! No notes, no do-overs, no safety net, simply some of the nation's best storytellers join host Glynn Washington and rock San Francisco's Brava Theatre.  Hear the electrifying performances from your own front row seat (wherever you are).]]></itunes:summary>
+      <itunes:keywords>NPR,Snap Judgment,Judgment,Glynn Washington,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133871798/npr_133871798.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #205: Ain't No Sunshine</title>
+      <description><![CDATA[For some couples, it's simply not enough to say, "I love you."  On this episode, we meet people who have tasted Cupid's sting, and hear about the decisions born from that surrender of the heart.]]></description>
+      <pubDate>Fri, 11 Feb 2011 15:51:24 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133690108/npr_133690108.mp3</guid>
+      <itunes:summary><![CDATA[For some couples, it's simply not enough to say, "I love you."  On this episode, we meet people who have tasted Cupid's sting, and hear about the decisions born from that surrender of the heart.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133690108/npr_133690108.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #204: Quest</title>
+      <description><![CDATA[When you're searching for something really important, it's hard to know if it's "out there" or lurking deep inside.  The quest can be everything.  On this episode we explore stories of people who dig deep, and put everything on the line.]]></description>
+      <pubDate>Fri, 04 Feb 2011 18:20:48 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133506640/npr_133506640.mp3</guid>
+      <itunes:summary><![CDATA[When you're searching for something really important, it's hard to know if it's "out there" or lurking deep inside.  The quest can be everything.  On this episode we explore stories of people who dig deep, and put everything on the line.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133506640/npr_133506640.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #203a: One Of Our Own</title>
+      <description><![CDATA[Some say blood is thicker than water.  Maybe, maybe not, but on this episode we explore that special alchemy called family.
+[Corrected Audio.]]]></description>
+      <pubDate>Fri, 28 Jan 2011 22:48:17 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133319338/npr_133319338.mp3</guid>
+      <itunes:summary><![CDATA[Some say blood is thicker than water.  Maybe, maybe not, but on this episode we explore that special alchemy called family.
+[Corrected Audio.]]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133319338/npr_133319338.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #203: One Of Our Own</title>
+      <description><![CDATA[Some say blood is thicker than water.  Maybe, maybe not, so on this episode we explore that special alchemy called family.]]></description>
+      <pubDate>Fri, 28 Jan 2011 14:01:21 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133307317/npr_133307317.mp3</guid>
+      <itunes:summary><![CDATA[Some say blood is thicker than water.  Maybe, maybe not, so on this episode we explore that special alchemy called family.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133307317/npr_133307317.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #113: The Story</title>
+      <description><![CDATA[We've all got those stories that we tell ourselves to get by. Sometimes they're rooted in truth, other times, not so much. This week, Snap Judgment examines inner storytelling and how we use it to make sense of the world around us.]]></description>
+      <pubDate>Fri, 21 Jan 2011 15:58:49 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133121229/npr_133121229.mp3</guid>
+      <itunes:summary><![CDATA[We've all got those stories that we tell ourselves to get by. Sometimes they're rooted in truth, other times, not so much. This week, Snap Judgment examines inner storytelling and how we use it to make sense of the world around us.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/133121229/npr_133121229.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #202: Abducted</title>
+      <description><![CDATA[Desperate times call for desperate measures, and for those willing to do anything, human lives are an excellent bargaining tool. This week, Snap Judgment presents stories about abductions  and the toll they take on survivors.]]></description>
+      <pubDate>Fri, 14 Jan 2011 13:06:31 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132933818/npr_132933818.mp3</guid>
+      <itunes:summary><![CDATA[Desperate times call for desperate measures, and for those willing to do anything, human lives are an excellent bargaining tool. This week, Snap Judgment presents stories about abductions  and the toll they take on survivors.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132933818/npr_132933818.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #201: Hungry</title>
+      <description><![CDATA[Snap Judgment churns your stomach, tempts you with a phat dessert, then leads you to the brink of starvation with stories of hunger, thirst, cruelty and largess.]]></description>
+      <pubDate>Fri, 07 Jan 2011 16:24:14 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132744441/npr_132744441.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment churns your stomach, tempts you with a phat dessert, then leads you to the brink of starvation with stories of hunger, thirst, cruelty and largess.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132744441/npr_132744441.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #112: Can't Go Home</title>
+      <description><![CDATA[Snap Judgment circumnavigates the globe to discover why some people can't go home.]]></description>
+      <pubDate>Sun, 02 Jan 2011 14:18:48 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132593029/npr_132593029.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment circumnavigates the globe to discover why some people can't go home.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132593029/npr_132593029.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #108: The Man in the White Hat</title>
+      <description><![CDATA[On this episode of Snap Judgment, we're relying on the kindness of strangers to get us out of the mess we're in. A single individual will hear the call and act. Lives will be saved. Destinies will be altered.]]></description>
+      <pubDate>Thu, 23 Dec 2010 21:32:45 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132298132/npr_132298132.mp3</guid>
+      <itunes:summary><![CDATA[On this episode of Snap Judgment, we're relying on the kindness of strangers to get us out of the mess we're in. A single individual will hear the call and act. Lives will be saved. Destinies will be altered.]]></itunes:summary>
+      <itunes:keywords>snap judgment,snap judgement,glynn washington,washington,npr,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132298132/npr_132298132.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #122: Season One Finale</title>
+      <description><![CDATA[Snap Judgment proudly ends Season One with a look back on the stories that got us here and the people who made it happen.]]></description>
+      <pubDate>Fri, 17 Dec 2010 16:19:19 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132146402/npr_132146402.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment proudly ends Season One with a look back on the stories that got us here and the people who made it happen.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/132146402/npr_132146402.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #121: Invisible Cities</title>
+      <description><![CDATA[Sometimes one slip, one wrong turn, or one misplaced word opens a glimpse to the parallel universe humming right beside all you thought you knew.  This week, we present "Invisible Cities"--the episode where we tear aside the flimsy curtain hiding the city's secrets, and dive into the other world next door.]]></description>
+      <pubDate>Fri, 10 Dec 2010 17:05:49 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131973794/npr_131973794.mp3</guid>
+      <itunes:summary><![CDATA[Sometimes one slip, one wrong turn, or one misplaced word opens a glimpse to the parallel universe humming right beside all you thought you knew.  This week, we present "Invisible Cities"--the episode where we tear aside the flimsy curtain hiding the city's secrets, and dive into the other world next door.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131973794/npr_131973794.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #120: True Confessions</title>
+      <description><![CDATA[Storytellers from across the nation reveal their true confessions to a theater audience for the third episode of Snap Judgment LIVE.   Glynn Washington hosts the courageous confessors as they unveil their darkest secrets at San Francisco's Brava Theater.]]></description>
+      <pubDate>Fri, 03 Dec 2010 14:20:24 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131788602/npr_131788602.mp3</guid>
+      <itunes:summary><![CDATA[Storytellers from across the nation reveal their true confessions to a theater audience for the third episode of Snap Judgment LIVE.   Glynn Washington hosts the courageous confessors as they unveil their darkest secrets at San Francisco's Brava Theater.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131788602/npr_131788602.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #106: Utopia</title>
+      <description><![CDATA[Snap Judgment searches for that perfect place, just around the bend, our Shangri-La. For those lucky few who have found their Utopia, they also discover it's surrounded by enemies clamoring to tear it down]]></description>
+      <pubDate>Sat, 27 Nov 2010 09:33:13 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131626361/npr_131626361.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment searches for that perfect place, just around the bend, our Shangri-La. For those lucky few who have found their Utopia, they also discover it's surrounded by enemies clamoring to tear it down]]></itunes:summary>
+      <itunes:keywords>NPR,Snap Judgment,Judgement,Glynn Washington,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131626361/npr_131626361.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #119: Wild Kingdom LIVE!</title>
+      <description><![CDATA[Snap Judgment storytellers step up to the stage once again for this installment of Snap Judgment LIVE.  Get ready for bold, brave tales of animal encounters in front of a live studio audience. Join them, along with host Glynn Washington at San Francisco's Brava Theater.]]></description>
+      <pubDate>Fri, 19 Nov 2010 16:27:54 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131451600/npr_131451600.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment storytellers step up to the stage once again for this installment of Snap Judgment LIVE.  Get ready for bold, brave tales of animal encounters in front of a live studio audience. Join them, along with host Glynn Washington at San Francisco's Brava Theater.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131451600/npr_131451600.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #118: The Man</title>
+      <description><![CDATA[Snap Judgment attacks the most powerful enemy in the history of modern civilization.  That's right, we're taking on "The Man."]]></description>
+      <pubDate>Fri, 12 Nov 2010 00:22:47 -0500</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131259854/npr_131259854.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment attacks the most powerful enemy in the history of modern civilization.  That's right, we're taking on "The Man."]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131259854/npr_131259854.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #109: Plasticity</title>
+      <description><![CDATA[It's an amazing world.  It used to be that whatever life served you that's what you got.  You didn't like your nose, skin, class or gender?  Too damn bad.   But times have changed and nothing is fixed.  If you don't like what you see in the mirror, start anew.  But are there limits?  Are there boundaries, internal or external?  How much can you really change and how much can you demand the universe change for you?]]></description>
+      <pubDate>Fri, 05 Nov 2010 16:53:37 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131107010/npr_131107010.mp3</guid>
+      <itunes:summary><![CDATA[It's an amazing world.  It used to be that whatever life served you that's what you got.  You didn't like your nose, skin, class or gender?  Too damn bad.   But times have changed and nothing is fixed.  If you don't like what you see in the mirror, start anew.  But are there limits?  Are there boundaries, internal or external?  How much can you really change and how much can you demand the universe change for you?]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/131107010/npr_131107010.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #107: Superheroes-Origin Stories</title>
+      <description><![CDATA[Stories of mere mortals rising above adversity to become mighty.  Lives will be in danger, heroes will be born.  Plus, what's a comic book without an evil villain?]]></description>
+      <pubDate>Fri, 29 Oct 2010 15:13:38 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130919157/npr_130919157.mp3</guid>
+      <itunes:summary><![CDATA[Stories of mere mortals rising above adversity to become mighty.  Lives will be in danger, heroes will be born.  Plus, what's a comic book without an evil villain?]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130919157/npr_130919157.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #117: Spooked</title>
+      <description><![CDATA[Sometimes, lying in bed in the dead of night, you may get the sense that you are not alone. You tell yourself, "There's nothing there. There's nothing there." But something shapeless and dark and afraid inside of you knows that somebody, or something...is watching. This week, Snap Judgment travels around the globe to investigate what lies beyond.]]></description>
+      <pubDate>Fri, 22 Oct 2010 17:40:28 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130760631/npr_130760631.mp3</guid>
+      <itunes:summary><![CDATA[Sometimes, lying in bed in the dead of night, you may get the sense that you are not alone. You tell yourself, "There's nothing there. There's nothing there." But something shapeless and dark and afraid inside of you knows that somebody, or something...is watching. This week, Snap Judgment travels around the globe to investigate what lies beyond.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130760631/npr_130760631.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #104: Something Ain't Right</title>
+      <description><![CDATA[Your brain doesn't quite know what's going on, but your body knows that something's up. Your breathing gets shallow. Your palms start to sweat. Do you run--or watch things play out? In this episode, Snap Judgment does both.]]></description>
+      <pubDate>Fri, 15 Oct 2010 18:41:49 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130601195/npr_130601195.mp3</guid>
+      <itunes:summary><![CDATA[Your brain doesn't quite know what's going on, but your body knows that something's up. Your breathing gets shallow. Your palms start to sweat. Do you run--or watch things play out? In this episode, Snap Judgment does both.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130601195/npr_130601195.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #116: Breaking In</title>
+      <description><![CDATA[Everyone's been there. Standing on the outside, feeling like a fish in an aquarium, looking in at something--whether it's a group of friends, a lifestyle or a job--and thinking, "That right there, that's where I want to be."  But in order for them to let you in, they've gotta notice you. Today, Snap Judgment proudly presents stories about people finding unusual ways to break in.]]></description>
+      <pubDate>Fri, 08 Oct 2010 15:30:03 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130435287/npr_130435287.mp3</guid>
+      <itunes:summary><![CDATA[Everyone's been there. Standing on the outside, feeling like a fish in an aquarium, looking in at something--whether it's a group of friends, a lifestyle or a job--and thinking, "That right there, that's where I want to be."  But in order for them to let you in, they've gotta notice you. Today, Snap Judgment proudly presents stories about people finding unusual ways to break in.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130435287/npr_130435287.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #115: Hacked</title>
+      <description><![CDATA[In this technological era, you can live a full life without ever looking away from your computer screen. Talk to friends, read a book, order your groceries, diagnose your abdominal pains...all in a world made of zeroes and ones. And if you know the language--if you're a hacker--then this brave new world is yours for the taking. In this episode, Snap Judgment examines power in cyberspace and the impact it has on relationships in meat space.]]></description>
+      <pubDate>Fri, 01 Oct 2010 14:46:59 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130271083/npr_130271083.mp3</guid>
+      <itunes:summary><![CDATA[In this technological era, you can live a full life without ever looking away from your computer screen. Talk to friends, read a book, order your groceries, diagnose your abdominal pains...all in a world made of zeroes and ones. And if you know the language--if you're a hacker--then this brave new world is yours for the taking. In this episode, Snap Judgment examines power in cyberspace and the impact it has on relationships in meat space.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130271083/npr_130271083.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #102: Tales from the Library</title>
+      <description><![CDATA[The whole range of human experience isn't just cataloged in a library--it actually takes place inside. Roam the stacks with Snap Judgment, and we'll teach you to hypnotize your friends, jump start your career, and stop fanatics from burning your books. For more information visit snapjudgment.org]]></description>
+      <pubDate>Fri, 24 Sep 2010 11:31:23 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130101241/npr_130101241.mp3</guid>
+      <itunes:summary><![CDATA[The whole range of human experience isn't just cataloged in a library--it actually takes place inside. Roam the stacks with Snap Judgment, and we'll teach you to hypnotize your friends, jump start your career, and stop fanatics from burning your books. For more information visit snapjudgment.org]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/130101241/npr_130101241.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #114: Busted</title>
+      <description><![CDATA[Glynn Washington has never committed a crime, but that hasn't stopped them from slapping the cuffs on several times, clack clack, hands behind the back.  So as a public service, we at Snap Judgment proudly bring you BUSTED, because whether you did it or not - nobody likes to get caught .]]></description>
+      <pubDate>Fri, 17 Sep 2010 16:52:09 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129941173/npr_129941173.mp3</guid>
+      <itunes:summary><![CDATA[Glynn Washington has never committed a crime, but that hasn't stopped them from slapping the cuffs on several times, clack clack, hands behind the back.  So as a public service, we at Snap Judgment proudly bring you BUSTED, because whether you did it or not - nobody likes to get caught .]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129941173/npr_129941173.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #114: Busted</title>
+      <description><![CDATA[Glynn Washington has never committed a crime, but that hasn't stopped them from slapping the cuffs on several times, clack clack, hands behind the back.  So as a public service, we at Snap Judgment proudly bring you BUSTED, because whether you did it or not - nobody likes to get caught .]]></description>
+      <pubDate>Fri, 17 Sep 2010 16:30:53 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129940711/npr_129940711.mp3</guid>
+      <itunes:summary><![CDATA[Glynn Washington has never committed a crime, but that hasn't stopped them from slapping the cuffs on several times, clack clack, hands behind the back.  So as a public service, we at Snap Judgment proudly bring you BUSTED, because whether you did it or not - nobody likes to get caught .]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129940711/npr_129940711.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #113: The Story</title>
+      <description><![CDATA[We are all guilty of restructuring truth, crafting elaborate stories and fantasies to make sense of the worlds we inhabit.  On this edition of Snap Judgment, we examine how internal storytelling influences our external reality.]]></description>
+      <pubDate>Fri, 10 Sep 2010 13:19:02 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129777227/npr_129777227.mp3</guid>
+      <itunes:summary><![CDATA[We are all guilty of restructuring truth, crafting elaborate stories and fantasies to make sense of the worlds we inhabit.  On this edition of Snap Judgment, we examine how internal storytelling influences our external reality.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129777227/npr_129777227.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #101: 5150</title>
+      <description><![CDATA[Stories of people who are their own worst enemy. Push through the hallways of a psychiatric ward, obsess over a late night talk radio host and then get ready to run for your life.]]></description>
+      <pubDate>Fri, 03 Sep 2010 13:43:48 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129630312/npr_129630312.mp3</guid>
+      <itunes:summary><![CDATA[Stories of people who are their own worst enemy. Push through the hallways of a psychiatric ward, obsess over a late night talk radio host and then get ready to run for your life.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129630312/npr_129630312.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #112: Can't Go Home</title>
+      <description><![CDATA[Snap Judgment circumnavigates the globe to discover why some people can't go home.]]></description>
+      <pubDate>Fri, 27 Aug 2010 13:00:52 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129475342/npr_129475342.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment circumnavigates the globe to discover why some people can't go home.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129475342/npr_129475342.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #111a: LIVE - The Hard Way</title>
+      <description><![CDATA[Snap Judgment takes "Storytelling with a Beat" to the stage for our first ever LIVE show from June, 2010! No notes, no do-overs, no safety net, simply some of the nation's best storytellers join host Glynn Washington and rock San Francisco's Brava Theatre.  Hear the electrifying performances from your own front row seat (wherever you are).]]></description>
+      <pubDate>Fri, 20 Aug 2010 15:40:40 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129327952/npr_129327952.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment takes "Storytelling with a Beat" to the stage for our first ever LIVE show!  No notes, no do-overs, no safety net - the nation's best storytellers join host Glynn Washington and rock San Francisco's Brava Theatre.  
+
+Hear the electrifying performances from your own front row seat (wherever you are) . . .
+
+Snap Judgment: LIVE!]]></itunes:summary>
+      <itunes:keywords>NPR,Snap Judgment,Judgment,Glynn Washington,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129327952/npr_129327952.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #110: Magic Doors</title>
+      <description><![CDATA[Snap Judgment bumps up against the inexplicable as storytelling with a beat takes a magic ride through India, Morocco, Indonesia, Senegal and the good ol' Midwest.]]></description>
+      <pubDate>Fri, 13 Aug 2010 13:12:40 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129179830/npr_129179830.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment bumps up against the inexplicable as storytelling with a beat takes a magic ride through India, Morocco, Indonesia, Senegal and the good ol' Midwest.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129179830/npr_129179830.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #109: Plasticity</title>
+      <description><![CDATA[It's an amazing world.  It used to be that whatever life served you, that's what you got.  You didn't like your nose, skin, class or gender?  Too damn bad.   But times have changed.  Nothing is fixed.  If you don't like what you see in the mirror, start anew.    But are there limits?  Are there boundaries, internal or external?  How much can you really change and how much can you demand the universe change for you?]]></description>
+      <pubDate>Fri, 06 Aug 2010 15:00:31 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129033085/npr_129033085.mp3</guid>
+      <itunes:summary><![CDATA[It's an amazing world.  It used to be that whatever life served you, that's what you got.  You didn't like your nose, skin, class or gender?  Too damn bad.   But times have changed.  Nothing is fixed.  If you don't like what you see in the mirror, start anew.    But are there limits?  Are there boundaries, internal or external?  How much can you really change and how much can you demand the universe change for you?]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/129033085/npr_129033085.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #108: The Man in the White Hat</title>
+      <description><![CDATA[On this episode of Snap Judgment, we're relying on the kindness of strangers to get us out of the mess we're in. A single individual will hear the call and act. Lives will be saved. Destinies will be altered.]]></description>
+      <pubDate>Fri, 30 Jul 2010 17:38:43 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128881603/npr_128881603.mp3</guid>
+      <itunes:summary><![CDATA[On this episode of Snap Judgment, we're relying on the kindness of strangers to get us out of the mess we're in. A single individual will hear the call and act. Lives will be saved. Destinies will be altered.]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128881603/npr_128881603.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment Extra #107X: Dirty Delicious Downtempo Mixtape</title>
+      <description><![CDATA[We've got your weekend starter right here.
+One of the questions we hear most is, "What song was THAT?!"
+In answer, Snap Judgment's own DJ SmoovGrooves mixed up a special musical masala to keep summertime heads bobbing.
+Yeah, we know...and Snap loves you back.
+--Glynn]]></description>
+      <pubDate>Fri, 30 Jul 2010 15:11:57 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128877788/npr_128877788.mp3</guid>
+      <itunes:summary><![CDATA[We've got your weekend starter right here.
+One of the questions we hear most is, "What song was THAT?!"
+In answer, Snap Judgment's own DJ SmoovGrooves mixed up a special musical masala to keep summertime heads bobbing.
+Yeah, we know...and Snap loves you back.
+--Glynn]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128877788/npr_128877788.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #107: Superheroes - Origin Stories</title>
+      <description><![CDATA[Stories of mere mortals rising above adversity to become mighty.  Lives will be in danger, heroes will be born.  Plus, what's a comic book without an evil villain?]]></description>
+      <pubDate>Fri, 23 Jul 2010 17:20:24 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128727814/npr_128727814.mp3</guid>
+      <itunes:summary><![CDATA[Stories of mere mortals rising above adversity to become mighty.  Lives will be in danger, heroes will be born.  Plus, what's a comic book without an evil villain?]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128727814/npr_128727814.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #107: Superheroes - Origin Stories</title>
+      <description><![CDATA[Stories of mere mortals rising above adversity to become mighty.  Lives will be in danger, heroes will be born.  Plus, what's a comic book without an evil villain?]]></description>
+      <pubDate>Fri, 23 Jul 2010 17:13:57 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128727708/npr_128727708.mp3</guid>
+      <itunes:summary><![CDATA[Stories of mere mortals rising above adversity to become mighty.  Lives will be in danger, heroes will be born.  Plus, what's a comic book without an evil villain?]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Snap Judgement,Glynn Washington,NPR,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128727708/npr_128727708.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #106: Utopia</title>
+      <description><![CDATA[Snap Judgment searches for that perfect place, just around the bend, our Shangri-La. For those lucky few who have found their Utopia, they also discover it's surrounded by enemies clamoring to tear it down.]]></description>
+      <pubDate>Fri, 16 Jul 2010 11:42:10 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128565747/npr_128565747.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment searches for that perfect place, just around the bend, our Shangri-La. For those lucky few who have found their Utopia, they also discover it's surrounded by enemies clamoring to tear it down.]]></itunes:summary>
+      <itunes:keywords>NPR,Snap Judgment,Judgement,Glynn Washington,Storytelling,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128565747/npr_128565747.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #104: Something Ain't Right</title>
+      <description><![CDATA[Your brain doesn't quite know what's going on, but your body knows that something's up. Your breathing gets shallow. Your palms start to sweat. Do you run--or watch things play out? In this episode, Snap Judgment does both.]]></description>
+      <pubDate>Fri, 09 Jul 2010 16:19:45 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128415404/npr_128415404.mp3</guid>
+      <itunes:summary><![CDATA[Your brain doesn't quite know what's going on, but your body knows that something's up. Your breathing gets shallow. Your palms start to sweat. Do you run--or watch things play out? In this episode, Snap Judgment does both.]]></itunes:summary>
+      <itunes:keywords>NPR,Snap Judgment,Judgement,Glynn,Washington,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128415404/npr_128415404.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #103: Drop Everything</title>
+      <description><![CDATA[We know you're busy. Real busy. Doing all that "stuff." And after you do the stuff, they want you to document the stuff. Then you better file the stuff. But then, you get the midnight phone call. In a moment, everything changes. Turns out, all that stuff doesn't matter. 'Cause it's "Drop Everything" time . . .]]></description>
+      <pubDate>Thu, 01 Jul 2010 17:20:36 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128249765/npr_128249765.mp3</guid>
+      <itunes:summary><![CDATA[We know you're busy. Real busy. Doing all that "stuff." And after you do the stuff, they want you to document the stuff. Then you better file the stuff. But then, you get the midnight phone call. In a moment, everything changes. Turns out, all that stuff doesn't matter. 'Cause it's "Drop Everything" time . . .]]></itunes:summary>
+      <itunes:keywords>NPR,Snap Judgment,Judgment,Glynn,Washington,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128249765/npr_128249765.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment Extra #102X: Iranian Cafe</title>
+      <description><![CDATA[On this special edition of the Snap Judgment Podcast we feature talent from our upcoming television show.  We stop in to have lunch in Iran with Jeff Greenwald and hear from Jamie DeWolf as he quantifies beauty.]]></description>
+      <pubDate>Thu, 24 Jun 2010 19:34:03 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128092910/npr_128092910.mp3</guid>
+      <itunes:summary><![CDATA[On this special edition of the Snap Judgment Podcast we feature talent from our upcoming television show.  We stop in to have lunch in Iran with Jeff Greenwald and hear from Jamie DeWolf as he quantifies beauty.]]></itunes:summary>
+      <itunes:keywords>NPR,Snap Judgment,Judgment,Glynn,Washington,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>yes</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/128092910/npr_128092910.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #102: Tales from the Library</title>
+      <description><![CDATA[The whole range of human experience isn't just catalogued in a library--it actually takes place inside. Roam the stacks with Snap Judgment, and we'll teach you to hypnotize your friends, jump start your career, and stop fanatics from burning your books.  For  more information visit snapjudgment.org]]></description>
+      <pubDate>Fri, 18 Jun 2010 16:38:05 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/127938842/npr_127938842.mp3</guid>
+      <itunes:summary><![CDATA[The whole range of human experience isn't just catalogued in a library--it actually takes place inside. Roam the stacks with Snap Judgment, and we'll teach you to hypnotize your friends, jump start your career, and stop fanatics from burning your books.  For  more information visit snapjudgment.org]]></itunes:summary>
+      <itunes:keywords>Snap Judgment,Judgement,storytelling,Glynn,Washington,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/127938842/npr_127938842.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+    <item>
+      <title>Snap Judgment #101: 5150 Danger to Self</title>
+      <description><![CDATA[Snap Judgment is the smoking-hot new show from NPR.  Winner of the Public Radio Talent Quest, Glynn Washington delivers a raw, musical brand of storytelling, daring listeners to see the world through the eyes of another.]]></description>
+      <pubDate>Wed, 16 Jun 2010 09:19:47 -0400</pubDate>
+      <link>http://www.snapjudgment.org</link>
+      <guid>http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/127878242/npr_127878242.mp3</guid>
+      <itunes:summary><![CDATA[Snap Judgment is the smoking-hot new show from NPR.  Winner of the Public Radio Talent Quest, Glynn Washington delivers a raw, musical brand of storytelling, daring listeners to see the world through the eyes of another.]]></itunes:summary>
+      <itunes:keywords>npr,snap judgment,storytelling,glynn,washington,story,NPR,National Public Radio,Snap Judgment,Washington,District of Columbia,Morning Edition,All Things Considered,Fresh Air</itunes:keywords>
+      <itunes:duration>0:0</itunes:duration>
+      <itunes:explicit>no</itunes:explicit>
+      <enclosure url="http://podcastdownload.npr.org/anon.npr-podcasts/podcast/510294/127878242/npr_127878242.mp3" length="100000" type="audio/mpeg"/>
+      <nprml:organization orgId="1" orgAbbr="NPR">
+        <nprml:name>National Public Radio</nprml:name>
+        <nprml:website>http://www.npr.org/</nprml:website>
+      </nprml:organization>
+    </item>
+  </channel>
+</rss>
+
+
+<!--  Burned on demand at 2012-01-25 05:00:02-->

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/~d/styles/rss2enclosuresfull.xsl"?><?xml-stylesheet type="text/css" media="screen" href="http://feeds.feedburner.com/~d/styles/itemcontent.css"?><rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0">
+
+<channel>
+	<title>The Moth Podcast</title>
+	
+		<link>http://www.themoth.org</link>
+	<description>The Moth features people telling true, engaging, funny, touching and eye-opening stories from their lives. Hailed as "New York's hottest and hippest literary ticket" by the Wall Street Journal, The Moth has been producing sold-out storytelling shows for over ten years. Stories are told without notes to a live audience by a wide range of people. The best have been captured here. For more information about our programs, live events, and CD's for sale, go to www.themoth.org. The podcast is updated on Mondays.</description>
+	<lastBuildDate>Tue, 24 Jan 2012 16:03:03 +0000</lastBuildDate>
+	<language>en</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.3</generator>
+<!-- podcast_generator="Blubrry PowerPress/2.0.4" -->
+	<itunes:summary>The Moth features people telling true, engaging, funny, touching and eye-opening stories from their lives. Hailed as "New York's hottest and hippest literary ticket" by the Wall Street Journal, The Moth has been producing sold-out storytelling shows for over ten years. Stories are told without notes to a live audience by a wide range of people. The best have been captured here. For more information about our programs, live events, and CD's for sale, go to www.themoth.org. The podcast is updated on Mondays.</itunes:summary>
+	<itunes:author>The Moth</itunes:author>
+	<itunes:explicit>no</itunes:explicit>
+	<itunes:image href="http://cdn.themoth.prx.org/podcastlogo.jpg" />
+	<itunes:owner>
+		<itunes:name>The Moth</itunes:name>
+		<itunes:email>webmaster@themoth.org</itunes:email>
+	</itunes:owner>
+	<managingEditor>webmaster@themoth.org (The Moth)</managingEditor>
+	<copyright>2006-2010</copyright>
+	<itunes:subtitle>The Moth features people telling true, engaging, funny, touching and eye-opening stories from their lives. Hailed as "New York's hottest and hippest literary ticket" by the Wall Street Journal, The Moth has been producing sold-out storytelling shows for o</itunes:subtitle>
+	<itunes:keywords>the moth, the moht, storytelling, stories, story, mainstage, story slam, New York, Los Angeles, improv, comedy</itunes:keywords>
+	<image>
+		<title>The Moth Podcast</title>
+		<url>http://cdn.themoth.prx.org/moth_podcast_144x144.jpg</url>
+		<link>http://themoth.prx.org</link>
+	</image>
+	<itunes:category text="Arts">
+		<itunes:category text="Performing Arts" />
+	</itunes:category>
+	<itunes:category text="Comedy" />
+		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/themothpodcast" /><feedburner:info uri="themothpodcast" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><media:copyright>2006-2010</media:copyright><media:thumbnail url="http://cdn.themoth.prx.org/podcastlogo.jpg" /><media:keywords>the moth, the moht, storytelling, stories, story, mainstage, story slam, New York, Los Angeles, improv, comedy</media:keywords><media:category scheme="http://www.itunes.com/dtds/podcast-1.0.dtd">Arts/Performing Arts</media:category><media:category scheme="http://www.itunes.com/dtds/podcast-1.0.dtd">Comedy</media:category><item>
+		<title>Steve Zimmer &amp; Kirby Adams: StorySLAM Favorites</title>
+		<link>http://feedproxy.google.com/~r/themothpodcast/~3/JAeX6tjKAyc/</link>
+		<pubDate>Mon, 23 Jan 2012 15:55:57 +0000</pubDate>
+		<dc:creator>laura</dc:creator>
+				<category><![CDATA[Podcasts]]></category>
+
+		<guid isPermaLink="false">http://themoth.prx.org/?p=1393</guid>
+		<description><![CDATA[Coworkers become obsessed with the game Tetris and a 9-year-old Olympic hopeful starts an unauthorized exercise regimen.]]></description>
+			<content:encoded><![CDATA[<p>Coworkers become obsessed with the game Tetris and a 9-year-old Olympic hopeful starts an unauthorized exercise regimen.</p>
+<img src="http://feeds.feedburner.com/~r/themothpodcast/~4/JAeX6tjKAyc" height="1" width="1"/>]]></content:encoded>
+	
+			<itunes:subtitle>Coworkers become obsessed with the game Tetris and a 9-year-old Olympic hopeful starts an unauthorized exercise regimen.</itunes:subtitle>
+		<itunes:summary>Coworkers become obsessed with the game Tetris and a 9-year-old Olympic hopeful starts an unauthorized exercise regimen.</itunes:summary>
+		<itunes:author>The Moth</itunes:author>
+		<itunes:explicit>no</itunes:explicit>
+		<itunes:duration>17:17</itunes:duration>
+	<media:content url="http://feedproxy.google.com/~r/themothpodcast/~5/oxU1Le0ECy8/moth-podcast-208-steve-zimmer-kirby-adams.mp3" fileSize="8388951" type="audio/mpeg" /><itunes:keywords>Podcasts</itunes:keywords><feedburner:origLink>http://themoth.org/</feedburner:origLink><enclosure url="http://feedproxy.google.com/~r/themothpodcast/~5/oxU1Le0ECy8/moth-podcast-208-steve-zimmer-kirby-adams.mp3" length="8388951" type="audio/mpeg" /><feedburner:origEnclosureLink>http://www.podtrac.com/pts/redirect.mp3/cdn.themoth.prx.org/moth-podcast-208-steve-zimmer-kirby-adams.mp3</feedburner:origEnclosureLink></item>
+		<item>
+		<title>Jenny Allen: I Can’t Get It Out of My Mind</title>
+		<link>http://feedproxy.google.com/~r/themothpodcast/~3/JAeX6tjKAyc/</link>
+		<pubDate>Mon, 16 Jan 2012 19:13:11 +0000</pubDate>
+		<dc:creator>laura</dc:creator>
+				<category><![CDATA[Podcasts]]></category>
+
+		<guid isPermaLink="false">http://themoth.prx.org/?p=1389</guid>
+		<description><![CDATA[A mother discovers something alarming in her daughter&#8217;s email.]]></description>
+			<content:encoded><![CDATA[<p>A mother discovers something alarming in her daughter&#8217;s email.</p>
+<img src="http://feeds.feedburner.com/~r/themothpodcast/~4/JAeX6tjKAyc" height="1" width="1"/>]]></content:encoded>
+	
+			<itunes:subtitle>A mother discovers something alarming in her daughter's email.</itunes:subtitle>
+		<itunes:summary>A mother discovers something alarming in her daughter's email.</itunes:summary>
+		<itunes:author>The Moth</itunes:author>
+		<itunes:explicit>yes</itunes:explicit>
+		<itunes:duration>20:07</itunes:duration>
+	<media:content url="http://feedproxy.google.com/~r/themothpodcast/~5/hK22Rz6IpMo/moth-podcast-207-jenny-allen.mp3" fileSize="9751154" type="audio/mpeg" /><itunes:keywords>Podcasts</itunes:keywords><feedburner:origLink>http://themoth.org/</feedburner:origLink><enclosure url="http://feedproxy.google.com/~r/themothpodcast/~5/hK22Rz6IpMo/moth-podcast-207-jenny-allen.mp3" length="9751154" type="audio/mpeg" /><feedburner:origEnclosureLink>http://www.podtrac.com/pts/redirect.mp3/cdn.themoth.prx.org/moth-podcast-207-jenny-allen.mp3</feedburner:origEnclosureLink></item>
+		<item>
+		<title>Shalom Auslander: Death Camp Blues</title>
+		<link>http://feedproxy.google.com/~r/themothpodcast/~3/JAeX6tjKAyc/</link>
+		<pubDate>Mon, 09 Jan 2012 20:28:32 +0000</pubDate>
+		<dc:creator>laura</dc:creator>
+				<category><![CDATA[Podcasts]]></category>
+
+		<guid isPermaLink="false">http://themoth.prx.org/?p=1380</guid>
+		<description><![CDATA[A man finds humor can make the darkest situations more bearable.]]></description>
+			<content:encoded><![CDATA[<p>A man finds humor can make the darkest situations more bearable.</p>
+<img src="http://feeds.feedburner.com/~r/themothpodcast/~4/JAeX6tjKAyc" height="1" width="1"/>]]></content:encoded>
+	
+			<itunes:subtitle>A man finds humor can make the darkest situations more bearable.</itunes:subtitle>
+		<itunes:summary>A man finds humor can make the darkest situations more bearable.</itunes:summary>
+		<itunes:author>The Moth</itunes:author>
+		<itunes:explicit>yes</itunes:explicit>
+		<itunes:duration>16:40</itunes:duration>
+	<media:content url="http://feedproxy.google.com/~r/themothpodcast/~5/9gmd8_3YS6I/moth-podcast-206-shalom-auslander1.mp3" fileSize="8096503" type="audio/mpeg" /><itunes:keywords>Podcasts</itunes:keywords><feedburner:origLink>http://themoth.org/</feedburner:origLink><enclosure url="http://feedproxy.google.com/~r/themothpodcast/~5/9gmd8_3YS6I/moth-podcast-206-shalom-auslander1.mp3" length="8096503" type="audio/mpeg" /><feedburner:origEnclosureLink>http://www.podtrac.com/pts/redirect.mp3/cdn.themoth.prx.org/moth-podcast-206-shalom-auslander1.mp3</feedburner:origEnclosureLink></item>
+		<item>
+		<title>Aimee Mullins: A Work in Progress</title>
+		<link>http://feedproxy.google.com/~r/themothpodcast/~3/JAeX6tjKAyc/</link>
+		<pubDate>Tue, 03 Jan 2012 02:15:04 +0000</pubDate>
+		<dc:creator>laura</dc:creator>
+				<category><![CDATA[Podcasts]]></category>
+
+		<guid isPermaLink="false">http://themoth.prx.org/?p=1372</guid>
+		<description><![CDATA[A double amputee explores her changing relationship with prosthetic legs.]]></description>
+			<content:encoded><![CDATA[<p>A double amputee explores her changing relationship with prosthetic legs.</p>
+<img src="http://feeds.feedburner.com/~r/themothpodcast/~4/JAeX6tjKAyc" height="1" width="1"/>]]></content:encoded>
+	
+			<itunes:subtitle>A double amputee explores her changing relationship with prosthetic legs.</itunes:subtitle>
+		<itunes:summary>A double amputee explores her changing relationship with prosthetic legs.</itunes:summary>
+		<itunes:author>The Moth</itunes:author>
+		<itunes:explicit>no</itunes:explicit>
+		<itunes:duration>13:27</itunes:duration>
+	<media:content url="http://feedproxy.google.com/~r/themothpodcast/~5/-yMHJ7sBAQQ/moth-podcast-205-aimee-mullins.mp3" fileSize="6704882" type="audio/mpeg" /><itunes:keywords>Podcasts</itunes:keywords><feedburner:origLink>http://themoth.org/</feedburner:origLink><enclosure url="http://feedproxy.google.com/~r/themothpodcast/~5/-yMHJ7sBAQQ/moth-podcast-205-aimee-mullins.mp3" length="6704882" type="audio/mpeg" /><feedburner:origEnclosureLink>http://www.podtrac.com/pts/redirect.mp3/cdn.themoth.prx.org/moth-podcast-205-aimee-mullins.mp3</feedburner:origEnclosureLink></item>
+		<item>
+		<title>Deborah Allen Carr &amp; Bernard Jenkins: MothSHOP Favorites</title>
+		<link>http://feedproxy.google.com/~r/themothpodcast/~3/JAeX6tjKAyc/</link>
+		<pubDate>Tue, 27 Dec 2011 02:08:21 +0000</pubDate>
+		<dc:creator>laura</dc:creator>
+				<category><![CDATA[Podcasts]]></category>
+
+		<guid isPermaLink="false">http://themoth.prx.org/?p=1365</guid>
+		<description><![CDATA[Two students learn what they will give up &#8211; and what they won&#8217;t &#8211; for friends and family.]]></description>
+			<content:encoded><![CDATA[<p>Two students learn what they will give up &#8211; and what they won&#8217;t &#8211; for friends and family.</p>
+<img src="http://feeds.feedburner.com/~r/themothpodcast/~4/JAeX6tjKAyc" height="1" width="1"/>]]></content:encoded>
+	
+			<itunes:subtitle>Two students learn what they will give up - and what they won't - for friends and family.</itunes:subtitle>
+		<itunes:summary>Two students learn what they will give up - and what they won't - for friends and family.</itunes:summary>
+		<itunes:author>The Moth</itunes:author>
+		<itunes:explicit>no</itunes:explicit>
+		<itunes:duration>16:12</itunes:duration>
+	<media:content url="http://feedproxy.google.com/~r/themothpodcast/~5/paQvjD9tHC4/moth-podcast-204-deborah-allen-carr-bernard-jenkins.mp3" fileSize="8020851" type="audio/mpeg" /><itunes:keywords>Podcasts</itunes:keywords><feedburner:origLink>http://themoth.org/</feedburner:origLink><enclosure url="http://feedproxy.google.com/~r/themothpodcast/~5/paQvjD9tHC4/moth-podcast-204-deborah-allen-carr-bernard-jenkins.mp3" length="8020851" type="audio/mpeg" /><feedburner:origEnclosureLink>http://www.podtrac.com/pts/redirect.mp3/cdn.themoth.prx.org/moth-podcast-204-deborah-allen-carr-bernard-jenkins.mp3</feedburner:origEnclosureLink></item>
+	<media:credit role="author">The Moth</media:credit><media:rating>nonadult</media:rating><media:description type="plain">The Moth features people telling true, engaging, funny, touching and eye-opening stories from their lives. Hailed as "New York's hottest and hippest literary ticket" by the Wall Street Journal, The Moth has been producing sold-out storytelling shows for o</media:description></channel>
+</rss>
