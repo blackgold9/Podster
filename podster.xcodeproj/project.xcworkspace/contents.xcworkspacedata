@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:net.vanterpool.podster 2012-01-25 14.45.52.755.xcappdata">
+   </FileRef>
+   <FileRef
       location = "self:podster.xcodeproj">
    </FileRef>
 </Workspace>

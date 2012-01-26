@@ -70,7 +70,7 @@
     self.summaryLabel.text = [podcast summary];
     self.logoImageView.backgroundColor = [UIColor grayColor];
     if ([podcast logoURL] != nil) {
-    NSURL *imageURL = [NSURL URLWithString:[podcast thumbLogoURL]];
+    NSURL *imageURL = [NSURL URLWithString:[@"http://" stringByAppendingString:[podcast thumbLogoURL]]];
     op = [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
                                        onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
                                            if ([[url absoluteString] isEqualToString:[imageURL absoluteString]]) {

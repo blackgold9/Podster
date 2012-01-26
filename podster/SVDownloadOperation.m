@@ -108,7 +108,8 @@
             NSLog(@"Set custom headers: %@", headers);
             [op addHeaders:headers];
         }
-        [op setDownloadStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
+        
+        [op addDownloadStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
         [op onDownloadProgressChanged:^(double progress) {
             [self downloadProgressChanged:progress
                               forDownload:localDownload 

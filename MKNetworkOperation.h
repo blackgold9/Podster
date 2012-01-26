@@ -25,6 +25,12 @@
 
 @class MKNetworkOperation;
 
+typedef enum {
+    MKNetworkOperationStateReady = 1,
+    MKNetworkOperationStateExecuting = 2,
+    MKNetworkOperationStateFinished = 3
+} MKNetworkOperationState;
+
 typedef void (^MKNKProgressBlock)(double progress);
 typedef void (^MKNKResponseBlock)(MKNetworkOperation* completedOperation);
 #if TARGET_OS_IPHONE
@@ -36,6 +42,14 @@ typedef void (^MKNKErrorBlock)(NSError* error);
 
 typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
 
+typedef NSString* (^MKNKEncodingBlock) (NSDictionary* postDataDict);
+
+typedef enum {
+    
+    MKNKPostDataEncodingTypeURL = 0, // default
+    MKNKPostDataEncodingTypeJSON,
+    MKNKPostDataEncodingTypePlist,
+} MKNKPostDataEncodingType;
 /*!
  @header MKNetworkOperation.h
  @abstract   Represents a single unique network operation.
@@ -60,15 +74,6 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
 }
 
 /*!
- * @abstract Tag Property
- * @property tag
- * @discussion
- * Assign a tag to an operation so that you can cancel all operations with a given tag later.
- * For example, cancel all image load opeartions when you navigate away from a controller
- */
-@property (nonatomic, assign) NSInteger tag;
-
-/*!
  *  @abstract Request URL Property
  *  @property url
  *  
@@ -88,7 +93,7 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *  This property is readonly cannot be modified. 
  *  To create an operation with a new request, use the operationWithURLString:params:httpMethod: 
  */
-@property (nonatomic, strong, readonly) NSMutableURLRequest *readonlyRequest;
+@property (nonatomic, strong, readonly) NSURLRequest *readonlyRequest;
 
 /*!
  *  @abstract The internal HTTP Response Object
@@ -99,15 +104,84 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *  This property is readonly cannot be updated. 
  */
 @property (nonatomic, strong, readonly) NSHTTPURLResponse *readonlyResponse;
+
+/*!
+ *  @abstract The internal HTTP Post data values
+ *  @property readonlyPostDictionary
+ *  
+ *  @discussion
+ *	Returns the operation's post data dictionary
+ *  This property is readonly cannot be updated.
+ *  Rather, updating this post dictionary doesn't have any effect on the MKNetworkOperation.
+ *  Use the addHeaders method to add post data parameters to the operation.
+ *
+ *  @seealso
+ *   addHeaders:
+ */
+@property (nonatomic, strong, readonly) NSDictionary *readonlyPostDictionary;
+
+/*!
+ *  @abstract The internal request object's method type
+ *  @property HTTPMethod
+ *  
+ *  @discussion
+ *	Returns the operation's method type
+ *  This property is readonly cannot be modified. 
+ *  To create an operation with a new method type, use the operationWithURLString:params:httpMethod: 
+ */
+@property (nonatomic, strong, readonly) NSString *HTTPMethod;
+
+/*!
+ *  @abstract The internal response object's status code
+ *  @property HTTPStatusCode
+ *  
+ *  @discussion
+ *	Returns the operation's response's status code.
+ *  Returns 0 when the operation has not yet started and the response is not available.
+ *  This property is readonly cannot be modified. 
+ */
+@property (nonatomic, assign, readonly) NSInteger HTTPStatusCode;
+
+/*!
+ *  @abstract Post Data Encoding Type Property
+ *  @property postDataEncoding
+ *  
+ *  @discussion
+ *  Specifies which type of encoding should be used to encode post data.
+ *  MKNKPostDataEncodingTypeURL is the default which defaults to application/x-www-form-urlencoded
+ *  MKNKPostDataEncodingTypeJSON uses JSON encoding. 
+ *  JSON Encoding is supported only in iOS 5 or Mac OS X 10.7 and above.
+ *  On older operating systems, JSON Encoding reverts back to URL Encoding
+ *  You can use the postDataEncodingHandler to provide a custom postDataEncoding 
+ *  For example, JSON encoding using a third party library.
+ *
+ *  @seealso
+ *  setCustomPostDataEncodingHandler:forType:
+ *
+ */
+@property (nonatomic, assign) MKNKPostDataEncodingType postDataEncoding;
+
+/*!
+ *  @abstract Set a customized Post Data Encoding Handler for a given HTTP Content Type
+ *  
+ *  @discussion
+ *  If you need customized post data encoding support, provide a block method here.
+ *  This block method will be invoked only when your HTTP Method is POST or PUT
+ *  For default URL encoding or JSON encoding, use the property postDataEncoding
+ *  If you change the postData format, it's your responsiblity to provide a correct Content-Type.
+ *
+ *  @seealso
+ *  postDataEncoding
+ */
+
+-(void) setCustomPostDataEncodingHandler:(MKNKEncodingBlock) postDataEncodingHandler forType:(NSString*) contentType;
+
 /*!
  *  @abstract String Encoding Property
  *  @property stringEncoding
  *  
  *  @discussion
- *	Creates an operation with the given URL string.
- *  The default headers you specified in your MKNetworkEngine subclass gets added to the headers
- *  The params dictionary in this method gets attached to the URL as query parameters if the HTTP Method is GET/DELETE
- *  The params dictionary is attached to the body if the HTTP Method is POST/PUT
+ *  Specifies which type of encoding should be used to encode URL strings
  */
 @property (nonatomic, assign) NSStringEncoding stringEncoding;
 
@@ -122,6 +196,15 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *  MKNetworkKit doesn't freeze (readonly) GET operations even if they are marked as freezable
  */
 @property (nonatomic, assign) BOOL freezable;
+
+/*!
+ * @abstract Tag Property
+ * @property tag
+ * @discussion
+ * Assign a tag to an operation so that you can cancel all operations with a given tag later.
+ * For example, cancel all image load opeartions when you navigate away from a controller
+ */
+@property (nonatomic, assign) NSInteger tag;
 
 /*!
  *  @abstract Error object
@@ -152,6 +235,17 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
 -(void) setUsername:(NSString*) name password:(NSString*) password;
 
 /*!
+ *  @abstract Authentication methods
+ *  
+ *  @discussion
+ *	If your request needs to be authenticated using HTTP Basic, use this method to set your username and password.
+ *  Calling this method with basicAuth:NO is same as calling setUserName:password:
+ *  @seealso
+ *  setUserName:password:
+ */
+-(void) setUsername:(NSString*) username password:(NSString*) password basicAuth:(BOOL) bYesOrNo;
+
+/*!
  *  @abstract Authentication methods (Client Certificate)
  *  @property clientCertificate
  *  
@@ -169,6 +263,26 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *  and process the NSURLAuthenticationChallenge
  */
 @property (nonatomic, copy) MKNKAuthBlock authHandler;
+
+/*!
+ *  @abstract Handler that you implement to monitor reachability changes
+ *  @property reachabilityChangedHandler
+ *  
+ *  @discussion
+ *	The framework calls this handler whenever the reachability of the host changes.
+ *  The default implementation freezes the queued operations and stops network activity
+ *  You normally don't have to implement this unless you need to show a HUD notifying the user of connectivity loss
+ */
+@property (copy, nonatomic) void (^operationStateChangedHandler)(MKNetworkOperationState newState);
+
+/*!
+ *  @abstract controls persistence of authentication credentials
+ *  @property credentialPersistence
+ *  
+ *  @discussion
+ *  The default value is set to NSURLCredentialPersistenceForSession, change it to NSURLCredentialPersistenceNone to avoid caching issues (isse #35)
+ */
+@property (nonatomic, assign) NSURLCredentialPersistence credentialPersistence;
 
 /*!
  *  @abstract Add additional header parameters
@@ -256,6 +370,15 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
 -(void) onDownloadProgressChanged:(MKNKProgressBlock) downloadProgressBlock;
 
 /*!
+ *  @abstract Uploads a resource from a stream
+ *  
+ *  @discussion
+ *	This method can be used to upload a resource for a post body directly from a stream.
+ *
+ */
+-(void) setUploadStream:(NSInputStream*) inputStream;
+
+/*!
  *  @abstract Downloads a resource directly to a file or any output stream
  *  
  *  @discussion
@@ -264,7 +387,7 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *  A stream cannot be removed after it is added.
  *
  */
--(void) setDownloadStream:(NSOutputStream*) outputStream;
+-(void) addDownloadStream:(NSOutputStream*) outputStream;
 
 /*!
  *  @abstract Helper method to check if the response is from cache
@@ -284,7 +407,7 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *	This method is used for accessing the downloaded data. If the operation is still in progress, the method returns nil instead of partial data. To access partial data, use a downloadStream.
  *
  *  @seealso
- *  setDownloadStream:
+ *  addDownloadStream:
  */
 -(NSData*) responseData;
 
@@ -295,7 +418,7 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *	This method is used for accessing the downloaded data. If the operation is still in progress, the method returns nil instead of partial data. To access partial data, use a downloadStream. The method also converts the responseData to a NSString using the stringEncoding specified in the operation
  *
  *  @seealso
- *  setDownloadStream:
+ *  addDownloadStream:
  *  stringEncoding
  */
 -(NSString*)responseString;
@@ -316,7 +439,7 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *	This method is used for accessing the downloaded data. If the operation is still in progress, the method returns nil instead of partial data. To access partial data, use a downloadStream. The method also converts the responseData to a NSString using the stringEncoding specified in the parameter
  *
  *  @seealso
- *  setDownloadStream:
+ *  addDownloadStream:
  *  stringEncoding
  */
 -(NSString*) responseStringWithEncoding:(NSStringEncoding) encoding;
@@ -328,7 +451,7 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *	This method is used for accessing the downloaded data as a UIImage. If the operation is still in progress, the method returns nil instead of a partial image. To access partial data, use a downloadStream. If the response is not a valid image, this method returns nil. This method doesn't obey the response mime type property. If the server response with a proper image data but set the mime type incorrectly, this method will still be able access the response as an image.
  *
  *  @seealso
- *  setDownloadStream:
+ *  addDownloadStream:
  */
 #if TARGET_OS_IPHONE
 -(UIImage*) responseImage;
@@ -337,7 +460,6 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
 -(NSXMLDocument*) responseXML;
 #endif
 
-#ifdef __IPHONE_5_0
 /*!
  *  @abstract Helper method to retrieve the contents as a NSDictionary or NSArray depending on the JSON contents
  *  
@@ -345,10 +467,9 @@ typedef void (^MKNKAuthBlock)(NSURLAuthenticationChallenge* challenge);
  *	This method is used for accessing the downloaded data as a NSDictionary or an NSArray. If the operation is still in progress, the method returns nil. If the response is not a valid JSON, this method returns nil.
  *
  *  @availability
- *  iOS 5 and above
+ *  iOS 5 and above or Mac OS 10.7 and above
  */
 -(id) responseJSON;
-#endif
 
 /*!
  *  @abstract Overridable custom method where you can add your custom business logic error handling

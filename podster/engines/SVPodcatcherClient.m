@@ -101,7 +101,7 @@
            errorBlock(error);
        }];
     
-    [self enqueueOperation:op];
+    [self enqueueOperation:op forceReload:YES];
     
     return op;
 }

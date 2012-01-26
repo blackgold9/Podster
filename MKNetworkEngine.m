@@ -48,9 +48,7 @@
 
 static NSOperationQueue *_sharedNetworkQueue;
 
-@implementation MKNetworkEngine {
-    NSInteger maximumConcurrentOperationsOverride;
-}
+@implementation MKNetworkEngine
 @synthesize hostName = _hostName;
 @synthesize reachability = _reachability;
 @synthesize customHeaders = _customHeaders;
@@ -59,6 +57,7 @@ static NSOperationQueue *_sharedNetworkQueue;
 @synthesize memoryCacheKeys = _memoryCacheKeys;
 @synthesize cacheInvalidationParams = _cacheInvalidationParams;
 
+@synthesize reachabilityChangedHandler = _reachabilityChangedHandler;
 
 // Network Queue is a shared singleton object.
 // no matter how many instances of MKNetworkEngine is created, there is one and only one network queue
@@ -75,6 +74,7 @@ static NSOperationQueue *_sharedNetworkQueue;
             _sharedNetworkQueue = [[NSOperationQueue alloc] init];
             [_sharedNetworkQueue addObserver:[self self] forKeyPath:@"operationCount" options:0 context:NULL];
             [_sharedNetworkQueue setMaxConcurrentOperationCount:6];
+            
         });
     }            
 }
@@ -82,7 +82,7 @@ static NSOperationQueue *_sharedNetworkQueue;
 - (id) initWithHostName:(NSString*) hostName customHeaderFields:(NSDictionary*) headers {
     
     if((self = [super init])) {        
-        maximumConcurrentOperationsOverride = NSIntegerMax;
+        
         if(hostName) {
             [[NSNotificationCenter defaultCenter] addObserver:self 
                                                      selector:@selector(reachabilityChanged:) 
@@ -99,8 +99,8 @@ static NSOperationQueue *_sharedNetworkQueue;
             
             NSMutableDictionary *newHeadersDict = [headers mutableCopy];
             NSString *userAgentString = [NSString stringWithFormat:@"%@/%@", 
-             [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleNameKey], 
-             [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey]];
+                                         [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleNameKey], 
+                                         [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey]];
             [newHeadersDict setObject:userAgentString forKey:@"User-Agent"];
             self.customHeaders = newHeadersDict;
         } else {
@@ -135,6 +135,10 @@ static NSOperationQueue *_sharedNetworkQueue;
 {
     if (object == _sharedNetworkQueue && [keyPath isEqualToString:@"operationCount"]) {
         
+        DLog(@"*** Running: %d ***", (int) [_sharedNetworkQueue.operations count]);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMKNetworkEngineOperationCountChanged 
+                                                            object:[NSNumber numberWithInteger:[_sharedNetworkQueue operationCount]]];
 #if TARGET_OS_IPHONE
         [UIApplication sharedApplication].networkActivityIndicatorVisible = 
         ([_sharedNetworkQueue.operations count] > 0);        
@@ -154,24 +158,28 @@ static NSOperationQueue *_sharedNetworkQueue;
     if([self.reachability currentReachabilityStatus] == ReachableViaWiFi)
     {
         DLog(@"Server [%@] is reachable via Wifi", self.hostName);
-        [_sharedNetworkQueue setMaxConcurrentOperationCount:MIN(6, maximumConcurrentOperationsOverride)];
+        [_sharedNetworkQueue setMaxConcurrentOperationCount:6];
         
         [self checkAndRestoreFrozenOperations];
     }
     else if([self.reachability currentReachabilityStatus] == ReachableViaWWAN)
     {
         DLog(@"Server [%@] is reachable only via cellular data", self.hostName);
-        [_sharedNetworkQueue setMaxConcurrentOperationCount:MIN(2, maximumConcurrentOperationsOverride)];
+        [_sharedNetworkQueue setMaxConcurrentOperationCount:2];
         [self checkAndRestoreFrozenOperations];
     }
     else if([self.reachability currentReachabilityStatus] == NotReachable)
     {
         DLog(@"Server [%@] is not reachable", self.hostName);        
         [self freezeOperations];
-    }        
+    }   
+    
+    if(self.reachabilityChangedHandler) {
+        self.reachabilityChangedHandler([self.reachability currentReachabilityStatus]);
+    }
 }
 
-#pragma Freezing operations (Called when network connectivity fails)
+#pragma mark Freezing operations (Called when network connectivity fails)
 -(void) freezeOperations {
     
     if(![self isCacheEnabled]) return;
@@ -219,13 +227,6 @@ static NSOperationQueue *_sharedNetworkQueue;
     }
 }
 
-- (void)overrideConcurrentOperations:(NSInteger)concurrentOperations
-{
-    maximumConcurrentOperationsOverride = concurrentOperations;
-    NSInteger newLimit = MIN([_sharedNetworkQueue maxConcurrentOperationCount], maximumConcurrentOperationsOverride);
-    [_sharedNetworkQueue setMaxConcurrentOperationCount:newLimit];
-}
-
 -(NSString*) readonlyHostName {
     
     return [_hostName copy];
@@ -236,8 +237,8 @@ static NSOperationQueue *_sharedNetworkQueue;
     return ([self.reachability currentReachabilityStatus] != NotReachable);
 }
 
-#pragma -
-#pragma Create methods
+#pragma mark -
+#pragma mark Create methods
 
 -(MKNetworkOperation*) operationWithPath:(NSString*) path {
     
@@ -286,7 +287,7 @@ static NSOperationQueue *_sharedNetworkQueue;
                                    httpMethod:(NSString*)method {
     
     MKNetworkOperation *operation = [[MKNetworkOperation alloc] initWithURLString:urlString params:body httpMethod:method];
-        
+    
     [self prepareHeaders:operation];
     return operation;
 }
@@ -305,7 +306,7 @@ static NSOperationQueue *_sharedNetworkQueue;
     
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         
-        NSData *cachedData = [NSData dataWithContentsOfFile:filePath];
+        cachedData = [NSData dataWithContentsOfFile:filePath];
         [self saveCacheData:cachedData forKey:[operation uniqueIdentifier]]; // bring it back to the in-memory cache
         return cachedData;
     }
@@ -323,30 +324,27 @@ static NSOperationQueue *_sharedNetworkQueue;
     dispatch_queue_t originalQueue = dispatch_get_current_queue();
     // Jump off the main thread, mainly for disk cache reading purposes
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (self.memoryCache) {
-            // Only do cache handler if caching is enabled
-            [operation setCacheHandler:^(MKNetworkOperation* completedCacheableOperation) {
-                
-                // if this is not called, the request would have been a non cacheable request
-                //completedCacheableOperation.cacheHeaders;
-                NSString *uniqueId = [completedCacheableOperation uniqueIdentifier];
-                [self saveCacheData:[completedCacheableOperation responseData] 
-                             forKey:uniqueId];
-                
-                [self.cacheInvalidationParams setObject:completedCacheableOperation.cacheHeaders forKey:uniqueId];
-            }];
-        }
+        [operation setCacheHandler:^(MKNetworkOperation* completedCacheableOperation) {
+            
+            // if this is not called, the request would have been a non cacheable request
+            //completedCacheableOperation.cacheHeaders;
+            NSString *uniqueId = [completedCacheableOperation uniqueIdentifier];
+            [self saveCacheData:[completedCacheableOperation responseData] 
+                         forKey:uniqueId];
+            
+            [self.cacheInvalidationParams setObject:completedCacheableOperation.cacheHeaders forKey:uniqueId];
+        }];
         
         double expiryTimeInSeconds = 0.0f;    
         
-        if(!forceReload && self.memoryCache) {
+        if(!forceReload) {
             NSData *cachedData = [self cachedDataForOperation:operation];
             if(cachedData) {
                 dispatch_async(originalQueue, ^{
                     // Jump back to the original thread here since setCachedData updates the main thread
                     [operation setCachedData:cachedData];                    
                 });
-
+                
                 
                 NSString *uniqueId = [operation uniqueIdentifier];
                 NSMutableDictionary *savedCacheHeaders = [self.cacheInvalidationParams objectForKey:uniqueId];
@@ -384,6 +382,12 @@ static NSOperationQueue *_sharedNetworkQueue;
 
 - (MKNetworkOperation*)imageAtURL:(NSURL *)url onCompletion:(MKNKImageBlock) imageFetchedBlock
 {
+#ifdef DEBUG
+    // I could enable caching here, but that hits performance and inturn affects table view scrolling
+    // if imageAtURL is called for loading thumbnails.
+    if(![self isCacheEnabled]) DLog(@"imageAtURL:onCompletion: requires caching to be enabled.")
+#endif
+    
     if (url == nil) {
         return nil;
     }
@@ -402,15 +406,28 @@ static NSOperationQueue *_sharedNetworkQueue;
          
          DLog(@"%@", error);
      }];    
-    op.queuePriority = NSOperationQueuePriorityLow;
-
-    NSAssert(!op.isFinished, @"Op should not be finished at this time");
+    
     [self enqueueOperation:op];
+    
     return op;
 }
 
-#pragma -
-#pragma Cache related
+-(void)cancelAllOperationsWithTag:(NSInteger)tag
+{
+    __block int count = 0;
+    [_sharedNetworkQueue.operations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MKNetworkOperation *op = obj;
+        if(op.tag == tag) {
+            [op cancel];
+            count += 1;
+        }
+    }];
+    
+    DLog(@"Cancelled %d operations", count);
+}
+
+#pragma mark -
+#pragma mark Cache related
 
 -(NSString*) cacheDirectoryName {
     
@@ -426,14 +443,11 @@ static NSOperationQueue *_sharedNetworkQueue;
 }
 
 -(void) saveCache {
-
-    NSAssert(self.memoryCache, @"Memorycache should exist here");
+    
     for(NSString *cacheKey in [self.memoryCache allKeys])
     {
         NSString *filePath = [[self cacheDirectoryName] stringByAppendingPathComponent:cacheKey];
-        
-        if(![[NSFileManager defaultManager] fileExistsAtPath:filePath])
-            [[self.memoryCache objectForKey:cacheKey] writeToFile:filePath atomically:YES];        
+        [[self.memoryCache objectForKey:cacheKey] writeToFile:filePath atomically:YES];        
     }
     
     [self.memoryCache removeAllObjects];
@@ -446,14 +460,14 @@ static NSOperationQueue *_sharedNetworkQueue;
 -(void) saveCacheData:(NSData*) data forKey:(NSString*) cacheDataKey
 {    
     [self.memoryCache setObject:data forKey:cacheDataKey];
-    NSAssert(self.memoryCache != nil, @" The memory cache should exist at this point");
+    
     NSUInteger index = [self.memoryCacheKeys indexOfObject:cacheDataKey];
     if(index != NSNotFound)
         [self.memoryCacheKeys removeObjectAtIndex:index];    
     
     [self.memoryCacheKeys insertObject:cacheDataKey atIndex:0]; // remove it and insert it at start
     
-    if([self.memoryCacheKeys count] > [self cacheMemoryCost])
+    if([self.memoryCacheKeys count] >= [self cacheMemoryCost])
     {
         NSString *lastKey = [self.memoryCacheKeys lastObject];        
         NSData *data = [self.memoryCache objectForKey:lastKey];        
@@ -528,17 +542,26 @@ static NSOperationQueue *_sharedNetworkQueue;
     
 }
 
--(void)cancelAllOperationsWithTag:(NSInteger)tag
-{
-    __block int count = 0;
-    [_sharedNetworkQueue.operations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        MKNetworkOperation *op = obj;
-        if(op.tag == tag) {
-            [op cancel];
-            count += 1;
-        }
-    }];
+-(void) emptyCache {
+            
+    [self saveCache]; // ensures that invalidation params are written to disk properly
+    NSError *error = nil;
+    NSArray *directoryContents = [[NSFileManager defaultManager] 
+                                  contentsOfDirectoryAtPath:[self cacheDirectoryName] error:&error];
+    if(error) DLog(@"%@", error);
     
-    DLog(@"Cancelled %d operations", count);
+    error = nil;
+    for(NSString *fileName in directoryContents) {
+        
+        NSString *path = [[self cacheDirectoryName] stringByAppendingPathComponent:fileName];
+        [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+        if(error) DLog(@"%@", error);
+    }    
+
+    error = nil;
+    NSString *cacheInvalidationPlistFilePath = [[self cacheDirectoryName] stringByAppendingPathExtension:@"plist"];
+    [[NSFileManager defaultManager] removeItemAtPath:cacheInvalidationPlistFilePath error:&error];
+    if(error) DLog(@"%@", error);
 }
+
 @end

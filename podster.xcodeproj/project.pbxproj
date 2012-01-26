@@ -389,6 +389,8 @@
 		4B91BFCA14C8009900B33776 /* SVSubscriptionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */; };
 		4B91BFCB14C8009900B33776 /* SVSubscriptionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */; };
 		4B91BFCC14C8009900B33776 /* SVSubscriptionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */; };
+		4BA116F414D09D0C006EEE46 /* NSData+MK_Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA116F314D09D0C006EEE46 /* NSData+MK_Base64.m */; };
+		4BA116F514D09D0C006EEE46 /* NSData+MK_Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA116F314D09D0C006EEE46 /* NSData+MK_Base64.m */; };
 		4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */; };
@@ -752,6 +754,8 @@
 		4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSubscriptionListViewController.m; sourceTree = "<group>"; };
 		4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVSubscriptionListViewController.xib; sourceTree = "<group>"; };
 		4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 4.xcdatamodel"; sourceTree = "<group>"; };
+		4BA116F214D09D0B006EEE46 /* NSData+MK_Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MK_Base64.h"; sourceTree = "<group>"; };
+		4BA116F314D09D0C006EEE46 /* NSData+MK_Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MK_Base64.m"; sourceTree = "<group>"; };
 		4BD1C21D14B7D05E00E8C942 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		4BD1C21E14B7D05E00E8C942 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeGetters.h"; sourceTree = "<group>"; };
@@ -1311,6 +1315,8 @@
 		4B71F7C714A5B62E00D26F4C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4BA116F214D09D0B006EEE46 /* NSData+MK_Base64.h */,
+				4BA116F314D09D0C006EEE46 /* NSData+MK_Base64.m */,
 				4B71F7CC14A5B62E00D26F4C /* NSDate+RFC1123.h */,
 				4B71F7CD14A5B62E00D26F4C /* NSDate+RFC1123.m */,
 				4B71F7CE14A5B62E00D26F4C /* NSDictionary+RequestEncoding.h */,
@@ -1781,6 +1787,7 @@
 				4B141FA714C9433A00028CE4 /* BWQuincyManager.m in Sources */,
 				4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */,
 				4B141FC014CCCAB500028CE4 /* SVGridCell.m in Sources */,
+				4BA116F414D09D0C006EEE46 /* NSData+MK_Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1915,6 +1922,7 @@
 				4B141FA814C9433A00028CE4 /* BWQuincyManager.m in Sources */,
 				4B141FBB14CB220200028CE4 /* SVCustomApplication.m in Sources */,
 				4B141FC114CCCAB500028CE4 /* SVGridCell.m in Sources */,
+				4BA116F514D09D0C006EEE46 /* NSData+MK_Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

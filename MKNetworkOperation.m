@@ -26,14 +26,7 @@
 #import "MKNetworkOperation.h"
 #import "NSDictionary+RequestEncoding.h"
 #import "NSString+MKNetworkKitAdditions.h"
-#import "JSONKit.h"
 
-// Should there be a cancelled state? or something similar.
-typedef enum {
-    MKNetworkOperationStateReady = 1,
-    MKNetworkOperationStateExecuting = 2,
-    MKNetworkOperationStateFinished = 3
-} MKNetworkOperationState;
 
 @interface MKNetworkOperation (/*Private Methods*/)
 @property (strong, nonatomic) NSURLConnection *connection;
@@ -48,19 +41,24 @@ typedef enum {
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
 
-@property (nonatomic, retain) NSMutableArray *responseBlocks;
-@property (nonatomic, retain) NSMutableArray *errorBlocks;
+@property (nonatomic, strong) NSMutableArray *responseBlocks;
+@property (nonatomic, strong) NSMutableArray *errorBlocks;
 
 @property (nonatomic, assign) MKNetworkOperationState state;
 @property (nonatomic, assign) BOOL isCancelled;
-@property (nonatomic, assign) NSInteger startPoint;
+
 @property (strong, nonatomic) NSMutableData *mutableData;
 
-@property (nonatomic, retain) NSMutableArray *uploadProgressChangedHandlers;
-@property (nonatomic, retain) NSMutableArray *downloadProgressChangedHandlers;
-@property (nonatomic, retain) NSMutableArray *downloadStreams;
-@property (nonatomic, retain) NSData *cachedResponse;
+@property (nonatomic, strong) NSMutableArray *uploadProgressChangedHandlers;
+@property (nonatomic, strong) NSMutableArray *downloadProgressChangedHandlers;
+@property (nonatomic, copy) MKNKEncodingBlock postDataEncodingHandler;
+
+@property (nonatomic, assign) NSInteger startPosition;
+
+@property (nonatomic, strong) NSMutableArray *downloadStreams;
+@property (nonatomic, strong) NSData *cachedResponse;
 @property (nonatomic, copy) MKNKResponseBlock cacheHandlingBlock;
+
 #if TARGET_OS_IPHONE    
 @property (nonatomic, assign) UIBackgroundTaskIdentifier backgroundTaskId;
 #endif
@@ -74,14 +72,17 @@ typedef enum {
 -(NSData*) bodyData;
 -(BOOL) isCacheable;
 
+-(NSString*) encodedPostDataString;
+
 @end
 
 @implementation MKNetworkOperation
+@synthesize postDataEncoding = _postDataEncoding;
+@synthesize postDataEncodingHandler = _postDataEncodingHandler;
 
 @synthesize stringEncoding = _stringEncoding;
 @dynamic freezable;
 @synthesize uniqueId = _uniqueId; // freezable operations have a unique id
-@synthesize tag = _tag;
 
 @synthesize connection = _connection;
 
@@ -96,6 +97,7 @@ typedef enum {
 @synthesize password = _password;
 @synthesize clientCertificate = _clientCertificate;
 @synthesize authHandler = _authHandler;
+@synthesize operationStateChangedHandler = _operationStateChangedHandler;
 
 @synthesize responseBlocks = _responseBlocks;
 @synthesize errorBlocks = _errorBlocks;
@@ -105,12 +107,15 @@ typedef enum {
 
 @synthesize uploadProgressChangedHandlers = _uploadProgressChangedHandlers;
 @synthesize downloadProgressChangedHandlers = _downloadProgressChangedHandlers;
-@synthesize startPoint = _startPoint;
+
 @synthesize downloadStreams = _downloadStreams;
 
 @synthesize cachedResponse = _cachedResponse;
 @synthesize cacheHandlingBlock = _cacheHandlingBlock;
+@synthesize credentialPersistence = _credentialPersistence;
 
+@synthesize startPosition = _startPosition;
+@synthesize tag = _tag;
 #if TARGET_OS_IPHONE    
 @synthesize backgroundTaskId = _backgroundTaskId;
 #endif
@@ -129,6 +134,29 @@ typedef enum {
     return [self.request.HTTPMethod isEqualToString:@"GET"];
 }
 
+-(NSString*) encodedPostDataString {
+    
+    NSString *returnValue = @"";
+    if(self.postDataEncodingHandler)
+        returnValue = self.postDataEncodingHandler(self.fieldsToBePosted);    
+    else if(self.postDataEncoding == MKNKPostDataEncodingTypeURL)
+        returnValue = [self.fieldsToBePosted urlEncodedKeyValueString];    
+    else if(self.postDataEncoding == MKNKPostDataEncodingTypeJSON)
+        returnValue = [self.fieldsToBePosted jsonEncodedKeyValueString];
+    else if(self.postDataEncoding == MKNKPostDataEncodingTypePlist)
+        returnValue = [self.fieldsToBePosted plistEncodedKeyValueString];
+    return returnValue;
+}
+
+-(void) setCustomPostDataEncodingHandler:(MKNKEncodingBlock) postDataEncodingHandler forType:(NSString*) contentType {
+    
+    NSString *charset = (__bridge NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding));
+    
+    self.postDataEncodingHandler = postDataEncodingHandler;
+    [self.request addValue:
+     [NSString stringWithFormat:@"%@; charset=%@", contentType, charset]
+        forHTTPHeaderField:@"Content-Type"];
+}
 //=========================================================== 
 //  freezable 
 //=========================================================== 
@@ -142,7 +170,7 @@ typedef enum {
     return [[self.request URL] absoluteString];
 }
 
--(NSMutableURLRequest*) readonlyRequest {
+-(NSURLRequest*) readonlyRequest {
     
     return [self.request copy];
 }
@@ -150,6 +178,24 @@ typedef enum {
 -(NSHTTPURLResponse*) readonlyResponse {
     
     return [self.response copy];
+}
+
+- (NSDictionary *) readonlyPostDictionary {
+    
+    return [self.fieldsToBePosted copy];
+}
+
+-(NSString*) HTTPMethod {
+    
+    return self.request.HTTPMethod;
+}
+
+-(NSInteger) HTTPStatusCode {
+    
+    if(self.response)
+        return self.response.statusCode;
+    else
+        return 0;
 }
 
 - (void)setFreezable:(BOOL)flag
@@ -166,7 +212,7 @@ typedef enum {
 
 -(BOOL) isEqual:(id)object {
     
-    if([self isCacheable]) {
+    if([self.request.HTTPMethod isEqualToString:@"GET"] || [self.request.HTTPMethod isEqualToString:@"HEAD"]) {
         
         MKNetworkOperation *anotherObject = (MKNetworkOperation*) object;
         return ([[self uniqueIdentifier] isEqualToString:[anotherObject uniqueIdentifier]]);
@@ -251,6 +297,10 @@ typedef enum {
 #endif        
             break;
     }
+    
+    if(self.operationStateChangedHandler) {
+        self.operationStateChangedHandler(newState);
+    }
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder 
@@ -265,13 +315,15 @@ typedef enum {
     [encoder encodeObject:self.username forKey:@"username"];
     [encoder encodeObject:self.password forKey:@"password"];
     [encoder encodeObject:self.clientCertificate forKey:@"clientCertificate"];
-    [encoder encodeInteger:self.tag forKey:@"tag"];
+    
     self.state = MKNetworkOperationStateReady;
     [encoder encodeInt32:_state forKey:@"state"];
     [encoder encodeBool:self.isCancelled forKey:@"isCancelled"];
     [encoder encodeObject:self.mutableData forKey:@"mutableData"];
     
     [encoder encodeObject:self.downloadStreams forKey:@"downloadStreams"];
+    [encoder encodeInteger:self.startPosition forKey:@"startPosition"];
+    [encoder encodeInteger:self.credentialPersistence forKey:@"credentialPersistence"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
@@ -292,8 +344,10 @@ typedef enum {
         [self setState:[decoder decodeInt32ForKey:@"state"]];
         self.isCancelled = [decoder decodeBoolForKey:@"isCancelled"];
         self.mutableData = [decoder decodeObjectForKey:@"mutableData"];
-        self.tag = [decoder decodeIntegerForKey:@"tag"];
+        
         self.downloadStreams = [decoder decodeObjectForKey:@"downloadStreams"];
+        self.startPosition = [decoder decodeIntegerForKey:@"startPosition"];
+        self.credentialPersistence = [decoder decodeIntegerForKey:@"credentialPersistence"];
     }
     return self;
 }
@@ -324,7 +378,9 @@ typedef enum {
     [theCopy setDownloadStreams:[self.downloadStreams copy]];
     [theCopy setCachedResponse:[self.cachedResponse copy]];
     [theCopy setCacheHandlingBlock:self.cacheHandlingBlock];
-    [theCopy setTag:self.tag];
+    [theCopy setStartPosition:self.startPosition];
+    [theCopy setCredentialPersistence:self.credentialPersistence];
+    
     return theCopy;
 }
 
@@ -371,6 +427,14 @@ typedef enum {
     self.password = password;
 }
 
+-(void) setUsername:(NSString*) username password:(NSString*) password basicAuth:(BOOL) bYesOrNo {
+    
+    [self setUsername:username password:password];
+    NSString *base64EncodedString = [[[NSString stringWithFormat:@"%@:%@", self.username, self.password] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString];
+    
+    [self addHeaders:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Basic %@", base64EncodedString] forKey:@"Authorization"]];
+}
+
 -(void) onCompletion:(MKNKResponseBlock) response onError:(MKNKErrorBlock) error {
     
     [self.responseBlocks addObject:[response copy]];
@@ -387,7 +451,13 @@ typedef enum {
     [self.downloadProgressChangedHandlers addObject:[downloadProgressBlock copy]];
 }
 
--(void) setDownloadStream:(NSOutputStream*) outputStream {
+-(void) setUploadStream:(NSInputStream*) inputStream {
+
+#warning Method not tested yet.
+    self.request.HTTPBodyStream = inputStream;
+}
+
+-(void) addDownloadStream:(NSOutputStream*) outputStream {
     
     [self.downloadStreams addObject:outputStream];
 }
@@ -404,11 +474,13 @@ typedef enum {
         
         self.filesToBePosted = [NSMutableArray array];
         self.dataToBePosted = [NSMutableArray array];
-        self.fieldsToBePosted = [NSMutableArray array];
+        self.fieldsToBePosted = [NSMutableDictionary dictionary];
         
         self.uploadProgressChangedHandlers = [NSMutableArray array];
         self.downloadProgressChangedHandlers = [NSMutableArray array];
         self.downloadStreams = [NSMutableArray array];
+        
+        self.credentialPersistence = NSURLCredentialPersistenceForSession;
         
         NSURL *finalURL = nil;
         
@@ -424,18 +496,14 @@ typedef enum {
              [method isEqualToString:@"DELETE"]) && (params && [params count] > 0)) {
             
             finalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", aURLString, 
-                                             [params urlEncodedKeyValueString]]];
+                                             [self encodedPostDataString]]];
         } else {
             finalURL = [NSURL URLWithString:aURLString];
         }
         
-        // if your server takes longer than 30 seconds to provide real data,
-        // you should hire a better server developer.
-        // on iOS (or any mobile device), 30 seconds is already considered high.
-        
         self.request = [NSMutableURLRequest requestWithURL:finalURL                                                           
-                                               cachePolicy:NSURLRequestUseProtocolCachePolicy                                            
-                                           timeoutInterval:30.0f];
+                                               cachePolicy:NSURLRequestReloadIgnoringLocalCacheData                                            
+                                           timeoutInterval:kMKNetworkKitRequestTimeOutInSeconds];
         
         [self.request setHTTPMethod:method];
         
@@ -448,11 +516,37 @@ typedef enum {
         if (([method isEqualToString:@"POST"] ||
              [method isEqualToString:@"PUT"]) && (params && [params count] > 0)) {
             
-            [self.request addValue:
-             [NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@", charset]
-                forHTTPHeaderField:@"Content-Type"];
+            switch (self.postDataEncoding) {
+                    
+                case MKNKPostDataEncodingTypeURL: {
+                    [self.request addValue:
+                     [NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@", charset]
+                        forHTTPHeaderField:@"Content-Type"];
+                }
+                    break;
+                case MKNKPostDataEncodingTypeJSON: {
+                    if([NSJSONSerialization class]) {
+                    [self.request addValue:
+                     [NSString stringWithFormat:@"application/json; charset=%@", charset]
+                        forHTTPHeaderField:@"Content-Type"];
+                    } else {
+                        [self.request addValue:
+                         [NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@", charset]
+                            forHTTPHeaderField:@"Content-Type"];
+                    }
+                }
+                    break;
+                case MKNKPostDataEncodingTypePlist: {
+                    [self.request addValue:
+                     [NSString stringWithFormat:@"application/x-plist; charset=%@", charset]
+                        forHTTPHeaderField:@"Content-Type"];
+                }
+                                        
+                default:
+                    break;
+            }
         }
-        
+
         self.state = MKNetworkOperationStateReady;
     }
     
@@ -565,7 +659,7 @@ typedef enum {
     
     if([self.filesToBePosted count] == 0 && [self.dataToBePosted count] == 0) {
         
-        return [[[self.fieldsToBePosted urlEncodedKeyValueString] dataUsingEncoding:self.stringEncoding] mutableCopy];
+        return [[self encodedPostDataString] dataUsingEncoding:self.stringEncoding];
     }
     
     NSString *boundary = @"0xKhTmLbOuNdArY";
@@ -642,10 +736,6 @@ typedef enum {
 
 - (void) start
 {
-    if(![NSThread isMainThread]){
-        [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
-        return;
-    }
     
 #if TARGET_OS_IPHONE
     self.backgroundTaskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
@@ -661,6 +751,11 @@ typedef enum {
     }];
     
 #endif
+    
+    if(![NSThread isMainThread]){
+        [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
+        return;
+    }
     if(!self.isCancelled) {
         
         if ([self.request.HTTPMethod isEqualToString:@"POST"] || [self.request.HTTPMethod isEqualToString:@"PUT"]) {            
@@ -726,8 +821,14 @@ typedef enum {
     
     self.authHandler = nil;    
     self.mutableData = nil;
-    self.isCancelled = YES; 
-    self.state = MKNetworkOperationStateFinished;
+    self.isCancelled = YES;
+        
+    self.cacheHandlingBlock = nil;
+    
+    if(self.state == MKNetworkOperationStateExecuting)
+        self.state = MKNetworkOperationStateFinished; // This notifies the queue and removes the operation.
+        // if the operation is not removed, the spinner continues to spin, not a good UX
+    
     [super cancel];
 }
 
@@ -747,75 +848,84 @@ typedef enum {
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
     
-    if (((challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodDefault) ||
-         (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPBasic) ||
-         (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPDigest) ||
-         (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodNTLM)) && 
-        (self.username && self.password))
-    {
-        
-        // for NTLM, we will assume user name to be of the form "domain\\username"
-        NSURLCredential *credential = [NSURLCredential credentialWithUser:self.username 
-                                                                 password:self.password
-                                                              persistence:NSURLCredentialPersistenceForSession];
-        
-        [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-    }
-    else if ((challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodClientCertificate) && self.clientCertificate) {
-         
-        NSData *certData = [[NSData alloc] initWithContentsOfFile:self.clientCertificate];
-        
-#warning method not implemented. Don't use client certicate authentication for now.
-        SecIdentityRef myIdentity;  // ???
-        
-        SecCertificateRef myCert = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)certData);
-        SecCertificateRef certArray[1] = { myCert };
-        CFArrayRef myCerts = CFArrayCreate(NULL, (void *)certArray, 1, NULL);
-        CFRelease(myCert);
-        NSURLCredential *credential = [NSURLCredential credentialWithIdentity:myIdentity
-                                                                 certificates:(__bridge NSArray *)myCerts
-                                                                  persistence:NSURLCredentialPersistencePermanent];
-        CFRelease(myCerts);
-        [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-    }
-    else if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {
-#warning method not tested. proceed at your own risk
-        SecTrustRef serverTrust = [[challenge protectionSpace] serverTrust];
-        SecTrustResultType result;
-        SecTrustEvaluate(serverTrust, &result);
-
-        if(result == kSecTrustResultProceed) {
-            
-             [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-        }
-        else if(result == kSecTrustResultConfirm) {
-            
-            // ask user
-            BOOL userOkWithWrongCert = NO; // (ACTUALLY CHEAT., DON'T BE A F***ING BROWSER, USERS ALWAYS TAP YES WHICH IS RISKY)
-            if(userOkWithWrongCert) {
-
-                // Cert not trusted, but user is OK with that
-                [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-            } else {
-
-                // Cert not trusted, and user is not OK with that. Don't proceed
-                [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-            }
-        } else {
-
-            // invalid or revoked certificate
-            [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-        }
-    }        
-    else if (self.authHandler) {
+    if ([challenge previousFailureCount] == 0) {
     
-        // forward the authentication to the view controller that created this operation
-        // If this happens for NSURLAuthenticationMethodHTMLForm, you have to
-        // do some shit work like showing a modal webview controller and close it after authentication.
-        // I HATE THIS.
-        self.authHandler(challenge);
-    }
-    else {
+        if (((challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodDefault) ||
+             (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPBasic) ||
+             (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPDigest) ||
+             (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodNTLM)) && 
+            (self.username && self.password))
+        {
+            
+            // for NTLM, we will assume user name to be of the form "domain\\username"
+            NSURLCredential *credential = [NSURLCredential credentialWithUser:self.username 
+                                                                     password:self.password
+                                                                  persistence:self.credentialPersistence];
+            
+            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+        }
+        else if ((challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodClientCertificate) && self.clientCertificate) {
+            
+            NSData *certData = [[NSData alloc] initWithContentsOfFile:self.clientCertificate];
+            
+    #warning method not implemented. Don't use client certicate authentication for now.
+            SecIdentityRef myIdentity;  // ???
+            
+            SecCertificateRef myCert = SecCertificateCreateWithData(NULL, (__bridge CFDataRef)certData);
+            SecCertificateRef certArray[1] = { myCert };
+            CFArrayRef myCerts = CFArrayCreate(NULL, (void *)certArray, 1, NULL);
+            CFRelease(myCert);
+            NSURLCredential *credential = [NSURLCredential credentialWithIdentity:myIdentity
+                                                                     certificates:(__bridge NSArray *)myCerts
+                                                                      persistence:NSURLCredentialPersistencePermanent];
+            CFRelease(myCerts);
+            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+        }
+        else if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {
+    #warning method not tested. proceed at your own risk
+            SecTrustRef serverTrust = [[challenge protectionSpace] serverTrust];
+            SecTrustResultType result;
+            SecTrustEvaluate(serverTrust, &result);
+            
+            if(result == kSecTrustResultProceed) {
+                
+                [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+            }
+            else if(result == kSecTrustResultConfirm) {
+                
+                // ask user
+                BOOL userOkWithWrongCert = NO; // (ACTUALLY CHEAT., DON'T BE A F***ING BROWSER, USERS ALWAYS TAP YES WHICH IS RISKY)
+                if(userOkWithWrongCert) {
+                    
+                    // Cert not trusted, but user is OK with that
+                    [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+                } else {
+                    
+                    // Cert not trusted, and user is not OK with that. Don't proceed
+                    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+                }
+            } 
+            else {
+                
+                // invalid or revoked certificate
+                [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+                //[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+            }
+        }        
+        else if (self.authHandler) {
+            
+            // forward the authentication to the view controller that created this operation
+            // If this happens for NSURLAuthenticationMethodHTMLForm, you have to
+            // do some shit work like showing a modal webview controller and close it after authentication.
+            // I HATE THIS.
+            self.authHandler(challenge);
+        }
+        else {
+            [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
+        }
+    } else {
+        //  apple proposes to cancel authentication, which results in NSURLErrorDomain error -1012, but we prefer to trigger a 401
+        //        [[challenge sender] cancelAuthenticationChallenge:challenge];
         [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
     }
 }
@@ -831,7 +941,10 @@ typedef enum {
     
     NSDictionary *httpHeaders = [self.response allHeaderFields];
     
-    if([self.request.HTTPMethod isEqualToString:@"GET"]) {
+    // if you attach a stream, MKNetworkKit will not cache the response.
+    // Streams are usually "big data chunks" that doesn't need caching anyways.
+    
+    if([self.request.HTTPMethod isEqualToString:@"GET"] && [self.downloadStreams count] == 0) {
         
         // We have all this complicated cache handling since NSURLRequestReloadRevalidatingCacheData is not implemented
         // do cache processing only if the request is a "GET" method
@@ -888,24 +1001,21 @@ typedef enum {
         if(eTag)
             [self.cacheHeaders setObject:eTag forKey:@"ETag"];
     }
-    
-    
-    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    
+
     if ([self.mutableData length] == 0) {
         // This is the first batch of data
         // Check for a range header and make changes as neccesary
         NSString *rangeString = [[self request] valueForHTTPHeaderField:@"Range"];
         if ([rangeString hasPrefix:@"bytes="] && [rangeString hasSuffix:@"-"]) {
             NSString *bytesText = [rangeString substringWithRange:NSMakeRange(6, [rangeString length] - 7)];
-            self.startPoint = [bytesText integerValue];
-            DLog(@"Resuming at %d bytes", self.startPoint);
+            self.startPosition = [bytesText integerValue];
+            DLog(@"Resuming at %d bytes", self.startPosition);
         }
     }
-    
+
     [self.mutableData appendData:data];
     
     for(NSOutputStream *stream in self.downloadStreams) {
@@ -920,7 +1030,7 @@ typedef enum {
         
         if([self.response expectedContentLength] > 0) {
             
-            double progress = (double)(self.startPoint + [self.mutableData length]) / (double)(self.startPoint + [self.response expectedContentLength]);
+            double progress = (double)(self.startPosition + [self.mutableData length]) / (double)(self.startPosition + [self.response expectedContentLength]);
             downloadProgressBlock(progress);
         }        
     }
@@ -938,18 +1048,32 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
     }
 }
 
+// http://stackoverflow.com/questions/1446509/handling-redirects-correctly-with-nsurlconnection
+- (NSURLRequest *)connection: (NSURLConnection *)inConnection
+             willSendRequest: (NSURLRequest *)inRequest
+            redirectResponse: (NSURLResponse *)inRedirectResponse;
+{
+    if (inRedirectResponse) {
+        NSMutableURLRequest *r = [self.request mutableCopy];
+        [r setURL: [inRequest URL]];
+        DLog(@"Redirected to %@", [[inRequest URL] absoluteString]);
+
+        return r;
+    } else {
+        return inRequest;
+    }
+}
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
     self.state = MKNetworkOperationStateFinished;
-    self.cachedResponse = nil; // remove cached data
     
     for(NSOutputStream *stream in self.downloadStreams)
         [stream close];
     
     if (self.response.statusCode >= 200 && self.response.statusCode < 300) {
-        if (self.cacheHandlingBlock) {
-            [self notifyCache];        
-        }
+        
+        self.cachedResponse = nil; // remove cached data
+        [self notifyCache];        
         [self operationSucceeded];
         
     } 
@@ -965,7 +1089,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
             DLog(@"%@ temporarily redirected", self.url);
         }
         else {
-            DLog(@"%@ returned status %d", self.url, self.response.statusCode);
+            DLog(@"%@ returned status %d", self.url, (int) self.response.statusCode);
         }
         
     } else if (self.response.statusCode >= 400 && self.response.statusCode < 600) {                        
@@ -984,7 +1108,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 -(NSData*) responseData {
     
     if([self isFinished])
-        return [self.mutableData copy];
+        return self.mutableData;
     else if(self.cachedResponse)
         return self.cachedResponse;
     else
@@ -1018,12 +1142,19 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 }
 #endif
 
-#ifdef __IPHONE_5_0
 -(id) responseJSON {
-    id returnValue = [[self responseData] objectFromJSONData];
-    return returnValue;
+    
+    if([NSJSONSerialization class]) {
+        if([self responseData] == nil) return nil;
+        NSError *error = nil;
+        id returnValue = [NSJSONSerialization JSONObjectWithData:[self responseData] options:0 error:&error];    
+        if(error) DLog(@"JSON Parsing Error: %@", error);
+        return returnValue;
+    } else {
+        DLog("No valid JSON Serializers found");
+        return [self responseString];
+    }
 }
-#endif
 
 
 #pragma mark -

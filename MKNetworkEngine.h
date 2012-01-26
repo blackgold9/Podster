@@ -23,7 +23,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
 #import "MKNetworkOperation.h"
 
 /*!
@@ -199,13 +198,12 @@
 -(void) enqueueOperation:(MKNetworkOperation*) operation forceReload:(BOOL) forceReload;
 
 /*!
- * @abstract Manually override the number of conncurrent connections allowed
- * 
+ * @abstract Cancel operations with a specific tag
+ *
  * @discussion
- * Sets the number of concurrent connections to the number supplied.
- * Ordinarliy, the number is dynamically assigned based on connectivity type.
+ * This method enumerates through all operations in the queue, and cancels any matching the given tag
  */
--(void) overrideConcurrentOperations:(NSInteger)concurrentOperations;
+-(void)cancelAllOperationsWithTag:(NSInteger)tag;
 
 /*!
  *  @abstract HostName of the engine
@@ -217,6 +215,17 @@
  *  You normally initialize an engine with its hostname using the initWithHostName:customHeaders: method
  */
 @property (readonly, strong, nonatomic) NSString *readonlyHostName;
+
+/*!
+ *  @abstract Handler that you implement to monitor reachability changes
+ *  @property reachabilityChangedHandler
+ *  
+ *  @discussion
+ *	The framework calls this handler whenever the reachability of the host changes.
+ *  The default implementation freezes the queued operations and stops network activity
+ *  You normally don't have to implement this unless you need to show a HUD notifying the user of connectivity loss
+ */
+@property (copy, nonatomic) void (^reachabilityChangedHandler)(NetworkStatus ns);
 
 /*!
  *  @abstract Cache Directory Name
@@ -250,10 +259,13 @@
 -(void) useCache;
 
 /*!
- * @abstract Cancel operations with a specific tag
- *
- * @discussion
- * This method enumerates through all operations in the queue, and cancels any matching the given tag
+ *  @abstract Empties previously cached data
+ *  
+ *  @discussion
+ *	This method is a handy helper that you can use to clear cached data.
+ *  By default, MKNetworkKit doens't cache your requests. Use this only when you enabled caching
+ *  @seealso
+ *  useCache
  */
--(void)cancelAllOperationsWithTag:(NSInteger)tag;
+-(void) emptyCache;
 @end
