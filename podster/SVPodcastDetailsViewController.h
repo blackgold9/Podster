@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *metadataView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+- (IBAction)infoTapped:(id)sender;
 
 - (IBAction)subscribeTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *subscribeButton;

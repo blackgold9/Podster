@@ -11,6 +11,7 @@
 #import "SVPodcatcherClient.h"
 #import "SVPodcast.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UILabel+VerticalAlign.h"
 @implementation SVPodcastListCell
 {
     MKNetworkOperation *op;
@@ -67,9 +68,25 @@
 {
     
     self.titleLabel.text = [podcast title];
-    self.summaryLabel.text = [podcast summary];
-    self.logoImageView.backgroundColor = [UIColor grayColor];
-    if ([podcast logoURL] != nil) {
+    CGSize maxSize = CGSizeMake(self.titleLabel.frame.size.width, self.contentView.frame.size.height);
+    CGSize titleSize = [[podcast title] sizeWithFont:self.titleLabel.font constrainedToSize:maxSize];
+    CGRect frame = self.titleLabel.frame;
+    self.titleLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, titleSize.height);
+    CGFloat bottomOfTitleLabel = CGRectGetMaxY(self.titleLabel.frame);
+    if  (self.contentView.frame.size.height - bottomOfTitleLabel >= 20) {
+                self.summaryLabel.hidden = NO;
+        // Enough space for the summary label
+        self.summaryLabel.text = [podcast summary];
+        self.summaryLabel.numberOfLines = 3;
+        CGSize summarySize = [[podcast summary] sizeWithFont:self.summaryLabel.font constrainedToSize:CGSizeMake(self.summaryLabel.frame.size.width,  self.contentView.frame.size.height - bottomOfTitleLabel - 5)];
+        self.summaryLabel.frame = CGRectMake(self.summaryLabel.frame.origin.x, bottomOfTitleLabel + 1, self.summaryLabel.frame.size.width, summarySize.height);
+        
+        
+    } else {
+        self.summaryLabel.hidden = YES;
+    }
+       self.logoImageView.backgroundColor = [UIColor grayColor];
+    if ([podcast thumbLogoURL] != nil) {
     NSURL *imageURL = [NSURL URLWithString:[@"http://" stringByAppendingString:[podcast thumbLogoURL]]];
     op = [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
                                        onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {

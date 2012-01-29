@@ -21,8 +21,8 @@
     static SVPodcatcherClient *client;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        client = [[SVPodcatcherClient alloc] initWithHostName:@"podstore.herokuapp.com" customHeaderFields:nil];
-      //  client = [[SVPodcatcherClient alloc] initWithHostName:@"localhost:3000" customHeaderFields:nil];
+       client = [[SVPodcatcherClient alloc] initWithHostName:@"podstore.herokuapp.com" customHeaderFields:nil];
+//        client = [[SVPodcatcherClient alloc] initWithHostName:@"localhost:5000" customHeaderFields:nil];
     });
     
     return client;
@@ -173,7 +173,7 @@
     NSParameterAssert(token);
     NSParameterAssert(deviceId);
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:token, @"deviceToken",  deviceId, @"deviceId",@"ios", @"platform", nil];
-    MKNetworkOperation *op = [self operationWithPath:@"devices/register.json" 
+    MKNetworkOperation *op = [self operationWithPath:@"devices/create.json" 
                                               params:params 
                                           httpMethod:@"POST"];    
     [op onCompletion:^(MKNetworkOperation *completedOperation) {
@@ -198,7 +198,7 @@
     NSParameterAssert(feedURL);
     NSParameterAssert(deviceId);
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
-    MKNetworkOperation *op = [self operationWithPath:@"devices/subscribe.json" 
+    MKNetworkOperation *op = [self operationWithPath:@"subscriptions/create.json" 
                                               params:params 
                                           httpMethod:@"POST"];    
     [op onCompletion:^(MKNetworkOperation *completedOperation) {
@@ -209,7 +209,7 @@
     }];
     op.freezable = YES;
     
-    [self enqueueOperation:op];
+    [self enqueueOperation:op forceReload:YES];
     
     return op;
 }
@@ -222,7 +222,7 @@
     NSParameterAssert(feedURL);
     NSParameterAssert(deviceId);
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
-    MKNetworkOperation *op = [self operationWithPath:@"devices/unsubscribe.json" 
+    MKNetworkOperation *op = [self operationWithPath:@"subscriptions/destroy.json" 
                                               params:params 
                                           httpMethod:@"POST"];    
     [op onCompletion:^(MKNetworkOperation *completedOperation) {
@@ -233,7 +233,7 @@
     }];
     op.freezable = YES;
     
-    [self enqueueOperation:op];
+    [self enqueueOperation:op forceReload:YES];
     
     return op;
 }

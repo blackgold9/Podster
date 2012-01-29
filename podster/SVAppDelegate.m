@@ -67,9 +67,37 @@ NSString *uuid();
     //[[SVDownloadManager sharedInstance] resumeDownloads];
     [self configureTheming];
 
+    #if TARGET_IPHONE_SIMULATOR
+    // Fake out notifications
+    [[NSUserDefaults standardUserDefaults] setBool:YES 
+                                            forKey:@"notificationsEnabled"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
+    if (!deviceId)
+    {
+        LOG_GENERAL(2, @"No stored device id, creating and storing one");
+        deviceId = uuid();
+        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
+        [[NSUserDefaults standardUserDefaults] synchronize];        
+    }
+    NSString *tokenAsString = @"000000000";
+    [[SVPodcatcherClient sharedInstance] registerForPushNotificationsWithToken:tokenAsString 
+                                                            andDeviceIdentifer:deviceId
+                                                                  onCompletion:^{
+                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore");    
+                                                                      [[NSUserDefaults standardUserDefaults] setBool:YES 
+                                                                                                              forKey:@"notificationsEnabled"];
+                                                                      [[NSUserDefaults standardUserDefaults] synchronize];
+                                                                      
+                                                                  } onError:^(NSError *error) {
+                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore failed with error: %@", error);    
+                                                                  }]; // custom method
+    #else
+    // Actually register
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
                                                                            UIRemoteNotificationTypeBadge|
                                                                            UIRemoteNotificationTypeSound)];
+    #endif
     return YES;
 }
 

@@ -27,6 +27,10 @@
 #import "SVPlaybackManager.h"
 #import "SVPlaybackController.h"
 #import "SVSubscription.h"
+#import "SVPodcastModalView.h"
+#import "Reachability.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "SVPodcastSettingsView.h"
 @interface SVPodcastDetailsViewController ()
 - (BOOL)isSubscribed;
 @end
@@ -40,6 +44,8 @@
     NSFetchedResultsController *fetcher;
     BOOL shouldSave;
     SVPodcast *localPodcast;
+    UIView *headerView;
+    
     
 }
 @synthesize titleLabel;
@@ -72,6 +78,13 @@
     NSParameterAssert(podcast);
     NSAssert(podcast.feedURL, @"The podcast did not have a feed url");
     _podcast = podcast;
+}
+
+- (IBAction)infoTapped:(id)sender {
+    SVPodcastModalView *modal = [[SVPodcastModalView alloc] initWithFrame:self.view.bounds ];
+    modal.podcast = self.podcast;
+    [self.view addSubview:modal];
+    [modal showFromPoint:((UIView *)sender).center];
 }
 
 - (IBAction)subscribeTapped:(id)sender {
@@ -129,6 +142,28 @@
     LOG_GENERAL(2, @"dealloc");
 }
 
+-(void)updateTableHeader
+{
+    if (fetcher.fetchedObjects.count < 4) {
+        if ([headerView superview]) {
+            // header is showing and it shouldnt, remove it
+            self.tableView.tableHeaderView = nil;
+            self.tableView.contentOffset = CGPointMake(0, -headerView.frame.size.height);
+        }
+        
+    } else {
+        // Should show yeader
+        if(![headerView superview]) {
+            // And it needs to be added.
+            self.tableView.tableHeaderView = headerView; 
+            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
+
+        }
+        
+    }
+
+}
+
 - (SVPodcastEntry *)saveAndReturnItemAtIndexPath:(NSIndexPath*)indexPath
 {
     // NEed to save now
@@ -153,21 +188,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showEpisodeDetails"]) {
-        SVEpisodeDetailsViewController *details = segue.destinationViewController;
-        
-        details.episode = (SVPodcastEntry *)[self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
-    } else if ([[segue identifier] isEqualToString:@"playPodcastEpisode"]) {
-        SVPodcastEntry *fetcherEpisode;
-        fetcherEpisode = [self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
-        SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
-        NSLog(@"Selected episode %@", episode);
-        [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
-        
-        // Download episode
-        //[[SVDownloadManager sharedInstance] downloadEntry:episode];
-    }
-}
+   }
 - (void)loadFeedImage
 {
     [[SVPodcatcherClient sharedInstance] imageAtURL:[NSURL URLWithString:localPodcast.logoURL]
@@ -188,13 +209,14 @@
     self.metadataView.layer.shadowOpacity = 0.5;
     self.titleLabel.text = self.podcast.title;
     self.descriptionLabel.text = self.podcast.summary;
-    [[SVPodcatcherClient sharedInstance] imageAtURL:[NSURL URLWithString:self.podcast.logoURL] onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
+    [[SVPodcatcherClient sharedInstance] imageAtURL:[NSURL URLWithString:[self.podcast thumbLogoURL]] onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
         self.imageView.image = fetchedImage;
     }];
     isLoading = YES;
+   
+ //   self.tableView.tableHeaderView = settingsView;
 
     localContext = [NSManagedObjectContext defaultContext];
-
     [localContext performBlockAndWait:^{
                     LOG_GENERAL(2, @"Lookuing up podcast in data store");
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
@@ -204,11 +226,16 @@
         if (!localPodcast) {
             LOG_GENERAL(2, @"Podcast didn't exist, creating it");
             localPodcast =[SVPodcast createInContext:localContext];
-            localPodcast.title = self.podcast.title;
-            localPodcast.summary = self.podcast.summary;
-            localPodcast.logoURL = self.podcast.logoURL;
-            localPodcast.feedURL = self.podcast.feedURL;
         }
+        
+        localPodcast.title = self.podcast.title;
+        localPodcast.summary = self.podcast.summary;
+        localPodcast.logoURL = self.podcast.logoURL;
+        localPodcast.feedURL = self.podcast.feedURL;
+        localPodcast.thumbLogoURL = [self.podcast thumbLogoURL];
+        localPodcast.smallLogoURL = [self.podcast smallLogoURL];
+        localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
+
     }];
     
     if ([self isSubscribed]) {
@@ -243,6 +270,11 @@
 
     fetcher = [SVPodcastEntry fetchAllSortedBy:SVPodcastEntryAttributes.datePublished ascending:NO withPredicate:[NSPredicate predicateWithFormat:@"podcast.feedURL == %@", localPodcast.feedURL] groupBy:nil delegate:self inContext:localContext];
     [self.tableView reloadData];
+    
+    headerView = self.tableView.tableHeaderView;
+//    self.tableView.contentInset = UIEdgeInsetsMake(-80, 0, 0, 0);
+    [self updateTableHeader];
+     //  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)viewDidUnload
@@ -270,6 +302,7 @@
 // Return YES for supported orientations
 	return YES;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    // NEed to save now
@@ -298,13 +331,46 @@
 //    LOG_GENERAL(3, @"Navigating to player");
 //    [[self navigationController] pushViewController:controller animated:YES];
     
+
+        SVPodcastEntry *fetcherEpisode;
+        fetcherEpisode = [self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
+        SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
+    BOOL isVideo = NO;
+    isVideo |=  [episode.mediaURL rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
+    isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
+    isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
+    if (isVideo) {
+        if ([[SVPodcatcherClient sharedInstance] isOnWifi]) {
+            MPMoviePlayerViewController *player =
+            [[MPMoviePlayerViewController alloc] initWithContentURL: [NSURL URLWithString:[episode mediaURL]]];
+            [self presentMoviePlayerViewControllerAnimated:player
+             ];
+
+        }
+    }else {
+          [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
+          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+          UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
+          NSParameterAssert(controller);
+          
+          LOG_GENERAL(3, @"Navigating to player");
+          [[self navigationController] pushViewController:controller animated:YES];
+
+    }
+        // Download episode
+        //[[SVDownloadManager sharedInstance] downloadEntry:episode];
     
+
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
-    [self performSegueWithIdentifier:@"showEpisodeDetails" sender:self];
+    SVEpisodeDetailsViewController *details = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"episodeDetails"];    
+    details.episode = (SVPodcastEntry *)[self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
+    [[self navigationController] pushViewController:details
+                                           animated:YES];
+
 
 }
 
@@ -350,6 +416,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    [self updateTableHeader];
 
 }
 

@@ -268,4 +268,7 @@
  *  useCache
  */
 -(void) emptyCache;
+
+
+-(BOOL)isOnWifi;
 @end

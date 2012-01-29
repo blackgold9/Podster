@@ -6,7 +6,9 @@
 {
     self.title = [[info title] capitalizedString];
     self.summary = info.summary;
-    self.logoURL = info.imageURL;
+    if (info.imageURL) {
+        self.logoURL = info.imageURL;
+    }
 }
 // Custom logic goes here.
 -(void)populateWithDictionary:(NSDictionary *)dictionary
