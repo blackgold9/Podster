@@ -44,6 +44,8 @@
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
     self.fetcher.delegate = self;
+    self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+
 }
 
 - (void)viewDidUnload

@@ -37,6 +37,7 @@
 @synthesize imageURL = _imageURL;
 @synthesize author = _author;
 @synthesize subTitle = _subTitle;
+@synthesize lastUpdated = _lastUpdated;
 #pragma mark NSObject
 
 - (NSString *)description {

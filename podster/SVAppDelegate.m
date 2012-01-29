@@ -17,8 +17,10 @@
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcast.h"
 #import "SDURLCache.h"
+#import "GMGridView.h"
 @implementation SVAppDelegate
 {
+    UIColor *backgrondTexture;
 }
 
 NSString *uuid();
@@ -30,7 +32,7 @@ NSString *uuid();
 }
 - (void)configureTheming
 {
-    UIColor *backgrondTexture = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.jpg"]];
+    backgrondTexture = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
     UIColor *colorOne = [UIColor colorWithHex:0x1E1E27];
     UIColor *colorTwo = [UIColor colorWithHex:0x65F4FF];
     UIColor *colorThree = [UIColor colorWithHex:0x41EA29];
@@ -43,8 +45,10 @@ NSString *uuid();
     [[UISegmentedControl appearance] setTintColor:colorOne];
     [[UIToolbar appearance] setTintColor:colorOne];
     [[UIBarButtonItem appearance] setTintColor:colorOne];
-
-    [[UITableView appearance] setBackgroundColor:backgrondTexture];
+   
+   // [[GMGridView appearance] setBackgroundColor:backgrondTexture];
+   // [[UIScrollView appearance] setBackgroundColor:backgrondTexture];
+    //[[UIScrollView appearance] setBackgroundColor:backgrondTexture];
    // NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorFour
    //                                                               forKey:UITextAttributeTextColor];
    // [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];

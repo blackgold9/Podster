@@ -43,7 +43,7 @@
     SVPodcast *localPodcast;
     UIView *headerView;
     
-    
+    BOOL isInitialLoad;
 }
 @synthesize titleLabel;
 @synthesize descriptionLabel;
@@ -58,6 +58,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+
     }
     return self;
 }
@@ -149,15 +150,23 @@
         }
         
     } else {
+        if (isInitialLoad) {
+            // Only the first time do you need to do set the offset. 
+            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
+            isInitialLoad = NO;
+        }
+        
         // Should show yeader
         if(![headerView superview]) {
             // And it needs to be added.
             self.tableView.tableHeaderView = headerView; 
             self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
-
+            
         }
         
     }
+    
+   
 
 }
 
@@ -197,6 +206,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+            isInitialLoad = YES;
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0];
 //    self.metadataView.layer.shadowPath = CGPathCreateWithRect(self.metadataView.frame, NULL);
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
@@ -361,8 +372,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-      SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView dequeueReusableCellWithIdentifier:@"episodeCell"];
+      SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView 
+                                                       dequeueReusableCellWithIdentifier:@"episodeCell"];
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item.png"]];
         SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
+    
     [cell bind:episode];    
     
     return cell;

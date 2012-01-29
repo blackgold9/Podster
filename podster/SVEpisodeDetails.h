@@ -11,6 +11,7 @@
 #import "SVViewController.h"
 @class DTAttributedTextView;
 @interface SVEpisodeDetailsViewController : SVViewController
+@property (weak, nonatomic) IBOutlet UIImageView *imageBackground;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *listenButton;
 @property (weak, nonatomic) IBOutlet UIButton *downloadButton;

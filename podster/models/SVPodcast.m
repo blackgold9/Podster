@@ -6,7 +6,7 @@
 {
     self.title = [[info title] capitalizedString];
     self.summary = info.summary;
-    if (info.imageURL) {
+    if (info.imageURL != nil && self.logoURL == nil) {
         self.logoURL = info.imageURL;
     }
 }
@@ -19,6 +19,7 @@
     NSParameterAssert(self.title);
     self.summary = [dictionary stringForKey:@"summary"];
     self.feedURL = [dictionary stringForKey:@"feed_url"];
+
     NSParameterAssert(self.feedURL);
     self.websiteURL = [dictionary stringForKey:@"website_url"];
     if ([[dictionary objectForKey:@"image"] objectForKey:@"url"] != [NSNull null]) {

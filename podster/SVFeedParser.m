@@ -21,6 +21,7 @@
     MWFeedParser *feedParser;
     NSString *feedURL;
     dispatch_queue_t originalQueue;
+    BOOL isFirstItem;
 }
 @synthesize errorCallback, completionCallback;
 + (id)parseData:(NSData *)data
@@ -42,6 +43,7 @@ forPodcastAtURL:(NSString *)feedURL
     parser->failed = NO;
     parser->feedParser = [[MWFeedParser alloc] initWithFeedData:data textEncodingName:@"NSUnicodeStringEncoding"];
     parser->feedParser.delegate = parser;
+    parser->isFirstItem = YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [parser->feedParser parse];
     });
@@ -74,6 +76,11 @@ forPodcastAtURL:(NSString *)feedURL
         });
         //TODO: Report parsing error with url
         return;
+    }
+    
+    if (isFirstItem) {
+        localPodcast.lastUpdated = item.date;
+        isFirstItem = NO;
     }
     [localContext performBlock:^void() {
         LOG_PARSING(4, @"Processing feed item %@", item);
@@ -109,6 +116,7 @@ forPodcastAtURL:(NSString *)feedURL
         NSParameterAssert(episode.guid);
         episode.imageURL = item.imageURL;
         episode.datePublished = item.date;
+        episode.content = item.content;
         episode.durationValue = [item.duration secondsFromDurationString];
         episode.podcast = localPodcast;
         [localContext save];

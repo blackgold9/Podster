@@ -43,6 +43,7 @@
 @property (nonatomic, copy) NSString *imageURL;
 @property (nonatomic, copy) NSString *author;
 @property (nonatomic, copy) NSString *subTitle;
+@property (nonatomic, copy) NSString *lastUpdated;
 
 
 @end

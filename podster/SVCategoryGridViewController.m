@@ -133,14 +133,14 @@
 - (void)loadView
 {
     [super loadView];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:imageView];
+    //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+    //imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    //[self.view addSubview:imageView];
                               
     self.gridView = [[GMGridView alloc] initWithFrame:self.view.bounds];
     self.gridView.actionDelegate = self;
     self.gridView.dataSource = self;
-    self.gridView.backgroundColor = [UIColor clearColor];
+    self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
     self.gridView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     searchbar.placeholder = @"Search for a specific Podcast";

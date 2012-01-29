@@ -146,10 +146,11 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="zBW-st-oQR">
-                                <rect key="frame" x="0.0" y="85" width="320" height="287"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="zBW-st-oQR">
+                                <rect key="frame" x="0.0" y="88" width="320" height="287"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="72Q-WM-wBy">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -195,7 +196,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="episodeCell" rowHeight="88" id="J7U-bG-OW1" customClass="SVEpisodeListCell">
-                                        <rect key="frame" x="0.0" y="180" width="320" height="88"/>
+                                        <rect key="frame" x="0.0" y="180" width="320" height="89"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="87"/>
@@ -205,7 +206,7 @@
                                                     <rect key="frame" x="13" y="6" width="270" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n6z-SI-tH6">
@@ -223,13 +224,20 @@
                                                     <rect key="frame" x="236" y="63" width="50" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="down.png" id="FuM-p9-34D">
                                                     <rect key="frame" x="160" y="0.0" width="24" height="13"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="xc6-wg-Vae">
+                                                    <rect key="frame" x="13" y="62" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -247,9 +255,13 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="ZhJ-GG-EuI" userLabel="Details Header">
-                                <rect key="frame" x="0.0" y="0.0" width="325" height="85"/>
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="88"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list-item.png" id="sje-8n-dga">
+                                        <rect key="frame" x="0.0" y="0.0" width="325" height="88"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podcast Title" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="pCs-j8-aWo">
                                         <rect key="frame" x="87" y="8" width="213" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -270,7 +282,7 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="VI1-Eb-eO6">
                                         <rect key="frame" x="287" y="33" width="18" height="19"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                         <state key="normal">
                                             <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
@@ -319,55 +331,29 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list-item.png" id="dVC-kK-wZh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" minimumFontSize="10" id="sd0-Ab-VTv">
-                                <rect key="frame" x="20" y="20" width="280" height="52"/>
+                                <rect key="frame" x="10" y="0.0" width="300" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kbL-3e-13f">
-                                <rect key="frame" x="20" y="80" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal" image="listen.png">
-                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="listenTapped:" destination="Ud2-Hj-ZkH" eventType="touchUpInside" id="Cd2-bM-DRR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8sw-dC-7V6">
-                                <rect key="frame" x="96" y="80" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal" image="download.png">
-                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="downloadTapped:" destination="Ud2-Hj-ZkH" eventType="touchUpInside" id="KK7-xU-lGz"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" id="kiP-A3-gBF" customClass="DTAttributedTextView">
-                                <rect key="frame" x="21" y="168" width="280" height="270"/>
+                                <rect key="frame" x="10" y="60" width="300" height="378"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Episode Details" id="vXP-cd-eGE"/>
                     <connections>
-                        <outlet property="downloadButton" destination="8sw-dC-7V6" id="ulh-1n-rA1"/>
-                        <outlet property="listenButton" destination="kbL-3e-13f" id="otz-xP-fMd"/>
+                        <outlet property="imageBackground" destination="dVC-kK-wZh" id="n1k-hd-VXf"/>
                         <outlet property="summaryView" destination="kiP-A3-gBF" id="C6D-lo-Mzq"/>
                         <outlet property="titleLabel" destination="sd0-Ab-VTv" id="75z-O8-psh"/>
                     </connections>
@@ -383,7 +369,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000013" contentMode="scaleToFill" image="bg-gunmetal.png" id="r5t-Du-EsY">
+                            <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.40000000000000013" contentMode="scaleToFill" image="bg-gunmetal.png" id="r5t-Du-EsY">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -707,9 +693,8 @@
         <image name="bigplay.png" width="100" height="100"/>
         <image name="clockSmall.png" width="12" height="12"/>
         <image name="down.png" width="24" height="13"/>
-        <image name="download.png" width="48" height="42"/>
         <image name="heart.png" width="26" height="26"/>
-        <image name="listen.png" width="48" height="39"/>
+        <image name="list-item.png" width="320" height="88"/>
         <image name="skipback.png" width="24" height="24"/>
         <image name="skipforward.png" width="24" height="24"/>
     </resources>
@@ -754,6 +739,7 @@
                 <relationship kind="action" name="downloadTapped:"/>
                 <relationship kind="action" name="listenTapped:"/>
                 <relationship kind="outlet" name="downloadButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imageBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="listenButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="summaryView" candidateClass="DTAttributedTextView"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
@@ -833,6 +819,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1h9-6I-oKZ"/>
+        <segue reference="fze-37-ETh"/>
     </inferredMetricsTieBreakers>
 </document>

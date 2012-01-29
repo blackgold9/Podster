@@ -52,7 +52,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tableView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
     [self.tableView registerNib:[self listNib] forCellReuseIdentifier:@"SVPodcastListCell"];
     self.tableView.rowHeight = 88;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
