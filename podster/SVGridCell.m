@@ -9,14 +9,14 @@
 #import "SVGridCell.h"
 
 @implementation SVGridCell
-@synthesize operation = _operation;
+//@synthesize operation = _operation;
 
 -(void)prepareForReuse
 {
-    if (self.operation) {
-        [self.operation cancel];
-    }
-    
+//    if (self.operation) {
+//        [self.operation cancel];
+//    }
+//    
     [super prepareForReuse];
 }
 @end

@@ -7,5 +7,5 @@ typedef enum {
 } SVDownloadState;
 @interface SVDownload : _SVDownload {}
 // Custom logic goes here.
-@property (strong) MKNetworkOperation *downloadOperation;
+//@property (strong) MKNetworkOperation *downloadOperation;
 @end

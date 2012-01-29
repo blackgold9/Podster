@@ -85,7 +85,7 @@
                                                        [self.tableView reloadData];
 
                                                    }    onError:^(NSError *error) {
-            [UIAlertView showWithError:error];
+         //   [UIAlertView showWithError:error];
         }];
     }
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.

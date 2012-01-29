@@ -9,5 +9,4 @@
 #import "GMGridViewCell.h"
 
 @interface SVGridCell : GMGridViewCell
-@property (nonatomic, retain) MKNetworkOperation *operation; 
 @end

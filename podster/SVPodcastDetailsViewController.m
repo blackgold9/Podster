@@ -13,7 +13,6 @@
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 #import "SVPodcatcherClient.h"
-#import "UIAlertView+MKNetworkKitAdditions.h"
 #import "SVPodcastEntry.h"
 #import "SVPlaybackManager.h"
 #import <QuartzCore/QuartzCore.h>
@@ -28,7 +27,6 @@
 #import "SVPlaybackController.h"
 #import "SVSubscription.h"
 #import "SVPodcastModalView.h"
-#import "Reachability.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "SVPodcastSettingsView.h"
 @interface SVPodcastDetailsViewController ()
@@ -39,7 +37,6 @@
     NSMutableArray *feedItems;
     MWFeedInfo *feedInfo;
     MWFeedParser *feedParser;
-    MKNetworkOperation *op;
     NSManagedObjectContext *localContext;
     NSFetchedResultsController *fetcher;
     BOOL shouldSave;
@@ -191,11 +188,7 @@
    }
 - (void)loadFeedImage
 {
-    [[SVPodcatcherClient sharedInstance] imageAtURL:[NSURL URLWithString:localPodcast.logoURL]
-                                       onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-
-                                           imageView.image = fetchedImage;
-                                       }];
+    [imageView setImageWithURL:[NSURL URLWithString:localPodcast.logoURL]];
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -209,9 +202,7 @@
     self.metadataView.layer.shadowOpacity = 0.5;
     self.titleLabel.text = self.podcast.title;
     self.descriptionLabel.text = self.podcast.summary;
-    [[SVPodcatcherClient sharedInstance] imageAtURL:[NSURL URLWithString:[self.podcast thumbLogoURL]] onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-        self.imageView.image = fetchedImage;
-    }];
+    [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
     isLoading = YES;
    
  //   self.tableView.tableHeaderView = settingsView;
@@ -261,11 +252,11 @@
         LOG_GENERAL(2, @"Done loading entries");
     };
 
-    op = [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
+    [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
                                                                           inContext:localContext
                                                                        onCompletion:loadCompleteHandler
                                                                             onError:^(NSError *error) {
-                [UIAlertView showWithError:error];
+              //  [UIAlertView showWithError:error];
             }];
 
     fetcher = [SVPodcastEntry fetchAllSortedBy:SVPodcastEntryAttributes.datePublished ascending:NO withPredicate:[NSPredicate predicateWithFormat:@"podcast.feedURL == %@", localPodcast.feedURL] groupBy:nil delegate:self inContext:localContext];
@@ -288,13 +279,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    if (op) {
-        [op cancel];
-    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -340,13 +324,13 @@
     isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
     isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
     if (isVideo) {
-        if ([[SVPodcatcherClient sharedInstance] isOnWifi]) {
+//        if ([[SVPodcatcherClient sharedInstance] isOnWifi]) {
             MPMoviePlayerViewController *player =
             [[MPMoviePlayerViewController alloc] initWithContentURL: [NSURL URLWithString:[episode mediaURL]]];
             [self presentMoviePlayerViewControllerAnimated:player
              ];
 
-        }
+//        }
     }else {
           [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
           UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];

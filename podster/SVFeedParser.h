@@ -18,5 +18,5 @@ typedef void (^CompletionBlock)(void);
 forPodcastAtURL:(NSString *)feedURL
       inContext:(NSManagedObjectContext *)context
      onComplete:(CompletionBlock)complete
-        onError:(MKNKErrorBlock)error;
+        onError:(SVErrorBlock)error;
 @end

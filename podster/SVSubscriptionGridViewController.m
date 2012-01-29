@@ -140,21 +140,7 @@
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
     imageView.image = nil;
     NSURL *imageURL = [NSURL URLWithString: currentPodcast.logoURL];
-    [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
-                                       onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-                                           if (url == imageURL) {
-                                               if (!isInCache) {
-                                                   CATransition *transition = [CATransition animation];
-                                                   
-                                                   
-                                                   [imageView.layer addAnimation:transition forKey:nil];
-                                               }
-                                               imageView.image = fetchedImage;
-                                               if (!fetchedImage) {
-                                                   LOG_NETWORK(1, @"Error loading image for url: %@", url);
-                                               }
-                                           }
-                                       }];
+    [imageView setImageWithURL:imageURL];
     return cell;
 }
 

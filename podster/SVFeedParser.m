@@ -10,7 +10,7 @@
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 @interface SVFeedParser ()
-@property (nonatomic, copy) MKNKErrorBlock errorCallback;
+@property (nonatomic, copy) SVErrorBlock errorCallback;
 @property (nonatomic, copy) CompletionBlock completionCallback;
 @end
 @implementation SVFeedParser {
@@ -27,7 +27,7 @@
 forPodcastAtURL:(NSString *)feedURL
              inContext:(NSManagedObjectContext *)context
             onComplete:(CompletionBlock)complete
-               onError:(MKNKErrorBlock)error
+               onError:(SVErrorBlock)error
 {
     NSParameterAssert(feedURL);
     NSParameterAssert(context);

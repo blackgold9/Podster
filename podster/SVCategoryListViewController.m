@@ -70,7 +70,7 @@
 
                                                                                } onError:^(NSError *error)
                                                                                          {
-                                                                                             [UIAlertView showWithError:error];
+                                                                                            // [UIAlertView showWithError:error];
                                                                                          }];
 
 }

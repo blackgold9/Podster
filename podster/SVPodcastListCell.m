@@ -14,7 +14,7 @@
 #import "UILabel+VerticalAlign.h"
 @implementation SVPodcastListCell
 {
-    MKNetworkOperation *op;
+    
 }
 @synthesize titleLabel = _titleLabel;
 @synthesize summaryLabel = _summaryLabel;
@@ -25,12 +25,6 @@
 
 -(void)prepareForReuse
 {
-    if (op) {
-        [op cancel];
-        op = nil;
-        LOG_NETWORK(3, @"Cancelled network operation");;
-
-    }
     self.logoImageView.image = nil;
     [super prepareForReuse];
 }
@@ -85,28 +79,11 @@
     } else {
         self.summaryLabel.hidden = YES;
     }
-       self.logoImageView.backgroundColor = [UIColor grayColor];
+    self.logoImageView.backgroundColor = [UIColor grayColor];
     if ([podcast thumbLogoURL] != nil) {
-    NSURL *imageURL = [NSURL URLWithString:[@"http://" stringByAppendingString:[podcast thumbLogoURL]]];
-    op = [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL
-                                       onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-                                           if ([[url absoluteString] isEqualToString:[imageURL absoluteString]]) {
-                                               if(!isInCache) {
-                                                   LOG_NETWORK(3, @"Image was not cached");
-                                                   CATransition *transition = [CATransition animation];
-                                                   
-                                                   
-                                                   [self.logoImageView.layer addAnimation:transition forKey:nil];
-                                               } else {
-                                                   LOG_NETWORK(3, @"Image was cached");                                                   
-                                               }
-
-                                               self.logoImageView.image = fetchedImage;
-                                               if (!fetchedImage) {
-                                                   LOG_NETWORK(1, @"Error loading image for url: %@", url);
-                                               }
-                                           }
-                                       }];
+        NSURL *imageURL = [NSURL URLWithString:[@"http://" stringByAppendingString:[podcast thumbLogoURL]]];
+        
+        [self.logoImageView setImageWithURL:imageURL];
     }
 
 }

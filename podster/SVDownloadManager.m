@@ -22,7 +22,7 @@
 @implementation SVDownloadManager {
     NSMutableDictionary *operationLookup;
     NSInteger currentProgressPercentage;
-    MKNetworkEngine *downloadEngine;
+   // MKNetworkEngine *downloadEngine;
     NSInteger maxConcurrentDownloads;
     NSOperationQueue *queue;
 }
@@ -42,8 +42,8 @@
     if (self) {
         [self ensureDownloadsDirectory];
         currentProgressPercentage = 0;
-        downloadEngine = [[MKNetworkEngine alloc] initWithHostName:nil
-                                                customHeaderFields:nil];
+      //  downloadEngine = [[MKNetworkEngine alloc] initWithHostName:nil
+                                                //customHeaderFields:nil];
         operationLookup = [NSMutableDictionary dictionary];
         maxConcurrentDownloads = 2;
         queue = [NSOperationQueue new];
@@ -68,17 +68,17 @@
 
 - (void)pauseDownloadForEntry:(SVPodcastEntry *)entry
 {
-    NSParameterAssert(entry.mediaURL);
-    MKNetworkOperation *op = [operationLookup objectForKey:entry.mediaURL];
-    if (op) {
-        [op cancel];
-        [operationLookup removeObjectForKey:entry.mediaURL];
-    }
-    
-    [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
-        SVPodcastEntry *localEntry = [entry inContext:localContext];
-        localEntry.download.stateValue = SVDownloadStatePaused;
-    }];
+//    NSParameterAssert(entry.mediaURL);
+//    MKNetworkOperation *op = [operationLookup objectForKey:entry.mediaURL];
+//    if (op) {
+//        [op cancel];
+//        [operationLookup removeObjectForKey:entry.mediaURL];
+//    }
+//    
+//    [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+//        SVPodcastEntry *localEntry = [entry inContext:localContext];
+//        localEntry.download.stateValue = SVDownloadStatePaused;
+//    }];
 }
 
 -(SVDownload *)nextUpDownload

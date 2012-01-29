@@ -7,7 +7,6 @@
 //
 
 #import "SVAppDelegate.h"
-#import "SVGPodderClient.h"
 #import "UIColor+Hex.h"
 #import "SVDownloadManager.h"
 #import "SVPodcatcherClient.h"
@@ -17,9 +16,9 @@
 #import "SVPlaybackManager.h"
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcast.h"
+#import "SDURLCache.h"
 @implementation SVAppDelegate
 {
-    MKNetworkEngine *engine;
 }
 
 NSString *uuid();
@@ -31,6 +30,7 @@ NSString *uuid();
 }
 - (void)configureTheming
 {
+    UIColor *backgrondTexture = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.jpg"]];
     UIColor *colorOne = [UIColor colorWithHex:0x1E1E27];
     UIColor *colorTwo = [UIColor colorWithHex:0x65F4FF];
     UIColor *colorThree = [UIColor colorWithHex:0x41EA29];
@@ -44,6 +44,7 @@ NSString *uuid();
     [[UIToolbar appearance] setTintColor:colorOne];
     [[UIBarButtonItem appearance] setTintColor:colorOne];
 
+    [[UITableView appearance] setBackgroundColor:backgrondTexture];
    // NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorFour
    //                                                               forKey:UITextAttributeTextColor];
    // [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];
@@ -62,8 +63,10 @@ NSString *uuid();
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     
-    [[SVPodcatcherClient sharedInstance] useCache];
-    
+    SDURLCache *urlCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024   // 1MB mem cache
+                                                         diskCapacity:1024*1024*50 // 50MB disk cache
+                                                             diskPath:[SDURLCache defaultCachePath]];
+    [NSURLCache setSharedURLCache:urlCache];
     //[[SVDownloadManager sharedInstance] resumeDownloads];
     [self configureTheming];
 
@@ -156,7 +159,7 @@ NSString *uuid(){
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     LOG_GENERAL(1,@"Error in registration. Error: %@", err);
-    [UIAlertView showWithError:err];
+  //  [UIAlertView showWithError:err];
 }
 	
 - (void)applicationWillResignActive:(UIApplication *)application

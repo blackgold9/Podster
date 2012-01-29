@@ -17,10 +17,10 @@
     #import <Foundation/Foundation.h>
     #import "LoggerCommon.h"
     #import "LoggerClient.h"
-    #import "MKNetworkKit.h"
     #import "CoreData+MagicalRecord.h"
     #import "NSString+SVHelpers.h"
-
+#import "AFNetworking.h"
+#import "SVPodcatcherClient.h"
 #endif
 #ifdef DEBUG
 #define LOG_NETWORK(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"network",level,__VA_ARGS__)

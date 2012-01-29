@@ -3,6 +3,6 @@
 @implementation SVDownload
 
 // Custom logic goes here.
-@synthesize downloadOperation;
+//@synthesize downloadOperation;
 
 @end

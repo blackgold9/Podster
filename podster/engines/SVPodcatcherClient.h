@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MKNetworkEngine.h"
+#import "AFNetworking.h"
 #import "MWFeedParser.h"
 
 @class SVPodcast;
@@ -16,49 +16,50 @@ typedef void (^CategoryResponseBlock)(NSArray *categories);
 typedef void (^PodcastListResponeBlock)(NSArray *podcasts);
 typedef void (^FeedListResponeBlock)(NSArray *feedURLs);
 typedef void (^PodcastItemsResponseBlock)(NSArray *entries);
+typedef void (^SVErrorBlock)(NSError *error);
 
-@interface SVPodcatcherClient : MKNetworkEngine<MWFeedParserDelegate>
+@interface SVPodcatcherClient : AFHTTPClient<MWFeedParserDelegate>
 +(id)sharedInstance;
--(MKNetworkOperation *)categoriesInLanguage:(NSString *)language
+-(void)categoriesInLanguage:(NSString *)language
                                onCompletion:(CategoryResponseBlock)completion
-                                    onError:(MKNKErrorBlock)error;
+                                    onError:(SVErrorBlock)error;
 
--(MKNetworkOperation *)searchForPodcastsMatchingQuery:(NSString *)query
+-(void)searchForPodcastsMatchingQuery:(NSString *)query
                                          onCompletion:(PodcastListResponeBlock)completion
-                                              onError:(MKNKErrorBlock)error;
+                                              onError:(SVErrorBlock)error;
 
-- (MKNetworkOperation *)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL
+- (void)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL
                                           withDeviceId:(NSString *)deviceId
                                           onCompletion:(void(^)(void))completion
-                                               onError:(MKNKErrorBlock)error;
+                                               onError:(SVErrorBlock)error;
 
-- (MKNetworkOperation *)notifyOfSubscriptionToFeed:(NSString *)feedURL
+- (void)notifyOfSubscriptionToFeed:(NSString *)feedURL
                                       withDeviceId:(NSString *)deviceId
                                       onCompletion:(void(^)(void))completion
-                                           onError:(MKNKErrorBlock)error;
+                                           onError:(SVErrorBlock)error;
 
-- (MKNetworkOperation *)getAppConfigWithLanguage:(NSString *)language
+- (void)getAppConfigWithLanguage:(NSString *)language
                                    onCompletion:(void(^)(void))completion
-                                         onError:(MKNKErrorBlock)error;
+                                         onError:(SVErrorBlock)error;
 
-- (MKNetworkOperation *)findFeedsOnWebPage:(NSString *)pageURL
+- (void)findFeedsOnWebPage:(NSString *)pageURL
                               onCompletion:(FeedListResponeBlock)completion
-                                   onError:(MKNKErrorBlock)error;
--(MKNetworkOperation *)podcastsByCategory:(NSInteger)categoryId
+                                   onError:(SVErrorBlock)error;
+-(void)podcastsByCategory:(NSInteger)categoryId
                        startingAtIndex:(NSInteger)start
                                  limit:(NSInteger)limit
                           onCompletion:(PodcastListResponeBlock)completion 
-                               onError:(MKNKErrorBlock)errorBlock;
+                               onError:(SVErrorBlock)errorBlock;
 
--(MKNetworkOperation *)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
+-(void)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
                                                    inContext:(NSManagedObjectContext *)context
                                                 onCompletion:(void (^)(void))onComplete
-                                                     onError:(MKNKErrorBlock)onError;
+                                                     onError:(SVErrorBlock)onError;
 
--(MKNetworkOperation *)registerForPushNotificationsWithToken:(NSString *)token
+-(void)registerForPushNotificationsWithToken:(NSString *)token
                                           andDeviceIdentifer:(NSString *)deviceId
                                                 onCompletion:(void (^)(void))onComplete
-                                                     onError:(MKNKErrorBlock)onError;
+                                                     onError:(SVErrorBlock)onError;
 
 #pragma mark - podcast downloading
 

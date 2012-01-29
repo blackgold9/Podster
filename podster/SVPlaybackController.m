@@ -49,20 +49,21 @@
     LOG_GENERAL(2, @"View did appear");
     LOG_NETWORK(4, @"Triggering albumart image load");
     NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                LOG_NETWORK(4, @"Album art recieved");
-                CATransition *transition = [CATransition animation];
-                [self.artworkImage.layer addAnimation:transition forKey:nil];
-                
-                self.artworkImage.image = fetchedImage;
-
-            });
-            
-        }];
-    });
+    [self.artworkImage setImageWithURL:imageURL];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
+//
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                LOG_NETWORK(4, @"Album art recieved");
+//                CATransition *transition = [CATransition animation];
+//                [self.artworkImage.layer addAnimation:transition forKey:nil];
+//                
+//                self.artworkImage.image = fetchedImage;
+//
+//            });
+//            
+//        }];
+//    });
    
 
 }

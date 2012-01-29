@@ -47,7 +47,7 @@
 
                                                                                } onError:^(NSError *error)
                                                                                                                                                            {
-                                                                                              [UIAlertView showWithError:error];
+                                                                                              //[UIAlertView showWithError:error];
                                                                                                                                                            }];
 
 }
@@ -65,7 +65,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    [[SVPodcatcherClient sharedInstance] cancelAllOperationsWithTag:IMAGE_LOAD_OPERATION_TAG];
+//    [[SVPodcatcherClient sharedInstance] cancelAllOperationsWithTag:IMAGE_LOAD_OPERATION_TAG];
     
 }
 
@@ -124,28 +124,10 @@
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
     imageView.image = nil;
     if (category.imageURL) {
-        MKNetworkOperation *op;
-        op =[[SVPodcatcherClient sharedInstance] imageAtURL:category.imageURL
-                                               onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-                                                   if (url == category.imageURL) {
-                                                       CATransition *transition = [CATransition animation];
-                                                       
-                                                       
-                                                       [imageView.layer addAnimation:transition forKey:nil];
-                                                       
-                                                       imageView.image = fetchedImage;
-                                                       if (!fetchedImage) {
-                                                           LOG_NETWORK(1, @"Error loading image for url: %@", url);
-                                                       }
-                                                   }                                              
-                                               }];
-        op.tag = IMAGE_LOAD_OPERATION_TAG;
-        cell.operation = op;
-        
+        [imageView setImageWithURL:category.imageURL];
     }
-    return cell;
     
-
+    return cell;
 }
 
 - (void)loadView
