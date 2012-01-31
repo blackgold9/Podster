@@ -9,6 +9,7 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *logoURL;
 	__unsafe_unretained NSString *smallLogoURL;
+	__unsafe_unretained NSString *subtitle;
 	__unsafe_unretained NSString *summary;
 	__unsafe_unretained NSString *thumbLogoURL;
 	__unsafe_unretained NSString *tinyLogoURL;
@@ -26,6 +27,7 @@ extern const struct SVPodcastFetchedProperties {
 
 @class SVPodcastEntry;
 @class SVSubscription;
+
 
 
 
@@ -77,6 +79,14 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateSmallLogoURL:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSString *subtitle;
+
+
+//- (BOOL)validateSubtitle:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -170,6 +180,12 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveSmallLogoURL;
 - (void)setPrimitiveSmallLogoURL:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveSubtitle;
+- (void)setPrimitiveSubtitle:(NSString*)value;
 
 
 

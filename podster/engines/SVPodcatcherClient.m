@@ -24,8 +24,6 @@
     dispatch_once(&onceToken, ^{
         NSURL *url = [NSURL URLWithString:@"http://podstore.herokuapp.com"];
         client = [[SVPodcatcherClient alloc] initWithBaseURL:url];
-        // initWithHostName:@"podstore.herokuapp.com" customHeaderFields:nil];
-//        client = [[SVPodcatcherClient alloc] initWithHostName:@"localhost:5000" customHeaderFields:nil];
     });
     
     return client;
@@ -135,33 +133,37 @@
 }
 
 -(void)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
+                           withLowerPriority:(BOOL)lowPriority
                                    inContext:(NSManagedObjectContext *)context
                                 onCompletion:(void (^)(void))onComplete
                                      onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedURL);
     NSParameterAssert(context);
-
     NSManagedObjectContext *localContext= [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     localContext.parentContext = context;
-   
-    [self getPath:feedURL parameters:nil
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              [SVFeedParser parseData:responseObject
-                      forPodcastAtURL:feedURL
-                            inContext:localContext
-                           onComplete:^{
-                               [localContext save];
-                               onComplete();
-                           } onError:^(NSError *error) {
-                               LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
-                               onError(error);
-                           }];
-
-          } 
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed");
-          }];
+    
+    NSURLRequest *request = [self requestWithMethod:@"GET" path:feedURL parameters:nil];
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request 
+                                                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                                          [SVFeedParser parseData:responseObject
+                                                                                  forPodcastAtURL:feedURL
+                                                                                        inContext:localContext
+                                                                                       onComplete:^{
+                                                                                           [localContext save];
+                                                                                           onComplete();
+                                                                                       } onError:^(NSError *error) {
+                                                                                           LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
+                                                                                           onError(error);
+                                                                                       }];
+                                                                          
+                                                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                          LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed");
+                                                                          
+                                                                      }];
+    
+    operation.queuePriority = lowPriority ? NSOperationQueuePriorityLow : NSOperationQueuePriorityNormal;
+    [self enqueueHTTPRequestOperation:operation];
 }
 #pragma mark - push related
 -(void)registerForPushNotificationsWithToken:(NSString *)token

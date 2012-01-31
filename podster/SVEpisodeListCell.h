@@ -12,6 +12,7 @@
 @property (weak) IBOutlet UILabel *titleLabel;
 @property (weak) IBOutlet UILabel *subtitleLabel;
 @property (weak) IBOutlet UILabel *durationLabel;
+@property (weak) IBOutlet UILabel *dateLabel;
 @property (weak) IBOutlet UIImageView *downloadedIndicator;
 -(void)bind:(SVPodcastEntry *)entry;
 @end

@@ -22,6 +22,7 @@
     NSString *feedURL;
     dispatch_queue_t originalQueue;
     BOOL isFirstItem;
+    NSInteger itemsParsed;
 }
 @synthesize errorCallback, completionCallback;
 + (id)parseData:(NSData *)data
@@ -41,6 +42,7 @@ forPodcastAtURL:(NSString *)feedURL
     parser->localContext = context;
     parser->feedURL = feedURL;
     parser->failed = NO;
+    parser->itemsParsed = 0;
     parser->feedParser = [[MWFeedParser alloc] initWithFeedData:data textEncodingName:@"NSUnicodeStringEncoding"];
     parser->feedParser.delegate = parser;
     parser->isFirstItem = YES;
@@ -119,11 +121,19 @@ forPodcastAtURL:(NSString *)feedURL
         episode.content = item.content;
         episode.durationValue = [item.duration secondsFromDurationString];
         episode.podcast = localPodcast;
+        
         [localContext save];
-        if (localContext.parentContext) {
-            [localContext.parentContext performBlock:^{
-                [localContext.parentContext save];
-            }];
+        itemsParsed += 1;
+        if (itemsParsed % 10 == 0){
+            
+            if (localContext.parentContext) {
+                [localContext.parentContext performBlock:^{
+                    [localContext.parentContext save];
+                    LOG_PARSING(4, @"Saving parent");
+                }];
+            }
+        } else {
+            LOG_PARSING(4, @"Skipping parent save");
         }
     }];
 }
@@ -152,6 +162,12 @@ forPodcastAtURL:(NSString *)feedURL
                 self.errorCallback(error);
                 LOG_PARSING(0, @"Could not save parsed feed data. Core data reported error: %@", error);
             }];
+            if (localContext.parentContext) {
+                [localContext.parentContext performBlockAndWait:^{
+                    [localContext.parentContext save];
+                }];
+            }
+
             dispatch_async(originalQueue, ^void() {
                 self.completionCallback();
             });

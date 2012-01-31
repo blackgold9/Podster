@@ -9,23 +9,22 @@
 #import "SVPodcastSearchResult.h"
 #import "NSDictionary+safeGetters.h"
 @implementation SVPodcastSearchResult
-@synthesize title, summary, feedURL, websiteURL, logoURL, tinyLogoURL,smallLogoURL,thumbLogoURL;
-// Custom logic goes here.
--(void)populateWithDictionary:(NSDictionary *)dictionary
+@synthesize title, summary, feedURL, websiteURL, logoURL, tinyLogoURL,smallLogoURL,thumbLogoURL, subtitle;
+-(void)populateWithDictionary:(NSDictionary *)dataDict
 {
-    
+    NSDictionary *dictionary = [dataDict objectForKey:@"feed"];
     self.title = [dictionary stringForKey:@"title"];
     self.title = [self.title capitalizedString];
     NSParameterAssert(self.title);
     self.summary = [dictionary stringForKey:@"summary"];
     self.feedURL = [dictionary stringForKey:@"feed_url"];
     NSParameterAssert(self.feedURL);
+    self.subtitle = [dictionary stringForKey:@"subtitle"];
     self.websiteURL = [dictionary stringForKey:@"website_url"];
-    if ([[dictionary objectForKey:@"image"] objectForKey:@"url"] != [NSNull null]) {
-        self.logoURL = [[dictionary objectForKey:@"image"] objectForKey:@"url"];
-        self.smallLogoURL = [[[dictionary objectForKey:@"image"] objectForKey:@"small"] objectForKey:@"url"];
-        self.tinyLogoURL =  [[[dictionary objectForKey:@"image"] objectForKey:@"tiny"] objectForKey:@"url"];
-        self.thumbLogoURL =  [[[dictionary objectForKey:@"image"] objectForKey:@"thumb"] objectForKey:@"url"];
-    }    
-}
-@end
+    
+    self.logoURL = [dictionary stringForKey:@"logo"];
+    
+    self.smallLogoURL = [dictionary stringForKey:@"logo_small"];
+    self.tinyLogoURL = [dictionary stringForKey:@"logo_tiny"];
+    self.thumbLogoURL = [dictionary stringForKey:@"logo_thumb"];    
+}@end

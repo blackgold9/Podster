@@ -52,9 +52,10 @@ typedef void (^SVErrorBlock)(NSError *error);
                                onError:(SVErrorBlock)errorBlock;
 
 -(void)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
-                                                   inContext:(NSManagedObjectContext *)context
-                                                onCompletion:(void (^)(void))onComplete
-                                                     onError:(SVErrorBlock)onError;
+                           withLowerPriority:(BOOL)lowPriority
+                                   inContext:(NSManagedObjectContext *)context
+                                onCompletion:(void (^)(void))onComplete
+                                     onError:(SVErrorBlock)onError;
 
 -(void)registerForPushNotificationsWithToken:(NSString *)token
                                           andDeviceIdentifer:(NSString *)deviceId

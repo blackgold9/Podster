@@ -53,6 +53,30 @@ NSString *uuid();
    //                                                               forKey:UITextAttributeTextColor];
    // [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];
     [[UISearchBar appearance] setBarStyle:UIBarStyleBlack];
+    
+    
+    UIImage *barButton = [UIImage imageNamed:@"nav-bar-btn.png"];
+    
+    [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal 
+                                          barMetrics:UIBarMetricsDefault];
+    
+    UIImage *backButton = [UIImage imageNamed:@"back-btn-big.png"];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal 
+                                                    barMetrics:UIBarMetricsDefault];
+    
+       
+    UIImage *minImage = [UIImage imageNamed:@"slider-fill.png"];
+    UIImage *maxImage = [UIImage imageNamed:@"slider-bg.png"];
+    UIImage *thumbImage = [UIImage imageNamed:@"slider-cap.png"];
+    
+    [[UISlider appearance] setMaximumTrackImage:maxImage 
+                                       forState:UIControlStateNormal];
+    [[UISlider appearance] setMinimumTrackImage:minImage 
+                                       forState:UIControlStateNormal];
+    [[UISlider appearance] setThumbImage:thumbImage 
+                                forState:UIControlStateNormal];
+
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

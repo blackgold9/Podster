@@ -264,7 +264,8 @@
     };
 
     [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
-                                                                          inContext:localContext
+                                                               withLowerPriority:NO     
+                                                                     inContext:localContext
                                                                        onCompletion:loadCompleteHandler
                                                                             onError:^(NSError *error) {
               //  [UIAlertView showWithError:error];
@@ -374,7 +375,7 @@
     
       SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView 
                                                        dequeueReusableCellWithIdentifier:@"episodeCell"];
-    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item.png"]];
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item-darker.png"]];
         SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
     
     [cell bind:episode];    

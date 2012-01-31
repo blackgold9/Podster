@@ -49,7 +49,12 @@
     LOG_GENERAL(2, @"View did appear");
     LOG_NETWORK(4, @"Triggering albumart image load");
     NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
-    [self.artworkImage setImageWithURL:imageURL];
+    [self.artworkImage setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
+    if (player.rate == 0) {
+        self.playButton.selected = NO;
+    } else {
+        self.playButton.selected = YES;
+    }
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
 //
@@ -100,6 +105,14 @@
         }
     }];
 }
+-(void)dealloc
+{
+    NSLog(@"Removing observers");
+    [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
+    [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
+    [player removeTimeObserver:playerObserver];
+
+}
 
 - (void)viewDidUnload
 {
@@ -111,12 +124,13 @@
     [self setSkipForwardButton:nil];
     [self setArtworkImage:nil];
     [super viewDidUnload];
+        // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
     NSLog(@"Removing observers");
     [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
     [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
     [player removeTimeObserver:playerObserver];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

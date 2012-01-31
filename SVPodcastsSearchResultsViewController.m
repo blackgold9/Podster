@@ -13,19 +13,46 @@
 #import "SVPodcastListCell.h"
 #import "ActsAsPodcast.h"
 #import <QuartzCore/QuartzCore.h>
+static const NSInteger kDefaultPageSize = 50;
+@interface SVPodcastsSearchResultsViewController()
+-(void)loadNextPage;
+@end
 @implementation SVPodcastsSearchResultsViewController {
     BOOL isLoading;
-    NSArray *podcasts;
+    NSMutableArray *podcasts;
     UINib *nib;
+    NSInteger currentPage;
+    BOOL noMoreData;
 }
 @synthesize category;
 @synthesize searchString;
-
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        podcasts = [NSMutableArray array];
+        noMoreData = NO;
+        currentPage = NSNotFound;
+    }
+    
+    return self;
+}
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        podcasts = [NSMutableArray array];
+        noMoreData = NO;
+        currentPage = NSNotFound;
+    }
+    
+    return self;
+}
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        podcasts = [NSArray array];
+     
     }
     return self;
 }
@@ -56,42 +83,90 @@
     [self.tableView registerNib:[self listNib] forCellReuseIdentifier:@"SVPodcastListCell"];
     self.tableView.rowHeight = 88;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self loadNextPage];
+       // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+- (void)processPodcasts:(NSArray *)newPodcasts withStartIndex:(NSInteger)startIndex andPageSize:(NSInteger)pageSize
+{
+    if (newPodcasts.count < pageSize) {
+        noMoreData = YES;
+    }
+    [podcasts addObjectsFromArray:newPodcasts];
+
+    [self.tableView beginUpdates];
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    NSUInteger returnedItemCount = newPodcasts.count;
+    for(int i = 0; i<returnedItemCount; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:startIndex+ i inSection:0]];
+    }
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+    
+    
+    // Remove the loading cell
+    isLoading = NO;
+    [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:podcasts.count inSection:0]] 
+                            withRowAnimation:UITableViewRowAnimationAutomatic];
+
+
+
+}
+-(void)loadNextPage
+{
+    if (currentPage == NSNotFound) {
+        currentPage = 0;
+    } else {
+        currentPage ++;
+    }
+    isLoading = YES;
+    // Insert the loading row
+    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:podcasts.count inSection:0]] 
+                            withRowAnimation:UITableViewRowAnimationAutomatic];
+    self.navigationItem.title = self.category.name;
+
+    NSInteger startIndex = currentPage * kDefaultPageSize;
+    
     if (self.searchString) {
-    //    [TestFlight passCheckpoint:@"SEARCH"];
-        isLoading = YES;
+        //    [TestFlight passCheckpoint:@"SEARCH"];
+
         self.navigationItem.title = self.searchString;
         
         LOG_GENERAL(2, @"A search string was entered");
         [[SVPodcatcherClient sharedInstance] searchForPodcastsMatchingQuery:self.searchString onCompletion:^(NSArray *returnedPodcasts) {
-            LOG_GENERAL(2, @"%d search resutls returned", returnedPodcasts.count);
-            podcasts = returnedPodcasts;
-            isLoading = NO;
-            [self.tableView reloadData];
-
-
+            [self processPodcasts:returnedPodcasts 
+                   withStartIndex:startIndex 
+                      andPageSize:kDefaultPageSize];
+            
+            
         }                                                           onError:^(NSError *error) {
             LOG_GENERAL(2, @"search failed with error: %@", error);
         }];
     } else {
-      //  [TestFlight passCheckpoint:@"BROWSE_CATEGORY"];
-        isLoading = YES;
-        self.navigationItem.title = self.category.name;
         [[SVPodcatcherClient sharedInstance] podcastsByCategory:self.category.categoryId
-                                                startingAtIndex:0
+                                                startingAtIndex:startIndex
                                                           limit:50
                                                    onCompletion:^(NSArray *returnedPodcasts) {
-                                                       podcasts = returnedPodcasts;
-                                                       isLoading = NO;
-                                                       [self.tableView reloadData];
-
+                                                       [self processPodcasts:returnedPodcasts 
+                                                              withStartIndex:startIndex 
+                                                                 andPageSize:kDefaultPageSize];                                          
                                                    }    onError:^(NSError *error) {
-         //   [UIAlertView showWithError:error];
-        }];
+                                                       //   [UIAlertView showWithError:error];
+                                                   }];
     }
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+   
+    if (!isLoading && scrollView.contentSize.height > scrollView.frame.size.height){
+        if(!noMoreData) {        
+            if(scrollView.contentSize.height - scrollView.contentOffset.y < 400) {
+                [self loadNextPage];
+            }
+        }
+    }
+    
+}
 - (void)viewDidUnload {
     [super viewDidUnload];
     nib = nil;
@@ -129,63 +204,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return isLoading ? 1 : podcasts.count;
+    return isLoading ? podcasts.count + 1 : podcasts.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    SVPodcastListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SVPodcastListCell"];
-    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item.png"]];
-
-    id<ActsAsPodcast> podcast = [podcasts objectAtIndex:indexPath.row];
-    [cell bind:podcast];
-    
-    
-    return cell;
-    
+    if (isLoading && indexPath.row == podcasts.count) {
+        // WE are one past the last podcast, and loading. show the indicator
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LoadingCell"];
+        return cell;
+    } else {   
+        SVPodcastListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SVPodcastListCell"];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item-darker.png"]];
+        
+        id<ActsAsPodcast> podcast = [podcasts objectAtIndex:indexPath.row];
+        [cell bind:podcast];
+        return cell;
+    }
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

@@ -21,13 +21,8 @@
 @synthesize logoImageView = _logoImageView;
 + (NSString *)cellIdentifier {
     return NSStringFromClass([self class]);
-   }
-
--(void)prepareForReuse
-{
-    self.logoImageView.image = nil;
-    [super prepareForReuse];
 }
+
 
 + (id)cellForTableView:(UITableView *)tableView fromNib:(UINib *)nib {
     NSString *cellID = [self cellIdentifier];
@@ -70,7 +65,7 @@
     if  (self.contentView.frame.size.height - bottomOfTitleLabel >= 20) {
                 self.summaryLabel.hidden = NO;
         // Enough space for the summary label
-        self.summaryLabel.text = [podcast summary];
+        self.summaryLabel.text = [podcast subtitle] != nil && ![[podcast subtitle] isEqualToString:[podcast title]]? [podcast subtitle] : [podcast summary]; 
         self.summaryLabel.numberOfLines = 3;
         CGSize summarySize = [[podcast summary] sizeWithFont:self.summaryLabel.font constrainedToSize:CGSizeMake(self.summaryLabel.frame.size.width,  self.contentView.frame.size.height - bottomOfTitleLabel - 5)];
         self.summaryLabel.frame = CGRectMake(self.summaryLabel.frame.origin.x, bottomOfTitleLabel + 1, self.summaryLabel.frame.size.width, summarySize.height);
@@ -79,11 +74,15 @@
     } else {
         self.summaryLabel.hidden = YES;
     }
+    
     self.logoImageView.backgroundColor = [UIColor grayColor];
+    self.logoImageView.image = nil;
     if ([podcast thumbLogoURL] != nil) {
-        NSURL *imageURL = [NSURL URLWithString:[@"http://" stringByAppendingString:[podcast thumbLogoURL]]];
-        
-        [self.logoImageView setImageWithURL:imageURL];
+
+        NSURL *imageURL = [NSURL URLWithString:[podcast thumbLogoURL]];
+       // LOG_NETWORK(3, @"Downloading image at url: %@", imageURL);
+        self.logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.logoImageView setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
     }
 
 }

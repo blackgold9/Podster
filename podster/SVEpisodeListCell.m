@@ -10,7 +10,7 @@
 #import "SVPodcastEntry.h"
 #import "NSString+MW_HTML.h"
 @implementation SVEpisodeListCell
-@synthesize downloadedIndicator, subtitleLabel, titleLabel, durationLabel;
+@synthesize downloadedIndicator, subtitleLabel, titleLabel, durationLabel,dateLabel;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -29,6 +29,13 @@
 
 -(void)bind:(SVPodcastEntry *)entry
 {
+    static NSDateFormatter *dateFormatter = nil;
+    if (!dateFormatter){
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setLocale:[NSLocale currentLocale]];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    }
+    self.dateLabel.text = [dateFormatter stringFromDate:entry.datePublished];
     self.titleLabel.text = entry.title;
     self.subtitleLabel.text = [entry.summary stringByConvertingHTMLToPlainText];
     self.durationLabel.text =[NSString formattedStringRepresentationOfSeconds: [entry.duration integerValue]];

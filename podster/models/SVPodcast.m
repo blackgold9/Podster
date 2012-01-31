@@ -10,25 +10,26 @@
         self.logoURL = info.imageURL;
     }
 }
+
 // Custom logic goes here.
 -(void)populateWithDictionary:(NSDictionary *)dictionary
 {
-
     self.title = [dictionary stringForKey:@"title"];
     self.title = [self.title capitalizedString];
     NSParameterAssert(self.title);
     self.summary = [dictionary stringForKey:@"summary"];
     self.feedURL = [dictionary stringForKey:@"feed_url"];
-
     NSParameterAssert(self.feedURL);
+    self.subtitle = [dictionary stringForKey:@"subtitle"];
     self.websiteURL = [dictionary stringForKey:@"website_url"];
-    if ([[dictionary objectForKey:@"image"] objectForKey:@"url"] != [NSNull null]) {
-        self.logoURL = [[dictionary objectForKey:@"image"] objectForKey:@"url"];
-        self.smallLogoURL = [[[dictionary objectForKey:@"image"] objectForKey:@"small"] objectForKey:@"url"];
-        self.tinyLogoURL =  [[[dictionary objectForKey:@"image"] objectForKey:@"tiny"] objectForKey:@"url"];
-        self.thumbLogoURL =  [[[dictionary objectForKey:@"image"] objectForKey:@"thumb"] objectForKey:@"url"];
-    }
+
+    self.logoURL = [dictionary stringForKey:@"logo"];
+    
+    self.smallLogoURL = [dictionary stringForKey:@"logo_small"];
+    self.tinyLogoURL = [dictionary stringForKey:@"logo_tiny"];
+    self.thumbLogoURL = [dictionary stringForKey:@"logo_thumb"];    
 }
+
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"%@: %@", [super description], self.title];

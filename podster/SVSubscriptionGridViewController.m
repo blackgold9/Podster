@@ -125,7 +125,7 @@
         //      cell.deleteButtonOffset = CGPointMake(-15, -15);
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        view.backgroundColor = [UIColor redColor];
+        view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
         view.layer.masksToBounds = NO;
         //view.layer.cornerRadius = 8;
         view.layer.shadowColor = [UIColor whiteColor].CGColor;
@@ -141,8 +141,8 @@
     }
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
     imageView.image = nil;
-    NSURL *imageURL = [NSURL URLWithString: currentPodcast.logoURL];
-    [imageView setImageWithURL:imageURL];
+    NSURL *imageURL = [NSURL URLWithString: currentPodcast.smallLogoURL];
+    [imageView setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
     return cell;
 }
 

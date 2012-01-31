@@ -22,6 +22,7 @@
 
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
+#import <QuartzCore/QuartzCore.h>
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import "UIImageView+AFNetworking.h"
@@ -90,16 +91,24 @@ static char kAFImageRequestOperationObjectKey;
 
 - (void)setImageWithURL:(NSURL *)url 
        placeholderImage:(UIImage *)placeholderImage
+             shouldFade:(BOOL)doFade
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
     [request setHTTPShouldHandleCookies:NO];
     [request setHTTPShouldUsePipelining:YES];
-    
-    [self setImageWithURLRequest:request placeholderImage:placeholderImage success:nil failure:nil];
+
+    [self setImageWithURLRequest:request placeholderImage:placeholderImage shouldFade:doFade success:nil failure:nil];
+}
+
+- (void)setImageWithURL:(NSURL *)url 
+       placeholderImage:(UIImage *)placeholderImage
+{
+    [self setImageWithURL:url placeholderImage:placeholderImage shouldFade:NO];
 }
 
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest 
               placeholderImage:(UIImage *)placeholderImage 
+                    shouldFade:(BOOL)doFade
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
@@ -123,6 +132,14 @@ static char kAFImageRequestOperationObjectKey;
         AFImageRequestOperation *requestOperation = [[[AFImageRequestOperation alloc] initWithRequest:urlRequest] autorelease];
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[urlRequest URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
+                if (doFade) {
+                    CATransition *transition = [CATransition animation];
+                    transition.type = kCATransitionFade;
+                    transition.duration = 0.55;
+                    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                    [self.layer addAnimation:transition forKey:kCATransition];
+                }
+
                 self.image = responseObject;
             }
 

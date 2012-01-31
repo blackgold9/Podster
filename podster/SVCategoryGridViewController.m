@@ -39,17 +39,7 @@
 {
     [super viewDidAppear:animated];
 
-    [[SVPodcatcherClient sharedInstance] categoriesInLanguage:nil onCompletion:^(NSArray *returnedPodcasts)
-                                                                               {
-                                                                                   categories = returnedPodcasts;
-                                                                                   _loading = NO;
-                                                                                   [self.gridView reloadData];
-
-                                                                               } onError:^(NSError *error)
-                                                                                                                                                           {
-                                                                                              //[UIAlertView showWithError:error];
-                                                                                                                                                           }];
-
+   
 }
 
 
@@ -150,6 +140,18 @@
     self.gridView.style = GMGridViewStyleSwap;
     self.gridView.itemSpacing = 10;
     [self.view addSubview:self.gridView];
+    
+    [[SVPodcatcherClient sharedInstance] categoriesInLanguage:nil onCompletion:^(NSArray *returnedPodcasts)
+     {
+         categories = returnedPodcasts;
+         _loading = NO;
+         [self.gridView reloadData];
+         
+     } onError:^(NSError *error)
+     {
+         //[UIAlertView showWithError:error];
+     }];
+
     
 }
 

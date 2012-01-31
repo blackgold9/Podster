@@ -8,6 +8,7 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.lastUpdated = @"lastUpdated",
 	.logoURL = @"logoURL",
 	.smallLogoURL = @"smallLogoURL",
+	.subtitle = @"subtitle",
 	.summary = @"summary",
 	.thumbLogoURL = @"thumbLogoURL",
 	.tinyLogoURL = @"tinyLogoURL",
@@ -78,6 +79,13 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 @dynamic smallLogoURL;
+
+
+
+
+
+
+@dynamic subtitle;
 
 
 

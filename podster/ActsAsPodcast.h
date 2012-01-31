@@ -17,4 +17,5 @@
 @property (copy) NSString *smallLogoURL;
 @property (copy) NSString *thumbLogoURL;
 @property (copy) NSString *tinyLogoURL;
+@property (copy) NSString *subtitle;
 @end
