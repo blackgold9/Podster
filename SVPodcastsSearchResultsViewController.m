@@ -26,6 +26,7 @@ static const NSInteger kDefaultPageSize = 50;
 }
 @synthesize category;
 @synthesize searchString;
+@synthesize tableView = _tableView;
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,14 +47,6 @@ static const NSInteger kDefaultPageSize = 50;
         currentPage = NSNotFound;
     }
     
-    return self;
-}
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-     
-    }
     return self;
 }
 
@@ -119,6 +112,7 @@ static const NSInteger kDefaultPageSize = 50;
     } else {
         currentPage ++;
     }
+    [FlurryAnalytics logEvent:@"SearchResultsLoadPage" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:currentPage] forKey:@"Page"]];
     isLoading = YES;
     // Insert the loading row
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:podcasts.count inSection:0]] 
@@ -180,6 +174,12 @@ static const NSInteger kDefaultPageSize = 50;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (self.searchString) {
+            [FlurryAnalytics logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"Search" forKey:@"Type"]];
+
+    } else {
+                    [FlurryAnalytics logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"CategoryList" forKey:@"Type"]];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -227,6 +227,7 @@ static const NSInteger kDefaultPageSize = 50;
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self performSegueWithIdentifier:@"showPodcastDetails" sender:self];
 }
 

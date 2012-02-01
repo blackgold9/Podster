@@ -18,6 +18,10 @@
 #import "SVPodcast.h"
 #import "SDURLCache.h"
 #import "GMGridView.h"
+
+
+#import <CoreText/CoreText.h>
+
 @implementation SVAppDelegate
 {
     UIColor *backgrondTexture;
@@ -78,16 +82,33 @@ NSString *uuid();
                                 forState:UIControlStateNormal];
 
 }
+- (void)initializeCoreText
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+    dispatch_async(queue, ^(void) {
+        NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+        [attributes setObject:@"HelveticaNeue" forKey:(id)kCTFontFamilyNameAttribute];
+        [attributes setObject:[NSNumber numberWithFloat:36.0f] forKey:(id)kCTFontSizeAttribute];
+        CTFontDescriptorRef fontDesc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)attributes);
+        CTFontRef matchingFont = CTFontCreateWithFontDescriptor(fontDesc, 36.0f, NULL);
+        CFRelease(matchingFont);
+        CFRelease(fontDesc);
+    });   
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
 #if defined (CONFIGURATION_Ad_Hoc)
     [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
     [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-
+    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+    [[BWQuincyManager sharedQuincyManager] setAutoSubmitDeviceUDID:YES];
+    [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
 #endif
 
+    [self initializeCoreText];
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     
@@ -98,37 +119,37 @@ NSString *uuid();
     //[[SVDownloadManager sharedInstance] resumeDownloads];
     [self configureTheming];
 
-    #if TARGET_IPHONE_SIMULATOR
-    // Fake out notifications
-    [[NSUserDefaults standardUserDefaults] setBool:YES 
-                                            forKey:@"notificationsEnabled"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
-    if (!deviceId)
-    {
-        LOG_GENERAL(2, @"No stored device id, creating and storing one");
-        deviceId = uuid();
-        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
-        [[NSUserDefaults standardUserDefaults] synchronize];        
-    }
-    NSString *tokenAsString = @"000000000";
-    [[SVPodcatcherClient sharedInstance] registerForPushNotificationsWithToken:tokenAsString 
-                                                            andDeviceIdentifer:deviceId
-                                                                  onCompletion:^{
-                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore");    
-                                                                      [[NSUserDefaults standardUserDefaults] setBool:YES 
-                                                                                                              forKey:@"notificationsEnabled"];
-                                                                      [[NSUserDefaults standardUserDefaults] synchronize];
-                                                                      
-                                                                  } onError:^(NSError *error) {
-                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore failed with error: %@", error);    
-                                                                  }]; // custom method
-    #else
+//    #if TARGET_IPHONE_SIMULATOR
+//    // Fake out notifications
+//    [[NSUserDefaults standardUserDefaults] setBool:YES 
+//                                            forKey:@"notificationsEnabled"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
+//    if (!deviceId)
+//    {
+//        LOG_GENERAL(2, @"No stored device id, creating and storing one");
+//        deviceId = uuid();
+//        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];        
+//    }
+//    NSString *tokenAsString = @"000000000";
+//    [[SVPodcatcherClient sharedInstance] registerForPushNotificationsWithToken:tokenAsString 
+//                                                            andDeviceIdentifer:deviceId
+//                                                                  onCompletion:^{
+//                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore");    
+//                                                                      [[NSUserDefaults standardUserDefaults] setBool:YES 
+//                                                                                                              forKey:@"notificationsEnabled"];
+//                                                                      [[NSUserDefaults standardUserDefaults] synchronize];
+//                                                                      
+//                                                                  } onError:^(NSError *error) {
+//                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore failed with error: %@", error);    
+//                                                                  }]; // custom method
+//    #else
     // Actually register
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
                                                                            UIRemoteNotificationTypeBadge|
                                                                            UIRemoteNotificationTypeSound)];
-    #endif
+ //   #endif
     return YES;
 }
 

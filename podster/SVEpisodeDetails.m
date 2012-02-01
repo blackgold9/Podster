@@ -47,6 +47,11 @@
 {
 }
 */
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [FlurryAnalytics logEvent:@"EpisodeDetailsPageView"];
+}
 -(void)bind:(SVPodcastEntry *)theEpisode
 {
     self.titleLabel.text = theEpisode.title;

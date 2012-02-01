@@ -190,6 +190,8 @@
 		4B2023E514D8962A00820391 /* playback-bottom-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2023E214D8962900820391 /* playback-bottom-back.png */; };
 		4B2023E614D8962A00820391 /* playback-bottom-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2023E314D8962A00820391 /* playback-bottom-back@2x.png */; };
 		4B2023E714D8962A00820391 /* playback-bottom-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2023E314D8962A00820391 /* playback-bottom-back@2x.png */; };
+		4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2023F914D920FE00820391 /* libFlurryAnalytics.a */; };
+		4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2023F914D920FE00820391 /* libFlurryAnalytics.a */; };
 		4B22F16F14C4F048001B8595 /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B22F16D14C4F048001B8595 /* nav-bar.png */; };
 		4B22F17014C4F048001B8595 /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B22F16D14C4F048001B8595 /* nav-bar.png */; };
 		4B22F17114C4F048001B8595 /* nav-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B22F16E14C4F048001B8595 /* nav-bar@2x.png */; };
@@ -610,6 +612,8 @@
 		4B2023DD14D7933100820391 /* list-item-darker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-item-darker@2x.png"; sourceTree = "<group>"; };
 		4B2023E214D8962900820391 /* playback-bottom-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playback-bottom-back.png"; sourceTree = "<group>"; };
 		4B2023E314D8962A00820391 /* playback-bottom-back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playback-bottom-back@2x.png"; sourceTree = "<group>"; };
+		4B2023F914D920FE00820391 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
+		4B2023FC14D9211300820391 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		4B22F16D14C4F048001B8595 /* nav-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar.png"; sourceTree = "<group>"; };
 		4B22F16E14C4F048001B8595 /* nav-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar@2x.png"; sourceTree = "<group>"; };
 		4B2E51CB14B2C85D0030B7C1 /* SVDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadManager.h; sourceTree = "<group>"; };
@@ -869,6 +873,7 @@
 				4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */,
 				4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */,
 				4B141FA914C9433A00028CE4 /* CrashReporter.framework in Frameworks */,
+				4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,6 +891,7 @@
 				4B71F7AF14A5B08C00D26F4C /* UIKit.framework in Frameworks */,
 				4B71F7B014A5B08C00D26F4C /* Foundation.framework in Frameworks */,
 				4B141FAA14C9433A00028CE4 /* CrashReporter.framework in Frameworks */,
+				4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1401,6 +1407,8 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B2023FC14D9211300820391 /* FlurryAnalytics.h */,
+				4B2023F914D920FE00820391 /* libFlurryAnalytics.a */,
 				4B434BFB14D59D64004A5E89 /* SDURLCache */,
 				4B434B9C14D4E31A004A5E89 /* AFNetworking */,
 				4BB2055E14D0F3130038EB7D /* Panel */,

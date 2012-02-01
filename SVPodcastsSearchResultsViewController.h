@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "SVCategory.h"
+#import "SVViewController.h"
 
-@interface SVPodcastsSearchResultsViewController : UITableViewController<UIScrollViewDelegate>
+@interface SVPodcastsSearchResultsViewController : SVViewController<UITableViewDelegate,UITableViewDataSource, UIScrollViewDelegate>
 @property(strong) SVCategory *category;
 @property(copy) NSString *searchString;
-
+@property(weak) IBOutlet UITableView *tableView;
 @end

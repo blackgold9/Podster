@@ -59,6 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [FlurryAnalytics logEvent:@"CategoryListPageView"];
 }
 
 - (void)viewDidAppear:(BOOL)animated

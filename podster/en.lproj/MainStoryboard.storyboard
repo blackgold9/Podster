@@ -127,12 +127,14 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="7eF-mi-Iw1" id="Ue5-Kb-R7A"/>
-                            <outlet property="delegate" destination="7eF-mi-Iw1" id="FBx-2o-DFM"/>
+                            <outlet property="dataSource" destination="7eF-mi-Iw1" id="fvh-eE-vFu"/>
+                            <outlet property="delegate" destination="7eF-mi-Iw1" id="FqJ-Ux-gyF"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tagged 'Tag'" id="vPz-mH-tQ3"/>
                     <connections>
+                        <outlet property="tableView" destination="Czt-4I-mD4" id="hJN-ys-XaD"/>
+                        <outlet property="view" destination="Czt-4I-mD4" id="UAq-iC-c0l"/>
                         <segue destination="Xyd-co-oUC" kind="push" identifier="showPodcastDetails" id="1h9-6I-oKZ"/>
                     </connections>
                 </tableViewController>
@@ -803,8 +805,11 @@
                 <relationship kind="action" name="cancelButtonTapped:"/>
             </relationships>
         </class>
-        <class className="SVPodcastsSearchResultsViewController" superclassName="UITableViewController">
+        <class className="SVPodcastsSearchResultsViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastsSearchResultsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="SVSubscriptionGridViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVSubscriptionGridViewController.h"/>

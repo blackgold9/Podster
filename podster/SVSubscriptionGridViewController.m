@@ -54,7 +54,20 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [FlurryAnalytics logEvent:@"SubscriptionGridPageView"];
+    [super viewWillAppear:animated];
+    self.fetcher.delegate = self;
+    [self.fetcher performFetch:nil];
+   // [self.gridView reloadData];
+}
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.fetcher.delegate = nil;
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations

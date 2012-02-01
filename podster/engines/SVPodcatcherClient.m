@@ -16,6 +16,7 @@
 #import "AFNetworking.h"
 #import "SVPodcastSearchResult.h"
 #import "NSString+URLEncoding.h"
+#import "AFNetworkActivityIndicatorManager.h"
 @implementation SVPodcatcherClient
 + (id)sharedInstance
 {
@@ -24,6 +25,7 @@
     dispatch_once(&onceToken, ^{
         NSURL *url = [NSURL URLWithString:@"http://podstore.herokuapp.com"];
         client = [[SVPodcatcherClient alloc] initWithBaseURL:url];
+            [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     });
     
     return client;
@@ -42,6 +44,7 @@
 -(void)findFeedsOnWebPage:(NSString *)pageURL onCompletion:(FeedListResponeBlock)completion onError:(SVErrorBlock)errorBlock
 {
     NSString *feedFinderURL = @"feeds/feeds_from_page/%@/json";
+
     [self getPath:[NSString stringWithFormat:feedFinderURL, [pageURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *returnedData = responseObject;
         completion(returnedData);
@@ -140,6 +143,8 @@
 {
     NSParameterAssert(feedURL);
     NSParameterAssert(context);
+    NSDictionary *loggingParamters = [NSDictionary dictionaryWithObject:feedURL forKey:@"FeedURL"];
+    [FlurryAnalytics logEvent:@"ParsingFeed" withParameters:loggingParamters timed:YES];
     NSManagedObjectContext *localContext= [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     localContext.parentContext = context;
     
@@ -150,10 +155,17 @@
                                                                                   forPodcastAtURL:feedURL
                                                                                         inContext:localContext
                                                                                        onComplete:^{
+                                                                                           
+                                                                                           [FlurryAnalytics endTimedEvent:@"ParsingFeed" 
+                                                                                                           withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"Success"]];
                                                                                            [localContext save];
                                                                                            onComplete();
                                                                                        } onError:^(NSError *error) {
                                                                                            LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
+                                                                                           
+                                                                                           [FlurryAnalytics endTimedEvent:@"ParsingFeed" 
+                                                                                                           withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"Success"]];
+                                                                                           [FlurryAnalytics logError:@"ParsingError" message:[error localizedDescription] error:error];
                                                                                            onError(error);
                                                                                        }];
                                                                           

@@ -21,6 +21,7 @@
     #import "NSString+SVHelpers.h"
 #import "AFNetworking.h"
 #import "SVPodcatcherClient.h"
+#import "FlurryAnalytics.h"
 #endif
 #ifdef DEBUG
 #define LOG_NETWORK(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"network",level,__VA_ARGS__)

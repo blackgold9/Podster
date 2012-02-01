@@ -89,7 +89,7 @@
     // TODO: Clean this crap up. Better user feedback.
     [localContext performBlock:^{
         SVSubscription *subscription = localPodcast.subscription;
-        
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:localPodcast.title,@"title", localPodcast.feedURL, @"feedURL", nil];
         if(!subscription) {
          //   [TestFlight passCheckpoint:@"SUBSCRIBED"];
                self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
@@ -99,9 +99,12 @@
             
             if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
                 NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
+
                 [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:localPodcast.feedURL withDeviceId:deviceId onCompletion:^{
+                    [FlurryAnalytics logEvent:@"Subscribed" withParameters:parameters];
                     LOG_GENERAL(2, @"Registered for notifications on feed");
                 } onError:^(NSError *error) {
+                    [FlurryAnalytics logError:@"SubscribeFailed" message:[error localizedDescription] error:error ];
                     LOG_GENERAL(1, @"Registration failed with error: %@", error);
                 }];
             }
@@ -111,8 +114,9 @@
             if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
                 NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
                 [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:localPodcast.feedURL withDeviceId:deviceId onCompletion:^{
-                    LOG_GENERAL(2, @"unsubscribe for notifications on feed");
+                     [FlurryAnalytics logEvent:@"Unsubscribed" withParameters:parameters];
                 } onError:^(NSError *error) {
+                    [FlurryAnalytics logError:@"UnsubscribeFailed" message:[error localizedDescription] error:error ];
                     LOG_GENERAL(1, @"unsubscribe failed with error: %@", error);
                 }];
             }
@@ -197,7 +201,7 @@
    }
 - (void)loadFeedImage
 {
-    [imageView setImageWithURL:[NSURL URLWithString:localPodcast.logoURL]];
+    [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image shouldFade:YES];
 }
 -(void)viewDidDisappear:(BOOL)animated
 {

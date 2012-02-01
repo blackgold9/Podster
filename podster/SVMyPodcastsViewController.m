@@ -105,7 +105,7 @@
 
     tabView = [[JMTabView alloc] initWithFrame:CGRectMake(0, 0, 150, 32)];
     self.navigationItem.titleView  = tabView;
-    tabView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin;
+    tabView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
     [tabView addTabItemWithTitle:@"Discover" icon:nil];
     
     [tabView addTabItemWithTitle:@"Favorites" icon:nil];
@@ -147,7 +147,10 @@
     }
 
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
 - (void)viewDidUnload
 {
     [self setGridView:nil];
@@ -161,8 +164,13 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    
 }
 
 
