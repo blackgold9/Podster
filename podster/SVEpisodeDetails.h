@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SVPodcastEntry.h"
 #import "SVViewController.h"
+#import "DTAttributedTextContentView.h"
 @class DTAttributedTextView;
-@interface SVEpisodeDetailsViewController : SVViewController
+@interface SVEpisodeDetailsViewController : SVViewController<DTAttributedTextContentViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageBackground;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *listenButton;

@@ -13,6 +13,7 @@
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UILabel+VerticalAlign.h"
 @implementation SVSubscriptionGridViewController {
     NSUInteger tappedIndex;
 }
@@ -149,13 +150,50 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
         imageView.tag = 1906;
         [view addSubview:imageView];
+        UILabel *label = [[UILabel alloc] initWithFrame:view.bounds];
+        label.tag = 1907;
+        label.numberOfLines = 0;
+        label.lineBreakMode = UILineBreakModeWordWrap;
+        label.font = [UIFont systemFontOfSize:27];
+        [view addSubview:label];
         
         cell.contentView = view;
     }
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
     imageView.image = nil;
-    NSURL *imageURL = [NSURL URLWithString: currentPodcast.smallLogoURL];
-    [imageView setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
+    NSString *logoString = currentPodcast.smallLogoURL;
+    if (!logoString) {
+        logoString = currentPodcast.logoURL;
+    }
+    
+    if (logoString) {    
+        // We have an image
+        NSURL *imageURL = [NSURL URLWithString: currentPodcast.smallLogoURL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
+        [request setHTTPShouldHandleCookies:NO];
+        [request setHTTPShouldUsePipelining:YES];
+        
+        
+        
+        [imageView setImageWithURLRequest:request
+                         placeholderImage:nil
+                               shouldFade:YES
+                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                      
+                                  } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                      imageView.hidden = YES;
+                                      UILabel *label = (UILabel *)[cell viewWithTag:1907];
+                                      label.text = currentPodcast.title;
+                                      [label alignBottom];
+                                      
+                                  }];
+    } else {
+        imageView.hidden = YES;
+        UILabel *label = (UILabel *)[cell viewWithTag:1907];
+        label.text = currentPodcast.title;
+        [label alignBottom];
+        
+    }
     return cell;
 }
 

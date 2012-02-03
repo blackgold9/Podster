@@ -13,6 +13,7 @@
 #import "UILabel+VerticalAlign.h"
 #import "DTAttributedTextView.h"
 #import "NSAttributedString+HTML.h"
+#import "DTLinkButton.h"
 #import "NSString+MW_HTML.h"
 #import <QuartzCore/QuartzCore.h>
 @implementation SVEpisodeDetailsViewController
@@ -69,6 +70,7 @@
     NSString *bodyText = theEpisode.content ? theEpisode.content : theEpisode.summary;
     NSData *stringData = [[bodyText stringWithNewLinesAsBRs] dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.2",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
+    self.summaryView.textDelegate = self;;
     [self.summaryView setAttributedString:[NSAttributedString attributedStringWithHTML:stringData options:dictionary]];
 }
 
@@ -115,6 +117,42 @@
 
 }
 
-- (IBAction)downloadTapped:(id)sender {
+- (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame
+{
+	DTLinkButton *button = [[DTLinkButton alloc] initWithFrame:frame];
+	button.url = url;
+	button.minimumHitSize = CGSizeMake(25, 25); // adjusts it's bounds so that button is always large enough
+	button.guid = identifier;
+	
+	// use normal push action for opening URL
+	[button addTarget:self action:@selector(linkPushed:) forControlEvents:UIControlEventTouchUpInside];
+	
+	// demonstrate combination with long press
+	UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(linkLongPressed:)];
+	[button addGestureRecognizer:longPress];
+	
+	return button;
+}
+
+- (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame
+{
+    if (attachment.contentType == DTTextAttachmentTypeImage)
+	{
+		// if the attachment has a hyperlinkURL then this is currently ignored
+		UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+
+		if (attachment.contents)
+		{
+			imageView.image = attachment.contents;
+		}
+		
+		[imageView setImageWithURL:attachment.contentURL placeholderImage:nil shouldFade:YES];		
+		return imageView;
+	}
+	return nil;
+}
+- (void)linkPushed:(DTLinkButton *)button
+{
+	[[UIApplication sharedApplication] openURL:[button.url absoluteURL]];
 }
 @end

@@ -12,6 +12,91 @@
 #import "SVPodcastEntry.h"
 #import "SVAppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import <AudioToolbox/AudioToolbox.h>
+// Prototype for following callbakc function
+void audioRouteChangeListenerCallback (
+                                       void                      *inUserData,
+                                       AudioSessionPropertyID    inPropertyID,
+                                       UInt32                    inPropertyValueSize,
+                                       const void                *inPropertyValue
+                                       );
+// This function is supposed to be outside the file interface
+void audioRouteChangeListenerCallback (
+   void                      *inUserData,
+   AudioSessionPropertyID    inPropertyID,
+   UInt32                    inPropertyValueSize,
+   const void                *inPropertyValue
+) {
+
+	// ensure that this callback was invoked for a route change
+	if (inPropertyID != kAudioSessionProperty_AudioRouteChange) return;
+
+	// if application sound is not playing, there's nothing to do, so return.
+	if ([[SVPlaybackManager sharedInstance] player] == nil ||
+        [[SVPlaybackManager sharedInstance] player].rate == 0 ) {
+
+		LOG_GENERAL(2,@"Audio route change while application audio is stopped.");
+		return;
+
+	} else {
+
+		// Determines the reason for the route change, to ensure that it is not
+		//		because of a category change.
+		CFDictionaryRef	routeChangeDictionary = inPropertyValue;
+
+		CFNumberRef routeChangeReasonRef =
+						CFDictionaryGetValue (
+							routeChangeDictionary,
+							CFSTR (kAudioSession_AudioRouteChangeKey_Reason)
+						);
+
+		SInt32 routeChangeReason;
+
+		CFNumberGetValue (
+			routeChangeReasonRef,
+			kCFNumberSInt32Type,
+			&routeChangeReason
+		);
+
+
+        BOOL connectedToA2DP = NO;
+        CFDictionaryRef currentRouteDictionaryRef =
+            CFDictionaryGetValue(routeChangeDictionary,
+                                 kAudioSession_AudioRouteChangeKey_CurrentRouteDescription
+                                 );
+
+        CFArrayRef outputs = CFDictionaryGetValue(
+                                                  currentRouteDictionaryRef, 
+                                                  kAudioSession_AudioRouteKey_Outputs
+                                                  );
+        if (CFArrayGetCount(outputs) > 0) {
+           CFDictionaryRef output =  CFArrayGetValueAtIndex(outputs, 0);
+            if (output != nil) {
+                CFStringRef outputType = CFDictionaryGetValue(
+                                                              output,
+                                                              kAudioSession_AudioRouteKey_Type
+                                                              );
+                if (CFStringCompare(outputType, kAudioSessionOutputRoute_BluetoothA2DP, 0) == kCFCompareEqualTo) {
+                    connectedToA2DP = YES;
+                }
+
+            }
+        }
+		// "Old device unavailable" indicates that a headset was unplugged, or that the
+		//	device was removed from a dock connector that supports audio output. This is
+		//	the recommended test for when to pause audio.
+		if (routeChangeReason == kAudioSessionRouteChangeReason_OldDeviceUnavailable || 
+            (routeChangeReason == kAudioSessionRouteChangeReason_NewDeviceAvailable && connectedToA2DP)) {
+
+			[[[SVPlaybackManager sharedInstance] player] pause];
+
+		} else {
+
+            LOG_GENERAL(2, @"A route change occurred that does not require pausing of application audio.");
+		}
+	}
+}
+
 @implementation SVPlaybackManager {
     AVPlayer *_player;
     dispatch_queue_t monitorQueue;
@@ -71,8 +156,19 @@
         
     });
     LOG_GENERAL(4, @"Setting up audio session");
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setActive: YES error: nil];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        
+        [[AVAudioSession sharedInstance] setActive: YES error: nil];
+        [[AVAudioSession sharedInstance] setDelegate:self];
+        AudioSessionAddPropertyListener (
+                                         kAudioSessionProperty_AudioRouteChange,
+                                         audioRouteChangeListenerCallback,
+                                         NULL
+                                         ); 
+    });
+   
     if (!_player) {
         _player = [AVPlayer playerWithURL:[NSURL URLWithString:episode.mediaURL]];
         
@@ -99,6 +195,16 @@
     }
 }
 
+#pragma mark - AVAudioSessionDelegate
+- (void)endInterruptionWithFlags:(NSUInteger)flags {
+   if (flags == AVAudioSessionInterruptionFlags_ShouldResume) {
+       NSAssert(_player !=nil, @"The player is expected to exist here");
+       [_player play];
+   }
+
+}
+
+#pragma mark - KVO
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ((__bridge id)context == self) {
@@ -108,12 +214,15 @@
                 if (_player.status == AVPlayerStatusReadyToPlay) {
                     [_player play];
                     LOG_NETWORK(2,@"Started Playback");
-                } else {
+                } else if (_player.status == AVPlayerItemStatusFailed) {
                     LOG_NETWORK(1,@"Error downloing");
+                    [FlurryAnalytics logError:@"PlaybackFailed" message:[_player.error localizedDescription] error:_player.error];
+                    //TODO: Reflect to user?
                 }
             } else if ([keyPath isEqualToString:@"rate"]) {
                 if (_player.rate == 0) {
                     [_player removeTimeObserver:monitorId];
+
                     LOG_GENERAL(3, @"suspending monitoring playback position");
                 } else {
                     [self startPositionMonitoring];

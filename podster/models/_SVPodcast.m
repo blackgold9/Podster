@@ -6,6 +6,7 @@
 const struct SVPodcastAttributes SVPodcastAttributes = {
 	.feedURL = @"feedURL",
 	.lastUpdated = @"lastUpdated",
+    .lastSynced = @"lastSynced",
 	.logoURL = @"logoURL",
 	.smallLogoURL = @"smallLogoURL",
 	.subtitle = @"subtitle",
@@ -65,6 +66,8 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 @dynamic lastUpdated;
+
+@dynamic lastSynced;
 
 
 

@@ -76,6 +76,13 @@ static const NSInteger kDefaultPageSize = 50;
     [self.tableView registerNib:[self listNib] forCellReuseIdentifier:@"SVPodcastListCell"];
     self.tableView.rowHeight = 88;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    if (self.searchString) {
+        [FlurryAnalytics logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"Search" forKey:@"Type"]];
+        
+    } else {
+        [FlurryAnalytics logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"CategoryList" forKey:@"Type"]];
+    }
+
     [self loadNextPage];
        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -112,7 +119,7 @@ static const NSInteger kDefaultPageSize = 50;
     } else {
         currentPage ++;
     }
-    [FlurryAnalytics logEvent:@"SearchResultsLoadPage" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:currentPage] forKey:@"Page"]];
+    [FlurryAnalytics logEvent:@"LoadSearchResultsPage" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:currentPage] forKey:@"Page"]];
     isLoading = YES;
     // Insert the loading row
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:podcasts.count inSection:0]] 
@@ -174,16 +181,12 @@ static const NSInteger kDefaultPageSize = 50;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.searchString) {
-            [FlurryAnalytics logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"Search" forKey:@"Type"]];
-
-    } else {
-                    [FlurryAnalytics logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"CategoryList" forKey:@"Type"]];
-    }
-}
+   }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -227,7 +230,7 @@ static const NSInteger kDefaultPageSize = 50;
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+
     [self performSegueWithIdentifier:@"showPodcastDetails" sender:self];
 }
 

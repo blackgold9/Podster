@@ -272,7 +272,17 @@ NSString *uuid(){
     if (receivedEvent.type == UIEventTypeRemoteControl) {
         
         switch (receivedEvent.subtype) {
-                
+            case UIEventSubtypeRemoteControlStop:
+            case UIEventSubtypeRemoteControlPause:
+                if( _player) {
+                    _player.rate = 0;
+                }
+                break;
+            case UIEventSubtypeRemoteControlPlay:
+                if(_player) {
+                    _player.rate = 1;
+                }
+                break;
             case UIEventSubtypeRemoteControlTogglePlayPause:
                 if( _player) {
                     if ( _player.rate != 0) {

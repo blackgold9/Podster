@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @protocol ActsAsPodcast <NSObject>
+@property (copy) NSDate *lastSynced;
+@property (copy) NSDate *lastUpdated;
 @property (copy) NSString *title;
 @property (copy) NSString *feedURL;
 @property (copy) NSString *summary;
@@ -18,4 +20,5 @@
 @property (copy) NSString *thumbLogoURL;
 @property (copy) NSString *tinyLogoURL;
 @property (copy) NSString *subtitle;
+
 @end

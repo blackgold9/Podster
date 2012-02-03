@@ -192,6 +192,9 @@
 		4B2023E714D8962A00820391 /* playback-bottom-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2023E314D8962A00820391 /* playback-bottom-back@2x.png */; };
 		4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2023F914D920FE00820391 /* libFlurryAnalytics.a */; };
 		4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2023F914D920FE00820391 /* libFlurryAnalytics.a */; };
+		4B20240714DA47F300820391 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B20240614DA47F200820391 /* AudioToolbox.framework */; };
+		4B20240B14DA626C00820391 /* SVSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B20240A14DA626800820391 /* SVSubscriptionManager.m */; };
+		4B20240C14DA626C00820391 /* SVSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B20240A14DA626800820391 /* SVSubscriptionManager.m */; };
 		4B22F16F14C4F048001B8595 /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B22F16D14C4F048001B8595 /* nav-bar.png */; };
 		4B22F17014C4F048001B8595 /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B22F16D14C4F048001B8595 /* nav-bar.png */; };
 		4B22F17114C4F048001B8595 /* nav-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B22F16E14C4F048001B8595 /* nav-bar@2x.png */; };
@@ -614,6 +617,10 @@
 		4B2023E314D8962A00820391 /* playback-bottom-back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playback-bottom-back@2x.png"; sourceTree = "<group>"; };
 		4B2023F914D920FE00820391 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		4B2023FC14D9211300820391 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
+		4B20240614DA47F200820391 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		4B20240814DA5EF400820391 /* SVPodcastDatastore 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 6.xcdatamodel"; sourceTree = "<group>"; };
+		4B20240914DA626600820391 /* SVSubscriptionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSubscriptionManager.h; sourceTree = "<group>"; };
+		4B20240A14DA626800820391 /* SVSubscriptionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSubscriptionManager.m; sourceTree = "<group>"; };
 		4B22F16D14C4F048001B8595 /* nav-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar.png"; sourceTree = "<group>"; };
 		4B22F16E14C4F048001B8595 /* nav-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav-bar@2x.png"; sourceTree = "<group>"; };
 		4B2E51CB14B2C85D0030B7C1 /* SVDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadManager.h; sourceTree = "<group>"; };
@@ -859,6 +866,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B20240714DA47F300820391 /* AudioToolbox.framework in Frameworks */,
 				4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */,
 				4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */,
 				4B10D0A614BFB44500DF4DBD /* CoreText.framework in Frameworks */,
@@ -1067,6 +1075,15 @@
 				4B141FA614C9433A00028CE4 /* Quincy.bundle */,
 			);
 			name = QuincyKit;
+			sourceTree = "<group>";
+		};
+		4B20240114D9F28000820391 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				4B2023FC14D9211300820391 /* FlurryAnalytics.h */,
+				4B2023F914D920FE00820391 /* libFlurryAnalytics.a */,
+			);
+			name = Flurry;
 			sourceTree = "<group>";
 		};
 		4B20DEC814BE75B30042DC9D /* Images */ = {
@@ -1296,7 +1313,7 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
-				4B68583814C8AF5900496A38 /* libz.dylib */,
+				4B20240614DA47F200820391 /* AudioToolbox.framework */,
 				4B71F7C514A5B09B00D26F4C /* 3rd Party */,
 				4B71F79514A5B08C00D26F4C /* podster */,
 				4B71F7B314A5B08C00D26F4C /* podsterTests */,
@@ -1317,6 +1334,7 @@
 		4B71F78E14A5B08C00D26F4C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B68583814C8AF5900496A38 /* libz.dylib */,
 				4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */,
 				4BEDB18814C004E200264CCC /* ImageIO.framework */,
 				4B10D0A514BFB44500DF4DBD /* CoreText.framework */,
@@ -1370,6 +1388,8 @@
 				4B10CFB014BE804D00DF4DBD /* UIColor+Hex.m */,
 				4B141FB814CB220000028CE4 /* SVCustomApplication.h */,
 				4B141FB914CB220100028CE4 /* SVCustomApplication.m */,
+				4B20240914DA626600820391 /* SVSubscriptionManager.h */,
+				4B20240A14DA626800820391 /* SVSubscriptionManager.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -1407,8 +1427,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
-				4B2023FC14D9211300820391 /* FlurryAnalytics.h */,
-				4B2023F914D920FE00820391 /* libFlurryAnalytics.a */,
+				4B20240114D9F28000820391 /* Flurry */,
 				4B434BFB14D59D64004A5E89 /* SDURLCache */,
 				4B434B9C14D4E31A004A5E89 /* AFNetworking */,
 				4BB2055E14D0F3130038EB7D /* Panel */,
@@ -1981,6 +2000,7 @@
 				4B434BEB14D5201C004A5E89 /* AFXMLRequestOperation.m in Sources */,
 				4B434BED14D5201C004A5E89 /* UIImageView+AFNetworking.m in Sources */,
 				4B434BF914D59C12004A5E89 /* SDURLCache.m in Sources */,
+				4B20240B14DA626C00820391 /* SVSubscriptionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2127,6 +2147,7 @@
 				4B434BEC14D5201C004A5E89 /* AFXMLRequestOperation.m in Sources */,
 				4B434BEE14D5201C004A5E89 /* UIImageView+AFNetworking.m in Sources */,
 				4B434BFA14D59C12004A5E89 /* SDURLCache.m in Sources */,
+				4B20240C14DA626C00820391 /* SVSubscriptionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2434,12 +2455,13 @@
 			isa = XCVersionGroup;
 			children = (
 				4B20237914D65AA700820391 /* SVPodcastDatastore 5.xcdatamodel */,
+				4B20240814DA5EF400820391 /* SVPodcastDatastore 6.xcdatamodel */,
 				4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */,
 				4B141FB314CA9AFD00028CE4 /* SVPodcastDatastore 3.xcdatamodel */,
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4B20237914D65AA700820391 /* SVPodcastDatastore 5.xcdatamodel */;
+			currentVersion = 4B20240814DA5EF400820391 /* SVPodcastDatastore 6.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

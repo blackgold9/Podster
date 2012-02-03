@@ -21,6 +21,7 @@
 @synthesize skipForwardButton;
 @synthesize skipBackButton;
 @synthesize chromeViews;
+@synthesize titleLabel;
 @synthesize artworkImage;
 @synthesize progressSlider;
 @synthesize timeRemainingLabel;
@@ -46,15 +47,22 @@
 #pragma mark - View lifecycle
 -(void)viewDidAppear:(BOOL)animated
 {
-    LOG_GENERAL(2, @"View did appear");
-    LOG_NETWORK(4, @"Triggering albumart image load");
+    [FlurryAnalytics logEvent:@"PlaybackPageView"];
     NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
     [self.artworkImage setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
+
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    LOG_GENERAL(2, @"View did appear");
+    LOG_NETWORK(4, @"Triggering albumart image load");
     if (player.rate == 0) {
         self.playButton.selected = NO;
     } else {
         self.playButton.selected = YES;
     }
+    
+    self.titleLabel.text = [SVPlaybackManager sharedInstance].currentEpisode.title;
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
 //
@@ -123,6 +131,7 @@
     [self setSkipBackButton:nil];
     [self setSkipForwardButton:nil];
     [self setArtworkImage:nil];
+    [self setTitleLabel:nil];
     [super viewDidUnload];
         // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -164,8 +173,10 @@
 - (IBAction)playTapped:(id)sender {
     if (player.rate == 0) {
         [player play];
+        [FlurryAnalytics logEvent:@"PlayTapped"];
     } else {
         [player pause];
+        [FlurryAnalytics logEvent:@"PauseTapped"];
     }
 }
 - (IBAction)sliderChanged:(id)sender {
@@ -184,11 +195,13 @@
 }
 
 - (IBAction)skipForwardTapped:(id)sender {
+    [FlurryAnalytics logEvent:@"SkipBackTapped"];
     CMTime ammount = CMTimeMake(30, 1);
     [player seekToTime:CMTimeAdd(ammount, player.currentTime)];
 }
 
 - (IBAction)skipBackTapped:(id)sender {
+    [FlurryAnalytics logEvent:@"SkipForwardTapped"];
     CMTime ammount = CMTimeMake(7, 1);
     [player seekToTime:CMTimeSubtract(player.currentTime, ammount)];
 }
