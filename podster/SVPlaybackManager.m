@@ -152,23 +152,26 @@ void audioRouteChangeListenerCallback (
     NSParameterAssert(episode);
     NSParameterAssert(podcast);
     NSAssert(episode.mediaURL != nil, @"The podcast must have a mediaURL");
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-    });
+   
     LOG_GENERAL(4, @"Setting up audio session");
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+       // AudioSessionAddPropertyListener (
+         //                                kAudioSessionProperty_AudioRouteChange,
+           //                              audioRouteChangeListenerCallback,
+             //                            NULL
+               //                          ); 
+
         
-        [[AVAudioSession sharedInstance] setActive: YES error: nil];
-        [[AVAudioSession sharedInstance] setDelegate:self];
-        AudioSessionAddPropertyListener (
-                                         kAudioSessionProperty_AudioRouteChange,
-                                         audioRouteChangeListenerCallback,
-                                         NULL
-                                         ); 
-    });
-   
+            });
+    NSError *error;
+    [[AVAudioSession sharedInstance] setActive: YES error: &error];
+    NSAssert(error == nil, @"There should be no error starting the session");
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+    
+
+  
+    [[AVAudioSession sharedInstance] setDelegate:self];
     if (!_player) {
         _player = [AVPlayer playerWithURL:[NSURL URLWithString:episode.mediaURL]];
         
@@ -181,13 +184,13 @@ void audioRouteChangeListenerCallback (
         [self startPositionMonitoring];
     }
     
-    
-    
     LOG_GENERAL(4, @"Triggering playback");
     [_player replaceCurrentItemWithPlayerItem:[[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]]];
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title,MPMediaItemPropertyTitle, podcast.title, MPMediaItemPropertyAlbumTitle , nil];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title,MPMediaItemPropertyTitle, podcast.title, MPMediaItemPropertyAlbumTitle ,[NSNumber numberWithInteger:episode.positionInSecondsValue],MPNowPlayingInfoPropertyElapsedPlaybackTime, nil];
+    
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:params];
+    
     // Check if there was a previous position
     if (episode.positionInSecondsValue > 0) {
         LOG_GENERAL(2, @"Resuming at %d seconds", episode.positionInSecondsValue);
@@ -200,6 +203,7 @@ void audioRouteChangeListenerCallback (
    if (flags == AVAudioSessionInterruptionFlags_ShouldResume) {
        NSAssert(_player !=nil, @"The player is expected to exist here");
        [_player play];
+       [[AVAudioSession sharedInstance] setActive: YES error: nil];
    }
 
 }

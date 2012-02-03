@@ -155,12 +155,16 @@
         label.numberOfLines = 0;
         label.lineBreakMode = UILineBreakModeWordWrap;
         label.font = [UIFont systemFontOfSize:27];
+        label.hidden = YES;
         [view addSubview:label];
         
         cell.contentView = view;
     }
+    UILabel *label = (UILabel *)[cell viewWithTag:1907];
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
     imageView.image = nil;
+    imageView.hidden = NO;
+    label.hidden = YES;
     NSString *logoString = currentPodcast.smallLogoURL;
     if (!logoString) {
         logoString = currentPodcast.logoURL;
@@ -173,23 +177,21 @@
         [request setHTTPShouldHandleCookies:NO];
         [request setHTTPShouldUsePipelining:YES];
         
-        
-        
+        __block UIImageView *blockImage = imageView;
         [imageView setImageWithURLRequest:request
                          placeholderImage:nil
                                shouldFade:YES
-                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {                                    
                                       
                                   } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                      imageView.hidden = YES;
-                                      UILabel *label = (UILabel *)[cell viewWithTag:1907];
+                                      blockImage.hidden = YES;                           
+                                      label.hidden = NO;
                                       label.text = currentPodcast.title;
-                                      [label alignBottom];
-                                      
+                                      [label alignBottom];                                      
                                   }];
     } else {
         imageView.hidden = YES;
-        UILabel *label = (UILabel *)[cell viewWithTag:1907];
+        label.hidden = NO;
         label.text = currentPodcast.title;
         [label alignBottom];
         
