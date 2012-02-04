@@ -9,6 +9,7 @@
 #import "SVSubscriptionGridViewController.h"
 #import "GMGridView.h"
 #import "SVSubscription.h"
+#import "SVSubscriptionManager.h"
 #import "SVPodcast.h"
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcatcherClient.h"
@@ -16,6 +17,7 @@
 #import "UILabel+VerticalAlign.h"
 @implementation SVSubscriptionGridViewController {
     NSUInteger tappedIndex;
+    BOOL needsReload;
 }
 @synthesize fetcher;
 @synthesize gridView = _gridView;
@@ -37,7 +39,11 @@
 }
 
 #pragma mark - View lifecycle
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -77,12 +83,14 @@
 #pragma  mark - fetchedresults
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    
+    needsReload = NO;
 }
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    
+    if (needsReload) {
+        [self.gridView reloadData];
+    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -94,6 +102,11 @@
         case NSFetchedResultsChangeDelete:
             [self.gridView removeObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade];
             break;
+        case NSFetchedResultsChangeMove:
+            needsReload = YES;
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self.gridView reloadObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade]; 
         default:
             break;
     }
@@ -147,55 +160,33 @@
         view.layer.shadowOffset = CGSizeMake(0, 0);
         view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
         view.layer.shadowRadius = 3;
+        
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        
+        titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
+        titleLabel.numberOfLines = 0;
+        titleLabel.tag = 1907;
+        titleLabel.opaque = NO;
+        [view addSubview:titleLabel];
+
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
         imageView.tag = 1906;
+        imageView.backgroundColor = [UIColor clearColor];
         [view addSubview:imageView];
-        UILabel *label = [[UILabel alloc] initWithFrame:view.bounds];
-        label.tag = 1907;
-        label.numberOfLines = 0;
-        label.lineBreakMode = UILineBreakModeWordWrap;
-        label.font = [UIFont systemFontOfSize:27];
-        label.hidden = YES;
-        [view addSubview:label];
-        
+               
         cell.contentView = view;
     }
     UILabel *label = (UILabel *)[cell viewWithTag:1907];
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
-    imageView.image = nil;
-    imageView.hidden = NO;
-    label.hidden = YES;
+    label.text = currentPodcast.title;
     NSString *logoString = currentPodcast.smallLogoURL;
     if (!logoString) {
         logoString = currentPodcast.logoURL;
     }
-    
-    if (logoString) {    
-        // We have an image
-        NSURL *imageURL = [NSURL URLWithString: currentPodcast.smallLogoURL];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
-        [request setHTTPShouldHandleCookies:NO];
-        [request setHTTPShouldUsePipelining:YES];
-        
-        __block UIImageView *blockImage = imageView;
-        [imageView setImageWithURLRequest:request
-                         placeholderImage:nil
-                               shouldFade:YES
-                                  success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {                                    
-                                      
-                                  } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                      blockImage.hidden = YES;                           
-                                      label.hidden = NO;
-                                      label.text = currentPodcast.title;
-                                      [label alignBottom];                                      
-                                  }];
-    } else {
-        imageView.hidden = YES;
-        label.hidden = NO;
-        label.text = currentPodcast.title;
-        [label alignBottom];
-        
-    }
+     NSURL *imageURL = [NSURL URLWithString: currentPodcast.smallLogoURL];
+    [imageView setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
     return cell;
 }
 

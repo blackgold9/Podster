@@ -8,12 +8,15 @@
 
 #import "SVViewController.h"
 #import "SVPlaybackManager.h"
+#import "GCDiscreetNotificationView.h"
+#import "SVSubscriptionManager.h"
 @interface SVViewController() 
 -(void)showNowPlayingController;
 -(void)showNowPLayingButton;
 @end
 @implementation SVViewController{
     SVPlaybackManager *localManager;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,6 +32,7 @@
     [super viewDidLoad];
     localManager = [SVPlaybackManager sharedInstance];
     [localManager addObserver:self forKeyPath:@"currentPodcast" options:NSKeyValueObservingOptionNew context:nil];
+    
 }
 -(void)dealloc
 {
@@ -53,6 +57,7 @@
             [self showNowPLayingButton];
         }
     }
+ 
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -77,14 +82,13 @@
 }
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+  
     if (object == localManager) {
         if([keyPath isEqualToString:@"currentPodcast"]) {
             if (self.toolbarItems.count == 0) {
                 [self showNowPLayingButton];
             }
-        } else {
-            
-        }
+        } 
     }
 }
 -(void)showNowPlayingController

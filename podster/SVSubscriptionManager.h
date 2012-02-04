@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface SVSubscriptionManager : NSObject
+@property (assign) BOOL isBusy;
 -(void)refreshAllSubscriptions;
++ (id)sharedInstance;
 @end

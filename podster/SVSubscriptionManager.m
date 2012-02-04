@@ -11,26 +11,78 @@
 #import "SVPodcast.h"
 @implementation SVSubscriptionManager {
     NSArray *subscriptions;
-    BOOL isBusy;
+    NSDate *startDate; // The date the sync was begun, everything older than that should be synced.
+}
+@synthesize isBusy = _isBusy;
++ (id)sharedInstance
+{
+    static id sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    
+    return sharedInstance;
+}
+-(void)refreshNextSubscription
+{
+
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+
+    [offsetComponents setMinute:1];
+
+    NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
+                                                    toDate:[NSDate date]
+                                                   options:0];
+
+    __block SVPodcast *nextPodcast = nil;
+    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    [context performBlockAndWait:^{
+            subscriptions =  [SVSubscription findAllInContext:context];
+        NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];
+        NSPredicate *subscribed = [NSPredicate predicateWithFormat:@"%K in %@", SVPodcastRelationships.subscription, subscriptions];
+        NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@",SVPodcastAttributes.lastSynced, syncWindow];
+        
+        NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribed, olderThanSyncStart,stale, nil]];
+        
+        nextPodcast = [SVPodcast findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
+
+    }];
+    LOG_NETWORK(2, @"Finding subscription that needs refreshing");
+    if (nextPodcast) {
+        self.isBusy = YES;
+        nextPodcast.lastSynced = [NSDate date];
+        [context save];
+        LOG_NETWORK(2, @"Updating feed: %@", nextPodcast.title);
+        [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
+                                                                 withLowerPriority:YES
+                                                                         inContext:context onCompletion:^{
+                                                                             [self refreshNextSubscription];
+                                                                         } onError:^(NSError *error) {
+                                                                             [self refreshNextSubscription];
+
+                                                                         }];
+    } else {
+        self.isBusy = NO;
+        LOG_NETWORK(2, @"Updating subscriptions complete");
+    }
+    
 }
 -(void)refreshAllSubscriptions
 {
-    subscriptions = [SVSubscription findAll];
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    for(SVSubscription *sub in subscriptions) {
-       [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:sub.podcast.feedURL 
-                                                                withLowerPriority:YES 
-                                                                        inContext:[NSManagedObjectContext defaultContext]
-                                                                     onCompletion:^{
-                                                                         dispatch_semaphore_signal(semaphore);
-                                                                     } 
-                                                                          onError:^(NSError *error) {
-                                                                              dispatch_semaphore_signal(semaphore);
-                                                                          }];
+    
+    if (self.isBusy) {
+        LOG_NETWORK(3, @"Subscription Manager busy. Refresh cancelled");
+        return;
         
-        double delayInSeconds = 120.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_semaphore_wait(semaphore, popTime);
     }
+    LOG_NETWORK(2, @"Refreshing subscriptions");
+    startDate = [NSDate date];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self refreshNextSubscription];        
+    });
+
 }
 @end

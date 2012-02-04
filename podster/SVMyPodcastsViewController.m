@@ -19,6 +19,8 @@
 #import "SVCategoryListViewController.h"
 #import "SVSubscriptionGridViewController.h"
 #import "SVSubscriptionListViewController.h"
+#import "SVSubscriptionManager.h"
+#import "GCDiscreetNotificationView.h"
 @interface SVMyPodcastsViewController ()
 -(SVCategoryListViewController *)categoryListController;
 -(SVCategoryGridViewController *)categoryGridController;
@@ -35,6 +37,7 @@
     SVSubscriptionListViewController *subscriptionListController;
     UIViewController *currentController;
     BOOL showGrid;
+    GCDiscreetNotificationView *notificationView;
 }
 @synthesize gridView;
 @synthesize segmentedControl;
@@ -121,7 +124,10 @@
     [button addTarget:self action:@selector(viewModeToggleTapped:) forControlEvents:UIControlEventTouchUpInside];
  self.viewModeToggleButton =  [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setRightBarButtonItem:self.viewModeToggleButton animated:YES];
-    
+    notificationView = [[GCDiscreetNotificationView alloc] initWithText:@"Updating Podcasts" 
+                                                           showActivity:YES 
+                                                     inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom 
+                                                                 inView:self.navigationController.view];
     
 }
 
@@ -147,9 +153,30 @@
     }
 
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if ([[SVSubscriptionManager sharedInstance] isBusy]) {
+     
+    }
+    
+    [[SVSubscriptionManager sharedInstance] addObserver:self
+                                             forKeyPath:@"isBusy"
+                                                options:NSKeyValueObservingOptionNew context:nil];
+    [notificationView show:NO];
+    [notificationView setTextLabel:@"BOOGOAAAA"];
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+   // [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    
+}
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[SVSubscriptionManager sharedInstance] removeObserver:self forKeyPath:@"isBusy"];
 }
 - (void)viewDidUnload
 {
@@ -158,6 +185,10 @@
     [self setContainerView:nil];
     [self setSegmentedControl:nil];
     [super viewDidUnload];
+    categoryGrid.view = nil;
+    categoryListController.view = nil;
+    subscriptionGridController.view = nil;
+    subscriptionListController.view = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -241,5 +272,16 @@
                     }];
         
         
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+
+//        if ([keyPath isEqualToString:@"isBusy"]){
+//            if([[SVSubscriptionManager sharedInstance] isBusy]) {
+//                [notificationView showAnimated]; 
+//            } else {
+//                [notificationView hideAnimated];
+//            }
+//        }
+   
 }
 @end

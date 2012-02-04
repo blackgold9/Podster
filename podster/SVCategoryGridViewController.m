@@ -12,6 +12,7 @@
 #import "SVCategory.h"
 #import "SVPodcastsSearchResultsViewController.h"
 #import "SVGridCell.h"
+#import "UILabel+VerticalAlign.h"
 @implementation SVCategoryGridViewController
 {
     BOOL _loading;
@@ -90,26 +91,30 @@
         view.layer.shadowOffset = CGSizeMake(0, 0);
         view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
         view.layer.shadowRadius = 3;
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
-        imageView.tag = 1906;
-        [view addSubview:imageView];
-        CGFloat overlayHeight = 50;
-        UIView *overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height - overlayHeight, size.width, overlayHeight)];
-        [view addSubview:overlayView];
-        overlayView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(overlayView.frame, 5, 5)];
+       
+//        CGFloat overlayHeight = 50;
+//        UIView *overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height - overlayHeight, size.width, overlayHeight)];
+//        [view addSubview:overlayView];
+//        overlayView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.numberOfLines = 2;
+
+        titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
+        titleLabel.numberOfLines = 0;
         titleLabel.tag = 42;
-        titleLabel.opaque = YES;
+        titleLabel.opaque = NO;
         [view addSubview:titleLabel];
-        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
+        imageView.tag = 1906;
+        imageView.backgroundColor =[UIColor clearColor];
+        [view addSubview:imageView];
         cell.contentView = view;
     }
 
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:42];
     titleLabel.text = category.name;
+    [titleLabel alignBottom];
     
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
     imageView.image = nil;
