@@ -13,6 +13,9 @@
 #import "SVAppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AudioToolbox/AudioToolbox.h>
+
+// The percentage after which a podcast is marked as played
+#define PLAYED_PERCENTAGE 0.95
 // Prototype for following callbakc function
 void audioRouteChangeListenerCallback (
                                        void                      *inUserData,
@@ -139,6 +142,15 @@ void audioRouteChangeListenerCallback (
     monitorId = [_player addPeriodicTimeObserverForInterval:CMTimeMake(5, 1) queue:monitorQueue usingBlock:^(CMTime time) {
         [[NSManagedObjectContext defaultContext] performBlock:^{
             blockSelf.currentEpisode.positionInSecondsValue = time.value / time.timescale; 
+            CGFloat currentPosition = (CGFloat)blockSelf.currentEpisode.positionInSecondsValue;
+            CGFloat totalDuration = (CGFloat)blockSelf.currentEpisode.durationValue;
+            CGFloat progresPercentage = currentPosition / totalDuration;
+            if (progresPercentage > PLAYED_PERCENTAGE) {
+                // Mark as played when you pass the played percentage
+                if (blockSelf.currentEpisode.playedValue != YES) {
+                    blockSelf.currentEpisode.playedValue = YES;
+                }
+            }
             [[NSManagedObjectContext defaultContext] save];
         }];
     }];
@@ -172,27 +184,39 @@ void audioRouteChangeListenerCallback (
 
   
     [[AVAudioSession sharedInstance] setDelegate:self];
-    if (!_player) {
+    if (!_player) {    
+        LOG_GENERAL(4, @"Initializing player");
         _player = [AVPlayer playerWithURL:[NSURL URLWithString:episode.mediaURL]];
-        
+        LOG_GENERAL(4, @"Player Initialized");
         monitorQueue = dispatch_queue_create("com.vantertech.podster.playbackmonitor", DISPATCH_QUEUE_SERIAL);
         [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
         [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
 
         [(SVAppDelegate *)[[UIApplication sharedApplication] delegate] startListening];
      
-        [self startPositionMonitoring];
+//        [self startPositionMonitoring];
     }
     
-    LOG_GENERAL(4, @"Triggering playback");
-    [_player replaceCurrentItemWithPlayerItem:[[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]]];
     
+    [_player replaceCurrentItemWithPlayerItem:[[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]]];
+
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title,MPMediaItemPropertyTitle, podcast.title, MPMediaItemPropertyAlbumTitle ,[NSNumber numberWithInteger:episode.positionInSecondsValue],MPNowPlayingInfoPropertyElapsedPlaybackTime, nil];
     
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:params];
-    
+    AFImageRequestOperation *imageOp = [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[currentPodcast logoURL]]] 
+                                                                                         success:^(UIImage *image) {
+                                                                                             NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
+                                                                                             MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+                                                                                             [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
+                                                                                             [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:imageParams];
+
+        
+    }];
+  
+    [imageOp start];
     // Check if there was a previous position
     if (episode.positionInSecondsValue > 0) {
+        [FlurryAnalytics logEvent:@"PlayingEpisodeResumingFromPreviousPosition"];
         LOG_GENERAL(2, @"Resuming at %d seconds", episode.positionInSecondsValue);
         [_player seekToTime:CMTimeMake(episode.positionInSecondsValue, 1)];
     }

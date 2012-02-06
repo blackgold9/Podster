@@ -9,6 +9,9 @@
     if (info.imageURL != nil && self.logoURL == nil) {
         self.logoURL = info.imageURL;
     }
+
+    self.author = [info author];
+    self.websiteURL = info.link;
 }
 
 // Custom logic goes here.

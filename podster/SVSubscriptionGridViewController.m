@@ -15,6 +15,7 @@
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+VerticalAlign.h"
+#import "UIColor+Hex.h"
 @implementation SVSubscriptionGridViewController {
     NSUInteger tappedIndex;
     BOOL needsReload;
@@ -51,7 +52,7 @@
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
     self.fetcher.delegate = self;
-    self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+    self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
 
 }
 
@@ -67,7 +68,7 @@
     [super viewWillAppear:animated];
     self.fetcher.delegate = self;
     [self.fetcher performFetch:nil];
-   // [self.gridView reloadData];
+    [self.gridView reloadData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -153,14 +154,16 @@
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
-        view.layer.masksToBounds = NO;
-        //view.layer.cornerRadius = 8;
-        view.layer.shadowColor = [UIColor whiteColor].CGColor;
-        view.layer.shadowOpacity = 0.5;
-        view.layer.shadowOffset = CGSizeMake(0, 0);
-        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
-        view.layer.shadowRadius = 3;
-        
+//        view.layer.masksToBounds = NO;
+//        //view.layer.cornerRadius = 8;
+//        view.layer.shadowColor = [UIColor whiteColor].CGColor;
+//        view.layer.shadowOpacity = 0.5;
+//        view.layer.shadowOffset = CGSizeMake(0, 0);
+//        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
+//        view.layer.shadowRadius = 3;
+        view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
+        view.layer.borderWidth = 2;
+
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.backgroundColor = [UIColor clearColor];
@@ -170,12 +173,28 @@
         titleLabel.tag = 1907;
         titleLabel.opaque = NO;
         [view addSubview:titleLabel];
-
+        
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
         imageView.tag = 1906;
         imageView.backgroundColor = [UIColor clearColor];
         [view addSubview:imageView];
-               
+        
+        UILabel *newCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 25, 20)];
+        newCountLabel.backgroundColor = [UIColor colorWithHex:0x0066a4];
+        newCountLabel.hidden = YES;
+        newCountLabel.tag = 1908;
+        newCountLabel.textColor =[UIColor whiteColor];
+        newCountLabel.adjustsFontSizeToFitWidth = YES;
+        newCountLabel.minimumFontSize = 13;
+        
+        newCountLabel.textAlignment = UITextAlignmentLeft;
+        newCountLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+        
+        UIImageView *countOverlay = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"grid-count-overlay.png"]];
+        countOverlay.tag = 1909;
+        [view addSubview:countOverlay];
+                               
+        [view addSubview:newCountLabel];
         cell.contentView = view;
     }
     UILabel *label = (UILabel *)[cell viewWithTag:1907];
@@ -187,6 +206,19 @@
     }
      NSURL *imageURL = [NSURL URLWithString: currentPodcast.smallLogoURL];
     [imageView setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
+    UILabel *countLabel = (UILabel *)[cell viewWithTag:1908];
+    UIImageView *countOverlay = (UIImageView *)[cell viewWithTag:1909];
+    if (currentPodcast.unseenEpsiodeCountValue > 0) {
+
+        countOverlay.hidden = NO;
+        
+        countLabel.hidden = NO;
+        countLabel.text = [NSString stringWithFormat:@"%d", currentPodcast.unseenEpsiodeCountValue];
+    } else {
+        countLabel.hidden = YES;
+          countOverlay.hidden = YES;
+    }
+            
     return cell;
 }
 

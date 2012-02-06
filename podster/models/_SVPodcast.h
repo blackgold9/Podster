@@ -5,16 +5,20 @@
 
 
 extern const struct SVPodcastAttributes {
+	__unsafe_unretained NSString *author;
 	__unsafe_unretained NSString *feedURL;
+	__unsafe_unretained NSString *hidePlayedEpisodes;
+	__unsafe_unretained NSString *lastSynced;
 	__unsafe_unretained NSString *lastUpdated;
-    __unsafe_unretained NSString *lastSynced;
 	__unsafe_unretained NSString *logoURL;
 	__unsafe_unretained NSString *smallLogoURL;
+	__unsafe_unretained NSString *sortNewestFirst;
 	__unsafe_unretained NSString *subtitle;
 	__unsafe_unretained NSString *summary;
 	__unsafe_unretained NSString *thumbLogoURL;
 	__unsafe_unretained NSString *tinyLogoURL;
 	__unsafe_unretained NSString *title;
+	__unsafe_unretained NSString *unseenEpsiodeCount;
 	__unsafe_unretained NSString *websiteURL;
 } SVPodcastAttributes;
 
@@ -40,6 +44,11 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+
+
+
+
+
 @interface SVPodcastID : NSManagedObjectID {}
 @end
 
@@ -52,6 +61,14 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString *author;
+
+
+//- (BOOL)validateAuthor:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSString *feedURL;
 
 
@@ -60,9 +77,27 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSDate *lastUpdated;
+@property (nonatomic, strong) NSNumber *hidePlayedEpisodes;
+
+
+@property BOOL hidePlayedEpisodesValue;
+- (BOOL)hidePlayedEpisodesValue;
+- (void)setHidePlayedEpisodesValue:(BOOL)value_;
+
+//- (BOOL)validateHidePlayedEpisodes:(id*)value_ error:(NSError**)error_;
+
+
+
 
 @property (nonatomic, strong) NSDate *lastSynced;
+
+
+//- (BOOL)validateLastSynced:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSDate *lastUpdated;
 
 
 //- (BOOL)validateLastUpdated:(id*)value_ error:(NSError**)error_;
@@ -82,6 +117,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateSmallLogoURL:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *sortNewestFirst;
+
+
+@property BOOL sortNewestFirstValue;
+- (BOOL)sortNewestFirstValue;
+- (void)setSortNewestFirstValue:(BOOL)value_;
+
+//- (BOOL)validateSortNewestFirst:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -126,6 +173,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber *unseenEpsiodeCount;
+
+
+@property int unseenEpsiodeCountValue;
+- (int)unseenEpsiodeCountValue;
+- (void)setUnseenEpsiodeCountValue:(int)value_;
+
+//- (BOOL)validateUnseenEpsiodeCount:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSString *websiteURL;
 
 
@@ -163,8 +222,29 @@ extern const struct SVPodcastFetchedProperties {
 @interface _SVPodcast (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSString*)primitiveAuthor;
+- (void)setPrimitiveAuthor:(NSString*)value;
+
+
+
+
 - (NSString*)primitiveFeedURL;
 - (void)setPrimitiveFeedURL:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveHidePlayedEpisodes;
+- (void)setPrimitiveHidePlayedEpisodes:(NSNumber*)value;
+
+- (BOOL)primitiveHidePlayedEpisodesValue;
+- (void)setPrimitiveHidePlayedEpisodesValue:(BOOL)value_;
+
+
+
+
+- (NSDate*)primitiveLastSynced;
+- (void)setPrimitiveLastSynced:(NSDate*)value;
 
 
 
@@ -172,9 +252,6 @@ extern const struct SVPodcastFetchedProperties {
 - (NSDate*)primitiveLastUpdated;
 - (void)setPrimitiveLastUpdated:(NSDate*)value;
 
-
-- (NSDate*)primitiveLastSynced;
-- (void)setPrimitiveLastSynced:(NSDate*)value;
 
 
 
@@ -186,6 +263,15 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveSmallLogoURL;
 - (void)setPrimitiveSmallLogoURL:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveSortNewestFirst;
+- (void)setPrimitiveSortNewestFirst:(NSNumber*)value;
+
+- (BOOL)primitiveSortNewestFirstValue;
+- (void)setPrimitiveSortNewestFirstValue:(BOOL)value_;
 
 
 
@@ -216,6 +302,15 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveTitle;
 - (void)setPrimitiveTitle:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveUnseenEpsiodeCount;
+- (void)setPrimitiveUnseenEpsiodeCount:(NSNumber*)value;
+
+- (int)primitiveUnseenEpsiodeCountValue;
+- (void)setPrimitiveUnseenEpsiodeCountValue:(int)value_;
 
 
 

@@ -36,8 +36,8 @@ NSString *uuid();
 }
 - (void)configureTheming
 {
-    backgrondTexture = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
-    UIColor *colorOne = [UIColor colorWithHex:0x1E1E27];
+    backgrondTexture =[UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
+    UIColor *colorOne = [UIColor colorWithRed:0.15 green:0.15 blue:0.16 alpha:1.0]; // [UIColor colorWithHex:0x1E1E27];
     UIColor *colorTwo = [UIColor colorWithHex:0x65F4FF];
     UIColor *colorThree = [UIColor colorWithHex:0x41EA29];
     UIColor *colorFour = [UIColor colorWithHex:0xC0C0E8];

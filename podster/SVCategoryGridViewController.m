@@ -84,31 +84,27 @@
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         view.backgroundColor = [UIColor grayColor];
-        view.layer.masksToBounds = NO;
-        //view.layer.cornerRadius = 8;
-        view.layer.shadowColor = [UIColor whiteColor].CGColor;
-        view.layer.shadowOpacity = 0.5;
-        view.layer.shadowOffset = CGSizeMake(0, 0);
-        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
-        view.layer.shadowRadius = 3;
-       
+        view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
+        view.layer.borderWidth = 2;
 //        CGFloat overlayHeight = 50;
 //        UIView *overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height - overlayHeight, size.width, overlayHeight)];
 //        [view addSubview:overlayView];
 //        overlayView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
-        titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.backgroundColor = [UIColor clearColor];
-
-        titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
-        titleLabel.numberOfLines = 0;
-        titleLabel.tag = 42;
-        titleLabel.opaque = NO;
-        [view addSubview:titleLabel];
+        
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
         imageView.tag = 1906;
         imageView.backgroundColor =[UIColor clearColor];
         [view addSubview:imageView];
+        
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 0,0)];
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        
+        titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:23];
+        titleLabel.numberOfLines = 0;
+        titleLabel.tag = 42;
+        titleLabel.opaque = NO;
+        [view addSubview:titleLabel];
         cell.contentView = view;
     }
 
@@ -135,7 +131,7 @@
     self.gridView = [[GMGridView alloc] initWithFrame:self.view.bounds];
     self.gridView.actionDelegate = self;
     self.gridView.dataSource = self;
-    self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+    self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
     self.gridView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     searchbar.placeholder = @"Search for a specific Podcast";

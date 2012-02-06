@@ -31,6 +31,7 @@
 #import "SVPodcastSettingsView.h"
 @interface SVPodcastDetailsViewController ()
 - (BOOL)isSubscribed;
+- (void)reloadData;
 @end
 @implementation SVPodcastDetailsViewController {
     BOOL isLoading;
@@ -45,6 +46,8 @@
     
     BOOL isInitialLoad;
 }
+@synthesize sortSegmentedControl;
+@synthesize hidePlayedSwitch;
 @synthesize titleLabel;
 @synthesize descriptionLabel;
 @synthesize tableView = _tableView;
@@ -83,6 +86,22 @@
     modal.podcast = self.podcast;
     [self.view addSubview:modal];
     [modal showFromPoint:((UIView *)sender).center];
+}
+
+- (IBAction)hidePlayedSwitchedByUser:(id)sender {
+    localPodcast.hidePlayedEpisodesValue = self.hidePlayedSwitch.on;
+    [localContext performBlockAndWait:^{
+        [localContext save];
+    }];
+    [self reloadData];
+}
+
+- (IBAction)sortControlTapped:(id)sender {
+    localPodcast.sortNewestFirstValue = self.sortSegmentedControl.selectedSegmentIndex == 0;
+    [localContext performBlockAndWait:^{
+        [localContext save];
+    }];
+    [self reloadData];
 }
 
 - (IBAction)subscribeTapped:(id)sender {
@@ -241,6 +260,8 @@
         localPodcast.thumbLogoURL = [self.podcast thumbLogoURL];
         localPodcast.smallLogoURL = [self.podcast smallLogoURL];
         localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
+        localPodcast.unseenEpsiodeCountValue = 0;
+        [localContext save];
 
     }];
     
@@ -275,15 +296,33 @@
               //  [UIAlertView showWithError:error];
             }];
 
-    fetcher = [SVPodcastEntry fetchAllSortedBy:SVPodcastEntryAttributes.datePublished ascending:NO withPredicate:[NSPredicate predicateWithFormat:@"podcast.feedURL == %@", localPodcast.feedURL] groupBy:nil delegate:self inContext:localContext];
-    [self.tableView reloadData];
+   
     
+    [self reloadData];
     headerView = self.tableView.tableHeaderView;
 //    self.tableView.contentInset = UIEdgeInsetsMake(-80, 0, 0, 0);
     [self updateTableHeader];
+
      //  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
-
+-(void)reloadData
+{
+    self.hidePlayedSwitch.on = localPodcast.hidePlayedEpisodesValue;
+    self.sortSegmentedControl.selectedSegmentIndex = localPodcast.sortNewestFirstValue ? 0 : 1;
+    NSMutableArray *predicates = [NSMutableArray array];
+    [predicates addObject:[NSPredicate predicateWithFormat:@"podcast.feedURL == %@", localPodcast.feedURL]];
+    if (localPodcast.hidePlayedEpisodesValue){
+        [predicates addObject:[NSPredicate predicateWithFormat:@"%K == NO", SVPodcastEntryAttributes.played]];
+    }
+    
+    fetcher = [SVPodcastEntry fetchAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                     ascending:!localPodcast.sortNewestFirstValue 
+                                 withPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:predicates] 
+                                       groupBy:nil 
+                                      delegate:self
+                                     inContext:localContext];
+    [self.tableView reloadData];
+}
 - (void)viewDidUnload
 {
     [self setTitleLabel:nil];
@@ -292,6 +331,8 @@
     [self setMetadataView:nil];
     [self setImageView:nil];
     [self setSubscribeButton:nil];
+    [self setHidePlayedSwitch:nil];
+    [self setSortSegmentedControl:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

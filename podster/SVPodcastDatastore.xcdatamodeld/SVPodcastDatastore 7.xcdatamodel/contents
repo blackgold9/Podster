@@ -10,13 +10,14 @@
         <relationship name="entry" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PodcastEntry" inverseName="download" inverseEntity="PodcastEntry" syncable="YES"/>
     </entity>
     <entity name="Podcast" representedClassName="SVPodcast" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feedURL" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="hidePlayedEpisodes" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="hidePlayedEpisodes" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="lastSynced" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="logoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="smallLogoURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sortNewestFirst" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="sortNewestFirst" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbLogoURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,6 +38,7 @@
         <attribute name="isVideo" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="markedForDownload" optional="YES" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="mediaURL" attributeType="String" syncable="YES"/>
+        <attribute name="played" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="positionInSeconds" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
@@ -53,7 +55,7 @@
     <elements>
         <element name="Download" positionX="160" positionY="192" width="128" height="135"/>
         <element name="Podcast" positionX="160" positionY="192" width="128" height="285"/>
-        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="270"/>
+        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="285"/>
         <element name="Subscription" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

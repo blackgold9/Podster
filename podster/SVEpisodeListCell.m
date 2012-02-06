@@ -10,7 +10,7 @@
 #import "SVPodcastEntry.h"
 #import "NSString+MW_HTML.h"
 @implementation SVEpisodeListCell
-@synthesize downloadedIndicator, subtitleLabel, titleLabel, durationLabel,dateLabel;
+@synthesize downloadedIndicator, subtitleLabel, titleLabel, durationLabel,dateLabel, unplayedIndicator;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -40,5 +40,6 @@
     self.subtitleLabel.text = [entry.summary stringByConvertingHTMLToPlainText];
     self.durationLabel.text =[NSString formattedStringRepresentationOfSeconds: [entry.duration integerValue]];
     self.downloadedIndicator.hidden = !entry.downloadCompleteValue;
+    self.unplayedIndicator.hidden = YES;//entry.playedValue;
 }
 @end

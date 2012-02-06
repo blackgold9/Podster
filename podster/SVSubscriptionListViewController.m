@@ -51,8 +51,7 @@
     [super viewDidLoad];
     self.fetcher.delegate  = self;
     [self.tableView reloadData];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
-
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewDidAppear:(BOOL)animated

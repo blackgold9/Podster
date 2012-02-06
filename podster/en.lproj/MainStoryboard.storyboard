@@ -169,6 +169,9 @@
                                             <rect key="frame" x="230" y="8" width="79" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             <color key="onTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="hidePlayedSwitchedByUser:" destination="Xyd-co-oUC" eventType="valueChanged" id="sol-8j-P2E"/>
+                                            </connections>
                                         </switch>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="6IA-Pt-CD3">
                                             <rect key="frame" x="0.0" y="41" width="320" height="30"/>
@@ -178,6 +181,9 @@
                                                 <segment title="Oldest First"/>
                                             </segments>
                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <connections>
+                                                <action selector="sortControlTapped:" destination="Xyd-co-oUC" eventType="valueChanged" id="ipG-hS-nFe"/>
+                                            </connections>
                                         </segmentedControl>
                                     </subviews>
                                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -205,6 +211,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="unplayed-flag.png" id="CcC-IM-rWl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FNh-69-GvI">
                                                     <rect key="frame" x="13" y="6" width="270" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -250,6 +260,7 @@
                                             <outlet property="durationLabel" destination="wfH-o3-S5V" id="9fq-AM-w7y"/>
                                             <outlet property="subtitleLabel" destination="n6z-SI-tH6" id="Z1g-OU-YUu"/>
                                             <outlet property="titleLabel" destination="FNh-69-GvI" id="SPh-pG-bv3"/>
+                                            <outlet property="unplayedIndicator" destination="CcC-IM-rWl" id="Ncr-yu-F9X"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -317,8 +328,10 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="McF-Qx-rxl" id="kLl-qb-okb"/>
+                        <outlet property="hidePlayedSwitch" destination="h87-rV-Gem" id="4CP-Yr-Msn"/>
                         <outlet property="imageView" destination="uzv-F6-J3U" id="AvW-IH-c03"/>
                         <outlet property="metadataView" destination="ZhJ-GG-EuI" id="6b5-qE-fTW"/>
+                        <outlet property="sortSegmentedControl" destination="6IA-Pt-CD3" id="MLG-Oh-sMq"/>
                         <outlet property="subscribeButton" destination="tJ0-3t-8nC" id="vCs-wI-d6p"/>
                         <outlet property="tableView" destination="zBW-st-oQR" id="gfx-Wz-qt4"/>
                         <outlet property="titleLabel" destination="pCs-j8-aWo" id="b1J-MP-fhH"/>
@@ -709,6 +722,7 @@
         <image name="playback-bottom-back.png" width="320" height="125"/>
         <image name="skipback.png" width="24" height="24"/>
         <image name="skipforward.png" width="24" height="24"/>
+        <image name="unplayed-flag.png" width="22" height="22"/>
     </resources>
     <classes>
         <class className="DTAttributedTextView" superclassName="UIScrollView">
@@ -765,6 +779,7 @@
                 <relationship kind="outlet" name="durationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="subtitleLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="unplayedIndicator" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="SVMyPodcastsViewController" superclassName="SVViewController">
@@ -798,11 +813,15 @@
         <class className="SVPodcastDetailsViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDetailsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="hidePlayedSwitchedByUser:"/>
                 <relationship kind="action" name="infoTapped:"/>
+                <relationship kind="action" name="sortControlTapped:"/>
                 <relationship kind="action" name="subscribeTapped:"/>
                 <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="hidePlayedSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="metadataView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="sortSegmentedControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="subscribeButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>

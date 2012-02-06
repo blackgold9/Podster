@@ -63,7 +63,7 @@
     self.imageBackground.layer.shadowOpacity=0.5;
     
     self.imageBackground.frame = CGRectMake(0, 0, self.view.bounds.size.width, titleSize.height+20);
-    self.summaryView.frame = CGRectMake(10, titleSize.height + 30, self.view.bounds.size.width - 20, self.view.bounds.size.height - 30 - titleSize.height);
+       self.summaryView.frame = CGRectMake(10, titleSize.height + 30, self.view.bounds.size.width - 20, self.view.bounds.size.height - 30 - titleSize.height);
 
     self.summaryView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
     self.summaryView.contentOffset = CGPointMake(0, -10);
@@ -72,6 +72,9 @@
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.2",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
     self.summaryView.textDelegate = self;;
     [self.summaryView setAttributedString:[NSAttributedString attributedStringWithHTML:stringData options:dictionary]];
+    
+    
+    
 }
 
 - (void)viewDidLoad
@@ -80,7 +83,8 @@
     NSAssert(episode, @"There should be an episode here");
     [self bind:self.episode];
     [self.titleLabel alignTop];
-    self.view.backgroundColor =  [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
+
     
 }
 

@@ -11,6 +11,7 @@
 #import "SVPodcast.h"
 @implementation SVSubscriptionManager {
     NSArray *subscriptions;
+    BOOL shouldCancel;
     NSDate *startDate; // The date the sync was begun, everything older than that should be synced.
 }
 @synthesize isBusy = _isBusy;
@@ -20,9 +21,18 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
+
     });
     
     return sharedInstance;
+}
+-(void)cancel
+{
+    if(!self.isBusy) {
+        return;
+    }
+    
+    shouldCancel = YES;
 }
 -(void)refreshNextSubscription
 {
@@ -31,7 +41,7 @@
                              initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
 
-    [offsetComponents setMinute:1];
+    [offsetComponents setMinute:-3];
 
     NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
                                                     toDate:[NSDate date]
@@ -43,7 +53,7 @@
             subscriptions =  [SVSubscription findAllInContext:context];
         NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];
         NSPredicate *subscribed = [NSPredicate predicateWithFormat:@"%K in %@", SVPodcastRelationships.subscription, subscriptions];
-        NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@",SVPodcastAttributes.lastSynced, syncWindow];
+        NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@ OR %K == nil",SVPodcastAttributes.lastSynced, syncWindow, SVPodcastAttributes.lastSynced];
         
         NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribed, olderThanSyncStart,stale, nil]];
         
@@ -51,11 +61,13 @@
 
     }];
     LOG_NETWORK(2, @"Finding subscription that needs refreshing");
-    if (nextPodcast) {
-        self.isBusy = YES;
+    if (nextPodcast && !shouldCancel) {
+        if (!self.isBusy) {
+            self.isBusy = YES;
+        }
         nextPodcast.lastSynced = [NSDate date];
         [context save];
-        LOG_NETWORK(2, @"Updating feed: %@", nextPodcast.title);
+        LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
         [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
                                                                  withLowerPriority:YES
                                                                          inContext:context onCompletion:^{
@@ -65,14 +77,19 @@
 
                                                                          }];
     } else {
-        self.isBusy = NO;
+        if (self.isBusy) {
+            self.isBusy = NO;            
+        }
+        [context performBlock:^{
+            [context save];
+        }];
         LOG_NETWORK(2, @"Updating subscriptions complete");
     }
     
 }
 -(void)refreshAllSubscriptions
 {
-    
+    shouldCancel = NO;
     if (self.isBusy) {
         LOG_NETWORK(3, @"Subscription Manager busy. Refresh cancelled");
         return;

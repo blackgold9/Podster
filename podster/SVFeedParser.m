@@ -60,8 +60,9 @@ forPodcastAtURL:(NSString *)feedURL
         localPodcast = [SVPodcast findFirstWithPredicate:        [NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
                                              inContext:localContext];
         if (!localPodcast) {
+
             localPodcast = [SVPodcast createInContext:localContext];
-        }
+        } 
         
         [localPodcast updatePodcastWithFeedInfo:info];
     }];
@@ -121,7 +122,8 @@ forPodcastAtURL:(NSString *)feedURL
         episode.content = item.content;
         episode.durationValue = [item.duration secondsFromDurationString];
         episode.podcast = localPodcast;
-        
+
+        localPodcast.unseenEpsiodeCountValue ++;
         [localContext save];
         itemsParsed += 1;
         if (itemsParsed % 10 == 0){

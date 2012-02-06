@@ -126,8 +126,8 @@
     [self.navigationItem setRightBarButtonItem:self.viewModeToggleButton animated:YES];
     notificationView = [[GCDiscreetNotificationView alloc] initWithText:@"Updating Podcasts" 
                                                            showActivity:YES 
-                                                     inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom 
-                                                                 inView:self.navigationController.view];
+                                                     inPresentationMode:GCDiscreetNotificationViewPresentationModeTop
+                                                                 inView:self.view];
     
 }
 
@@ -157,19 +157,20 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if ([[SVSubscriptionManager sharedInstance] isBusy]) {
-     
-    }
+
     
     [[SVSubscriptionManager sharedInstance] addObserver:self
                                              forKeyPath:@"isBusy"
                                                 options:NSKeyValueObservingOptionNew context:nil];
-    [notificationView show:NO];
-    [notificationView setTextLabel:@"BOOGOAAAA"];
+
+
 }
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    if ([[SVSubscriptionManager sharedInstance] isBusy]) {
+            [notificationView show:YES];
+    }
    // [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
     
 }
@@ -275,13 +276,17 @@
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 
-//        if ([keyPath isEqualToString:@"isBusy"]){
-//            if([[SVSubscriptionManager sharedInstance] isBusy]) {
-//                [notificationView showAnimated]; 
-//            } else {
-//                [notificationView hideAnimated];
-//            }
-//        }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+        if ([keyPath isEqualToString:@"isBusy"]){
+            if([[SVSubscriptionManager sharedInstance] isBusy]) {
+                [notificationView showAnimated]; 
+            } else {
+                [notificationView hideAnimatedAfter:2.0];
+            }
+        }
+    });
    
 }
 @end

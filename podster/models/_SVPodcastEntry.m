@@ -13,6 +13,7 @@ const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
 	.isVideo = @"isVideo",
 	.markedForDownload = @"markedForDownload",
 	.mediaURL = @"mediaURL",
+	.played = @"played",
 	.positionInSeconds = @"positionInSeconds",
 	.summary = @"summary",
 	.title = @"title",
@@ -67,6 +68,10 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 	}
 	if ([key isEqualToString:@"markedForDownloadValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"markedForDownload"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"playedValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"played"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"positionInSecondsValue"]) {
@@ -218,6 +223,32 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 @dynamic mediaURL;
 
+
+
+
+
+
+@dynamic played;
+
+
+
+- (BOOL)playedValue {
+	NSNumber *result = [self played];
+	return [result boolValue];
+}
+
+- (void)setPlayedValue:(BOOL)value_ {
+	[self setPlayed:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitivePlayedValue {
+	NSNumber *result = [self primitivePlayed];
+	return [result boolValue];
+}
+
+- (void)setPrimitivePlayedValue:(BOOL)value_ {
+	[self setPrimitivePlayed:[NSNumber numberWithBool:value_]];
+}
 
 
 
