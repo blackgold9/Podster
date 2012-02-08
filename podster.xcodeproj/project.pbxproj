@@ -295,6 +295,8 @@
 		4B4B5F4714BBB24900C40A95 /* SVFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */; };
 		4B4B5FD114BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */; };
 		4B4B5FD214BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */; };
+		4B4BB61B14E0482E00E49860 /* CarbonListBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B4BB61914E0482E00E49860 /* CarbonListBackground.png */; };
+		4B4BB61C14E0482E00E49860 /* CarbonListBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B4BB61A14E0482E00E49860 /* CarbonListBackground@2x.png */; };
 		4B5CE90014B0E10400E17299 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE8FF14B0E10400E17299 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B5CE90114B0E10400E17299 /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE8FF14B0E10400E17299 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B5CE90414B1161E00E17299 /* SVPlaybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */; };
@@ -731,6 +733,8 @@
 		4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 2.xcdatamodel"; sourceTree = "<group>"; };
 		4B4B5FCF14BCD7D800C40A95 /* SVPodcastSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastSearchResult.h; sourceTree = "<group>"; };
 		4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastSearchResult.m; sourceTree = "<group>"; };
+		4B4BB61914E0482E00E49860 /* CarbonListBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CarbonListBackground.png; sourceTree = "<group>"; };
+		4B4BB61A14E0482E00E49860 /* CarbonListBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CarbonListBackground@2x.png"; sourceTree = "<group>"; };
 		4B5CE8FE14B0E10400E17299 /* OBSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSlider.h; sourceTree = "<group>"; };
 		4B5CE8FF14B0E10400E17299 /* OBSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBSlider.m; sourceTree = "<group>"; };
 		4B5CE90214B1161D00E17299 /* SVPlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackManager.h; sourceTree = "<group>"; };
@@ -1127,6 +1131,8 @@
 		4B20DEC814BE75B30042DC9D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4B4BB61914E0482E00E49860 /* CarbonListBackground.png */,
+				4B4BB61A14E0482E00E49860 /* CarbonListBackground@2x.png */,
 				4B0E654314DF9DE9008913B2 /* unplayed-flag.png */,
 				4B0E654414DF9DE9008913B2 /* unplayed-flag@2x.png */,
 				4B0E653F14DF86CE008913B2 /* grid-count-overlay.png */,
@@ -1821,6 +1827,8 @@
 				4B0E654214DF86CE008913B2 /* grid-count-overlay@2x.png in Resources */,
 				4B0E654514DF9DE9008913B2 /* unplayed-flag.png in Resources */,
 				4B0E654614DF9DE9008913B2 /* unplayed-flag@2x.png in Resources */,
+				4B4BB61B14E0482E00E49860 /* CarbonListBackground.png in Resources */,
+				4B4BB61C14E0482E00E49860 /* CarbonListBackground@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2280,8 +2288,8 @@
 		4B141FB114C9476100028CE4 /* Ad_Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2298,8 +2306,8 @@
 				);
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "BD37BEEE-177C-428C-B5E3-87A966C1CFC3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BD37BEEE-177C-428C-B5E3-87A966C1CFC3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Ad_Hoc;

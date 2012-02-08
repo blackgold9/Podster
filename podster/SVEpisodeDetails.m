@@ -70,7 +70,7 @@
     NSString *bodyText = theEpisode.content ? theEpisode.content : theEpisode.summary;
     NSData *stringData = [[bodyText stringWithNewLinesAsBRs] dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.2",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
-    self.summaryView.textDelegate = self;;
+    self.summaryView.textDelegate = self;
     [self.summaryView setAttributedString:[NSAttributedString attributedStringWithHTML:stringData options:dictionary]];
     
     

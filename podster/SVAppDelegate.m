@@ -30,6 +30,26 @@
 NSString *uuid();
 
 @synthesize window = _window;
+- (void)processLinkInPasteboard
+{
+    NSString *regexToReplaceRawLinks = @"(\\b(https?):\\/\\/[-A-Z0-9+&@#\\/%?=~_|!:,.;]*[-A-Z0-9+&@#\\/%=~_|])";   
+    
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexToReplaceRawLinks
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+    
+    NSString *sourceString = [UIPasteboard generalPasteboard].string;
+    if (sourceString) {
+        NSRange range = [regex rangeOfFirstMatchInString:sourceString
+                                                 options:NSRegularExpressionCaseInsensitive
+                                                   range:NSMakeRange(0, [sourceString length])];
+        if (range.location != NSNotFound){
+            
+        }
+    }
+
+}
 -(void)handleCoreDataError:(NSError *)error
 {
     LOG_GENERAL(0, @"Core data error: %@", error);
@@ -71,11 +91,9 @@ NSString *uuid();
     
        
     UIImage *minImage = [UIImage imageNamed:@"slider-fill.png"];
-    UIImage *maxImage = [UIImage imageNamed:@"slider-bg.png"];
+    //UIImage *maxImage = [UIImage imageNamed:@"slider-bg.png"];
     UIImage *thumbImage = [UIImage imageNamed:@"slider-cap.png"];
     
-    [[UISlider appearance] setMaximumTrackImage:maxImage 
-                                       forState:UIControlStateNormal];
     [[UISlider appearance] setMinimumTrackImage:minImage 
                                        forState:UIControlStateNormal];
     [[UISlider appearance] setThumbImage:thumbImage 

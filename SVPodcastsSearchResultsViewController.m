@@ -219,12 +219,20 @@ static const NSInteger kDefaultPageSize = 50;
         return cell;
     } else {   
         SVPodcastListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SVPodcastListCell"];
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item-darker.png"]];
+       // cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item-darker.png"]];
         
         id<ActsAsPodcast> podcast = [podcasts objectAtIndex:indexPath.row];
         [cell bind:podcast];
         return cell;
     }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    static UIColor *cellBackground;
+    if (!cellBackground) {
+        cellBackground = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"CarbonListBackground.png"]];
+    }
+    cell.backgroundColor = cellBackground;
 }
 
 #pragma mark - Table view delegate

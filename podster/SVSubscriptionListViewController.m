@@ -112,6 +112,15 @@
     LOG_GENERAL(2, @"Displaying %d podcats",  [sectionInfo numberOfObjects]);
     return [sectionInfo numberOfObjects];
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    static UIColor *cellBackground;
+    if (!cellBackground) {
+        cellBackground = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"CarbonListBackground.png"]];
+    }
+    cell.backgroundColor = cellBackground;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -119,7 +128,7 @@
     SVPodcastListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"podcastListCell"];
     if (!cell) {
         cell = [SVPodcastListCell cellForTableView:tableView fromNib:[self listNib]];
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item.png"]];
+//        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item.png"]];
     }
     
     SVSubscription *sub = [self.fetcher objectAtIndexPath:indexPath];

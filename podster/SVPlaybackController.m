@@ -62,23 +62,8 @@
         self.playButton.selected = YES;
     }
     
+    self.navigationItem.title = @"Now Playing";
     self.titleLabel.text = [SVPlaybackManager sharedInstance].currentEpisode.title;
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        [[SVPodcatcherClient sharedInstance] imageAtURL:imageURL onCompletion:^(UIImage *fetchedImage, NSURL *url, BOOL isInCache) {
-//
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                LOG_NETWORK(4, @"Album art recieved");
-//                CATransition *transition = [CATransition animation];
-//                [self.artworkImage.layer addAnimation:transition forKey:nil];
-//                
-//                self.artworkImage.image = fetchedImage;
-//
-//            });
-//            
-//        }];
-//    });
-   
-
 }
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.

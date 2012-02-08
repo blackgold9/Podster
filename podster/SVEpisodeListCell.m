@@ -34,6 +34,7 @@
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setLocale:[NSLocale currentLocale]];
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [dateFormatter setDoesRelativeDateFormatting:YES];
     }
     self.dateLabel.text = [dateFormatter stringFromDate:entry.datePublished];
     self.titleLabel.text = entry.title;

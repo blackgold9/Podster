@@ -16,7 +16,8 @@
 + (SVPlaybackManager *)sharedInstance;
 
 - (AVPlayer *)player;
-
+- (void)play;
+- (void)pause;
 - (BOOL)startedPlayback;
 - (void)playEpisode:(SVPodcastEntry *)episode ofPodcast:(SVPodcast *)podcast;
 @end

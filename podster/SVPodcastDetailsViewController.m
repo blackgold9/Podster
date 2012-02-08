@@ -414,13 +414,20 @@
 
 
 }
-
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    static UIColor *cellBackground;
+    if (!cellBackground) {
+        cellBackground = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"CarbonListBackground.png"]];
+    }
+    cell.backgroundColor = cellBackground;
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
       SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView 
                                                        dequeueReusableCellWithIdentifier:@"episodeCell"];
-    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item-darker.png"]];
+    //cell.backgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"CarbonListBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsZero]];
+    //cell.backgroundView.backgroundColor = ;
         SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
     
     [cell bind:episode];    

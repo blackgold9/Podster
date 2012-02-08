@@ -104,6 +104,9 @@ void audioRouteChangeListenerCallback (
     AVPlayer *_player;
     dispatch_queue_t monitorQueue;
     id monitorId;
+    // Represents whether the user has triggered playback.
+    // This is used to decide whether ot not to start playback after an interruption (phone call) has completed
+    BOOL playing;
 }
 @synthesize currentPodcast;
 @synthesize currentEpisode;
@@ -141,7 +144,12 @@ void audioRouteChangeListenerCallback (
     __block __typeof(self) blockSelf = self;
     monitorId = [_player addPeriodicTimeObserverForInterval:CMTimeMake(5, 1) queue:monitorQueue usingBlock:^(CMTime time) {
         [[NSManagedObjectContext defaultContext] performBlock:^{
-            blockSelf.currentEpisode.positionInSecondsValue = time.value / time.timescale; 
+            NSInteger duration = blockSelf->_player.currentItem.duration.value / blockSelf->_player.currentItem.duration.timescale;
+            if( blockSelf.currentEpisode.durationValue != duration) {
+                blockSelf.currentEpisode.durationValue = duration;
+            }
+            
+            blockSelf.currentEpisode.positionInSecondsValue = time.value / time.timescale;            
             CGFloat currentPosition = (CGFloat)blockSelf.currentEpisode.positionInSecondsValue;
             CGFloat totalDuration = (CGFloat)blockSelf.currentEpisode.durationValue;
             CGFloat progresPercentage = currentPosition / totalDuration;
@@ -199,11 +207,15 @@ void audioRouteChangeListenerCallback (
     
     
     [_player replaceCurrentItemWithPlayerItem:[[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]]];
-
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title,MPMediaItemPropertyTitle, podcast.title, MPMediaItemPropertyAlbumTitle ,[NSNumber numberWithInteger:episode.positionInSecondsValue],MPNowPlayingInfoPropertyElapsedPlaybackTime, nil];
+ 
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title, MPMediaItemPropertyTitle,
+                            podcast.author, MPMediaItemPropertyArtist,
+                            podcast.title, MPMediaItemPropertyAlbumTitle,
+                            [NSNumber numberWithInteger:episode.positionInSecondsValue],MPNowPlayingInfoPropertyElapsedPlaybackTime, nil];
     
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:params];
-    AFImageRequestOperation *imageOp = [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[currentPodcast logoURL]]] 
+    AFImageRequestOperation *imageOp = 
+    [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[currentPodcast logoURL]]] 
                                                                                          success:^(UIImage *image) {
                                                                                              NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
                                                                                              MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
@@ -222,9 +234,26 @@ void audioRouteChangeListenerCallback (
     }
 }
 
+-(void)play
+{
+    if (_player) {
+        [_player play];
+        playing = YES;
+    }
+
+}
+
+-(void)pause
+{
+    if (_player) {
+        [_player pause];
+        playing = NO;
+    }
+}
+
 #pragma mark - AVAudioSessionDelegate
 - (void)endInterruptionWithFlags:(NSUInteger)flags {
-   if (flags == AVAudioSessionInterruptionFlags_ShouldResume) {
+   if (flags == AVAudioSessionInterruptionFlags_ShouldResume && playing) {
        NSAssert(_player !=nil, @"The player is expected to exist here");
        [_player play];
        [[AVAudioSession sharedInstance] setActive: YES error: nil];
