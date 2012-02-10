@@ -158,7 +158,7 @@
 {
     [super viewWillAppear:animated];
 
-    
+
     [[SVSubscriptionManager sharedInstance] addObserver:self
                                              forKeyPath:@"isBusy"
                                                 options:NSKeyValueObservingOptionNew context:nil];
@@ -168,15 +168,21 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+        [self becomeFirstResponder];
     if ([[SVSubscriptionManager sharedInstance] isBusy]) {
             [notificationView show:YES];
     }
    // [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
     
 }
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [self resignFirstResponder];
     [[SVSubscriptionManager sharedInstance] removeObserver:self forKeyPath:@"isBusy"];
 }
 - (void)viewDidUnload
@@ -283,10 +289,26 @@
             if([[SVSubscriptionManager sharedInstance] isBusy]) {
                 [notificationView showAnimated]; 
             } else {
-                [notificationView hideAnimatedAfter:2.0];
+                [notificationView hideAnimatedAfter:1.0];
             }
         }
     });
    
 }
+
+#ifdef DEBUG
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    NSLog(@"{motion ended event ");
+    
+    if (motion == UIEventSubtypeMotionShake) {
+        NSLog(@"{shaken state ");
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Debug" bundle:nil];
+        [self.navigationController pushViewController:[storyboard instantiateInitialViewController] animated:YES];
+        
+    }
+    else {
+        NSLog(@"{not shaken state ");           
+    }
+}
+#endif
 @end

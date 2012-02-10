@@ -15,6 +15,8 @@ typedef void (^CompletionBlock)(void);
 @interface SVFeedParser : NSObject<MWFeedParserDelegate>
 
 + (id)parseData:(NSData *)data
+       withETag:(NSString *)etag
+andLastModified:(NSString *)cachingLastModified
 forPodcastAtURL:(NSString *)feedURL
       inContext:(NSManagedObjectContext *)context
      onComplete:(CompletionBlock)complete

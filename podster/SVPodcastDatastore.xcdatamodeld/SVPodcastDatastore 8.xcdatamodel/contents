@@ -11,6 +11,8 @@
     </entity>
     <entity name="Podcast" representedClassName="SVPodcast" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cachingLastModified" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="etag" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feedURL" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="hidePlayedEpisodes" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="lastSynced" optional="YES" attributeType="Date" syncable="YES"/>
@@ -54,7 +56,7 @@
     </entity>
     <elements>
         <element name="Download" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Podcast" positionX="160" positionY="192" width="128" height="285"/>
+        <element name="Podcast" positionX="160" positionY="192" width="128" height="330"/>
         <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="285"/>
         <element name="Subscription" positionX="160" positionY="192" width="128" height="105"/>
     </elements>

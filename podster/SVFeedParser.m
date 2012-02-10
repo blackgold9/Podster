@@ -23,9 +23,13 @@
     dispatch_queue_t originalQueue;
     BOOL isFirstItem;
     NSInteger itemsParsed;
+    NSString *etag;
+    NSString *cachingLastModified;
 }
 @synthesize errorCallback, completionCallback;
 + (id)parseData:(NSData *)data
+       withETag:(NSString *)etag
+andLastModified:(NSString *)cachingLastModified
 forPodcastAtURL:(NSString *)feedURL
              inContext:(NSManagedObjectContext *)context
             onComplete:(CompletionBlock)complete
@@ -43,6 +47,8 @@ forPodcastAtURL:(NSString *)feedURL
     parser->feedURL = feedURL;
     parser->failed = NO;
     parser->itemsParsed = 0;
+    parser->etag = etag;
+    parser->cachingLastModified = cachingLastModified;
     parser->feedParser = [[MWFeedParser alloc] initWithFeedData:data textEncodingName:@"NSUnicodeStringEncoding"];
     parser->feedParser.delegate = parser;
     parser->isFirstItem = YES;
@@ -62,22 +68,24 @@ forPodcastAtURL:(NSString *)feedURL
         if (!localPodcast) {
 
             localPodcast = [SVPodcast createInContext:localContext];
+            localPodcast.feedURL = feedURL; 
         } 
         
         [localPodcast updatePodcastWithFeedInfo:info];
+        localPodcast.etag = etag;
     }];
 }
 
 -(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
 {
     if (item.enclosures.count == 0) {
-        [parser stopParsing];
-        NSError *badFeed = [[NSError alloc] initWithDomain:@"SVParsing" code:100 userInfo:[NSDictionary dictionaryWithObject:@"This podcast feed appears invalid" forKey:NSLocalizedDescriptionKey]];
-        failed = YES;
-        dispatch_async(originalQueue, ^void() {
-            self.errorCallback(badFeed);
-        });
-        //TODO: Report parsing error with url
+//        [parser stopParsing];
+//        NSError *badFeed = [[NSError alloc] initWithDomain:@"SVParsing" code:100 userInfo:[NSDictionary dictionaryWithObject:@"This podcast feed appears invalid" forKey:NSLocalizedDescriptionKey]];
+//        failed = YES;
+//        dispatch_async(originalQueue, ^void() {
+//            self.errorCallback(badFeed);
+//        });
+//        //TODO: Report parsing error with url
         return;
     }
     

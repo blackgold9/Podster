@@ -376,6 +376,8 @@
 		4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
 		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
 		4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
+		4B90FC8814E490130082C155 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B90FC8714E490120082C155 /* Debug.storyboard */; };
+		4B90FC8B14E4907C0082C155 /* DebugHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B90FC8A14E4907C0082C155 /* DebugHomeViewController.m */; };
 		4B91BF6514C77B6600B33776 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF5114C77B6600B33776 /* UIColor+Hex.m */; };
 		4B91BF6614C77B6600B33776 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF5114C77B6600B33776 /* UIColor+Hex.m */; };
 		4B91BF6714C77B6600B33776 /* UIView+InnerShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF5314C77B6600B33776 /* UIView+InnerShadow.m */; };
@@ -436,6 +438,9 @@
 		4B91BFCA14C8009900B33776 /* SVSubscriptionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */; };
 		4B91BFCB14C8009900B33776 /* SVSubscriptionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */; };
 		4B91BFCC14C8009900B33776 /* SVSubscriptionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */; };
+		4BA02C6314E25AA600582306 /* BlocksKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA02C6214E25AA600582306 /* BlocksKit.framework */; };
+		4BA02C6414E25AA600582306 /* BlocksKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA02C6214E25AA600582306 /* BlocksKit.framework */; };
+		4BA02C6614E25AEF00582306 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA02C6514E25AEF00582306 /* MessageUI.framework */; };
 		4BB2057114D0F3130038EB7D /* UIView+JMNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2056114D0F3130038EB7D /* UIView+JMNoise.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BB2057214D0F3130038EB7D /* UIView+JMNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2056114D0F3130038EB7D /* UIView+JMNoise.m */; };
 		4BB2057314D0F3130038EB7D /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BB2056314D0F3130038EB7D /* close.png */; };
@@ -815,6 +820,10 @@
 		4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadsViewController.m; sourceTree = "<group>"; };
 		4B86242F14B57C7500A4B320 /* SVDownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadCell.h; sourceTree = "<group>"; };
 		4B86243014B57C7500A4B320 /* SVDownloadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadCell.m; sourceTree = "<group>"; };
+		4B90FC8514E3BDC00082C155 /* SVPodcastDatastore 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 8.xcdatamodel"; sourceTree = "<group>"; };
+		4B90FC8714E490120082C155 /* Debug.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
+		4B90FC8914E4907C0082C155 /* DebugHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugHomeViewController.h; sourceTree = "<group>"; };
+		4B90FC8A14E4907C0082C155 /* DebugHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugHomeViewController.m; sourceTree = "<group>"; };
 		4B91BF5014C77B6600B33776 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		4B91BF5114C77B6600B33776 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		4B91BF5214C77B6600B33776 /* UIView+InnerShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+InnerShadow.h"; sourceTree = "<group>"; };
@@ -860,6 +869,8 @@
 		4B91BFC614C8009700B33776 /* SVSubscriptionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSubscriptionListViewController.h; sourceTree = "<group>"; };
 		4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSubscriptionListViewController.m; sourceTree = "<group>"; };
 		4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVSubscriptionListViewController.xib; sourceTree = "<group>"; };
+		4BA02C6214E25AA600582306 /* BlocksKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BlocksKit.framework; sourceTree = "<group>"; };
+		4BA02C6514E25AEF00582306 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 4.xcdatamodel"; sourceTree = "<group>"; };
 		4BB2056014D0F3130038EB7D /* UIView+JMNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JMNoise.h"; sourceTree = "<group>"; };
 		4BB2056114D0F3130038EB7D /* UIView+JMNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMNoise.m"; sourceTree = "<group>"; };
@@ -899,6 +910,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BA02C6614E25AEF00582306 /* MessageUI.framework in Frameworks */,
 				4B20240714DA47F300820391 /* AudioToolbox.framework in Frameworks */,
 				4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */,
 				4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */,
@@ -915,6 +927,7 @@
 				4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */,
 				4B141FA914C9433A00028CE4 /* CrashReporter.framework in Frameworks */,
 				4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */,
+				4BA02C6314E25AA600582306 /* BlocksKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -933,6 +946,7 @@
 				4B71F7B014A5B08C00D26F4C /* Foundation.framework in Frameworks */,
 				4B141FAA14C9433A00028CE4 /* CrashReporter.framework in Frameworks */,
 				4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */,
+				4BA02C6414E25AA600582306 /* BlocksKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -942,6 +956,8 @@
 		4B10D00314BF786E00DF4DBD /* View controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4B90FC8914E4907C0082C155 /* DebugHomeViewController.h */,
+				4B90FC8A14E4907C0082C155 /* DebugHomeViewController.m */,
 				4B71F82314A7060A00D26F4C /* SVPodcastsSearchResultsViewController.h */,
 				4B71F82414A7060A00D26F4C /* SVPodcastsSearchResultsViewController.m */,
 				4B71F81F14A6E95A00D26F4C /* SVPodcastDirectoryViewController.h */,
@@ -1369,6 +1385,7 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
+				4BA02C6514E25AEF00582306 /* MessageUI.framework */,
 				4B71F7C514A5B09B00D26F4C /* 3rd Party */,
 				4B71F79514A5B08C00D26F4C /* podster */,
 				4B71F7B314A5B08C00D26F4C /* podsterTests */,
@@ -1446,6 +1463,7 @@
 				4B141FB914CB220100028CE4 /* SVCustomApplication.m */,
 				4B20240914DA626600820391 /* SVSubscriptionManager.h */,
 				4B20240A14DA626800820391 /* SVSubscriptionManager.m */,
+				4B90FC8714E490120082C155 /* Debug.storyboard */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -1483,6 +1501,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4BA02C6214E25AA600582306 /* BlocksKit.framework */,
 				4B20247314DD0BBE00820391 /* DiscreetNotification */,
 				4B20240114D9F28000820391 /* Flurry */,
 				4B434BFB14D59D64004A5E89 /* SDURLCache */,
@@ -1829,6 +1848,7 @@
 				4B0E654614DF9DE9008913B2 /* unplayed-flag@2x.png in Resources */,
 				4B4BB61B14E0482E00E49860 /* CarbonListBackground.png in Resources */,
 				4B4BB61C14E0482E00E49860 /* CarbonListBackground@2x.png in Resources */,
+				4B90FC8814E490130082C155 /* Debug.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2073,6 +2093,7 @@
 				4B434BF914D59C12004A5E89 /* SDURLCache.m in Sources */,
 				4B20240B14DA626C00820391 /* SVSubscriptionManager.m in Sources */,
 				4B20247614DD0BF200820391 /* GCDiscreetNotificationView.m in Sources */,
+				4B90FC8B14E4907C0082C155 /* DebugHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2304,7 +2325,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				OTHER_LDFLAGS = "-lxml2";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "BD37BEEE-177C-428C-B5E3-87A966C1CFC3";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BD37BEEE-177C-428C-B5E3-87A966C1CFC3";
@@ -2388,8 +2413,8 @@
 		4B71F7BF14A5B08C00D26F4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2407,10 +2432,14 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				OTHER_LDFLAGS = "-lxml2";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "759DD7BC-82F6-4993-B614-41B1CBA1182A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "759DD7BC-82F6-4993-B614-41B1CBA1182A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2433,7 +2462,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				OTHER_LDFLAGS = "-lxml2";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -2527,6 +2560,7 @@
 		4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				4B90FC8514E3BDC00082C155 /* SVPodcastDatastore 8.xcdatamodel */,
 				4B20237914D65AA700820391 /* SVPodcastDatastore 5.xcdatamodel */,
 				4B20240814DA5EF400820391 /* SVPodcastDatastore 6.xcdatamodel */,
 				4B20247814DDCFD600820391 /* SVPodcastDatastore 7.xcdatamodel */,
@@ -2535,7 +2569,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4B20247814DDCFD600820391 /* SVPodcastDatastore 7.xcdatamodel */;
+			currentVersion = 4B90FC8514E3BDC00082C155 /* SVPodcastDatastore 8.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

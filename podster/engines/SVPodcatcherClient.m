@@ -147,11 +147,24 @@
     [FlurryAnalytics logEvent:@"ParsingFeed" withParameters:loggingParamters timed:YES];
     NSManagedObjectContext *localContext= [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     localContext.parentContext = context;
-    
-    NSURLRequest *request = [self requestWithMethod:@"GET" path:feedURL parameters:nil];
+    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:feedURL parameters:nil];
+    SVPodcast *podcast = [SVPodcast findFirstWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
+                                           inContext:localContext];
+
+
+    if (podcast && podcast.etag) {       
+        [request setValue:podcast.etag forHTTPHeaderField:@"If-None-Match"];
+    }
+
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request 
                                                                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+                                                                          NSString *returnedETag = [[[operation response] allHeaderFields] valueForKey:@"ETag"];
+                                                                          NSString *cachingLastModified = [[[operation response] allHeaderFields] valueForKey:@"Last-Modified"];
+                                                                          LOG_NETWORK(3, @"Returned ETag: %@", returnedETag );
                                                                           [SVFeedParser parseData:responseObject
+                                                                                         withETag:returnedETag
+                                                                                  andLastModified:cachingLastModified
                                                                                   forPodcastAtURL:feedURL
                                                                                         inContext:localContext
                                                                                        onComplete:^{
@@ -170,7 +183,16 @@
                                                                                        }];
                                                                           
                                                                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                          if ([[operation response] statusCode] == 304) {
+                                                                              // This is a valid case
+                                                                              LOG_NETWORK(2, @"Feed has not changed (Server returned 304");
+                                                                              [FlurryAnalytics logEvent:@"FeedNotChangedYAY"];
+                                                                              onComplete();
+                                                                          } else {
+                                                                          
                                                                           LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed");
+                                                                              [FlurryAnalytics logError:@"Downloading a feed failed" message:[error localizedDescription] error:error];
+                                                                          }
                                                                           
                                                                       }];
     

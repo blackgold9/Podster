@@ -18,7 +18,7 @@
 #import "SVPodcast.h"
 #import "SDURLCache.h"
 #import "GMGridView.h"
-
+#import "SVSubscription.h"
 
 #import <CoreText/CoreText.h>
 
@@ -30,6 +30,25 @@
 NSString *uuid();
 
 @synthesize window = _window;
+- (void)subscribeToFeedWithURL:(NSString *)url
+{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, url];
+    SVPodcast *podcast = [SVPodcast findFirstWithPredicate:pred];
+    if (podcast && podcast.subscription == nil) {
+        SVSubscription *sub = [SVSubscription createEntity];
+        sub.podcast = podcast;
+        [[NSManagedObjectContext defaultContext] save];        
+
+        [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:url
+                                                           withDeviceId: [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"] onCompletion:^{
+                                                               
+                                                           } onError:^(NSError *error) {
+                                                               
+                                                           }];
+    }
+
+    
+}
 - (void)processLinkInPasteboard
 {
     NSString *regexToReplaceRawLinks = @"(\\b(https?):\\/\\/[-A-Z0-9+&@#\\/%?=~_|!:,.;]*[-A-Z0-9+&@#\\/%=~_|])";   
@@ -45,7 +64,28 @@ NSString *uuid();
                                                  options:NSRegularExpressionCaseInsensitive
                                                    range:NSMakeRange(0, [sourceString length])];
         if (range.location != NSNotFound){
-            
+            NSString *url = [sourceString substringWithRange:range];
+            url = [url lowercaseString];
+            UIAlertView *testView = [UIAlertView alertViewWithTitle:@"Add this feed?" message:[NSString stringWithFormat:@"We noticed you have the url: \"%@\" in your pasteboard. Would you like to subscribe to it?", url]];
+            [testView addButtonWithTitle:@"Yes" handler:^{
+                [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:url
+                                                                         withLowerPriority:NO
+                                                                                 inContext:[NSManagedObjectContext defaultContext]
+                                                                              onCompletion:^{
+                                                                                  [self subscribeToFeedWithURL:url];
+                                                                              } onError:^(NSError *error) {
+                                                                                 
+                                                                                 NSString *msg= [NSString stringWithFormat:@"The link (%@) does not represent a valid feed.", url];
+                                                                               [UIAlertView showAlertViewWithTitle:@"Whoops!"
+                                                                                                           message:msg
+                                                                                                 cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alert, NSInteger index) {
+                                                                                                               
+                                                                                                           }];   
+                                                                               
+                                                                              }];
+            }];
+            [testView addButtonWithTitle:@"No" handler:^{ LOG_GENERAL(2, @"Improting a feed failed"); }];
+            [testView show];
         }
     }
 
@@ -113,10 +153,21 @@ NSString *uuid();
         CFRelease(fontDesc);
     });   
 }
-
+- (void)ensureDeviceId
+{
+    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
+    if (!deviceId)
+    {
+        LOG_GENERAL(2, @"No stored device id, creating and storing one");
+        deviceId = uuid();
+        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    
 #if defined (CONFIGURATION_Ad_Hoc)
     [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
     [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
@@ -124,8 +175,12 @@ NSString *uuid();
     [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
     [[BWQuincyManager sharedQuincyManager] setAutoSubmitDeviceUDID:YES];
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
-#endif
+    [self ensureDeviceId];
+    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
+    [FlurryAnalytics setUserID:deviceId];
 
+#endif
+    
     [self initializeCoreText];
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
@@ -180,19 +235,15 @@ NSString *uuid(){
     return uuidString;
 }
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+    [self ensureDeviceId];
     NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
-    if (!deviceId)
-    {
-        LOG_GENERAL(2, @"No stored device id, creating and storing one");
-        deviceId = uuid();
-        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-    }
+   
 
     NSString * tokenAsString = [[[devToken description] 
                                  stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] 
                                 stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [[NSUserDefaults standardUserDefaults] setObject:tokenAsString forKey:@"notificationsToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [[SVPodcatcherClient sharedInstance] registerForPushNotificationsWithToken:tokenAsString 
                                                             andDeviceIdentifer:deviceId
                                                                   onCompletion:^{
@@ -256,6 +307,7 @@ NSString *uuid(){
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+        [self performSelectorOnMainThread:@selector(processLinkInPasteboard) withObject:self waitUntilDone:NO];
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */

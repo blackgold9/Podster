@@ -100,9 +100,31 @@
 
 -(void)showNowPLayingButton
 {
+    SVPodcastEntry *episode = [[SVPlaybackManager sharedInstance] currentEpisode];
     if ([[SVPlaybackManager sharedInstance] currentEpisode]) {
-        UIBarButtonItem *nowPlaying = [[UIBarButtonItem alloc] initWithTitle:@"Now Playing" style:UIBarButtonItemStyleBordered target:self action:@selector(showNowPlayingController)];
-        [self setToolbarItems:[NSArray arrayWithObject:nowPlaying]];
+
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [image setImageWithURL:[NSURL URLWithString:[[SVPlaybackManager sharedInstance] currentPodcast].tinyLogoURL]];
+        __weak SVViewController *weakSelf = self;
+        [image setUserInteractionEnabled:YES];
+        [image whenTapped:^{
+            [weakSelf showNowPlayingController];
+        }];
+        UIBarButtonItem *nowPlaying = [[UIBarButtonItem alloc] initWithCustomView:image];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,self.view.bounds.size.width - 60, 30)];
+        label.text = episode.title;
+        label.font = [UIFont systemFontOfSize:13];
+        [label setUserInteractionEnabled:YES];
+        [label whenTapped:^{
+            [weakSelf showNowPlayingController];
+        }];
+
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = [UIColor whiteColor];
+        UIBarButtonItem *title = [[UIBarButtonItem alloc] initWithCustomView:label];
+        
+        [self setToolbarItems:[NSArray arrayWithObjects:nowPlaying, title,[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace handler:nil], nil]];
+        
     }
 
 }

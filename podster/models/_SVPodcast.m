@@ -5,6 +5,8 @@
 
 const struct SVPodcastAttributes SVPodcastAttributes = {
 	.author = @"author",
+	.cachingLastModified = @"cachingLastModified",
+	.etag = @"etag",
 	.feedURL = @"feedURL",
 	.hidePlayedEpisodes = @"hidePlayedEpisodes",
 	.lastSynced = @"lastSynced",
@@ -75,6 +77,20 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 @dynamic author;
+
+
+
+
+
+
+@dynamic cachingLastModified;
+
+
+
+
+
+
+@dynamic etag;
 
 
 

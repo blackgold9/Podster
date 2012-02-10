@@ -6,6 +6,8 @@
 
 extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *author;
+	__unsafe_unretained NSString *cachingLastModified;
+	__unsafe_unretained NSString *etag;
 	__unsafe_unretained NSString *feedURL;
 	__unsafe_unretained NSString *hidePlayedEpisodes;
 	__unsafe_unretained NSString *lastSynced;
@@ -49,6 +51,8 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+
+
 @interface SVPodcastID : NSManagedObjectID {}
 @end
 
@@ -65,6 +69,22 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateAuthor:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSString *cachingLastModified;
+
+
+//- (BOOL)validateCachingLastModified:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSString *etag;
+
+
+//- (BOOL)validateEtag:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -224,6 +244,18 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveAuthor;
 - (void)setPrimitiveAuthor:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveCachingLastModified;
+- (void)setPrimitiveCachingLastModified:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveEtag;
+- (void)setPrimitiveEtag:(NSString*)value;
 
 
 
