@@ -14,7 +14,7 @@
 
 typedef void (^CategoryResponseBlock)(NSArray *categories);
 typedef void (^PodcastListResponeBlock)(NSArray *podcasts);
-typedef void (^FeedListResponeBlock)(NSArray *feedURLs);
+typedef void (^FeedResponseBlock)(NSString *result);
 typedef void (^PodcastItemsResponseBlock)(NSArray *entries);
 typedef void (^SVErrorBlock)(NSError *error);
 
@@ -42,14 +42,20 @@ typedef void (^SVErrorBlock)(NSError *error);
                                    onCompletion:(void(^)(void))completion
                                          onError:(SVErrorBlock)error;
 
-- (void)findFeedsOnWebPage:(NSString *)pageURL
-                              onCompletion:(FeedListResponeBlock)completion
-                                   onError:(SVErrorBlock)error;
+-(void)findFeedFromLink:(NSString *)pageURL 
+           onCompletion:(FeedResponseBlock)completion
+                onError:(SVErrorBlock)errorBlock;
+
 -(void)podcastsByCategory:(NSInteger)categoryId
                        startingAtIndex:(NSInteger)start
                                  limit:(NSInteger)limit
                           onCompletion:(PodcastListResponeBlock)completion 
                                onError:(SVErrorBlock)errorBlock;
+
+-(void)topPodcastsStartingAtIndex:(NSInteger)start
+                            limit:(NSInteger)limit
+                     onCompletion:(PodcastListResponeBlock)completion 
+                          onError:(SVErrorBlock)errorBlock;
 
 -(void)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
                            withLowerPriority:(BOOL)lowPriority

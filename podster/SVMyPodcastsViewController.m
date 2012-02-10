@@ -162,6 +162,9 @@
     [[SVSubscriptionManager sharedInstance] addObserver:self
                                              forKeyPath:@"isBusy"
                                                 options:NSKeyValueObservingOptionNew context:nil];
+    
+    
+
 
 
 }

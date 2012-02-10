@@ -13,12 +13,15 @@
 @interface SVViewController() 
 -(void)showNowPlayingController;
 -(void)showNowPLayingButton;
+// Private Properties:
+@property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
+
 @end
 @implementation SVViewController{
     SVPlaybackManager *localManager;
     
 }
-
+@synthesize navigationBarPanGestureRecognizer;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -33,10 +36,12 @@
     localManager = [SVPlaybackManager sharedInstance];
     [localManager addObserver:self forKeyPath:@"currentPodcast" options:NSKeyValueObservingOptionNew context:nil];
     
+    
 }
 -(void)dealloc
 {
     [localManager removeObserver:self forKeyPath:@"currentPodcast"];
+    self.navigationBarPanGestureRecognizer = nil;
 
 }
 
@@ -56,6 +61,20 @@
         if (self.toolbarItems.count == 0 ) {
             [self showNowPLayingButton];
         }
+    }
+    
+    if ([self.navigationController.parentViewController respondsToSelector:@selector(revealGesture:)] && [self.navigationController.parentViewController respondsToSelector:@selector(revealToggle:)])
+	{
+		// Check if a UIPanGestureRecognizer already sits atop our NavigationBar.
+		if (![[self.navigationController.navigationBar gestureRecognizers] containsObject:self.navigationBarPanGestureRecognizer])
+		{
+			// If not, allocate one and add it.
+			UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self.navigationController.parentViewController action:@selector(revealGesture:)];
+			self.navigationBarPanGestureRecognizer = panGestureRecognizer;
+            
+			[self.navigationController.navigationBar addGestureRecognizer:self.navigationBarPanGestureRecognizer];
+		}
+        
     }
  
 }

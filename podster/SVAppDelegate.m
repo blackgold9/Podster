@@ -32,6 +32,7 @@ NSString *uuid();
 @synthesize window = _window;
 - (void)subscribeToFeedWithURL:(NSString *)url
 {
+    NSLog(@"Subscribing to feed with url");
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, url];
     SVPodcast *podcast = [SVPodcast findFirstWithPredicate:pred];
     if (podcast && podcast.subscription == nil) {
@@ -57,8 +58,17 @@ NSString *uuid();
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexToReplaceRawLinks
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
-    
+    NSString *lastURLAskedAbout = [[NSUserDefaults standardUserDefaults] valueForKey:@"lastPastebordImportURL"];
     NSString *sourceString = [UIPasteboard generalPasteboard].string;
+    if ([sourceString isEqualToString:lastURLAskedAbout]) {
+        // We already asked the user about this url.
+        return;
+    } else {
+        // Save it so we don't ask them again
+        [[NSUserDefaults standardUserDefaults] setValue:sourceString forKey:@"lastPastebordImportURL"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
     if (sourceString) {
         NSRange range = [regex rangeOfFirstMatchInString:sourceString
                                                  options:NSRegularExpressionCaseInsensitive
@@ -68,27 +78,44 @@ NSString *uuid();
             url = [url lowercaseString];
             UIAlertView *testView = [UIAlertView alertViewWithTitle:@"Add this feed?" message:[NSString stringWithFormat:@"We noticed you have the url: \"%@\" in your pasteboard. Would you like to subscribe to it?", url]];
             [testView addButtonWithTitle:@"Yes" handler:^{
-                [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:url
-                                                                         withLowerPriority:NO
-                                                                                 inContext:[NSManagedObjectContext defaultContext]
-                                                                              onCompletion:^{
-                                                                                  [self subscribeToFeedWithURL:url];
-                                                                              } onError:^(NSError *error) {
-                                                                                 
-                                                                                 NSString *msg= [NSString stringWithFormat:@"The link (%@) does not represent a valid feed.", url];
-                                                                               [UIAlertView showAlertViewWithTitle:@"Whoops!"
-                                                                                                           message:msg
-                                                                                                 cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alert, NSInteger index) {
-                                                                                                               
-                                                                                                           }];   
-                                                                               
-                                                                              }];
+                [[SVPodcatcherClient sharedInstance] findFeedFromLink:url
+                                                         onCompletion:^(NSString *feedURL) {
+                                                             if (feedURL){
+                                                             [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:feedURL
+                                                                                                                      withLowerPriority:NO
+                                                                                                                              inContext:[NSManagedObjectContext defaultContext]
+                                                                                                                           onCompletion:^{
+                                                                                                                               [self subscribeToFeedWithURL:feedURL];
+                                                                                                                           } onError:^(NSError *error) {
+                                                                                                                               
+                                                                                                                               // The feed could not be parsed
+                                                                                                                               [UIAlertView showAlertViewWithTitle:@"Whoops!"
+                                                                                                                                                           message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
+                                                                                                                                                               
+                                                                                                                                                           }];
+                                                                                                                               
+                                                                                                                           }];
+                                                             } else {
+                                                                 // The feed could not be parsed
+                                                                 [UIAlertView showAlertViewWithTitle:@"Whoops!"
+                                                                                             message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
+                                                                                                 
+                                                                                             }];
+                                                             }
+                                                         } onError:^(NSError *error) {
+                                                             // The feed could not be parsed
+                                                             [UIAlertView showAlertViewWithTitle:@"Whoops!"
+                                                                                         message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
+                                                                                             
+                                                                                         }];
+
+                                                         }];
             }];
             [testView addButtonWithTitle:@"No" handler:^{ LOG_GENERAL(2, @"Improting a feed failed"); }];
             [testView show];
         }
     }
-
+    
 }
 -(void)handleCoreDataError:(NSError *)error
 {

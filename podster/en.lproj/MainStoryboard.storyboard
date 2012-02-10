@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="G1m-uo-Ar1">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -146,11 +146,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq8-FL-BUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="podcastDetailsController" title="Podcast Details" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hra-2Y-S1w">
-                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="zBW-st-oQR">
-                                <rect key="frame" x="0.0" y="88" width="320" height="287"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="331"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -383,15 +383,15 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4N-MX-IMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MyPodcasts" title="My Podcasts" modalTransitionStyle="flipHorizontal" id="04a-hT-U9C" customClass="SVMyPodcastsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ev5-gc-u6u">
-                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.40000000000000013" contentMode="scaleToFill" image="bg-gunmetal.png" id="r5t-Du-EsY">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="Fxc-dX-VW2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -589,10 +589,165 @@
             </objects>
             <point key="canvasLocation" x="1700" y="552"/>
         </scene>
+        <scene sceneID="AXF-8O-pt5">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UC7-CT-owX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="slideContainer" id="G1m-uo-Ar1" customClass="RootController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kUE-Qc-AFf">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-879" y="122"/>
+        </scene>
+        <scene sceneID="BeD-CB-ZzO">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E6e-tn-6Ko" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="rearController" id="M7V-qZ-eET" customClass="RearController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="u4K-tZ-NYr">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection headerTitle="Discover New Podcasts" id="eQe-m0-zeV">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="165" id="zXx-jj-WmD">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="165"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" id="z7D-2E-OSg" customClass="GMGridView">
+                                                    <rect key="frame" x="20" y="7" width="260" height="106"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <connections>
+                                                        <outlet property="actionDelegate" destination="M7V-qZ-eET" id="8sn-lb-8pT"/>
+                                                        <outlet property="dataSource" destination="M7V-qZ-eET" id="jEm-5O-tvP"/>
+                                                    </connections>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RUG-xd-9zd">
+                                                    <rect key="frame" x="20" y="114" width="230" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Podcast Directory">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="directoryTapped:" destination="M7V-qZ-eET" eventType="touchUpInside" id="CpQ-pz-keT"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Add your own" id="osn-f2-oMj">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="117" id="Hsv-Hy-vGt">
+                                        <rect key="frame" x="0.0" y="209" width="320" height="117"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a podcast URL here" minimumFontSize="17" id="yB6-pX-hmg">
+                                                    <rect key="frame" x="20" y="20" width="230" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.94509810209274292" green="0.94509810209274292" blue="0.95294123888015747" alpha="1" colorSpace="deviceRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="urlTextFieldValueChanged:" destination="M7V-qZ-eET" eventType="valueChanged" id="ekJ-5n-LoP"/>
+                                                    </connections>
+                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nd4-aU-Roe">
+                                                    <rect key="frame" x="20" y="59" width="230" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Add It">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="addURLTapped:" destination="M7V-qZ-eET" eventType="touchUpInside" id="Ryu-o1-LRl"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Notifications" id="wrM-y8-AAz">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="109" id="txp-Wn-1Bh">
+                                        <rect key="frame" x="0.0" y="348" width="320" height="109"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Hjr-A0-XLZ">
+                                                    <rect key="frame" x="171" y="11" width="79" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="notificationsChanged:" destination="M7V-qZ-eET" eventType="valueChanged" id="09d-JJ-Snc"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Enable Notifications" lineBreakMode="tailTruncation" minimumFontSize="10" id="ntR-WZ-xEr">
+                                                    <rect key="frame" x="20" y="14" width="157" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podster can alert you when new episodes of your favorite podcasts are released." lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="zaS-bv-xW0">
+                                                    <rect key="frame" x="20" y="40" width="230" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="M7V-qZ-eET" id="hQk-xx-lbT"/>
+                            <outlet property="delegate" destination="M7V-qZ-eET" id="YYp-H6-yDc"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="addUrlButton" destination="nd4-aU-Roe" id="aLp-iS-ijP"/>
+                        <outlet property="gridView" destination="z7D-2E-OSg" id="Mwy-6W-AD5"/>
+                        <outlet property="notificationsSwitch" destination="Hjr-A0-XLZ" id="jbb-cH-fma"/>
+                        <outlet property="urlTextField" destination="yB6-pX-hmg" id="itk-Uv-bAN"/>
+                        <outlet property="view" destination="u4K-tZ-NYr" id="kdW-lh-cGU"/>
+                    </connections>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="-1036" y="784"/>
+        </scene>
         <scene sceneID="GTp-18-0Rf">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w0Q-rf-d8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController toolbarHidden="NO" id="rH6-DC-ajB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainNavigationController" toolbarHidden="NO" id="rH6-DC-ajB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -607,7 +762,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="04a-hT-U9C" kind="relationship" relationship="rootViewController" id="Hkr-SI-Y1d"/>
+                        <segue destination="1nk-N3-2Nt" kind="relationship" relationship="rootViewController" id="Bs6-jb-HUU"/>
                     </connections>
                 </navigationController>
             </objects>
@@ -635,15 +790,15 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Twn-P0-pDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="subscriptionGridController" title="Subscripton Grid View" id="1nk-N3-2Nt" customClass="SVSubscriptionGridViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lkc-WF-bF9">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg-gunmetal.png" id="eoG-lR-kk9">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="82k-9o-qR8" customClass="GMGridView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -654,13 +809,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="EmO-aN-uFa"/>
                     <connections>
                         <outlet property="gridView" destination="82k-9o-qR8" id="3TK-Bz-G11"/>
                         <outlet property="view" destination="lkc-WF-bF9" id="bHK-7b-akA"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-510" y="1540"/>
+            <point key="canvasLocation" x="-524" y="1520"/>
         </scene>
         <scene sceneID="szf-9S-t5T">
             <objects>
@@ -707,9 +863,10 @@
                             <outlet property="delegate" destination="sDD-bl-slx" id="TVD-rX-ZUc"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="ywr-jP-E1o"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-131" y="1556"/>
+            <point key="canvasLocation" x="-1641" y="1072"/>
         </scene>
     </scenes>
     <resources>
@@ -746,6 +903,22 @@
         </class>
         <class className="OBSlider" superclassName="UISlider">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>
+        </class>
+        <class className="RearController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RearController.h"/>
+            <relationships>
+                <relationship kind="action" name="addURLTapped:"/>
+                <relationship kind="action" name="directoryTapped:"/>
+                <relationship kind="action" name="notificationsChanged:"/>
+                <relationship kind="action" name="urlTextFieldValueChanged:"/>
+                <relationship kind="outlet" name="addUrlButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
+                <relationship kind="outlet" name="notificationsSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="urlTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="RootController" superclassName="ZUUIRevealController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RootController.h"/>
         </class>
         <class className="SVCategoryListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVCategoryListViewController.h"/>
@@ -840,7 +1013,7 @@
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="SVSubscriptionGridViewController" superclassName="UIViewController">
+        <class className="SVSubscriptionGridViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVSubscriptionGridViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
@@ -848,6 +1021,13 @@
         </class>
         <class className="SVViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVViewController.h"/>
+        </class>
+        <class className="ZUUIRevealController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ZUUIRevealController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="frontViewController" candidateClass="UIViewController"/>
+                <relationship kind="outlet" name="rearViewController" candidateClass="UIViewController"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

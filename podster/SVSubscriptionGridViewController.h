@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GMGridView.h"
-@interface SVSubscriptionGridViewController : UIViewController<GMGridViewDataSource, GMGridViewActionDelegate, NSFetchedResultsControllerDelegate>
+#import "SVViewController.h"
+@interface SVSubscriptionGridViewController : SVViewController<GMGridViewDataSource, GMGridViewActionDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetcher;
 @property (nonatomic, weak) IBOutlet GMGridView *gridView;
 @end

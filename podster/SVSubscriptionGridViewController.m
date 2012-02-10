@@ -16,9 +16,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+VerticalAlign.h"
 #import "UIColor+Hex.h"
+#import "GCDiscreetNotificationView.h"
 @implementation SVSubscriptionGridViewController {
     NSUInteger tappedIndex;
     BOOL needsReload;
+    GCDiscreetNotificationView *notificationView;
 }
 @synthesize fetcher;
 @synthesize gridView = _gridView;
@@ -44,6 +46,23 @@
 {
     [super viewDidAppear:animated];
     [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    if ([self.navigationController.parentViewController respondsToSelector:@selector(revealGesture:)] && [self.navigationController.parentViewController respondsToSelector:@selector(revealToggle:)])
+	{
+        
+		// Check if we have a revealButton already.
+		if (![self.navigationItem leftBarButtonItem])
+		{
+			// If not, allocate one and add it.
+			UIBarButtonItem *revealButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reveal", @"Reveal") style:UIBarButtonItemStylePlain target:self.navigationController.parentViewController action:@selector(revealToggle:)];
+            revealButton.image = [UIImage imageNamed:@"settings.png"];
+			self.navigationItem.leftBarButtonItem = revealButton;
+		}
+	}
+    if ([[SVSubscriptionManager sharedInstance] isBusy]) {
+        [notificationView show:YES];
+    }
+
+   
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -51,8 +70,15 @@
 {
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
+    self.fetcher = [SVSubscription fetchAllSortedBy:@"podcast.lastUpdated" ascending:NO withPredicate:nil groupBy:nil delegate:self];
+
     self.fetcher.delegate = self;
     self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+    notificationView = [[GCDiscreetNotificationView alloc] initWithText:@"Updating Podcasts" 
+                                                           showActivity:YES 
+                                                     inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
+                                                                 inView:self.view];
+
 
 }
 
@@ -64,7 +90,11 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[SVSubscriptionManager sharedInstance] addObserver:self
+                                             forKeyPath:@"isBusy"
+                                                options:NSKeyValueObservingOptionNew context:nil];
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView"];
+
     [super viewWillAppear:animated];
     self.fetcher.delegate = self;
     [self.fetcher performFetch:nil];
@@ -73,6 +103,10 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [[SVSubscriptionManager sharedInstance] removeObserver:self
+                                             forKeyPath:@"isBusy"
+                                                ];
+
     [super viewWillDisappear:animated];
     self.fetcher.delegate = nil;
 }
@@ -222,5 +256,20 @@
     return cell;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+        if ([keyPath isEqualToString:@"isBusy"]){
+            if([[SVSubscriptionManager sharedInstance] isBusy]) {
+                [notificationView showAnimated]; 
+            } else {
+                [notificationView hideAnimatedAfter:1.0];
+            }
+        }
+    });
+    
+}
 
 @end

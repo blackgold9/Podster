@@ -38,18 +38,23 @@
     }
     
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    //[self setDefaultHeader:@"Accept" value:@"application/json"];
 
     return self;
 }
--(void)findFeedsOnWebPage:(NSString *)pageURL onCompletion:(FeedListResponeBlock)completion onError:(SVErrorBlock)errorBlock
+-(void)findFeedFromLink:(NSString *)pageURL onCompletion:(FeedResponseBlock)completion onError:(SVErrorBlock)errorBlock
 {
-    NSString *feedFinderURL = @"feeds/feeds_from_page/%@/json";
-
-    [self getPath:[NSString stringWithFormat:feedFinderURL, [pageURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *returnedData = responseObject;
-        completion(returnedData);
+    NSDictionary *params = [NSDictionary dictionaryWithObject:pageURL forKey:@"url"];
+    [self postPath: @"feeds/feed_from_link.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *data = responseObject ;
+        if ([data objectForKey:@"found_feed"] != [NSNull null]) {
+            NSString *url = [data objectForKey:@"found_feed"];
+            completion(url);
+        } else {
+            completion(nil);
+        }
+            
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        LOG_NETWORK(1, @"FindFeedsOnWebPage faild with error: %@", error);
         errorBlock(error);
     }];
 }
@@ -108,6 +113,32 @@
               errorBlock(error);
           }];
 }
+
+-(void)topPodcastsStartingAtIndex:(NSInteger)start
+                            limit:(NSInteger)limit
+                     onCompletion:(PodcastListResponeBlock)completion 
+                          onError:(SVErrorBlock)errorBlock
+{
+    NSString *feedFinderURL = [NSString stringWithFormat:@"feeds.json?start=%d&limit=%d", start, limit];
+    [self getPath:feedFinderURL
+       parameters:nil
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSArray *returnedData = responseObject;
+              NSMutableArray *podcasts = [NSMutableArray array];
+              for(NSDictionary *dict in returnedData) {
+                  SVPodcastSearchResult *result = [SVPodcastSearchResult new];
+                  [result populateWithDictionary:dict];
+                  [podcasts addObject:result];
+              }
+              
+              completion(podcasts);
+          } 
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              LOG_NETWORK(1, @"feedsByCategory faild with error: %@", error);
+              errorBlock(error);
+          }];
+}
+
 
 -(void)searchForPodcastsMatchingQuery:(NSString *)query
                          onCompletion:(PodcastListResponeBlock)completion 
@@ -190,7 +221,7 @@
                                                                               onComplete();
                                                                           } else {
                                                                           
-                                                                          LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed");
+                                                                              LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed. %@", error);
                                                                               [FlurryAnalytics logError:@"Downloading a feed failed" message:[error localizedDescription] error:error];
                                                                           }
                                                                           
