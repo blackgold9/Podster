@@ -146,7 +146,7 @@ NSString *uuid();
     [[UISearchBar appearance] setBarStyle:UIBarStyleBlack];
     
     
-    UIImage *barButton = [UIImage imageNamed:@"nav-bar-btn.png"];
+    UIImage *barButton = [[UIImage imageNamed:@"nav-bar-btn.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
     
     [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal 
                                           barMetrics:UIBarMetricsDefault];

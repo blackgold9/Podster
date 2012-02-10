@@ -15,6 +15,10 @@
 #import "GMGridViewLayoutStrategies.h"
 #import "SVPodcastDetailsViewController.h"
 #import "ZUUIRevealController.h"
+
+@interface RearController () 
+-(void)showController:(UIViewController *)controller;
+@end
 @implementation RearController
 {
     NSArray *podcasts;
@@ -50,6 +54,42 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+-(void)showController:(UIViewController *)controller
+{
+    
+        ZUUIRevealController *revealController = [self.parentViewController isKindOfClass:[ZUUIRevealController class]] ? (ZUUIRevealController *)self.parentViewController : nil;
+        
+        //		if (![revealController.frontViewController isKindOfClass:[FrontViewController class]])
+        //		{
+        //			FrontViewController *frontViewController;
+        //            
+        //			if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        //			{
+        //				frontViewController = [[FrontViewController alloc] initWithNibName:@"FrontViewController_iPhone" bundle:nil];
+        //			}
+        //			else
+        //			{
+        //				frontViewController = [[FrontViewController alloc] initWithNibName:@"FrontViewController_iPad" bundle:nil];
+        //			}
+        //            
+        //			UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
+        //			[frontViewController release];
+        //			[revealController setFrontViewController:navigationController animated:NO];
+        //			[navigationController release];
+        //		}
+        double delayInSeconds = 0.5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            UINavigationController *navController = (UINavigationController *)revealController.frontViewController;
+            [navController pushViewController:controller animated:YES];
+        });
+        
+        [revealController revealToggle:self];
+        
+    
+
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -78,13 +118,14 @@
 {
     [super viewWillAppear:animated];
 }
--(NSMutableArray *)randomSortArray:(NSMutableArray *)array {
+-(NSMutableArray *)randomSortArray:(NSArray *)array {
     srandom(time(NULL));
+    NSMutableArray *mutable = [NSMutableArray arrayWithArray:array];
     for (NSInteger x = 0; x < [array count]; x++) {
         NSInteger randInt = (arc4random() % ([array count] - x)) + x;
-        [array exchangeObjectAtIndex:x withObjectAtIndex:randInt];
+        [mutable exchangeObjectAtIndex:x withObjectAtIndex:randInt];
     }
-    return array;
+    return mutable;
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -95,6 +136,7 @@
             podcasts = (NSArray *)[self randomSortArray:returnedPodcasts];
             [self.gridView reloadData];
         } onError:^(NSError *error) {
+            //TODO: Handle failre case when podcast dont load/offline
             LOG_NETWORK(3, @"There was an error downloading the top podcasts: %@", error);
         }];
     }
@@ -122,6 +164,12 @@
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark-noise.png"]];  //[UIColor colorWithRed:0.15 green:0.15 blue:0.16 alpha:1.0];
 }
 - (IBAction)directoryTapped:(id)sender {
+    
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    [self showController: [storyboard instantiateViewControllerWithIdentifier:@"categoryListView"]];
+
+    
 }
 - (IBAction)addURLTapped:(id)sender {
 }
@@ -178,33 +226,6 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     SVPodcastDetailsViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
     controller.podcast = [podcasts objectAtIndex:position];
-    ZUUIRevealController *revealController = [self.parentViewController isKindOfClass:[ZUUIRevealController class]] ? (ZUUIRevealController *)self.parentViewController : nil;
-    
-//		if (![revealController.frontViewController isKindOfClass:[FrontViewController class]])
-//		{
-//			FrontViewController *frontViewController;
-//            
-//			if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-//			{
-//				frontViewController = [[FrontViewController alloc] initWithNibName:@"FrontViewController_iPhone" bundle:nil];
-//			}
-//			else
-//			{
-//				frontViewController = [[FrontViewController alloc] initWithNibName:@"FrontViewController_iPad" bundle:nil];
-//			}
-//            
-//			UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
-//			[frontViewController release];
-//			[revealController setFrontViewController:navigationController animated:NO];
-//			[navigationController release];
-//		}
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        UINavigationController *navController = (UINavigationController *)revealController.frontViewController;
-        [navController pushViewController:controller animated:YES];
-    });
-   
-	[revealController revealToggle:self];
+    [self showController:controller];
 }
 @end
