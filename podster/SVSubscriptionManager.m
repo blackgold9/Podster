@@ -65,6 +65,7 @@
         if (!self.isBusy) {
             self.isBusy = YES;
         }
+        [FlurryAnalytics logEvent:@"UpdatingSubscriptions" timed:YES];
         nextPodcast.lastSynced = [NSDate date];
         [context save];
         LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
@@ -72,11 +73,17 @@
                                                                  withLowerPriority:YES
                                                                          inContext:context onCompletion:^{
                                                                              [self refreshNextSubscription];
+                                                                             [context performBlock:^{
+                                                                                 [context save];
+                                                                             }];
+
                                                                          } onError:^(NSError *error) {
                                                                              [self refreshNextSubscription];
 
                                                                          }];
     } else {
+        [FlurryAnalytics endTimedEvent:@"UpdatingSubscriptions" 
+                        withParameters:nil];
         if (self.isBusy) {
             self.isBusy = NO;            
         }

@@ -99,7 +99,9 @@ void audioRouteChangeListenerCallback (
 		}
 	}
 }
-
+@interface SVPlaybackManager()
+@property (assign, readwrite) PlaybackState playbackState;
+@end
 @implementation SVPlaybackManager {
     AVPlayer *_player;
     dispatch_queue_t monitorQueue;
@@ -110,11 +112,13 @@ void audioRouteChangeListenerCallback (
 }
 @synthesize currentPodcast;
 @synthesize currentEpisode;
+@synthesize playbackState;
 - (id)init {
     self = [super init];
     if (self) {
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback 
                                                error:nil];
+        self.playbackState = kPlaybackStateStopped;
     }
 
     return self;
@@ -173,17 +177,6 @@ void audioRouteChangeListenerCallback (
     NSParameterAssert(podcast);
     NSAssert(episode.mediaURL != nil, @"The podcast must have a mediaURL");
    
-    LOG_GENERAL(4, @"Setting up audio session");
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-       // AudioSessionAddPropertyListener (
-         //                                kAudioSessionProperty_AudioRouteChange,
-           //                              audioRouteChangeListenerCallback,
-             //                            NULL
-               //                          ); 
-
-        
-            });
     NSError *error;
     [[AVAudioSession sharedInstance] setActive: YES error: &error];
     NSAssert(error == nil, @"There should be no error starting the session");
@@ -207,6 +200,7 @@ void audioRouteChangeListenerCallback (
     
     
     [_player replaceCurrentItemWithPlayerItem:[[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]]];
+    [_player play];
  
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title, MPMediaItemPropertyTitle,
                             podcast.author, MPMediaItemPropertyArtist,
@@ -227,9 +221,11 @@ void audioRouteChangeListenerCallback (
   
     [imageOp start];
     // Check if there was a previous position
-    if (episode.positionInSecondsValue > 0) {
+    BOOL hasSavedPlaybackPosition = episode.positionInSecondsValue > 0;
+    BOOL prettyMuchAtTheEnd = episode.positionInSecondsValue > episode.durationValue - 120;
+    if (hasSavedPlaybackPosition && !prettyMuchAtTheEnd ) {
         [FlurryAnalytics logEvent:@"PlayingEpisodeResumingFromPreviousPosition"];
-        LOG_GENERAL(2, @"Resuming at %d seconds", episode.positionInSecondsValue);
+        LOG_PLAYBACK(2, @"Resuming at %d seconds", episode.positionInSecondsValue);
         [_player seekToTime:CMTimeMake(episode.positionInSecondsValue, 1)];
     }
 }
@@ -238,7 +234,7 @@ void audioRouteChangeListenerCallback (
 {
     if (_player) {
         [_player play];
-        playing = YES;
+
     }
 
 }
@@ -247,13 +243,12 @@ void audioRouteChangeListenerCallback (
 {
     if (_player) {
         [_player pause];
-        playing = NO;
     }
 }
 
 #pragma mark - AVAudioSessionDelegate
 - (void)endInterruptionWithFlags:(NSUInteger)flags {
-   if (flags == AVAudioSessionInterruptionFlags_ShouldResume && playing) {
+   if (flags == AVAudioSessionInterruptionFlags_ShouldResume && kPlaybackStatePlaying) {
        NSAssert(_player !=nil, @"The player is expected to exist here");
        [_player play];
        [[AVAudioSession sharedInstance] setActive: YES error: nil];
@@ -270,20 +265,29 @@ void audioRouteChangeListenerCallback (
 
                 if (_player.status == AVPlayerStatusReadyToPlay) {
                     [_player play];
-                    LOG_NETWORK(2,@"Started Playback");
+                    LOG_PLAYBACK(2,@"Started Playback");
                 } else if (_player.status == AVPlayerItemStatusFailed) {
-                    LOG_NETWORK(1,@"Error downloing");
+                    LOG_PLAYBACK(1,@"Playback failed with error: %@", _player.error);
                     [FlurryAnalytics logError:@"PlaybackFailed" message:[_player.error localizedDescription] error:_player.error];
                     //TODO: Reflect to user?
                 }
             } else if ([keyPath isEqualToString:@"rate"]) {
                 if (_player.rate == 0) {
+                    CMTime bufferTime = CMTimeSubtract(_player.currentItem.duration, CMTimeMakeWithSeconds(10, 1)) ;
+                    if (CMTIME_COMPARE_INLINE(_player.currentTime,>=,bufferTime)) {
+                        LOG_PLAYBACK(1, @"Stopping playback, epsidoe complete");                        
+                        self.playbackState = kPlaybackStateStopped;
+                    } else {
+                        LOG_PLAYBACK(3, @"Pausing playback");
+                        self.playbackState = kPlaybackStatePaused;
+                    }
+                    
                     [_player removeTimeObserver:monitorId];
-
-                    LOG_GENERAL(3, @"suspending monitoring playback position");
                 } else {
+                    LOG_PLAYBACK(2, @"Playback started");
                     [self startPositionMonitoring];
-                    LOG_GENERAL(3, @"Starting monitoring playback position");
+                    self.playbackState = kPlaybackStatePlaying;
+                    
                 }
             }
         }

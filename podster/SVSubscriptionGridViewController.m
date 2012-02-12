@@ -15,6 +15,7 @@
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+VerticalAlign.h"
+
 #import "UIColor+Hex.h"
 #import "GCDiscreetNotificationView.h"
 @implementation SVSubscriptionGridViewController {
@@ -70,8 +71,13 @@
 {
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
-    self.fetcher = [SVSubscription fetchAllSortedBy:@"podcast.lastUpdated" ascending:NO withPredicate:nil groupBy:nil delegate:self];
-
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"subscription != nil"];
+    self.fetcher = [SVPodcast fetchAllSortedBy:@"lastUpdated" 
+                                     ascending:NO
+                                 withPredicate:predicate
+                                       groupBy:nil
+                                      delegate:self];
+    
     self.fetcher.delegate = self;
     self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
     notificationView = [[GCDiscreetNotificationView alloc] initWithText:@"Updating Podcasts" 
@@ -90,14 +96,20 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    LOG_GENERAL(2, @"ViewWillAppear");
     [[SVSubscriptionManager sharedInstance] addObserver:self
                                              forKeyPath:@"isBusy"
-                                                options:NSKeyValueObservingOptionNew context:nil];
-    [FlurryAnalytics logEvent:@"SubscriptionGridPageView"];
+                                                options:NSKeyValueObservingOptionNew 
+                                                context:nil];
+    [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
 
-    [super viewWillAppear:animated];
+
+    NSAssert(self.fetcher, @"Fetcher should exist");
     self.fetcher.delegate = self;
-    [self.fetcher performFetch:nil];
+    NSError *error= nil;
+    [self.fetcher performFetch:&error];
+    NSAssert(error == nil, @"Error!");
     [self.gridView reloadData];
 }
 
@@ -108,6 +120,7 @@
                                                 ];
 
     [super viewWillDisappear:animated];
+    [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
     self.fetcher.delegate = nil;
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -118,12 +131,15 @@
 #pragma  mark - fetchedresults
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    LOG_GENERAL(2, @"Controller will changecontent");
     needsReload = NO;
 }
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    LOG_GENERAL(2, @"Controller done changing content");
     if (needsReload) {
+        LOG_GENERAL(2, @"Needs reload");
         [self.gridView reloadData];
     }
 }
@@ -132,16 +148,18 @@
 {
     switch (type) {
         case NSFetchedResultsChangeInsert:
-            [self.gridView insertObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade];
+            [self.gridView insertObjectAtIndex:indexPath.row];
             break;
         case NSFetchedResultsChangeDelete:
-            [self.gridView removeObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade];
+            [self.gridView removeObjectAtIndex:indexPath.row];
             break;
         case NSFetchedResultsChangeMove:
+            LOG_GENERAL(2, @"Updating item position");
             needsReload = YES;
             break;
         case NSFetchedResultsChangeUpdate:
-            [self.gridView reloadObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade]; 
+            LOG_GENERAL(2, @"Refreshing item");
+            [self.gridView reloadObjectAtIndex:indexPath.row]; 
         default:
             break;
     }
@@ -150,7 +168,7 @@
 -(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
     tappedIndex = position;
-    SVPodcast *podcast =  ((SVSubscription *)[fetcher objectAtIndexPath:[NSIndexPath indexPathForRow:position inSection:0]]).podcast;
+    SVPodcast *podcast =  [fetcher objectAtIndexPath:[NSIndexPath indexPathForRow:position inSection:0]];
 
    SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
     controller.podcast = podcast;
@@ -175,7 +193,7 @@
 
 -(GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
 {
-    SVPodcast *currentPodcast = ((SVSubscription *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]]).podcast;    
+    SVPodcast *currentPodcast = (SVPodcast *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];    
     CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
     
     GMGridViewCell *cell = [gridView dequeueReusableCell];
@@ -243,9 +261,7 @@
     UILabel *countLabel = (UILabel *)[cell viewWithTag:1908];
     UIImageView *countOverlay = (UIImageView *)[cell viewWithTag:1909];
     if (currentPodcast.unseenEpsiodeCountValue > 0) {
-
         countOverlay.hidden = NO;
-        
         countLabel.hidden = NO;
         countLabel.text = [NSString stringWithFormat:@"%d", currentPodcast.unseenEpsiodeCountValue];
     } else {
@@ -265,11 +281,16 @@
             if([[SVSubscriptionManager sharedInstance] isBusy]) {
                 [notificationView showAnimated]; 
             } else {
+                LOG_GENERAL(2, @"Forcing reload at end");
                 [notificationView hideAnimatedAfter:1.0];
             }
         }
     });
     
+    [super observeValueForKeyPath:keyPath
+                         ofObject:object
+                           change:change
+                          context:context];
 }
 
 @end

@@ -42,13 +42,13 @@
 }
 */
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UINavigationController *navController = (UINavigationController *)self.frontViewController;
+    [FlurryAnalytics logAllPageViews:navController];
 }
-*/
 
 - (void)viewDidUnload
 {
@@ -79,7 +79,20 @@
 
 - (void)revealController:(ZUUIRevealController *)revealController didRevealRearViewController:(UIViewController *)rearViewController
 {
-	NSLog(@"%@", NSStringFromSelector(_cmd));
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIView *coverView = [[UIView alloc] initWithFrame:self.frontViewController.view.bounds];
+    [closeButton whenTapped:^{        
+        [self revealToggle:self];
+        [closeButton removeFromSuperview]; 
+    }];
+    
+    [closeButton addSubview:coverView];
+    coverView.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+    [UIView animateWithDuration:0.33
+                     animations:^{
+                         coverView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5]; 
+                     }];
+    
 }
 
 - (void)revealController:(ZUUIRevealController *)revealController willHideRearViewController:(UIViewController *)rearViewController

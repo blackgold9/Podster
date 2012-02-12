@@ -12,7 +12,7 @@
 #import "SVSubscriptionManager.h"
 @interface SVViewController() 
 -(void)showNowPlayingController;
--(void)showNowPLayingButton;
+-(void)updateNowPlayingControls;
 // Private Properties:
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
 
@@ -34,20 +34,17 @@
 {
     [super viewDidLoad];
     localManager = [SVPlaybackManager sharedInstance];
-    [localManager addObserver:self forKeyPath:@"currentPodcast" options:NSKeyValueObservingOptionNew context:nil];
+
     
     
 }
 -(void)dealloc
 {
-    [localManager removeObserver:self forKeyPath:@"currentPodcast"];
     self.navigationBarPanGestureRecognizer = nil;
-
 }
 
 - (void)viewDidUnload
 {
-    [localManager removeObserver:self forKeyPath:@"currentPodcast"];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -57,12 +54,19 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (localManager.currentEpisode) {
-        if (self.toolbarItems.count == 0 ) {
-            [self showNowPLayingButton];
-        }
+    if(localManager.playbackState == kPlaybackStateStopped) {
+        LOG_GENERAL(2, @"Playback is stopped. Making sure toolbar is hiden");
+        [self.navigationController setToolbarHidden:YES animated:NO];
+    } else {
+        LOG_GENERAL(2, @"An item is playing, show the toolbar");
+        [self.navigationController setToolbarHidden:NO animated:NO];
+        if (localManager.currentEpisode) {
+
+            [self updateNowPlayingControls];
+        } 
     }
-    
+    [localManager addObserver:self forKeyPath:@"currentEpisode" options:NSKeyValueObservingOptionNew context:nil];
+    [localManager addObserver:self forKeyPath:@"playbackState" options:NSKeyValueObservingOptionNew context:nil];
     if ([self.navigationController.parentViewController respondsToSelector:@selector(revealGesture:)] && [self.navigationController.parentViewController respondsToSelector:@selector(revealToggle:)])
 	{
 		// Check if a UIPanGestureRecognizer already sits atop our NavigationBar.
@@ -87,11 +91,14 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-}
+   }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
+    [localManager removeObserver:self forKeyPath:@"currentEpisode"];
+    [localManager removeObserver:self forKeyPath:@"playbackState"];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -103,11 +110,18 @@
 {
   
     if (object == localManager) {
-        if([keyPath isEqualToString:@"currentPodcast"]) {
-            if (self.toolbarItems.count == 0) {
-                [self showNowPLayingButton];
+        if([keyPath isEqualToString:@"currentEpisode"]) {
+            if (localManager.currentEpisode != nil) {
+                LOG_PLAYBACK(2, @"Current episode changed: %@", localManager.currentEpisode);
+                [self updateNowPlayingControls];
             }
-        } 
+        } else if ([keyPath isEqualToString:@"playbackState"]){
+            if(localManager.playbackState == kPlaybackStateStopped) {
+                [self.navigationController setToolbarHidden:YES animated:YES];
+            } else {
+                [self.navigationController setToolbarHidden:NO animated:YES];
+            }
+        }
     }
 }
 -(void)showNowPlayingController
@@ -117,7 +131,7 @@
 }
 
 
--(void)showNowPLayingButton
+-(void)updateNowPlayingControls
 {
     SVPodcastEntry *episode = [[SVPlaybackManager sharedInstance] currentEpisode];
     if ([[SVPlaybackManager sharedInstance] currentEpisode]) {

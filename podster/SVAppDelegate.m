@@ -19,6 +19,7 @@
 #import "SDURLCache.h"
 #import "GMGridView.h"
 #import "SVSubscription.h"
+#import "ZUUIRevealController.h"
 
 #import <CoreText/CoreText.h>
 
@@ -202,6 +203,7 @@ NSString *uuid();
     [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
     [[BWQuincyManager sharedQuincyManager] setAutoSubmitDeviceUDID:YES];
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
+    [FlurryAnalytics setSecureTransportEnabled:YES];
     [self ensureDeviceId];
     NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
     [FlurryAnalytics setUserID:deviceId];
@@ -269,6 +271,9 @@ NSString *uuid(){
     NSString * tokenAsString = [[[devToken description] 
                                  stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] 
                                 stringByReplacingOccurrencesOfString:@" " withString:@""];
+#ifndef CONFIGURATION_Release
+    LOG_NETWORK(2, @"Notification Token: %@", tokenAsString);
+#endif
     [[NSUserDefaults standardUserDefaults] setObject:tokenAsString forKey:@"notificationsToken"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[SVPodcatcherClient sharedInstance] registerForPushNotificationsWithToken:tokenAsString 
@@ -287,13 +292,14 @@ NSString *uuid(){
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     if (application.applicationState != UIApplicationStateActive) {
+        [FlurryAnalytics logEvent:@"LaunchedFromNotifications"];
         NSString *url= [userInfo valueForKey:@"url"];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, url];
         SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
         if (podcast) {
             SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
             controller.podcast = podcast;
-            UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+            UINavigationController *nav = (UINavigationController *)((ZUUIRevealController *)self.window.rootViewController).frontViewController;
             [nav pushViewController:controller animated:NO];
         }
     }
@@ -304,7 +310,13 @@ NSString *uuid(){
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     LOG_GENERAL(1,@"Error in registration. Error: %@", err);
-  //  [UIAlertView showWithError:err];
+#ifndef CONFIGURATION_Release
+  [UIAlertView showAlertViewWithTitle:@"Error" message:@"Could not register for notifications" cancelButtonTitle:@"OK" otherButtonTitles:nil
+                              
+                              handler:^(UIAlertView *view, NSInteger index) {
+                                  
+                              }];
+#endif
 }
 	
 - (void)applicationWillResignActive:(UIApplication *)application

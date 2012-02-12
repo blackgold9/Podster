@@ -225,6 +225,7 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    [FlurryAnalytics endTimedEvent:@"PodcastDetailsPageView"  withParameters:nil];
 }
 - (void)viewDidLoad
 {
@@ -342,6 +343,12 @@
 {
 // Return YES for supported orientations
 	return YES;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [FlurryAnalytics logEvent:@"PodcastDetailsPageView" timed:YES];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,9 +10,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
+typedef enum {
+    kPlaybackStatePaused,
+    kPlaybackStatePlaying,
+    kPlaybackStateStopped
+} PlaybackState;
 @interface SVPlaybackManager : UIResponder<AVAudioSessionDelegate>
 @property (strong) SVPodcast *currentPodcast;
 @property (strong) SVPodcastEntry *currentEpisode;
+@property (assign, readonly) PlaybackState playbackState;
 + (SVPlaybackManager *)sharedInstance;
 
 - (AVPlayer *)player;

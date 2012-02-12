@@ -133,11 +133,7 @@
     self.gridView.dataSource = self;
     self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
     self.gridView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    UISearchBar *searchbar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-    searchbar.placeholder = @"Search for a specific Podcast";
-    searchbar.delegate = self;
-    self.gridView.gridHeaderView = searchbar;
-
+    
     self.gridView.style = GMGridViewStyleSwap;
     self.gridView.itemSpacing = 10;
     [self.view addSubview:self.gridView];

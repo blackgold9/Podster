@@ -157,6 +157,7 @@
 }
 - (void)linkPushed:(DTLinkButton *)button
 {
+    [FlurryAnalytics logEvent:@"UserTappedLinkFromShowNotes"];
 	[[UIApplication sharedApplication] openURL:[button.url absoluteURL]];
 }
 @end

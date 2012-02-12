@@ -47,40 +47,21 @@
 #pragma mark - View lifecycle
 -(void)viewDidAppear:(BOOL)animated
 {
-    [FlurryAnalytics logEvent:@"PlaybackPageView"];
+    [FlurryAnalytics logEvent:@"PlaybackPageView" timed:YES];
     NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
     [self.artworkImage setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
 
 }
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidDisappear:(BOOL)animated
 {
-    LOG_GENERAL(2, @"View did appear");
-    LOG_NETWORK(4, @"Triggering albumart image load");
-    if (player.rate == 0) {
-        self.playButton.selected = NO;
-    } else {
-        self.playButton.selected = YES;
-    }
-    
-    self.navigationItem.title = @"Now Playing";
-    self.titleLabel.text = [SVPlaybackManager sharedInstance].currentEpisode.title;
+    [FlurryAnalytics endTimedEvent:@"PlaybackPageView" withParameters:nil];
+    [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
+    [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
+    [player removeTimeObserver:playerObserver];
+
 }
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
+- (void)registerObservers
 {
-}
-*/
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    LOG_GENERAL(4, @"Super viewdidload");
-    [super viewDidLoad];
-
-    
-    player = [[SVPlaybackManager sharedInstance] player];
     [player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     [player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     __weak SVPlaybackController  *weakSelf = self;
@@ -98,13 +79,37 @@
         }
     }];
 }
--(void)dealloc
-{
-    NSLog(@"Removing observers");
-    [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
-    [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
-    [player removeTimeObserver:playerObserver];
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    LOG_GENERAL(2, @"View did appear");
+    LOG_NETWORK(4, @"Triggering albumart image load");
+    if (player.rate == 0) {
+        self.playButton.selected = NO;
+    } else {
+        self.playButton.selected = YES;
+    }
+    self.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:[SVPlaybackManager sharedInstance].currentEpisode.durationValue];
+    self.navigationItem.title = @"Now Playing";
+    self.titleLabel.text = [SVPlaybackManager sharedInstance].currentEpisode.title;
+    [self registerObservers];
+}
+/*
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView
+{
+}
+*/
+
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad
+{
+    LOG_GENERAL(4, @"Super viewdidload");
+    [super viewDidLoad];
+
+    
+    player = [[SVPlaybackManager sharedInstance] player];
 }
 
 - (void)viewDidUnload
