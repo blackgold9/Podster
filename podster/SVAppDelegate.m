@@ -293,8 +293,8 @@ NSString *uuid(){
 {
     if (application.applicationState != UIApplicationStateActive) {
         [FlurryAnalytics logEvent:@"LaunchedFromNotifications"];
-        NSString *url= [userInfo valueForKey:@"url"];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, url];
+        NSString *hash= [userInfo valueForKey:@"url_hash"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.urlHash, hash];
         SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
         if (podcast) {
             SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];

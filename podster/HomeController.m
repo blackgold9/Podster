@@ -71,7 +71,10 @@
     self.scrollView.contentOffset = CGPointMake(0, 0);
 
     [self configureTabView];
-    [self configureViewControllerForScreenType:HomePageSubscriptionsScreen];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    HomePageScreenType screenType = (HomePageScreenType)[defaults integerForKey:@"HomeScreenType"];
+    [self configureViewControllerForScreenType:screenType];
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         if (state == UIGestureRecognizerStateRecognized) {
             if (self.currentScreen == HomePageFeaturedScreen) {
@@ -116,6 +119,10 @@
         output = self.featuredController;
     }
 
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:(NSInteger)screenType forKey:@"HomeScreenType"];
+    [defaults synchronize];
     NSAssert(output, @"There should be a view controller returned");
     return output;
 }

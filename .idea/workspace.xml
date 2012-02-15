@@ -2,35 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/PartiallyPlayed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/PartiallyPlayed@2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/Played.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/Played@2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/Unplayed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/Unplayed@2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/FeaturedController.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/FeaturedController.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/HomeController.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/HomeController.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/PodcastGridCell.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/PodcastGridCell.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Submodules/UAModalPanel" afterPath="$PROJECT_DIR$/Submodules/UAModalPanel" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/ActsAsPodcast.h" afterPath="$PROJECT_DIR$/podster/ActsAsPodcast.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/RearController.m" afterPath="$PROJECT_DIR$/podster/RearController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/RootController.m" afterPath="$PROJECT_DIR$/podster/RootController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVCategoryGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVCategoryGridViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVEpisodeDetails.m" afterPath="$PROJECT_DIR$/podster/SVEpisodeDetails.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVEpisodeListCell.h" afterPath="$PROJECT_DIR$/podster/SVEpisodeListCell.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVEpisodeListCell.m" afterPath="$PROJECT_DIR$/podster/SVEpisodeListCell.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVFeedParser.m" afterPath="$PROJECT_DIR$/podster/SVFeedParser.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackController.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastSearchResult.m" afterPath="$PROJECT_DIR$/podster/SVPodcastSearchResult.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" afterPath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/HomeController.m" afterPath="$PROJECT_DIR$/podster/HomeController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Info.plist" afterPath="$PROJECT_DIR$/podster/podster-Info.plist" />
     </list>
     <ignored path="podster.iws" />
@@ -83,7 +55,7 @@
       <file leaf-file-name="FeaturedController.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podster/FeaturedController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="78" selection-start="4947" selection-end="4947" vertical-scroll-proportion="0.529976">
+            <state line="128" column="79" selection-start="4962" selection-end="4962" vertical-scroll-proportion="0.529976">
               <folding>
                 <element signature="e#157#187#0" expanded="true" />
               </folding>
@@ -94,7 +66,7 @@
       <file leaf-file-name="HomeController.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="0" selection-start="2399" selection-end="2399" vertical-scroll-proportion="0.0">
+            <state line="88" column="0" selection-start="2688" selection-end="2688" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#153#179#0" expanded="true" />
                 <element signature="e#832#869#0" expanded="true" />
@@ -417,19 +389,19 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
-          <line>178</line>
+          <line>185</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
-          <line>91</line>
+          <line>99</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
-          <line>82</line>
+          <line>90</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
-          <line>80</line>
+          <line>88</line>
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -544,7 +516,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="0" selection-start="2399" selection-end="2399" vertical-scroll-proportion="0.0">
+        <state line="88" column="0" selection-start="2688" selection-end="2688" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#153#179#0" expanded="true" />
             <element signature="e#832#869#0" expanded="true" />
@@ -554,7 +526,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/FeaturedController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="78" selection-start="4947" selection-end="4947" vertical-scroll-proportion="0.529976">
+        <state line="128" column="79" selection-start="4962" selection-end="4962" vertical-scroll-proportion="0.529976">
           <folding>
             <element signature="e#157#187#0" expanded="true" />
           </folding>

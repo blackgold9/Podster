@@ -857,6 +857,7 @@
 		4B8F6F4014EA425700D328DE /* FeaturedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedController.m; sourceTree = "<group>"; };
 		4B8F6F4314EA44D700D328DE /* PodcastGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastGridCell.h; sourceTree = "<group>"; };
 		4B8F6F4414EA44D700D328DE /* PodcastGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastGridCell.m; sourceTree = "<group>"; };
+		4B8F6F4714EC63B400D328DE /* SVPodcastDatastore 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 9.xcdatamodel"; sourceTree = "<group>"; };
 		4B90FC8514E3BDC00082C155 /* SVPodcastDatastore 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 8.xcdatamodel"; sourceTree = "<group>"; };
 		4B90FC8714E490120082C155 /* Debug.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		4B90FC8914E4907C0082C155 /* DebugHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugHomeViewController.h; sourceTree = "<group>"; };
@@ -2664,6 +2665,7 @@
 		4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				4B8F6F4714EC63B400D328DE /* SVPodcastDatastore 9.xcdatamodel */,
 				4B90FC8514E3BDC00082C155 /* SVPodcastDatastore 8.xcdatamodel */,
 				4B20237914D65AA700820391 /* SVPodcastDatastore 5.xcdatamodel */,
 				4B20240814DA5EF400820391 /* SVPodcastDatastore 6.xcdatamodel */,
@@ -2673,7 +2675,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4B90FC8514E3BDC00082C155 /* SVPodcastDatastore 8.xcdatamodel */;
+			currentVersion = 4B8F6F4714EC63B400D328DE /* SVPodcastDatastore 9.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

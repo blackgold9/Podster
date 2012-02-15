@@ -20,6 +20,7 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.tinyLogoURL = @"tinyLogoURL",
 	.title = @"title",
 	.unseenEpsiodeCount = @"unseenEpsiodeCount",
+	.urlHash = @"urlHash",
 	.websiteURL = @"websiteURL",
 };
 
@@ -240,6 +241,13 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 - (void)setPrimitiveUnseenEpsiodeCountValue:(int)value_ {
 	[self setPrimitiveUnseenEpsiodeCount:[NSNumber numberWithInt:value_]];
 }
+
+
+
+
+
+@dynamic urlHash;
+
 
 
 

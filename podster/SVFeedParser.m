@@ -9,6 +9,7 @@
 #import "SVFeedParser.h"
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
+#import "NSString+MD5Addition.h"
 @interface SVFeedParser ()
 @property (nonatomic, copy) SVErrorBlock errorCallback;
 @property (nonatomic, copy) CompletionBlock completionCallback;
@@ -69,10 +70,12 @@ forPodcastAtURL:(NSString *)feedURL
 
             localPodcast = [SVPodcast createInContext:localContext];
             localPodcast.feedURL = feedURL; 
+            localPodcast.urlHash = [localPodcast.feedURL stringFromMD5];
         } 
         
         [localPodcast updatePodcastWithFeedInfo:info];
         localPodcast.etag = etag;
+
     }];
 }
 

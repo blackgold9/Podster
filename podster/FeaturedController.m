@@ -126,7 +126,7 @@
         id<ActsAsPodcast> podcast = (id<ActsAsPodcast>) [featuredPodcasts objectAtIndex:position - 1];
         SVPodcastDetailsViewController *destination = [storyboard instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
         destination.podcast = podcast;
-        [self.navigationController pushViewController:destination animated:YES];
+        [self.navigationController pushViewController:destination animated:YES1];
 
     }
 }
