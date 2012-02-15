@@ -309,13 +309,13 @@ NSString *uuid(){
     
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    LOG_GENERAL(1,@"Error in registration. Error: %@", err);
+    LOG_GENERAL(1,@"Error registering for notifications. Error: %@", err);
 #ifndef CONFIGURATION_Release
-  [UIAlertView showAlertViewWithTitle:@"Error" message:@"Could not register for notifications" cancelButtonTitle:@"OK" otherButtonTitles:nil
-                              
-                              handler:^(UIAlertView *view, NSInteger index) {
-                                  
-                              }];
+//  [UIAlertView showAlertViewWithTitle:@"Error" message:@"Could not register for notifications" cancelButtonTitle:@"OK" otherButtonTitles:nil
+//                              
+//                              handler:^(UIAlertView *view, NSInteger index) {
+//                                  
+//                              }];
 #endif
 }
 	

@@ -47,6 +47,7 @@
 #pragma mark - View lifecycle
 -(void)viewDidAppear:(BOOL)animated
 {
+
     [FlurryAnalytics logEvent:@"PlaybackPageView" timed:YES];
     NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
     [self.artworkImage setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
@@ -82,6 +83,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+        self.navigationController.toolbarHidden = YES;
     LOG_GENERAL(2, @"View did appear");
     LOG_NETWORK(4, @"Triggering albumart image load");
     if (player.rate == 0) {

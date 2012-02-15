@@ -15,5 +15,6 @@
 @property (weak) IBOutlet UILabel *dateLabel;
 @property (weak) IBOutlet UIImageView *downloadedIndicator;
 @property (weak) IBOutlet UIImageView *unplayedIndicator;
+@property (weak) IBOutlet UIImageView *progressIndicator;
 -(void)bind:(SVPodcastEntry *)entry;
 @end

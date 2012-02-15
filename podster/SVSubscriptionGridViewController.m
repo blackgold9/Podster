@@ -15,9 +15,14 @@
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+VerticalAlign.h"
-
+#import "PodcastGridCell.h"
 #import "UIColor+Hex.h"
 #import "GCDiscreetNotificationView.h"
+@interface SVSubscriptionGridViewController()
+- (void)configureCell:(GMGridViewCell *)cell 
+           forPodcast:(SVPodcast *)currentPodcast
+        fadingImage:(BOOL)updateImage;
+@end
 @implementation SVSubscriptionGridViewController {
     NSUInteger tappedIndex;
     BOOL needsReload;
@@ -146,20 +151,33 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
+    SVPodcast *podcast = [self.fetcher objectAtIndexPath:indexPath];
     switch (type) {
         case NSFetchedResultsChangeInsert:
-            [self.gridView insertObjectAtIndex:indexPath.row];
+            LOG_GENERAL(2, @"GRID:Inserting object at %d", indexPath.row);
+            [self.gridView insertObjectAtIndex:indexPath.row 
+                                 withAnimation:GMGridViewItemAnimationScroll];
             break;
         case NSFetchedResultsChangeDelete:
-            [self.gridView removeObjectAtIndex:indexPath.row];
+            LOG_GENERAL(2, @"GRID:Removing object at %d", indexPath.row);
+            [self.gridView removeObjectAtIndex:indexPath.row 
+                                 withAnimation:GMGridViewItemAnimationScroll];
             break;
         case NSFetchedResultsChangeMove:
-            LOG_GENERAL(2, @"Updating item position");
-            needsReload = YES;
+            LOG_GENERAL(2, @"GRID:Object should move from %d to %d", indexPath.row, newIndexPath.row );
+            [self.gridView removeObjectAtIndex:indexPath.row 
+                                 withAnimation:GMGridViewItemAnimationNone];
+            [self.gridView insertObjectAtIndex:newIndexPath.row
+                                 withAnimation:GMGridViewItemAnimationScroll];
+           // needsReload = YES;
             break;
         case NSFetchedResultsChangeUpdate:
-            LOG_GENERAL(2, @"Refreshing item");
-            [self.gridView reloadObjectAtIndex:indexPath.row]; 
+        {
+            LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
+            GMGridViewCell *currentCell = [self.gridView cellForItemAtIndex:indexPath.row];
+            [self configureCell:currentCell forPodcast:podcast fadingImage:NO];
+        }
+            break;
         default:
             break;
     }
@@ -167,6 +185,7 @@
 }
 -(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
+    self.fetcher.delegate= nil;
     tappedIndex = position;
     SVPodcast *podcast =  [fetcher objectAtIndexPath:[NSIndexPath indexPathForRow:position inSection:0]];
 
@@ -191,64 +210,11 @@
     return DEFAULT_GRID_CELL_SIZE;
 }
 
--(GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
+- (void)configureCell:(GMGridViewCell *)cell 
+           forPodcast:(SVPodcast *)currentPodcast
+        fadingImage:(BOOL)fadeImage 
 {
-    SVPodcast *currentPodcast = (SVPodcast *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];    
-    CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
-    
-    GMGridViewCell *cell = [gridView dequeueReusableCell];
-    
-    if (!cell) 
-    {
-        cell = [[GMGridViewCell alloc] init];
-        //        cell.deleteButtonIcon = [UIImage imageNamed:@"close_x.png"];
-        //      cell.deleteButtonOffset = CGPointMake(-15, -15);
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
-//        view.layer.masksToBounds = NO;
-//        //view.layer.cornerRadius = 8;
-//        view.layer.shadowColor = [UIColor whiteColor].CGColor;
-//        view.layer.shadowOpacity = 0.5;
-//        view.layer.shadowOffset = CGSizeMake(0, 0);
-//        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
-//        view.layer.shadowRadius = 3;
-        view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
-        view.layer.borderWidth = 2;
-
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
-        titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        
-        titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
-        titleLabel.numberOfLines = 0;
-        titleLabel.tag = 1907;
-        titleLabel.opaque = NO;
-        [view addSubview:titleLabel];
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
-        imageView.tag = 1906;
-        imageView.backgroundColor = [UIColor clearColor];
-        [view addSubview:imageView];
-        
-        UILabel *newCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 25, 20)];
-        newCountLabel.backgroundColor = [UIColor colorWithHex:0x0066a4];
-        newCountLabel.hidden = YES;
-        newCountLabel.tag = 1908;
-        newCountLabel.textColor =[UIColor whiteColor];
-        newCountLabel.adjustsFontSizeToFitWidth = YES;
-        newCountLabel.minimumFontSize = 13;
-        
-        newCountLabel.textAlignment = UITextAlignmentLeft;
-        newCountLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
-        
-        UIImageView *countOverlay = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"grid-count-overlay.png"]];
-        countOverlay.tag = 1909;
-        [view addSubview:countOverlay];
-                               
-        [view addSubview:newCountLabel];
-        cell.contentView = view;
-    }
+   
     UILabel *label = (UILabel *)[cell viewWithTag:1907];
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
     label.text = currentPodcast.title;
@@ -256,8 +222,14 @@
     if (!logoString) {
         logoString = currentPodcast.logoURL;
     }
-     NSURL *imageURL = [NSURL URLWithString: currentPodcast.smallLogoURL];
-    [imageView setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
+    if(logoString) {
+        NSURL *imageURL = [NSURL URLWithString: logoString];
+        [imageView setImageWithURL:imageURL placeholderImage:nil shouldFade:fadeImage];
+    } else {
+        // Clear rhe image if there is no logo 
+        imageView.image = nil; 
+    }
+    
     UILabel *countLabel = (UILabel *)[cell viewWithTag:1908];
     UIImageView *countOverlay = (UIImageView *)[cell viewWithTag:1909];
     if (currentPodcast.unseenEpsiodeCountValue > 0) {
@@ -268,7 +240,22 @@
         countLabel.hidden = YES;
           countOverlay.hidden = YES;
     }
-            
+}
+
+-(GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
+{
+    SVPodcast *currentPodcast = (SVPodcast *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];    
+    CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
+    
+    PodcastGridCell *cell = (PodcastGridCell *)[gridView dequeueReusableCell];
+    
+    if (!cell) 
+    {
+        cell = [[PodcastGridCell alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    }
+    
+    [cell bind:currentPodcast fadeImage:YES];
+
     return cell;
 }
 
@@ -281,8 +268,7 @@
             if([[SVSubscriptionManager sharedInstance] isBusy]) {
                 [notificationView showAnimated]; 
             } else {
-                LOG_GENERAL(2, @"Forcing reload at end");
-                [notificationView hideAnimatedAfter:1.0];
+                [notificationView hideAnimated];
             }
         }
     });

@@ -8,6 +8,9 @@
 
 #import "RootController.h"
 @implementation RootController
+{
+    UIButton *topViewCloseButton;
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -81,8 +84,9 @@
 {
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIView *coverView = [[UIView alloc] initWithFrame:self.frontViewController.view.bounds];
+    __weak RootController *weakSelf = self;
     [closeButton whenTapped:^{        
-        [self revealToggle:self];
+        [weakSelf revealToggle:self];
         [closeButton removeFromSuperview]; 
     }];
     
@@ -93,16 +97,28 @@
                          coverView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5]; 
                      }];
     
+    [revealController.frontViewController.view addSubview:closeButton];
+    closeButton.frame = revealController.frontViewController.view.bounds;
+    topViewCloseButton = closeButton;
+    
 }
 
 - (void)revealController:(ZUUIRevealController *)revealController willHideRearViewController:(UIViewController *)rearViewController
 {
 	NSLog(@"%@", NSStringFromSelector(_cmd));
+    [UIView animateWithDuration:0.33
+                     animations:^{
+                         topViewCloseButton.alpha = 0;
+                     }completion:^(BOOL finished) {                         
+                         [topViewCloseButton removeFromSuperview];
+                         topViewCloseButton = nil; 
+                     }];
 }
 
 - (void)revealController:(ZUUIRevealController *)revealController didHideRearViewController:(UIViewController *)rearViewController 
 {
 	NSLog(@"%@", NSStringFromSelector(_cmd));
+    
 }
 
 

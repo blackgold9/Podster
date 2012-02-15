@@ -74,11 +74,12 @@
     
     CGSize size = [self GMGridView:self.gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
     
-    SVGridCell *cell = (SVGridCell *)[self.gridView dequeueReusableCell];
+    GMGridViewCell *cell = (GMGridViewCell *)[self.gridView dequeueReusableCellWithIdentifier:@"podcastCell"];
      
     if (!cell) 
     {
-        cell = [[SVGridCell alloc] init];
+        cell = [[GMGridViewCell alloc] init];
+        cell.reuseIdentifier = @"podcastCell";
         //        cell.deleteButtonIcon = [UIImage imageNamed:@"close_x.png"];
         //      cell.deleteButtonOffset = CGPointMake(-15, -15);
         

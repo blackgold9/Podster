@@ -10,7 +10,7 @@
 #import "SVPodcastEntry.h"
 #import "NSString+MW_HTML.h"
 @implementation SVEpisodeListCell
-@synthesize downloadedIndicator, subtitleLabel, titleLabel, durationLabel,dateLabel, unplayedIndicator;
+@synthesize downloadedIndicator, subtitleLabel, titleLabel, durationLabel,dateLabel, unplayedIndicator, progressIndicator;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -36,11 +36,21 @@
         [dateFormatter setDateStyle:NSDateFormatterShortStyle];
         [dateFormatter setDoesRelativeDateFormatting:YES];
     }
+    
     self.dateLabel.text = [dateFormatter stringFromDate:entry.datePublished];
     self.titleLabel.text = entry.title;
     self.subtitleLabel.text = [entry.summary stringByConvertingHTMLToPlainText];
     self.durationLabel.text =[NSString formattedStringRepresentationOfSeconds: [entry.duration integerValue]];
     self.downloadedIndicator.hidden = !entry.downloadCompleteValue;
     self.unplayedIndicator.hidden = YES;//entry.playedValue;
+    if (entry.playedValue) {
+        self.progressIndicator.image = [UIImage imageNamed:@"Played.png"];
+    } else {
+        if (entry.positionInSecondsValue == 0) {
+            self.progressIndicator.image = [UIImage imageNamed:@"Unplayed.png"];
+        } else {
+            self.progressIndicator.image = [UIImage imageNamed:@"PartiallyPlayed.png"];
+        }
+    }
 }
 @end

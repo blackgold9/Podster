@@ -89,11 +89,8 @@ forPodcastAtURL:(NSString *)feedURL
         return;
     }
     
-    if (isFirstItem) {
-        localPodcast.lastUpdated = item.date;
-        isFirstItem = NO;
-    }
-    [localContext performBlock:^void() {
+  
+    [localContext performBlockAndWait:^void() {
         LOG_PARSING(4, @"Processing feed item %@", item);
         NSString *guid = item.identifier;
         if (!guid) {
@@ -111,6 +108,12 @@ forPodcastAtURL:(NSString *)feedURL
             return;
         } else {
             LOG_PARSING(2, @"Episode did not exist matching %@. Creaitng one.", item);
+            
+            // Only update lastUpdated if it's a new episode
+            if (isFirstItem) {
+                localPodcast.lastUpdated = item.date;
+                
+            }
             episode = [SVPodcastEntry MR_createInContext:localContext];
         }
         
@@ -146,6 +149,10 @@ forPodcastAtURL:(NSString *)feedURL
             LOG_PARSING(4, @"Skipping parent save");
         }
     }];
+    
+    
+    
+     isFirstItem = NO;
 }
 
 -(void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error

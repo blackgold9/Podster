@@ -9,6 +9,10 @@
 #import "SVSubscriptionManager.h"
 #import "SVSubscription.h"
 #import "SVPodcast.h"
+#import "SVPodcastEntry.h"
+
+static char const kRefreshInterval = -3;
+
 @implementation SVSubscriptionManager {
     NSArray *subscriptions;
     BOOL shouldCancel;
@@ -34,6 +38,18 @@
     
     shouldCancel = YES;
 }
+- (void)updateLastUpdatedForPodcast:(SVPodcast *)podcast 
+                          inContext:(NSManagedObjectContext *)context
+{
+
+    [context performBlock:^{
+        
+
+     SVPodcastEntry *lastUnplayedEntry = [SVPodcastEntry findFirstWithPredicate:[NSPredicate predicateWithFormat:@"podcast == %@ AND played == NO", podcast]
+                                   sortedBy:SVPodcastEntryAttributes.datePublished ascending:NO inContext:context];
+        podcast.lastUpdated = lastUnplayedEntry.datePublished;
+    }];
+}
 -(void)refreshNextSubscription
 {
 
@@ -41,7 +57,7 @@
                              initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
 
-    [offsetComponents setMinute:-3];
+    [offsetComponents setMinute:kRefreshInterval];
 
     NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
                                                     toDate:[NSDate date]
@@ -72,6 +88,8 @@
         [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
                                                                  withLowerPriority:YES
                                                                          inContext:context onCompletion:^{
+                                                                             [self updateLastUpdatedForPodcast:nextPodcast
+                                                                              inContext:context];
                                                                              [self refreshNextSubscription];
                                                                              [context performBlock:^{
                                                                                  [context save];

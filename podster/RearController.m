@@ -56,27 +56,7 @@
 
 -(void)showController:(UIViewController *)controller
 {
-    
         ZUUIRevealController *revealController = [self.parentViewController isKindOfClass:[ZUUIRevealController class]] ? (ZUUIRevealController *)self.parentViewController : nil;
-        
-        //		if (![revealController.frontViewController isKindOfClass:[FrontViewController class]])
-        //		{
-        //			FrontViewController *frontViewController;
-        //            
-        //			if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-        //			{
-        //				frontViewController = [[FrontViewController alloc] initWithNibName:@"FrontViewController_iPhone" bundle:nil];
-        //			}
-        //			else
-        //			{
-        //				frontViewController = [[FrontViewController alloc] initWithNibName:@"FrontViewController_iPad" bundle:nil];
-        //			}
-        //            
-        //			UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
-        //			[frontViewController release];
-        //			[revealController setFrontViewController:navigationController animated:NO];
-        //			[navigationController release];
-        //		}
         double delayInSeconds = 0.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -85,10 +65,7 @@
         });
         
         [revealController revealToggle:self];
-        
-    
-
-}
+ }
 
 #pragma mark - View lifecycle
 
@@ -96,11 +73,6 @@
 {
     self.gridView.layoutStrategy = [GMGridViewLayoutStrategyFactory strategyFromType:GMGridViewLayoutHorizontal];
     [super viewDidLoad];
-        // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -163,14 +135,12 @@
 {
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dark-noise.png"]];  //[UIColor colorWithRed:0.15 green:0.15 blue:0.16 alpha:1.0];
 }
-- (IBAction)directoryTapped:(id)sender {
-    
-    
+- (IBAction)directoryTapped:(id)sender
+{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     [self showController: [storyboard instantiateViewControllerWithIdentifier:@"categoryListView"]];
-
-    
 }
+
 - (IBAction)addURLTapped:(id)sender {
 }
 
@@ -221,7 +191,8 @@
    
 }
 
--(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
+-(void)GMGridView:(GMGridView *)gridView
+        didTapOnItemAtIndex:(NSInteger)position
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     SVPodcastDetailsViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"podcastDetailsController"];

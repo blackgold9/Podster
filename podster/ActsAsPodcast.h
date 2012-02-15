@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @protocol ActsAsPodcast <NSObject>
-@property (copy) NSDate *lastSynced;
-@property (copy) NSDate *lastUpdated;
-@property (copy) NSString *title;
-@property (copy) NSString *feedURL;
-@property (copy) NSString *summary;
-@property (copy) NSString *websiteURL;
-@property (copy) NSString *logoURL;
-@property (copy) NSString *smallLogoURL;
-@property (copy) NSString *thumbLogoURL;
-@property (copy) NSString *tinyLogoURL;
-@property (copy) NSString *subtitle;
-
+@property (strong) NSDate *lastSynced;
+@property (strong) NSDate *lastUpdated;
+@property (strong) NSString *title;
+@property (strong) NSString *feedURL;
+@property (strong) NSString *summary;
+@property (strong) NSString *websiteURL;
+@property (strong) NSString *logoURL;
+@property (strong) NSString *smallLogoURL;
+@property (strong) NSString *thumbLogoURL;
+@property (strong) NSString *tinyLogoURL;
+@property (strong) NSString *subtitle;
+@property (strong) NSNumber *unseenEpsiodeCount;
 @end
