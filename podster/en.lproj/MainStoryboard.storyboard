@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2177" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1173"/>
     </dependencies>
     <scenes>
+        <!--Podcast Directory View Controller - Popular Tags-->
         <scene sceneID="1fO-IR-PVg">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vp7-3z-zqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -75,6 +76,7 @@
             </objects>
             <point key="canvasLocation" x="1043" y="22"/>
         </scene>
+        <!--Podcasts Search Results View Controller - Tagged 'Tag'-->
         <scene sceneID="w0A-9D-Yl8">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcO-Yx-a7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -98,7 +100,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EKE-e3-0Rq">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="EKE-e3-0Rq">
                                             <rect key="frame" x="10" y="24" width="47" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -141,6 +143,7 @@
             </objects>
             <point key="canvasLocation" x="1481" y="-35"/>
         </scene>
+        <!--Podcast Details View Controller - Podcast Details-->
         <scene sceneID="3VK-cs-szj">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq8-FL-BUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -215,14 +218,14 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FNh-69-GvI">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="FNh-69-GvI">
                                                     <rect key="frame" x="30" y="6" width="253" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n6z-SI-tH6">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" id="n6z-SI-tH6">
                                                     <rect key="frame" x="13" y="28" width="270" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -233,7 +236,7 @@
                                                     <rect key="frame" x="204" y="72" width="12" height="12"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="wfH-o3-S5V">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="wfH-o3-S5V">
                                                     <rect key="frame" x="220" y="67" width="63" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
@@ -244,7 +247,7 @@
                                                     <rect key="frame" x="160" y="0.0" width="24" height="13"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="xc6-wg-Vae">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="xc6-wg-Vae">
                                                     <rect key="frame" x="13" y="66" width="71" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -282,14 +285,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="88"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podcast Title" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="pCs-j8-aWo">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podcast Title" lineBreakMode="tailTruncation" minimumFontSize="10" id="pCs-j8-aWo">
                                         <rect key="frame" x="87" y="8" width="213" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" red="0.91764712329999998" green="0.91764712329999998" blue="0.91764712329999998" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" adjustsFontSizeToFit="NO" minimumFontSize="10" id="McF-Qx-rxl">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" minimumFontSize="10" id="McF-Qx-rxl">
                                         <rect key="frame" x="87" y="30" width="192" height="50"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -324,7 +327,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Details" id="51T-lo-c3z">
-                        <barButtonItem key="rightBarButtonItem" image="heart.png" id="tJ0-3t-8nC">
+                        <barButtonItem key="rightBarButtonItem" image="heart.png" style="plain" id="tJ0-3t-8nC">
                             <connections>
                                 <action selector="subscribeTapped:" destination="Xyd-co-oUC" id="AhE-Dv-oSI"/>
                             </connections>
@@ -345,6 +348,7 @@
             </objects>
             <point key="canvasLocation" x="2153" y="-20"/>
         </scene>
+        <!--Episode Details View Controller - Episode Details-->
         <scene sceneID="Rqu-WU-irX">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ny0-NL-oHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -357,7 +361,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" minimumFontSize="10" id="sd0-Ab-VTv">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" id="sd0-Ab-VTv">
                                 <rect key="frame" x="10" y="0.0" width="300" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
@@ -383,6 +387,7 @@
             </objects>
             <point key="canvasLocation" x="2668" y="61"/>
         </scene>
+        <!--Downloads View Controller-->
         <scene sceneID="0zk-oC-zmJ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1T9-Wy-cdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -430,6 +435,7 @@
             </objects>
             <point key="canvasLocation" x="1361" y="552"/>
         </scene>
+        <!--Playback Controller - Now Playing-->
         <scene sceneID="iM8-22-u5p">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5T1-jh-PxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -519,7 +525,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podcast Label" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="C3p-Tm-Scu">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podcast Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="C3p-Tm-Scu">
                                         <rect key="frame" x="63" y="3" width="193" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -549,6 +555,7 @@
             </objects>
             <point key="canvasLocation" x="1700" y="552"/>
         </scene>
+        <!--Root Controller-->
         <scene sceneID="AXF-8O-pt5">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UC7-CT-owX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -562,6 +569,7 @@
             </objects>
             <point key="canvasLocation" x="-879" y="122"/>
         </scene>
+        <!--Rear Controller-->
         <scene sceneID="BeD-CB-ZzO">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6e-tn-6Ko" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -704,6 +712,7 @@
             </objects>
             <point key="canvasLocation" x="-1036" y="784"/>
         </scene>
+        <!--Navigation Controller-->
         <scene sceneID="GTp-18-0Rf">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w0Q-rf-d8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -728,6 +737,7 @@
             </objects>
             <point key="canvasLocation" x="-1298" y="1514"/>
         </scene>
+        <!--Navigation Controller-->
         <scene sceneID="mam-K3-Myx">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eNf-AJ-ixJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -745,6 +755,7 @@
             </objects>
             <point key="canvasLocation" x="517" y="22"/>
         </scene>
+        <!--Home Controller-->
         <scene sceneID="2JF-xa-zuy">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSv-ZI-FsM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -762,6 +773,7 @@
             </objects>
             <point key="canvasLocation" x="-645" y="1452"/>
         </scene>
+        <!--Subscription Grid View Controller - Subscripton Grid View-->
         <scene sceneID="JQt-u6-o4T">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Twn-P0-pDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -797,6 +809,7 @@
             </objects>
             <point key="canvasLocation" x="152" y="1018"/>
         </scene>
+        <!--Featured Controller - Featured-->
         <scene sceneID="hF1-eS-QHN">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TS6-NK-Moq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -825,6 +838,7 @@
             </objects>
             <point key="canvasLocation" x="163" y="1570"/>
         </scene>
+        <!--Category List View Controller - Directory-->
         <scene sceneID="szf-9S-t5T">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tpy-6l-td3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -849,7 +863,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Qm-6c-9GP">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="9Qm-6c-9GP">
                                             <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -881,7 +895,7 @@
         <image name="bigplay.png" width="100" height="100"/>
         <image name="clockSmall.png" width="12" height="12"/>
         <image name="down.png" width="24" height="13"/>
-        <image name="heart.png" width="26" height="26"/>
+        <image name="heart.png" width="22" height="22"/>
         <image name="list-item.png" width="320" height="88"/>
         <image name="playback-bottom-back.png" width="320" height="125"/>
         <image name="skipback.png" width="24" height="24"/>

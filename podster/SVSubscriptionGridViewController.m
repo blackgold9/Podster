@@ -19,9 +19,9 @@
 #import "UIColor+Hex.h"
 #import "GCDiscreetNotificationView.h"
 @interface SVSubscriptionGridViewController()
-- (void)configureCell:(GMGridViewCell *)cell 
-           forPodcast:(SVPodcast *)currentPodcast
-        fadingImage:(BOOL)updateImage;
+//- (void)configureCell:(GMGridViewCell *)cell 
+//           forPodcast:(SVPodcast *)currentPodcast
+//        fadingImage:(BOOL)updateImage;
 @end
 @implementation SVSubscriptionGridViewController {
     NSUInteger tappedIndex;
@@ -85,6 +85,7 @@
     
     self.fetcher.delegate = self;
     self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+    self.gridView.centerGrid = NO;
     notificationView = [[GCDiscreetNotificationView alloc] initWithText:@"Updating Podcasts" 
                                                            showActivity:YES 
                                                      inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
@@ -174,8 +175,8 @@
         case NSFetchedResultsChangeUpdate:
         {
             LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
-            GMGridViewCell *currentCell = [self.gridView cellForItemAtIndex:indexPath.row];
-            [self configureCell:currentCell forPodcast:podcast fadingImage:NO];
+            PodcastGridCell *currentCell = (PodcastGridCell *)[self.gridView cellForItemAtIndex:indexPath.row];
+            [currentCell bind:podcast fadeImage:YES];
         }
             break;
         default:
@@ -210,44 +211,12 @@
     return DEFAULT_GRID_CELL_SIZE;
 }
 
-- (void)configureCell:(GMGridViewCell *)cell 
-           forPodcast:(SVPodcast *)currentPodcast
-        fadingImage:(BOOL)fadeImage 
-{
-   
-    UILabel *label = (UILabel *)[cell viewWithTag:1907];
-    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
-    label.text = currentPodcast.title;
-    NSString *logoString = currentPodcast.smallLogoURL;
-    if (!logoString) {
-        logoString = currentPodcast.logoURL;
-    }
-    if(logoString) {
-        NSURL *imageURL = [NSURL URLWithString: logoString];
-        [imageView setImageWithURL:imageURL placeholderImage:nil shouldFade:fadeImage];
-    } else {
-        // Clear rhe image if there is no logo 
-        imageView.image = nil; 
-    }
-    
-    UILabel *countLabel = (UILabel *)[cell viewWithTag:1908];
-    UIImageView *countOverlay = (UIImageView *)[cell viewWithTag:1909];
-    if (currentPodcast.unseenEpsiodeCountValue > 0) {
-        countOverlay.hidden = NO;
-        countLabel.hidden = NO;
-        countLabel.text = [NSString stringWithFormat:@"%d", currentPodcast.unseenEpsiodeCountValue];
-    } else {
-        countLabel.hidden = YES;
-          countOverlay.hidden = YES;
-    }
-}
-
 -(GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
 {
     SVPodcast *currentPodcast = (SVPodcast *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];    
     CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
     
-    PodcastGridCell *cell = (PodcastGridCell *)[gridView dequeueReusableCell];
+    PodcastGridCell *cell = (PodcastGridCell *)[gridView dequeueReusableCellWithIdentifier:@"MySubscriptionsGridCell"];
     
     if (!cell) 
     {

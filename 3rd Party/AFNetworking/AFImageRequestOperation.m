@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "AFImageRequestOperation.h"
-
+#import "UIImage+ForceDecompress.h"
 static dispatch_queue_t af_image_request_operation_processing_queue;
 static dispatch_queue_t image_request_operation_processing_queue() {
     if (af_image_request_operation_processing_queue == NULL) {
@@ -81,13 +81,19 @@ static dispatch_queue_t image_request_operation_processing_queue() {
     AFImageRequestOperation *requestOperation = [[[AFImageRequestOperation alloc] initWithRequest:urlRequest] autorelease];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
+            dispatch_async(image_request_operation_processing_queue(), ^{
+                
+
             UIImage *image = responseObject;
             
             if (imageProcessingBlock) {
                 image = imageProcessingBlock(image);
             }
-            
-            success(operation.request, operation.response, image);
+                
+                dispatch_async(dispatch_get_main_queue(),^{
+                    success(operation.request, operation.response, image);
+                });
+            });
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
@@ -157,7 +163,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 - (UIImage *)responseImage {
     if (!_responseImage && [self.responseData length] > 0 && [self isFinished]) {
-        UIImage *image = [UIImage imageWithData:self.responseData];
+        UIImage *image = [[UIImage imageWithData:self.responseData] preloadedImage];
         
         self.responseImage = [UIImage imageWithCGImage:[image CGImage] scale:self.imageScale orientation:image.imageOrientation];
     }
@@ -237,6 +243,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
                 }
             } else {                
                 if (success) {
+                    UIImage *image = self.responseImage;
                     dispatch_async(dispatch_get_main_queue(), ^(void) {
                         success(self, self.responseImage);
                     });

@@ -28,6 +28,7 @@
     NSString *cachingLastModified;
 }
 @synthesize errorCallback, completionCallback;
+
 + (id)parseData:(NSData *)data
        withETag:(NSString *)etag
 andLastModified:(NSString *)cachingLastModified
@@ -72,9 +73,11 @@ forPodcastAtURL:(NSString *)feedURL
             localPodcast.feedURL = feedURL; 
             localPodcast.urlHash = [localPodcast.feedURL stringFromMD5];
         } 
-        
+        NSAssert(localPodcast.feedURL != nil, @"There should be a feedURL");        
         [localPodcast updatePodcastWithFeedInfo:info];
-        localPodcast.etag = etag;
+        if (!localPodcast.etag || [localPodcast.etag isEqualToString:etag]) {
+            localPodcast.etag = etag;
+        }
 
     }];
 }
@@ -82,17 +85,11 @@ forPodcastAtURL:(NSString *)feedURL
 -(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
 {
     if (item.enclosures.count == 0) {
-//        [parser stopParsing];
-//        NSError *badFeed = [[NSError alloc] initWithDomain:@"SVParsing" code:100 userInfo:[NSDictionary dictionaryWithObject:@"This podcast feed appears invalid" forKey:NSLocalizedDescriptionKey]];
-//        failed = YES;
-//        dispatch_async(originalQueue, ^void() {
-//            self.errorCallback(badFeed);
-//        });
-//        //TODO: Report parsing error with url
+        [FlurryAnalytics logEvent:@"ParsedItemHadNoEnclosure" withParameters:[NSDictionary dictionaryWithObject:feedURL
+                                                                                                         forKey:@"URL"]];
         return;
     }
-    
-  
+      
     [localContext performBlockAndWait:^void() {
         LOG_PARSING(4, @"Processing feed item %@", item);
         NSString *guid = item.identifier;

@@ -11,13 +11,43 @@
 #import "UIColor+Hex.h"
 #import "ActsAsPodcast.h"
 @implementation PodcastGridCell
-
+{
+    AFImageRequestOperation *imageLoadOp;
+}
+static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize size) {
+    if (image == nil) {
+        return nil;
+    } else if (CGSizeEqualToSize(image.size, size) || CGSizeEqualToSize(size, CGSizeZero)) {
+        return image;
+    }
+    
+    CGSize scaledSize = size;
+	CGPoint thumbnailPoint = CGPointZero;
+    
+    CGFloat widthFactor = size.width / image.size.width;
+    CGFloat heightFactor = size.height / image.size.height;
+    CGFloat scaleFactor = (widthFactor > heightFactor) ? widthFactor : heightFactor;
+    scaledSize.width = image.size.width * scaleFactor;
+    scaledSize.height = image.size.height * scaleFactor;
+    if (widthFactor > heightFactor) {
+        thumbnailPoint.y = (size.height - scaledSize.height) * 0.5; 
+    } else if (widthFactor < heightFactor) {
+        thumbnailPoint.x = (size.width - scaledSize.width) * 0.5;
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0); 
+    [image drawInRect:CGRectMake(thumbnailPoint.x, thumbnailPoint.y, scaledSize.width, scaledSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+	return newImage;
+}
 -(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {        
         UIView *view = [[UIView alloc] initWithFrame:frame];
-        view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
+        //view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
         //        view.layer.masksToBounds = NO;
         //        //view.layer.cornerRadius = 8;
         //        view.layer.shadowColor = [UIColor whiteColor].CGColor;
@@ -27,6 +57,22 @@
         //        view.layer.shadowRadius = 3;
         view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
         view.layer.borderWidth = 2;
+                
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.colors = [NSArray arrayWithObjects:
+                           (id)[[UIColor colorWithHex:0x01408C] CGColor],
+                           (id)[[UIColor colorWithHex:0x052D52] CGColor],
+                           nil];
+        gradient.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.3], [NSNumber numberWithFloat:1], nil];
+        gradient.frame = self.bounds;
+        [view.layer addSublayer:gradient];
+
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
+        imageView.tag = 1906;
+        [view addSubview:imageView];
+       
+        
         
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
         titleLabel.textColor = [UIColor whiteColor];
@@ -37,11 +83,7 @@
         titleLabel.tag = 1907;
         titleLabel.opaque = NO;
         [view addSubview:titleLabel];
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
-        imageView.tag = 1906;
-        imageView.backgroundColor = [UIColor clearColor];
-        [view addSubview:imageView];
+
         
         UILabel *newCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 25, 20)];
         newCountLabel.backgroundColor = [UIColor colorWithHex:0x0066a4];
@@ -57,9 +99,13 @@
         UIImageView *countOverlay = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"grid-count-overlay.png"]];
         countOverlay.tag = 1909;
         [view addSubview:countOverlay];
+        countOverlay.hidden = YES;
+        newCountLabel.hidden = YES;
         
         [view addSubview:newCountLabel];
         self.contentView = view;
+        self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        self.layer.shouldRasterize = YES;
     }
     
     return self;
@@ -75,14 +121,39 @@
     if (!logoString) {
         logoString = podcast.logoURL;
     }
+    if (imageView.image != nil) {
+        // Imageview image is cleaned up in prepareForREuse, so if there's an image, this is just an update
+        // Don't show the label if you dont have to;
+        label.hidden = YES;
+    } else {
+        label.hidden = NO;
+    }
     if(logoString) {
         NSURL *imageURL = [NSURL URLWithString: logoString];
-        [imageView setImageWithURL:imageURL 
-                  placeholderImage:nil
-                        shouldFade:fadeImage];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+
+        imageLoadOp = [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:imageURL]
+                                                           imageProcessingBlock:^UIImage *(UIImage *returnedImage) {
+                                                               return AFImageByScalingAndCroppingImageToSize(returnedImage, imageView.frame.size);
+                                                           } cacheName:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                               [UIView transitionWithView:imageView
+                                                                                 duration:0.33
+                                                                                  options:UIViewAnimationOptionTransitionCrossDissolve
+                                                                               animations:^{
+                                                                                   label.hidden = YES;
+                                                                                   imageView.image = image;
+                                                                               } completion:^(BOOL finished) {
+                                                                                   
+                                                                               }];
+                                                               
+ } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+}];
+        
+        [[SVPodcatcherClient sharedInstance] enqueueHTTPRequestOperation:imageLoadOp];
+                    });
     } else {
-        // Clear rhe image if there is no logo 
-        imageView.image = nil; 
+        
     }
     
     UILabel *countLabel = (UILabel *)[self viewWithTag:1908];
@@ -96,5 +167,16 @@
         countOverlay.hidden = YES;
     }
 
+}
+
+-(void)prepareForReuse
+{
+    [super prepareForReuse];
+
+    [imageLoadOp cancel];
+    UILabel *countLabel = (UILabel *)[self viewWithTag:1908];
+    UIImageView *countOverlay = (UIImageView *)[self viewWithTag:1909];
+    countLabel.hidden = YES;
+    countOverlay.hidden = YES;
 }
 @end

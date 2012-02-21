@@ -1,17 +1,29 @@
 #import "SVPodcast.h"
 #import "NSDictionary+safeGetters.h"
 #import "MWFeedInfo.h"
+#import "NSString+MD5Addition.h"
 @implementation SVPodcast
 -(void)updatePodcastWithFeedInfo:(MWFeedInfo *)info
 {
-    self.title = [[info title] capitalizedString];
-    self.summary = info.summary;
+    NSString *captializedTitle = [[info title] capitalizedString];
+    if (!self.title || ![self.title isEqualToString:captializedTitle]) {
+        self.title = captializedTitle;
+    }
+    
+    if (!self.summary || ![self.summary isEqualToString:info.summary]) {
+        self.summary = info.summary;
+    }
     if (info.imageURL != nil && self.logoURL == nil) {
         self.logoURL = info.imageURL;
     }
 
-    self.author = [info author];
-    self.websiteURL = info.link;
+    if (!self.author || ![self.author isEqualToString:info.author]) {
+        self.author = info.author; 
+    }
+    
+    if (!self.websiteURL || [self.websiteURL isEqualToString:info.link]) {
+        self.websiteURL = info.link;
+    }
 }
 
 // Custom logic goes here.

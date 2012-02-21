@@ -95,14 +95,8 @@
     self.navigationItem.title = @"Now Playing";
     self.titleLabel.text = [SVPlaybackManager sharedInstance].currentEpisode.title;
     [self registerObservers];
+    [self.navigationController setToolbarHidden:YES animated:NO];
 }
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad

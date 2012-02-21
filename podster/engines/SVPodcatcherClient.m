@@ -230,6 +230,7 @@
     operation.queuePriority = lowPriority ? NSOperationQueuePriorityLow : NSOperationQueuePriorityNormal;
     [self enqueueHTTPRequestOperation:operation];
 }
+
 #pragma mark - push related
 -(void)registerForPushNotificationsWithToken:(NSString *)token
                           andDeviceIdentifer:(NSString *)deviceId
@@ -238,7 +239,8 @@
 { 
     NSParameterAssert(token);
     NSParameterAssert(deviceId);
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:token, @"deviceToken",  deviceId, @"deviceId",@"ios", @"platform", nil];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:token, @"deviceToken",  deviceId, @"deviceId",@"ios", @"platform",version, @"version", nil];
     
     [self postPath:@"devices/create.json" parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {

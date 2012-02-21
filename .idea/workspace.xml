@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/HomeController.m" afterPath="$PROJECT_DIR$/podster/HomeController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/UIImage+ForceDecompress.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/UIImage+ForceDecompress.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/FeaturedController.m" afterPath="$PROJECT_DIR$/podster/FeaturedController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcast.m" afterPath="$PROJECT_DIR$/podster/models/SVPodcast.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackManager.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVFeedParser.m" afterPath="$PROJECT_DIR$/podster/SVFeedParser.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Info.plist" afterPath="$PROJECT_DIR$/podster/podster-Info.plist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVViewController.m" afterPath="$PROJECT_DIR$/podster/SVViewController.m" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -16,6 +25,7 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
+    <option name="REVERSE_PATCH" value="false" />
   </component>
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
@@ -25,52 +35,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HomeController.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/HomeController.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="84" selection-start="384" selection-end="384" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVMyPodcastsViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVMyPodcastsViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="272" column="46" selection-start="9531" selection-end="10049" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UIViewController.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file:///Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIViewController.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="334" column="8" selection-start="19038" selection-end="19038" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeaturedController.m" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/podster/FeaturedController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="79" selection-start="4962" selection-end="4962" vertical-scroll-proportion="0.529976">
-              <folding>
-                <element signature="e#157#187#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeController.m" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="HomeController.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="0" selection-start="2688" selection-end="2688" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#153#179#0" expanded="true" />
-                <element signature="e#832#869#0" expanded="true" />
-              </folding>
+            <state line="75" column="96" selection-start="2068" selection-end="2082" vertical-scroll-proportion="0.10164835">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SVAppDelegate.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="303" column="41" selection-start="18251" selection-end="18251" vertical-scroll-proportion="-8.846154">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -83,8 +61,9 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
+    <option name="UPDATE_CHANGES_POLICY" value="STASH" />
     <option name="LINE_SEPARATORS_CONVERSION" value="ASK" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
@@ -93,7 +72,6 @@
         <option value="$PROJECT_DIR$/podster/SVCategoryGridViewController.m" />
         <option value="$PROJECT_DIR$/podster/SVCategoryListViewController.m" />
         <option value="$PROJECT_DIR$/MKNetworkOperation.m" />
-        <option value="$PROJECT_DIR$/podster/SVAppDelegate.m" />
         <option value="$PROJECT_DIR$/MKNetworkEngine.m" />
         <option value="$PROJECT_DIR$/podster/SVPlaybackManager.h" />
         <option value="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
@@ -103,8 +81,9 @@
         <option value="$PROJECT_DIR$/podster/RearController.m" />
         <option value="$PROJECT_DIR$/podster/SVEpisodeListCell.m" />
         <option value="$PROJECT_DIR$/podster/HomeController.h" />
-        <option value="$PROJECT_DIR$/podster/HomeController.m" />
         <option value="$PROJECT_DIR$/podster/FeaturedController.m" />
+        <option value="$PROJECT_DIR$/podster/SVAppDelegate.m" />
+        <option value="$PROJECT_DIR$/podster/HomeController.m" />
       </list>
     </option>
   </component>
@@ -250,16 +229,16 @@
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="application.passwordSafe" />
+    <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.podster - Debug">
-    <configuration default="false" name="podster - Debug" type="AppleRunConfiguration" factoryName="Application" temporary="true" PROJECT_NAME="podster" TARGET_NAME="podster" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.0_1" DEBUGGER="GDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+    <configuration default="false" name="podster - Debug" type="AppleRunConfiguration" factoryName="Application" temporary="true" PROJECT_NAME="podster" TARGET_NAME="podster" CONFIG_NAME="Debug" SDK_NAME="iphonesimulator5.0" ARCH_ID="Standard" DEVICE="IPHONE" DEBUGGER="LLDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
       <envs />
       <RunnerSettings RunnerId="AppRunner" />
       <ConfigurationWrapper RunnerId="AppRunner" />
@@ -308,18 +287,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32647058" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32544377" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32767403" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.21005917" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.6720588" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39898133" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.602071" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39792898" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32794118" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32692307" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -362,8 +341,6 @@
     <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
-    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="LAST_COMMIT_MESSAGE" value="Renamed tag controllers to appropriate names" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
@@ -389,10 +366,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
-          <line>185</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
           <line>99</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -402,6 +375,14 @@
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
           <line>88</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
+          <line>74</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/podster/HomeController.m</url>
+          <line>104</line>
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -436,16 +417,6 @@
     <entry file="file://$PROJECT_DIR$/podster/SVCategoryListViewController.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="177" column="33" selection-start="5457" selection-end="5459" vertical-scroll-proportion="-95.30769" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="113" selection-start="1336" selection-end="1336" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file:///Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFArray.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="33" selection-start="4506" selection-end="4506" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPlaybackManager.h">
@@ -493,16 +464,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVMyPodcastsViewController.m">
+    <entry file="file://$PROJECT_DIR$/podster/FeaturedController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="272" column="46" selection-start="9531" selection-end="10049" vertical-scroll-proportion="0.0">
+        <state line="127" column="79" selection-start="4882" selection-end="4882" vertical-scroll-proportion="0.34375">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:///Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIViewController.h">
+    <entry file="file://$PROJECT_DIR$/podster/SVMyPodcastsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="334" column="8" selection-start="19038" selection-end="19038" vertical-scroll-proportion="0.0">
+        <state line="272" column="46" selection-start="9531" selection-end="10049" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -514,22 +485,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
+    <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="0" selection-start="2688" selection-end="2688" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#153#179#0" expanded="true" />
-            <element signature="e#832#869#0" expanded="true" />
-          </folding>
+        <state line="303" column="41" selection-start="18251" selection-end="18251" vertical-scroll-proportion="-8.846154">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/podster/FeaturedController.m">
+    <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="79" selection-start="4962" selection-end="4962" vertical-scroll-proportion="0.529976">
-          <folding>
-            <element signature="e#157#187#0" expanded="true" />
-          </folding>
+        <state line="75" column="96" selection-start="2068" selection-end="2082" vertical-scroll-proportion="0.10164835">
+          <folding />
         </state>
       </provider>
     </entry>

@@ -209,8 +209,15 @@ NSString *uuid();
     [FlurryAnalytics setUserID:deviceId];
 
 #endif
+    double delayInSeconds = 5.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [self initializeCoreText];        
+        });
+    });
     
-    [self initializeCoreText];
+
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     
@@ -248,9 +255,11 @@ NSString *uuid();
 //                                                                  }]; // custom method
 //    #else
     // Actually register
+#ifndef CONFIGURATION_Debug
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
                                                                            UIRemoteNotificationTypeBadge|
                                                                            UIRemoteNotificationTypeSound)];
+#endif
  //   #endif
     return YES;
 }
@@ -294,12 +303,13 @@ NSString *uuid(){
     if (application.applicationState != UIApplicationStateActive) {
         [FlurryAnalytics logEvent:@"LaunchedFromNotifications"];
         NSString *hash= [userInfo valueForKey:@"url_hash"];
+        LOG_GENERAL(2, @"launched for podcast with URL Hash: %@", hash);
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.urlHash, hash];
         SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
         if (podcast) {
             SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
             controller.podcast = podcast;
-            UINavigationController *nav = (UINavigationController *)((ZUUIRevealController *)self.window.rootViewController).frontViewController;
+            UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
             [nav pushViewController:controller animated:NO];
         }
     }

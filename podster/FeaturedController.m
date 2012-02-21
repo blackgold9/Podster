@@ -49,7 +49,7 @@
     self.gridView.centerGrid = NO;
     
     [[SVPodcatcherClient sharedInstance] topPodcastsStartingAtIndex: arc4random() % 100
-                                                              limit:21
+                                                              limit:41
                                                        onCompletion:^(NSArray *podcasts) {
                                                            featuredPodcasts = podcasts;
                                                            [self.gridView reloadData];
@@ -126,7 +126,7 @@
         id<ActsAsPodcast> podcast = (id<ActsAsPodcast>) [featuredPodcasts objectAtIndex:position - 1];
         SVPodcastDetailsViewController *destination = [storyboard instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
         destination.podcast = podcast;
-        [self.navigationController pushViewController:destination animated:YES1];
+        [self.navigationController pushViewController:destination animated:YES];
 
     }
 }

@@ -108,7 +108,7 @@ void audioRouteChangeListenerCallback (
     id monitorId;
     // Represents whether the user has triggered playback.
     // This is used to decide whether ot not to start playback after an interruption (phone call) has completed
-    BOOL playing;
+    BOOL playingWhenInterrupted;
 }
 @synthesize currentPodcast;
 @synthesize currentEpisode;
@@ -234,9 +234,7 @@ void audioRouteChangeListenerCallback (
 {
     if (_player) {
         [_player play];
-
     }
-
 }
 
 -(void)pause
@@ -248,7 +246,7 @@ void audioRouteChangeListenerCallback (
 
 #pragma mark - AVAudioSessionDelegate
 - (void)endInterruptionWithFlags:(NSUInteger)flags {
-   if (flags == AVAudioSessionInterruptionFlags_ShouldResume && kPlaybackStatePlaying) {
+   if (flags == AVAudioSessionInterruptionFlags_ShouldResume && self.playbackState == kPlaybackStatePlaying) {
        NSAssert(_player !=nil, @"The player is expected to exist here");
        [_player play];
        [[AVAudioSession sharedInstance] setActive: YES error: nil];
@@ -269,6 +267,7 @@ void audioRouteChangeListenerCallback (
                 } else if (_player.status == AVPlayerItemStatusFailed) {
                     LOG_PLAYBACK(1,@"Playback failed with error: %@", _player.error);
                     [FlurryAnalytics logError:@"PlaybackFailed" message:[_player.error localizedDescription] error:_player.error];
+                    _player = nil;                    
                     //TODO: Reflect to user?
                 }
             } else if ([keyPath isEqualToString:@"rate"]) {
@@ -277,6 +276,11 @@ void audioRouteChangeListenerCallback (
                     if (CMTIME_COMPARE_INLINE(_player.currentTime,>=,bufferTime)) {
                         LOG_PLAYBACK(1, @"Stopping playback, epsidoe complete");                        
                         self.playbackState = kPlaybackStateStopped;
+                        [[NSManagedObjectContext defaultContext] performBlock:^{
+                            self.currentEpisode.positionInSecondsValue = 0;
+                            self.currentEpisode.playedValue = YES;
+                            [[NSManagedObjectContext defaultContext] save];                            
+                        }];
                     } else {
                         LOG_PLAYBACK(3, @"Pausing playback");
                         self.playbackState = kPlaybackStatePaused;

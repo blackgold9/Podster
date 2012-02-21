@@ -119,10 +119,6 @@
         output = self.featuredController;
     }
 
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:(NSInteger)screenType forKey:@"HomeScreenType"];
-    [defaults synchronize];
     NSAssert(output, @"There should be a view controller returned");
     return output;
 }
@@ -158,6 +154,12 @@
     
     [self.titleTabView setSelectedIndex:screenType == HomePageFeaturedScreen ? 0 : 1];
     self.currentScreen = screenType;
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:screenType forKey:@"HomeScreenType"];
+    [defaults synchronize];
+
 }
 
 #pragma mark - View lifecycle
@@ -186,7 +188,7 @@
     self.titleTabView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
     
     __weak HomeController *weakSelf = self;
-    [self.titleTabView addTabItemWithTitle:@"Discovery"
+    [self.titleTabView addTabItemWithTitle:@"What's Hot"
                                       icon:nil executeBlock:^{
         [weakSelf configureViewControllerForScreenType:HomePageFeaturedScreen];
     }];

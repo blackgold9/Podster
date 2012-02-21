@@ -10,6 +10,7 @@
 #import "SVPlaybackManager.h"
 #import "GCDiscreetNotificationView.h"
 #import "SVSubscriptionManager.h"
+#import <QuartzCore/QuartzCore.h>
 @interface SVViewController() 
 -(void)showNowPlayingController;
 -(void)updateNowPlayingControls;
@@ -91,14 +92,15 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+    [localManager removeObserver:self forKeyPath:@"currentEpisode"];
+    [localManager removeObserver:self forKeyPath:@"playbackState"];
+
    }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
-    [localManager removeObserver:self forKeyPath:@"currentEpisode"];
-    [localManager removeObserver:self forKeyPath:@"playbackState"];
-
+   
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -136,14 +138,29 @@
     SVPodcastEntry *episode = [[SVPlaybackManager sharedInstance] currentEpisode];
     if ([[SVPlaybackManager sharedInstance] currentEpisode]) {
 
-        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        [image setImageWithURL:[NSURL URLWithString:[[SVPlaybackManager sharedInstance] currentPodcast].tinyLogoURL]];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        imageView.layer.cornerRadius = 3;
+        imageView.layer.masksToBounds = YES;
+        [NSURL URLWithString:[[SVPlaybackManager sharedInstance] currentPodcast].tinyLogoURL];
+        imageView.image = AFImageByScalingAndCroppingImageToSize([UIImage imageNamed:@"Thumb-Placeholder.png"], imageView.frame.size) ;
+
+        NSURL *url =  [NSURL URLWithString:[[SVPlaybackManager sharedInstance] currentPodcast].tinyLogoURL];
+            AFImageRequestOperation *imageLoadOp = [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:url]
+                                                                                        imageProcessingBlock:^UIImage *(UIImage *returnedImage) {
+                                                                                            return AFImageByScalingAndCroppingImageToSize(returnedImage, imageView.frame.size);
+                                                                                        } cacheName:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                                                            imageView.image = image;
+                                                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                                   
+                                                                                        }];
+            
+            [[SVPodcatcherClient sharedInstance] enqueueHTTPRequestOperation:imageLoadOp];
         __weak SVViewController *weakSelf = self;
-        [image setUserInteractionEnabled:YES];
-        [image whenTapped:^{
+        [imageView setUserInteractionEnabled:YES];
+        [imageView whenTapped:^{
             [weakSelf showNowPlayingController];
         }];
-        UIBarButtonItem *nowPlaying = [[UIBarButtonItem alloc] initWithCustomView:image];
+        UIBarButtonItem *nowPlaying = [[UIBarButtonItem alloc] initWithCustomView:imageView];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,self.view.bounds.size.width - 60, 30)];
         label.text = episode.title;
         label.font = [UIFont systemFontOfSize:13];
@@ -160,5 +177,34 @@
         
     }
 
+}
+
+static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize size) {
+    if (image == nil) {
+        return nil;
+    } else if (CGSizeEqualToSize(image.size, size) || CGSizeEqualToSize(size, CGSizeZero)) {
+        return image;
+    }
+    
+    CGSize scaledSize = size;
+	CGPoint thumbnailPoint = CGPointZero;
+    
+    CGFloat widthFactor = size.width / image.size.width;
+    CGFloat heightFactor = size.height / image.size.height;
+    CGFloat scaleFactor = (widthFactor > heightFactor) ? widthFactor : heightFactor;
+    scaledSize.width = image.size.width * scaleFactor;
+    scaledSize.height = image.size.height * scaleFactor;
+    if (widthFactor > heightFactor) {
+        thumbnailPoint.y = (size.height - scaledSize.height) * 0.5; 
+    } else if (widthFactor < heightFactor) {
+        thumbnailPoint.x = (size.width - scaledSize.width) * 0.5;
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0); 
+    [image drawInRect:CGRectMake(thumbnailPoint.x, thumbnailPoint.y, scaledSize.width, scaledSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+	return newImage;
 }
 @end

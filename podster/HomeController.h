@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "JMTabView.h"
+#import "SVViewController.h"
 typedef enum {
     HomePageSubscriptionsScreen = 0,
     HomePageFeaturedScreen
 } HomePageScreenType;
-@interface HomeController : UIViewController<UIScrollViewDelegate, JMTabViewDelegate>
+@interface HomeController : SVViewController<UIScrollViewDelegate, JMTabViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (assign) HomePageScreenType currentScreen;
 @end

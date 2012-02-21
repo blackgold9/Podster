@@ -110,10 +110,13 @@
         SVSubscription *subscription = localPodcast.subscription;
         NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:localPodcast.title,@"title", localPodcast.feedURL, @"feedURL", nil];
         if(!subscription) {
-         //   [TestFlight passCheckpoint:@"SUBSCRIBED"];
+            dispatch_async(dispatch_get_main_queue(), ^{
                self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
+            });
+              
             subscription = [SVSubscription createInContext:localContext];
             localPodcast.subscription = subscription;
+            localPodcast.unseenEpsiodeCountValue = 0;
     
             
             if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
@@ -128,6 +131,10 @@
                 }];
             }
         } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.subscribeButton.image = [UIImage imageNamed:@"heart.png"]; 
+            });
+            
           //  [TestFlight passCheckpoint:@"UNSUBSCRIBED"];
             [subscription deleteInContext:localContext];
             if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
@@ -139,6 +146,7 @@
                     LOG_GENERAL(1, @"unsubscribe failed with error: %@", error);
                 }];
             }
+           
         }
         [localContext save];
         if(localContext.parentContext) {
