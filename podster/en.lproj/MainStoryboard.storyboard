@@ -895,7 +895,7 @@
         <image name="bigplay.png" width="100" height="100"/>
         <image name="clockSmall.png" width="12" height="12"/>
         <image name="down.png" width="24" height="13"/>
-        <image name="heart.png" width="22" height="22"/>
+        <image name="heart.png" width="30" height="30"/>
         <image name="list-item.png" width="320" height="88"/>
         <image name="playback-bottom-back.png" width="320" height="125"/>
         <image name="skipback.png" width="24" height="24"/>
@@ -927,7 +927,7 @@
                 <relationship kind="outlet" name="transformDelegate" candidateClass="NSObject"/>
             </relationships>
         </class>
-        <class className="HomeController" superclassName="UIViewController">
+        <class className="HomeController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeController.h"/>
             <relationships>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>

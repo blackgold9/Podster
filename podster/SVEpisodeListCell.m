@@ -39,6 +39,7 @@
     
     self.dateLabel.text = [dateFormatter stringFromDate:entry.datePublished];
     self.titleLabel.text = entry.title;
+    self.titleLabel.adjustsFontSizeToFitWidth = NO;
     self.subtitleLabel.text = [entry.summary stringByConvertingHTMLToPlainText];
     self.durationLabel.text =[NSString formattedStringRepresentationOfSeconds: [entry.duration integerValue]];
     self.downloadedIndicator.hidden = !entry.downloadCompleteValue;
