@@ -12,6 +12,8 @@
 #import "JMTabView.h"
 #import "FeaturedController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GCDiscreetNotificationView.h"
+#import "SVSubscriptionManager.h"
 
 @interface HomeController ()
 @property(nonatomic, strong) SVSubscriptionGridViewController *subscriptionsController;
@@ -27,7 +29,9 @@
 
 @end
 
-@implementation HomeController
+@implementation HomeController {
+    GCDiscreetNotificationView *notificationView;
+}
 
 @synthesize scrollView = _scrollView;
 @synthesize currentScreen = _currentScreen;
@@ -98,6 +102,11 @@
     
     [self.view addGestureRecognizer:rightSwipe];
 
+    notificationView = [[GCDiscreetNotificationView alloc] initWithText:@"Updating Podcasts" 
+                                                           showActivity:YES 
+                                                     inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
+                                                                 inView:self.view];
+
 }
 
 - (UIViewController *)controllerForScreenType:(HomePageScreenType)screenType
@@ -164,8 +173,26 @@
 
 #pragma mark - View lifecycle
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[SVSubscriptionManager sharedInstance] removeObserver:self
+                                                forKeyPath:@"isBusy"
+     ];
 
+}
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+    [[SVSubscriptionManager sharedInstance] addObserver:self
+                                             forKeyPath:@"isBusy"
+                                                options:NSKeyValueObservingOptionNew 
+                                                context:nil];
+    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    if ([[SVSubscriptionManager sharedInstance] isBusy]) {
+        [notificationView show:YES];
+    }
+}
 
 - (void)viewDidUnload
 {
@@ -203,4 +230,25 @@
     [self.titleTabView setSelectedIndex:1];
 
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+        if ([keyPath isEqualToString:@"isBusy"]){
+            if([[SVSubscriptionManager sharedInstance] isBusy]) {
+                [notificationView showAnimated]; 
+            } else {
+                [notificationView hideAnimated];
+            }
+        }
+    });
+    
+    [super observeValueForKeyPath:keyPath
+                         ofObject:object
+                           change:change
+                          context:context];
+}
+
 @end

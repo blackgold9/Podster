@@ -13,8 +13,10 @@
 #include <stdlib.h>
 #import "SVPodcastsSearchResultsViewController.h"
 #import "SVPodcastDetailsViewController.h"
+#import "SVPodcastImageCache.h"
 @implementation FeaturedController {
     NSArray *featuredPodcasts;
+    SVPodcastImageCache *imageCache;
 }
 @synthesize gridView;
 
@@ -52,6 +54,21 @@
                                                               limit:41
                                                        onCompletion:^(NSArray *podcasts) {
                                                            featuredPodcasts = podcasts;
+                                                           
+                                                           NSMutableArray *urls = [NSMutableArray array];
+                                                           for (id<ActsAsPodcast> podcast in podcasts) {
+                                                               NSString *logoString = podcast.smallLogoURL;
+                                                               if (!logoString) {
+                                                                   logoString = podcast.logoURL;
+                                                               }
+                                                               
+                                                               if (logoString) {
+                                                                   NSURL *url = [NSURL URLWithString:logoString];
+                                                                   [urls addObject:url];
+                                                               }
+                                                           }
+                                                           imageCache = [[SVPodcastImageCache alloc] initWithImageURLs:urls andSize:CGSizeMake(150.0f, 150.0f)];
+                                                           
                                                            [self.gridView reloadData];
                                                        } onError:^(NSError *error) {
                                                            LOG_GENERAL(2, @"Error occured downloading featured podcasts");
@@ -108,9 +125,9 @@
     
     if (index > 0) {
         // We bind the actual podcast if it isnt the first one.
-        NSLog(@"Processing podcast at index %d", index);
         [((PodcastGridCell *)cell) bind:[featuredPodcasts objectAtIndex:index - 1] 
-                              fadeImage:YES];
+                              fadeImage:YES 
+                         withImageCache:imageCache];
     }
     
     return cell;

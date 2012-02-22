@@ -9,7 +9,12 @@
 
 #import "GMGridViewCell.h"
 @protocol ActsAsPodcast;
+@class SVPodcastImageCache;
 @interface PodcastGridCell : GMGridViewCell
 -(void)bind:(id<ActsAsPodcast>)podcast
   fadeImage:(BOOL)fadeImage;
+
+-(void)bind:(id<ActsAsPodcast>)podcast
+  fadeImage:(BOOL)fadeImage withImageCache:(SVPodcastImageCache *)cache;
+
 @end

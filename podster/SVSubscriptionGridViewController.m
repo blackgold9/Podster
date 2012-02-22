@@ -17,16 +17,14 @@
 #import "UILabel+VerticalAlign.h"
 #import "PodcastGridCell.h"
 #import "UIColor+Hex.h"
-#import "GCDiscreetNotificationView.h"
+
 @interface SVSubscriptionGridViewController()
-//- (void)configureCell:(GMGridViewCell *)cell 
-//           forPodcast:(SVPodcast *)currentPodcast
-//        fadingImage:(BOOL)updateImage;
+
 @end
+
 @implementation SVSubscriptionGridViewController {
     NSUInteger tappedIndex;
     BOOL needsReload;
-    GCDiscreetNotificationView *notificationView;
 }
 @synthesize fetcher;
 @synthesize gridView = _gridView;
@@ -51,7 +49,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+
     if ([self.navigationController.parentViewController respondsToSelector:@selector(revealGesture:)] && [self.navigationController.parentViewController respondsToSelector:@selector(revealToggle:)])
 	{
         
@@ -64,11 +62,6 @@
 			self.navigationItem.leftBarButtonItem = revealButton;
 		}
 	}
-    if ([[SVSubscriptionManager sharedInstance] isBusy]) {
-        [notificationView show:YES];
-    }
-
-   
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -86,12 +79,6 @@
     self.fetcher.delegate = self;
     self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
     self.gridView.centerGrid = NO;
-    notificationView = [[GCDiscreetNotificationView alloc] initWithText:@"Updating Podcasts" 
-                                                           showActivity:YES 
-                                                     inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
-                                                                 inView:self.view];
-
-
 }
 
 - (void)viewDidUnload
@@ -104,10 +91,6 @@
 {
     [super viewWillAppear:animated];
     LOG_GENERAL(2, @"ViewWillAppear");
-    [[SVSubscriptionManager sharedInstance] addObserver:self
-                                             forKeyPath:@"isBusy"
-                                                options:NSKeyValueObservingOptionNew 
-                                                context:nil];
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
 
 
@@ -121,10 +104,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[SVSubscriptionManager sharedInstance] removeObserver:self
-                                             forKeyPath:@"isBusy"
-                                                ];
-
     [super viewWillDisappear:animated];
     [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
     self.fetcher.delegate = nil;
@@ -230,19 +209,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        
-        if ([keyPath isEqualToString:@"isBusy"]){
-            if([[SVSubscriptionManager sharedInstance] isBusy]) {
-                [notificationView showAnimated]; 
-            } else {
-                [notificationView hideAnimated];
-            }
-        }
-    });
-    
-    [super observeValueForKeyPath:keyPath
+        [super observeValueForKeyPath:keyPath
                          ofObject:object
                            change:change
                           context:context];
