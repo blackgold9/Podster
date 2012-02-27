@@ -29,8 +29,11 @@
 #import "SVPodcastModalView.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "SVPodcastSettingsView.h"
+#import "BlockAlertView.h"
 @interface SVPodcastDetailsViewController ()
-- (BOOL)isSubscribed;
+
+- (void)saveLocalContextIncludingParent:(BOOL)includeParent;
+
 - (void)reloadData;
 @end
 @implementation SVPodcastDetailsViewController {
@@ -43,9 +46,11 @@
     BOOL shouldSave;
     SVPodcast *localPodcast;
     UIView *headerView;
-    
+    BOOL optionsOpen;
     BOOL isInitialLoad;
+    BOOL isSubscribed;
 }
+@synthesize notifySwitch;
 @synthesize sortSegmentedControl;
 @synthesize hidePlayedSwitch;
 @synthesize titleLabel;
@@ -55,6 +60,7 @@
 @synthesize imageView;
 @synthesize subscribeButton;
 @synthesize podcast = _podcast;
+@synthesize optionsButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -90,7 +96,7 @@
 
 - (IBAction)hidePlayedSwitchedByUser:(id)sender {
     localPodcast.hidePlayedEpisodesValue = self.hidePlayedSwitch.on;
-    [localContext performBlockAndWait:^{
+    [localContext performBlock:^{
         [localContext save];
     }];
     [self reloadData];
@@ -98,71 +104,249 @@
 
 - (IBAction)sortControlTapped:(id)sender {
     localPodcast.sortNewestFirstValue = self.sortSegmentedControl.selectedSegmentIndex == 0;
-    [localContext performBlockAndWait:^{
+    [localContext performBlock:^{
         [localContext save];
     }];
     [self reloadData];
 }
 
-- (IBAction)subscribeTapped:(id)sender {
-    // TODO: Clean this crap up. Better user feedback.
-    [localContext performBlock:^{
-        SVSubscription *subscription = localPodcast.subscription;
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:localPodcast.title,@"title", localPodcast.feedURL, @"feedURL", nil];
-        if(!subscription) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-               self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
-            });
-              
-            subscription = [SVSubscription createInContext:localContext];
-            localPodcast.subscription = subscription;
-            localPodcast.unseenEpsiodeCountValue = 0;
-    
-            
-            if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
+- (IBAction)notifySwitchChanged:(id)sender {
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
+        if (localPodcast.subscription == nil) {
+            BlockAlertView *alertView= [BlockAlertView alertWithTitle:@"Not a Favorite" message:@"You cannot recieve notifications about a podcast unless it is marked as a Favorite"];
+            [alertView setCancelButtonWithTitle:@"OK" block:^{
+                
+            }];
+            [self.notifySwitch setOn:NO animated:YES];
+            [alertView show];
+        } else {
+            if (self.notifySwitch.on) {
+                // Notify 
                 NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
-
+                
                 [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:localPodcast.feedURL withDeviceId:deviceId onCompletion:^{
-                    [FlurryAnalytics logEvent:@"Subscribed" withParameters:parameters];
+                    [FlurryAnalytics logEvent:@"SubscribedForNotifications"];
                     LOG_GENERAL(2, @"Registered for notifications on feed");
+                    localPodcast.shouldNotifyValue = YES;
+                    [localContext save];
+
+                   
                 } onError:^(NSError *error) {
                     [FlurryAnalytics logError:@"SubscribeFailed" message:[error localizedDescription] error:error ];
                     LOG_GENERAL(1, @"Registration failed with error: %@", error);
+                    BlockAlertView *alertView= [BlockAlertView alertWithTitle:@"Network Error" message:@"There was a problem communicating with the Podster servers. Please try again alter."];
+                    
+                                      [alertView setCancelButtonWithTitle:@"OK" block:^{
+                        
+                    }];
+                    [self.notifySwitch setOn:NO animated:YES];
+                    [alertView show];
+                    
                 }];
-            }
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.subscribeButton.image = [UIImage imageNamed:@"heart.png"]; 
-            });
-            
-          //  [TestFlight passCheckpoint:@"UNSUBSCRIBED"];
-            [subscription deleteInContext:localContext];
-            if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){  
+                
+            } else {
+                // Unsuscribe on the server
                 NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
                 [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:localPodcast.feedURL withDeviceId:deviceId onCompletion:^{
-                     [FlurryAnalytics logEvent:@"Unsubscribed" withParameters:parameters];
+                    [FlurryAnalytics logEvent:@"UnsubscribedForNotifications"];
+                    
+                    localPodcast.shouldNotifyValue = NO;
+                    [localContext save];
+
                 } onError:^(NSError *error) {
                     [FlurryAnalytics logError:@"UnsubscribeFailed" message:[error localizedDescription] error:error ];
                     LOG_GENERAL(1, @"unsubscribe failed with error: %@", error);
+                    BlockAlertView *alertView= [BlockAlertView alertWithTitle:@"Network Error" message:@"There was a problem communicating with the Podster servers. Please try again alter."];
+                    [alertView setCancelButtonWithTitle:@"OK" block:^{
+                        
+                    }];
+                    [self.notifySwitch setOn:YES animated:YES];
+                    [alertView show];                    
                 }];
-            }
-           
+            }                    
         }
-        [localContext save];
-        if(localContext.parentContext) {
+    } else {
+        // Notifications not enabled
+        BlockAlertView *alertView = [BlockAlertView alertWithTitle:@"Notifications are disabled" 
+                                                           message:@"Please enable notifications in settings if you would like to recieve updates when new episodes are posted."];
+        [alertView addButtonWithTitle:@"Settings" block:^{
             
-            [[localContext parentContext] performBlock:^{
-                [[localContext parentContext] save];                
-            }];
+        }];
+        [alertView setCancelButtonWithTitle:@"Not Now" block:^{
+            
+        }];
+        [self.notifySwitch setOn:NO animated:YES];
+        [alertView show];
+        
+    }
+}
 
-        }
+- (void)showFeedNotificationSubscriptionError
+{
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Error" message:@"Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area."];
+    [alert setCancelButtonWithTitle:@"OK" block:^{}];
+    [alert show];
+}
 
+- (void)subscribeToPodcast
+{
+    // User is making this a favorite
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
+    });
+    
+    [localContext performBlock:^{
+        SVSubscription *subscription = [SVSubscription createInContext:localContext];
+        localPodcast.subscription = subscription;
+        localPodcast.unseenEpsiodeCountValue = 0;
+        isSubscribed = YES;
     }];
+    
+    
+    // If notifications are enabled, figure out if we want to subscribe for this podcast
+    if([[SVSettings sharedInstance] notificationsEnabled]){
+        NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+        SVSettings *settings = [SVSettings sharedInstance];
+        BOOL shouldAskAboutNotifications = ![settings shouldAlwaysSubscribeToNotifications] && ![settings neverAutoSubscribeToNotifications];
+        
+        if (shouldAskAboutNotifications) {
+            void (^subscribeWithErrorAlertBlock)() = ^{
+                LOG_GENERAL(2, @"Creating notification subscription");
+                [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:localPodcast.feedURL
+                                                                   withDeviceId:deviceId onCompletion:^{
+                                                                       LOG_GENERAL(2, @"Succeed creating notification subscription");
+                                                                       self.subscribeButton.enabled = YES;
+                                                                       localPodcast.shouldNotifyValue = YES;
+                                                                       [self saveLocalContextIncludingParent:YES];
+                                                                       [self.notifySwitch setOn:YES animated:YES];
+                                                                   }
+                                                                        onError:^(NSError *error) {
+                                                                             LOG_GENERAL(2, @"Failed creating notification subscription");
+                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                [self showFeedNotificationSubscriptionError];
+                                                                                self.subscribeButton.enabled = YES;
+                                                                            });
+                                                                            
+                                                                        }];
+            };
+            
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Notifications"
+                                                           message:@"Would you like to be notified when new episodes become available?"];
+            [alert setCancelButtonWithTitle:@"No" block:^{
+                self.subscribeButton.enabled = YES;
+            }];
+            [alert addButtonWithTitle:@"Yes"
+                                block:^{
+                                    subscribeWithErrorAlertBlock();
+                                }];
+            
+            [alert show];
+            
+        }
+    }
+
+}
+
+- (void)unsubscribeFromPodcast
+{
+    // USer is unsuscribing
+    BOOL notificationsEnabled = [[SVSettings sharedInstance] notificationsEnabled];
+    __block BOOL subscribedForNotifications = NO;
+    [localContext performBlockAndWait:^{
+        subscribedForNotifications = localPodcast.shouldNotifyValue;                
+    }];
+    
+    
+    if (notificationsEnabled && subscribedForNotifications) {
+        LOG_GENERAL(2, @"Notifications Enabled and user was signed up for them");
+
+        [[SVPodcatcherClient sharedInstance]
+         notifyOfUnsubscriptionFromFeed:localPodcast.feedURL
+         withDeviceId:[[SVSettings sharedInstance] deviceId]
+         onCompletion:^{
+             LOG_GENERAL(2, @"Successfully unsubscribed from podcast notifications");
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 self.subscribeButton.enabled = YES;
+                 self.subscribeButton.image = [UIImage imageNamed:@"heart.png"];
+             });
+             SVSubscription *subscription = localPodcast.subscription;
+             [subscription deleteInContext:localContext];
+             localPodcast.shouldNotifyValue = NO;
+             [self.notifySwitch setOn:NO animated:YES];
+             [self saveLocalContextIncludingParent:YES];
+             
+             
+         } onError:^(NSError *error) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Error" message:@"We were unable to contact the server to unsubscribe you from notifications. Please try again later"];
+                 [alert setCancelButtonWithTitle:@"OK" block:^{}];
+                 self.subscribeButton.enabled = YES;
+             });
+         }];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.subscribeButton.enabled = YES;
+            self.subscribeButton.image = [UIImage imageNamed:@"heart.png"];
+        });
+        
+        SVSubscription *subscription = localPodcast.subscription;
+        [subscription deleteInContext:localContext];
+        localPodcast.shouldNotifyValue = NO;
+        [self.notifySwitch setOn:NO animated:YES];
+        [self saveLocalContextIncludingParent:YES];
+    }
+}
+
+- (IBAction)subscribeTapped:(id)sender {
+    LOG_GENERAL(2, @"Subscribe tapped");
+    self.subscribeButton.enabled = NO;
+    if(!isSubscribed) {
+        [self subscribeToPodcast];
+    } else {
+        [self unsubscribeFromPodcast];             
+    } 
+}
+
+- (void)saveLocalContextIncludingParent:(BOOL)includeParent
+{
+    [localContext save];
+    if(localContext.parentContext && includeParent) {
+
+        [[localContext parentContext] performBlock:^{
+            [[localContext parentContext] save];
+        }];
+
+    }
+
 }
 
 -(id<ActsAsPodcast>)podcast
 {
     return _podcast;
+}
+
+- (IBAction)optionsButtonTapped:(id)sender {
+   [self toggleOptionsPanel:!optionsOpen
+                   animated:YES];
+}
+
+- (void)toggleOptionsPanel:(BOOL)open animated:(BOOL)animated
+{
+    optionsOpen = open;
+    if (!open) {
+        [UIView animateWithDuration:animated ? 0.33 : 0.0
+                         animations:^{
+                             self.metadataView.frame = CGRectMake(0, 0, 320, 88);
+                             self.tableView.frame = CGRectMake(0, 88, 320, self.view.frame.size.height - 88);
+        }];
+    } else {
+        [UIView animateWithDuration:animated ? 0.33 : 0.0
+                         animations:^{
+                             self.metadataView.frame = CGRectMake(0, 0, 320, 220);
+                             self.tableView.frame = CGRectMake(0, 220, 320, self.view.frame.size.height - 220);
+        }];
+    }
+
 }
 
 #pragma mark - View lifecycle
@@ -173,30 +357,30 @@
 
 -(void)updateTableHeader
 {
-    if (fetcher.fetchedObjects.count < 4) {
-        if ([headerView superview]) {
-            // header is showing and it shouldnt, remove it
-            self.tableView.tableHeaderView = nil;
-            self.tableView.contentOffset = CGPointMake(0, -headerView.frame.size.height);
-        }
-        
-    } else {
-        if (isInitialLoad) {
-            // Only the first time do you need to do set the offset. 
-            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
-            isInitialLoad = NO;
-        }
-        
-        // Should show yeader
-        if(![headerView superview]) {
-            // And it needs to be added.
-            self.tableView.tableHeaderView = headerView; 
-            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
-            
-        }
-        
-    }
-    
+//    if (fetcher.fetchedObjects.count < 4) {
+//        if ([headerView superview]) {
+//            // header is showing and it shouldnt, remove it
+//            self.tableView.tableHeaderView = nil;
+//            self.tableView.contentOffset = CGPointMake(0, -headerView.frame.size.height);
+//        }
+//        
+//    } else {
+//        if (isInitialLoad) {
+//            // Only the first time do you need to do set the offset. 
+//            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
+//            isInitialLoad = NO;
+//        }
+//        
+//        // Should show yeader
+//        if(![headerView superview]) {
+//            // And it needs to be added.
+//            self.tableView.tableHeaderView = headerView; 
+//            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
+//            
+//        }
+//        
+//    }
+//    
    
 
 }
@@ -235,6 +419,22 @@
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [FlurryAnalytics endTimedEvent:@"PodcastDetailsPageView"  withParameters:nil];
 }
+
+- (void)setupSubscribeButton
+{
+    [localContext performBlock:^{
+        BOOL subscribed = localPodcast.subscription != nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(subscribed) {
+                self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
+            }
+            
+            
+            self.subscribeButton.enabled = YES;
+        });
+    }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -250,7 +450,8 @@
    
  //   self.tableView.tableHeaderView = settingsView;
 
-    localContext = [NSManagedObjectContext defaultContext];
+    localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+    __block BOOL blockHasSubscription = NO;
     [localContext performBlockAndWait:^{
                     LOG_GENERAL(2, @"Lookuing up podcast in data store");
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
@@ -270,15 +471,17 @@
         localPodcast.smallLogoURL = [self.podcast smallLogoURL];
         localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
         localPodcast.unseenEpsiodeCountValue = 0;
+        blockHasSubscription = localPodcast.subscription != nil;
         [localContext save];
 
     }];
     
-    if ([self isSubscribed]) {
-        self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
-    }
-    
-   // NSAssert([localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:localPodcast] error:nil], @"Object should have id");
+    isSubscribed = blockHasSubscription;
+    self.notifySwitch.on = localPodcast.shouldNotifyValue;
+    self.subscribeButton.enabled = NO;
+  
+    [self setupSubscribeButton];
+        
     __weak SVPodcastDetailsViewController *blockSelf = self;
 
     void (^loadCompleteHandler)() = ^{
@@ -287,12 +490,12 @@
         LOG_GENERAL(2, @"Saving local context");
         [localContext performBlock:^void() {
             [localContext save];
-            NSManagedObjectContext *parentContext = localContext.parentContext;
-            if (parentContext) {
-                [parentContext performBlock:^{
-                    [parentContext save];
-                }];
-            }
+         //   NSManagedObjectContext *parentContext = localContext.parentContext;
+//            if (parentContext) {
+//                [parentContext performBlock:^{
+//                    [parentContext save];
+//                }];
+//            }
         }];
         LOG_GENERAL(2, @"Done loading entries");
     };
@@ -308,12 +511,9 @@
    
     
     [self reloadData];
-    headerView = self.tableView.tableHeaderView;
-//    self.tableView.contentInset = UIEdgeInsetsMake(-80, 0, 0, 0);
-    [self updateTableHeader];
-
-     //  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self toggleOptionsPanel:NO animated:NO];
 }
+
 -(void)reloadData
 {
     self.hidePlayedSwitch.on = localPodcast.hidePlayedEpisodesValue;
@@ -324,12 +524,13 @@
         [predicates addObject:[NSPredicate predicateWithFormat:@"%K == NO", SVPodcastEntryAttributes.played]];
     }
     
+    LOG_GENERAL(2, @"Created Fetcher For Podcast Details");
     fetcher = [SVPodcastEntry fetchAllSortedBy:SVPodcastEntryAttributes.datePublished
                                      ascending:!localPodcast.sortNewestFirstValue 
                                  withPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:predicates] 
                                        groupBy:nil 
                                       delegate:self
-                                     inContext:localContext];
+                                     inContext:[NSManagedObjectContext defaultContext]];
     [self.tableView reloadData];
 }
 - (void)viewDidUnload
@@ -342,6 +543,9 @@
     [self setSubscribeButton:nil];
     [self setHidePlayedSwitch:nil];
     [self setSortSegmentedControl:nil];
+    [self setNotifySwitch:nil];
+    [self setOptionsButton:nil];
+    [self setOptionsButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -349,8 +553,8 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-// Return YES for supported orientations
-	return YES;
+    // Return YES for supported orientations
+	return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -361,32 +565,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    // NEed to save now
-//    __block SVPodcastEntry *entry = nil;
-//    [localContext performBlockAndWait:^{
-//        entry = [fetcher objectAtIndexPath:indexPath];
-//        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
-//        LOG_GENERAL(2, @"Saving local context");
-//        [localContext save];
-//        LOG_GENERAL(2, @"local context saved");
-//    }];
-//    
-//    NSError *error;
-//    [fetcher performFetch:&error];
-//    NSAssert(error == nil, @"there should be no error");
-//    SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
-//    [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
-//    SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
-//
-//    LOG_GENERAL(3, @"Triggering playback");
-//    [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-//    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
-//    NSParameterAssert(controller);
-//    
-//    LOG_GENERAL(3, @"Navigating to player");
-//    [[self navigationController] pushViewController:controller animated:YES];
-    
+
 
         SVPodcastEntry *fetcherEpisode;
         fetcherEpisode = [self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
@@ -496,15 +675,5 @@
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[fetcher sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
-}
-#pragma mark - utilities
-- (BOOL)isSubscribed
-{
-    __block BOOL subscribed;
-    [localContext performBlockAndWait:^{
-        subscribed = localPodcast.subscription != nil;
-    }];
-    
-    return subscribed;
 }
 @end

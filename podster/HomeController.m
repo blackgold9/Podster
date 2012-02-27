@@ -62,7 +62,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.currentScreen = HomePageSubscriptionsScreen;
+        self.currentScreen = HomePageFeaturedScreen;
 
     }
 
@@ -72,13 +72,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.scrollView.contentOffset = CGPointMake(0, 0);
-
     [self configureTabView];
+    self.scrollView.contentOffset = CGPointMake(0, 0);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"] 
+                                                                              style:UIBarButtonItemStylePlain
+                                                                            handler:^(id sender) {
+                                                                                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+                                                                                [self.navigationController pushViewController:[storyboard instantiateViewControllerWithIdentifier:@"categoryListView"] animated:YES];
+                                                                            }];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    HomePageScreenType screenType = (HomePageScreenType)[defaults integerForKey:@"HomeScreenType"];
-    [self configureViewControllerForScreenType:screenType];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+    }];
+    
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         if (state == UIGestureRecognizerStateRecognized) {
             if (self.currentScreen == HomePageFeaturedScreen) {
@@ -91,7 +97,7 @@
     
     [self.view addGestureRecognizer:leftSwipe];
     
-    [self configureViewControllerForScreenType:HomePageSubscriptionsScreen];
+    [self configureViewControllerForScreenType:[[SVSettings sharedInstance] homeScreen]];
     UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         if (state == UIGestureRecognizerStateRecognized) {
             if (self.currentScreen == HomePageSubscriptionsScreen) {
@@ -161,6 +167,8 @@
         }];
     }
     
+    controller.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    
     [self.titleTabView setSelectedIndex:screenType == HomePageFeaturedScreen ? 0 : 1];
     self.currentScreen = screenType;
     
@@ -188,7 +196,12 @@
                                              forKeyPath:@"isBusy"
                                                 options:NSKeyValueObservingOptionNew 
                                                 context:nil];
-    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    });
+    
     if ([[SVSubscriptionManager sharedInstance] isBusy]) {
         [notificationView show:YES];
     }

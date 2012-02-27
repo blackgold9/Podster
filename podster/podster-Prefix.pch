@@ -19,12 +19,13 @@
     #import "LoggerClient.h"
     #import "CoreData+MagicalRecord.h"
     #import "NSString+SVHelpers.h"
+#import "SVSettings.h"
 #import "AFNetworking.h"
 #import "SVPodcatcherClient.h"
 #import "FlurryAnalytics.h"
 #import <BlocksKit/BlocksKit.h>
 #endif
-#ifndef CONFIGURATION_Release
+#ifdef DEBUG
 #define LOG_NETWORK(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"network",level,__VA_ARGS__)
 #define LOG_GENERAL(level, ...)  NSLog(__VA_ARGS__);  LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"general",level,__VA_ARGS__)
 #define LOG_GRAPHICS(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"graphics",level,__VA_ARGS__)

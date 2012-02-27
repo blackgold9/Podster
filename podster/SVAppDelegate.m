@@ -42,7 +42,8 @@ NSString *uuid();
         [[NSManagedObjectContext defaultContext] save];        
 
         [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:url
-                                                           withDeviceId: [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"] onCompletion:^{
+                                                           withDeviceId:[[SVSettings sharedInstance] deviceId]
+                                                           onCompletion:^{
                                                                
                                                            } onError:^(NSError *error) {
                                                                
@@ -181,18 +182,7 @@ NSString *uuid();
         CFRelease(fontDesc);
     });   
 }
-- (void)ensureDeviceId
-{
-    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
-    if (!deviceId)
-    {
-        LOG_GENERAL(2, @"No stored device id, creating and storing one");
-        deviceId = uuid();
-        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-    }
-}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
@@ -204,21 +194,22 @@ NSString *uuid();
     [[BWQuincyManager sharedQuincyManager] setAutoSubmitDeviceUDID:YES];
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
-    [self ensureDeviceId];
-    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
-    [FlurryAnalytics setUserID:deviceId];
+
+    [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
 
 #endif
-    double delayInSeconds = 5.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [self initializeCoreText];        
-        });
-    });
+//    double delayInSeconds = 5.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//            [self initializeCoreText];        
+//        });
+//    });
     
 
-    [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
+//    [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
+    [MagicalRecordHelpers setupCoreDataStackWithiCloudContainer:@"WGD796842A.net.vanterpool.podster" contentNameKey:@"net.vanterpool.podster.library"
+                                                localStoreNamed:@"podster.sqlite" cloudStorePathComponent:nil];    
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     
     SDURLCache *urlCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024   // 1MB mem cache
@@ -228,32 +219,7 @@ NSString *uuid();
     //[[SVDownloadManager sharedInstance] resumeDownloads];
     [self configureTheming];
 
-//    #if TARGET_IPHONE_SIMULATOR
-//    // Fake out notifications
-//    [[NSUserDefaults standardUserDefaults] setBool:YES 
-//                                            forKey:@"notificationsEnabled"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
-//    if (!deviceId)
-//    {
-//        LOG_GENERAL(2, @"No stored device id, creating and storing one");
-//        deviceId = uuid();
-//        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];        
-//    }
-//    NSString *tokenAsString = @"000000000";
-//    [[SVPodcatcherClient sharedInstance] registerForPushNotificationsWithToken:tokenAsString 
-//                                                            andDeviceIdentifer:deviceId
-//                                                                  onCompletion:^{
-//                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore");    
-//                                                                      [[NSUserDefaults standardUserDefaults] setBool:YES 
-//                                                                                                              forKey:@"notificationsEnabled"];
-//                                                                      [[NSUserDefaults standardUserDefaults] synchronize];
-//                                                                      
-//                                                                  } onError:^(NSError *error) {
-//                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore failed with error: %@", error);    
-//                                                                  }]; // custom method
-//    #else
+
     // Actually register
 #ifndef CONFIGURATION_Debug
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
@@ -265,17 +231,9 @@ NSString *uuid();
 }
 
 
-
-NSString *uuid(){
-    CFUUIDRef theUUID = CFUUIDCreate(NULL);
-    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, theUUID);
-    CFRelease(theUUID);
-    return uuidString;
-}
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
-    [self ensureDeviceId];
-    NSString *deviceId = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceId"];  
-   
+
+    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
 
     NSString * tokenAsString = [[[devToken description] 
                                  stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] 
@@ -289,34 +247,38 @@ NSString *uuid(){
                                                             andDeviceIdentifer:deviceId
                                                                   onCompletion:^{
                                                                       LOG_GENERAL(2, @"Registered for notifications with podstore");    
-                                                                      [[NSUserDefaults standardUserDefaults] setBool:YES 
-                                                                                                              forKey:@"notificationsEnabled"];
-                                                                      [[NSUserDefaults standardUserDefaults] synchronize];
+                                                                      [[SVSettings sharedInstance] setNotificationsEnabled:YES];
 
                                                                   } onError:^(NSError *error) {
-                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore failed with error: %@", error);    
-                                                                  }]; // custom method
+        [FlurryAnalytics logError:@"NotificationRegistrationFailed"
+                          message:[error localizedDescription]
+                            error:error];
+        LOG_GENERAL(2, @"Registered for notifications with podstore failed with error: %@", error);
+    }]; // custom method
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     if (application.applicationState != UIApplicationStateActive) {
-        [FlurryAnalytics logEvent:@"LaunchedFromNotifications"];
         NSString *hash= [userInfo valueForKey:@"url_hash"];
         LOG_GENERAL(2, @"launched for podcast with URL Hash: %@", hash);
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.urlHash, hash];
         SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
         if (podcast) {
+            NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
+                                                               forKey:@"Title"];
+            [FlurryAnalytics logEvent:@"LaunchedFromNotification"
+                       withParameters:params];
+
             SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
             controller.podcast = podcast;
-            UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-            [nav pushViewController:controller animated:NO];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+                [nav pushViewController:controller animated:NO];
+            });
+
         }
     }
-    
-   // [self.navigationController pushViewController:controller animated:YES];
-
-    
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     LOG_GENERAL(1,@"Error registering for notifications. Error: %@", err);
@@ -341,10 +303,6 @@ NSString *uuid(){
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [[NSManagedObjectContext defaultContext] save];
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     */
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -356,7 +314,7 @@ NSString *uuid(){
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-        [self performSelectorOnMainThread:@selector(processLinkInPasteboard) withObject:self waitUntilDone:NO];
+//        [self performSelectorOnMainThread:@selector(processLinkInPasteboard) withObject:self waitUntilDone:NO];
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
@@ -411,7 +369,7 @@ NSString *uuid(){
                     }
                 }
                 break;
-                
+
             default:
                 break;
         }

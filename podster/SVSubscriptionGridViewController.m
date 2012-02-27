@@ -46,6 +46,14 @@
 }
 
 #pragma mark - View lifecycle
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.fetcher.delegate = nil;
+    self.fetcher = nil;
+}
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -69,15 +77,7 @@
 {
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"subscription != nil"];
-    self.fetcher = [SVPodcast fetchAllSortedBy:@"lastUpdated" 
-                                     ascending:NO
-                                 withPredicate:predicate
-                                       groupBy:nil
-                                      delegate:self];
-    
-    self.fetcher.delegate = self;
-    self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+      self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
     self.gridView.centerGrid = NO;
 }
 
@@ -94,8 +94,15 @@
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
 
 
-    NSAssert(self.fetcher, @"Fetcher should exist");
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"subscription != nil"];
+    self.fetcher = [SVPodcast fetchAllSortedBy:@"lastUpdated" 
+                                     ascending:NO
+                                 withPredicate:predicate
+                                       groupBy:nil
+                                      delegate:self];
+    
     self.fetcher.delegate = self;
+
     NSError *error= nil;
     [self.fetcher performFetch:&error];
     NSAssert(error == nil, @"Error!");
@@ -107,6 +114,7 @@
     [super viewWillDisappear:animated];
     [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
     self.fetcher.delegate = nil;
+
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

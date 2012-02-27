@@ -63,6 +63,8 @@ forPodcastAtURL:(NSString *)feedURL
 }
 -(void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info
 {
+
+    NSAssert(localContext != [NSManagedObjectContext defaultContext], @"We should not be using the main context here");
     [localContext performBlockAndWait:^void() {
 
         localPodcast = [SVPodcast findFirstWithPredicate:        [NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
@@ -73,9 +75,10 @@ forPodcastAtURL:(NSString *)feedURL
             localPodcast.feedURL = feedURL; 
             localPodcast.urlHash = [localPodcast.feedURL stringFromMD5];
         } 
+        
         NSAssert(localPodcast.feedURL != nil, @"There should be a feedURL");        
         [localPodcast updatePodcastWithFeedInfo:info];
-        if (!localPodcast.etag || [localPodcast.etag isEqualToString:etag]) {
+        if (!localPodcast.etag || ![localPodcast.etag isEqualToString:etag]) {
             localPodcast.etag = etag;
         }
 
@@ -135,20 +138,22 @@ forPodcastAtURL:(NSString *)feedURL
         episode.podcast = localPodcast;
 
         localPodcast.unseenEpsiodeCountValue ++;
-        [localContext save];
+
         itemsParsed += 1;
-        if (itemsParsed % 10 == 0){
-            
-            if (localContext.parentContext) {
-                [localContext.parentContext performBlock:^{
-                    [localContext.parentContext save];
-                    LOG_PARSING(4, @"Saving parent");
-                }];
-            }
+        if (itemsParsed % 20 == 0){
+            [localContext performBlock:^{                
+                [localContext save];
+            }];
+//            if (localContext.parentContext) {
+//                [localContext.parentContext performBlock:^{
+//                    [localContext.parentContext save];
+//                    LOG_PARSING(4, @"Saving parent");
+//                }];
+//            }
         } else {
             LOG_PARSING(4, @"Skipping parent save");
         }
-    }];
+  }];
     
     
     
@@ -171,6 +176,7 @@ forPodcastAtURL:(NSString *)feedURL
 
 -(void)feedParserDidFinish:(MWFeedParser *)parser
 {
+    LOG_PARSING(2, @"Done parsing");
     if (!failed) {
         
         [localContext performBlock:^void() {
@@ -180,14 +186,19 @@ forPodcastAtURL:(NSString *)feedURL
                 LOG_PARSING(0, @"Could not save parsed feed data. Core data reported error: %@", error);
             }];
             if (localContext.parentContext) {
-                [localContext.parentContext performBlockAndWait:^{
+                [localContext.parentContext performBlock:^{
                     [localContext.parentContext save];
-                }];
-            }
+                    dispatch_async(originalQueue, ^void() {
+                        self.completionCallback();
+                    });
 
-            dispatch_async(originalQueue, ^void() {
-                self.completionCallback();
-            });
+                }];
+            } else {
+                
+                dispatch_async(originalQueue, ^void() {
+                    self.completionCallback();
+                });
+            }
         }];
     }
 }

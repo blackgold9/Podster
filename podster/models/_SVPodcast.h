@@ -13,6 +13,7 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *lastSynced;
 	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *logoURL;
+	__unsafe_unretained NSString *shouldNotify;
 	__unsafe_unretained NSString *smallLogoURL;
 	__unsafe_unretained NSString *sortNewestFirst;
 	__unsafe_unretained NSString *subtitle;
@@ -35,6 +36,7 @@ extern const struct SVPodcastFetchedProperties {
 
 @class SVPodcastEntry;
 @class SVSubscription;
+
 
 
 
@@ -131,6 +133,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateLogoURL:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *shouldNotify;
+
+
+@property BOOL shouldNotifyValue;
+- (BOOL)shouldNotifyValue;
+- (void)setShouldNotifyValue:(BOOL)value_;
+
+//- (BOOL)validateShouldNotify:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -299,6 +313,15 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveLogoURL;
 - (void)setPrimitiveLogoURL:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveShouldNotify;
+- (void)setPrimitiveShouldNotify:(NSNumber*)value;
+
+- (BOOL)primitiveShouldNotifyValue;
+- (void)setPrimitiveShouldNotifyValue:(BOOL)value_;
 
 
 

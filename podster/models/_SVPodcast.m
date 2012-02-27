@@ -12,6 +12,7 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.lastSynced = @"lastSynced",
 	.lastUpdated = @"lastUpdated",
 	.logoURL = @"logoURL",
+	.shouldNotify = @"shouldNotify",
 	.smallLogoURL = @"smallLogoURL",
 	.sortNewestFirst = @"sortNewestFirst",
 	.subtitle = @"subtitle",
@@ -60,6 +61,10 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	
 	if ([key isEqualToString:@"hidePlayedEpisodesValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"hidePlayedEpisodes"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"shouldNotifyValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"shouldNotify"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"sortNewestFirstValue"]) {
@@ -147,6 +152,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 @dynamic logoURL;
 
+
+
+
+
+
+@dynamic shouldNotify;
+
+
+
+- (BOOL)shouldNotifyValue {
+	NSNumber *result = [self shouldNotify];
+	return [result boolValue];
+}
+
+- (void)setShouldNotifyValue:(BOOL)value_ {
+	[self setShouldNotify:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveShouldNotifyValue {
+	NSNumber *result = [self primitiveShouldNotify];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveShouldNotifyValue:(BOOL)value_ {
+	[self setPrimitiveShouldNotify:[NSNumber numberWithBool:value_]];
+}
 
 
 

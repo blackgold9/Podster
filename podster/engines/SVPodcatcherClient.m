@@ -266,9 +266,11 @@
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  completion();
+               [FlurryAnalytics logEvent:@"FeedNotificationsSubscribed" withParameters:params];
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"subscribe failed with error: %@", error);
+               [FlurryAnalytics logError:@"FeedNotificationsSubscribed" message:[error localizedDescription] error:error];
                onError(error);
            }];
 }
@@ -284,11 +286,14 @@
    
     [self postPath:@"subscriptions/destroy.json"  parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               completion();               
+               completion();
+
+               [FlurryAnalytics logEvent:@"FeedNotificationsUnsubscribed" withParameters:params];
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"unsubscribe failed with error: %@", error);
                onError(error);
+               [FlurryAnalytics logError:@"FeedNotificationsUnsubscribed" message:[error localizedDescription] error:error];
            }];
 }
 

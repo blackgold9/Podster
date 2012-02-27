@@ -22,8 +22,12 @@
 - (IBAction)hidePlayedSwitchedByUser:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sortSegmentedControl;
 - (IBAction)sortControlTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UISwitch *notifySwitch;
+- (IBAction)notifySwitchChanged:(id)sender;
 
 - (IBAction)subscribeTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *subscribeButton;
 @property (weak) id<ActsAsPodcast> podcast;
+@property (weak, nonatomic) IBOutlet UIButton *optionsButton;
+- (IBAction)optionsButtonTapped:(id)sender;
 @end

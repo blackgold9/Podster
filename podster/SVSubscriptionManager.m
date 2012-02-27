@@ -64,7 +64,8 @@ static char const kRefreshInterval = -3;
                                                    options:0];
 
     __block SVPodcast *nextPodcast = nil;
-    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+    LOG_GENERAL(2, @"About to look for a subscription to refresh");
     [context performBlockAndWait:^{
             subscriptions =  [SVSubscription findAllInContext:context];
         NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];

@@ -45,7 +45,7 @@
             SVDownload *innerDownload = (SVDownload *)[localDownload inContext:innerContext];
             innerDownload.stateValue = SVDownloadStateDownloading;
             innerDownload.progressValue = progress;
-        } saveParentContext:YES];
+        }];
     }
 
 }

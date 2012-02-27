@@ -24,26 +24,36 @@
 
 #import <CoreData/CoreData.h>
 
-#ifdef MR_SHORTHAND
-#import "MagicalRecordShorthand.h"
+#ifndef MR_USE_ARC
+#define MR_USE_ARC __has_feature(objc_arc)
 #endif
 
-#import "MagicalRecordHelpers.h"
-#import "MRCoreDataAction.h"
+#ifndef kCFCoreFoundationVersionNumber_iPhoneOS_5_0
+#define kCFCoreFoundationVersionNumber_iPhoneOS_5_0 674.0
+#endif
 
-#import "NSManagedObject+MagicalRecord.h"
-#import "NSManagedObjectContext+MagicalRecord.h"
-#import "NSPersistentStoreCoordinator+MagicalRecord.h"
-#import "NSManagedObjectModel+MagicalRecord.h"
-#import "NSPersistentStore+MagicalRecord.h"
+#ifndef kCFCoreFoundationVersionNumber_10_7
+#define kCFCoreFoundationVersionNumber_10_7 635.0
+#endif
 
-#import "NSManagedObject+MagicalDataImport.h"
-#import "NSNumber+MagicalDataImport.h"
-#import "NSObject+MagicalDataImport.h"
-#import "NSString+MagicalDataImport.h"
-#import "NSAttributeDescription+MagicalDataImport.h"
-#import "NSRelationshipDescription+MagicalDataImport.h"
-#import "NSEntityDescription+MagicalDataImport.h"
+#if TARGET_OS_IPHONE == 0
+#define MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION kCFCoreFoundationVersionNumber_10_7
+#else
+#define MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION kCFCoreFoundationVersionNumber_iPhoneOS_5_0
+#endif
+
+#define PRIVATE_QUEUES_ENABLED(...) \
+    if (kCFCoreFoundationVersionNumber >= MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION) \
+    { \
+        __VA_ARGS__ \
+    }
+
+#define THREAD_ISOLATION_ENABLED(...) \
+    if (kCFCoreFoundationVersionNumber < MR_MINIMUM_PRIVATE_QUEUE_CF_VERSION) \
+    { \
+        __VA_ARGS__ \
+    }
+
 
 #if MR_USE_ARC
 #define MR_RETAIN(xx)

@@ -75,6 +75,7 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
             MRLog(@"Error: %@", detailedError);
         }
     }
+    MRLog(@"Error Message: %@", [error localizedDescription]);
     MRLog(@"Error Domain: %@", [error domain]);
     MRLog(@"Recovery Suggestion: %@", [error localizedRecoverySuggestion]);
 }
@@ -123,6 +124,13 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 + (void) setDefaultModelNamed:(NSString *)modelName;
 {
     NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:modelName];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+}
+
++ (void) setDefaultModelForTestCase:(Class)class;
+{
+    NSBundle *bundle = [NSBundle bundleForClass:class];
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
     [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
 }
 
@@ -189,7 +197,8 @@ void replaceSelectorForTargetWithSourceImpAndSwizzle(Class originalClass, SEL or
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)icloudBucket localStoreNamed:(NSString *)localStore;
 {
-    [self setupCoreDataStackWithiCloudContainer:icloudBucket contentNameKey:nil localStoreNamed:localStore cloudStorePathComponent:nil];
+    NSString *contentNameKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    [self setupCoreDataStackWithiCloudContainer:icloudBucket contentNameKey:contentNameKey localStoreNamed:localStore cloudStorePathComponent:nil];
 }
 
 + (void) setupCoreDataStackWithiCloudContainer:(NSString *)containerID contentNameKey:(NSString *)contentNameKey localStoreNamed:(NSString *)localStoreName cloudStorePathComponent:(NSString *)pathSubcomponent;
@@ -421,6 +430,7 @@ NSDate * dateFromString(NSString *value, NSString *format)
     [formatter setDateFormat:format];
     
     NSDate *parsedDate = [formatter dateFromString:value];
+    MR_AUTORELEASE(formatter);
 
     return parsedDate;
 }
