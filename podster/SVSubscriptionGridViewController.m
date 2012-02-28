@@ -95,11 +95,12 @@
 
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"subscription != nil"];
-    self.fetcher = [SVPodcast fetchAllSortedBy:@"lastUpdated" 
-                                     ascending:NO
-                                 withPredicate:predicate
-                                       groupBy:nil
-                                      delegate:self];
+    NSFetchRequest *request = [SVPodcast requestAllSortedBy:@"lastUpdated" ascending:NO withPredicate:predicate];
+    request.includesSubentities = NO;
+    self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                       managedObjectContext:[NSManagedObjectContext defaultContext] 
+                                                         sectionNameKeyPath:nil
+                                                                  cacheName:nil];
     
     self.fetcher.delegate = self;
 

@@ -169,19 +169,6 @@ NSString *uuid();
                                 forState:UIControlStateNormal];
 
 }
-- (void)initializeCoreText
-{
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
-    dispatch_async(queue, ^(void) {
-        NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-        [attributes setObject:@"HelveticaNeue" forKey:(id)kCTFontFamilyNameAttribute];
-        [attributes setObject:[NSNumber numberWithFloat:36.0f] forKey:(id)kCTFontSizeAttribute];
-        CTFontDescriptorRef fontDesc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)attributes);
-        CTFontRef matchingFont = CTFontCreateWithFontDescriptor(fontDesc, 36.0f, NULL);
-        CFRelease(matchingFont);
-        CFRelease(fontDesc);
-    });   
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -207,9 +194,7 @@ NSString *uuid();
 //    });
     
 
-//    [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
-    [MagicalRecordHelpers setupCoreDataStackWithiCloudContainer:@"WGD796842A.net.vanterpool.podster" contentNameKey:@"net.vanterpool.podster.library"
-                                                localStoreNamed:@"podster.sqlite" cloudStorePathComponent:nil];    
+    [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
     
     SDURLCache *urlCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024   // 1MB mem cache

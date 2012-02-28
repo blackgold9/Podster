@@ -144,19 +144,17 @@ forPodcastAtURL:(NSString *)feedURL
             [localContext performBlock:^{                
                 [localContext save];
             }];
-//            if (localContext.parentContext) {
-//                [localContext.parentContext performBlock:^{
-//                    [localContext.parentContext save];
-//                    LOG_PARSING(4, @"Saving parent");
-//                }];
-//            }
         } else {
             LOG_PARSING(4, @"Skipping parent save");
         }
+        
+        // Don't parse more than 100 items
+        if (itemsParsed > 100) {
+            LOG_GENERAL(2, @"Hit the 100 item limit, stopping parsing");
+            [parser stopParsing];
+        }
   }];
-    
-    
-    
+
      isFirstItem = NO;
 }
 

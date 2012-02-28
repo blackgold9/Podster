@@ -19,7 +19,7 @@
 #import "SVDownloadManager.h"
 #import "SVPodcastSearchResult.h"
 #import "ActsAsPodcast.h"
-#import "NSString+MW_HTML.h"
+
 #import "SVEpisodeListCell.h"
 #import "GTMNSString+HTML.h"
 #import "SVEpisodeDetails.h"
@@ -49,6 +49,8 @@
     BOOL optionsOpen;
     BOOL isInitialLoad;
     BOOL isSubscribed;
+    
+    NSManagedObjectContext *context;
 }
 @synthesize notifySwitch;
 @synthesize sortSegmentedControl;
@@ -190,6 +192,7 @@
 
 - (void)subscribeToPodcast
 {
+    LOG_GENERAL(2, @"Creating a subscription for this podcast");
     // User is making this a favorite
     dispatch_async(dispatch_get_main_queue(), ^{
         self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
@@ -243,6 +246,11 @@
             [alert show];
             
         }
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            LOG_GENERAL(2, @"Subscribed- notifications disabled");
+            self.subscribeButton.enabled = YES;
+        });
     }
 
 }
@@ -254,8 +262,19 @@
     __block BOOL subscribedForNotifications = NO;
     [localContext performBlockAndWait:^{
         subscribedForNotifications = localPodcast.shouldNotifyValue;                
-    }];
+    }]; 
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.subscribeButton.enabled = YES;
+        self.subscribeButton.image = [UIImage imageNamed:@"heart.png"];
+        [self.notifySwitch setOn:NO animated:YES];
+    });
+
+    SVSubscription *subscription = localPodcast.subscription;
+    [subscription deleteInContext:localContext];
+    localPodcast.shouldNotifyValue = NO;  
+    [self saveLocalContextIncludingParent:YES];
+
     
     if (notificationsEnabled && subscribedForNotifications) {
         LOG_GENERAL(2, @"Notifications Enabled and user was signed up for them");
@@ -265,36 +284,15 @@
          withDeviceId:[[SVSettings sharedInstance] deviceId]
          onCompletion:^{
              LOG_GENERAL(2, @"Successfully unsubscribed from podcast notifications");
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 self.subscribeButton.enabled = YES;
-                 self.subscribeButton.image = [UIImage imageNamed:@"heart.png"];
-             });
-             SVSubscription *subscription = localPodcast.subscription;
-             [subscription deleteInContext:localContext];
-             localPodcast.shouldNotifyValue = NO;
-             [self.notifySwitch setOn:NO animated:YES];
-             [self saveLocalContextIncludingParent:YES];
-             
+                           
              
          } onError:^(NSError *error) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Error" message:@"We were unable to contact the server to unsubscribe you from notifications. Please try again later"];
-                 [alert setCancelButtonWithTitle:@"OK" block:^{}];
-                 self.subscribeButton.enabled = YES;
+                 LOG_GENERAL(2, @"We failed attempting to unsubscribe from notifications. Mark that syncing is needed");
+                 [[SVSettings sharedInstance] setNotificationsNeedSyncing:YES];                 
              });
          }];
-    } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.subscribeButton.enabled = YES;
-            self.subscribeButton.image = [UIImage imageNamed:@"heart.png"];
-        });
-        
-        SVSubscription *subscription = localPodcast.subscription;
-        [subscription deleteInContext:localContext];
-        localPodcast.shouldNotifyValue = NO;
-        [self.notifySwitch setOn:NO animated:YES];
-        [self saveLocalContextIncludingParent:YES];
-    }
+    }         
 }
 
 - (IBAction)subscribeTapped:(id)sender {
@@ -488,18 +486,12 @@
         blockSelf->isLoading = NO;
         [self loadFeedImage];
         LOG_GENERAL(2, @"Saving local context");
-        [localContext performBlock:^void() {
+        [localContext performBlock:^{
             [localContext save];
-         //   NSManagedObjectContext *parentContext = localContext.parentContext;
-//            if (parentContext) {
-//                [parentContext performBlock:^{
-//                    [parentContext save];
-//                }];
-//            }
         }];
         LOG_GENERAL(2, @"Done loading entries");
     };
-
+    
     [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
                                                                withLowerPriority:NO     
                                                                      inContext:localContext
@@ -568,6 +560,7 @@
 
 
         SVPodcastEntry *fetcherEpisode;
+    
         fetcherEpisode = [self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
         SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
     BOOL isVideo = NO;
@@ -602,7 +595,7 @@
 {
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
     SVEpisodeDetailsViewController *details = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"episodeDetails"];    
-    details.episode = (SVPodcastEntry *)[self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
+    details.episode =[fetcher objectAtIndexPath:indexPath];
     [[self navigationController] pushViewController:details
                                            animated:YES];
 

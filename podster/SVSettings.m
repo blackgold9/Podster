@@ -95,4 +95,15 @@ NSString *uuid(){
     [defaults setInteger:screenType forKey:@"HomeScreenType"];
     [defaults synchronize];
 }
+
+-(BOOL)notificationsNeedSyncing
+{
+    return [defaults boolForKey:@"NotificationsNeedSyncing"];
+}
+
+-(void)setNotificationsNeedSyncing:(BOOL)needSyncing
+{
+    [defaults setBool:needSyncing forKey:@"NotificationsNeedSyncing"];
+    [defaults synchronize];
+}
 @end
