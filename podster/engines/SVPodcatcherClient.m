@@ -174,12 +174,17 @@
 {
     NSParameterAssert(feedURL);
     NSParameterAssert(context);
+    LOG_GENERAL(2,@">>>>> %@", NSStringFromSelector(_cmd) );
     NSDictionary *loggingParamters = [NSDictionary dictionaryWithObject:feedURL forKey:@"FeedURL"];
     [FlurryAnalytics logEvent:@"ParsingFeed" withParameters:loggingParamters timed:YES];
     NSManagedObjectContext *localContext= [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     localContext.parentContext = context;
     NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:feedURL parameters:nil];
-    SVPodcast *podcast = [SVPodcast findFirstWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
+   
+    [localContext performBlock:^{
+        
+        LOG_GENERAL(2, @"Fetching podcast in local context");        
+        SVPodcast *podcast = [SVPodcast findFirstWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
                                            inContext:localContext];
 
 
@@ -199,7 +204,7 @@
                                                                                   forPodcastAtURL:feedURL
                                                                                         inContext:localContext
                                                                                        onComplete:^{
-                                                                                           
+                                                                                           LOG_GENERAL(2, @"Parssing complete");
                                                                                            [FlurryAnalytics endTimedEvent:@"ParsingFeed" 
                                                                                                            withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"Success"]];
                                                                                            [localContext save];
@@ -229,6 +234,7 @@
     
     operation.queuePriority = lowPriority ? NSOperationQueuePriorityLow : NSOperationQueuePriorityNormal;
     [self enqueueHTTPRequestOperation:operation];
+    }];
 }
 
 #pragma mark - push related

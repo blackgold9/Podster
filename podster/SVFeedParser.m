@@ -180,23 +180,15 @@ forPodcastAtURL:(NSString *)feedURL
         [localContext performBlock:^void() {
             LOG_PARSING(2, @"Saving local context");
             [localContext MR_saveWithErrorHandler:^(NSError *error) {
-                self.errorCallback(error);
+                dispatch_async(originalQueue, ^void() {
+                     self.errorCallback(error);
+                 });
                 LOG_PARSING(0, @"Could not save parsed feed data. Core data reported error: %@", error);
             }];
-            if (localContext.parentContext) {
-                [localContext.parentContext performBlock:^{
-                    [localContext.parentContext save];
-                    dispatch_async(originalQueue, ^void() {
-                        self.completionCallback();
-                    });
-
-                }];
-            } else {
-                
-                dispatch_async(originalQueue, ^void() {
-                    self.completionCallback();
-                });
-            }
+            
+            dispatch_async(originalQueue, ^void() {
+                self.completionCallback();
+            });        
         }];
     }
 }

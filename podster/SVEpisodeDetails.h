@@ -20,4 +20,7 @@
 - (IBAction)listenTapped:(id)sender;
 - (IBAction)downloadTapped:(id)sender;
 @property (strong) SVPodcastEntry *episode;
+@property (weak, nonatomic) IBOutlet UIButton *markAsPlayedButton;
+- (IBAction)markAsPlayedTapped:(id)sender;
+
 @end

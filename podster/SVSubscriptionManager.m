@@ -66,7 +66,7 @@ static char const kRefreshInterval = -3;
     __block SVPodcast *nextPodcast = nil;
     NSManagedObjectContext *context = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
     LOG_GENERAL(2, @"About to look for a subscription to refresh");
-    [context performBlockAndWait:^{
+    [context performBlock:^{
             subscriptions =  [SVSubscription findAllInContext:context];
         NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];
         NSPredicate *subscribed = [NSPredicate predicateWithFormat:@"%K in %@", SVPodcastRelationships.subscription, subscriptions];
@@ -75,42 +75,41 @@ static char const kRefreshInterval = -3;
         NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribed, olderThanSyncStart,stale, nil]];
         
         nextPodcast = [SVPodcast findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
+        
+        LOG_NETWORK(2, @"Finding subscription that needs refreshing");
+        if (nextPodcast && !shouldCancel) {
+            if (!self.isBusy) {
+                self.isBusy = YES;
+            }
+            [FlurryAnalytics logEvent:@"UpdatingSubscriptions" timed:YES];
+            nextPodcast.lastSynced = [NSDate date];
+            [context save];
+            LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
+            [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
+                                                                     withLowerPriority:YES
+                                                                             inContext:context onCompletion:^{
+                                                                                 [self updateLastUpdatedForPodcast:nextPodcast
+                                                                                                         inContext:context];
+                                                                                 [self refreshNextSubscription];
+                                                                                                                                                                  
+                                                                             } onError:^(NSError *error) {
+                                                                                 [self refreshNextSubscription];
+                                                                                 
+                                                                             }];
+        } else {
+            [FlurryAnalytics endTimedEvent:@"UpdatingSubscriptions" 
+                            withParameters:nil];
+            if (self.isBusy) {
+                self.isBusy = NO;            
+            }
+            [context performBlock:^{
+                [context save];
+            }];
+            LOG_NETWORK(2, @"Updating subscriptions complete");
+        }
 
     }];
-    LOG_NETWORK(2, @"Finding subscription that needs refreshing");
-    if (nextPodcast && !shouldCancel) {
-        if (!self.isBusy) {
-            self.isBusy = YES;
-        }
-        [FlurryAnalytics logEvent:@"UpdatingSubscriptions" timed:YES];
-        nextPodcast.lastSynced = [NSDate date];
-        [context save];
-        LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
-        [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
-                                                                 withLowerPriority:YES
-                                                                         inContext:context onCompletion:^{
-                                                                             [self updateLastUpdatedForPodcast:nextPodcast
-                                                                              inContext:context];
-                                                                             [self refreshNextSubscription];
-                                                                             [context performBlock:^{
-                                                                                 [context save];
-                                                                             }];
-
-                                                                         } onError:^(NSError *error) {
-                                                                             [self refreshNextSubscription];
-
-                                                                         }];
-    } else {
-        [FlurryAnalytics endTimedEvent:@"UpdatingSubscriptions" 
-                        withParameters:nil];
-        if (self.isBusy) {
-            self.isBusy = NO;            
-        }
-        [context performBlock:^{
-            [context save];
-        }];
-        LOG_NETWORK(2, @"Updating subscriptions complete");
-    }
+    
     
 }
 -(void)refreshAllSubscriptions

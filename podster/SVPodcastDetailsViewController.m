@@ -91,24 +91,19 @@
 
 - (IBAction)infoTapped:(id)sender {
     SVPodcastModalView *modal = [[SVPodcastModalView alloc] initWithFrame:self.view.bounds ];
-    modal.podcast = self.podcast;
+    modal.podcast = localPodcast;
     [self.view addSubview:modal];
     [modal showFromPoint:((UIView *)sender).center];
 }
 
 - (IBAction)hidePlayedSwitchedByUser:(id)sender {
     localPodcast.hidePlayedEpisodesValue = self.hidePlayedSwitch.on;
-    [localContext performBlock:^{
-        [localContext save];
-    }];
     [self reloadData];
 }
 
 - (IBAction)sortControlTapped:(id)sender {
     localPodcast.sortNewestFirstValue = self.sortSegmentedControl.selectedSegmentIndex == 0;
-    [localContext performBlock:^{
-        [localContext save];
-    }];
+
     [self reloadData];
 }
 
@@ -203,6 +198,7 @@
         localPodcast.subscription = subscription;
         localPodcast.unseenEpsiodeCountValue = 0;
         isSubscribed = YES;
+        [localContext save];
     }];
     
     
@@ -259,10 +255,10 @@
 {
     // USer is unsuscribing
     BOOL notificationsEnabled = [[SVSettings sharedInstance] notificationsEnabled];
-    __block BOOL subscribedForNotifications = NO;
-    [localContext performBlockAndWait:^{
-        subscribedForNotifications = localPodcast.shouldNotifyValue;                
-    }]; 
+    BOOL subscribedForNotifications = NO;
+    
+    subscribedForNotifications = localPodcast.shouldNotifyValue;                
+    
     
     dispatch_async(dispatch_get_main_queue(), ^{
         self.subscribeButton.enabled = YES;
@@ -308,14 +304,7 @@
 - (void)saveLocalContextIncludingParent:(BOOL)includeParent
 {
     [localContext save];
-    if(localContext.parentContext && includeParent) {
-
-        [[localContext parentContext] performBlock:^{
-            [[localContext parentContext] save];
-        }];
-
-    }
-
+   
 }
 
 -(id<ActsAsPodcast>)podcast
@@ -335,15 +324,22 @@
         [UIView animateWithDuration:animated ? 0.33 : 0.0
                          animations:^{
                              self.metadataView.frame = CGRectMake(0, 0, 320, 88);
+                             self.optionsButton.transform = CGAffineTransformIdentity;
                              self.tableView.frame = CGRectMake(0, 88, 320, self.view.frame.size.height - 88);
         }];
     } else {
         [UIView animateWithDuration:animated ? 0.33 : 0.0
                          animations:^{
+
                              self.metadataView.frame = CGRectMake(0, 0, 320, 220);
+                            
                              self.tableView.frame = CGRectMake(0, 220, 320, self.view.frame.size.height - 220);
         }];
     }
+    
+    [UIView animateWithDuration:0.15 animations:^{
+        self.optionsButton.transform = open ? CGAffineTransformMakeRotation((CGFloat) M_PI) : CGAffineTransformIdentity;
+    }];
 
 }
 
@@ -383,27 +379,27 @@
 
 }
 
-- (SVPodcastEntry *)saveAndReturnItemAtIndexPath:(NSIndexPath*)indexPath
-{
-    // NEed to save now
-    LOG_GENERAL(3, @"Starting save operation");
-    __block SVPodcastEntry *entry = nil;
-    [localContext performBlockAndWait:^{
-        entry = [fetcher objectAtIndexPath:indexPath];
-        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
-        LOG_GENERAL(2, @"Saving local context");
-        [localContext save];
-        LOG_GENERAL(2, @"local context saved");
-    }];
-    
-    NSError *error;
-    [fetcher performFetch:&error];
-    NSAssert(error == nil, @"there should be no error");
-    SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
-    [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
-    LOG_GENERAL(3, @"Save complete");
-    return fetcherEpisode;
-}
+//- (SVPodcastEntry *)saveAndReturnItemAtIndexPath:(NSIndexPath*)indexPath
+//{
+//    // NEed to save now
+//    LOG_GENERAL(3, @"Starting save operation");
+//    __block SVPodcastEntry *entry = nil;
+//    [localContext performBlockAndWait:^{
+//        entry = [fetcher objectAtIndexPath:indexPath];
+//        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
+//        LOG_GENERAL(2, @"Saving local context");
+//        [localContext save];
+//        LOG_GENERAL(2, @"local context saved");
+//    }];
+//    
+//    NSError *error;
+//    [fetcher performFetch:&error];
+//    NSAssert(error == nil, @"there should be no error");
+//    SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
+//    [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
+//    LOG_GENERAL(3, @"Save complete");
+//    return fetcherEpisode;
+//}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -414,6 +410,11 @@
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
+    [localContext performBlock:^{
+        localPodcast.unseenEpsiodeCountValue = 0;        
+        [localContext save];
+    }];
+
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [FlurryAnalytics endTimedEvent:@"PodcastDetailsPageView"  withParameters:nil];
 }
@@ -442,11 +443,9 @@
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
     self.titleLabel.text = self.podcast.title;
-    self.descriptionLabel.text = self.podcast.summary;
+    
     [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
     isLoading = YES;
-   
- //   self.tableView.tableHeaderView = settingsView;
 
     localContext = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
     __block BOOL blockHasSubscription = NO;
@@ -455,6 +454,7 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
         localPodcast = [SVPodcast findFirstWithPredicate:predicate
                                            inContext:localContext];
+        
         LOG_GENERAL(2, @"Retrived: %@", localPodcast);
         if (!localPodcast) {
             LOG_GENERAL(2, @"Podcast didn't exist, creating it");
@@ -470,10 +470,11 @@
         localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
         localPodcast.unseenEpsiodeCountValue = 0;
         blockHasSubscription = localPodcast.subscription != nil;
+
         [localContext save];
 
     }];
-    
+    self.descriptionLabel.text = localPodcast.summary;    
     isSubscribed = blockHasSubscription;
     self.notifySwitch.on = localPodcast.shouldNotifyValue;
     self.subscribeButton.enabled = NO;
@@ -486,6 +487,7 @@
         blockSelf->isLoading = NO;
         [self loadFeedImage];
         LOG_GENERAL(2, @"Saving local context");
+        localPodcast.unseenEpsiodeCountValue = 0;
         [localContext performBlock:^{
             [localContext save];
         }];
@@ -548,7 +550,11 @@
     // Return YES for supported orientations
 	return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -557,35 +563,46 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
-        SVPodcastEntry *fetcherEpisode;
-    
-        fetcherEpisode = [self saveAndReturnItemAtIndexPath:self.tableView.indexPathForSelectedRow];
+       
+    [localContext performBlock:^{
+        if ([localContext hasChanges]) {
+            [localContext save];
+        }
+         SVPodcastEntry *fetcherEpisode;
+        fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
         SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
-    BOOL isVideo = NO;
-    isVideo |=  [episode.mediaURL rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
-    isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
-    isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
-    if (isVideo) {
-//        if ([[SVPodcatcherClient sharedInstance] isOnWifi]) {
-            MPMoviePlayerViewController *player =
-            [[MPMoviePlayerViewController alloc] initWithContentURL: [NSURL URLWithString:[episode mediaURL]]];
-            [self presentMoviePlayerViewControllerAnimated:player
-             ];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            
+            BOOL isVideo = NO;
+            isVideo |=  [episode.mediaURL rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
+            isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
+            isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
+            if (isVideo) {
+                //        if ([[SVPodcatcherClient sharedInstance] isOnWifi]) {
+                MPMoviePlayerViewController *player =
+                [[MPMoviePlayerViewController alloc] initWithContentURL: [NSURL URLWithString:[episode mediaURL]]];
+                [self presentMoviePlayerViewControllerAnimated:player
+                 ];
+                
+                //        }
+            }else {
+                
+                LOG_GENERAL(3,@"Triggering playback");
+                [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
+                LOG_GENERAL(3,@"Playback triggered");
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+                UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
+                NSParameterAssert(controller);
+                
+                LOG_GENERAL(3, @"Navigating to player");
+                [[self navigationController] pushViewController:controller animated:YES];
+                
+            }
+        });
 
-//        }
-    }else {
-          [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
-          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-          UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
-          NSParameterAssert(controller);
-          
-          LOG_GENERAL(3, @"Navigating to player");
-          [[self navigationController] pushViewController:controller animated:YES];
-
-    }
-        // Download episode
+    }];
+                // Download episode
         //[[SVDownloadManager sharedInstance] downloadEntry:episode];
     
 

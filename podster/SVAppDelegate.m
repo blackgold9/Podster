@@ -158,10 +158,10 @@ NSString *uuid();
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal 
                                                     barMetrics:UIBarMetricsDefault];
     
-       
     UIImage *minImage = [UIImage imageNamed:@"slider-fill.png"];
     //UIImage *maxImage = [UIImage imageNamed:@"slider-bg.png"];
     UIImage *thumbImage = [UIImage imageNamed:@"slider-cap.png"];
+    
     
     [[UISlider appearance] setMinimumTrackImage:minImage 
                                        forState:UIControlStateNormal];

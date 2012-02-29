@@ -290,6 +290,8 @@
 		4B48756F14F49781007E9092 /* SVPodcastImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B48756D14F49781007E9092 /* SVPodcastImageCache.m */; };
 		4B48757314F497A9007E9092 /* SVPodcastImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B48757214F497A9007E9092 /* SVPodcastImage.m */; };
 		4B48757414F497A9007E9092 /* SVPodcastImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B48757214F497A9007E9092 /* SVPodcastImage.m */; };
+		4B4AC24A14FD3CD9004C32F6 /* DropdownTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B4AC24814FD3CD9004C32F6 /* DropdownTriangle.png */; };
+		4B4AC24B14FD3CD9004C32F6 /* DropdownTriangle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B4AC24914FD3CD9004C32F6 /* DropdownTriangle@2x.png */; };
 		4B4B5F4114BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */; };
 		4B4B5F4214BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */; };
 		4B4B5F4614BBB24900C40A95 /* SVFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4B5F4514BBB24900C40A95 /* SVFeedParser.m */; };
@@ -329,8 +331,6 @@
 		4B688A3114FA1E0B007C6AD7 /* plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B688A2F14FA1E0A007C6AD7 /* plus@2x.png */; };
 		4B6D48FB14BD656B00E7B11F /* SVDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */; };
 		4B6D48FC14BD656B00E7B11F /* SVDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */; };
-		4B6D491914BE3E5B00E7B11F /* SVMyPodcastsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */; };
-		4B6D491A14BE3E5B00E7B11F /* SVMyPodcastsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */; };
 		4B6D491C14BE437F00E7B11F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B6D491B14BE437F00E7B11F /* QuartzCore.framework */; };
 		4B71F79014A5B08C00D26F4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F78F14A5B08C00D26F4C /* UIKit.framework */; };
 		4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F79114A5B08C00D26F4C /* Foundation.framework */; };
@@ -498,10 +498,6 @@
 		4B91BFC314C7FF7600B33776 /* list-item.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC014C7FF7600B33776 /* list-item.png */; };
 		4B91BFC414C7FF7600B33776 /* list-item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC114C7FF7600B33776 /* list-item@2x.png */; };
 		4B91BFC514C7FF7600B33776 /* list-item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC114C7FF7600B33776 /* list-item@2x.png */; };
-		4B91BFC914C8009900B33776 /* SVSubscriptionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */; };
-		4B91BFCA14C8009900B33776 /* SVSubscriptionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */; };
-		4B91BFCB14C8009900B33776 /* SVSubscriptionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */; };
-		4B91BFCC14C8009900B33776 /* SVSubscriptionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */; };
 		4BA02C6314E25AA600582306 /* BlocksKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA02C6214E25AA600582306 /* BlocksKit.framework */; };
 		4BA02C6414E25AA600582306 /* BlocksKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA02C6214E25AA600582306 /* BlocksKit.framework */; };
 		4BA02C6614E25AEF00582306 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA02C6514E25AEF00582306 /* MessageUI.framework */; };
@@ -545,6 +541,10 @@
 		4BD8FB2314EF93CD00C0F3AD /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD8FB1F14EF93CD00C0F3AD /* heart@2x.png */; };
 		4BD8FB2614F0003F00C0F3AD /* Thumb-Placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD8FB2414F0003F00C0F3AD /* Thumb-Placeholder.png */; };
 		4BD8FB2714F0003F00C0F3AD /* Thumb-Placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD8FB2514F0003F00C0F3AD /* Thumb-Placeholder@2x.png */; };
+		4BE71E6A14FDA044008CECE5 /* standard-big-over.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE71E6614FDA02B008CECE5 /* standard-big-over.png */; };
+		4BE71E6B14FDA044008CECE5 /* standard-big-over@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE71E6714FDA030008CECE5 /* standard-big-over@2x.png */; };
+		4BE71E6C14FDA044008CECE5 /* standard-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE71E6814FDA037008CECE5 /* standard-big.png */; };
+		4BE71E6D14FDA044008CECE5 /* standard-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE71E6914FDA03C008CECE5 /* standard-big@2x.png */; };
 		4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEDB18814C004E200264CCC /* ImageIO.framework */; };
 		D62284FE14E4EBE3003084BB /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62284FD14E4EBE3003084BB /* RootController.m */; };
 		D62284FF14E4EBE3003084BB /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62284FD14E4EBE3003084BB /* RootController.m */; };
@@ -827,6 +827,8 @@
 		4B48756D14F49781007E9092 /* SVPodcastImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastImageCache.m; sourceTree = "<group>"; };
 		4B48757114F497A9007E9092 /* SVPodcastImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastImage.h; sourceTree = "<group>"; };
 		4B48757214F497A9007E9092 /* SVPodcastImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastImage.m; sourceTree = "<group>"; };
+		4B4AC24814FD3CD9004C32F6 /* DropdownTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DropdownTriangle.png; sourceTree = "<group>"; };
+		4B4AC24914FD3CD9004C32F6 /* DropdownTriangle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DropdownTriangle@2x.png"; sourceTree = "<group>"; };
 		4B4B5F3F14BB9FBF00C40A95 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		4B4B5F4014BB9FBF00C40A95 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		4B4B5F4414BBB24900C40A95 /* SVFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFeedParser.h; sourceTree = "<group>"; };
@@ -859,8 +861,6 @@
 		4B688A2F14FA1E0A007C6AD7 /* plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@2x.png"; sourceTree = "<group>"; };
 		4B6D48F914BD656B00E7B11F /* SVDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadOperation.h; sourceTree = "<group>"; };
 		4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadOperation.m; sourceTree = "<group>"; };
-		4B6D491714BE3E5B00E7B11F /* SVMyPodcastsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMyPodcastsViewController.h; sourceTree = "<group>"; };
-		4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVMyPodcastsViewController.m; sourceTree = "<group>"; };
 		4B6D491B14BE437F00E7B11F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4B6D494014BE499C00E7B11F /* ActsAsPodcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActsAsPodcast.h; sourceTree = "<group>"; };
 		4B71F78B14A5B08C00D26F4C /* podster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podster.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1023,9 +1023,6 @@
 		4B91BFAF14C7FF4D00B33776 /* slider-fill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-fill@2x.png"; sourceTree = "<group>"; };
 		4B91BFC014C7FF7600B33776 /* list-item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-item.png"; sourceTree = "<group>"; };
 		4B91BFC114C7FF7600B33776 /* list-item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-item@2x.png"; sourceTree = "<group>"; };
-		4B91BFC614C8009700B33776 /* SVSubscriptionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSubscriptionListViewController.h; sourceTree = "<group>"; };
-		4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSubscriptionListViewController.m; sourceTree = "<group>"; };
-		4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVSubscriptionListViewController.xib; sourceTree = "<group>"; };
 		4BA02C6214E25AA600582306 /* BlocksKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BlocksKit.framework; sourceTree = "<group>"; };
 		4BA02C6514E25AEF00582306 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -1067,6 +1064,10 @@
 		4BD8FB1F14EF93CD00C0F3AD /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		4BD8FB2414F0003F00C0F3AD /* Thumb-Placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Thumb-Placeholder.png"; sourceTree = "<group>"; };
 		4BD8FB2514F0003F00C0F3AD /* Thumb-Placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Thumb-Placeholder@2x.png"; sourceTree = "<group>"; };
+		4BE71E6614FDA02B008CECE5 /* standard-big-over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-big-over.png"; sourceTree = "<group>"; };
+		4BE71E6714FDA030008CECE5 /* standard-big-over@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-big-over@2x.png"; sourceTree = "<group>"; };
+		4BE71E6814FDA037008CECE5 /* standard-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-big.png"; sourceTree = "<group>"; };
+		4BE71E6914FDA03C008CECE5 /* standard-big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-big@2x.png"; sourceTree = "<group>"; };
 		4BEDB18814C004E200264CCC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		D62284FC14E4EBE3003084BB /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
 		D62284FD14E4EBE3003084BB /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
@@ -1142,8 +1143,6 @@
 				4B189B3614AFAD13001E378A /* SVPlaybackController.m */,
 				4B86242B14B576A900A4B320 /* SVDownloadsViewController.h */,
 				4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */,
-				4B6D491714BE3E5B00E7B11F /* SVMyPodcastsViewController.h */,
-				4B6D491814BE3E5B00E7B11F /* SVMyPodcastsViewController.m */,
 				4B10D02314BFA6A800DF4DBD /* SVEpisodeDetails.h */,
 				4B10D02414BFA6A800DF4DBD /* SVEpisodeDetails.m */,
 				4B91BF8114C7839F00B33776 /* SVCategoryGridViewController.h */,
@@ -1152,9 +1151,6 @@
 				4B91BF8D14C7A8E800B33776 /* SVCategoryListViewController.m */,
 				4B91BF9714C7C74100B33776 /* SVSubscriptionGridViewController.h */,
 				4B91BF9814C7C74100B33776 /* SVSubscriptionGridViewController.m */,
-				4B91BFC614C8009700B33776 /* SVSubscriptionListViewController.h */,
-				4B91BFC714C8009700B33776 /* SVSubscriptionListViewController.m */,
-				4B91BFC814C8009800B33776 /* SVSubscriptionListViewController.xib */,
 				4B8F6F3B14E9B2BC00D328DE /* HomeController.h */,
 				4B8F6F3C14E9B2BC00D328DE /* HomeController.m */,
 				4B8F6F3F14EA425700D328DE /* FeaturedController.h */,
@@ -1330,6 +1326,8 @@
 		4B20DEC814BE75B30042DC9D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4B4AC24814FD3CD9004C32F6 /* DropdownTriangle.png */,
+				4B4AC24914FD3CD9004C32F6 /* DropdownTriangle@2x.png */,
 				4BD8FB2414F0003F00C0F3AD /* Thumb-Placeholder.png */,
 				4BD8FB2514F0003F00C0F3AD /* Thumb-Placeholder@2x.png */,
 				4BD8FB1C14EF93CD00C0F3AD /* heart-highlighted.png */,
@@ -1417,6 +1415,10 @@
 				4B10CFAA14BE7B4800DF4DBD /* downloads@2x.png */,
 				4B10CFA214BE7A5300DF4DBD /* reload.png */,
 				4B10CFA314BE7A5300DF4DBD /* reload@2x.png */,
+				4BE71E6614FDA02B008CECE5 /* standard-big-over.png */,
+				4BE71E6714FDA030008CECE5 /* standard-big-over@2x.png */,
+				4BE71E6814FDA037008CECE5 /* standard-big.png */,
+				4BE71E6914FDA03C008CECE5 /* standard-big@2x.png */,
 			);
 			name = Images;
 			path = images;
@@ -2109,7 +2111,6 @@
 				4B91BFBE14C7FF4D00B33776 /* slider-fill@2x.png in Resources */,
 				4B91BFC214C7FF7600B33776 /* list-item.png in Resources */,
 				4B91BFC414C7FF7600B33776 /* list-item@2x.png in Resources */,
-				4B91BFCB14C8009900B33776 /* SVSubscriptionListViewController.xib in Resources */,
 				4B68580914C878AA00496A38 /* back-btn-big.png in Resources */,
 				4B68580B14C878AA00496A38 /* back-btn-big@2x.png in Resources */,
 				4B68580F14C87A2300496A38 /* grid-icon.png in Resources */,
@@ -2192,6 +2193,12 @@
 				4B688A2D14FA1B29007C6AD7 /* gear@2x.png in Resources */,
 				4B688A3014FA1E0B007C6AD7 /* plus.png in Resources */,
 				4B688A3114FA1E0B007C6AD7 /* plus@2x.png in Resources */,
+				4B4AC24A14FD3CD9004C32F6 /* DropdownTriangle.png in Resources */,
+				4B4AC24B14FD3CD9004C32F6 /* DropdownTriangle@2x.png in Resources */,
+				4BE71E6A14FDA044008CECE5 /* standard-big-over.png in Resources */,
+				4BE71E6B14FDA044008CECE5 /* standard-big-over@2x.png in Resources */,
+				4BE71E6C14FDA044008CECE5 /* standard-big.png in Resources */,
+				4BE71E6D14FDA044008CECE5 /* standard-big@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2239,7 +2246,6 @@
 				4B91BFBF14C7FF4D00B33776 /* slider-fill@2x.png in Resources */,
 				4B91BFC314C7FF7600B33776 /* list-item.png in Resources */,
 				4B91BFC514C7FF7600B33776 /* list-item@2x.png in Resources */,
-				4B91BFCC14C8009900B33776 /* SVSubscriptionListViewController.xib in Resources */,
 				4B68580A14C878AA00496A38 /* back-btn-big.png in Resources */,
 				4B68580C14C878AA00496A38 /* back-btn-big@2x.png in Resources */,
 				4B68581014C87A2300496A38 /* grid-icon.png in Resources */,
@@ -2352,7 +2358,6 @@
 				4B4B5F4614BBB24900C40A95 /* SVFeedParser.m in Sources */,
 				4B4B5FD114BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */,
 				4B6D48FB14BD656B00E7B11F /* SVDownloadOperation.m in Sources */,
-				4B6D491914BE3E5B00E7B11F /* SVMyPodcastsViewController.m in Sources */,
 				4B10CFB114BE804D00DF4DBD /* UIColor+Hex.m in Sources */,
 				4B10D01014BF926200DF4DBD /* SVEpisodeListCell.m in Sources */,
 				4B10D01B14BF9A5F00DF4DBD /* NSString+SVHelpers.m in Sources */,
@@ -2402,7 +2407,6 @@
 				4B91BF8E14C7A8E800B33776 /* SVCategoryListViewController.m in Sources */,
 				4B91BF9914C7C74100B33776 /* SVSubscriptionGridViewController.m in Sources */,
 				4B91BF9D14C7F39F00B33776 /* SVPodcastListCell.m in Sources */,
-				4B91BFC914C8009900B33776 /* SVSubscriptionListViewController.m in Sources */,
 				4B141F8C14C942FF00028CE4 /* BWApp.m in Sources */,
 				4B141F8E14C942FF00028CE4 /* BWGlobal.m in Sources */,
 				4B141F9014C942FF00028CE4 /* BWHockeyManager.m in Sources */,
@@ -2522,7 +2526,6 @@
 				4B4B5F4714BBB24900C40A95 /* SVFeedParser.m in Sources */,
 				4B4B5FD214BCD7D800C40A95 /* SVPodcastSearchResult.m in Sources */,
 				4B6D48FC14BD656B00E7B11F /* SVDownloadOperation.m in Sources */,
-				4B6D491A14BE3E5B00E7B11F /* SVMyPodcastsViewController.m in Sources */,
 				4B10CFB214BE804D00DF4DBD /* UIColor+Hex.m in Sources */,
 				4B10D01114BF926200DF4DBD /* SVEpisodeListCell.m in Sources */,
 				4B10D01C14BF9A5F00DF4DBD /* NSString+SVHelpers.m in Sources */,
@@ -2572,7 +2575,6 @@
 				4B91BF8F14C7A8E800B33776 /* SVCategoryListViewController.m in Sources */,
 				4B91BF9A14C7C74100B33776 /* SVSubscriptionGridViewController.m in Sources */,
 				4B91BF9E14C7F39F00B33776 /* SVPodcastListCell.m in Sources */,
-				4B91BFCA14C8009900B33776 /* SVSubscriptionListViewController.m in Sources */,
 				4B141F8D14C942FF00028CE4 /* BWApp.m in Sources */,
 				4B141F8F14C942FF00028CE4 /* BWGlobal.m in Sources */,
 				4B141F9114C942FF00028CE4 /* BWHockeyManager.m in Sources */,

@@ -16,13 +16,17 @@
 #import "DTLinkButton.h"
 #import "NSString+MW_HTML.h"
 #import <QuartzCore/QuartzCore.h>
-@implementation SVEpisodeDetailsViewController
+@implementation SVEpisodeDetailsViewController {
+    NSManagedObjectContext *context;
+    SVPodcastEntry *episode;
+}
 @synthesize imageBackground;
 @synthesize titleLabel;
 @synthesize listenButton;
 @synthesize downloadButton;
 @synthesize summaryView;
 @synthesize episode;
+@synthesize markAsPlayedButton;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -48,6 +52,20 @@
 {
 }
 */
+- (void)updatePlayedToggle
+{
+    NSString *playedButtonText = episode.playedValue ? NSLocalizedString(@"Mark as Unplayed", @"Mark an episode as NOT having been played") : NSLocalizedString(@"Mark as Played", @"Mark an episode as having been played");
+    [UIView animateWithDuration:0.33f 
+                          delay:0.0f
+                        options:UIViewAnimationOptionTransitionCrossDissolve
+                     animations:^{
+                         [self.markAsPlayedButton setTitle:playedButtonText forState:UIControlStateNormal];    
+                     } completion:^(BOOL finished) {
+                         
+                     }];
+
+
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -72,9 +90,9 @@
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.4",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
     self.summaryView.textDelegate = self;
     [self.summaryView setAttributedString:[NSAttributedString attributedStringWithHTML:stringData options:dictionary]];
-    
-    
-    
+    [self updatePlayedToggle];
+       context = theEpisode.managedObjectContext;
+    episode = theEpisode;
 }
 
 - (void)viewDidLoad
@@ -84,6 +102,10 @@
     [self bind:self.episode];
     [self.titleLabel alignTop];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
+    
+    [self.markAsPlayedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.markAsPlayedButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal ];
+    [self.markAsPlayedButton setBackgroundImage:[UIImage imageNamed:@"standard-big-over.png"] forState:UIControlStateHighlighted];
 
     
 }
@@ -97,6 +119,7 @@
     [self setDownloadButton:nil];
     [self setSummaryView:nil];
     [self setImageBackground:nil];
+    [self setMarkAsPlayedButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -159,5 +182,16 @@
 {
     [FlurryAnalytics logEvent:@"UserTappedLinkFromShowNotes"];
 	[[UIApplication sharedApplication] openURL:[button.url absoluteURL]];
+}
+- (IBAction)markAsPlayedTapped:(id)sender {
+    episode.playedValue = !episode.playedValue;
+    if (!episode.playedValue) {
+        // If we are now unplayed, reset playback location
+        
+    }
+    [self updatePlayedToggle];
+    [context performBlock:^{
+        [context save];
+    }];
 }
 @end

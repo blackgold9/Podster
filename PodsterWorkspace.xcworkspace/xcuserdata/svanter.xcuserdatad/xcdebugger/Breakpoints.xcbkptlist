@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/engines/SVPodcatcherClient.m"
-         timestampString = "351821913.862609"
+         timestampString = "352185382.969989"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "291"
-         endingLineNumber = "291"
+         startingLineNumber = "297"
+         endingLineNumber = "297"
          landmarkName = "-notifyOfUnsubscriptionFromFeed:withDeviceId:onCompletion:onError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/engines/SVPodcatcherClient.m"
-         timestampString = "351821915.496816"
+         timestampString = "352185382.969989"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "294"
-         endingLineNumber = "294"
+         startingLineNumber = "300"
+         endingLineNumber = "300"
          landmarkName = "-notifyOfUnsubscriptionFromFeed:withDeviceId:onCompletion:onError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/engines/SVPodcatcherClient.m"
-         timestampString = "351821999.39981"
+         timestampString = "352185382.969989"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "283"
-         endingLineNumber = "283"
+         startingLineNumber = "289"
+         endingLineNumber = "289"
          landmarkName = "-notifyOfUnsubscriptionFromFeed:withDeviceId:onCompletion:onError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,7 +112,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "352101729.381525"
+         timestampString = "352166184.166724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "198"
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "352107488.235981"
+         timestampString = "352186801.798857"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "301"
-         endingLineNumber = "301"
+         startingLineNumber = "297"
+         endingLineNumber = "297"
          landmarkName = "-subscribeTapped:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,24 +294,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "352101729.381525"
+         timestampString = "352186801.798857"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "201"
-         endingLineNumber = "201"
+         startingLineNumber = "196"
+         endingLineNumber = "196"
          landmarkName = "-subscribeToPodcast"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "352103511.611104"
+         timestampString = "352186801.798857"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261"
+         startingLineNumber = "257"
+         endingLineNumber = "257"
          landmarkName = "-unsubscribeFromPodcast"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "352103516.084089"
+         timestampString = "352186801.798857"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
+         startingLineNumber = "258"
+         endingLineNumber = "258"
          landmarkName = "-unsubscribeFromPodcast"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,38 +333,129 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "352103517.5233"
+         timestampString = "352186801.798857"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "263"
-         endingLineNumber = "263"
+         startingLineNumber = "259"
+         endingLineNumber = "259"
          landmarkName = "-unsubscribeFromPodcast"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "352107488.235981"
+         timestampString = "352186801.798857"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "279"
-         endingLineNumber = "279"
+         startingLineNumber = "275"
+         endingLineNumber = "275"
          landmarkName = "-unsubscribeFromPodcast"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "352103575.649431"
+         timestampString = "352186801.798857"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "195"
-         endingLineNumber = "195"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
          landmarkName = "-subscribeToPodcast"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVSubscriptionListViewController.m"
+         timestampString = "352181466.919434"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVPodcastDetailsViewController.m"
+         timestampString = "352188226.514254"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "569"
+         endingLineNumber = "569"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVPodcastDetailsViewController.m"
+         timestampString = "352188226.514254"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "568"
+         endingLineNumber = "568"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVPodcastDetailsViewController.m"
+         timestampString = "352188226.514254"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "570"
+         endingLineNumber = "570"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVPodcastDetailsViewController.m"
+         timestampString = "352188226.514254"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "571"
+         endingLineNumber = "571"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVPodcastDetailsViewController.m"
+         timestampString = "352188226.514254"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "566"
+         endingLineNumber = "566"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVPodcastDetailsViewController.m"
+         timestampString = "352188226.514254"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "567"
+         endingLineNumber = "567"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
