@@ -25,7 +25,9 @@
 
 @implementation SVAppDelegate
 {
+    NSTimer *saveTimer;
     UIColor *backgrondTexture;
+    NSManagedObjectContext *parentContext;
 }
 
 NSString *uuid();
@@ -195,8 +197,15 @@ NSString *uuid();
     
 
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
-    [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
+    parentContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    parentContext.persistentStoreCoordinator = [NSPersistentStoreCoordinator defaultStoreCoordinator];
     
+    NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    childContext.parentContext = parentContext;
+    [NSManagedObjectContext setDefaultContext:childContext];
+    
+    [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
+    [self startSaveTimer];
     SDURLCache *urlCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024   // 1MB mem cache
                                                          diskCapacity:1024*1024*50 // 50MB disk cache
                                                              diskPath:[SDURLCache defaultCachePath]];
@@ -358,6 +367,39 @@ NSString *uuid();
             default:
                 break;
         }
+    }
+}
+
+- (void)startSaveTimer
+{
+    LOG_GENERAL(2, @"Starting Save Timer");
+    [self stopSaveTimer];
+    
+    saveTimer = [NSTimer scheduledTimerWithTimeInterval:30 // save every 30 seconds
+                                                  block:^(NSTimeInterval time) {
+                                                      NSManagedObjectContext *rootContext = [NSManagedObjectContext defaultContext].parentContext;
+                                                      LOG_GENERAL(2, @"Checking if root save is neccesary");
+                                                      if (rootContext.hasChanges) {
+                                                          LOG_GENERAL(2, @"Queing Root Save");
+                                                          [rootContext performBlock:^{
+                                                              LOG_GENERAL(2, @"Saving root context");
+                                                              [rootContext saveWithErrorHandler:^(NSError *error) {
+                                                                  LOG_GENERAL(0, @"ERROR: Error saving root store. Big deal here Y'Alll" );
+                                                              }];
+                                                          }];                                                 
+                                                      }
+                                                  } 
+                                                repeats:YES];
+    
+
+}
+
+- (void)stopSaveTimer
+{
+    LOG_GENERAL(2, @"Stopping Save Timer");
+    if(saveTimer) {
+        [saveTimer invalidate];
+        saveTimer = nil;
     }
 }
 

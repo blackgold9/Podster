@@ -282,7 +282,8 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 	}
 }
 
-+ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
++ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
+                                         andConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType
 {
 	NSManagedObjectContext *context = nil;
     if (coordinator != nil)
@@ -295,7 +296,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
                                  )
         PRIVATE_QUEUES_ENABLED(
             MRLog(@"Creating context in Context Private Queue Mode");
-            context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+            context = [[NSManagedObjectContext alloc] initWithConcurrencyType:concurrencyType];
             [context performBlockAndWait:^{
                 [context setPersistentStoreCoordinator:coordinator];
             }];
@@ -304,6 +305,12 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
         MR_AUTORELEASE(context);
     }
     return context;
+}
+
++ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator                                        
+{
+    return [NSManagedObjectContext MR_contextWithStoreCoordinator:coordinator
+                                               andConcurrencyType:NSMainQueueConcurrencyType];
 }
 
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;

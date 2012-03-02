@@ -64,7 +64,10 @@ static char const kRefreshInterval = -3;
                                                    options:0];
 
     __block SVPodcast *nextPodcast = nil;
-    NSManagedObjectContext *context = [NSManagedObjectContext contextThatNotifiesDefaultContextOnMainThread];
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+
+    // Get the root(Background )context to work against
+    context.parentContext = [[NSManagedObjectContext defaultContext] parentContext];
     LOG_GENERAL(2, @"About to look for a subscription to refresh");
     [context performBlock:^{
             subscriptions =  [SVSubscription findAllInContext:context];
@@ -91,6 +94,7 @@ static char const kRefreshInterval = -3;
                                                                                  [self updateLastUpdatedForPodcast:nextPodcast
                                                                                                          inContext:context];
                                                                                  [self refreshNextSubscription];
+
                                                                                                                                                                   
                                                                              } onError:^(NSError *error) {
                                                                                  [self refreshNextSubscription];

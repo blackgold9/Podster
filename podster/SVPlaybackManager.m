@@ -163,7 +163,7 @@ void audioRouteChangeListenerCallback (
                     blockSelf.currentEpisode.playedValue = YES;
                 }
             }
-            [[NSManagedObjectContext defaultContext] save];
+            [[NSManagedObjectContext defaultContext] save:nil];
         }];
     }];
 }

@@ -39,6 +39,9 @@ extern NSString * const kMagicalRecordDidMergeChangesFromiCloudNotification;
 + (NSManagedObjectContext *) MR_contextThatNotifiesDefaultContextOnMainThreadWithCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 + (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
++ (NSManagedObjectContext *) MR_contextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
+                                         andConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType;
+
 @property (nonatomic, assign, setter=MR_setNotifiesMainContextOnSave:) BOOL MR_notifiesMainContextOnSave;
 
 @end

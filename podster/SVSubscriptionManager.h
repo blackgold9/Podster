@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString *const kPodcastHasBeenUpdated = @"PodcastHasBeenUpdated";
+
 @interface SVSubscriptionManager : NSObject
 @property (assign) BOOL isBusy;
 -(void)refreshAllSubscriptions;

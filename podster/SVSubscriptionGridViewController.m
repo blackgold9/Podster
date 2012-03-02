@@ -57,19 +57,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
-    if ([self.navigationController.parentViewController respondsToSelector:@selector(revealGesture:)] && [self.navigationController.parentViewController respondsToSelector:@selector(revealToggle:)])
-	{
-        
-		// Check if we have a revealButton already.
-		if (![self.navigationItem leftBarButtonItem])
-		{
-			// If not, allocate one and add it.
-			UIBarButtonItem *revealButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Reveal", @"Reveal") style:UIBarButtonItemStylePlain target:self.navigationController.parentViewController action:@selector(revealToggle:)];
-            revealButton.image = [UIImage imageNamed:@"settings.png"];
-			self.navigationItem.leftBarButtonItem = revealButton;
-		}
-	}
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -86,6 +73,14 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)rootContextUpdated:(NSNotification *)notification
+{
+    LOG_GENERAL(2, @"Root context changed. Refetching");
+    NSError *error= nil;
+        [self.fetcher performFetch:&error];
+        NSAssert(error == nil, @"Error!");
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -104,6 +99,11 @@
     
     self.fetcher.delegate = self;
 
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(rootContextUpdated:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:[[NSManagedObjectContext defaultContext] parentContext]];
     NSError *error= nil;
     [self.fetcher performFetch:&error];
     NSAssert(error == nil, @"Error!");
@@ -115,6 +115,7 @@
     [super viewWillDisappear:animated];
     [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
     self.fetcher.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

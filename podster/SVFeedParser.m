@@ -142,7 +142,7 @@ forPodcastAtURL:(NSString *)feedURL
         itemsParsed += 1;
         if (itemsParsed % 20 == 0){
             [localContext performBlock:^{                
-                [localContext save];
+                [localContext save:nil];
             }];
         } else {
             LOG_PARSING(4, @"Skipping parent save");
