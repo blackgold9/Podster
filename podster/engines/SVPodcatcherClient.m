@@ -207,7 +207,7 @@
                                                                                            LOG_GENERAL(2, @"Parssing complete");
                                                                                            [FlurryAnalytics endTimedEvent:@"ParsingFeed" 
                                                                                                            withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"Success"]];
-                                                                                           [localContext save];
+                                                                                           [localContext save:nil];
                                                                                            onComplete();
                                                                                        } onError:^(NSError *error) {
                                                                                            LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);

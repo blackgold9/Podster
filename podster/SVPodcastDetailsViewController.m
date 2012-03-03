@@ -422,6 +422,7 @@
 
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [FlurryAnalytics endTimedEvent:@"PodcastDetailsPageView"  withParameters:nil];
+    fetcher.delegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -559,6 +560,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    fetcher.delegate = self;
     [self.tableView reloadData];
 }
 
@@ -674,9 +676,7 @@
             [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                     withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
-        
         default:
-            NSLog(@"Other udpate");
             break;
     }
 

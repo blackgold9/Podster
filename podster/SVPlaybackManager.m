@@ -13,6 +13,9 @@
 #import "SVAppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "BlockAlertView.h"
+#import "SVPlaybackController.h"
+#import "MessageGenerator.h"
 
 // The percentage after which a podcast is marked as played
 #define PLAYED_PERCENTAGE 0.95
@@ -104,6 +107,7 @@ void audioRouteChangeListenerCallback (
 @end
 @implementation SVPlaybackManager {
     AVPlayer *_player;
+    AVPlayerItem *currentItem;
     dispatch_queue_t monitorQueue;
     id monitorId;
     // Represents whether the user has triggered playback.
@@ -198,8 +202,16 @@ void audioRouteChangeListenerCallback (
 //        [self startPositionMonitoring];
     }
     
-    
-    [_player replaceCurrentItemWithPlayerItem:[[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]]];
+    LOG_PLAYBACK(2, @"Loading media at URL:%@", episode.mediaURL);
+    if (currentItem) {
+        [currentItem removeObserver:self forKeyPath:@"status"];
+    }
+    currentItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]];
+    [currentItem addObserver:self 
+                  forKeyPath:@"status" 
+                     options:NSKeyValueObservingOptionNew 
+                     context:(__bridge void*)self];
+    [_player replaceCurrentItemWithPlayerItem:currentItem];
     [_player play];
  
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title, MPMediaItemPropertyTitle,
@@ -279,7 +291,7 @@ void audioRouteChangeListenerCallback (
                         [[NSManagedObjectContext defaultContext] performBlock:^{
                             self.currentEpisode.positionInSecondsValue = 0;
                             self.currentEpisode.playedValue = YES;
-                            [[NSManagedObjectContext defaultContext] save];                            
+                            [[NSManagedObjectContext defaultContext] save:nil];                            
                         }];
                     } else {
                         LOG_PLAYBACK(3, @"Pausing playback");
@@ -293,6 +305,37 @@ void audioRouteChangeListenerCallback (
                     self.playbackState = kPlaybackStatePlaying;
                     
                 }
+            }
+        } else if (object == currentItem) {
+            switch (currentItem.status) {
+                case AVPlayerItemStatusFailed:
+                {
+                    NSAssert([NSThread isMainThread], @"Should only execute on main thread");
+                    [FlurryAnalytics logError:@"PlaybackFailed" 
+                                      message:[currentItem.error localizedDescription] 
+                                        error:currentItem.error];
+                    BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:[MessageGenerator randomErrorAlertTitle]
+                                                                              message:@"There was a problem playing this podcast. Please try again later."];
+                    [alertView setCancelButtonWithTitle:@"OK" block:^{
+                        UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+                        if ([window.rootViewController class] == [UINavigationController class]) {
+                            UINavigationController *controller = (UINavigationController *)window.rootViewController;
+                            if ([[controller topViewController] class] == [SVPlaybackController class]) {
+                                double delayInSeconds = 0.5;
+                                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                                    [controller popViewControllerAnimated:YES];                                    
+                                });
+                            }
+                        }
+                    }];
+                    
+                    [alertView show];
+                    LOG_PLAYBACK(1, @"Error during playback: %@", currentItem.error);
+                    break;    
+                }
+                default:
+                    break;
             }
         }
     }

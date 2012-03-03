@@ -399,7 +399,7 @@
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
-                            <view contentMode="scaleToFill" id="kiP-A3-gBF" customClass="DTAttributedTextView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" id="kiP-A3-gBF" customClass="DTAttributedTextView">
                                 <rect key="frame" x="10" y="60" width="300" height="335"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

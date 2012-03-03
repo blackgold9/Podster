@@ -86,7 +86,7 @@ static char const kRefreshInterval = -3;
             }
             [FlurryAnalytics logEvent:@"UpdatingSubscriptions" timed:YES];
             nextPodcast.lastSynced = [NSDate date];
-            [context save];
+            [context save:nil];
             LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
             [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
                                                                      withLowerPriority:YES
@@ -107,7 +107,7 @@ static char const kRefreshInterval = -3;
                 self.isBusy = NO;            
             }
             [context performBlock:^{
-                [context save];
+                [context save:nil];
             }];
             LOG_NETWORK(2, @"Updating subscriptions complete");
         }

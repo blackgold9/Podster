@@ -174,6 +174,8 @@
 		4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
 		4B189B3814AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
 		4B189B3A14AFDEE6001E378A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B189B3914AFDEE6001E378A /* AVFoundation.framework */; };
+		4B1BC92B150201B000F5F799 /* MessageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC92A150201AF00F5F799 /* MessageGenerator.m */; };
+		4B1BC92C150201B000F5F799 /* MessageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC92A150201AF00F5F799 /* MessageGenerator.m */; };
 		4B1F3F7014D2130000CECBA2 /* SVVideoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */; };
 		4B1F3F7114D2130000CECBA2 /* SVVideoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */; };
 		4B1F3F7C14D249F600CECBA2 /* 265.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1F3F7B14D249F600CECBA2 /* 265.png */; };
@@ -715,6 +717,8 @@
 		4B189B3514AFAD12001E378A /* SVPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackController.h; sourceTree = "<group>"; };
 		4B189B3614AFAD13001E378A /* SVPlaybackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlaybackController.m; sourceTree = "<group>"; };
 		4B189B3914AFDEE6001E378A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4B1BC929150201AF00F5F799 /* MessageGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageGenerator.h; sourceTree = "<group>"; };
+		4B1BC92A150201AF00F5F799 /* MessageGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageGenerator.m; sourceTree = "<group>"; };
 		4B1F3F6E14D2130000CECBA2 /* SVVideoPlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVVideoPlaybackView.h; sourceTree = "<group>"; };
 		4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVVideoPlaybackView.m; sourceTree = "<group>"; };
 		4B1F3F7B14D249F600CECBA2 /* 265.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 265.png; sourceTree = "<group>"; };
@@ -1674,6 +1678,8 @@
 				4B48757214F497A9007E9092 /* SVPodcastImage.m */,
 				4BCE681E14F7638C005B0324 /* SVSettings.h */,
 				4BCE681F14F7638C005B0324 /* SVSettings.m */,
+				4B1BC929150201AF00F5F799 /* MessageGenerator.h */,
+				4B1BC92A150201AF00F5F799 /* MessageGenerator.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -2469,6 +2475,7 @@
 				4B7A7CC014F5A0EC00AD88F9 /* UIButton+WebCache.m in Sources */,
 				4B7A7CC214F5A0EC00AD88F9 /* UIImageView+WebCache.m in Sources */,
 				4BCE682014F7638C005B0324 /* SVSettings.m in Sources */,
+				4B1BC92B150201B000F5F799 /* MessageGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2631,6 +2638,7 @@
 				4B7A7CC114F5A0EC00AD88F9 /* UIButton+WebCache.m in Sources */,
 				4B7A7CC314F5A0EC00AD88F9 /* UIImageView+WebCache.m in Sources */,
 				4BCE682114F7638C005B0324 /* SVSettings.m in Sources */,
+				4B1BC92C150201B000F5F799 /* MessageGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
