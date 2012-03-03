@@ -164,8 +164,8 @@
         case NSFetchedResultsChangeUpdate:
         {
             LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
-            PodcastGridCell *currentCell = (PodcastGridCell *)[self.gridView cellForItemAtIndex:indexPath.row];
-            [currentCell bind:podcast fadeImage:YES];
+            [self.gridView reloadObjectAtIndex:indexPath.row
+                                 withAnimation:GMGridViewItemAnimationFade];
         }
             break;
         default:

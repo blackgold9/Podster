@@ -104,11 +104,12 @@ forPodcastAtURL:(NSString *)feedURL
         NSPredicate *inPodcast =[NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryRelationships.podcast, localPodcast ];
         SVPodcastEntry *episode = [SVPodcastEntry findFirstWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:matchesGuid,inPodcast,nil]]
                                                                inContext:localContext];
+        BOOL abort = NO;
         if (episode) {
             //Items are date ordered, so we don't need to reparse stuff
-            LOG_PARSING(2, @"Hit an item we already know about. Aborting.");
-            [parser stopParsing];
-            return;
+            // We will always reparse the latest thing in case there is a correction
+            LOG_PARSING(2, @"Hit an item we already know about. Aborting after processing it.");
+            abort = YES;
         } else {
             LOG_PARSING(2, @"Episode did not exist matching %@. Creaitng one.", item);
             
@@ -149,9 +150,13 @@ forPodcastAtURL:(NSString *)feedURL
         }
         
         // Don't parse more than 100 items
-        if (itemsParsed > 100) {
+        if (itemsParsed == 100) {
             LOG_GENERAL(2, @"Hit the 100 item limit, stopping parsing");
             [parser stopParsing];
+        }
+        if (abort) {
+            [parser stopParsing];
+            return;
         }
   }];
 
@@ -163,7 +168,11 @@ forPodcastAtURL:(NSString *)feedURL
     dispatch_async(originalQueue, ^void() {
         self.errorCallback(error);
     });
-
+    [FlurryAnalytics logError:@"ParsingFailed" 
+                      message:[error localizedDescription]
+                        error:error];
+    [FlurryAnalytics logEvent:@"ParsingFailed"
+               withParameters:[NSDictionary dictionaryWithObject:feedURL forKey:@"URL"]];
     LOG_PARSING(1, @"Parsing feed \"%@\" failed with error: %@", parser.url, error);
 }
 
