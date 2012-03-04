@@ -176,6 +176,10 @@
 		4B189B3A14AFDEE6001E378A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B189B3914AFDEE6001E378A /* AVFoundation.framework */; };
 		4B1BC92B150201B000F5F799 /* MessageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC92A150201AF00F5F799 /* MessageGenerator.m */; };
 		4B1BC92C150201B000F5F799 /* MessageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC92A150201AF00F5F799 /* MessageGenerator.m */; };
+		4B1BC93515034EBA00F5F799 /* NRGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC93015034EBA00F5F799 /* NRGridView.m */; };
+		4B1BC93615034EBA00F5F799 /* NRGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC93015034EBA00F5F799 /* NRGridView.m */; };
+		4B1BC93715034EBA00F5F799 /* NRGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC93215034EBA00F5F799 /* NRGridViewCell.m */; };
+		4B1BC93815034EBA00F5F799 /* NRGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC93215034EBA00F5F799 /* NRGridViewCell.m */; };
 		4B1F3F7014D2130000CECBA2 /* SVVideoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */; };
 		4B1F3F7114D2130000CECBA2 /* SVVideoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */; };
 		4B1F3F7C14D249F600CECBA2 /* 265.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1F3F7B14D249F600CECBA2 /* 265.png */; };
@@ -719,6 +723,13 @@
 		4B189B3914AFDEE6001E378A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4B1BC929150201AF00F5F799 /* MessageGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageGenerator.h; sourceTree = "<group>"; };
 		4B1BC92A150201AF00F5F799 /* MessageGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageGenerator.m; sourceTree = "<group>"; };
+		4B1BC92E15034EBA00F5F799 /* NRGridConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridConstants.h; path = "3rd Party/NRGridView/NRGridConstants.h"; sourceTree = "<group>"; };
+		4B1BC92F15034EBA00F5F799 /* NRGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridView.h; path = "3rd Party/NRGridView/NRGridView.h"; sourceTree = "<group>"; };
+		4B1BC93015034EBA00F5F799 /* NRGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NRGridView.m; path = "3rd Party/NRGridView/NRGridView.m"; sourceTree = "<group>"; };
+		4B1BC93115034EBA00F5F799 /* NRGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridViewCell.h; path = "3rd Party/NRGridView/NRGridViewCell.h"; sourceTree = "<group>"; };
+		4B1BC93215034EBA00F5F799 /* NRGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NRGridViewCell.m; path = "3rd Party/NRGridView/NRGridViewCell.m"; sourceTree = "<group>"; };
+		4B1BC93315034EBA00F5F799 /* NRGridViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridViewDataSource.h; path = "3rd Party/NRGridView/NRGridViewDataSource.h"; sourceTree = "<group>"; };
+		4B1BC93415034EBA00F5F799 /* NRGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridViewDelegate.h; path = "3rd Party/NRGridView/NRGridViewDelegate.h"; sourceTree = "<group>"; };
 		4B1F3F6E14D2130000CECBA2 /* SVVideoPlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVVideoPlaybackView.h; sourceTree = "<group>"; };
 		4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVVideoPlaybackView.m; sourceTree = "<group>"; };
 		4B1F3F7B14D249F600CECBA2 /* 265.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 265.png; sourceTree = "<group>"; };
@@ -1309,6 +1320,20 @@
 			name = QuincyKit;
 			sourceTree = "<group>";
 		};
+		4B1BC92D15034EA000F5F799 /* NRGridView */ = {
+			isa = PBXGroup;
+			children = (
+				4B1BC92E15034EBA00F5F799 /* NRGridConstants.h */,
+				4B1BC92F15034EBA00F5F799 /* NRGridView.h */,
+				4B1BC93015034EBA00F5F799 /* NRGridView.m */,
+				4B1BC93115034EBA00F5F799 /* NRGridViewCell.h */,
+				4B1BC93215034EBA00F5F799 /* NRGridViewCell.m */,
+				4B1BC93315034EBA00F5F799 /* NRGridViewDataSource.h */,
+				4B1BC93415034EBA00F5F799 /* NRGridViewDelegate.h */,
+			);
+			name = NRGridView;
+			sourceTree = "<group>";
+		};
 		4B20240114D9F28000820391 /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
@@ -1717,6 +1742,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B1BC92D15034EA000F5F799 /* NRGridView */,
 				4B7A7C9D14F5A07B00AD88F9 /* SDWebImage */,
 				4B7A7C4114F59BE200AD88F9 /* BlockAlerts */,
 				D67B1AB814E4D4CA001EB41A /* ZUUIRevealController */,
@@ -2476,6 +2502,8 @@
 				4B7A7CC214F5A0EC00AD88F9 /* UIImageView+WebCache.m in Sources */,
 				4BCE682014F7638C005B0324 /* SVSettings.m in Sources */,
 				4B1BC92B150201B000F5F799 /* MessageGenerator.m in Sources */,
+				4B1BC93515034EBA00F5F799 /* NRGridView.m in Sources */,
+				4B1BC93715034EBA00F5F799 /* NRGridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2639,6 +2667,8 @@
 				4B7A7CC314F5A0EC00AD88F9 /* UIImageView+WebCache.m in Sources */,
 				4BCE682114F7638C005B0324 /* SVSettings.m in Sources */,
 				4B1BC92C150201B000F5F799 /* MessageGenerator.m in Sources */,
+				4B1BC93615034EBA00F5F799 /* NRGridView.m in Sources */,
+				4B1BC93815034EBA00F5F799 /* NRGridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

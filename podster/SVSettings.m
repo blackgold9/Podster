@@ -31,7 +31,7 @@ NSString *uuid(){
 {
    [defaults setBool:autoSubscribe
               forKey:kShouldAlwaysSubscribeToNotifications];
-    [defaults synchronize];
+
 
 }
 
@@ -44,7 +44,7 @@ NSString *uuid(){
 {
     [defaults setBool:neverSubscribe
                forKey:kNeverAutoSubscribeToNotifications];
-    [defaults synchronize];
+
 
 }
 
@@ -70,6 +70,18 @@ NSString *uuid(){
 
     return deviceId;
 }
+- (void)save
+{
+    [defaults synchronize];
+}
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationWillTerminateNotification object:nil];
+    }
+    return self;
+}
 
 + (SVSettings *)sharedInstance
 {
@@ -78,6 +90,7 @@ NSString *uuid(){
     dispatch_once(&onceToken, ^{
         instance = [[SVSettings alloc] init];
         instance->defaults = [NSUserDefaults standardUserDefaults];
+        
     });
     
     return instance;
@@ -93,7 +106,7 @@ NSString *uuid(){
 - (void)setHomeScreen:(HomePageScreenType)screenType
 {
     [defaults setInteger:screenType forKey:@"HomeScreenType"];
-    [defaults synchronize];
+     
 }
 
 -(BOOL)notificationsNeedSyncing
@@ -104,6 +117,6 @@ NSString *uuid(){
 -(void)setNotificationsNeedSyncing:(BOOL)needSyncing
 {
     [defaults setBool:needSyncing forKey:@"NotificationsNeedSyncing"];
-    [defaults synchronize];
+     
 }
 @end

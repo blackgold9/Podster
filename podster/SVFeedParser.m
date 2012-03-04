@@ -138,29 +138,32 @@ forPodcastAtURL:(NSString *)feedURL
         episode.durationValue = [item.duration secondsFromDurationString];
         episode.podcast = localPodcast;
 
-        localPodcast.unseenEpsiodeCountValue ++;
-
+        if (!abort) {
+            // Only update unseen count if we aren't already aborting
+            // if we ARE aborting, it means we already knew about this, we're just updating to be safe
+            localPodcast.unseenEpsiodeCountValue ++;
+        }
+        
         itemsParsed += 1;
         if (itemsParsed % 20 == 0){
-            [localContext performBlock:^{                
                 [localContext save:nil];
-            }];
         } else {
             LOG_PARSING(4, @"Skipping parent save");
         }
         
         // Don't parse more than 100 items
-        if (itemsParsed == 100) {
+        if (itemsParsed >= 100) {
             LOG_GENERAL(2, @"Hit the 100 item limit, stopping parsing");
             [parser stopParsing];
         }
+        
         if (abort) {
             [parser stopParsing];
             return;
         }
-  }];
-
-     isFirstItem = NO;
+    }];
+    
+    isFirstItem = NO;
 }
 
 -(void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error
@@ -168,9 +171,7 @@ forPodcastAtURL:(NSString *)feedURL
     dispatch_async(originalQueue, ^void() {
         self.errorCallback(error);
     });
-    [FlurryAnalytics logError:@"ParsingFailed" 
-                      message:[error localizedDescription]
-                        error:error];
+    
     [FlurryAnalytics logEvent:@"ParsingFailed"
                withParameters:[NSDictionary dictionaryWithObject:feedURL forKey:@"URL"]];
     LOG_PARSING(1, @"Parsing feed \"%@\" failed with error: %@", parser.url, error);

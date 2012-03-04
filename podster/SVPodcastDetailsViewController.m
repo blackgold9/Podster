@@ -19,6 +19,7 @@
 #import "SVDownloadManager.h"
 #import "SVPodcastSearchResult.h"
 #import "ActsAsPodcast.h"
+#import "MessageGenerator.h"
 
 #import "SVEpisodeListCell.h"
 #import "GTMNSString+HTML.h"
@@ -131,9 +132,9 @@
                 } onError:^(NSError *error) {
                     [FlurryAnalytics logError:@"SubscribeFailed" message:[error localizedDescription] error:error ];
                     LOG_GENERAL(1, @"Registration failed with error: %@", error);
-                    BlockAlertView *alertView= [BlockAlertView alertWithTitle:@"Network Error" message:@"There was a problem communicating with the Podster servers. Please try again alter."];
+                    BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again alter."];
                     
-                                      [alertView setCancelButtonWithTitle:@"OK" block:^{
+                    [alertView setCancelButtonWithTitle:@"OK" block:^{
                         
                     }];
                     [self.notifySwitch setOn:NO animated:YES];
@@ -198,7 +199,6 @@
         localPodcast.unseenEpsiodeCountValue = 0;
         [localContext save:nil];
     }];
-    
     
     // If notifications are enabled, figure out if we want to subscribe for this podcast
     LOG_GENERAL(2, @"Checking if notifications are enabled");
@@ -456,6 +456,7 @@
 
     localContext = [NSManagedObjectContext defaultContext];
     __block BOOL blockHasSubscription = NO;
+   
     [localContext performBlockAndWait:^{
                     LOG_GENERAL(2, @"Lookuing up podcast in data store");
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
@@ -506,7 +507,13 @@
                                                                      inContext:localContext
                                                                   onCompletion:loadCompleteHandler
             onError:^(NSError *error) {
-              //  [UIAlertView showWithError:error];
+                BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
+                                                               message:@"There was an error downloading this podcast. Please try again later"];
+                [alert setCancelButtonWithTitle:@"OK"
+                                          block:^{
+                                              
+                                          }];
+                [alert show];
             }];
 
    

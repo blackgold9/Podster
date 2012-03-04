@@ -11,7 +11,7 @@
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 
-static char const kRefreshInterval = -3;
+static char const kRefreshInterval = -30;
 
 @implementation SVSubscriptionManager {
     NSArray *subscriptions;
@@ -57,7 +57,7 @@ static char const kRefreshInterval = -3;
                              initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
 
-    [offsetComponents setMinute:kRefreshInterval];
+    [offsetComponents setSecond:kRefreshInterval];
 
     NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
                                                     toDate:[NSDate date]
