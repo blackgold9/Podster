@@ -14,12 +14,16 @@
 #import "SVPodcastsSearchResultsViewController.h"
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcastImageCache.h"
+#import "NRGridView.h"
+#import "SVPodcatcherClient.h"
+#import "UIColor+Hex.h"
+#import "BlockAlertView.h"
 @implementation FeaturedController {
-    NSArray *featuredPodcasts;
+    NSArray *featured;
     SVPodcastImageCache *imageCache;
 }
 @synthesize gridView;
-
+@synthesize featuedGrid;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,7 +36,7 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        featuredPodcasts = [NSArray array];
+        featured = [NSArray array];
     }
     return self;
 }
@@ -48,113 +52,132 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.gridView.centerGrid = NO;
-    
-    [[SVPodcatcherClient sharedInstance] topPodcastsStartingAtIndex: arc4random() % 100
-                                                              limit:41
-                                                       onCompletion:^(NSArray *podcasts) {
-                                                           featuredPodcasts = podcasts;
-                                                           
-                                                           NSMutableArray *urls = [NSMutableArray array];
-                                                           for (id<ActsAsPodcast> podcast in podcasts) {
-                                                               NSString *logoString = podcast.smallLogoURL;
-                                                               if (!logoString) {
-                                                                   logoString = podcast.logoURL;
-                                                               }
-                                                               
-                                                               if (logoString) {
-                                                                   NSURL *url = [NSURL URLWithString:logoString];
-                                                                   [urls addObject:url];
-                                                               }
-                                                           }
-                                                           imageCache = [[SVPodcastImageCache alloc] initWithImageURLs:urls andSize:CGSizeMake(150.0f, 150.0f)];
-                                                           
-                                                           [self.gridView reloadData];
-                                                       } onError:^(NSError *error) {
-                                                           LOG_GENERAL(2, @"Error occured downloading featured podcasts");
-                                                           NSAssert(false, @"This should be handled");
-                                                       }];
+//    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
+//    self.gridView.centerGrid = NO;
+    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
+    self.featuedGrid.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
+    self.featuedGrid.dataSource = self;
+    [[SVPodcatcherClient sharedInstance] featuredPodcastsForLanguage:nil
+                                                        onCompletion:^(NSArray *returned) {
+                                                            featured = returned;                                                                                                                                                                                 
+                                                            [self.featuedGrid reloadData];
+                                                        } onError:^(NSError *error) {
+                                                            LOG_GENERAL(2, @"Error occured downloading featured podcasts");
+                                                            BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Oh No!" message:@"There was a problem downloading the featured podcasts for today. Please try again later."];
+                                                            [alert show];
+                                                        }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.gridView reloadData];
+    [self.featuedGrid reloadData];
     self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
 }
--(NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
+-(NSInteger)numberOfSectionsInGridView:(NRGridView *)gridView
 {
-    return featuredPodcasts.count + 1;
+    return featured.count;
 }
 
--(CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
+-(NSString *)gridView:(NRGridView *)gridView titleForHeaderInSection:(NSInteger)section
 {
-    return DEFAULT_GRID_CELL_SIZE;
+    return [[featured objectAtIndex:section] valueForKey:@"name"];
+
 }
 
--(GMGridViewCell *)GMGridView:(GMGridView *)grid cellForItemAtIndex:(NSInteger)index
+- (NSInteger)gridView:(NRGridView*)gridView numberOfItemsInSection:(NSInteger)section
 {
-    NSString *identifier = index == 0 ? @"DirectoryCell" : @"PodcastCell";
-    CGSize cellSize = DEFAULT_GRID_CELL_SIZE;
-    GMGridViewCell *cell = [grid dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        CGRect frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
-        if (index == 0) {            
-            // Make the directory teaser
-            cell = [[GMGridViewCell alloc] initWithFrame:frame];
-            UIView *view = [[UIView alloc] initWithFrame:frame];
-            view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
-            view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
-            view.layer.borderWidth = 2;
-            
-            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
-            titleLabel.textColor = [UIColor whiteColor];
-            titleLabel.backgroundColor = [UIColor clearColor];
-            
-            titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
-            titleLabel.numberOfLines = 0;
-            titleLabel.tag = 1907;
-            titleLabel.opaque = NO;
-            titleLabel.text = @"Podcast Directory";
-            [view addSubview:titleLabel];
-            [cell addSubview:view];
+    NSArray *podcasts = [[featured objectAtIndex:section] objectForKey:@"feeds"];
+    return podcasts.count;
+}
 
-        } else {
-            cell = [[PodcastGridCell alloc] initWithFrame:frame];           
-        }        
-    }
+-(UIView *)gridView:(NRGridView *)grid viewForHeaderInSection:(NSInteger)section
+{
+    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 280, 50)];
+    [label setFont:[UIFont boldSystemFontOfSize:17.0f]];
+    label.backgroundColor = [UIColor clearColor];
+    [background addSubview:label];
+    label.text = [self gridView:grid titleForHeaderInSection:section];
+    background.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"list-item.png"]];
+    label.textColor = [UIColor whiteColor];
+    return background;
+}
+
+-(NRGridViewCell *)gridView:(NRGridView *)gridView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *MyCellIdentifier = @"FeaturedCell";
     
-    if (index > 0) {
-        // We bind the actual podcast if it isnt the first one.
-        [((PodcastGridCell *)cell) bind:[featuredPodcasts objectAtIndex:index - 1] 
-                              fadeImage:YES 
-                         withImageCache:imageCache];
-    }
+    NRGridViewCell* cell = [self.featuedGrid dequeueReusableCellWithIdentifier:MyCellIdentifier];
     
-    return cell;
-}
-
--(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    if (position == 0) {
+    if(cell == nil){
+        cell = [[NRGridViewCell alloc] initWithReuseIdentifier:MyCellIdentifier];
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0,0,140,140)];
+        //view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
+        //        view.layer.masksToBounds = NO;
+        //        //view.layer.cornerRadius = 8;
+        //        view.layer.shadowColor = [UIColor whiteColor].CGColor;
+        //        view.layer.shadowOpacity = 0.5;
+        //        view.layer.shadowOffset = CGSizeMake(0, 0);
+        //        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
+        //        view.layer.shadowRadius = 3;
+        view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
+        view.layer.borderWidth = 2;
+        
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.colors = [NSArray arrayWithObjects:
+                           (id)[[UIColor colorWithHex:0x01408C] CGColor],
+                           (id)[[UIColor colorWithHex:0x052D52] CGColor],
+                           nil];
+        gradient.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.3], [NSNumber numberWithFloat:1], nil];
+        gradient.frame = view.bounds;
+                [view.layer addSublayer:gradient];
+        
        
-        [self.navigationController pushViewController:[storyboard instantiateViewControllerWithIdentifier:@"categoryListView"] animated:YES];
-    } else {
-        id<ActsAsPodcast> podcast = (id<ActsAsPodcast>) [featuredPodcasts objectAtIndex:position - 1];
-        SVPodcastDetailsViewController *destination = [storyboard instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
-        destination.podcast = podcast;
-        [self.navigationController pushViewController:destination animated:YES];
+        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder.png"]];
+        backgroundImage.frame = view.frame;
+        [view addSubview:backgroundImage];
 
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
+       titleLabel.textColor = [UIColor whiteColor];
+       titleLabel.backgroundColor = [UIColor clearColor];
+       
+       titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
+       titleLabel.numberOfLines = 0;
+       titleLabel.tag = 1907;
+       titleLabel.opaque = NO;
+        [view addSubview:titleLabel];
+
+        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
+        imageView.tag = 1906;
+        [view addSubview:imageView];
+        [cell.contentView addSubview:view];
+        
     }
+    
+    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
+    imageView.image = nil;
+    UILabel *label = (UILabel *)[cell.contentView viewWithTag:1907];
+
+    NSDictionary *sectionDict = [featured objectAtIndex:indexPath.section];
+    NSArray *feeds = [sectionDict valueForKey:@"feeds"];
+    id<ActsAsPodcast> podcast = [feeds objectAtIndex:indexPath.row];
+    label.text = [podcast title];
+    [imageView setImageWithURL:[NSURL URLWithString:[podcast thumbLogoURL]]
+                                   placeholderImage:nil];
+    return cell;
 }
 
 
 
 - (void)viewDidUnload
 {
-    [self setGridView:nil];
+    self.featuedGrid = nil;
     [super viewDidUnload];
-    featuredPodcasts = [NSArray array];
+    
+  //  featuredPodcasts = [NSArray array];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

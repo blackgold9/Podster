@@ -68,6 +68,9 @@ typedef void (^SVErrorBlock)(NSError *error);
                                                 onCompletion:(void (^)(void))onComplete
                                                      onError:(SVErrorBlock)onError;
 
+- (void)featuredPodcastsForLanguage:(NSString *)language
+                       onCompletion:(PodcastListResponeBlock)completion 
+                            onError:(SVErrorBlock)errorBlock;
 #pragma mark - podcast downloading
 
 @end

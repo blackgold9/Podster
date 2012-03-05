@@ -864,12 +864,11 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="KxV-Nr-LMY" customClass="GMGridView">
+                            <view contentMode="scaleToFill" id="KxV-Nr-LMY" customClass="NRGridView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
-                                    <outlet property="actionDelegate" destination="3eP-dT-cog" id="gdO-gh-9sG"/>
-                                    <outlet property="dataSource" destination="3eP-dT-cog" id="01u-cs-gnF"/>
+                                    <outlet property="delegate" destination="3eP-dT-cog" id="5pv-Mp-14d"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -877,7 +876,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="gridView" destination="KxV-Nr-LMY" id="CDo-9x-5ic"/>
+                        <outlet property="featuedGrid" destination="KxV-Nr-LMY" id="3Sw-tG-7K9"/>
                         <outlet property="view" destination="DIr-9o-Wjm" id="7Ce-cg-aXs"/>
                     </connections>
                 </viewController>
@@ -960,6 +959,7 @@
         <class className="FeaturedController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedController.h"/>
             <relationships>
+                <relationship kind="outlet" name="featuedGrid" candidateClass="NRGridView"/>
                 <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
             </relationships>
         </class>
@@ -979,6 +979,9 @@
             <relationships>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
+        </class>
+        <class className="NRGridView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NRGridView.h"/>
         </class>
         <class className="OBSlider" superclassName="UISlider">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>

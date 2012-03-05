@@ -139,6 +139,44 @@
           }];
 }
 
+- (void)featuredPodcastsForLanguage:(NSString *)language
+                       onCompletion:(PodcastListResponeBlock)completion 
+                            onError:(SVErrorBlock)errorBlock
+{
+    NSString *feedFinderURL = [NSString stringWithFormat:@"feeds/featured.json"];
+    [self getPath:feedFinderURL
+       parameters:nil
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              NSMutableArray *featured = [NSMutableArray array];
+              for(NSDictionary *groupDict in (NSArray *)responseObject) {
+                  NSDictionary *innerGroup = [groupDict objectForKey:@"featuredgroup"];
+                  NSMutableDictionary *bucketDict = [NSMutableDictionary dictionary];
+                  [bucketDict setValue:[innerGroup valueForKey:@"name"] forKey:@"name"];
+                  NSArray *podcastDicts = [innerGroup valueForKey:@"feeds"];
+                  NSMutableArray *podcasts = [NSMutableArray array];
+                  
+                  for (NSDictionary *podcastDict in podcastDicts) {
+                      SVPodcastSearchResult *result = [SVPodcastSearchResult new];
+                      [result populateWithDictionary:podcastDict];
+                      [podcasts addObject:result];
+                      
+                  }
+              [bucketDict setValue:podcasts forKey:@"feeds"];
+              [featured addObject:bucketDict];
+              
+          }
+     
+     completion(featured);
+     } 
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              LOG_NETWORK(1, @"feedsByCategory faild with error: %@", error);
+              errorBlock(error);
+          }];
+
+}
+
+
 
 -(void)searchForPodcastsMatchingQuery:(NSString *)query
                          onCompletion:(PodcastListResponeBlock)completion 

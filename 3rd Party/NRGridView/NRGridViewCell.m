@@ -311,7 +311,7 @@
 }
 
 #pragma mark - Layout
-static CGSize const _kNRGridViewCellLayoutPadding = {5,5};
+static CGSize const _kNRGridViewCellLayoutPadding = {0,5};
 static CGSize const _kNRGridViewCellLayoutSpacing = {5,5};
 
 - (void)layoutSubviews
