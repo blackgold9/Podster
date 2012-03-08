@@ -296,11 +296,11 @@
                
            }];
 }
- 
-- (void)notifyOfSubscriptionToFeed:(NSString *)feedURL 
-                                     withDeviceId:(NSString *)deviceId
-                                     onCompletion:(void (^)(void))completion 
-                                          onError:(SVErrorBlock)onError
+
+- (void)notifyOfSubscriptionToFeed:(NSString *)feedURL
+                      withDeviceId:(NSString *)deviceId
+                      onCompletion:(void (^)(void))completion
+                           onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedURL);
     NSParameterAssert(deviceId);
@@ -318,6 +318,32 @@
                onError(error);
            }];
 }
+
+- (void)changeNotificationSetting:(BOOL)shouldNotify
+                   forFeedWithURL:(NSString *)feedURL
+                     onCompletion:(void (^)(void))completion
+                          onError:(SVErrorBlock)onError
+{
+    NSParameterAssert(feedURL);
+    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+    [self postPath:@"subscriptions/update.json"
+        parameters:[NSDictionary dictionaryWithObjectsAndKeys:deviceId, @"deviceId", feedURL, @"feedUrl", shouldNotify ? @"true" : @"false",nil]
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               if (completion) {
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       completion();
+                   });
+               }
+           }
+           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               if (onError) {
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       onError(error);
+                   });
+               }
+           }];
+}
+
 
 -(void)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL 
                          withDeviceId:(NSString *)deviceId

@@ -28,6 +28,8 @@ typedef void (^SVErrorBlock)(NSError *error);
                                          onCompletion:(PodcastListResponeBlock)completion
                                               onError:(SVErrorBlock)error;
 
+- (void)changeNotificationSetting:(BOOL)shouldNotify forFeedWithURL:(NSString *)feedURL onCompletion:(void (^)())completion onError:(SVErrorBlock)onError;
+
 - (void)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL
                                           withDeviceId:(NSString *)deviceId
                                           onCompletion:(void(^)(void))completion

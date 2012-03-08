@@ -82,6 +82,7 @@
                                                                             }];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController] animated:YES];
         
     }];
     

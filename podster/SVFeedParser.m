@@ -81,6 +81,10 @@ forPodcastAtURL:(NSString *)feedURL
         if (!localPodcast.etag || ![localPodcast.etag isEqualToString:etag]) {
             localPodcast.etag = etag;
         }
+        
+        if (!localPodcast || localPodcast.urlHash != [localPodcast.feedURL stringFromMD5]) {
+            localPodcast.urlHash = [localPodcast.feedURL stringFromMD5];
+        }
 
     }];
 }

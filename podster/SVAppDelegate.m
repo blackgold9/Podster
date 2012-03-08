@@ -20,7 +20,7 @@
 #import "GMGridView.h"
 #import "SVSubscription.h"
 #import "ZUUIRevealController.h"
-
+#import "PodsterIAPHelper.h"
 #import <CoreText/CoreText.h>
 
 @implementation SVAppDelegate
@@ -194,8 +194,12 @@ NSString *uuid();
 //            [self initializeCoreText];        
 //        });
 //    });
+
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
     
 
+    [[PodsterIAPHelper sharedInstance] requestProducts];
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     parentContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     parentContext.persistentStoreCoordinator = [NSPersistentStoreCoordinator defaultStoreCoordinator];
@@ -266,11 +270,13 @@ NSString *uuid();
 
             SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
             controller.podcast = podcast;
-            dispatch_async(dispatch_get_main_queue(), ^{
+            double delayInSeconds = 1.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-                [nav pushViewController:controller animated:NO];
-            });
+                [nav pushViewController:controller animated:YES];
 
+            });
         }
     }
 }
