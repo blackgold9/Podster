@@ -232,22 +232,23 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                        [sheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@", name, price]
                                                                                            block:^{
                                                                                                [[PodsterIAPHelper sharedInstance] buyProductIdentifier:[product productIdentifier]];
+                                                                                                [self waitForPurchaseCompletion];
                                                                                            }];
                                                                    }
                                                                    
                                                                    [sheet setCancelButtonWithTitle:@"Cancel" block:^{
-                                                                       
+                                                                       [FlurryAnalytics logEvent:@"CanceledPurchase"];   
                                                                    }];
                                                                    if (!hasProducts) {
                                                                        [FlurryAnalytics logEvent:@"NoProductsAvailable"];        
                                                                    }
-                                                                   
+                                                                   [FlurryAnalytics logEvent:@"ShowPurchaseOptions"];   
                                                                    [sheet showInView:self.view];
                                                                    LOG_GENERAL(2, @"Removing observer");
                                                                    [[NSNotificationCenter defaultCenter] removeObserver:tmpObserver
                                                                                                                    name:kProductsLoadedNotification
                                                                                                                  object:nil];
-                                                                   [self waitForPurchaseCompletion];
+                                                                  
                                                                }];
     
 

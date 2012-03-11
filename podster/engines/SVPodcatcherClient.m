@@ -363,7 +363,13 @@ onCompletion:(void (^)(BOOL))onComplete
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                if (onError) {
                    dispatch_async(dispatch_get_main_queue(), ^{
-                       onError(error);
+                       if ([[operation response] statusCode] == 402) {
+                           // This is the special case needs purchase. For some reason the code is not reflected in the error , so make a new one
+                           NSError *newError = [NSError errorWithDomain:@"Podster" code:402 userInfo:nil];
+                           onError(newError);
+                       } else {
+                           onError(error);
+                       }
                    });
                }
            }];

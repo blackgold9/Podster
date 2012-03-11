@@ -104,9 +104,33 @@
    return ![[SVSettings sharedInstance] premiumMode] && currentCount >= [[SVSettings sharedInstance] maxNonPremiumNotifications];
 }
 
+- (void)showNotificationsUpsell
+{
+    [FlurryAnalytics logEvent:@"HitLimitUpsell"];
+    NSString *title = NSLocalizedString(@"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE", @"Title for the prompt asking the user to updgrade to premium");
+    NSString *body = NSLocalizedString(@"HIT_MAX_NOTIFICATIONS_PROMPT_BODY", @"Body text prompting the user to upgrade to upgrade when they hit the free notifications limit" );
+    BlockAlertView *signupAlert =  [BlockAlertView alertWithTitle:title
+                                                          message:body];
+    [signupAlert addButtonWithTitle:NSLocalizedString(@"LEARN_MORE", @"Find out more about a given option") block:^{
+        // Take to the signup page?
+        [FlurryAnalytics logEvent:@"LimitUpsellLearnMoreTapped"];
+        UIViewController *controller = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
+        [self.navigationController pushViewController:controller animated:YES];
+        
+        
+    }];
+    
+    [signupAlert setCancelButtonWithTitle:NSLocalizedString(@"DECLINE", @"decline") block:^{
+        [FlurryAnalytics logEvent:@"LimitUpsellDeclined"];
+    }];
+    [signupAlert show];
+    [self.notifySwitch setOn:NO animated:YES];
+
+}
+
 - (IBAction)notifySwitchChanged:(id)sender {
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){
-        if (localPodcast.subscription == nil) {
+        if (!localPodcast.isSubscribedValue) {
             BlockAlertView *alertView= [BlockAlertView alertWithTitle:@"Not a Favorite" message:@"You cannot recieve notifications about a podcast unless it is marked as a Favorite"];
             [alertView setCancelButtonWithTitle:@"OK" block:^{
 
@@ -115,27 +139,8 @@
             [alertView show];
         } else {
             if (self.notifySwitch.on && [self needsToSignUpForPremium])  {
-                [FlurryAnalytics logEvent:@"HitLimitUpsell"];
-                NSString *title = NSLocalizedString(@"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE", @"Title for the prompt asking the user to updgrade to premium");
-                NSString *body = NSLocalizedString(@"HIT_MAX_NOTIFICATIONS_PROMPT_BODY", @"Body text prompting the user to upgrade to upgrade when they hit the free notifications limit" );
-                BlockAlertView *signupAlert =  [BlockAlertView alertWithTitle:title
-                                                                      message:body];
-                [signupAlert addButtonWithTitle:NSLocalizedString(@"LEARN_MORE", @"Find out more about a given option") block:^{
-                    // Take to the signup page?
-                    [FlurryAnalytics logEvent:@"LimitUpsellLearnMoreTapped"];
-                    UIViewController *controller = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
-                    [self.navigationController pushViewController:controller animated:YES];
-                    
-
-                }];
-
-                [signupAlert setCancelButtonWithTitle:NSLocalizedString(@"DECLINE", @"decline") block:^{
-                    [FlurryAnalytics logEvent:@"LimitUpsellDeclined"];
-                }];
-                [signupAlert show];
-                [self.notifySwitch setOn:NO animated:YES];
-                return;
-            }
+                [self showNotificationsUpsell];
+                           }
 
             [[SVPodcatcherClient sharedInstance] changeNotificationSetting:self.notifySwitch.on
                                                             forFeedWithURL:localPodcast.feedURL
@@ -150,6 +155,7 @@
 
                                                                        if ([error code] == 402) {
                                                                            // recieved a 'payment required' status code
+                                                                           [self showNotificationsUpsell];
                                                                        } else {
                                                                            [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
                                                                            LOG_GENERAL(1, @"Registration failed with error: %@", error);
@@ -197,25 +203,30 @@
 
         if (shouldAskAboutNotifications) {
             void (^subscribeWithErrorAlertBlock)() = ^{
-                LOG_GENERAL(2, @"Creating notification subscription");
-                [[SVPodcatcherClient sharedInstance] changeNotificationSetting:YES
-                                                                forFeedWithURL:localPodcast.feedURL
-                                                                  onCompletion:^{
-                                                                      LOG_GENERAL(2, @"Succeed creating notification subscription");
-                                                                      self.subscribeButton.enabled = YES;
-                                                                      localPodcast.shouldNotifyValue = YES;
-                                                                      [localContext save:nil];
-                                                                      [self.notifySwitch setOn:YES animated:YES];
-                                                                  }
-                                                                       onError:^(NSError *error) {
-                                                                           LOG_GENERAL(2, @"Failed creating notification subscription");
-                                                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                                                               [self showFeedNotificationSubscriptionError];
-                                                                               self.subscribeButton.enabled = YES;
-                                                                           });
-
-                                                                       }];
+                if([self needsToSignUpForPremium]) {
+                    [self showNotificationsUpsell];
+                } else {
+                    LOG_GENERAL(2, @"Creating notification subscription");
+                    [[SVPodcatcherClient sharedInstance] changeNotificationSetting:YES
+                                                                    forFeedWithURL:localPodcast.feedURL
+                                                                      onCompletion:^{
+                                                                          LOG_GENERAL(2, @"Succeed creating notification subscription");
+                                                                          self.subscribeButton.enabled = YES;
+                                                                          localPodcast.shouldNotifyValue = YES;
+                                                                          [localContext save:nil];
+                                                                          [self.notifySwitch setOn:YES animated:YES];
+                                                                      }
+                                                                           onError:^(NSError *error) {
+                                                                               LOG_GENERAL(2, @"Failed creating notification subscription");
+                                                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                   [self showFeedNotificationSubscriptionError];
+                                                                                   self.subscribeButton.enabled = YES;
+                                                                               });
+                                                                               
+                                                                           }];
+                }
             };
+            
 
             BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Notifications"
                                                            message:@"Would you like to be notified when new episodes become available?"];
@@ -488,9 +499,9 @@
                     [[NSManagedObjectContext defaultContext].parentContext save:nil];
                     LOG_GENERAL(2, @"Done loading entries");
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self reloadData];
+                        [blockSelf reloadData];
                          
-                        [self loadFeedImage];
+                        [blockSelf loadFeedImage];
                     });
                     
                 }];

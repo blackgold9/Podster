@@ -133,7 +133,7 @@ static char const kRefreshInterval = -3;
 - (void)processServerState:(NSDictionary *)serverState isPremium:(BOOL)isPremium
 {
     [[NSManagedObjectContext defaultContext] performBlock:^{
-
+        LOG_GENERAL(2, @"Server State: %@", serverState);
         NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
         NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
         NSArray *podcasts = [SVPodcast findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]]];
@@ -147,7 +147,7 @@ static char const kRefreshInterval = -3;
                 LOG_GENERAL(1, @"Setting podcast notify value to match server value");
                 // Only do this if the user hasn't made a change. 
                 // When they have, we'll attempt to make their change later
-                if (!podcast.needsReconcilingValue) {
+                if (podcast.shouldNotifyValue != serverNotify) {
                     podcast.shouldNotifyValue = serverNotify;
                 }
             }

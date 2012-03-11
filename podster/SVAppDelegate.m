@@ -40,7 +40,7 @@ NSString *uuid();
     NSLog(@"Subscribing to feed with url");
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, url];
     SVPodcast *podcast = [SVPodcast findFirstWithPredicate:pred];
-    if (podcast && podcast.subscription == nil) {
+    if (podcast && !podcast.isSubscribedValue) {
         SVSubscription *sub = [SVSubscription createEntity];
         sub.podcast = podcast;
         [[NSManagedObjectContext defaultContext] save:nil];        
