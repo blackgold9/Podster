@@ -142,7 +142,7 @@ static char const kRefreshInterval = -3;
             // Only do this if we're not premium anymore. It's the only time this can get out of sync
             for(SVPodcast *podcast in podcasts) {
               
-                BOOL serverNotify = [[serverState objectForKey:podcast.urlHash] boolValue];
+                BOOL serverNotify = [[serverState objectForKey:podcast.feedURL] boolValue];
                 
                 LOG_GENERAL(1, @"Setting podcast notify value to match server value");
                 // Only do this if the user hasn't made a change. 

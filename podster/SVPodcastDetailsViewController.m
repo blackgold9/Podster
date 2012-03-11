@@ -140,34 +140,35 @@
         } else {
             if (self.notifySwitch.on && [self needsToSignUpForPremium])  {
                 [self showNotificationsUpsell];
-                           }
-
-            [[SVPodcatcherClient sharedInstance] changeNotificationSetting:self.notifySwitch.on
-                                                            forFeedWithURL:localPodcast.feedURL
-                                                              onCompletion:^{
-                                                                  [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
-                                                                             withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.notifySwitch.on] forKey:@"ON"]];
-                                                                  LOG_GENERAL(2, @"Notifications setting changed successfully");
-                                                                  localPodcast.shouldNotifyValue = self.notifySwitch.on;
-                                                                  [localContext save:nil];
-                                                              }
-                                                                   onError:^(NSError *error) {
-
-                                                                       if ([error code] == 402) {
-                                                                           // recieved a 'payment required' status code
-                                                                           [self showNotificationsUpsell];
-                                                                       } else {
-                                                                           [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
-                                                                           LOG_GENERAL(1, @"Registration failed with error: %@", error);
-                                                                           BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
-
-                                                                           [alertView setCancelButtonWithTitle:@"OK" block:^{
-
-                                                                           }];
-                                                                           [self.notifySwitch setOn:!self.notifySwitch.on animated:YES];
-                                                                           [alertView show];
-                                                                       }
-                                                                   }];
+            } else {
+                
+                [[SVPodcatcherClient sharedInstance] changeNotificationSetting:self.notifySwitch.on
+                                                                forFeedWithURL:localPodcast.feedURL
+                                                                  onCompletion:^{
+                                                                      [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
+                                                                                 withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.notifySwitch.on] forKey:@"ON"]];
+                                                                      LOG_GENERAL(2, @"Notifications setting changed successfully");
+                                                                      localPodcast.shouldNotifyValue = self.notifySwitch.on;
+                                                                      [localContext save:nil];
+                                                                  }
+                                                                       onError:^(NSError *error) {
+                                                                           
+                                                                           if ([error code] == 402) {
+                                                                               // recieved a 'payment required' status code
+                                                                               [self showNotificationsUpsell];
+                                                                           } else {
+                                                                               [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
+                                                                               LOG_GENERAL(1, @"Registration failed with error: %@", error);
+                                                                               BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
+                                                                               
+                                                                               [alertView setCancelButtonWithTitle:@"OK" block:^{
+                                                                                   
+                                                                               }];
+                                                                               [self.notifySwitch setOn:!self.notifySwitch.on animated:YES];
+                                                                               [alertView show];
+                                                                           }
+                                                                       }];
+            }
 
         }
     } else {

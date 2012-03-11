@@ -137,8 +137,8 @@ NSString *uuid(){
         [defaults setBool:premiumMode forKey:@"premium"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPremiumModeChanged" object:nil];
         if (premiumMode) {
-            NSString *title = NSLocalizedString(@"PURCHASE_ERROR", @"Title for alrerts dealing with purchase errors");
-            NSString *body = NSLocalizedString(@"PURCHASE_VALIDATION_FAILED", @"Error message for when purchase validation has failed");
+            NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
+            NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
             BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
             [alertView setCancelButtonWithTitle:@"OK" block:^{
                 

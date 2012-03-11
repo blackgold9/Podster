@@ -65,7 +65,7 @@ forPodcastAtURL:(NSString *)feedURL
 {
 
     NSAssert(localContext != [NSManagedObjectContext defaultContext], @"We should not be using the main context here");
-    [localContext performBlockAndWait:^void() {
+    [localContext performBlock:^void() {
 
         localPodcast = [SVPodcast findFirstWithPredicate:        [NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
                                              inContext:localContext];
@@ -82,7 +82,7 @@ forPodcastAtURL:(NSString *)feedURL
             localPodcast.etag = etag;
         }
         
-        if (!localPodcast || localPodcast.urlHash != [localPodcast.feedURL stringFromMD5]) {
+        if (!localPodcast || ![localPodcast.urlHash isEqualToString:[localPodcast.feedURL stringFromMD5]]) {
             localPodcast.urlHash = [localPodcast.feedURL stringFromMD5];
         }
 
