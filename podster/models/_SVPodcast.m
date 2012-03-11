@@ -9,9 +9,11 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.etag = @"etag",
 	.feedURL = @"feedURL",
 	.hidePlayedEpisodes = @"hidePlayedEpisodes",
+	.isSubscribed = @"isSubscribed",
 	.lastSynced = @"lastSynced",
 	.lastUpdated = @"lastUpdated",
 	.logoURL = @"logoURL",
+	.needsReconciling = @"needsReconciling",
 	.shouldNotify = @"shouldNotify",
 	.smallLogoURL = @"smallLogoURL",
 	.sortNewestFirst = @"sortNewestFirst",
@@ -61,6 +63,14 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	
 	if ([key isEqualToString:@"hidePlayedEpisodesValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"hidePlayedEpisodes"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"isSubscribedValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isSubscribed"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"needsReconcilingValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"needsReconciling"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"shouldNotifyValue"]) {
@@ -136,6 +146,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
+@dynamic isSubscribed;
+
+
+
+- (BOOL)isSubscribedValue {
+	NSNumber *result = [self isSubscribed];
+	return [result boolValue];
+}
+
+- (void)setIsSubscribedValue:(BOOL)value_ {
+	[self setIsSubscribed:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsSubscribedValue {
+	NSNumber *result = [self primitiveIsSubscribed];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsSubscribedValue:(BOOL)value_ {
+	[self setPrimitiveIsSubscribed:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
 @dynamic lastSynced;
 
 
@@ -152,6 +188,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 @dynamic logoURL;
 
+
+
+
+
+
+@dynamic needsReconciling;
+
+
+
+- (BOOL)needsReconcilingValue {
+	NSNumber *result = [self needsReconciling];
+	return [result boolValue];
+}
+
+- (void)setNeedsReconcilingValue:(BOOL)value_ {
+	[self setNeedsReconciling:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveNeedsReconcilingValue {
+	NSNumber *result = [self primitiveNeedsReconciling];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveNeedsReconcilingValue:(BOOL)value_ {
+	[self setPrimitiveNeedsReconciling:[NSNumber numberWithBool:value_]];
+}
 
 
 

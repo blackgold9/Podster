@@ -205,12 +205,13 @@ void audioRouteChangeListenerCallback (
     LOG_PLAYBACK(2, @"Loading media at URL:%@", episode.mediaURL);
     if (currentItem) {
         [currentItem removeObserver:self forKeyPath:@"status"];
-    }
+    }//
     currentItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]];
     [currentItem addObserver:self 
                   forKeyPath:@"status" 
                      options:NSKeyValueObservingOptionNew 
                      context:(__bridge void*)self];
+    
     [_player replaceCurrentItemWithPlayerItem:currentItem];
     [_player play];
  

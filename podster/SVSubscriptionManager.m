@@ -14,7 +14,6 @@
 static char const kRefreshInterval = -3;
 
 @implementation SVSubscriptionManager {
-    NSArray *subscriptions;
     BOOL shouldCancel;
     NSDate *startDate; // The date the sync was begun, everything older than that should be synced.
 }
@@ -68,14 +67,13 @@ static char const kRefreshInterval = -3;
 
     // Get the root(Background )context to work against
     context.parentContext = [[NSManagedObjectContext defaultContext] parentContext];
+    NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
     LOG_GENERAL(2, @"About to look for a subscription to refresh");
     [context performBlock:^{
-            subscriptions =  [SVSubscription findAllInContext:context];
-        NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];
-        NSPredicate *subscribed = [NSPredicate predicateWithFormat:@"%K in %@", SVPodcastRelationships.subscription, subscriptions];
+        NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];       
         NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@ OR %K == nil",SVPodcastAttributes.lastSynced, syncWindow, SVPodcastAttributes.lastSynced];
         
-        NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribed, olderThanSyncStart,stale, nil]];
+        NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate, olderThanSyncStart,stale, nil]];
         
         nextPodcast = [SVPodcast findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
         
@@ -130,5 +128,58 @@ static char const kRefreshInterval = -3;
         [self refreshNextSubscription];        
     });
 
+}
+
+- (void)processServerState:(NSDictionary *)serverState isPremium:(BOOL)isPremium
+{
+    [[NSManagedObjectContext defaultContext] performBlock:^{
+
+        NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+        NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
+        NSArray *podcasts = [SVPodcast findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]]];
+        
+        if(!isPremium) {
+            // Only do this if we're not premium anymore. It's the only time this can get out of sync
+            for(SVPodcast *podcast in podcasts) {
+              
+                BOOL serverNotify = [[serverState objectForKey:podcast.urlHash] boolValue];
+                
+                LOG_GENERAL(1, @"Setting podcast notify value to match server value");
+                // Only do this if the user hasn't made a change. 
+                // When they have, we'll attempt to make their change later
+                if (!podcast.needsReconcilingValue) {
+                    podcast.shouldNotifyValue = serverNotify;
+                }
+            }
+        } 
+        NSPredicate *missingFromServer = [NSPredicate predicateWithFormat:@"NOT (feedURL in %@)", [serverState allKeys]];
+        NSArray *needsReconciling = [SVPodcast findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]]];
+        for(SVPodcast *podcast in needsReconciling) {
+            [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:podcast.feedURL                                                                                                                           onCompletion:^{
+                [[NSManagedObjectContext defaultContext] performBlock:^{
+                    podcast.needsReconciling = NO;     
+                    podcast.isSubscribedValue = YES;
+                    [[NSManagedObjectContext defaultContext] save:nil];
+                }];
+                
+            }
+                                                                    onError:nil];
+        }
+        
+        // Now, delete items on the server that we're no-longer subscribed to
+        for(NSString *url in [serverState allKeys]) {
+            if ([SVPodcast countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url]] == 0) {
+                // We arent subscribed to this anyumore, tell the server
+                [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:url
+                                                                       onCompletion:^{
+                                                                           LOG_GENERAL(2, @"Removing podcast subscription from server that we unsusbscribed from locally");
+                                                                           
+                                                                       }
+                                                                            onError:nil];
+            }
+         }
+     [[NSManagedObjectContext defaultContext] save:nil];
+    }];
+    
 }
 @end

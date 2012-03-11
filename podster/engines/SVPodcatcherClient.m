@@ -274,11 +274,38 @@
     [self enqueueHTTPRequestOperation:operation];
     }];
 }
+- (void)updateDeviceReceipt:(NSString *)receipt
+onCompletion:(void (^)(BOOL))onComplete
+              onError:(SVErrorBlock)onError
+{
+            NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+   NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:receipt, @"receipt", deviceId,@"deviceId", nil];
+        NSParameterAssert(receipt);
+    [self postPath:@"devices/update.json"
+        parameters:params
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               BOOL isPremium = [(NSNumber *)[responseObject valueForKey:@"premium"] boolValue];
+               if(onComplete) {
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       onComplete(isPremium);
+                   });
+               }
+           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               if (onError) {
+                   dispatch_async(dispatch_get_main_queue(), ^{
+                       [FlurryAnalytics logError:@"FailedToUpdateReceipt"
+                                         message:[error localizedDescription] 
+                                           error:error];
+                       onError(error);
+                   });
+               }
+           }];
+}
 
 #pragma mark - push related
 -(void)registerForPushNotificationsWithToken:(NSString *)token
                           andDeviceIdentifer:(NSString *)deviceId
-                                onCompletion:(void (^)(void))onComplete
+                                onCompletion:(void (^)(NSDictionary *))onComplete
                                      onError:(SVErrorBlock)onError;
 { 
     NSParameterAssert(token);
@@ -288,7 +315,7 @@
     
     [self postPath:@"devices/create.json" parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               onComplete();
+               onComplete(responseObject);
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"registerForPushNotification failed with error: %@", error);
@@ -298,36 +325,34 @@
 }
 
 - (void)notifyOfSubscriptionToFeed:(NSString *)feedURL
-                      withDeviceId:(NSString *)deviceId
                       onCompletion:(void (^)(void))completion
                            onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedURL);
-    NSParameterAssert(deviceId);
+        NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
     
     [self postPath:@"subscriptions/create.json" 
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  completion();
-               [FlurryAnalytics logEvent:@"FeedNotificationsSubscribed" withParameters:params];
-           } 
+                         } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"subscribe failed with error: %@", error);
-               [FlurryAnalytics logError:@"FeedNotificationsSubscribed" message:[error localizedDescription] error:error];
+               [FlurryAnalytics logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
                onError(error);
            }];
 }
 
 - (void)changeNotificationSetting:(BOOL)shouldNotify
                    forFeedWithURL:(NSString *)feedURL
-                     onCompletion:(void (^)(void))completion
+                     onCompletion:(void (^)())completion
                           onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedURL);
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     [self postPath:@"subscriptions/update.json"
-        parameters:[NSDictionary dictionaryWithObjectsAndKeys:deviceId, @"deviceId", feedURL, @"feedUrl", shouldNotify ? @"true" : @"false",nil]
+        parameters:[NSDictionary dictionaryWithObjectsAndKeys:deviceId, @"deviceId", feedURL, @"feedUrl", shouldNotify ? @"true" : @"false",@"should_notify", nil]
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                if (completion) {
                    dispatch_async(dispatch_get_main_queue(), ^{
@@ -346,24 +371,23 @@
 
 
 -(void)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL 
-                         withDeviceId:(NSString *)deviceId
                          onCompletion:(void (^)(void))completion 
                               onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedURL);
-    NSParameterAssert(deviceId);
+    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
    
     [self postPath:@"subscriptions/destroy.json"  parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                completion();
 
-               [FlurryAnalytics logEvent:@"FeedNotificationsUnsubscribed" withParameters:params];
+               [FlurryAnalytics logEvent:@"FeedUnsubscribed" withParameters:params];
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"unsubscribe failed with error: %@", error);
                onError(error);
-               [FlurryAnalytics logError:@"FeedNotificationsUnsubscribed" message:[error localizedDescription] error:error];
+               [FlurryAnalytics logError:@"SubscribingToFeed" message:[error localizedDescription] error:error];
            }];
 }
 

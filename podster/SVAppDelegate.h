@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SVAppDelegate : UIResponder <UIApplicationDelegate>
-
+#import "AdWhirlView.h"
+@interface SVAppDelegate : UIResponder <UIApplicationDelegate, AdWhirlDelegate>
+@property (strong, nonatomic) AdWhirlView *banner;
 @property (strong, nonatomic) UIWindow *window;
 - (void)startListening;
 - (void)stopListening;

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UITableViewController
+@interface SettingsViewController : UITableViewController<MFMailComposeViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UISwitch *premiumSwitch;
 - (IBAction)premiumSwitchToggled:(id)sender;
+- (IBAction)purchaseTapped:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *buyButton;
 
 @end

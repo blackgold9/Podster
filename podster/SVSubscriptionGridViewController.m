@@ -8,7 +8,6 @@
 
 #import "SVSubscriptionGridViewController.h"
 #import "GMGridView.h"
-#import "SVSubscription.h"
 #import "SVSubscriptionManager.h"
 #import "SVPodcast.h"
 #import "SVPodcastDetailsViewController.h"
@@ -64,7 +63,7 @@
 {
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
-      self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];//[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+      self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
     self.gridView.centerGrid = NO;
 }
 
@@ -77,10 +76,12 @@
 
 - (void)rootContextUpdated:(NSNotification *)notification
 {
-    LOG_GENERAL(2, @"Root context changed. Refetching");
-    NSError *error= nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        LOG_GENERAL(2, @"Root context changed. Refetching");
+        NSError *error= nil;
         [self.fetcher performFetch:&error];
         NSAssert(error == nil, @"Error!");
+    });
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -89,8 +90,8 @@
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
 
 
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"subscription != nil"];
-    NSFetchRequest *request = [SVPodcast requestAllSortedBy:@"lastUpdated" ascending:NO withPredicate:predicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+    NSFetchRequest *request = [SVPodcast requestAllSortedBy:SVPodcastAttributes.lastUpdated ascending:NO withPredicate:predicate];
     request.includesSubentities = NO;
     self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                        managedObjectContext:[NSManagedObjectContext defaultContext] 
@@ -158,17 +159,18 @@
             [self.gridView removeObjectAtIndex:indexPath.row 
                                  withAnimation:GMGridViewItemAnimationNone];
             [self.gridView insertObjectAtIndex:newIndexPath.row
-                                 withAnimation:GMGridViewItemAnimationScroll];
+                                 withAnimation:GMGridViewItemAnimationNone];
            // needsReload = YES;
             break;
         case NSFetchedResultsChangeUpdate:
         {
             LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
             [self.gridView reloadObjectAtIndex:indexPath.row
-                                 withAnimation:GMGridViewItemAnimationScroll];
+                                 withAnimation:GMGridViewItemAnimationFade];
         }
             break;
         default:
+            LOG_GENERAL(2,@"GRID: Some other type of update");
             break;
     }
     

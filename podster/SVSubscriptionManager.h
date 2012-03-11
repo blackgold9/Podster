@@ -15,10 +15,9 @@ static NSString *const kPodcastHasBeenUpdated = @"PodcastHasBeenUpdated";
 -(void)refreshAllSubscriptions;
 + (id)sharedInstance;
 
-// When registering with the server,  we recieve an array of dictionaries back
-// The format is { feed_url_hash : notifications_enabled_bool }
+// When registering with the server,  recive a dictionary of feed_urls and notification statuses
 // The plan here is to update the notification status enforced from the server
 // For the cases where they fall OUT of premium status
 // and to register new feeds the server missed (somehow out of sync)
-- (void)processServerState:(NSArray *)subscriptions;
+- (void)processServerState:(NSDictionary *)serverState isPremium:(BOOL)isPremium;
 @end

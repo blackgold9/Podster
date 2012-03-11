@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class OBSlider;
 @interface SVPlaybackController : UIViewController
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIButton *skipForwardButton;
 @property (weak, nonatomic) IBOutlet UIButton *skipBackButton;
 - (IBAction)playTapped:(id)sender;

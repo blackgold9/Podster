@@ -25,6 +25,9 @@
 -(BOOL)notificationsNeedSyncing;
 - (void)setNotificationsNeedSyncing:(BOOL)needSyncing;
 + (SVSettings *)sharedInstance;
-
+- (BOOL)premiumMode;
+- (void)setPremiumMode:(BOOL)premiumMode;
+- (NSInteger)maxNonPremiumNotifications;
+- (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications;
 
 @end

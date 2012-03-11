@@ -10,9 +10,11 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *etag;
 	__unsafe_unretained NSString *feedURL;
 	__unsafe_unretained NSString *hidePlayedEpisodes;
+	__unsafe_unretained NSString *isSubscribed;
 	__unsafe_unretained NSString *lastSynced;
 	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *logoURL;
+	__unsafe_unretained NSString *needsReconciling;
 	__unsafe_unretained NSString *shouldNotify;
 	__unsafe_unretained NSString *smallLogoURL;
 	__unsafe_unretained NSString *sortNewestFirst;
@@ -36,6 +38,8 @@ extern const struct SVPodcastFetchedProperties {
 
 @class SVPodcastEntry;
 @class SVSubscription;
+
+
 
 
 
@@ -113,6 +117,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber *isSubscribed;
+
+
+@property BOOL isSubscribedValue;
+- (BOOL)isSubscribedValue;
+- (void)setIsSubscribedValue:(BOOL)value_;
+
+//- (BOOL)validateIsSubscribed:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSDate *lastSynced;
 
 
@@ -133,6 +149,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateLogoURL:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *needsReconciling;
+
+
+@property BOOL needsReconcilingValue;
+- (BOOL)needsReconcilingValue;
+- (void)setNeedsReconcilingValue:(BOOL)value_;
+
+//- (BOOL)validateNeedsReconciling:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -299,6 +327,15 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+- (NSNumber*)primitiveIsSubscribed;
+- (void)setPrimitiveIsSubscribed:(NSNumber*)value;
+
+- (BOOL)primitiveIsSubscribedValue;
+- (void)setPrimitiveIsSubscribedValue:(BOOL)value_;
+
+
+
+
 - (NSDate*)primitiveLastSynced;
 - (void)setPrimitiveLastSynced:(NSDate*)value;
 
@@ -313,6 +350,15 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveLogoURL;
 - (void)setPrimitiveLogoURL:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveNeedsReconciling;
+- (void)setPrimitiveNeedsReconciling:(NSNumber*)value;
+
+- (BOOL)primitiveNeedsReconcilingValue;
+- (void)setPrimitiveNeedsReconcilingValue:(BOOL)value_;
 
 
 

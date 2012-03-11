@@ -8,6 +8,7 @@
 
 #import "IAPHelper.h"
 #import "NSData+Base64.h"
+#import "BlockAlertView.h"
 @implementation IAPHelper
 @synthesize productIdentifiers = _productIdentifiers;
 @synthesize products = _products;
@@ -26,9 +27,9 @@
             BOOL productPurchased = [[NSUserDefaults standardUserDefaults] boolForKey:productIdentifier];
             if (productPurchased) {
                 [purchasedProducts addObject:productIdentifier];
-                NSLog(@"Previously purchased: %@", productIdentifier);
+                NSLog(@"StoreKit: Previously purchased: %@", productIdentifier);
             }
-            NSLog(@"Not purchased: %@", productIdentifier);
+            NSLog(@"StoreKit: Not purchased: %@", productIdentifier);
         }
         self.purchasedProducts = purchasedProducts;
                         
@@ -46,16 +47,18 @@
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     
-    NSLog(@"Received products results...");   
+    NSLog(@"StoreKit: Received products results...");   
     self.products = response.products;
     self.request = nil;    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kProductsLoadedNotification object:_products];    
 }
+-(void)request:(SKRequest *)request didFailWithError:(NSError *)error
+{
+    LOG_GENERAL(0, @"StoreKit: request failed with error: %@", error            );
+}
 
 - (void)recordTransaction:(SKPaymentTransaction *)transaction {    
-    NSString *receipt = [transaction.transactionReceipt base64EncodedString];
-    LOG_GENERAL(1, @"REcorded transaction with receipt: %@", receipt);
 }
 
 - (void)provideContent:(NSString *)productIdentifier {
@@ -71,7 +74,7 @@
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
     
-    NSLog(@"completeTransaction...");
+    NSLog(@"StoreKit: completeTransaction...");
     
     [self recordTransaction: transaction];
     [self provideContent: transaction.payment.productIdentifier];
@@ -81,7 +84,7 @@
 
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
     
-    NSLog(@"restoreTransaction...");
+    NSLog(@"StoreKit: restoreTransaction...");
     
     [self recordTransaction: transaction];
     [self provideContent: transaction.originalTransaction.payment.productIdentifier];

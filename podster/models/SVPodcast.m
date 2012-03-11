@@ -1,6 +1,7 @@
 #import "SVPodcast.h"
 #import "NSDictionary+safeGetters.h"
 #import "MWFeedInfo.h"
+#import "SVPodcastEntry.h"
 #import "NSString+MD5Addition.h"
 @implementation SVPodcast
 -(void)updatePodcastWithFeedInfo:(MWFeedInfo *)info
@@ -48,6 +49,21 @@
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"%@: %@", [super description], self.title];
+}
+
+- (SVPodcastEntry *)firstUnplayed
+{
+    NSManagedObjectContext *context = self.managedObjectContext;
+    __block SVPodcastEntry *entry = nil;
+    [context performBlockAndWait:^{
+        NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@", self];
+        entry = [SVPodcast findFirstWithPredicate:isChild 
+                                 sortedBy:SVPodcastEntryAttributes.datePublished
+                                ascending:!self.sortNewestFirstValue];
+        
+    }];
+    
+    return entry;
 }
 
 @end

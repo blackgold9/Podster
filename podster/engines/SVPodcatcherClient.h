@@ -28,15 +28,16 @@ typedef void (^SVErrorBlock)(NSError *error);
                                          onCompletion:(PodcastListResponeBlock)completion
                                               onError:(SVErrorBlock)error;
 
-- (void)changeNotificationSetting:(BOOL)shouldNotify forFeedWithURL:(NSString *)feedURL onCompletion:(void (^)())completion onError:(SVErrorBlock)onError;
+- (void)changeNotificationSetting:(BOOL)shouldNotify 
+                   forFeedWithURL:(NSString *)feedURL 
+                     onCompletion:(void (^)())completion
+                          onError:(SVErrorBlock)onError;
 
-- (void)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL
-                                          withDeviceId:(NSString *)deviceId
+- (void)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL                                    
                                           onCompletion:(void(^)(void))completion
                                                onError:(SVErrorBlock)error;
 
-- (void)notifyOfSubscriptionToFeed:(NSString *)feedURL
-                                      withDeviceId:(NSString *)deviceId
+- (void)notifyOfSubscriptionToFeed:(NSString *)feedURL                                    
                                       onCompletion:(void(^)(void))completion
                                            onError:(SVErrorBlock)error;
 
@@ -66,13 +67,14 @@ typedef void (^SVErrorBlock)(NSError *error);
                                      onError:(SVErrorBlock)onError;
 
 -(void)registerForPushNotificationsWithToken:(NSString *)token
-                                          andDeviceIdentifer:(NSString *)deviceId
-                                                onCompletion:(void (^)(void))onComplete
+                          andDeviceIdentifer:(NSString *)deviceId
+                                onCompletion:(void (^)(NSDictionary *))onComplete
                                                      onError:(SVErrorBlock)onError;
 
 - (void)featuredPodcastsForLanguage:(NSString *)language
                        onCompletion:(PodcastListResponeBlock)completion 
                             onError:(SVErrorBlock)errorBlock;
-#pragma mark - podcast downloading
-
+- (void)updateDeviceReceipt:(NSString *)receipt
+               onCompletion:(void (^)(BOOL))onComplete
+                    onError:(SVErrorBlock)onError;
 @end

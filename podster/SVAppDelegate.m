@@ -20,8 +20,10 @@
 #import "GMGridView.h"
 #import "SVSubscription.h"
 #import "ZUUIRevealController.h"
+#import "SVSubscriptionManager.h"
 #import "PodsterIAPHelper.h"
 #import <CoreText/CoreText.h>
+#import "BannerViewController.h"
 
 @implementation SVAppDelegate
 {
@@ -31,7 +33,7 @@
 }
 
 NSString *uuid();
-
+@synthesize banner = _banner;
 @synthesize window = _window;
 - (void)subscribeToFeedWithURL:(NSString *)url
 {
@@ -44,7 +46,6 @@ NSString *uuid();
         [[NSManagedObjectContext defaultContext] save:nil];        
 
         [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:url
-                                                           withDeviceId:[[SVSettings sharedInstance] deviceId]
                                                            onCompletion:^{
                                                                
                                                            } onError:^(NSError *error) {
@@ -196,10 +197,9 @@ NSString *uuid();
 //    });
 
     
+    
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
     
-
-    [[PodsterIAPHelper sharedInstance] requestProducts];
     [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
     parentContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     parentContext.persistentStoreCoordinator = [NSPersistentStoreCoordinator defaultStoreCoordinator];
@@ -219,13 +219,30 @@ NSString *uuid();
 
 
     // Actually register
-#ifndef CONFIGURATION_Debug
+//#ifndef CONFIGURATION_Debug
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
                                                                            UIRemoteNotificationTypeBadge|
                                                                            UIRemoteNotificationTypeSound)];
-#endif
+//#endif
  //   #endif
-    return YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:kProductPurchasedNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                     // Any purchase in this version is to premium status
+                                                      [[SVSettings sharedInstance] setPremiumMode:YES];
+                                                  }];
+   
+
+    if (![[SVSettings sharedInstance] premiumMode]) {
+        LOG_GENERAL(1, @"Starting in free mode");;
+        BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
+        self.window.rootViewController = controller;
+    } else {
+        LOG_GENERAL(1, @"Starting in premium mode");
+    }
+    return YES;    
 }
 
 
@@ -243,8 +260,15 @@ NSString *uuid();
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[SVPodcatcherClient sharedInstance] registerForPushNotificationsWithToken:tokenAsString 
                                                             andDeviceIdentifer:deviceId
-                                                                  onCompletion:^{
-                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore");    
+                                                                  onCompletion:^(NSDictionary *config ){
+                                                                      BOOL isPremium = [(NSNumber *)[config valueForKey:@"premium"] boolValue];
+                                                                      NSDictionary *subscriptions = [config objectForKey:@"subscriptions"];
+                                                                      [[SVSettings sharedInstance] setPremiumMode:isPremium];
+                                                                      [[SVSubscriptionManager sharedInstance] processServerState:subscriptions
+                                                                       isPremium:isPremium];
+                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore"); 
+                                                                      // TODO: Handle subscriptions from server
+
                                                                       [[SVSettings sharedInstance] setNotificationsEnabled:YES];
 
                                                                   } onError:^(NSError *error) {
@@ -302,7 +326,30 @@ NSString *uuid();
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [[NSManagedObjectContext defaultContext] save:nil];
+    
+    
+    __block UIBackgroundTaskIdentifier background_task; //Create a task object
+    
+    background_task = [application beginBackgroundTaskWithExpirationHandler: ^ {
+        [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
+        background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
+        
+        //System will be shutting down the app at any point in time now
+    }];
+    
+    //Background tasks require you to use asyncrous tasks
+    [[NSManagedObjectContext defaultContext] performBlock:^{
+        LOG_GENERAL(2,@"Saving on entering background");
+        [[NSManagedObjectContext defaultContext] save:nil];
+        [parentContext performBlock:^{
+            LOG_GENERAL(2, @"Saving parent context");
+            [parentContext save:nil];
+            LOG_GENERAL(2, @"Done parent context");
+            [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
+            background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
+            
+        }];
+    }];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -408,5 +455,17 @@ NSString *uuid();
         saveTimer = nil;
     }
 }
+
+#pragma mark -ads
+-(NSString *)adWhirlApplicationKey
+{
+    return @"91e9936604204bdb96316e8ebbf225ed";
+}
+
+- (UIViewController *)viewControllerForPresentingModalView {
+    return self.window.rootViewController;
+}
+
+
 
 @end

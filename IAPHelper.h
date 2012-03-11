@@ -29,4 +29,7 @@
 - (id)initWithProductIdentifiers:(NSSet *)productIdentifiers;
 - (void)buyProductIdentifier:(NSString *)productIdentifier;
 
+// For overriding
+- (void)recordTransaction:(SKPaymentTransaction *)transaction;
+- (void)provideContent:(NSString *)productIdentifier;
 @end

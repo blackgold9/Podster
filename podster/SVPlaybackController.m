@@ -18,6 +18,7 @@
     AVPlayer *player;
     id playerObserver;
 }
+@synthesize containerView;
 @synthesize skipForwardButton;
 @synthesize skipBackButton;
 @synthesize chromeViews;
@@ -59,6 +60,7 @@
     [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
     [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
     [player removeTimeObserver:playerObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 }
 - (void)registerObservers
@@ -79,6 +81,14 @@
             weakSelf.progressSlider.value = (float) (currentTimeInSeconds) / (duration.value / duration.timescale);
         }
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [self.navigationController popViewControllerAnimated:YES];
+                                                  }];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -118,6 +128,7 @@
     [self setSkipForwardButton:nil];
     [self setArtworkImage:nil];
     [self setTitleLabel:nil];
+    [self setContainerView:nil];
     [super viewDidUnload];
         // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

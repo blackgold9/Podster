@@ -8,6 +8,7 @@
 
 #import "SVSettings.h"
 #import "HomeController.h"
+#import "BlockAlertView.h"
 @implementation SVSettings {
     NSUserDefaults *defaults;
 }
@@ -119,4 +120,46 @@ NSString *uuid(){
     [defaults setBool:needSyncing forKey:@"NotificationsNeedSyncing"];
      
 }
+
+- (BOOL)premiumMode
+{
+    return [defaults boolForKey:@"premium"];
+
+}
+
+
+- (void)setPremiumMode:(BOOL)premiumMode
+{
+    if (premiumMode != [self premiumMode]) {
+        NSDictionary *params = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:premiumMode] forKey:@"Premium"];
+        [FlurryAnalytics logEvent:@"PremiumChanged" withParameters:params];
+        LOG_GENERAL(2, @"Premium changed");
+        [defaults setBool:premiumMode forKey:@"premium"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPremiumModeChanged" object:nil];
+        if (premiumMode) {
+            NSString *title = NSLocalizedString(@"PURCHASE_ERROR", @"Title for alrerts dealing with purchase errors");
+            NSString *body = NSLocalizedString(@"PURCHASE_VALIDATION_FAILED", @"Error message for when purchase validation has failed");
+            BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
+            [alertView setCancelButtonWithTitle:@"OK" block:^{
+                
+            }];
+            [alertView show];
+        }
+
+    }
+
+
+}
+
+- (NSInteger)maxNonPremiumNotifications
+{
+    return MAX(1, [defaults integerForKey:@"MaxNonPremiumNotifications"]);
+}
+
+- (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications
+{
+    [defaults setInteger:maxNotifications forKey:@"MaxNonPremiumNotifications"];
+}
+
+
 @end

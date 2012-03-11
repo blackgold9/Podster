@@ -18,6 +18,8 @@
 #import "SVPodcatcherClient.h"
 #import "UIColor+Hex.h"
 #import "BlockAlertView.h"
+#import "SVPodcast.h"
+#import "MBProgressHUD.h"
 @implementation FeaturedController {
     NSArray *featured;
     SVPodcastImageCache *imageCache;
@@ -55,15 +57,21 @@
 //    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
 //    self.gridView.centerGrid = NO;
     self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
-    self.featuedGrid.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
+    self.featuedGrid.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
     self.featuedGrid.dataSource = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[SVPodcatcherClient sharedInstance] featuredPodcastsForLanguage:nil
                                                         onCompletion:^(NSArray *returned) {
                                                             featured = returned;                                                                                                                                                                                 
                                                             [self.featuedGrid reloadData];
+                                                                [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                         } onError:^(NSError *error) {
+                                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                             LOG_GENERAL(2, @"Error occured downloading featured podcasts");
                                                             BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Oh No!" message:@"There was a problem downloading the featured podcasts for today. Please try again later."];
+                                                            [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", @"OK button text") block:^{
+                                                                
+                                                            }];
                                                             [alert show];
                                                         }];
 }
@@ -186,6 +194,19 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)gridView:(NRGridView *)gridView didSelectCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *sectionDict = [featured objectAtIndex:indexPath.section];
+        NSArray *feeds = [sectionDict valueForKey:@"feeds"];
+        id<ActsAsPodcast> podcast = [feeds objectAtIndex:indexPath.row];
+    SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
+        controller.podcast = podcast;
+    [self.navigationController pushViewController:controller animated:YES];
+
+    [gridView deselectCellAtIndexPath:indexPath animated:NO];
+
 }
 
 @end
