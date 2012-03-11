@@ -125,7 +125,7 @@
 - (void)loadView
 {
     [super loadView];
-    //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+    //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
     //imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     //[self.view addSubview:imageView];
                               

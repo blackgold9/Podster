@@ -57,7 +57,7 @@
 //    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
 //    self.gridView.centerGrid = NO;
     self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
-    self.featuedGrid.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg-gunmetal.png"]];
+    self.featuedGrid.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"honeycomb.png"]];
     self.featuedGrid.dataSource = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[SVPodcatcherClient sharedInstance] featuredPodcastsForLanguage:nil
