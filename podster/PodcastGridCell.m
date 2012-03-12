@@ -11,7 +11,6 @@
 #import "UIColor+Hex.h"
 #import "SVPodcastImageCache.h"
 #import "ActsAsPodcast.h"
-#import "UIImageView+WebCache.h"
 @interface PodcastGridCell()
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -68,17 +67,9 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         view.layer.borderWidth = 2;
                 
         
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.colors = [NSArray arrayWithObjects:
-                           (id)[[UIColor colorWithHex:0x01408C] CGColor],
-                           (id)[[UIColor colorWithHex:0x052D52] CGColor],
-                           nil];
-        gradient.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.3], [NSNumber numberWithFloat:1], nil];
-        gradient.frame = self.bounds;
-        [view.layer addSublayer:gradient];
-
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
-        [view addSubview:self.imageView];
+        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder.png"]];
+        backgroundImage.frame = view.frame;
+        [view addSubview:backgroundImage];
        
         
         
@@ -159,8 +150,7 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         //                                 
         //                             }];
         
-        [self.imageView setImageWithURL:imageURL
-                       placeholderImage:nil options:SDWebImageRetryFailed];
+        [self.imageView setImageWithURL:imageURL];
         if (self.imageView.image) {
             self.titleLabel.hidden = YES;
         }
@@ -231,8 +221,7 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
 //                                 
 //                             }];
                
-        [self.imageView setImageWithURL:imageURL
-                       placeholderImage:nil options:SDWebImageRetryFailed];
+        [self.imageView setImageWithURL:imageURL];
         if (self.imageView.image) {
             self.titleLabel.hidden = YES;
         }

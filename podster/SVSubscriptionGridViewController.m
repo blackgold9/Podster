@@ -63,7 +63,10 @@
 {
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
-      self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"honeycomb.png"]];
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
+    [self.view addSubview:image];
+    [self.view sendSubviewToBack:image];
+    self.gridView.backgroundColor = [UIColor clearColor];
     self.gridView.centerGrid = NO;
 }
 

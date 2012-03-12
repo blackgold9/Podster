@@ -135,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "podster/SVSubscriptionGridViewController.m"
-         timestampString = "350560229.026224"
+         timestampString = "353201863.519334"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "87"
-         endingLineNumber = "87"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -183,6 +183,19 @@
          startingLineNumber = "136"
          endingLineNumber = "136"
          landmarkName = "-viewDidAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/engines/SVPodcatcherClient.m"
+         timestampString = "353201950.449996"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "341"
+         endingLineNumber = "341"
+         landmarkName = "-notifyOfSubscriptionToFeed:onCompletion:onError:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

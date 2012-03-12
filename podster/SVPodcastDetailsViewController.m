@@ -296,7 +296,6 @@
 
 - (IBAction)subscribeTapped:(id)sender {
     LOG_GENERAL(2, @"Subscribe tapped");
-    self.subscribeButton.enabled = NO;
     if(!isSubscribed) {
         [self subscribeToPodcast];
     } else {

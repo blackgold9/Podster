@@ -340,7 +340,9 @@ onCompletion:(void (^)(BOOL))onComplete
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"subscribe failed with error: %@", error);
                [FlurryAnalytics logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
-               onError(error);
+               if (onError) {
+                   onError(error);
+               }
            }];
 }
 
