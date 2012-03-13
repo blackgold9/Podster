@@ -9,8 +9,9 @@
 #import "PodcastGridCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+Hex.h"
-#import "SVPodcastImageCache.h"
+#import "UIImage+ForceDecompress.h"
 #import "ActsAsPodcast.h"
+#import "UIImageView+AFNetworking.h"
 @interface PodcastGridCell()
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -67,11 +68,12 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         view.layer.borderWidth = 2;
                 
         
-        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder.png"]];
-        backgroundImage.frame = view.frame;
-        [view addSubview:backgroundImage];
+//        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder.png"]];
+//        backgroundImage.frame = view.frame;
+//        [view addSubview:backgroundImage];
        
-        
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
+        [view addSubview:self.imageView];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
         self.titleLabel.textColor = [UIColor whiteColor];
@@ -81,6 +83,7 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.tag = 1907;
         self.titleLabel.opaque = NO;
+        self.titleLabel.adjustsFontSizeToFitWidth = YES;
         [view addSubview:self.titleLabel];
 
         
@@ -120,18 +123,17 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
 -(void)bind:(id<ActsAsPodcast>)podcast
   fadeImage:(BOOL)fadeImage
 {
+    [imageLoadOp cancel];
+
     self.titleLabel.text = podcast.title;
     NSString *logoString = podcast.smallLogoURL;
     if (!logoString) {
         logoString = podcast.logoURL;
     }
-    if (self.imageView.image != nil) {
-        // Imageview image is cleaned up in prepareForREuse, so if there's an image, this is just an update
-        // Don't show the label if you dont have to;
-        self.titleLabel.hidden = YES;
-    } else {
-        self.titleLabel.hidden = NO;
-    }
+
+    self.imageView.image =  [UIImage imageNamed:@"placeholder.png"];
+
+    self.titleLabel.hidden = NO;
     if(logoString) {
         NSURL *imageURL = [NSURL URLWithString: logoString];
         //        [cache imageFromCacheWithURL:imageURL
@@ -149,98 +151,41 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         //                             } failure:^{
         //                                 
         //                             }];
-        
-        [self.imageView setImageWithURL:imageURL];
-        if (self.imageView.image) {
-            self.titleLabel.hidden = YES;
-        }
-        
+        __weak UIImageView *weakImageView = self.imageView;
         __weak UILabel *weakLabel = self.titleLabel;
-        __block PodcastGridCell *blockCell = self;
-        [self.imageView addObserverForKeyPath:@"image"                                 
-                                         task:^(id obj, NSDictionary *change) {
-                                             UIImageView *localView = obj;
-                                             
-                                             if (localView.image) {
-                                                 [weakLabel setHidden:YES];
-                                             }
-                                             
-                                             [blockCell removeAllBlockObservers];
-                                         }];
+
+
+        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
         
-    } else {
-        
-    }
-    
-    UILabel *countLabel = (UILabel *)[self viewWithTag:1908];
-    UIImageView *countOverlay = (UIImageView *)[self viewWithTag:1909];
-    if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
-        countOverlay.hidden = NO;
-        countLabel.hidden = NO;
-        countLabel.text = [NSString stringWithFormat:@"%d", [[podcast unseenEpsiodeCount] integerValue]];
-    } else {
-        countLabel.hidden = YES;
-        countOverlay.hidden = YES;
-    }
-    
-
-
-}
-
--(void)bind:(id<ActsAsPodcast>)podcast
-  fadeImage:(BOOL)fadeImage withImageCache:(SVPodcastImageCache *)cache
-{
-
-    self.titleLabel.text = podcast.title;
-    NSString *logoString = podcast.smallLogoURL;
-    if (!logoString) {
-        logoString = podcast.logoURL;
-    }
-    if (self.imageView.image != nil) {
-        // Imageview image is cleaned up in prepareForREuse, so if there's an image, this is just an update
-        // Don't show the label if you dont have to;
-        self.titleLabel.hidden = YES;
-    } else {
-        self.titleLabel.hidden = NO;
-    }
-    if(logoString) {
-        NSURL *imageURL = [NSURL URLWithString: logoString];
-//        [cache imageFromCacheWithURL:imageURL
-//                             success:^(UIImage *image) {
-//                                 [UIView transitionWithView:imageView
-//                                                   duration:0.33
-//                                                    options:UIViewAnimationOptionTransitionCrossDissolve
-//                                                 animations:^{
-//                                                     label.hidden = YES;
-//                                                     imageView.image = image;
-//                                                 } completion:^(BOOL finished) {
-//                                                     
-//                                                 }];
+        [self.imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                                                        self.titleLabel.hidden = YES;
+                                                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                                                        
+                                                                                    }];
+//        __weak AFImageRequestOperation *weakOp = imageLoadOp;
+//        imageLoadOp = [AFImageRequestOperation imageRequestOperationWithRequest:request
+//                                                           imageProcessingBlock:nil
+//                                                                      cacheName:nil
+//                                                                        success:^(NSURLRequest *req, NSHTTPURLResponse *response, UIImage *image) {
+//                                                                            if ( [[[req URL] absoluteString] isEqualToString:[imageURL absoluteString]]){
+//                                                                                UIImage *decompressed = [image preloadedImage];
+//                                                                                dispatch_async(dispatch_get_main_queue(), ^{
+//                                                                                    if (![weakOp isCancelled])
+//                                                                                    [UIView transitionWithView:weakImageView
+//                                                                                                      duration:0.25
+//                                                                                                       options:UIViewAnimationOptionTransitionCrossDissolve
+//                                                                                                      animations:^{
+//                                                                                                          weakImageView.image = decompressed;
+//                                                                                                          weakLabel.hidden = YES;
+//                                                                                                      } completion:nil];
+//                                                                                });
 //
-//                             } failure:^{
-//                                 
-//                             }];
-               
-        [self.imageView setImageWithURL:imageURL];
-        if (self.imageView.image) {
-            self.titleLabel.hidden = YES;
-        }
-        
-        __weak UILabel *weakLabel = self.titleLabel;
-        __block PodcastGridCell *blockCell = self;
-        [self.imageView addObserverForKeyPath:@"image"                                 
-                                         task:^(id obj, NSDictionary *change) {
-                                             UIImageView *localView = obj;
-
-                                             if (localView.image) {
-                                                 [weakLabel setHidden:YES];
-                                             }
-                                             
-                                             [blockCell removeAllBlockObservers];
-                                         }];
-        
-    } else {
-        
+//                                                                            }
+//                                                                        } failure:nil];
+//        imageLoadOp.successCallbackQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+//        [imageLoadOp start];      
+//        
     }
     
     UILabel *countLabel = (UILabel *)[self viewWithTag:1908];
@@ -253,8 +198,12 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         countLabel.hidden = YES;
         countOverlay.hidden = YES;
     }
+    
+
+    self.accessibilityLabel = [podcast title];
 
 }
+
 
 -(void)prepareForReuse
 {

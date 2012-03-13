@@ -135,17 +135,8 @@ NSString *uuid(){
         [FlurryAnalytics logEvent:@"PremiumChanged" withParameters:params];
         LOG_GENERAL(2, @"Premium changed");
         [defaults setBool:premiumMode forKey:@"premium"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPremiumModeChanged" object:nil];
-        if (premiumMode) {
-            NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
-            NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
-            BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
-            [alertView setCancelButtonWithTitle:@"OK" block:^{
-                
-            }];
-            [alertView show];
-        }
-
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPremiumModeChanged" object:self];
+        
     }
 
 

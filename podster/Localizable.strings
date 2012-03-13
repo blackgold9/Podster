@@ -26,3 +26,21 @@
 "LEARN_MORE" = "Learn More...";
 "DECLINE" = "No Thanks";
 
+
+"Disabled" = "Disabled";
+"Enabled" = "Enabled";
+"TAP_TO_UPGRADE" = "Tap to Upgrade";
+"PREMIUM_DESCRIPTION" = "The Podster Premium Experience removes all ads, and enables you to monitor as many podcasts as you like for new episodes.";
+"PRIVACY_POLICY" = "Privacy Policy";
+"CONTACT_US" = "Contact Us";
+"LEGAL_INFO" = "Legal Information";
+"Waiting for connection..." = "Waiting for connection...";
+"OFFLINE" = "OFFLINE";
+
+"FAVORITES_NO_CONTENT" = "Podcasts you have marked as a favorite will appear here.\n(Give it a shot!)";
+
+// Notifications
+"EPISODE_NOTIFICATION" = "A new episode of \"%@\" is available!";
+
+"OK" = "OK";
+"There was a problem playing this podcast. Please try again later." = "There was a problem playing this podcast. Please try again later.";

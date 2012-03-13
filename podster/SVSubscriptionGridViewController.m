@@ -25,6 +25,7 @@
     NSUInteger tappedIndex;
     BOOL needsReload;
 }
+@synthesize noContentLabel;
 @synthesize fetcher;
 @synthesize gridView = _gridView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -72,6 +73,7 @@
 
 - (void)viewDidUnload
 {
+    [self setNoContentLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -112,6 +114,9 @@
     [self.fetcher performFetch:&error];
     NSAssert(error == nil, @"Error!");
     [self.gridView reloadData];
+    self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
+    self.noContentLabel.numberOfLines = 0;
+    self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -141,11 +146,12 @@
         LOG_GENERAL(2, @"Needs reload");
         [self.gridView reloadData];
     }
+    self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    SVPodcast *podcast = [self.fetcher objectAtIndexPath:indexPath];
+//    SVPodcast *podcast = [self.fetcher objectAtIndexPath:indexPath];
     switch (type) {
         case NSFetchedResultsChangeInsert:
             LOG_GENERAL(2, @"GRID:Inserting object at %d", indexPath.row);

@@ -16,6 +16,7 @@
 #import "BlockAlertView.h"
 #import "SVPlaybackController.h"
 #import "MessageGenerator.h"
+#import "BannerViewController.h"
 
 // The percentage after which a podcast is marked as played
 #define PLAYED_PERCENTAGE 0.95
@@ -236,10 +237,13 @@ void audioRouteChangeListenerCallback (
     // Check if there was a previous position
     BOOL hasSavedPlaybackPosition = episode.positionInSecondsValue > 0;
     BOOL prettyMuchAtTheEnd = episode.positionInSecondsValue > episode.durationValue - 120;
+
     if (hasSavedPlaybackPosition && !prettyMuchAtTheEnd ) {
         [FlurryAnalytics logEvent:@"PlayingEpisodeResumingFromPreviousPosition"];
         LOG_PLAYBACK(2, @"Resuming at %d seconds", episode.positionInSecondsValue);
         [_player seekToTime:CMTimeMake(episode.positionInSecondsValue, 1)];
+    } else {
+        LOG_PLAYBACK(2, @"Starting at the beginning");
     }
 }
 
@@ -280,7 +284,9 @@ void audioRouteChangeListenerCallback (
                 } else if (_player.status == AVPlayerItemStatusFailed) {
                     LOG_PLAYBACK(1,@"Playback failed with error: %@", _player.error);
                     [FlurryAnalytics logError:@"PlaybackFailed" message:[_player.error localizedDescription] error:_player.error];
-                    _player = nil;                    
+                    _player = nil;           
+                    self.currentEpisode = nil;
+                    self.currentPodcast = nil;
                     //TODO: Reflect to user?
                 }
             } else if ([keyPath isEqualToString:@"rate"]) {
@@ -316,19 +322,26 @@ void audioRouteChangeListenerCallback (
                                       message:[currentItem.error localizedDescription] 
                                         error:currentItem.error];
                     BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                              message:@"There was a problem playing this podcast. Please try again later."];
-                    [alertView setCancelButtonWithTitle:@"OK" block:^{
+                                                                              message:NSLocalizedString(@"There was a problem playing this podcast. Please try again later.", @"There was a problem playing this podcast. Please try again later.")];
+                    [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", @"OK") block:^{
                         UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-                        if ([window.rootViewController class] == [UINavigationController class]) {
-                            UINavigationController *controller = (UINavigationController *)window.rootViewController;
-                            if ([[controller topViewController] class] == [SVPlaybackController class]) {
+                        UINavigationController *nav = nil;
+                                        if ([window.rootViewController class] == [UINavigationController class]) {
+                                            nav = (UINavigationController *)window.rootViewController;
+                                        } else {
+                                            //If the root isnt a nav controller, it's a banner controller;
+                                            BannerViewController *bc = (BannerViewController *) window.rootViewController;
+                                            nav = (UINavigationController *)[bc contentController];
+                                        }
+
+                            if ([[nav topViewController] class] == [SVPlaybackController class]) {
                                 double delayInSeconds = 0.5;
                                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
                                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                                    [controller popViewControllerAnimated:YES];                                    
+                                    [nav popViewControllerAnimated:YES];
                                 });
                             }
-                        }
+
                     }];
                     
                     [alertView show];

@@ -177,7 +177,7 @@
 			imageView.image = attachment.contents;
 		}
 		
-		[imageView setImageWithURL:attachment.contentURL placeholderImage:nil shouldFade:YES];		
+		[imageView setImageWithURL:attachment.contentURL placeholderImage:nil];		
 		return imageView;
 	}
 	return nil;

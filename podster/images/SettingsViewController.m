@@ -11,6 +11,7 @@
 #import <StoreKit/StoreKit.h>
 #import "PodsterIAPHelper.h"
 #import "MBProgressHUD.h"
+#import "BlockAlertView.h"
 @interface SettingsViewController ()
 
 @end
@@ -45,7 +46,11 @@
 //        NSData *imageData = UIImagePNGRepresentation(myImage);
 //        [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mobiletutsImage"]; 
         
-        NSString *versionNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+        NSDictionary *appInfo = [[NSBundle mainBundle] infoDictionary];
+        NSString *versionNumber = [NSString stringWithFormat:@"%@ (%@)", 
+                                [appInfo objectForKey:@"CFBundleShortVersionString"], 
+                                [appInfo objectForKey:@"CFBundleVersion"]];       
+        
         if ([[SVSettings sharedInstance] premiumMode]) {
             // Append a p if it's premium
             versionNumber = [NSString stringWithFormat:@"%@P", versionNumber];
@@ -94,16 +99,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
-    [self.view addSubview:image];
-    [self.view sendSubviewToBack:image];
-    self.tableView.backgroundColor = [UIColor clearColor];
+//    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
+//    [self.view addSubview:image];
+//    [self.view sendSubviewToBack:image];
+//    self.tableView.backgroundColor = [UIColor clearColor];
     [self.buyButton  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal  ];
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big-over.png"] forState:UIControlStateHighlighted];
 
-    // Uncomment the following line to preserve selection between presentations.
+   
+                                                         // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -113,8 +119,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+//    [[NSNotificationCenter defaultCenter] addObserver:self 
+//                                             selector:@selector(purchaseSuccessful) 
+//                                                 name:@"SVPremiumModeChanged" 
+//                                               object:[SVSettings sharedInstance]];
     [FlurryAnalytics logEvent:@"SettingsPageView"];
 }
+
 
 - (void)viewDidUnload
 {
@@ -134,19 +145,122 @@
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (indexPath.section == 1) {
-        if (indexPath.row == 1) {
+        if (indexPath.row == 0) {
             // Tapped contact us
             [self contactUsTapped];
-        }                      
+        } else if (indexPath.row == 1) {
+            [self performSegueWithIdentifier:@"showPrivacy" sender:self];
+        } else if (indexPath.row == 2) {
+            [self performSegueWithIdentifier:@"showLegal" sender:self];
+        }
     } else if (indexPath.section == 0) {
-        [self showPurchaseOptions];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        if(![[SVSettings sharedInstance] premiumMode]) {
+            [self showPurchaseOptions];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
     }
 		
 }
 
 
 #pragma mark - Table view data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger cellCount;
+    switch (section) {
+        case 0:
+            if ([[SVSettings sharedInstance] premiumMode])
+                cellCount = 1;
+            else
+                cellCount = 3;
+            break;
+        case 1:
+            cellCount = 3;
+
+            break;
+        default:
+            cellCount = 1;
+            break;
+    }
+    return cellCount;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        return 90.0;
+    } else {
+        return 44.0f;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = nil;
+    if (indexPath.section == 0) {
+        // Configure premium info section
+        if ([[SVSettings sharedInstance] premiumMode]) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"premiumStatusCell"];
+            cell.detailTextLabel.text = NSLocalizedString(@"Enabled", @"Enabled");
+        } else {
+            switch (indexPath.row) {
+                case 0:
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"premiumStatusCell"];
+                    cell.detailTextLabel.text = NSLocalizedString(@"Disabled", @"Disabled");
+                    break;
+                case 1:
+                {
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"premiumDescription"];
+                    UILabel *label = (UILabel *)[cell viewWithTag:1906];
+                    label.text = NSLocalizedString(@"PREMIUM_DESCRIPTION", @"The Podster Premium Experience removes all ads, and enables you to monitor as many podcasts as you like for new episodes.");
+                    break;
+                }
+                case 2:
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"upgradeButton"];
+                    cell.textLabel.text = NSLocalizedString(@"TAP_TO_UPGRADE", @"Tap to Upgrade!");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    } else if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 0:
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                              reuseIdentifier:@"Contact"];
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.textLabel.text = NSLocalizedString(@"CONTACT_US", @"Contact Us");
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                break;
+            case 1:
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                              reuseIdentifier:@"Privacy"];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textLabel.text = NSLocalizedString(@"PRIVACY_POLICY", @"Privacy Policy");
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                break;
+            case 2:
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                              reuseIdentifier:@"Legal"];
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textLabel.text = NSLocalizedString(@"LEGAL_INFO", @"Legal Information");
+                break;
+            default:
+            break;
+
+        }
+
+    }
+    NSAssert(cell != nil, @"cell should not be nil");
+    return cell;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -263,6 +377,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     hud.dimBackground = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseComplete) name:kProductPurchaseFailedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseComplete) name:kProductPurchaseFailedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(premiumActivated) name:@"SVPremiumModeChanged" object:[SVSettings sharedInstance]];
     
 }
 
@@ -271,8 +386,24 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchaseFailedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchasedNotification object:nil];    
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+   
 }
 
+-(void)premiumActivated
+{   
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SVPremiumModeChanged" object:[SVSettings sharedInstance]];
+    if ([[SVSettings sharedInstance] premiumMode]) {
+        NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
+        NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
+        BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
+        [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+            [self.tableView reloadData];
+        }];
+        [alertView show];
+    }
+
+}
 - (IBAction)purchaseTapped:(id)sender {
     [self showPurchaseOptions];      
 }

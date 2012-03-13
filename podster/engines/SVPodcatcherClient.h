@@ -66,10 +66,7 @@ typedef void (^SVErrorBlock)(NSError *error);
                                 onCompletion:(void (^)(void))onComplete
                                      onError:(SVErrorBlock)onError;
 
--(void)registerForPushNotificationsWithToken:(NSString *)token
-                          andDeviceIdentifer:(NSString *)deviceId
-                                onCompletion:(void (^)(NSDictionary *))onComplete
-                                                     onError:(SVErrorBlock)onError;
+- (void)registerWithDeviceId:(NSString *)deviceId notificationToken:(NSString *)token onCompletion:(void (^)(NSDictionary *))onComplete onError:(SVErrorBlock)onError;
 
 - (void)featuredPodcastsForLanguage:(NSString *)language
                        onCompletion:(PodcastListResponeBlock)completion 

@@ -24,6 +24,7 @@
 #import "PodsterIAPHelper.h"
 #import <CoreText/CoreText.h>
 #import "BannerViewController.h"
+#import "MBProgressHUD.h"
 
 @implementation SVAppDelegate
 {
@@ -33,7 +34,6 @@
 }
 
 NSString *uuid();
-@synthesize banner = _banner;
 @synthesize window = _window;
 - (void)subscribeToFeedWithURL:(NSString *)url
 {
@@ -175,7 +175,11 @@ NSString *uuid();
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+#if defined (CONFIGURATION_Release)
+[[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
+   [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
+    [FlurryAnalytics setSecureTransportEnabled:YES];
+#endif
 #if defined (CONFIGURATION_Ad_Hoc)
     [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
     [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
@@ -242,47 +246,54 @@ NSString *uuid();
     } else {
         LOG_GENERAL(1, @"Starting in premium mode");
     }
+    [self setupOfflineOverlayMonitoring];
     return YES;    
 }
 
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
 
-    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
-
-    NSString * tokenAsString = [[[devToken description] 
-                                 stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] 
-                                stringByReplacingOccurrencesOfString:@" " withString:@""];
+    LOG_GENERAL(2, @"Successuflly got a notification token from apple");
+    NSString * tokenAsString = [[[devToken description]
+            stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+            stringByReplacingOccurrencesOfString:@" " withString:@""];
 #ifndef CONFIGURATION_Release
     LOG_NETWORK(2, @"Notification Token: %@", tokenAsString);
 #endif
+    [[SVSettings sharedInstance] setNotificationsEnabled:YES];
     [[NSUserDefaults standardUserDefaults] setObject:tokenAsString forKey:@"notificationsToken"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[SVPodcatcherClient sharedInstance] registerForPushNotificationsWithToken:tokenAsString 
-                                                            andDeviceIdentifer:deviceId
-                                                                  onCompletion:^(NSDictionary *config ){
-                                                                      BOOL isPremium = [(NSNumber *)[config valueForKey:@"premium"] boolValue];
-                                                                      NSDictionary *subscriptions = [config objectForKey:@"subscriptions"];
-                                                                      [[SVSettings sharedInstance] setPremiumMode:isPremium];
-                                                                      [[SVSubscriptionManager sharedInstance] processServerState:subscriptions
-                                                                       isPremium:isPremium];
-                                                                      LOG_GENERAL(2, @"Registered for notifications with podstore"); 
-                                                                      // TODO: Handle subscriptions from server
+    [self registerWithOptionalNotificationToken:tokenAsString];
+}
 
-                                                                      [[SVSettings sharedInstance] setNotificationsEnabled:YES];
+/* Register with service. The token is optional. We want you to register regardless */
+- (void)registerWithOptionalNotificationToken:(NSString *)tokenAsString
+{
+    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+    [[SVPodcatcherClient sharedInstance] registerWithDeviceId:deviceId
+            notificationToken:tokenAsString
+                 onCompletion:^(NSDictionary *config ){
+                     BOOL isPremium = [(NSNumber *)[config valueForKey:@"premium"] boolValue];
+                     NSDictionary *subscriptions = [config objectForKey:@"subscriptions"];
+                     [[SVSettings sharedInstance] setPremiumMode:isPremium];
+                     [[SVSubscriptionManager sharedInstance] processServerState:subscriptions
+                                                                      isPremium:isPremium];
+                     LOG_GENERAL(2, @"Registered for notifications with podstore");
+                     // TODO: Handle subscriptions from server
 
-                                                                  } onError:^(NSError *error) {
-        [FlurryAnalytics logError:@"NotificationRegistrationFailed"
+
+                 } onError:^(NSError *error) {
+        [FlurryAnalytics logError:@"RegistrationFailed"
                           message:[error localizedDescription]
                             error:error];
-        LOG_GENERAL(2, @"Registered for notifications with podstore failed with error: %@", error);
+        LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
     }]; // custom method
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     if (application.applicationState != UIApplicationStateActive) {
-        NSString *hash= [userInfo valueForKey:@"url_hash"];
+        NSString *hash= [userInfo valueForKey:@"hash"];
         LOG_GENERAL(2, @"launched for podcast with URL Hash: %@", hash);
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.urlHash, hash];
         SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
@@ -294,10 +305,18 @@ NSString *uuid();
 
             SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
             controller.podcast = podcast;
+            __weak SVAppDelegate *weakDelegate = self;
             double delayInSeconds = 1.0;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+                UINavigationController *nav = nil;
+                if ([self.window.rootViewController class] == [UINavigationController class]) {
+                    nav = (UINavigationController *)weakDelegate.window.rootViewController;
+                } else {
+                    //If the root isnt a nav controller, it's a banner controller;
+                    BannerViewController *bc = (BannerViewController *) weakDelegate.window.rootViewController;
+                    nav = (UINavigationController *)[bc contentController];
+                }
                 [nav pushViewController:controller animated:YES];
 
             });
@@ -305,14 +324,9 @@ NSString *uuid();
     }
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    LOG_GENERAL(1,@"Error registering for notifications. Error: %@", err);
-#ifndef CONFIGURATION_Release
-//  [UIAlertView showAlertViewWithTitle:@"Error" message:@"Could not register for notifications" cancelButtonTitle:@"OK" otherButtonTitles:nil
-//                              
-//                              handler:^(UIAlertView *view, NSInteger index) {
-//                                  
-//                              }];
-#endif
+    [FlurryAnalytics logEvent:@"LaunchedWithNotificationsDisabled"];
+    [[SVSettings sharedInstance] setNotificationsEnabled:NO];
+    [self registerWithOptionalNotificationToken:nil];
 }
 	
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -365,6 +379,12 @@ NSString *uuid();
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    });
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -456,16 +476,27 @@ NSString *uuid();
     }
 }
 
-#pragma mark -ads
--(NSString *)adWhirlApplicationKey
+-(void)setupOfflineOverlayMonitoring
 {
-    return @"91e9936604204bdb96316e8ebbf225ed";
+    __block UIViewController *rootController = self.window.rootViewController;
+    __block BOOL isShowingOfflineOverlay = NO;
+    [[SVPodcatcherClient sharedInstance] setReachabilityStatusChangeBlock:^(BOOL isNetworkReachable) {
+        if (!isNetworkReachable&& !isShowingOfflineOverlay) {
+            LOG_GENERAL(1, @"App is offline, showing overlay");
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:rootController.view animated:YES];
+            hud.labelText = NSLocalizedString(@"OFFLINE", @"App is Offline");
+            hud.detailsLabelText = NSLocalizedString(@"Waiting for connection...", @"App is waiting for a connection");
+            hud.dimBackground = YES;
+            isShowingOfflineOverlay =YES;
+        } else {
+            if (isShowingOfflineOverlay) {
+                LOG_GENERAL(1, @"App is online, hiding overlay");
+                [MBProgressHUD hideHUDForView:rootController.view animated:YES];
+                isShowingOfflineOverlay = NO;
+            }
+        }
+        
+    }];
+
 }
-
-- (UIViewController *)viewControllerForPresentingModalView {
-    return self.window.rootViewController;
-}
-
-
-
 @end

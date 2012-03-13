@@ -12,6 +12,7 @@
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcastListCell.h"
 #import "ActsAsPodcast.h"
+#import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 static const NSInteger kDefaultPageSize = 50;
 @interface SVPodcastsSearchResultsViewController()
@@ -139,7 +140,6 @@ static const NSInteger kDefaultPageSize = 50;
                    withStartIndex:startIndex 
                       andPageSize:kDefaultPageSize];
             
-            
         }                                                           onError:^(NSError *error) {
             LOG_GENERAL(2, @"search failed with error: %@", error);
         }];
@@ -148,10 +148,12 @@ static const NSInteger kDefaultPageSize = 50;
                                                 startingAtIndex:startIndex
                                                           limit:50
                                                    onCompletion:^(NSArray *returnedPodcasts) {
+                                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                        [self processPodcasts:returnedPodcasts 
                                                               withStartIndex:startIndex 
                                                                  andPageSize:kDefaultPageSize];                                          
                                                    }    onError:^(NSError *error) {
+                                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                        //   [UIAlertView showWithError:error];
                                                    }];
     }

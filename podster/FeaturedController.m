@@ -22,7 +22,6 @@
 #import "MBProgressHUD.h"
 @implementation FeaturedController {
     NSArray *featured;
-    SVPodcastImageCache *imageCache;
 }
 @synthesize gridView;
 @synthesize featuedGrid;
@@ -124,61 +123,56 @@
     
     if(cell == nil){
         cell = [[NRGridViewCell alloc] initWithReuseIdentifier:MyCellIdentifier];
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0,0,140,140)];
-        //view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
-        //        view.layer.masksToBounds = NO;
-        //        //view.layer.cornerRadius = 8;
-        //        view.layer.shadowColor = [UIColor whiteColor].CGColor;
-        //        view.layer.shadowOpacity = 0.5;
-        //        view.layer.shadowOffset = CGSizeMake(0, 0);
-        //        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
-        //        view.layer.shadowRadius = 3;
-        view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
-        view.layer.borderWidth = 2;
-        
-        
-        CAGradientLayer *gradient = [CAGradientLayer layer];
-        gradient.colors = [NSArray arrayWithObjects:
-                           (id)[[UIColor colorWithHex:0x01408C] CGColor],
-                           (id)[[UIColor colorWithHex:0x052D52] CGColor],
-                           nil];
-        gradient.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.3], [NSNumber numberWithFloat:1], nil];
-        gradient.frame = view.bounds;
-                [view.layer addSublayer:gradient];
-        
-       
-        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder.png"]];
-        backgroundImage.frame = view.frame;
-        [view addSubview:backgroundImage];
 
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
-       titleLabel.textColor = [UIColor whiteColor];
-       titleLabel.backgroundColor = [UIColor clearColor];
-       
-       titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
-       titleLabel.numberOfLines = 0;
-       titleLabel.tag = 1907;
-       titleLabel.opaque = NO;
-        [view addSubview:titleLabel];
 
-        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
-        imageView.tag = 1906;
-        [view addSubview:imageView];
-        [cell.contentView addSubview:view];
+        PodcastGridCell *podCell = [[PodcastGridCell alloc] initWithFrame:CGRectMake(0, 0, 140, 140)];
+        podCell.tag = 9;
+//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0,0,140,140)];
+//        //view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
+//        //        view.layer.masksToBounds = NO;
+//        //        //view.layer.cornerRadius = 8;
+//        //        view.layer.shadowColor = [UIColor whiteColor].CGColor;
+//        //        view.layer.shadowOpacity = 0.5;
+//        //        view.layer.shadowOffset = CGSizeMake(0, 0);
+//        //        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
+//        //        view.layer.shadowRadius = 3;
+//        view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
+//        view.layer.borderWidth = 2;
+//
+//        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder.png"]];
+//        backgroundImage.frame = view.frame;
+//        [view addSubview:backgroundImage];
+//
+//        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
+//       titleLabel.textColor = [UIColor whiteColor];
+//       titleLabel.backgroundColor = [UIColor clearColor];
+//
+//       titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
+//       titleLabel.numberOfLines = 0;
+//       titleLabel.tag = 1907;
+//       titleLabel.opaque = NO;
+//        [view addSubview:titleLabel];
+//
+//        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
+//        imageView.tag = 1906;
+//        [view addSubview:imageView];
+        [cell.contentView addSubview:podCell];
         
     }
-    
-    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
-    imageView.image = nil;
-    UILabel *label = (UILabel *)[cell.contentView viewWithTag:1907];
+
+
+//    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
+//    imageView.image = nil;
+//    UILabel *label = (UILabel *)[cell.contentView viewWithTag:1907];
 
     NSDictionary *sectionDict = [featured objectAtIndex:indexPath.section];
     NSArray *feeds = [sectionDict valueForKey:@"feeds"];
     id<ActsAsPodcast> podcast = [feeds objectAtIndex:indexPath.row];
-    label.text = [podcast title];
-    [imageView setImageWithURL:[NSURL URLWithString:[podcast thumbLogoURL]]
-                                   placeholderImage:nil];
+    PodcastGridCell *gridCell = (PodcastGridCell *) [[cell contentView] viewWithTag:9];
+        [gridCell bind:podcast fadeImage:YES];
+    //label.text = [podcast title];
+    //[imageView setImageWithURL:[NSURL URLWithString:[podcast thumbLogoURL]]
+      //                             placeholderImage:nil];
     return cell;
 }
 

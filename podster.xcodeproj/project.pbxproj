@@ -495,6 +495,9 @@
 		4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
 		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
 		4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
+		4B8D1D89150DC9C600E6D770 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8D1D88150DC9C500E6D770 /* TextViewController.m */; };
+		4B8D1D8B150DCA0C00E6D770 /* LegalInfo.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4B8D1D8A150DCA0C00E6D770 /* LegalInfo.txt */; };
+		4B8D1D8D150DD04F00E6D770 /* PrivacyPolicy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4B8D1D8C150DD04F00E6D770 /* PrivacyPolicy.txt */; };
 		4B8F6F2F14E9A5CF00D328DE /* Unplayed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B8F6F2914E9A5CF00D328DE /* Unplayed.png */; };
 		4B8F6F3014E9A5CF00D328DE /* Unplayed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B8F6F2914E9A5CF00D328DE /* Unplayed.png */; };
 		4B8F6F3114E9A5CF00D328DE /* PartiallyPlayed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B8F6F2A14E9A5CF00D328DE /* PartiallyPlayed.png */; };
@@ -629,8 +632,6 @@
 		D608C9AF150D6BA2009BA9BD /* honeycomb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */; };
 		D62284FE14E4EBE3003084BB /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62284FD14E4EBE3003084BB /* RootController.m */; };
 		D62284FF14E4EBE3003084BB /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62284FD14E4EBE3003084BB /* RootController.m */; };
-		D622850214E4ECA3003084BB /* RearController.m in Sources */ = {isa = PBXBuildFile; fileRef = D622850114E4ECA3003084BB /* RearController.m */; };
-		D622850314E4ECA3003084BB /* RearController.m in Sources */ = {isa = PBXBuildFile; fileRef = D622850114E4ECA3003084BB /* RearController.m */; };
 		D622850614E50C48003084BB /* dark-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850414E50C48003084BB /* dark-noise.png */; };
 		D622850714E50C48003084BB /* dark-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850414E50C48003084BB /* dark-noise.png */; };
 		D622850814E50C48003084BB /* dark-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850514E50C48003084BB /* dark-noise@2x.png */; };
@@ -1126,6 +1127,10 @@
 		4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadsViewController.m; sourceTree = "<group>"; };
 		4B86242F14B57C7500A4B320 /* SVDownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadCell.h; sourceTree = "<group>"; };
 		4B86243014B57C7500A4B320 /* SVDownloadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadCell.m; sourceTree = "<group>"; };
+		4B8D1D87150DC9C500E6D770 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
+		4B8D1D88150DC9C500E6D770 /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
+		4B8D1D8A150DCA0C00E6D770 /* LegalInfo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LegalInfo.txt; sourceTree = "<group>"; };
+		4B8D1D8C150DD04F00E6D770 /* PrivacyPolicy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PrivacyPolicy.txt; sourceTree = "<group>"; };
 		4B8F6F2914E9A5CF00D328DE /* Unplayed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Unplayed.png; sourceTree = "<group>"; };
 		4B8F6F2A14E9A5CF00D328DE /* PartiallyPlayed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PartiallyPlayed.png; sourceTree = "<group>"; };
 		4B8F6F2B14E9A5CF00D328DE /* Played.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Played.png; sourceTree = "<group>"; };
@@ -1241,8 +1246,6 @@
 		D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "honeycomb@2x.png"; sourceTree = "<group>"; };
 		D62284FC14E4EBE3003084BB /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
 		D62284FD14E4EBE3003084BB /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
-		D622850014E4ECA3003084BB /* RearController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RearController.h; sourceTree = "<group>"; };
-		D622850114E4ECA3003084BB /* RearController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RearController.m; sourceTree = "<group>"; };
 		D622850414E50C48003084BB /* dark-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise.png"; sourceTree = "<group>"; };
 		D622850514E50C48003084BB /* dark-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise@2x.png"; sourceTree = "<group>"; };
 		D67B1AB914E4D4CA001EB41A /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -2021,8 +2024,6 @@
 				4B90FC8714E490120082C155 /* Debug.storyboard */,
 				D62284FC14E4EBE3003084BB /* RootController.h */,
 				D62284FD14E4EBE3003084BB /* RootController.m */,
-				D622850014E4ECA3003084BB /* RearController.h */,
-				D622850114E4ECA3003084BB /* RearController.m */,
 				4B48756C14F49781007E9092 /* SVPodcastImageCache.h */,
 				4B48756D14F49781007E9092 /* SVPodcastImageCache.m */,
 				4B48757114F497A9007E9092 /* SVPodcastImage.h */,
@@ -2035,6 +2036,10 @@
 				4B0A7A89150674EC00BADEBB /* PodsterIAPHelper.m */,
 				4B0A7B221506863000BADEBB /* Settings.storyboard */,
 				4BE7429B150C22A600557D8A /* Localizable.strings */,
+				4B8D1D87150DC9C500E6D770 /* TextViewController.h */,
+				4B8D1D88150DC9C500E6D770 /* TextViewController.m */,
+				4B8D1D8A150DCA0C00E6D770 /* LegalInfo.txt */,
+				4B8D1D8C150DD04F00E6D770 /* PrivacyPolicy.txt */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -2563,6 +2568,8 @@
 				4BE7429C150C22A600557D8A /* Localizable.strings in Resources */,
 				D608C9AE150D6BA2009BA9BD /* honeycomb.png in Resources */,
 				D608C9AF150D6BA2009BA9BD /* honeycomb@2x.png in Resources */,
+				4B8D1D8B150DCA0C00E6D770 /* LegalInfo.txt in Resources */,
+				4B8D1D8D150DD04F00E6D770 /* PrivacyPolicy.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2811,7 +2818,6 @@
 				4B90FC8B14E4907C0082C155 /* DebugHomeViewController.m in Sources */,
 				D67B1ABE14E4D4CA001EB41A /* ZUUIRevealController.m in Sources */,
 				D62284FE14E4EBE3003084BB /* RootController.m in Sources */,
-				D622850214E4ECA3003084BB /* RearController.m in Sources */,
 				4B28C97C14E7873800E1453E /* GMGridView.m in Sources */,
 				4B28C97D14E7873800E1453E /* GMGridViewCell.m in Sources */,
 				4B28C97E14E7873800E1453E /* GMGridViewLayoutStrategies.m in Sources */,
@@ -2866,6 +2872,7 @@
 				4B0A7B271506992800BADEBB /* SettingsViewController.m in Sources */,
 				4B3E5ECA150C43F300010833 /* MBProgressHUD.m in Sources */,
 				4B3E5EE1150C9A4F00010833 /* BannerViewController.m in Sources */,
+				4B8D1D89150DC9C600E6D770 /* TextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3009,7 +3016,6 @@
 				4B20247714DD0BF200820391 /* GCDiscreetNotificationView.m in Sources */,
 				D67B1ABF14E4D4CA001EB41A /* ZUUIRevealController.m in Sources */,
 				D62284FF14E4EBE3003084BB /* RootController.m in Sources */,
-				D622850314E4ECA3003084BB /* RearController.m in Sources */,
 				4B8F6F3E14E9B2BC00D328DE /* HomeController.m in Sources */,
 				4B8F6F4214EA425800D328DE /* FeaturedController.m in Sources */,
 				4B8F6F4614EA44D700D328DE /* PodcastGridCell.m in Sources */,
@@ -3270,8 +3276,9 @@
 		4B71F7C014A5B08C00D26F4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = podster/podster.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3293,7 +3300,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9DB0E41-7115-416D-928E-27B55434C2CA";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};

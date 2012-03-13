@@ -72,6 +72,11 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     return self;
 }
 
+- (UIViewController *)contentController
+{
+    return _contentController;
+}
+
 - (void)loadView
 {
     UIView *contentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

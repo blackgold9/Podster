@@ -51,7 +51,7 @@
 
     [FlurryAnalytics logEvent:@"PlaybackPageView" timed:YES];
     NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
-    [self.artworkImage setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
+    [self.artworkImage setImageWithURL:imageURL placeholderImage:nil];
 
 }
 -(void)viewDidDisappear:(BOOL)animated

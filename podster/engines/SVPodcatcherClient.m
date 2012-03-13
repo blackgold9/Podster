@@ -25,6 +25,7 @@
     dispatch_once(&onceToken, ^{
         NSURL *url = [NSURL URLWithString:@"http://podstore.herokuapp.com"];
         client = [[SVPodcatcherClient alloc] initWithBaseURL:url];
+
             [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     });
     
@@ -196,11 +197,16 @@
                   [result populateWithDictionary:dict];
                   [podcasts addObject:result];
               }
-              
-              completion(podcasts);
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  completion(podcasts);
+              });
+
           } 
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               errorHandler(error);
+              dispatch_async(dispatch_get_main_queue(), ^{
+                   errorHandler(error);
+              });
+              
           }];
 }
 
@@ -303,24 +309,26 @@ onCompletion:(void (^)(BOOL))onComplete
 }
 
 #pragma mark - push related
--(void)registerForPushNotificationsWithToken:(NSString *)token
-                          andDeviceIdentifer:(NSString *)deviceId
-                                onCompletion:(void (^)(NSDictionary *))onComplete
-                                     onError:(SVErrorBlock)onError;
+- (void)registerWithDeviceId:(NSString *)deviceId notificationToken:(NSString *)token onCompletion:(void (^)(NSDictionary *))onComplete onError:(SVErrorBlock)onError
 { 
-    NSParameterAssert(token);
     NSParameterAssert(deviceId);
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:token, @"deviceToken",  deviceId, @"deviceId",@"ios", @"platform",version, @"version", nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:  deviceId, @"deviceId",@"ios", @"platform",version, @"version", nil];
+    if (token) {
+        [params setValue:token forKey:@"deviceToken"];
+    }
     
     [self postPath:@"devices/create.json" parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              dispatch_async(dispatch_get_main_queue(), ^{
                onComplete(responseObject);
+              });
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               LOG_NETWORK(1, @"registerForPushNotification failed with error: %@", error);
-               onError(error);
-               
+               dispatch_async(dispatch_get_main_queue(), ^{
+                   LOG_NETWORK(1, @"registerForPushNotification failed with error: %@", error);
+                   onError(error);                   
+               });               
            }];
 }
 

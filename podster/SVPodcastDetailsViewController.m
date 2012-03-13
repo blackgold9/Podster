@@ -200,7 +200,7 @@
     if([[SVSettings sharedInstance] notificationsEnabled]){
 
         SVSettings *settings = [SVSettings sharedInstance];
-        BOOL shouldAskAboutNotifications = ![settings shouldAlwaysSubscribeToNotifications] && ![settings neverAutoSubscribeToNotifications];
+        BOOL shouldAskAboutNotifications = [settings notificationsEnabled];
 
         if (shouldAskAboutNotifications) {
             void (^subscribeWithErrorAlertBlock)() = ^{
@@ -397,7 +397,7 @@
    }
 - (void)loadFeedImage
 {
-    [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image shouldFade:YES];
+    [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image];
 }
 -(void)viewDidDisappear:(BOOL)animated
 {

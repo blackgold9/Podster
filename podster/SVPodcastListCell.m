@@ -82,7 +82,7 @@
         NSURL *imageURL = [NSURL URLWithString:[podcast thumbLogoURL]];
        // LOG_NETWORK(3, @"Downloading image at url: %@", imageURL);
         self.logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.logoImageView setImageWithURL:imageURL placeholderImage:nil shouldFade:YES];
+        [self.logoImageView setImageWithURL:imageURL placeholderImage:nil ];
     }
 
 }

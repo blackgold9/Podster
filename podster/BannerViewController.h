@@ -53,4 +53,7 @@ extern NSString * const BannerViewActionDidFinish;
 
 - (id)initWithContentViewController:(UIViewController *)contentController;
 
+- (UIViewController *)contentController;
+
+
 @end
