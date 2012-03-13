@@ -638,10 +638,6 @@
 		D622850714E50C48003084BB /* dark-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850414E50C48003084BB /* dark-noise.png */; };
 		D622850814E50C48003084BB /* dark-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850514E50C48003084BB /* dark-noise@2x.png */; };
 		D622850914E50C48003084BB /* dark-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850514E50C48003084BB /* dark-noise@2x.png */; };
-		D67B1ABC14E4D4CA001EB41A /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D67B1AB914E4D4CA001EB41A /* LICENSE.txt */; };
-		D67B1ABD14E4D4CA001EB41A /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D67B1AB914E4D4CA001EB41A /* LICENSE.txt */; };
-		D67B1ABE14E4D4CA001EB41A /* ZUUIRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67B1ABB14E4D4CA001EB41A /* ZUUIRevealController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D67B1ABF14E4D4CA001EB41A /* ZUUIRevealController.m in Sources */ = {isa = PBXBuildFile; fileRef = D67B1ABB14E4D4CA001EB41A /* ZUUIRevealController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1252,9 +1248,6 @@
 		D62284FD14E4EBE3003084BB /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
 		D622850414E50C48003084BB /* dark-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise.png"; sourceTree = "<group>"; };
 		D622850514E50C48003084BB /* dark-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise@2x.png"; sourceTree = "<group>"; };
-		D67B1AB914E4D4CA001EB41A /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		D67B1ABA14E4D4CA001EB41A /* ZUUIRevealController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZUUIRevealController.h; sourceTree = "<group>"; };
-		D67B1ABB14E4D4CA001EB41A /* ZUUIRevealController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZUUIRevealController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2090,9 +2083,7 @@
 				4B0A7A841506749F00BADEBB /* IAPHelper.h */,
 				4B0A7A851506749F00BADEBB /* IAPHelper.m */,
 				4B1BC92D15034EA000F5F799 /* NRGridView */,
-				4B7A7C9D14F5A07B00AD88F9 /* SDWebImage */,
 				4B7A7C4114F59BE200AD88F9 /* BlockAlerts */,
-				D67B1AB814E4D4CA001EB41A /* ZUUIRevealController */,
 				4BA02C6214E25AA600582306 /* BlocksKit.framework */,
 				4B20247314DD0BBE00820391 /* DiscreetNotification */,
 				4B20240114D9F28000820391 /* Flurry */,
@@ -2199,13 +2190,6 @@
 				4B7A7C6A14F59CEB00AD88F9 /* alert-window@2x.png */,
 			);
 			path = AlertView;
-			sourceTree = "<group>";
-		};
-		4B7A7C9D14F5A07B00AD88F9 /* SDWebImage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = SDWebImage;
 			sourceTree = "<group>";
 		};
 		4B91BF4E14C77B5800B33776 /* JMTabView */ = {
@@ -2353,17 +2337,6 @@
 			children = (
 			);
 			name = icon;
-			sourceTree = "<group>";
-		};
-		D67B1AB814E4D4CA001EB41A /* ZUUIRevealController */ = {
-			isa = PBXGroup;
-			children = (
-				D67B1AB914E4D4CA001EB41A /* LICENSE.txt */,
-				D67B1ABA14E4D4CA001EB41A /* ZUUIRevealController.h */,
-				D67B1ABB14E4D4CA001EB41A /* ZUUIRevealController.m */,
-			);
-			name = ZUUIRevealController;
-			path = "3rd Party/ZUUIRevealController";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2515,7 +2488,6 @@
 				4B4BB61B14E0482E00E49860 /* CarbonListBackground.png in Resources */,
 				4B4BB61C14E0482E00E49860 /* CarbonListBackground@2x.png in Resources */,
 				4B90FC8814E490130082C155 /* Debug.storyboard in Resources */,
-				D67B1ABC14E4D4CA001EB41A /* LICENSE.txt in Resources */,
 				D622850614E50C48003084BB /* dark-noise.png in Resources */,
 				D622850814E50C48003084BB /* dark-noise@2x.png in Resources */,
 				4B8F6F2F14E9A5CF00D328DE /* Unplayed.png in Resources */,
@@ -2648,7 +2620,6 @@
 				4B2023E114D7933100820391 /* list-item-darker@2x.png in Resources */,
 				4B2023E514D8962A00820391 /* playback-bottom-back.png in Resources */,
 				4B2023E714D8962A00820391 /* playback-bottom-back@2x.png in Resources */,
-				D67B1ABD14E4D4CA001EB41A /* LICENSE.txt in Resources */,
 				D622850714E50C48003084BB /* dark-noise.png in Resources */,
 				D622850914E50C48003084BB /* dark-noise@2x.png in Resources */,
 				4B8F6F3014E9A5CF00D328DE /* Unplayed.png in Resources */,
@@ -2824,7 +2795,6 @@
 				4B20240B14DA626C00820391 /* SVSubscriptionManager.m in Sources */,
 				4B20247614DD0BF200820391 /* GCDiscreetNotificationView.m in Sources */,
 				4B90FC8B14E4907C0082C155 /* DebugHomeViewController.m in Sources */,
-				D67B1ABE14E4D4CA001EB41A /* ZUUIRevealController.m in Sources */,
 				D62284FE14E4EBE3003084BB /* RootController.m in Sources */,
 				4B28C97C14E7873800E1453E /* GMGridView.m in Sources */,
 				4B28C97D14E7873800E1453E /* GMGridViewCell.m in Sources */,
@@ -3022,7 +2992,6 @@
 				4B434BFA14D59C12004A5E89 /* SDURLCache.m in Sources */,
 				4B20240C14DA626C00820391 /* SVSubscriptionManager.m in Sources */,
 				4B20247714DD0BF200820391 /* GCDiscreetNotificationView.m in Sources */,
-				D67B1ABF14E4D4CA001EB41A /* ZUUIRevealController.m in Sources */,
 				D62284FF14E4EBE3003084BB /* RootController.m in Sources */,
 				4B8F6F3E14E9B2BC00D328DE /* HomeController.m in Sources */,
 				4B8F6F4214EA425800D328DE /* FeaturedController.m in Sources */,
