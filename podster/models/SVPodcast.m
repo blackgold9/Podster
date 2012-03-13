@@ -56,7 +56,7 @@
     NSManagedObjectContext *context = self.managedObjectContext;
     __block SVPodcastEntry *entry = nil;
     [context performBlockAndWait:^{
-        NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@", self];
+        NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", self];
         entry = [SVPodcast findFirstWithPredicate:isChild 
                                  sortedBy:SVPodcastEntryAttributes.datePublished
                                 ascending:!self.sortNewestFirstValue];

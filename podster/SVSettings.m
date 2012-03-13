@@ -144,7 +144,7 @@ NSString *uuid(){
 
 - (NSInteger)maxNonPremiumNotifications
 {
-    return MAX(1, [defaults integerForKey:@"MaxNonPremiumNotifications"]);
+    return MAX(3, [defaults integerForKey:@"MaxNonPremiumNotifications"]);
 }
 
 - (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications

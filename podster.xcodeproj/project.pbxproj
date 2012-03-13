@@ -250,6 +250,8 @@
 		4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */; };
 		4B141FC014CCCAB500028CE4 /* SVGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FBF14CCCAB500028CE4 /* SVGridCell.m */; };
 		4B141FC114CCCAB500028CE4 /* SVGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FBF14CCCAB500028CE4 /* SVGridCell.m */; };
+		4B154DED150F8E4A00D80771 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B154DF0150F8E4A00D80771 /* Localizable.strings */; };
+		4B154DEE150F8E4A00D80771 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B154DF0150F8E4A00D80771 /* Localizable.strings */; };
 		4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3414A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */; };
 		4B189B3714AFAD13001E378A /* SVPlaybackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B189B3614AFAD13001E378A /* SVPlaybackController.m */; };
@@ -623,8 +625,6 @@
 		4BE71E6B14FDA044008CECE5 /* standard-big-over@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE71E6714FDA030008CECE5 /* standard-big-over@2x.png */; };
 		4BE71E6C14FDA044008CECE5 /* standard-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE71E6814FDA037008CECE5 /* standard-big.png */; };
 		4BE71E6D14FDA044008CECE5 /* standard-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE71E6914FDA03C008CECE5 /* standard-big@2x.png */; };
-		4BE7429C150C22A600557D8A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BE7429B150C22A600557D8A /* Localizable.strings */; };
-		4BE7429D150C22A600557D8A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BE7429B150C22A600557D8A /* Localizable.strings */; };
 		4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEDB18814C004E200264CCC /* ImageIO.framework */; };
 		4BFE0B6015041551005F9E81 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B5F15041551005F9E81 /* Icon.png */; };
 		4BFE0B6215041561005F9E81 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B6115041561005F9E81 /* Icon@2x.png */; };
@@ -875,6 +875,7 @@
 		4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		4B141FBE14CCCAB500028CE4 /* SVGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGridCell.h; sourceTree = "<group>"; };
 		4B141FBF14CCCAB500028CE4 /* SVGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGridCell.m; sourceTree = "<group>"; };
+		4B154DEF150F8E4A00D80771 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4B189B3114A7D771001E378A /* SVPodcastDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastDetailsViewController.h; sourceTree = "<group>"; };
 		4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastDetailsViewController.m; sourceTree = "<group>"; };
 		4B189B3514AFAD12001E378A /* SVPlaybackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackController.h; sourceTree = "<group>"; };
@@ -1234,7 +1235,6 @@
 		4BE71E6714FDA030008CECE5 /* standard-big-over@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-big-over@2x.png"; sourceTree = "<group>"; };
 		4BE71E6814FDA037008CECE5 /* standard-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-big.png"; sourceTree = "<group>"; };
 		4BE71E6914FDA03C008CECE5 /* standard-big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-big@2x.png"; sourceTree = "<group>"; };
-		4BE7429B150C22A600557D8A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		4BEDB18814C004E200264CCC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4BFE0B5F15041551005F9E81 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		4BFE0B6115041561005F9E81 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -2028,7 +2028,7 @@
 				4B0A7A88150674EC00BADEBB /* PodsterIAPHelper.h */,
 				4B0A7A89150674EC00BADEBB /* PodsterIAPHelper.m */,
 				4B0A7B221506863000BADEBB /* Settings.storyboard */,
-				4BE7429B150C22A600557D8A /* Localizable.strings */,
+				4B154DF0150F8E4A00D80771 /* Localizable.strings */,
 				4B8D1D87150DC9C500E6D770 /* TextViewController.h */,
 				4B8D1D88150DC9C500E6D770 /* TextViewController.m */,
 				4B8D1D8A150DCA0C00E6D770 /* LegalInfo.txt */,
@@ -2537,7 +2537,7 @@
 				4B0A7ADE150675E600BADEBB /* AdWhirlWebBrowser.xib in Resources */,
 				4B0A7B1E150676E000BADEBB /* README.txt in Resources */,
 				4B0A7B231506863000BADEBB /* Settings.storyboard in Resources */,
-				4BE7429C150C22A600557D8A /* Localizable.strings in Resources */,
+				4B154DED150F8E4A00D80771 /* Localizable.strings in Resources */,
 				D608C9AE150D6BA2009BA9BD /* honeycomb.png in Resources */,
 				D608C9AF150D6BA2009BA9BD /* honeycomb@2x.png in Resources */,
 				4B8D1D8B150DCA0C00E6D770 /* LegalInfo.txt in Resources */,
@@ -2625,7 +2625,7 @@
 				4B0A7ADF150675E600BADEBB /* AdWhirlWebBrowser.xib in Resources */,
 				4B0A7B1F150676E000BADEBB /* README.txt in Resources */,
 				4B0A7B241506863000BADEBB /* Settings.storyboard in Resources */,
-				4BE7429D150C22A600557D8A /* Localizable.strings in Resources */,
+				4B154DEE150F8E4A00D80771 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3047,6 +3047,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4B154DF0150F8E4A00D80771 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B154DEF150F8E4A00D80771 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		4B71F79814A5B08C00D26F4C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

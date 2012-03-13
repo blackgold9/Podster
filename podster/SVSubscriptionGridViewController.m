@@ -175,7 +175,7 @@
         {
             LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
             [self.gridView reloadObjectAtIndex:indexPath.row
-                                 withAnimation:GMGridViewItemAnimationFade];
+                                 withAnimation:GMGridViewItemAnimationNone];
         }
             break;
         default:
