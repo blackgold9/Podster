@@ -140,7 +140,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "90"
          endingLineNumber = "90"
-         landmarkName = "-viewWillAppear:"
+         landmarkName = "-rootContextUpdated:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
