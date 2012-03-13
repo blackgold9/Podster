@@ -632,8 +632,6 @@
 		D608C9AF150D6BA2009BA9BD /* honeycomb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */; };
 		D608C9BF150EDEFD009BA9BD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9BE150EDEFD009BA9BD /* Default.png */; };
 		D608C9C1150EDF0B009BA9BD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9C0150EDF0B009BA9BD /* Default@2x.png */; };
-		D62284FE14E4EBE3003084BB /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62284FD14E4EBE3003084BB /* RootController.m */; };
-		D62284FF14E4EBE3003084BB /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = D62284FD14E4EBE3003084BB /* RootController.m */; };
 		D622850614E50C48003084BB /* dark-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850414E50C48003084BB /* dark-noise.png */; };
 		D622850714E50C48003084BB /* dark-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850414E50C48003084BB /* dark-noise.png */; };
 		D622850814E50C48003084BB /* dark-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850514E50C48003084BB /* dark-noise@2x.png */; };
@@ -1244,8 +1242,6 @@
 		D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "honeycomb@2x.png"; sourceTree = "<group>"; };
 		D608C9BE150EDEFD009BA9BD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D608C9C0150EDF0B009BA9BD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		D62284FC14E4EBE3003084BB /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
-		D62284FD14E4EBE3003084BB /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
 		D622850414E50C48003084BB /* dark-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise.png"; sourceTree = "<group>"; };
 		D622850514E50C48003084BB /* dark-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2021,8 +2017,6 @@
 				4B20240914DA626600820391 /* SVSubscriptionManager.h */,
 				4B20240A14DA626800820391 /* SVSubscriptionManager.m */,
 				4B90FC8714E490120082C155 /* Debug.storyboard */,
-				D62284FC14E4EBE3003084BB /* RootController.h */,
-				D62284FD14E4EBE3003084BB /* RootController.m */,
 				4B48756C14F49781007E9092 /* SVPodcastImageCache.h */,
 				4B48756D14F49781007E9092 /* SVPodcastImageCache.m */,
 				4B48757114F497A9007E9092 /* SVPodcastImage.h */,
@@ -2795,7 +2789,6 @@
 				4B20240B14DA626C00820391 /* SVSubscriptionManager.m in Sources */,
 				4B20247614DD0BF200820391 /* GCDiscreetNotificationView.m in Sources */,
 				4B90FC8B14E4907C0082C155 /* DebugHomeViewController.m in Sources */,
-				D62284FE14E4EBE3003084BB /* RootController.m in Sources */,
 				4B28C97C14E7873800E1453E /* GMGridView.m in Sources */,
 				4B28C97D14E7873800E1453E /* GMGridViewCell.m in Sources */,
 				4B28C97E14E7873800E1453E /* GMGridViewLayoutStrategies.m in Sources */,
@@ -2992,7 +2985,6 @@
 				4B434BFA14D59C12004A5E89 /* SDURLCache.m in Sources */,
 				4B20240C14DA626C00820391 /* SVSubscriptionManager.m in Sources */,
 				4B20247714DD0BF200820391 /* GCDiscreetNotificationView.m in Sources */,
-				D62284FF14E4EBE3003084BB /* RootController.m in Sources */,
 				4B8F6F3E14E9B2BC00D328DE /* HomeController.m in Sources */,
 				4B8F6F4214EA425800D328DE /* FeaturedController.m in Sources */,
 				4B8F6F4614EA44D700D328DE /* PodcastGridCell.m in Sources */,

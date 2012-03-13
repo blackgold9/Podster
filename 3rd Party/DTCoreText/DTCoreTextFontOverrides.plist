@@ -82,5 +82,15 @@
 		<key>OverrideFontName</key>
 		<string>HelveticaNeue-Italic</string>
 	</dict>
+	<dict>
+		<key>Bold</key>
+		<false/>
+		<key>FontFamily</key>
+		<string>Helvetica Neue Light</string>
+		<key>Italic</key>
+		<false/>
+		<key>OverrideFontName</key>
+		<string>HelveticaNeue-Light</string>
+	</dict>
 </array>
 </plist>
