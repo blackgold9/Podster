@@ -131,7 +131,7 @@
 - (IBAction)notifySwitchChanged:(id)sender {
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){
         if (!localPodcast.isSubscribedValue) {
-            BlockAlertView *alertView= [BlockAlertView alertWithTitle:@"Not a Favorite" message:@"You cannot recieve notifications about a podcast unless it is marked as a Favorite"];
+            BlockAlertView *alertView= [BlockAlertView alertWithTitle:NSLocalizedString(@"Not a Favorite", @"Not a Favorite") message:NSLocalizedString(@"You cannot recieve notifications about a podcast unless it is marked as a Favorite", @"You cannot recieve notifications about a podcast unless it is marked as a Favorite")];
             [alertView setCancelButtonWithTitle:@"OK" block:^{
 
             }];
@@ -173,8 +173,8 @@
         }
     } else {
           // Notifications not enabled
-        BlockAlertView *alertView = [BlockAlertView alertWithTitle:@"Notifications are disabled"
-                                                           message:@"Please enable notifications in settings if you would like to recieve updates when new episodes are posted."];
+        BlockAlertView *alertView = [BlockAlertView alertWithTitle:NSLocalizedString(@"Notifications are disabled", @"Notifications are disabled")
+                                                           message:NSLocalizedString(@"Please enable notifications in settings if you would like to recieve updates when new episodes are posted.", @"Please enable notifications in settings if you would like to recieve updates when new episodes are posted.")];
         [alertView addButtonWithTitle:@"Settings" block:^{
 
         }];
@@ -188,8 +188,9 @@
 
 - (void)showFeedNotificationSubscriptionError
 {
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Error" message:@"Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area."];
-    [alert setCancelButtonWithTitle:@"OK" block:^{}];
+
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:NSLocalizedString(@"Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area.", @"Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area.")];
+    [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", @"OK") block:^{}];
     [alert show];
 }
 
@@ -229,8 +230,8 @@
             };
             
 
-            BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Notifications"
-                                                           message:@"Would you like to be notified when new episodes become available?"];
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
+                                                           message:NSLocalizedString(@"Would you like to be notified when new episodes become available?", @"Would you like to be notified when new episodes become available?")];
             [alert setCancelButtonWithTitle:@"No" block:^{
                 self.subscribeButton.enabled = YES;
             }];

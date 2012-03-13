@@ -222,11 +222,13 @@ NSString *uuid();
 
 
     // Actually register
-//#ifndef CONFIGURATION_Debug
+#ifndef CONFIGURATION_Debug
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
                                                                            UIRemoteNotificationTypeBadge|
                                                                            UIRemoteNotificationTypeSound)];
-//#endif
+#else
+    [self application:[UIApplication sharedApplication] didFailToRegisterForRemoteNotificationsWithError:nil];
+#endif
  //   #endif
     
     [[NSNotificationCenter defaultCenter] addObserverForName:kProductPurchasedNotification

@@ -12,11 +12,11 @@
 +(NSString *)randomErrorAlertTitle
 {
     NSMutableArray *array = [NSMutableArray array];
-    [array addObject:@"Awww Shucks!"];
-    [array addObject:@"So Sorry!"];
-    [array addObject:@"Oh No!"];
-    [array addObject:@"An Error Has Occured"];
-    [array addObject:@"Ooops!"];
+    [array addObject:NSLocalizedString(@"ERROR_TITLE_ONE", @"Awww Shucks!")];
+    [array addObject:NSLocalizedString(@"ERROR_TITLE_TWO", @"So Sorry!")];
+    [array addObject:NSLocalizedString(@"ERROR_TITLE_THREE", @"Oh No!")];
+    [array addObject:NSLocalizedString(@"ERROR_TITLE_FOUR", @"An Error Has Occured")];
+    [array addObject:NSLocalizedString(@"ERROR_TITLE_FIVE", @"Ooops!")];
     
     return [array objectAtIndex:arc4random() % array.count];
 }
