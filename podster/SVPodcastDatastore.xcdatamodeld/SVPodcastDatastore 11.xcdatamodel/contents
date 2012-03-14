@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Download" representedClassName="SVDownload" syncable="YES">
         <attribute name="downloadedBytes" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,7 +19,7 @@
         <attribute name="lastSynced" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="logoURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nextItemDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="nextItemDate" attributeType="Date" defaultDateTimeInterval="347140800" defaultValueString="1/1/2012" syncable="YES"/>
         <attribute name="shouldNotify" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="smallLogoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sortNewestFirst" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>

@@ -154,9 +154,10 @@
 //    SVPodcast *podcast = [self.fetcher objectAtIndexPath:indexPath];
     switch (type) {
         case NSFetchedResultsChangeInsert:
+            
             LOG_GENERAL(2, @"GRID:Inserting object at %d", indexPath.row);
             [self.gridView insertObjectAtIndex:indexPath.row 
-                                 withAnimation:GMGridViewItemAnimationScroll];
+                                 withAnimation:GMGridViewItemAnimationNone];
             break;
         case NSFetchedResultsChangeDelete:
             LOG_GENERAL(2, @"GRID:Removing object at %d", indexPath.row);
@@ -169,7 +170,7 @@
                                  withAnimation:GMGridViewItemAnimationNone];
             [self.gridView insertObjectAtIndex:newIndexPath.row
                                  withAnimation:GMGridViewItemAnimationNone];
-           // needsReload = YES;
+            needsReload = YES;
             break;
         case NSFetchedResultsChangeUpdate:
         {
