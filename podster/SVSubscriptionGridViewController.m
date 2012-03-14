@@ -161,7 +161,7 @@
         case NSFetchedResultsChangeDelete:
             LOG_GENERAL(2, @"GRID:Removing object at %d", indexPath.row);
             [self.gridView removeObjectAtIndex:indexPath.row 
-                                 withAnimation:GMGridViewItemAnimationScroll];
+                                 withAnimation:GMGridViewItemAnimationNone];
             break;
         case NSFetchedResultsChangeMove:
             LOG_GENERAL(2, @"GRID:Object should move from %d to %d", indexPath.row, newIndexPath.row );
