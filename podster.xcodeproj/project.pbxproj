@@ -493,6 +493,8 @@
 		4B7A7C7E14F59CEB00AD88F9 /* alert-red-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7A7C6814F59CEB00AD88F9 /* alert-red-button@2x.png */; };
 		4B7A7C7F14F59CEB00AD88F9 /* alert-window.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7A7C6914F59CEB00AD88F9 /* alert-window.png */; };
 		4B7A7C8014F59CEB00AD88F9 /* alert-window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7A7C6A14F59CEB00AD88F9 /* alert-window@2x.png */; };
+		4B842BDE150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */; };
+		4B842BDF150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */; };
 		4B86242D14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
 		4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
 		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
@@ -603,6 +605,8 @@
 		4BB2059214D101500038EB7D /* SVPodcastDetailsModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */; };
 		4BCE682014F7638C005B0324 /* SVSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE681F14F7638C005B0324 /* SVSettings.m */; };
 		4BCE682114F7638C005B0324 /* SVSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE681F14F7638C005B0324 /* SVSettings.m */; };
+		4BD123C5150FFF8100A108DA /* CloudHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD123C4150FFF8100A108DA /* CloudHelper.m */; };
+		4BD123C6150FFF8100A108DA /* CloudHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD123C4150FFF8100A108DA /* CloudHelper.m */; };
 		4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */; };
@@ -1120,6 +1124,8 @@
 		4B7A7C6A14F59CEB00AD88F9 /* alert-window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window@2x.png"; sourceTree = "<group>"; };
 		4B7A7C8114F59D1300AD88F9 /* BlockUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockUI.h; sourceTree = "<group>"; };
 		4B7A7CC414F6CFA700AD88F9 /* SVPodcastDatastore 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 10.xcdatamodel"; sourceTree = "<group>"; };
+		4B842BDC150FDC5D003F4BF5 /* PodsterManagedDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodsterManagedDocument.h; sourceTree = "<group>"; };
+		4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodsterManagedDocument.m; sourceTree = "<group>"; };
 		4B86242B14B576A900A4B320 /* SVDownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadsViewController.h; sourceTree = "<group>"; };
 		4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadsViewController.m; sourceTree = "<group>"; };
 		4B86242F14B57C7500A4B320 /* SVDownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadCell.h; sourceTree = "<group>"; };
@@ -1212,6 +1218,8 @@
 		4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVPodcastDetailsModalView.xib; sourceTree = "<group>"; };
 		4BCE681E14F7638C005B0324 /* SVSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSettings.h; sourceTree = "<group>"; };
 		4BCE681F14F7638C005B0324 /* SVSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSettings.m; sourceTree = "<group>"; };
+		4BD123C3150FFF8100A108DA /* CloudHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudHelper.h; sourceTree = "<group>"; };
+		4BD123C4150FFF8100A108DA /* CloudHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudHelper.m; sourceTree = "<group>"; };
 		4BD1C21D14B7D05E00E8C942 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		4BD1C21E14B7D05E00E8C942 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeGetters.h"; sourceTree = "<group>"; };
@@ -1925,6 +1933,8 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
+				4B842BDC150FDC5D003F4BF5 /* PodsterManagedDocument.h */,
+				4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */,
 				D608C9C0150EDF0B009BA9BD /* Default@2x.png */,
 				D608C9BE150EDEFD009BA9BD /* Default.png */,
 				4B2C6D0915049C9C009DFE1F /* alert.aiff */,
@@ -2033,6 +2043,8 @@
 				4B8D1D88150DC9C500E6D770 /* TextViewController.m */,
 				4B8D1D8A150DCA0C00E6D770 /* LegalInfo.txt */,
 				4B8D1D8C150DD04F00E6D770 /* PrivacyPolicy.txt */,
+				4BD123C3150FFF8100A108DA /* CloudHelper.h */,
+				4BD123C4150FFF8100A108DA /* CloudHelper.m */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -2844,6 +2856,8 @@
 				4B3E5ECA150C43F300010833 /* MBProgressHUD.m in Sources */,
 				4B3E5EE1150C9A4F00010833 /* BannerViewController.m in Sources */,
 				4B8D1D89150DC9C600E6D770 /* TextViewController.m in Sources */,
+				4B842BDE150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */,
+				4BD123C5150FFF8100A108DA /* CloudHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3033,6 +3047,8 @@
 				4B0A7B121506765000BADEBB /* CSerializedJSONData.m in Sources */,
 				4B0A7B281506992800BADEBB /* SettingsViewController.m in Sources */,
 				4B3E5EE2150C9A4F00010833 /* BannerViewController.m in Sources */,
+				4B842BDF150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */,
+				4BD123C6150FFF8100A108DA /* CloudHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

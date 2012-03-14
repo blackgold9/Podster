@@ -25,18 +25,18 @@
 #import "FlurryAnalytics.h"
 #import <BlocksKit/BlocksKit.h>
 #endif
-//#ifdef DEBUG
+#ifdef DEBUG
 #define LOG_NETWORK(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"network",level,__VA_ARGS__)
 #define LOG_GENERAL(level, ...)  NSLog(__VA_ARGS__);  LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"general",level,__VA_ARGS__)
 #define LOG_GRAPHICS(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"graphics",level,__VA_ARGS__)
 #define LOG_PARSING(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"parsing",level,__VA_ARGS__)
 #define LOG_DOWNLOADS(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"downloads",level,__VA_ARGS__)
 #define LOG_PLAYBACK(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"playbak",level,__VA_ARGS__)
-//#else
-//#define LOG_NETWORK(...)    do{}while(0)
-//#define LOG_GENERAL(...)    do{}while(0)
-//#define LOG_GRAPHICS(...)   do{}while(0)
-//#define LOG_PARSING(...)   do{}while(0)
-//#define LOG_DOWNLOADS(...)   do{}while(0)
-//#define LOG_PLAYBACK(...)   do{}while(0)
-//#endif
+#else
+#define LOG_NETWORK(...)    do{}while(0)
+#define LOG_GENERAL(...)    do{}while(0)
+#define LOG_GRAPHICS(...)   do{}while(0)
+#define LOG_PARSING(...)   do{}while(0)
+#define LOG_DOWNLOADS(...)   do{}while(0)
+#define LOG_PLAYBACK(...)   do{}while(0)
+#endif

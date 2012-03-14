@@ -13,7 +13,7 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.lastSynced = @"lastSynced",
 	.lastUpdated = @"lastUpdated",
 	.logoURL = @"logoURL",
-	.needsReconciling = @"needsReconciling",
+	.nextItemDate = @"nextItemDate",
 	.shouldNotify = @"shouldNotify",
 	.smallLogoURL = @"smallLogoURL",
 	.sortNewestFirst = @"sortNewestFirst",
@@ -67,10 +67,6 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	}
 	if ([key isEqualToString:@"isSubscribedValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"isSubscribed"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-	}
-	if ([key isEqualToString:@"needsReconcilingValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"needsReconciling"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"shouldNotifyValue"]) {
@@ -193,27 +189,8 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
-@dynamic needsReconciling;
+@dynamic nextItemDate;
 
-
-
-- (BOOL)needsReconcilingValue {
-	NSNumber *result = [self needsReconciling];
-	return [result boolValue];
-}
-
-- (void)setNeedsReconcilingValue:(BOOL)value_ {
-	[self setNeedsReconciling:[NSNumber numberWithBool:value_]];
-}
-
-- (BOOL)primitiveNeedsReconcilingValue {
-	NSNumber *result = [self primitiveNeedsReconciling];
-	return [result boolValue];
-}
-
-- (void)setPrimitiveNeedsReconcilingValue:(BOOL)value_ {
-	[self setPrimitiveNeedsReconciling:[NSNumber numberWithBool:value_]];
-}
 
 
 

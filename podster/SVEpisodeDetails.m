@@ -189,14 +189,18 @@
 	[[UIApplication sharedApplication] openURL:[button.url absoluteURL]];
 }
 - (IBAction)markAsPlayedTapped:(id)sender {
-    episode.playedValue = !episode.playedValue;
-    if (!episode.playedValue) {
-        // If we are now unplayed, reset playback location
+    [context performBlockAndWait:^{
+        episode.playedValue = !episode.playedValue;  
+        if (!episode.playedValue) {
+            // If we are now unplayed, reset playback location
+            episode.positionInSecondsValue = 0;            
+        }
         
-    }
-    [self updatePlayedToggle];
-    [context performBlock:^{
-        [context save:nil];
+        [episode.podcast updateNextItemDate];
+
     }];
+
+       
+    [self updatePlayedToggle];    
 }
 @end

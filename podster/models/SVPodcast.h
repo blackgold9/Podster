@@ -5,4 +5,6 @@
 @interface SVPodcast : _SVPodcast<ActsAsPodcast> {}
 -(void)populateWithDictionary:(NSDictionary *)dictionary;
 -(void)updatePodcastWithFeedInfo:(MWFeedInfo *)info;
+- (void)updateNextItemDate;
+- (SVPodcastEntry *)firstUnplayedInPodcastOrder;
 @end

@@ -2,12 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PodsterManagedDocument.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PodsterManagedDocument.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/CloudHelper.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/CloudHelper.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 11.xcdatamodel/contents" afterPath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 11.xcdatamodel/contents" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/MessageGenerator.m" afterPath="$PROJECT_DIR$/podster/MessageGenerator.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/HomeController.m" afterPath="$PROJECT_DIR$/podster/HomeController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVEpisodeDetails.m" afterPath="$PROJECT_DIR$/podster/SVEpisodeDetails.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackManager.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" afterPath="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcast.h" afterPath="$PROJECT_DIR$/podster/models/SVPodcast.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcast.m" afterPath="$PROJECT_DIR$/podster/models/SVPodcast.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/_SVPodcast.h" afterPath="$PROJECT_DIR$/podster/models/_SVPodcast.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/_SVPodcast.m" afterPath="$PROJECT_DIR$/podster/models/_SVPodcast.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Info.plist" afterPath="$PROJECT_DIR$/podster/podster-Info.plist" />
     </list>
     <ignored path="podster.iws" />
@@ -33,23 +48,40 @@
       <file leaf-file-name="SVPodcastDetailsViewController.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="692" column="48" selection-start="31038" selection-end="31038" vertical-scroll-proportion="0.54706925">
+            <state line="732" column="9" selection-start="32315" selection-end="32315" vertical-scroll-proportion="0.8624161">
+              <folding>
+                <element signature="e#11862#11915#0" expanded="true" />
+                <element signature="e#11983#12140#0" expanded="true" />
+                <element signature="e#18634#18701#0" expanded="true" />
+                <element signature="e#22806#22967#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PodsterManagedDocument.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PodsterManagedDocument.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="181" column="0" selection-start="6464" selection-end="6464" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MessageGenerator.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/MessageGenerator.m">
+      <file leaf-file-name="Localizable.strings" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/podster/en.lproj/Localizable.strings">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="44" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1331650183000" expanded="true" signature="327:381" placeholder="@&quot;Awww Shucks!&quot;" />
-                <marker date="1331650183000" expanded="true" signature="405:456" placeholder="@&quot;So Sorry!&quot;" />
-                <marker date="1331650183000" expanded="true" signature="480:530" placeholder="@&quot;Oh No!&quot;" />
-                <marker date="1331650183000" expanded="true" signature="554:617" placeholder="@&quot;An Error Has Occured&quot;" />
-                <marker date="1331650183000" expanded="true" signature="641:690" placeholder="@&quot;Ooops!&quot;" />
-              </folding>
+            <state line="40" column="12" selection-start="1595" selection-end="1595" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="253" column="68" selection-start="10343" selection-end="10343" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,8 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/podster/PodsterIAPHelper.m" />
-        <option value="$PROJECT_DIR$/podster/SVSubscriptionManager.h" />
         <option value="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.m" />
         <option value="$PROJECT_DIR$/podster/SVSettings.h" />
         <option value="$PROJECT_DIR$/podster/FeaturedController.h" />
@@ -83,6 +113,8 @@
         <option value="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
         <option value="$PROJECT_DIR$/podster/PodcastGridCell.m" />
         <option value="$PROJECT_DIR$/podster/MessageGenerator.m" />
+        <option value="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" />
+        <option value="$PROJECT_DIR$/podster/HomeController.m" />
         <option value="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
       </list>
     </option>
@@ -180,6 +212,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="DirectoryView.Xcode">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -192,14 +234,36 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="DirectoryView.Xcode">
-        <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Podster" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Images" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -208,15 +272,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="preferences.intentionPowerPack" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="preferences.intentionPowerPack" />
     <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.podster">
     <configuration default="true" type="OCUnitRunConfiguration" factoryName="OCUnit" PROJECT_NAME="podster" TARGET_NAME="podsterTests" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.1_1" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
       <envs />
       <method>
@@ -231,7 +295,15 @@
         <option name="com.jetbrains.cidr.execution.StopCurrentSessionBeforeRunTaskProvider$StopCurrentSessionBeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <list size="0" />
+    <configuration default="false" name="podster" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="podster" PROJECT_NAME="podster" TARGET_NAME="podster" CONFIG_NAME="Debug" DESTINATION_ID="iphoneos_IPHONE_C39GJTEYDTDK" RUN_TARGET_PROJECT_NAME="podster" RUN_TARGET_NAME="podster" DEBUGGER="LLDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <RunnerSettings RunnerId="AppRunner" />
+      <ConfigurationWrapper RunnerId="AppRunner" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.podster" />
+    </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false">
@@ -265,12 +337,13 @@
     <frame x="0" y="22" width="1280" height="697" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3217247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32767403" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.21005917" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.0" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3970346" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.6036484" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39635158" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.53731346" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -279,7 +352,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32504147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3217247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966834" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -365,60 +437,29 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/podster/SVSettings.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="102" selection-start="3519" selection-end="3519" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVSettings.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/images/SettingsViewController.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="375" column="123" selection-start="17081" selection-end="17081" vertical-scroll-proportion="-5.0384617">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/podster/images/SettingsViewController.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVFeedParser.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/models/SVPodcastEntry.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVFeedParser.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="148" selection-end="148" vertical-scroll-proportion="-3.2307692">
-          <folding />
-        </state>
+        <state line="6" column="13" selection-start="148" selection-end="148" vertical-scroll-proportion="-3.2307692" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPlaybackController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="14" selection-start="449" selection-end="449" vertical-scroll-proportion="-2.7307692">
-          <folding />
-        </state>
+        <state line="17" column="14" selection-start="449" selection-end="449" vertical-scroll-proportion="-2.7307692" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPlaybackManager.m">
@@ -437,16 +478,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFURLConnectionOperation.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="319" column="174" selection-start="11824" selection-end="11991" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="319" column="174" selection-start="11824" selection-end="11991" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/PodcastGridCell.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/PodcastGridCell.m">
@@ -471,15 +508,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/MessageGenerator.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="11" selection-start="200" selection-end="200" vertical-scroll-proportion="0.24305555">
+        <state line="10" column="11" selection-start="200" selection-end="200" vertical-scroll-proportion="0.24305555" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="253" column="68" selection-start="10343" selection-end="10343" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/en.lproj/Localizable.strings">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="12" selection-start="1595" selection-end="1595" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PodsterManagedDocument.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="181" column="0" selection-start="6464" selection-end="6464" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="692" column="48" selection-start="31038" selection-end="31038" vertical-scroll-proportion="0.54706925">
-          <folding />
+        <state line="732" column="9" selection-start="32315" selection-end="32315" vertical-scroll-proportion="0.8624161">
+          <folding>
+            <element signature="e#11862#11915#0" expanded="true" />
+            <element signature="e#11983#12140#0" expanded="true" />
+            <element signature="e#18634#18701#0" expanded="true" />
+            <element signature="e#22806#22967#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

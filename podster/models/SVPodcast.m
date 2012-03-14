@@ -51,7 +51,7 @@
     return [NSString stringWithFormat:@"%@: %@", [super description], self.title];
 }
 
-- (SVPodcastEntry *)firstUnplayed
+- (SVPodcastEntry *)firstUnplayedInPodcastOrder
 {
     NSManagedObjectContext *context = self.managedObjectContext;
     __block SVPodcastEntry *entry = nil;
@@ -65,5 +65,24 @@
     
     return entry;
 }
+
+- (void)updateNextItemDate
+{
+    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    [context performBlock:^{
+        SVPodcast *localPodcast = [self inContext:context];
+        SVPodcastEntry *entry = nil;
+
+        NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", localPodcast];
+        entry = [SVPodcastEntry findFirstWithPredicate:isChild 
+                                              sortedBy:SVPodcastEntryAttributes.datePublished
+                                             ascending:NO
+                                             inContext:context];
+        localPodcast.nextItemDate = entry.datePublished;
+        
+    }];
+    
+}
+
 
 @end

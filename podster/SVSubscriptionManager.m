@@ -10,7 +10,7 @@
 #import "SVSubscription.h"
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
-
+#import "PodsterManagedDocument.h"
 static char const kRefreshInterval = -3;
 
 @implementation SVSubscriptionManager {
@@ -52,66 +52,69 @@ static char const kRefreshInterval = -3;
 -(void)refreshNextSubscription
 {
 
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-
-    [offsetComponents setMinute:kRefreshInterval];
-
-    NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
-                                                    toDate:[NSDate date]
-                                                   options:0];
-
-    __block SVPodcast *nextPodcast = nil;
-    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-
-    // Get the root(Background )context to work against
-    context.parentContext = [[NSManagedObjectContext defaultContext] parentContext];
-    NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-    LOG_GENERAL(2, @"About to look for a subscription to refresh");
-    [context performBlock:^{
-        NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];       
-        NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@ OR %K == nil",SVPodcastAttributes.lastSynced, syncWindow, SVPodcastAttributes.lastSynced];
+    [[PodsterManagedDocument sharedInstance] performWhenReady: ^{
         
-        NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate, olderThanSyncStart,stale, nil]];
         
-        nextPodcast = [SVPodcast findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
+        NSCalendar *gregorian = [[NSCalendar alloc]
+                                 initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
         
-        LOG_NETWORK(2, @"Finding subscription that needs refreshing");
-        if (nextPodcast && !shouldCancel) {
-            if (!self.isBusy) {
-                self.isBusy = YES;
-            }
-            [FlurryAnalytics logEvent:@"UpdatingSubscriptions" timed:YES];
-            nextPodcast.lastSynced = [NSDate date];
-            [context save:nil];
-            LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
-            [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
-                                                                     withLowerPriority:YES
-                                                                             inContext:context onCompletion:^{
-                                                                                 [self updateLastUpdatedForPodcast:nextPodcast
-                                                                                                         inContext:context];
-                                                                                 [self refreshNextSubscription];
-
-                                                                                                                                                                  
-                                                                             } onError:^(NSError *error) {
-                                                                                 [self refreshNextSubscription];
-                                                                                 
-                                                                             }];
-        } else {
-            [FlurryAnalytics endTimedEvent:@"UpdatingSubscriptions" 
-                            withParameters:nil];
-            if (self.isBusy) {
-                self.isBusy = NO;            
-            }
-            [context performBlock:^{
+        [offsetComponents setMinute:kRefreshInterval];
+        
+        NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
+                                                        toDate:[NSDate date]
+                                                       options:0];
+        
+        __block SVPodcast *nextPodcast = nil;
+        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        
+        // Get the root(Background )context to work against
+        context.parentContext = [NSManagedObjectContext defaultContext];
+        NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+        LOG_GENERAL(2, @"About to look for a subscription to refresh");
+        [context performBlock:^{
+            NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];       
+            NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@ OR %K == nil",SVPodcastAttributes.lastSynced, syncWindow, SVPodcastAttributes.lastSynced];
+            
+            NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate, olderThanSyncStart,stale, nil]];
+            
+            nextPodcast = [SVPodcast findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
+            
+            LOG_NETWORK(2, @"Finding subscription that needs refreshing");
+            if (nextPodcast && !shouldCancel) {
+                if (!self.isBusy) {
+                    self.isBusy = YES;
+                }
+                [FlurryAnalytics logEvent:@"UpdatingSubscriptions" timed:YES];
+                nextPodcast.lastSynced = [NSDate date];
                 [context save:nil];
-            }];
-            LOG_NETWORK(2, @"Updating subscriptions complete");
-        }
-
+                LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
+                [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
+                                                                         withLowerPriority:YES
+                                                                                 inContext:context onCompletion:^{
+                                                                                     [self updateLastUpdatedForPodcast:nextPodcast
+                                                                                                             inContext:context];
+                                                                                     [self refreshNextSubscription];
+                                                                                     
+                                                                                     
+                                                                                 } onError:^(NSError *error) {
+                                                                                     [self refreshNextSubscription];
+                                                                                     
+                                                                                 }];
+            } else {
+                [FlurryAnalytics endTimedEvent:@"UpdatingSubscriptions" 
+                                withParameters:nil];
+                if (self.isBusy) {
+                    self.isBusy = NO;            
+                }
+                [context performBlock:^{
+                    [context save:nil];
+                }];
+                LOG_NETWORK(2, @"Updating subscriptions complete");
+            }
+            
+        }];
     }];
-    
     
 }
 -(void)refreshAllSubscriptions
@@ -157,9 +160,7 @@ static char const kRefreshInterval = -3;
         for(SVPodcast *podcast in needsReconciling) {
             [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:podcast.feedURL                                                                                                                           onCompletion:^{
                 [[NSManagedObjectContext defaultContext] performBlock:^{
-                    podcast.needsReconciling = NO;     
                     podcast.isSubscribedValue = YES;
-                    [[NSManagedObjectContext defaultContext] save:nil];
                 }];
                 
             }
@@ -177,8 +178,7 @@ static char const kRefreshInterval = -3;
                                                                        }
                                                                             onError:nil];
             }
-         }
-     [[NSManagedObjectContext defaultContext] save:nil];
+         }     
     }];
     
 }

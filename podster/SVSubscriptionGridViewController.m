@@ -96,7 +96,7 @@
 
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-    NSFetchRequest *request = [SVPodcast requestAllSortedBy:SVPodcastAttributes.lastUpdated ascending:NO withPredicate:predicate];
+    NSFetchRequest *request = [SVPodcast requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate];
     request.includesSubentities = NO;
     self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                        managedObjectContext:[NSManagedObjectContext defaultContext] 
