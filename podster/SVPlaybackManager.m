@@ -166,9 +166,9 @@ void audioRouteChangeListenerCallback (
                 // Mark as played when you pass the played percentage
                 if (blockSelf.currentEpisode.playedValue != YES) {
                     blockSelf.currentEpisode.playedValue = YES;
+                    [blockSelf.currentPodcast updateNextItemDate];
                 }
             }
-            [[NSManagedObjectContext defaultContext] save:nil];
         }];
     }];
 }
@@ -298,7 +298,7 @@ void audioRouteChangeListenerCallback (
                         [[NSManagedObjectContext defaultContext] performBlock:^{
                             self.currentEpisode.positionInSecondsValue = 0;
                             self.currentEpisode.playedValue = YES;
-                            [[NSManagedObjectContext defaultContext] save:nil];                            
+                            [self.currentPodcast updateNextItemDate];
                         }];
                     } else {
                         LOG_PLAYBACK(3, @"Pausing playback");

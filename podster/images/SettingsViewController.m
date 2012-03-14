@@ -149,7 +149,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             // Tapped contact us
             [self contactUsTapped];
         } else if (indexPath.row == 1) {
-            [self performSegueWithIdentifier:@"showPrivacy" sender:self];
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://policy-portal.truste.com/core/privacy-policy/Stephen-Vanterpool/6bcbf001-fefc-4ea7-86e6-aee92ceb40ad"]];
         } else if (indexPath.row == 2) {
             [self performSegueWithIdentifier:@"showLegal" sender:self];
         }
@@ -193,7 +194,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 1) {
-        return 90.0;
+        return 95.0;
     } else {
         return 44.0f;
     }

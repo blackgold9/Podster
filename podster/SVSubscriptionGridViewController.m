@@ -96,7 +96,7 @@
 
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-    NSFetchRequest *request = [SVPodcast requestAllSortedBy:SVPodcastAttributes.lastUpdated ascending:NO withPredicate:predicate];
+    NSFetchRequest *request = [SVPodcast requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate];
     request.includesSubentities = NO;
     self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                        managedObjectContext:[NSManagedObjectContext defaultContext] 
@@ -161,7 +161,7 @@
         case NSFetchedResultsChangeDelete:
             LOG_GENERAL(2, @"GRID:Removing object at %d", indexPath.row);
             [self.gridView removeObjectAtIndex:indexPath.row 
-                                 withAnimation:GMGridViewItemAnimationScroll];
+                                 withAnimation:GMGridViewItemAnimationNone];
             break;
         case NSFetchedResultsChangeMove:
             LOG_GENERAL(2, @"GRID:Object should move from %d to %d", indexPath.row, newIndexPath.row );
@@ -175,7 +175,7 @@
         {
             LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
             [self.gridView reloadObjectAtIndex:indexPath.row
-                                 withAnimation:GMGridViewItemAnimationFade];
+                                 withAnimation:GMGridViewItemAnimationNone];
         }
             break;
         default:

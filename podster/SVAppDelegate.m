@@ -19,109 +19,88 @@
 #import "SDURLCache.h"
 #import "GMGridView.h"
 #import "SVSubscription.h"
-#import "ZUUIRevealController.h"
 #import "SVSubscriptionManager.h"
 #import "PodsterIAPHelper.h"
 #import <CoreText/CoreText.h>
 #import "BannerViewController.h"
+#import "PodsterManagedDocument.h"
 #import "MBProgressHUD.h"
 
 @implementation SVAppDelegate
 {
     NSTimer *saveTimer;
     UIColor *backgrondTexture;
-    NSManagedObjectContext *parentContext;
 }
 
 NSString *uuid();
 @synthesize window = _window;
-- (void)subscribeToFeedWithURL:(NSString *)url
-{
-    NSLog(@"Subscribing to feed with url");
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, url];
-    SVPodcast *podcast = [SVPodcast findFirstWithPredicate:pred];
-    if (podcast && !podcast.isSubscribedValue) {
-        SVSubscription *sub = [SVSubscription createEntity];
-        sub.podcast = podcast;
-        [[NSManagedObjectContext defaultContext] save:nil];        
-
-        [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:url
-                                                           onCompletion:^{
-                                                               
-                                                           } onError:^(NSError *error) {
-                                                               
-                                                           }];
-    }
-
-    
-}
-- (void)processLinkInPasteboard
-{
-    NSString *regexToReplaceRawLinks = @"(\\b(https?):\\/\\/[-A-Z0-9+&@#\\/%?=~_|!:,.;]*[-A-Z0-9+&@#\\/%=~_|])";   
-    
-    NSError *error = NULL;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexToReplaceRawLinks
-                                                                           options:NSRegularExpressionCaseInsensitive
-                                                                             error:&error];
-    NSString *lastURLAskedAbout = [[NSUserDefaults standardUserDefaults] valueForKey:@"lastPastebordImportURL"];
-    NSString *sourceString = [UIPasteboard generalPasteboard].string;
-    if ([sourceString isEqualToString:lastURLAskedAbout]) {
-        // We already asked the user about this url.
-        return;
-    } else {
-        // Save it so we don't ask them again
-        [[NSUserDefaults standardUserDefaults] setValue:sourceString forKey:@"lastPastebordImportURL"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-    }
-    if (sourceString) {
-        NSRange range = [regex rangeOfFirstMatchInString:sourceString
-                                                 options:NSRegularExpressionCaseInsensitive
-                                                   range:NSMakeRange(0, [sourceString length])];
-        if (range.location != NSNotFound){
-            NSString *url = [sourceString substringWithRange:range];
-            url = [url lowercaseString];
-            UIAlertView *testView = [UIAlertView alertViewWithTitle:@"Add this feed?" message:[NSString stringWithFormat:@"We noticed you have the url: \"%@\" in your pasteboard. Would you like to subscribe to it?", url]];
-            [testView addButtonWithTitle:@"Yes" handler:^{
-                [[SVPodcatcherClient sharedInstance] findFeedFromLink:url
-                                                         onCompletion:^(NSString *feedURL) {
-                                                             if (feedURL){
-                                                             [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:feedURL
-                                                                                                                      withLowerPriority:NO
-                                                                                                                              inContext:[NSManagedObjectContext defaultContext]
-                                                                                                                           onCompletion:^{
-                                                                                                                               [self subscribeToFeedWithURL:feedURL];
-                                                                                                                           } onError:^(NSError *error) {
-                                                                                                                               
-                                                                                                                               // The feed could not be parsed
-                                                                                                                               [UIAlertView showAlertViewWithTitle:@"Whoops!"
-                                                                                                                                                           message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
-                                                                                                                                                               
-                                                                                                                                                           }];
-                                                                                                                               
-                                                                                                                           }];
-                                                             } else {
-                                                                 // The feed could not be parsed
-                                                                 [UIAlertView showAlertViewWithTitle:@"Whoops!"
-                                                                                             message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
-                                                                                                 
-                                                                                             }];
-                                                             }
-                                                         } onError:^(NSError *error) {
-                                                             // The feed could not be parsed
-                                                             [UIAlertView showAlertViewWithTitle:@"Whoops!"
-                                                                                         message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
-                                                                                             
-                                                                                         }];
-
-                                                         }];
-            }];
-            [testView addButtonWithTitle:@"No" handler:^{ LOG_GENERAL(2, @"Improting a feed failed"); }];
-            [testView show];
-        }
-    }
-    
-}
+//- (void)processLinkInPasteboard
+//{
+//    NSString *regexToReplaceRawLinks = @"(\\b(https?):\\/\\/[-A-Z0-9+&@#\\/%?=~_|!:,.;]*[-A-Z0-9+&@#\\/%=~_|])";   
+//    
+//    NSError *error = NULL;
+//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexToReplaceRawLinks
+//                                                                           options:NSRegularExpressionCaseInsensitive
+//                                                                             error:&error];
+//    NSString *lastURLAskedAbout = [[NSUserDefaults standardUserDefaults] valueForKey:@"lastPastebordImportURL"];
+//    NSString *sourceString = [UIPasteboard generalPasteboard].string;
+//    if ([sourceString isEqualToString:lastURLAskedAbout]) {
+//        // We already asked the user about this url.
+//        return;
+//    } else {
+//        // Save it so we don't ask them again
+//        [[NSUserDefaults standardUserDefaults] setValue:sourceString forKey:@"lastPastebordImportURL"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        
+//    }
+//    if (sourceString) {
+//        NSRange range = [regex rangeOfFirstMatchInString:sourceString
+//                                                 options:NSRegularExpressionCaseInsensitive
+//                                                   range:NSMakeRange(0, [sourceString length])];
+//        if (range.location != NSNotFound){
+//            NSString *url = [sourceString substringWithRange:range];
+//            url = [url lowercaseString];
+//            UIAlertView *testView = [UIAlertView alertViewWithTitle:@"Add this feed?" message:[NSString stringWithFormat:@"We noticed you have the url: \"%@\" in your pasteboard. Would you like to subscribe to it?", url]];
+//            [testView addButtonWithTitle:@"Yes" handler:^{
+//                [[SVPodcatcherClient sharedInstance] findFeedFromLink:url
+//                                                         onCompletion:^(NSString *feedURL) {
+//                                                             if (feedURL){
+//                                                             [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:feedURL
+//                                                                                                                      withLowerPriority:NO
+//                                                                                                                              inContext:[NSManagedObjectContext defaultContext]
+//                                                                                                                           onCompletion:^{
+//                                                                                                                               [self subscribeToFeedWithURL:feedURL];
+//                                                                                                                           } onError:^(NSError *error) {
+//                                                                                                                               
+//                                                                                                                               // The feed could not be parsed
+//                                                                                                                               [UIAlertView showAlertViewWithTitle:@"Whoops!"
+//                                                                                                                                                           message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
+//                                                                                                                                                               
+//                                                                                                                                                           }];
+//                                                                                                                               
+//                                                                                                                           }];
+//                                                             } else {
+//                                                                 // The feed could not be parsed
+//                                                                 [UIAlertView showAlertViewWithTitle:@"Whoops!"
+//                                                                                             message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
+//                                                                                                 
+//                                                                                             }];
+//                                                             }
+//                                                         } onError:^(NSError *error) {
+//                                                             // The feed could not be parsed
+//                                                             [UIAlertView showAlertViewWithTitle:@"Whoops!"
+//                                                                                         message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
+//                                                                                             
+//                                                                                         }];
+//
+//                                                         }];
+//            }];
+//            [testView addButtonWithTitle:@"No" handler:^{ LOG_GENERAL(2, @"Improting a feed failed"); }];
+//            [testView show];
+//        }
+//    }
+//    
+//}
 -(void)handleCoreDataError:(NSError *)error
 {
     LOG_GENERAL(0, @"Core data error: %@", error);
@@ -201,19 +180,8 @@ NSString *uuid();
 //    });
 
     
-    
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
-    
-    [MagicalRecordHelpers setupAutoMigratingCoreDataStack];
-    parentContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    parentContext.persistentStoreCoordinator = [NSPersistentStoreCoordinator defaultStoreCoordinator];
-    
-    NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    childContext.parentContext = parentContext;
-    [NSManagedObjectContext setDefaultContext:childContext];
-    
-    [MagicalRecordHelpers setErrorHandlerTarget:self action:@selector(handleCoreDataError:)];
-    [self startSaveTimer];
+   
     SDURLCache *urlCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024   // 1MB mem cache
                                                          diskCapacity:1024*1024*50 // 50MB disk cache
                                                              diskPath:[SDURLCache defaultCachePath]];
@@ -221,15 +189,19 @@ NSString *uuid();
     //[[SVDownloadManager sharedInstance] resumeDownloads];
     [self configureTheming];
 
-
-    // Actually register
-//#ifndef CONFIGURATION_Debug
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
-                                                                           UIRemoteNotificationTypeBadge|
-                                                                           UIRemoteNotificationTypeSound)];
-//#endif
- //   #endif
-    
+    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
+        
+        
+        // Actually register
+#ifndef CONFIGURATION_Debug
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
+                                                                               UIRemoteNotificationTypeBadge|
+                                                                               UIRemoteNotificationTypeSound)];
+#else
+        [self application:[UIApplication sharedApplication] didFailToRegisterForRemoteNotificationsWithError:nil];
+#endif
+        //   #endif
+    }];
     [[NSNotificationCenter defaultCenter] addObserverForName:kProductPurchasedNotification
                                                       object:nil
                                                        queue:nil
@@ -278,7 +250,7 @@ NSString *uuid();
                      [[SVSettings sharedInstance] setPremiumMode:isPremium];
                      [[SVSubscriptionManager sharedInstance] processServerState:subscriptions
                                                                       isPremium:isPremium];
-                     LOG_GENERAL(2, @"Registered for notifications with podstore");
+
                      // TODO: Handle subscriptions from server
 
 
@@ -292,36 +264,40 @@ NSString *uuid();
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    if (application.applicationState != UIApplicationStateActive) {
-        NSString *hash= [userInfo valueForKey:@"hash"];
-        LOG_GENERAL(2, @"launched for podcast with URL Hash: %@", hash);
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.urlHash, hash];
-        SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
-        if (podcast) {
-            NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
-                                                               forKey:@"Title"];
-            [FlurryAnalytics logEvent:@"LaunchedFromNotification"
-                       withParameters:params];
-
-            SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
-            controller.podcast = podcast;
-            __weak SVAppDelegate *weakDelegate = self;
-            double delayInSeconds = 1.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                UINavigationController *nav = nil;
-                if ([self.window.rootViewController class] == [UINavigationController class]) {
-                    nav = (UINavigationController *)weakDelegate.window.rootViewController;
-                } else {
-                    //If the root isnt a nav controller, it's a banner controller;
-                    BannerViewController *bc = (BannerViewController *) weakDelegate.window.rootViewController;
-                    nav = (UINavigationController *)[bc contentController];
-                }
-                [nav pushViewController:controller animated:YES];
-
-            });
+    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
+        
+        
+        if (application.applicationState != UIApplicationStateActive) {
+            NSString *hash= [userInfo valueForKey:@"hash"];
+            LOG_GENERAL(2, @"launched for podcast with URL Hash: %@", hash);
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.urlHash, hash];
+            SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
+            if (podcast) {
+                NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
+                                                                   forKey:@"Title"];
+                [FlurryAnalytics logEvent:@"LaunchedFromNotification"
+                           withParameters:params];
+                
+                SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
+                controller.podcast = podcast;
+                __weak SVAppDelegate *weakDelegate = self;
+                double delayInSeconds = 1.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    UINavigationController *nav = nil;
+                    if ([self.window.rootViewController class] == [UINavigationController class]) {
+                        nav = (UINavigationController *)weakDelegate.window.rootViewController;
+                    } else {
+                        //If the root isnt a nav controller, it's a banner controller;
+                        BannerViewController *bc = (BannerViewController *) weakDelegate.window.rootViewController;
+                        nav = (UINavigationController *)[bc contentController];
+                    }
+                    [nav pushViewController:controller animated:YES];
+                    
+                });
+            }
         }
-    }
+    }];
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     [FlurryAnalytics logEvent:@"LaunchedWithNotificationsDisabled"];
@@ -331,7 +307,6 @@ NSString *uuid();
 	
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    [[NSManagedObjectContext defaultContext] save:nil];
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -342,28 +317,28 @@ NSString *uuid();
 {
     
     
-    __block UIBackgroundTaskIdentifier background_task; //Create a task object
-    
-    background_task = [application beginBackgroundTaskWithExpirationHandler: ^ {
-        [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
-        background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
-        
-        //System will be shutting down the app at any point in time now
-    }];
-    
-    //Background tasks require you to use asyncrous tasks
-    [[NSManagedObjectContext defaultContext] performBlock:^{
-        LOG_GENERAL(2,@"Saving on entering background");
-        [[NSManagedObjectContext defaultContext] save:nil];
-        [parentContext performBlock:^{
-            LOG_GENERAL(2, @"Saving parent context");
-            [parentContext save:nil];
-            LOG_GENERAL(2, @"Done parent context");
-            [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
-            background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
-            
-        }];
-    }];
+//    __block UIBackgroundTaskIdentifier background_task; //Create a task object
+//    
+//    background_task = [application beginBackgroundTaskWithExpirationHandler: ^ {
+//        [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
+//        background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
+//        
+//        //System will be shutting down the app at any point in time now
+//    }];
+//    
+//    //Background tasks require you to use asyncrous tasks
+//    [[NSManagedObjectContext defaultContext] performBlock:^{
+//        LOG_GENERAL(2,@"Saving on entering background");
+//        [[NSManagedObjectContext defaultContext] save:nil];
+//        [parentContext performBlock:^{
+//            LOG_GENERAL(2, @"Saving parent context");
+//            [parentContext save:nil];
+//            LOG_GENERAL(2, @"Done parent context");
+//            [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
+//            background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
+//            
+//        }];
+//    }];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -383,7 +358,9 @@ NSString *uuid();
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        [[PodsterManagedDocument sharedInstance] performWhenReady:^{                    
+            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        }];
     });
 }
 

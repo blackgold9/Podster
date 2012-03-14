@@ -30,6 +30,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "SVPodcastSettingsView.h"
 #import "BlockAlertView.h"
+#import "GCDiscreetNotificationView.h"
 @interface SVPodcastDetailsViewController ()
 
 - (void)saveLocalContextIncludingParent:(BOOL)includeParent;
@@ -129,9 +130,9 @@
 }
 
 - (IBAction)notifySwitchChanged:(id)sender {
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"notificationsEnabled"]){
+    if([[SVSettings sharedInstance] notificationsEnabled]){
         if (!localPodcast.isSubscribedValue) {
-            BlockAlertView *alertView= [BlockAlertView alertWithTitle:@"Not a Favorite" message:@"You cannot recieve notifications about a podcast unless it is marked as a Favorite"];
+            BlockAlertView *alertView= [BlockAlertView alertWithTitle:NSLocalizedString(@"Not a Favorite", @"Not a Favorite") message:NSLocalizedString(@"You cannot recieve notifications about a podcast unless it is marked as a Favorite", @"You cannot recieve notifications about a podcast unless it is marked as a Favorite")];
             [alertView setCancelButtonWithTitle:@"OK" block:^{
 
             }];
@@ -149,7 +150,7 @@
                                                                                  withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.notifySwitch.on] forKey:@"ON"]];
                                                                       LOG_GENERAL(2, @"Notifications setting changed successfully");
                                                                       localPodcast.shouldNotifyValue = self.notifySwitch.on;
-                                                                      [localContext save:nil];
+                                                                      
                                                                   }
                                                                        onError:^(NSError *error) {
                                                                            
@@ -171,10 +172,12 @@
             }
 
         }
-    } else {
+    } 
+    else 
+    {
           // Notifications not enabled
-        BlockAlertView *alertView = [BlockAlertView alertWithTitle:@"Notifications are disabled"
-                                                           message:@"Please enable notifications in settings if you would like to recieve updates when new episodes are posted."];
+        BlockAlertView *alertView = [BlockAlertView alertWithTitle:NSLocalizedString(@"NOTIFICATIONS_ARE_DISABLED", @"Notifications are disabled")
+                                                           message:NSLocalizedString(@"NOTIFICATIONS_DISABLED_BODY", @"Please enable notifications in settings if you would like to recieve updates when new episodes are posted.")];
         [alertView addButtonWithTitle:@"Settings" block:^{
 
         }];
@@ -188,8 +191,8 @@
 
 - (void)showFeedNotificationSubscriptionError
 {
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Error" message:@"Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area."];
-    [alert setCancelButtonWithTitle:@"OK" block:^{}];
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:NSLocalizedString(@"NOTIFICAITONS_SUBSCRIBE_FAILED", @"Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area.")];
+    [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", @"OK") block:^{}];
     [alert show];
 }
 
@@ -214,7 +217,7 @@
                                                                           LOG_GENERAL(2, @"Succeed creating notification subscription");
                                                                           self.subscribeButton.enabled = YES;
                                                                           localPodcast.shouldNotifyValue = YES;
-                                                                          [localContext save:nil];
+                                                                          
                                                                           [self.notifySwitch setOn:YES animated:YES];
                                                                       }
                                                                            onError:^(NSError *error) {
@@ -229,8 +232,8 @@
             };
             
 
-            BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Notifications"
-                                                           message:@"Would you like to be notified when new episodes become available?"];
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
+                                                           message:NSLocalizedString(@"Would you like to be notified when new episodes become available?", @"Would you like to be notified when new episodes become available?")];
             [alert setCancelButtonWithTitle:@"No" block:^{
                 self.subscribeButton.enabled = YES;
             }];
@@ -260,7 +263,7 @@
         LOG_GENERAL(2, @"Communication pending with server. Setting Needs reconcile to YES");
         // Start out needing reconciling
         localPodcast.unseenEpsiodeCountValue = 0;
-        [localContext save:nil];
+        
     }];
     
     void (^succeeded)() = ^{
@@ -281,16 +284,12 @@
     [localContext performBlock:^void() {
         localPodcast.isSubscribedValue = NO;
         localPodcast.shouldNotifyValue = NO;
-        [localContext save:nil];
+        
     }];
 
     [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:localPodcast.feedURL
                                                            onCompletion:^{
-        [localContext performBlock:^void() {
-            localPodcast.needsReconcilingValue = NO;
-            [localContext save:nil];
-        }];
-    } onError:^(NSError *error) {
+                                                           } onError:^(NSError *error) {
     }];
 }
 
@@ -403,13 +402,6 @@
 {
     [localContext performBlock:^{
         localPodcast.unseenEpsiodeCountValue = 0;
-        // This save invokes magical record's helper that also saves the parent (root) context
-        [localContext save:nil];
-        [[localContext parentContext] performBlock:^{
-            NSError *error = nil;
-            [[localContext parentContext] save:&error];
-            NSAssert(error == nil, @"Saving root context should not fail");
-        }];
     }];
 
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
@@ -436,9 +428,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
             isInitialLoad = YES;
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0];
-//    self.metadataView.layer.shadowPath = CGPathCreateWithRect(self.metadataView.frame, NULL);
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
     self.titleLabel.text = self.podcast.title;
@@ -473,10 +465,7 @@
         localPodcast.unseenEpsiodeCountValue = 0;
         blockHasSubscription = localPodcast.isSubscribedValue;
 
-        [localContext save:nil];
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
             self.descriptionLabel.text = localPodcast.summary;    
             isSubscribed = blockHasSubscription;
             self.notifySwitch.on = localPodcast.shouldNotifyValue;
@@ -487,16 +476,15 @@
             __weak SVPodcastDetailsViewController *blockSelf = self;
             
             void (^loadCompleteHandler)() = ^{
+                [notificationView hideAnimated];
                 // Since we fetched directly on the background context,
                 // We need to triger the fetch manually when it's done
                 
                 blockSelf->isLoading = NO;
                 
                 LOG_GENERAL(2, @"Saving parent context");
-                [[NSManagedObjectContext defaultContext].parentContext performBlock:^{
-                    localPodcast.unseenEpsiodeCountValue = 0;
+                [localContext performBlock:^{
                     
-                    [[NSManagedObjectContext defaultContext].parentContext save:nil];
                     LOG_GENERAL(2, @"Done loading entries");
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [blockSelf reloadData];
@@ -508,13 +496,16 @@
                 
             };
             
+               
+                [notificationView show:YES];
             [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
                                                                      withLowerPriority:NO
-                                                                             inContext:[NSManagedObjectContext defaultContext].parentContext
+                                                                             inContext:localContext
                                                                           onCompletion:loadCompleteHandler
                                                                                onError:^(NSError *error) {
+                                                                                   [notificationView hideAnimated];
                                                                                    BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                                                                                  message:@"There was an error downloading this podcast. Please try again later"];
+                                                                                                                                  message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
                                                                                    [alert setCancelButtonWithTitle:@"OK"
                                                                                                              block:^{
                                                                                                                  
@@ -609,6 +600,13 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    NSAssert(localPodcast != nil, @"Local podcast should not be nil");
+    [localContext performBlock:^{
+        
+        localPodcast.unseenEpsiodeCountValue = 0;
+        [localPodcast updateNextItemDate];
+ 
+    }];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -626,7 +624,7 @@
        
     [localContext performBlock:^{
         if ([localContext hasChanges]) {
-            [localContext save:nil];
+            
         }
          SVPodcastEntry *fetcherEpisode;
         fetcherEpisode = [fetcher objectAtIndexPath:indexPath];

@@ -131,30 +131,9 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         logoString = podcast.logoURL;
     }
 
-    self.imageView.image =  [UIImage imageNamed:@"placeholder.png"];
-
     self.titleLabel.hidden = NO;
     if(logoString) {
         NSURL *imageURL = [NSURL URLWithString: logoString];
-        //        [cache imageFromCacheWithURL:imageURL
-        //                             success:^(UIImage *image) {
-        //                                 [UIView transitionWithView:imageView
-        //                                                   duration:0.33
-        //                                                    options:UIViewAnimationOptionTransitionCrossDissolve
-        //                                                 animations:^{
-        //                                                     label.hidden = YES;
-        //                                                     imageView.image = image;
-        //                                                 } completion:^(BOOL finished) {
-        //                                                     
-        //                                                 }];
-        //
-        //                             } failure:^{
-        //                                 
-        //                             }];
-        __weak UIImageView *weakImageView = self.imageView;
-        __weak UILabel *weakLabel = self.titleLabel;
-
-
         NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
         
         [self.imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder.png"]
@@ -163,29 +142,8 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
                                                                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                                                                         
                                                                                     }];
-//        __weak AFImageRequestOperation *weakOp = imageLoadOp;
-//        imageLoadOp = [AFImageRequestOperation imageRequestOperationWithRequest:request
-//                                                           imageProcessingBlock:nil
-//                                                                      cacheName:nil
-//                                                                        success:^(NSURLRequest *req, NSHTTPURLResponse *response, UIImage *image) {
-//                                                                            if ( [[[req URL] absoluteString] isEqualToString:[imageURL absoluteString]]){
-//                                                                                UIImage *decompressed = [image preloadedImage];
-//                                                                                dispatch_async(dispatch_get_main_queue(), ^{
-//                                                                                    if (![weakOp isCancelled])
-//                                                                                    [UIView transitionWithView:weakImageView
-//                                                                                                      duration:0.25
-//                                                                                                       options:UIViewAnimationOptionTransitionCrossDissolve
-//                                                                                                      animations:^{
-//                                                                                                          weakImageView.image = decompressed;
-//                                                                                                          weakLabel.hidden = YES;
-//                                                                                                      } completion:nil];
-//                                                                                });
-//
-//                                                                            }
-//                                                                        } failure:nil];
-//        imageLoadOp.successCallbackQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-//        [imageLoadOp start];      
-//        
+    } else {            
+        self.imageView.image =  [UIImage imageNamed:@"placeholder.png"];
     }
     
     UILabel *countLabel = (UILabel *)[self viewWithTag:1908];

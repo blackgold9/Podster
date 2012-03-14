@@ -14,7 +14,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GCDiscreetNotificationView.h"
 #import "SVSubscriptionManager.h"
-
+#import "MBProgressHUD.h"
+#import "PodsterManagedDocument.h"
 @interface HomeController ()
 @property(nonatomic, strong) SVSubscriptionGridViewController *subscriptionsController;
 @property(nonatomic, strong) FeaturedController *featuredController;
@@ -72,8 +73,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self configureTabView];
-    self.scrollView.contentOffset = CGPointMake(0, 0);
+    UIImageView *placeHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
+    placeHolder.frame = self.view.bounds;
+    [self.view addSubview:placeHolder];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"] 
                                                                               style:UIBarButtonItemStylePlain
                                                                             handler:^(id sender) {
@@ -85,6 +87,14 @@
         [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController] animated:YES];
         
     }];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.dimBackground = YES;
+
+    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self configureTabView];
+    self.scrollView.contentOffset = CGPointMake(0, 0);
     
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         if (state == UIGestureRecognizerStateRecognized) {
@@ -113,7 +123,10 @@
                                                            showActivity:YES 
                                                      inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
                                                                  inView:self.view];
-
+                                   [placeHolder removeFromSuperview];
+                            
+                  
+     }];
 }
 
 - (UIViewController *)controllerForScreenType:(HomePageScreenType)screenType
@@ -224,12 +237,14 @@
     self.titleTabView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
     
     __weak HomeController *weakSelf = self;
-    [self.titleTabView addTabItemWithTitle:@"What's Hot"
+    NSString *whatsHot = NSLocalizedString(@"WHATS_HOT", @"What's Hot");
+    [self.titleTabView addTabItemWithTitle:whatsHot
                                       icon:nil executeBlock:^{
         [weakSelf configureViewControllerForScreenType:HomePageFeaturedScreen];
     }];
 
-    [self.titleTabView addTabItemWithTitle:@"Favorites"
+    NSString *favorites = NSLocalizedString(@"FAVORITES", @"Favorites");
+    [self.titleTabView addTabItemWithTitle:favorites
                                       icon:nil executeBlock:^{
         [weakSelf configureViewControllerForScreenType:HomePageSubscriptionsScreen];
     }];

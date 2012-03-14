@@ -14,7 +14,7 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *lastSynced;
 	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *logoURL;
-	__unsafe_unretained NSString *needsReconciling;
+	__unsafe_unretained NSString *nextItemDate;
 	__unsafe_unretained NSString *shouldNotify;
 	__unsafe_unretained NSString *smallLogoURL;
 	__unsafe_unretained NSString *sortNewestFirst;
@@ -153,14 +153,10 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *needsReconciling;
+@property (nonatomic, strong) NSDate *nextItemDate;
 
 
-@property BOOL needsReconcilingValue;
-- (BOOL)needsReconcilingValue;
-- (void)setNeedsReconcilingValue:(BOOL)value_;
-
-//- (BOOL)validateNeedsReconciling:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateNextItemDate:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -354,11 +350,8 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-- (NSNumber*)primitiveNeedsReconciling;
-- (void)setPrimitiveNeedsReconciling:(NSNumber*)value;
-
-- (BOOL)primitiveNeedsReconcilingValue;
-- (void)setPrimitiveNeedsReconcilingValue:(BOOL)value_;
+- (NSDate*)primitiveNextItemDate;
+- (void)setPrimitiveNextItemDate:(NSDate*)value;
 
 
 

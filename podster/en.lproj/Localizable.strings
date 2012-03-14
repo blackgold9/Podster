@@ -1,0 +1,66 @@
+/* 
+  Localizable.strings
+  podster
+
+  Created by Vanterpool, Stephen on 3/10/12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+
+"FAVORITES" = "Favorites";
+"WHATS_HOT" = "What's Hot";
+"ONE_MONTH" = "1 month subscription";
+"ONE_YEAR" = "1 year subscription";
+"THREE_MONTHS" = "3 month subscription";
+
+// Feedback strings
+"FEEDBACK_SUBJECT" = "Feedback from a Podster Customer!";
+"FEEDBACK_BODY" = "Type your message here:\n\n---------------------\n\nPodster Version:\t%@"; 
+
+// Purchase error
+"PURCHASE_ERROR" = "Purchase Error";
+"PURCHASE_VALIDATION_FAILED" = "We apologize, but there was a problem verifying your subscription.\n\nWe will try again the next time you start the app.";
+
+// Purchase Success
+"THANK_YOU_REALLY" = "Thank You! (Really)";
+"PURCHASE_COMPLETE_MESSAGE" = "Thank you for purchasing Premium Mode!\nPlease quit and restart the app for it to take effect.";
+// Upsell when user hits free limit
+"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE" = "Upgrade To Premium";
+"HIT_MAX_NOTIFICATIONS_PROMPT_BODY" = "You have reached the maximum number of podcasts that you can monitor for free.\n\nSign up for the Premium Experience now!";
+
+"LEARN_MORE" = "Learn More...";
+"DECLINE" = "No Thanks";
+
+
+"Disabled" = "Disabled";
+"Enabled" = "Enabled";
+"TAP_TO_UPGRADE" = "Tap to Upgrade";
+"PREMIUM_DESCRIPTION" = "The Premium Experience unlocks:\n • Unlimited episode notificaitons!\n • NO Ads!\n • My neverending gratitude :)";
+"PRIVACY_POLICY" = "Privacy Policy";
+"CONTACT_US" = "Contact Us";
+"LEGAL_INFO" = "Legal Information";
+"Waiting for connection..." = "Waiting for connection...";
+"OFFLINE" = "OFFLINE";
+
+"FAVORITES_NO_CONTENT" = "Podcasts you have marked as a favorite will appear here.\n(Give it a try!)";
+
+// Notifications
+"EPISODE_NOTIFICATION" = "A new episode of \"%@\" is available!";
+
+"OK" = "OK";
+"There was a problem playing this podcast. Please try again later." = "There was a problem playing this podcast. Please try again later.";
+
+"ERROR_TITLE_ONE" = "Awww Shucks!";
+"ERROR_TITLE_TWO" = "So Sorry!";
+"ERROR_TITLE_THREE" = "Oh No!";
+"ERROR_TITLE_FOUR" = "An Error Has Occured";
+"ERROR_TITLE_FIVE" = "Ooops!";
+"Not a Favorite" = "Not a Favorite";
+"You cannot recieve notifications about a podcast unless it is marked as a Favorite" = "You cannot recieve notifications about a podcast unless it is marked as a Favorite";
+"NOTIFICATIONS_ARE_DISABLED" = "Notifications are disabled";
+"NOTIFICATIONS_DISABLED_BODY" = "Please enable notifications in settings if you would like to recieve updates when new episodes are posted.";
+"NOTIFICAITONS_SUBSCRIBE_FAILED" = "Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area.";
+"Notifications" = "Notifications";
+"Would you like to be notified when new episodes become available?" = "Would you like to be notified when new episodes become available?";
+
+"Loading new episodes" = "Loading new episodes";
+"There was an error downloading this podcast. Please try again later" = "There was an error downloading this podcast. Please try again later";

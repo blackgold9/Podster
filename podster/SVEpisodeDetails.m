@@ -89,7 +89,8 @@
     NSData *stringData = [[bodyText stringWithNewLinesAsBRs] dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.4",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
     self.summaryView.textDelegate = self;
-    [self.summaryView setAttributedString:[NSAttributedString attributedStringWithHTML:stringData options:dictionary]];
+    NSAttributedString *string = [NSAttributedString attributedStringWithHTML:stringData options:dictionary];
+    [self.summaryView setAttributedString:string];
 
     [self updatePlayedToggle];
        context = theEpisode.managedObjectContext;
@@ -188,14 +189,18 @@
 	[[UIApplication sharedApplication] openURL:[button.url absoluteURL]];
 }
 - (IBAction)markAsPlayedTapped:(id)sender {
-    episode.playedValue = !episode.playedValue;
-    if (!episode.playedValue) {
-        // If we are now unplayed, reset playback location
+    [context performBlockAndWait:^{
+        episode.playedValue = !episode.playedValue;  
+        if (!episode.playedValue) {
+            // If we are now unplayed, reset playback location
+            episode.positionInSecondsValue = 0;            
+        }
         
-    }
-    [self updatePlayedToggle];
-    [context performBlock:^{
-        [context save:nil];
+        [episode.podcast updateNextItemDate];
+
     }];
+
+       
+    [self updatePlayedToggle];    
 }
 @end

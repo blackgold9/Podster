@@ -515,28 +515,28 @@
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0:00" lineBreakMode="tailTruncation" minimumFontSize="10" id="fiR-nu-Q92">
-                                                <rect key="frame" x="19" y="2" width="54" height="21"/>
+                                                <rect key="frame" x="20" y="2" width="54" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-1:00" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="HVg-Lg-xBW">
-                                                <rect key="frame" x="255" y="2" width="49" height="21"/>
+                                                <rect key="frame" x="254" y="2" width="49" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podcast Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="C3p-Tm-Scu">
-                                                <rect key="frame" x="63" y="3" width="193" height="21"/>
+                                                <rect key="frame" x="72" y="3" width="175" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.35000000000000003" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.42999999999999999" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -950,9 +950,6 @@
         <class className="OBSlider" superclassName="UISlider">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>
         </class>
-        <class className="RootController" superclassName="ZUUIRevealController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RootController.h"/>
-        </class>
         <class className="SVCategoryListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVCategoryListViewController.h"/>
         </class>
@@ -1043,13 +1040,6 @@
         </class>
         <class className="SVViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVViewController.h"/>
-        </class>
-        <class className="ZUUIRevealController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ZUUIRevealController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="frontViewController" candidateClass="UIViewController"/>
-                <relationship kind="outlet" name="rearViewController" candidateClass="UIViewController"/>
-            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

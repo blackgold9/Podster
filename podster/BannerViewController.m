@@ -44,7 +44,7 @@
 /*  */
 
 #import "BannerViewController.h"
-
+#import "SVSettings.h"
 NSString * const BannerViewActionWillBegin = @"BannerViewActionWillBegin";
 NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
@@ -85,6 +85,16 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     [contentView addSubview:_contentController.view];
     [_contentController didMoveToParentViewController:self];
     self.view = contentView;
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"SVPremiumModeChanged" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        
+        if([[SVSettings sharedInstance] premiumMode]) {
+            [_bannerView ignoreNewAdRequests];
+        } else {
+            [_bannerView doNotIgnoreNewAdRequests];
+        }
+        [self.view setNeedsLayout];
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)viewDidUnload
@@ -102,7 +112,8 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
    
     CGRect contentFrame = self.view.bounds;
     CGRect bannerFrame = _bannerView.frame;
-    if ([_bannerView adExists]) {
+    if ([_bannerView adExists] && ![_bannerView isIgnoringNewAdRequests]) {
+
         bannerFrame.size = [_bannerView actualAdSize];
         contentFrame.size.height -= _bannerView.frame.size.height;
         bannerFrame.origin.y = contentFrame.size.height;
