@@ -102,6 +102,13 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     [super viewDidUnload];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
+}
+
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return [_contentController shouldAutorotateToInterfaceOrientation:interfaceOrientation];

@@ -228,7 +228,7 @@
     [localContext performBlock:^{
         
         LOG_GENERAL(2, @"Fetching podcast in local context");        
-        SVPodcast *podcast = [SVPodcast findFirstWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
+        SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
                                            inContext:localContext];
 
 

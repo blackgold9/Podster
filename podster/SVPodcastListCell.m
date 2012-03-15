@@ -75,14 +75,14 @@
         self.summaryLabel.hidden = YES;
     }
     
-    self.logoImageView.backgroundColor = [UIColor grayColor];
-    self.logoImageView.image = nil;
+
+    self.logoImageView.image = [UIImage imageNamed:@"placeholder-thumb.png"];
     if ([podcast thumbLogoURL] != nil) {
 
         NSURL *imageURL = [NSURL URLWithString:[podcast thumbLogoURL]];
        // LOG_NETWORK(3, @"Downloading image at url: %@", imageURL);
         self.logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.logoImageView setImageWithURL:imageURL placeholderImage:nil ];
+        [self.logoImageView setImageWithURL:imageURL placeholderImage:[UIImage imageNamed:@"placeholder-thumb.png"]];
     }
 
 }

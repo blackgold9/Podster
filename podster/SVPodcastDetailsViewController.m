@@ -31,6 +31,7 @@
 #import "SVPodcastSettingsView.h"
 #import "BlockAlertView.h"
 #import "GCDiscreetNotificationView.h"
+#import "SVSubscriptionManager.h"
 @interface SVPodcastDetailsViewController ()
 
 - (void)saveLocalContextIncludingParent:(BOOL)includeParent;
@@ -101,7 +102,8 @@
     [self reloadData];
 }
 - (BOOL)needsToSignUpForPremium {
-   NSInteger currentCount = (NSInteger )[SVPodcast countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"shouldNotify == YES AND isSubscribed == YES"]];
+
+    NSInteger currentCount = (NSInteger )[SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"shouldNotify == YES AND isSubscribed == YES"] inContext:[PodsterManagedDocument defaultContext]];
    return ![[SVSettings sharedInstance] premiumMode] && currentCount >= [[SVSettings sharedInstance] maxNonPremiumNotifications];
 }
 
@@ -128,61 +130,64 @@
     [self.notifySwitch setOn:NO animated:YES];
 
 }
+-(void)doNotificationChange
+{
+    if (self.notifySwitch.on && [self needsToSignUpForPremium])  {
+        [self showNotificationsUpsell];
+    } else {
+        
+        [[SVPodcatcherClient sharedInstance] changeNotificationSetting:self.notifySwitch.on
+                                                        forFeedWithURL:localPodcast.feedURL
+                                                          onCompletion:^{
+                                                              [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
+                                                                         withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.notifySwitch.on] forKey:@"ON"]];
+                                                              LOG_GENERAL(2, @"Notifications setting changed successfully");
+                                                              localPodcast.shouldNotifyValue = self.notifySwitch.on;
+                                                              
+                                                          }
+                                                               onError:^(NSError *error) {
+                                                                   
+                                                                   if ([error code] == 402) {
+                                                                       // recieved a 'payment required' status code
+                                                                       [self showNotificationsUpsell];
+                                                                   } else {
+                                                                       [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
+                                                                       LOG_GENERAL(1, @"Registration failed with error: %@", error);
+                                                                       BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
+                                                                       
+                                                                       [alertView setCancelButtonWithTitle:@"OK" block:^{
+                                                                           
+                                                                       }];
+                                                                       [self.notifySwitch setOn:!self.notifySwitch.on animated:YES];
+                                                                       [alertView show];
+                                                                   }
+                                                               }];
+    }
+}
 
 - (IBAction)notifySwitchChanged:(id)sender {
     if([[SVSettings sharedInstance] notificationsEnabled]){
         if (!localPodcast.isSubscribedValue) {
-            BlockAlertView *alertView= [BlockAlertView alertWithTitle:NSLocalizedString(@"Not a Favorite", @"Not a Favorite") message:NSLocalizedString(@"You cannot recieve notifications about a podcast unless it is marked as a Favorite", @"You cannot recieve notifications about a podcast unless it is marked as a Favorite")];
-            [alertView setCancelButtonWithTitle:@"OK" block:^{
-
+            [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
+                if (success) {
+                    [self doNotificationChange];
+                }
             }];
-            [self.notifySwitch setOn:NO animated:YES];
-            [alertView show];
         } else {
-            if (self.notifySwitch.on && [self needsToSignUpForPremium])  {
-                [self showNotificationsUpsell];
-            } else {
-                
-                [[SVPodcatcherClient sharedInstance] changeNotificationSetting:self.notifySwitch.on
-                                                                forFeedWithURL:localPodcast.feedURL
-                                                                  onCompletion:^{
-                                                                      [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
-                                                                                 withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.notifySwitch.on] forKey:@"ON"]];
-                                                                      LOG_GENERAL(2, @"Notifications setting changed successfully");
-                                                                      localPodcast.shouldNotifyValue = self.notifySwitch.on;
-                                                                      
-                                                                  }
-                                                                       onError:^(NSError *error) {
-                                                                           
-                                                                           if ([error code] == 402) {
-                                                                               // recieved a 'payment required' status code
-                                                                               [self showNotificationsUpsell];
-                                                                           } else {
-                                                                               [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
-                                                                               LOG_GENERAL(1, @"Registration failed with error: %@", error);
-                                                                               BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
-                                                                               
-                                                                               [alertView setCancelButtonWithTitle:@"OK" block:^{
-                                                                                   
-                                                                               }];
-                                                                               [self.notifySwitch setOn:!self.notifySwitch.on animated:YES];
-                                                                               [alertView show];
-                                                                           }
-                                                                       }];
-            }
-
+            [self doNotificationChange];
+            
         }
     } 
     else 
     {
-          // Notifications not enabled
+        // Notifications not enabled
         BlockAlertView *alertView = [BlockAlertView alertWithTitle:NSLocalizedString(@"NOTIFICATIONS_ARE_DISABLED", @"Notifications are disabled")
                                                            message:NSLocalizedString(@"NOTIFICATIONS_DISABLED_BODY", @"Please enable notifications in settings if you would like to recieve updates when new episodes are posted.")];
         [alertView addButtonWithTitle:@"Settings" block:^{
-
+            
         }];
         [alertView setCancelButtonWithTitle:@"Not Now" block:^{
-
+            
         }];
         [self.notifySwitch setOn:NO animated:YES];
         [alertView show];
@@ -248,7 +253,17 @@
     }
 }
 
-- (void)subscribeToPodcast
+
+-(void)subscribeToPodcast
+{
+    [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
+        if(success) {
+            [self askUserIfTheyWantNotifications];
+        }
+    }];
+}
+
+- (void)subscribeToPodcastWithSuccessBlock:(void (^)(BOOL))complete
 {
     dispatch_async(dispatch_get_main_queue(), ^void() {
         LOG_GENERAL(2, @"Creating a subscription for this podcast");
@@ -267,12 +282,25 @@
     }];
     
     void (^succeeded)() = ^{
-        [self askUserIfTheyWantNotifications];
+        if (complete) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complete(YES);                
+            });
+
+        }
+   
     };
 
     [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:localPodcast.feedURL
                                                        onCompletion:succeeded
-                                                            onError:nil];
+                                                            onError:^(NSError *error) {
+                                                                if (complete) {
+                                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                                        complete(NO);                
+                                                                    });
+                                                                    
+                                                                }
+                                                            }];
 }
 
 - (void)unsubscribeFromPodcast
@@ -438,7 +466,7 @@
     [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
     isLoading = YES;
 
-    localContext = [NSManagedObjectContext defaultContext];
+    localContext = [PodsterManagedDocument defaultContext];
     __block BOOL blockHasSubscription = NO;
    
     [localContext performBlock:^{
@@ -446,13 +474,13 @@
             
                            LOG_GENERAL(2, @"Lookuing up podcast in data store");
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
-        localPodcast = [SVPodcast findFirstWithPredicate:predicate
+        localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
                                            inContext:localContext];
         
         LOG_GENERAL(2, @"Retrived: %@", localPodcast);
         if (!localPodcast) {
             LOG_GENERAL(2, @"Podcast didn't exist, creating it");
-            localPodcast =[SVPodcast createInContext:localContext];
+            localPodcast =[SVPodcast MR_createInContext:localContext];
         }
         
         localPodcast.title = self.podcast.title;
@@ -495,26 +523,30 @@
                 }];
                 
             };
-            
-               
-                [notificationView show:YES];
-            [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
-                                                                     withLowerPriority:NO
-                                                                             inContext:localContext
-                                                                          onCompletion:loadCompleteHandler
-                                                                               onError:^(NSError *error) {
-                                                                                   [notificationView hideAnimated];
-                                                                                   BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                                                                                  message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
-                                                                                   [alert setCancelButtonWithTitle:@"OK"
-                                                                                                             block:^{
-                                                                                                                 
-                                                                                                             }];
-                                                                                   [alert show];
-                                                                               }];
-            
-            
-            
+
+
+                if ([[[SVSubscriptionManager sharedInstance] currentURL] isEqualToString:localPodcast.feedURL]) {
+                    // Skip doing anything since the background process is already on it
+                    LOG_GENERAL(2, @"Subscription manager is already downlioading thi sone, just wait");
+                } else {
+                    [notificationView show:YES];
+                    [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
+                                                                             withLowerPriority:NO
+                                                                                     inContext:localContext
+                                                                                  onCompletion:loadCompleteHandler
+                                                                                       onError:^(NSError *error) {
+                                                                                           [notificationView hideAnimated];
+                                                                                           BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
+                                                                                                                                          message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
+                                                                                           [alert setCancelButtonWithTitle:@"OK"
+                                                                                                                     block:^{
+
+                                                                                                                     }];
+                                                                                           [alert show];
+                                                                                       }];
+
+                }
+
             [self reloadData];
             [self toggleOptionsPanel:NO animated:NO]; 
         });
@@ -546,21 +578,24 @@
  
     if(fetcher == nil) {
                    LOG_GENERAL(2, @"Creating Fetcher For Podcast Details");
-        NSFetchRequest *request = [SVPodcastEntry requestAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                                           ascending:!localPodcast.sortNewestFirstValue
-                                                       withPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:predicates]];
+        NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                                              ascending:!localPodcast.
+                                   sortNewestFirstValue
+                                                          withPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:predicates]
+                                                              inContext:[PodsterManagedDocument defaultContext]];
         
         fetcher.delegate = nil;
         fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                      managedObjectContext:[NSManagedObjectContext defaultContext]
+                                                      managedObjectContext:[PodsterManagedDocument defaultContext]
                                                         sectionNameKeyPath:nil
                                                                  cacheName:nil];
         fetcher.delegate = self;
+        LOG_GENERAL(2, @"PErforming fetch");
+        [fetcher performFetch:nil];
+        LOG_GENERAL(2, @"Fetch complete");
            LOG_GENERAL(2, @"Done creating Fetcher For Podcast Details");
     }
-    LOG_GENERAL(2, @"PErforming fetch");
-    [fetcher performFetch:nil];
-    LOG_GENERAL(2, @"Fetch complete");
+   
     [self.tableView reloadData];
     LOG_GENERAL(2, @"REload Data complete");
 }
@@ -593,10 +628,7 @@
     [self reloadData];
 }
 
-- (void) rootContextUpdated:(NSNotification *)notification
-{
-    [self reloadData];
-}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -607,16 +639,12 @@
         [localPodcast updateNextItemDate];
  
     }];
+    [[PodsterManagedDocument sharedInstance] save:nil];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [FlurryAnalytics logEvent:@"PodcastDetailsPageView" timed:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(rootContextUpdated:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                               object:[[NSManagedObjectContext defaultContext] parentContext]];
-   
+    [FlurryAnalytics logEvent:@"PodcastDetailsPageView" timed:YES];       
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -628,7 +656,7 @@
         }
          SVPodcastEntry *fetcherEpisode;
         fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
-        SVPodcastEntry *episode = (SVPodcastEntry *)[[NSManagedObjectContext defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
+        SVPodcastEntry *episode = (SVPodcastEntry *)[[PodsterManagedDocument defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             

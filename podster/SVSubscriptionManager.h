@@ -12,6 +12,7 @@ static NSString *const kPodcastHasBeenUpdated = @"PodcastHasBeenUpdated";
 
 @interface SVSubscriptionManager : NSObject
 @property (assign) BOOL isBusy;
+@property (strong) NSString *currentURL;
 -(void)refreshAllSubscriptions;
 + (id)sharedInstance;
 

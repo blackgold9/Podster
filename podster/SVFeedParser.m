@@ -64,14 +64,14 @@ forPodcastAtURL:(NSString *)feedURL
 -(void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info
 {
 
-    NSAssert(localContext != [NSManagedObjectContext defaultContext], @"We should not be using the main context here");
+    NSAssert(localContext != [PodsterManagedDocument defaultContext], @"We should not be using the main context here");
     [localContext performBlock:^void() {
 
-        localPodcast = [SVPodcast findFirstWithPredicate:        [NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
+        localPodcast = [SVPodcast MR_findFirstWithPredicate:        [NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
                                              inContext:localContext];
         if (!localPodcast) {
 
-            localPodcast = [SVPodcast createInContext:localContext];
+            localPodcast = [SVPodcast MR_createInContext:localContext];
             localPodcast.feedURL = feedURL; 
             localPodcast.urlHash = [localPodcast.feedURL stringFromMD5];
         } 
@@ -106,7 +106,7 @@ forPodcastAtURL:(NSString *)feedURL
         NSAssert(guid != nil, @"Guid should not be nil at this point");
         NSPredicate *matchesGuid = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryAttributes.guid, guid];
         NSPredicate *inPodcast =[NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryRelationships.podcast, localPodcast ];
-        SVPodcastEntry *episode = [SVPodcastEntry findFirstWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:matchesGuid,inPodcast,nil]]
+        SVPodcastEntry *episode = [SVPodcastEntry MR_findFirstWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:matchesGuid,inPodcast,nil]]
                                                                inContext:localContext];
         BOOL abort = NO;
         if (episode) {
@@ -193,12 +193,15 @@ forPodcastAtURL:(NSString *)feedURL
         
         [localContext performBlock:^void() {
             LOG_PARSING(2, @"Saving local context");
-            [localContext MR_saveWithErrorHandler:^(NSError *error) {
+            NSError *error = nil;
+            [localContext save:&error];
+            if (error) {
+                
                 dispatch_async(originalQueue, ^void() {
-                     self.errorCallback(error);
-                 });
+                    self.errorCallback(error);
+                });
                 LOG_PARSING(0, @"Could not save parsed feed data. Core data reported error: %@", error);
-            }];
+            }
             
             dispatch_async(originalQueue, ^void() {
                 self.completionCallback();

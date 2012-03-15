@@ -79,15 +79,15 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)rootContextUpdated:(NSNotification *)notification
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        LOG_GENERAL(2, @"Root context changed. Refetching");
-        NSError *error= nil;
-        [self.fetcher performFetch:&error];
-        NSAssert(error == nil, @"Error!");
-    });
-}
+//- (void)rootContextUpdated:(NSNotification *)notification
+//{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        LOG_GENERAL(2, @"Root context changed. Refetching");
+//        NSError *error= nil;
+//        [self.fetcher performFetch:&error];
+//        NSAssert(error == nil, @"Error!");
+//    });
+//}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -96,20 +96,21 @@
 
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-    NSFetchRequest *request = [SVPodcast requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate];
+    NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
+
     request.includesSubentities = NO;
     self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                       managedObjectContext:[NSManagedObjectContext defaultContext] 
+                                                       managedObjectContext:[PodsterManagedDocument defaultContext] 
                                                          sectionNameKeyPath:nil
                                                                   cacheName:nil];
     
     self.fetcher.delegate = self;
 
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(rootContextUpdated:)
-                                                 name:NSManagedObjectContextDidSaveNotification
-                                               object:[[NSManagedObjectContext defaultContext] parentContext]];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(rootContextUpdated:)
+//                                                 name:NSManagedObjectContextDidSaveNotification
+//                                               object:[[PodsterManagedDocument defaultContext] parentContext]];
     NSError *error= nil;
     [self.fetcher performFetch:&error];
     NSAssert(error == nil, @"Error!");
@@ -124,7 +125,7 @@
     [super viewWillDisappear:animated];
     [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
     self.fetcher.delegate = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.fetcher = nil;
 
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -151,6 +152,8 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
+    SVPodcast *podcast = [fetcher objectAtIndexPath:indexPath];
+    LOG_GENERAL(2, @"GRID:Working with: %@", podcast.title);
 //    SVPodcast *podcast = [self.fetcher objectAtIndexPath:indexPath];
     switch (type) {
         case NSFetchedResultsChangeInsert:

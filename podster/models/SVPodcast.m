@@ -57,9 +57,9 @@
     __block SVPodcastEntry *entry = nil;
     [context performBlockAndWait:^{
         NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", self];
-        entry = [SVPodcast findFirstWithPredicate:isChild 
+        entry = [SVPodcast MR_findFirstWithPredicate:isChild 
                                  sortedBy:SVPodcastEntryAttributes.datePublished
-                                ascending:!self.sortNewestFirstValue];
+                                ascending:!self.sortNewestFirstValue inContext:[PodsterManagedDocument defaultContext]];
         
     }];
     
@@ -68,13 +68,13 @@
 
 - (void)updateNextItemDate
 {
-    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
     [context performBlock:^{
-        SVPodcast *localPodcast = [self inContext:context];
+        SVPodcast *localPodcast = [self MR_inContext:context];
         SVPodcastEntry *entry = nil;
 
         NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", localPodcast];
-        entry = [SVPodcastEntry findFirstWithPredicate:isChild 
+        entry = [SVPodcastEntry MR_findFirstWithPredicate:isChild 
                                               sortedBy:SVPodcastEntryAttributes.datePublished
                                              ascending:NO
                                              inContext:context];

@@ -12,6 +12,6 @@
 - (NSUInteger)durationInDaysForProduct:(NSString *)productIdentifier;
 
 + (PodsterIAPHelper *)sharedInstance;
-
+- (void)restoreTransactions;
 
 @end

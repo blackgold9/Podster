@@ -16,7 +16,9 @@ static char const kRefreshInterval = -3;
 @implementation SVSubscriptionManager {
     BOOL shouldCancel;
     NSDate *startDate; // The date the sync was begun, everything older than that should be synced.
+
 }
+@synthesize currentURL = _currentURL;
 @synthesize isBusy = _isBusy;
 + (id)sharedInstance
 {
@@ -37,21 +39,21 @@ static char const kRefreshInterval = -3;
     
     shouldCancel = YES;
 }
-- (void)updateLastUpdatedForPodcast:(SVPodcast *)podcast 
-                          inContext:(NSManagedObjectContext *)context
-{
-
-    [context performBlock:^{
-        
-
-     SVPodcastEntry *lastUnplayedEntry = [SVPodcastEntry findFirstWithPredicate:[NSPredicate predicateWithFormat:@"podcast == %@ AND played == NO", podcast]
-                                   sortedBy:SVPodcastEntryAttributes.datePublished ascending:NO inContext:context];
-        podcast.lastUpdated = lastUnplayedEntry.datePublished;
-    }];
-}
+//- (void)updateLastUpdatedForPodcast:(SVPodcast *)podcast 
+//                          inContext:(NSManagedObjectContext *)context
+//{
+//
+//    [context performBlock:^{
+//        
+//
+//     SVPodcastEntry *lastUnplayedEntry = [SVPodcastEntry MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"podcast == %@ AND played == NO", podcast]
+//                                   sortedBy:SVPodcastEntryAttributes.datePublished ascending:NO inContext:context];
+//        podcast.lastUpdated = lastUnplayedEntry.datePublished;
+//    }];
+//}
 -(void)refreshNextSubscription
 {
-
+    __weak SVSubscriptionManager *weakSelf = self;
     [[PodsterManagedDocument sharedInstance] performWhenReady: ^{
         
         
@@ -68,8 +70,8 @@ static char const kRefreshInterval = -3;
         __block SVPodcast *nextPodcast = nil;
         NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         
-        // Get the root(Background )context to work against
-        context.parentContext = [NSManagedObjectContext defaultContext];
+        // Get the root context to work against
+        context.parentContext = [PodsterManagedDocument defaultContext];
         NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
         LOG_GENERAL(2, @"About to look for a subscription to refresh");
         [context performBlock:^{
@@ -78,13 +80,14 @@ static char const kRefreshInterval = -3;
             
             NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate, olderThanSyncStart,stale, nil]];
             
-            nextPodcast = [SVPodcast findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
+            nextPodcast = [SVPodcast MR_findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
             
             LOG_NETWORK(2, @"Finding subscription that needs refreshing");
             if (nextPodcast && !shouldCancel) {
                 if (!self.isBusy) {
                     self.isBusy = YES;
                 }
+                weakSelf.currentURL = nextPodcast.feedURL;
                 [FlurryAnalytics logEvent:@"UpdatingSubscriptions" timed:YES];
                 nextPodcast.lastSynced = [NSDate date];
                 [context save:nil];
@@ -92,14 +95,15 @@ static char const kRefreshInterval = -3;
                 [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
                                                                          withLowerPriority:YES
                                                                                  inContext:context onCompletion:^{
-                                                                                     [self updateLastUpdatedForPodcast:nextPodcast
-                                                                                                             inContext:context];
+                                                                                     [context performBlock:^{
+                                                                                         [context save:nil];
+                                                                                     }];
                                                                                      [self refreshNextSubscription];
-                                                                                     
+                                                                                     weakSelf.currentURL = nil;
                                                                                      
                                                                                  } onError:^(NSError *error) {
                                                                                      [self refreshNextSubscription];
-                                                                                     
+                                                                                     weakSelf.currentURL = nil;
                                                                                  }];
             } else {
                 [FlurryAnalytics endTimedEvent:@"UpdatingSubscriptions" 
@@ -135,11 +139,14 @@ static char const kRefreshInterval = -3;
 
 - (void)processServerState:(NSDictionary *)serverState isPremium:(BOOL)isPremium
 {
-    [[NSManagedObjectContext defaultContext] performBlock:^{
+    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
+ 
+    }];
+    [[PodsterManagedDocument defaultContext] performBlock:^{
         LOG_GENERAL(2, @"Server State: %@", serverState);
         NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
         NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
-        NSArray *podcasts = [SVPodcast findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]]];
+        NSArray *podcasts = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
         
         if(!isPremium) {
             // Only do this if we're not premium anymore. It's the only time this can get out of sync
@@ -156,10 +163,10 @@ static char const kRefreshInterval = -3;
             }
         } 
         NSPredicate *missingFromServer = [NSPredicate predicateWithFormat:@"NOT (feedURL in %@)", [serverState allKeys]];
-        NSArray *needsReconciling = [SVPodcast findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]]];
+        NSArray *needsReconciling = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
         for(SVPodcast *podcast in needsReconciling) {
             [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:podcast.feedURL                                                                                                                           onCompletion:^{
-                [[NSManagedObjectContext defaultContext] performBlock:^{
+                [[PodsterManagedDocument defaultContext] performBlock:^{
                     podcast.isSubscribedValue = YES;
                 }];
                 
@@ -169,7 +176,7 @@ static char const kRefreshInterval = -3;
         
         // Now, delete items on the server that we're no-longer subscribed to
         for(NSString *url in [serverState allKeys]) {
-            if ([SVPodcast countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url]] == 0) {
+            if ([SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url] inContext:[PodsterManagedDocument defaultContext]] == 0) {
                 // We arent subscribed to this anyumore, tell the server
                 [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:url
                                                                        onCompletion:^{

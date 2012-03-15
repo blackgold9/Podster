@@ -42,7 +42,7 @@
         NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry identifier], @"identifier",[NSNumber numberWithDouble:progress], @"progress",  nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
         [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *innerContext) {
-            SVDownload *innerDownload = (SVDownload *)[localDownload inContext:innerContext];
+            SVDownload *innerDownload = (SVDownload *)[localDownload MR_inContext:innerContext];
             innerDownload.stateValue = SVDownloadStateDownloading;
             innerDownload.progressValue = progress;
         }];

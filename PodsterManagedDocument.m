@@ -5,7 +5,7 @@
 //  Created by Vanterpool, Stephen on 3/13/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-
+#import "BlockAlertView.h"
 #import "PodsterManagedDocument.h"
 #import "NSManagedObject+MagicalRecord.h"
 #define SharedFileName   @"PodsterData"
@@ -40,17 +40,17 @@
     return doc;
     
 }
-
++(NSManagedObjectContext *)defaultContext
+{
+    NSAssert([self sharedInstance].documentState == UIDocumentStateNormal, @"This should only be called after the document is opened");
+    return [self sharedInstance].managedObjectContext;
+}
 
 + (NSURL *)applicationDocumentsDirectory
 {
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSURL *url = [NSURL fileURLWithPath:path];
     return url;
-}
-+ (NSURL *)docURL
-{
-    return [[PodsterManagedDocument applicationDocumentsDirectory] URLByAppendingPathComponent:@"Podster"];
 }
 -(id)initWithFileURL:(NSURL *)url
 {
@@ -71,92 +71,92 @@
         }];        
         [readyCallbacks removeAllObjects];
     });
-    [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(documentContentsDidUpdate:)
-                                                name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                              object:nil];
-    
+//    [[NSNotificationCenter defaultCenter]addObserver:self
+//                                            selector:@selector(documentContentsDidUpdate:)
+//                                                name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+//                                              object:nil];
+//    
     
 }
-- (void) documentContentsDidUpdate: (NSNotification *) notification
-{
-    NSDictionary* userInfo = [notification userInfo];
-    [self.managedObjectContext performBlock:^{
-        [self mergeiCloudChanges:userInfo forContext:self.managedObjectContext];}];
-}
+//- (void) documentContentsDidUpdate: (NSNotification *) notification
+//{
+//    NSDictionary* userInfo = [notification userInfo];
+//    [self.managedObjectContext performBlock:^{
+//        [self mergeiCloudChanges:userInfo forContext:self.managedObjectContext];}];
+//}
 
 #pragma mark Courtesy of Apple. Thank you Apple
 // Merge the iCloud changes into the managed context
-- (void)mergeiCloudChanges: (NSDictionary*)userInfo
-                forContext: (NSManagedObjectContext*)managedObjectContext
-{
-    @autoreleasepool
-    
-    {
-        NSMutableDictionary *localUserInfo =
-        [NSMutableDictionary dictionary];
-        
-        // Handle the invalidations
-        NSSet* allInvalidations =
-        [userInfo objectForKey:NSInvalidatedAllObjectsKey];
-        NSString* materializeKeys[] = { NSDeletedObjectsKey,
-            NSInsertedObjectsKey };
-        if (nil == allInvalidations)
-        {
-            int c = (sizeof(materializeKeys) / sizeof(NSString*));
-            for (int i = 0; i < c; i++)
-            {
-                NSSet* set = [userInfo objectForKey:materializeKeys[i]];
-                if ([set count] > 0)
-                {
-                    NSMutableSet* objectSet = [NSMutableSet set];
-                    for (NSManagedObjectID* moid in set)
-                        [objectSet addObject:[managedObjectContext
-                                              objectWithID:moid]];
-                    [localUserInfo setObject:objectSet
-                                      forKey:materializeKeys[i]];
-                }
-            }
-            // Handle the updated and refreshed Items
-            NSString* noMaterializeKeys[] = { NSUpdatedObjectsKey,
-                NSRefreshedObjectsKey, NSInvalidatedObjectsKey };
-            c = (sizeof(noMaterializeKeys) / sizeof(NSString*));
-            
-            for (int i = 0; i < 2; i++)
-            {
-                NSSet* set = [userInfo objectForKey:noMaterializeKeys[i]];
-                if ([set count] > 0)
-                {
-                    NSMutableSet* objectSet = [NSMutableSet set];
-                    for (NSManagedObjectID* moid in set)
-                    {
-                        NSManagedObject* realObj =
-                        [managedObjectContext
-                         objectRegisteredForID:moid];
-                        if (realObj)
-                            [objectSet addObject:realObj];
-                    }
-                    [localUserInfo setObject:objectSet
-                                      forKey:noMaterializeKeys[i]];
-                }
-            }
-            // Fake a save to merge the changes
-            NSNotification *fakeSave = [NSNotification
-                                        notificationWithName:
-                                        NSManagedObjectContextDidSaveNotification
-                                        object:self userInfo:localUserInfo];
-            [managedObjectContext
-             mergeChangesFromContextDidSaveNotification:fakeSave];
-        }
-        else
-            [localUserInfo setObject:allInvalidations
-                              forKey:NSInvalidatedAllObjectsKey];
-        
-        [managedObjectContext processPendingChanges];
-        [self performSelectorOnMainThread:@selector(performFetch)
-                               withObject:nil waitUntilDone:NO];
-    }
-}
+//- (void)mergeiCloudChanges: (NSDictionary*)userInfo
+//                forContext: (NSManagedObjectContext*)managedObjectContext
+//{
+//    @autoreleasepool
+//    
+//    {
+//        NSMutableDictionary *localUserInfo =
+//        [NSMutableDictionary dictionary];
+//        
+//        // Handle the invalidations
+//        NSSet* allInvalidations =
+//        [userInfo objectForKey:NSInvalidatedAllObjectsKey];
+//        NSString* materializeKeys[] = { NSDeletedObjectsKey,
+//            NSInsertedObjectsKey };
+//        if (nil == allInvalidations)
+//        {
+//            int c = (sizeof(materializeKeys) / sizeof(NSString*));
+//            for (int i = 0; i < c; i++)
+//            {
+//                NSSet* set = [userInfo objectForKey:materializeKeys[i]];
+//                if ([set count] > 0)
+//                {
+//                    NSMutableSet* objectSet = [NSMutableSet set];
+//                    for (NSManagedObjectID* moid in set)
+//                        [objectSet addObject:[managedObjectContext
+//                                              objectWithID:moid]];
+//                    [localUserInfo setObject:objectSet
+//                                      forKey:materializeKeys[i]];
+//                }
+//            }
+//            // Handle the updated and refreshed Items
+//            NSString* noMaterializeKeys[] = { NSUpdatedObjectsKey,
+//                NSRefreshedObjectsKey, NSInvalidatedObjectsKey };
+//            c = (sizeof(noMaterializeKeys) / sizeof(NSString*));
+//            
+//            for (int i = 0; i < 2; i++)
+//            {
+//                NSSet* set = [userInfo objectForKey:noMaterializeKeys[i]];
+//                if ([set count] > 0)
+//                {
+//                    NSMutableSet* objectSet = [NSMutableSet set];
+//                    for (NSManagedObjectID* moid in set)
+//                    {
+//                        NSManagedObject* realObj =
+//                        [managedObjectContext
+//                         objectRegisteredForID:moid];
+//                        if (realObj)
+//                            [objectSet addObject:realObj];
+//                    }
+//                    [localUserInfo setObject:objectSet
+//                                      forKey:noMaterializeKeys[i]];
+//                }
+//            }
+//            // Fake a save to merge the changes
+//            NSNotification *fakeSave = [NSNotification
+//                                        notificationWithName:
+//                                        NSManagedObjectContextDidSaveNotification
+//                                        object:self userInfo:localUserInfo];
+//            [managedObjectContext
+//             mergeChangesFromContextDidSaveNotification:fakeSave];
+//        }
+//        else
+//            [localUserInfo setObject:allInvalidations
+//                              forKey:NSInvalidatedAllObjectsKey];
+//        
+//        [managedObjectContext processPendingChanges];
+//        [self performSelectorOnMainThread:@selector(performFetch)
+//                               withObject:nil waitUntilDone:NO];
+//    }
+//}
 - (void)performWhenReady:(ContextBlock)ready
 {
     if(self.documentState == UIDocumentStateNormal) {
@@ -198,9 +198,7 @@
             } else {               
                     
                         LOG_GENERAL(2, @"UIMAnagedDocument loaded.");
-                NSManagedObjectContext *local = self.managedObjectContext;
-                [NSManagedObjectContext MR_setDefaultContext:local];
-                     
+                            
                         if(opened){
                             opened();
                         }
@@ -231,8 +229,8 @@
     [super handleError:error userInteractionPermitted:userInteractionPermitted];
     
 }
-- (void)save
+- (void)save:(void(^)(BOOL))done
 {
-    [self saveToURL:[PodsterManagedDocument docURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:nil];
+    [self saveToURL:self.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:done];
 }
 @end

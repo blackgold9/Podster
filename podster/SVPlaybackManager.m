@@ -152,7 +152,7 @@ void audioRouteChangeListenerCallback (
 {
     __block __typeof(self) blockSelf = self;
     monitorId = [_player addPeriodicTimeObserverForInterval:CMTimeMake(5, 1) queue:monitorQueue usingBlock:^(CMTime time) {
-        [[NSManagedObjectContext defaultContext] performBlock:^{
+        [[PodsterManagedDocument defaultContext] performBlock:^{
             NSInteger duration = blockSelf->_player.currentItem.duration.value / blockSelf->_player.currentItem.duration.timescale;
             if( blockSelf.currentEpisode.durationValue != duration) {
                 blockSelf.currentEpisode.durationValue = duration;
@@ -176,8 +176,8 @@ void audioRouteChangeListenerCallback (
 - (void)playEpisode:(SVPodcastEntry *)episode
           ofPodcast:(SVPodcast *)podcast{
     LOG_GENERAL(4, @"Assigning new current podcast/episode");
-    self.currentEpisode = [episode inContext:[NSManagedObjectContext defaultContext]];;
-    self.currentPodcast = [podcast inContext:[NSManagedObjectContext defaultContext]];;
+    self.currentEpisode = [episode MR_inContext:[PodsterManagedDocument defaultContext]];;
+    self.currentPodcast = [podcast MR_inContext:[PodsterManagedDocument defaultContext]];;
     NSParameterAssert(episode);
     NSParameterAssert(podcast);
     NSAssert(episode.mediaURL != nil, @"The podcast must have a mediaURL");
@@ -206,13 +206,16 @@ void audioRouteChangeListenerCallback (
     LOG_PLAYBACK(2, @"Loading media at URL:%@", episode.mediaURL);
     if (currentItem) {
         [currentItem removeObserver:self forKeyPath:@"status"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:currentItem];
     }//
     currentItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]];
     [currentItem addObserver:self 
                   forKeyPath:@"status" 
                      options:NSKeyValueObservingOptionNew 
                      context:(__bridge void*)self];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(itemReachedEnd) 
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification object:currentItem];
     [_player replaceCurrentItemWithPlayerItem:currentItem];
     [_player play];
  
@@ -246,7 +249,14 @@ void audioRouteChangeListenerCallback (
         LOG_PLAYBACK(2, @"Starting at the beginning");
     }
 }
-
+- (void)itemReachedEnd
+{
+    [[PodsterManagedDocument defaultContext] performBlock:^{
+        self.currentEpisode.playedValue = YES;
+        self.currentEpisode.positionInSecondsValue = 0;   
+        [self.currentPodcast updateNextItemDate];
+    }];
+}
 -(void)play
 {
     if (_player) {
@@ -290,20 +300,10 @@ void audioRouteChangeListenerCallback (
                     //TODO: Reflect to user?
                 }
             } else if ([keyPath isEqualToString:@"rate"]) {
-                if (_player.rate == 0) {
-                    CMTime bufferTime = CMTimeSubtract(_player.currentItem.duration, CMTimeMakeWithSeconds(10, 1)) ;
-                    if (CMTIME_COMPARE_INLINE(_player.currentTime,>=,bufferTime)) {
-                        LOG_PLAYBACK(1, @"Stopping playback, epsidoe complete");                        
-                        self.playbackState = kPlaybackStateStopped;
-                        [[NSManagedObjectContext defaultContext] performBlock:^{
-                            self.currentEpisode.positionInSecondsValue = 0;
-                            self.currentEpisode.playedValue = YES;
-                            [self.currentPodcast updateNextItemDate];
-                        }];
-                    } else {
-                        LOG_PLAYBACK(3, @"Pausing playback");
-                        self.playbackState = kPlaybackStatePaused;
-                    }
+                if (_player.rate == 0) {                
+                    LOG_PLAYBACK(3, @"Pausing playback");
+                    self.playbackState = kPlaybackStatePaused;
+                    
                     
                     [_player removeTimeObserver:monitorId];
                 } else {

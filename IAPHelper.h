@@ -29,6 +29,9 @@
 - (id)initWithProductIdentifiers:(NSSet *)productIdentifiers;
 - (void)buyProductIdentifier:(NSString *)productIdentifier;
 
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue;
+
+
 // For overriding
 - (void)recordTransaction:(SKPaymentTransaction *)transaction;
 - (void)provideContent:(NSString *)productIdentifier;

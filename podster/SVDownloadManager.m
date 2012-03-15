@@ -57,7 +57,7 @@
 - (void)resumeDownloads
 {
     [MRCoreDataAction lookupWithBlock:^(NSManagedObjectContext *localContext) {
-        NSArray *downloads = [SVDownload findAllSortedBy:@"position" ascending:YES inContext:localContext];
+        NSArray *downloads = [SVDownload MR_findAllSortedBy:@"position" ascending:YES inContext:localContext];
         for (SVDownload *download in downloads) {
             // HACK: This should retrigger the download
             [self downloadEntry:download.entry];
@@ -84,9 +84,9 @@
 -(SVDownload *)nextUpDownload
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %d", SVDownloadAttributes.state, SVDownloadStatePending];
-    SVDownload *nextUp = [SVDownload findFirstWithPredicate:predicate
+    SVDownload *nextUp = [SVDownload MR_findFirstWithPredicate:predicate
                                                    sortedBy:SVDownloadAttributes.position
-                                                  ascending:YES];
+                                                  ascending:YES inContext:[PodsterManagedDocument defaultContext]];
     return nextUp;
 }
 
@@ -130,7 +130,7 @@
         download = localEntry.download;
         localEntry.download.positionValue = position;
         if (!download) {
-            download = [SVDownload createInContext:localContext];
+            download = [SVDownload MR_createInContext:localContext];
             localEntry.download = download;
             download.filePath = [[self downloadsPath] stringByAppendingPathComponent:[localEntry identifier]];
             download.stateValue = SVDownloadStatePending;

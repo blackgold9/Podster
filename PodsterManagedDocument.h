@@ -10,7 +10,8 @@
 typedef void (^ContextBlock)();
 @interface PodsterManagedDocument : UIManagedDocument
 + (PodsterManagedDocument *)sharedInstance;
++(NSManagedObjectContext *)defaultContext;
 // When your callback is called the default context has been set;
 - (void)performWhenReady:(ContextBlock)ready;
-- (void)save;
+- (void)save:(void(^)(BOOL))done;
 @end

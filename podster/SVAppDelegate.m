@@ -67,7 +67,7 @@ NSString *uuid();
 //                                                             if (feedURL){
 //                                                             [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:feedURL
 //                                                                                                                      withLowerPriority:NO
-//                                                                                                                              inContext:[NSManagedObjectContext defaultContext]
+//                                                                                                                              inContext:[PodsterManagedDocument defaultContext]
 //                                                                                                                           onCompletion:^{
 //                                                                                                                               [self subscribeToFeedWithURL:feedURL];
 //                                                                                                                           } onError:^(NSError *error) {
@@ -202,13 +202,13 @@ NSString *uuid();
 #endif
         //   #endif
     }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:kProductPurchasedNotification
-                                                      object:nil
-                                                       queue:nil
-                                                  usingBlock:^(NSNotification *note) {
-                                                     // Any purchase in this version is to premium status
-                                                      [[SVSettings sharedInstance] setPremiumMode:YES];
-                                                  }];
+//    [[NSNotificationCenter defaultCenter] addObserverForName:kProductPurchasedNotification
+//                                                      object:nil
+//                                                       queue:nil
+//                                                  usingBlock:^(NSNotification *note) {
+//                                                     // Any purchase in this version is to premium status
+//                                                      [[SVSettings sharedInstance] setPremiumMode:YES];
+//                                                  }];
    
 
     if (![[SVSettings sharedInstance] premiumMode]) {
@@ -247,6 +247,7 @@ NSString *uuid();
                  onCompletion:^(NSDictionary *config ){
                      BOOL isPremium = [(NSNumber *)[config valueForKey:@"premium"] boolValue];
                      NSDictionary *subscriptions = [config objectForKey:@"subscriptions"];
+                     LOG_GENERAL(2, @"Updating Premium mode from hello");
                      [[SVSettings sharedInstance] setPremiumMode:isPremium];
                      [[SVSubscriptionManager sharedInstance] processServerState:subscriptions
                                                                       isPremium:isPremium];
@@ -271,7 +272,8 @@ NSString *uuid();
             NSString *hash= [userInfo valueForKey:@"hash"];
             LOG_GENERAL(2, @"launched for podcast with URL Hash: %@", hash);
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.urlHash, hash];
-            SVPodcast *podcast = [SVPodcast findFirstWithPredicate:predicate];
+            SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:predicate 
+                                                            inContext:[PodsterManagedDocument defaultContext]];
             if (podcast) {
                 NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
                                                                    forKey:@"Title"];
@@ -316,29 +318,26 @@ NSString *uuid();
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     
-    
-//    __block UIBackgroundTaskIdentifier background_task; //Create a task object
-//    
-//    background_task = [application beginBackgroundTaskWithExpirationHandler: ^ {
-//        [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
-//        background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
-//        
-//        //System will be shutting down the app at any point in time now
-//    }];
-//    
-//    //Background tasks require you to use asyncrous tasks
-//    [[NSManagedObjectContext defaultContext] performBlock:^{
-//        LOG_GENERAL(2,@"Saving on entering background");
-//        [[NSManagedObjectContext defaultContext] save:nil];
-//        [parentContext performBlock:^{
-//            LOG_GENERAL(2, @"Saving parent context");
-//            [parentContext save:nil];
-//            LOG_GENERAL(2, @"Done parent context");
-//            [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
-//            background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
-//            
-//        }];
-//    }];
+ 
+   __block UIBackgroundTaskIdentifier background_task; //Create a task object
+   
+   background_task = [application beginBackgroundTaskWithExpirationHandler: ^ {
+       [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
+       background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
+       
+       //System will be shutting down the app at any point in time now
+   }];
+    [FlurryAnalytics logEvent:@"SavingOnEnteringBackground" timed:YES];
+   //Background tasks require you to use asyncrous tasks
+    dispatch_async(dispatch_get_main_queue(), ^{
+       LOG_GENERAL(2,@"Saving on entering background");
+       [[PodsterManagedDocument sharedInstance] save:^(BOOL success) {
+           [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
+           [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
+           background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
+           
+       }];
+   });
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -420,38 +419,6 @@ NSString *uuid();
     }
 }
 
-- (void)startSaveTimer
-{
-    LOG_GENERAL(2, @"Starting Save Timer");
-    [self stopSaveTimer];
-    
-    saveTimer = [NSTimer scheduledTimerWithTimeInterval:30 // save every 30 seconds
-                                                  block:^(NSTimeInterval time) {
-                                                      NSManagedObjectContext *rootContext = [NSManagedObjectContext defaultContext].parentContext;
-                                                      LOG_GENERAL(2, @"Checking if root save is neccesary");
-                                                      if (rootContext.hasChanges) {
-                                                          LOG_GENERAL(2, @"Queing Root Save");
-                                                          [rootContext performBlock:^{
-                                                              LOG_GENERAL(2, @"Saving root context");
-                                                              [rootContext saveWithErrorHandler:^(NSError *error) {
-                                                                  LOG_GENERAL(0, @"ERROR: Error saving root store. Big deal here Y'Alll" );
-                                                              }];
-                                                          }];                                                 
-                                                      }
-                                                  } 
-                                                repeats:YES];
-    
-
-}
-
-- (void)stopSaveTimer
-{
-    LOG_GENERAL(2, @"Stopping Save Timer");
-    if(saveTimer) {
-        [saveTimer invalidate];
-        saveTimer = nil;
-    }
-}
 
 -(void)setupOfflineOverlayMonitoring
 {

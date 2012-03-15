@@ -10,6 +10,10 @@
 #import "NSData+Base64.h"
 #import "BlockAlertView.h"
 @implementation PodsterIAPHelper
+{
+    BOOL restoring;
+    SKPaymentTransaction *lastTransaction;
+}
 
 - (NSUInteger)durationInDaysForProduct:(NSString *)productIdentifier
 {
@@ -37,28 +41,56 @@
                                   @"net.vanterpool.podster.premium3months",
                                   nil];
             instance = [[PodsterIAPHelper alloc] initWithProductIdentifiers:identifiers];
+            instance->restoring = NO;
         }
     });
 
     return instance;
 }
+- (void)restoreTransactions
+{
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+    restoring = YES;
+}
+-(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    LOG_GENERAL(2, @"Finnished recieving restores");
+    restoring = NO;
+    if (lastTransaction!=nil) {
+        [self recordTransaction:lastTransaction];
+    }
+}
 -(void)recordTransaction:(SKPaymentTransaction *)transaction
 {
-    NSString *receipt = [transaction.transactionReceipt base64EncodedString];
-    [[SVPodcatcherClient sharedInstance] updateDeviceReceipt:receipt
-                                                onCompletion:^(BOOL isPremium) {
-                                                    [[SVSettings sharedInstance] setPremiumMode:isPremium]; 
-                                                } onError:^(NSError *error) {
-                                                    LOG_GENERAL(0, @"Purchase failed with error: %@", error);
-                                                    NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
-                                                    NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
-                                                    BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
-                                                    [alertView setCancelButtonWithTitle:@"OK" block:^{
-                                                        
-                                                    }];
-                                                    [alertView show];
-                                                }];
+    LOG_GENERAL(2, @"Transaction DatE: %@", [[transaction transactionDate] description]);
+    if (restoring) {
+        if(transaction.originalTransaction.transactionState == SKPaymentTransactionStatePurchased) {
+//            if (lastTransaction == nil ||
+  //              [lastTransaction.transactionDate compare:transaction.transactionDate] == NSOrderedAscending) {
+                lastTransaction = transaction;            
+    //        }                    
+        } else {
+            LOG_GENERAL(2, @"Original transaction was not  a puchase");
+        }
 
+    } else{
+
+
+        NSString *receipt = [transaction.transactionReceipt base64EncodedString];
+        [[SVPodcatcherClient sharedInstance] updateDeviceReceipt:receipt
+                                                    onCompletion:^(BOOL isPremium) {
+                                                        [[SVSettings sharedInstance] setPremiumMode:isPremium];
+                                                    } onError:^(NSError *error) {
+            LOG_GENERAL(0, @"Purchase failed with error: %@", error);
+            NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
+            NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
+            BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
+            [alertView setCancelButtonWithTitle:@"OK" block:^{
+
+            }];
+            [alertView show];
+        }];
+    }
 }
 
 

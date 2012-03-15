@@ -133,7 +133,7 @@ NSString *uuid(){
     if (premiumMode != [self premiumMode]) {
         NSDictionary *params = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:premiumMode] forKey:@"Premium"];
         [FlurryAnalytics logEvent:@"PremiumChanged" withParameters:params];
-        LOG_GENERAL(2, @"Premium changed");
+        LOG_GENERAL(2, @"Premium changed: %@", premiumMode ? @"ON" : @"OFF");
         [defaults setBool:premiumMode forKey:@"premium"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPremiumModeChanged" object:self];
         
@@ -152,5 +152,14 @@ NSString *uuid(){
     [defaults setInteger:maxNotifications forKey:@"MaxNonPremiumNotifications"];
 }
 
+- (BOOL)firstRun
+{
+    return ![defaults boolForKey:@"SVHasRun"];
+}
+
+- (void)setFirstRun:(BOOL)firstRun
+{
+    [defaults setBool:!firstRun forKey:@"SVHasRun"];
+}
 
 @end

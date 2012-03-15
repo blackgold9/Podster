@@ -24,6 +24,7 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 + (NSManagedObjectContext *)MR_defaultContext
 {
+    NSAssert(false, @"This should not be called");
 	@synchronized (self)
 	{
         return defaultManageObjectContext_;
@@ -32,21 +33,21 @@ static void const * kMagicalRecordNotifiesMainContextAssociatedValueKey = @"kMag
 
 + (void) MR_setDefaultContext:(NSManagedObjectContext *)moc
 {
-    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
-    if ([MagicalRecordHelpers isICloudEnabled]) 
-    {
-        [defaultManageObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
-    }
+//    NSPersistentStoreCoordinator *coordinator = [NSPersistentStoreCoordinator MR_defaultStoreCoordinator];
+//    if ([MagicalRecordHelpers isICloudEnabled]) 
+//    {
+//        [defaultManageObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
+//    }
     
     MR_RETAIN(moc);
     MR_RELEASE(defaultManageObjectContext_);
 
     defaultManageObjectContext_ = moc;
     
-    if ([MagicalRecordHelpers isICloudEnabled]) 
-    {
-        [defaultManageObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
-    }
+//    if ([MagicalRecordHelpers isICloudEnabled]) 
+//    {
+//        [defaultManageObjectContext_ MR_observeiCloudChangesInCoordinator:coordinator];
+//    }
 }
 
 + (void)MR_resetDefaultContext

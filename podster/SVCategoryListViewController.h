@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SVViewController.h"
+@interface SVCategoryListViewController : SVViewController<UISearchBarDelegate,UITableViewDelegate, UITableViewDataSource>
 
-@interface SVCategoryListViewController : UITableViewController<UISearchBarDelegate>
-
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @end

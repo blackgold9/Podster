@@ -27,9 +27,9 @@
             BOOL productPurchased = [[NSUserDefaults standardUserDefaults] boolForKey:productIdentifier];
             if (productPurchased) {
                 [purchasedProducts addObject:productIdentifier];
-                NSLog(@"StoreKit: Previously purchased: %@", productIdentifier);
+                LOG_GENERAL(2,@"StoreKit: Previously purchased: %@", productIdentifier);
             }
-            NSLog(@"StoreKit: Not purchased: %@", productIdentifier);
+            LOG_GENERAL(2,@"StoreKit: Not purchased: %@", productIdentifier);
         }
         self.purchasedProducts = purchasedProducts;
                         
@@ -47,7 +47,7 @@
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     
-    NSLog(@"StoreKit: Received products results...");   
+    LOG_GENERAL(2,@"StoreKit: Received products results...");   
     self.products = response.products;
     self.request = nil;    
     
@@ -63,7 +63,7 @@
 
 - (void)provideContent:(NSString *)productIdentifier {
     
-    NSLog(@"Toggling flag for: %@", productIdentifier);
+    LOG_GENERAL(2,@"Toggling flag for: %@", productIdentifier);
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:productIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [_purchasedProducts addObject:productIdentifier];
@@ -74,7 +74,7 @@
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
     
-    NSLog(@"StoreKit: completeTransaction...");
+    LOG_GENERAL(2,@"StoreKit: completeTransaction...");
     
     [self recordTransaction: transaction];
     [self provideContent: transaction.payment.productIdentifier];
@@ -84,10 +84,10 @@
 
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
     
-    NSLog(@"StoreKit: restoreTransaction...");
+    LOG_GENERAL(2,@"StoreKit: restoreTransaction...");
     
     [self recordTransaction: transaction];
-    [self provideContent: transaction.originalTransaction.payment.productIdentifier];
+    [self provideContent: transaction.payment.productIdentifier];
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     
 }
@@ -96,7 +96,7 @@
     
     if (transaction.error.code != SKErrorPaymentCancelled)
     {
-        NSLog(@"Transaction error: %@", transaction.error.localizedDescription);
+        LOG_GENERAL(2,@"Transaction error: %@", transaction.error.localizedDescription);
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kProductPurchaseFailedNotification object:transaction];
@@ -127,7 +127,7 @@
 
 - (void)buyProductIdentifier:(NSString *)productIdentifier {
     
-    NSLog(@"Buying %@...", productIdentifier);
+    LOG_GENERAL(2,@"Buying %@...", productIdentifier);
     SKProduct *product = nil;
     for(SKProduct *current in self.products) {
         if([[current productIdentifier] isEqualToString:productIdentifier]) {
@@ -142,6 +142,10 @@
     
 }
 
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+
+}
 - (void)dealloc
 {
     [_productIdentifiers release];

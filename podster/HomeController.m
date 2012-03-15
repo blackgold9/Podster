@@ -16,6 +16,8 @@
 #import "SVSubscriptionManager.h"
 #import "MBProgressHUD.h"
 #import "PodsterManagedDocument.h"
+#import "PodsterIAPHelper.h"
+#import "BlockAlertView.h"
 @interface HomeController ()
 @property(nonatomic, strong) SVSubscriptionGridViewController *subscriptionsController;
 @property(nonatomic, strong) FeaturedController *featuredController;
@@ -124,9 +126,10 @@
                                                      inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
                                                                  inView:self.view];
                                    [placeHolder removeFromSuperview];
-                            
-                  
+                        
      }];
+
+    //[[PodsterIAPHelper sharedInstance] r]
 }
 
 - (UIViewController *)controllerForScreenType:(HomePageScreenType)screenType

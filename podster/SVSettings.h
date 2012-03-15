@@ -30,4 +30,9 @@
 - (NSInteger)maxNonPremiumNotifications;
 - (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications;
 
+- (BOOL)firstRun;
+
+- (void)setFirstRun:(BOOL)firstRun;
+
+
 @end

@@ -15,17 +15,17 @@
     NSArray *categories;
     BOOL _isLoading;
 }
-
-- (id)initWithStyle:(UITableViewStyle)style
+@synthesize tableView;
+- (id)initWithCoder:(NSCoder *)coder
 {
-    self = [super initWithStyle:style];
+    self = [super initWithCoder:coder];
     if (self) {
         _isLoading = YES;
         categories = [NSArray array];
+
     }
     return self;
 }
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -50,6 +50,7 @@
 
 - (void)viewDidUnload
 {
+    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

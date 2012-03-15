@@ -22,7 +22,7 @@
 
 // Purchase Success
 "THANK_YOU_REALLY" = "Thank You! (Really)";
-"PURCHASE_COMPLETE_MESSAGE" = "Thank you for purchasing Premium Mode!\nPlease quit and restart the app for it to take effect.";
+"PURCHASE_COMPLETE_MESSAGE" = "Your purchase was successful.\nThank you for purchasing Premium Mode!";
 // Upsell when user hits free limit
 "MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE" = "Upgrade To Premium";
 "HIT_MAX_NOTIFICATIONS_PROMPT_BODY" = "You have reached the maximum number of podcasts that you can monitor for free.\n\nSign up for the Premium Experience now!";
@@ -64,3 +64,7 @@
 
 "Loading new episodes" = "Loading new episodes";
 "There was an error downloading this podcast. Please try again later" = "There was an error downloading this podcast. Please try again later";
+"Yes" = "Yes";
+"PURCHASE_DISABLED_TITLE" = "Purchasing Disabled";
+"PURCHASE_DISABLED_BODY" = "Your device is currently unable to make purchases. Make sure they are enabled in the settings application";
+"RESTORE_PURCHASES" = "Restore Purchases";

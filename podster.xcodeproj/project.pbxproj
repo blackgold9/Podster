@@ -605,6 +605,8 @@
 		4BB2059214D101500038EB7D /* SVPodcastDetailsModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */; };
 		4BCE682014F7638C005B0324 /* SVSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE681F14F7638C005B0324 /* SVSettings.m */; };
 		4BCE682114F7638C005B0324 /* SVSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE681F14F7638C005B0324 /* SVSettings.m */; };
+		4BD0BAC3151124B2005E6232 /* placeholder-thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD0BAC1151124B2005E6232 /* placeholder-thumb.png */; };
+		4BD0BAC4151124B2005E6232 /* placeholder-thumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD0BAC2151124B2005E6232 /* placeholder-thumb@2x.png */; };
 		4BD123C5150FFF8100A108DA /* CloudHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD123C4150FFF8100A108DA /* CloudHelper.m */; };
 		4BD123C6150FFF8100A108DA /* CloudHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD123C4150FFF8100A108DA /* CloudHelper.m */; };
 		4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1049,7 +1051,7 @@
 		4B6D48FA14BD656B00E7B11F /* SVDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadOperation.m; sourceTree = "<group>"; };
 		4B6D491B14BE437F00E7B11F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4B6D494014BE499C00E7B11F /* ActsAsPodcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActsAsPodcast.h; sourceTree = "<group>"; };
-		4B71F78B14A5B08C00D26F4C /* podster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = podster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B71F78B14A5B08C00D26F4C /* Podster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Podster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B71F78F14A5B08C00D26F4C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B71F79114A5B08C00D26F4C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4B71F79314A5B08C00D26F4C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1218,6 +1220,8 @@
 		4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVPodcastDetailsModalView.xib; sourceTree = "<group>"; };
 		4BCE681E14F7638C005B0324 /* SVSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSettings.h; sourceTree = "<group>"; };
 		4BCE681F14F7638C005B0324 /* SVSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSettings.m; sourceTree = "<group>"; };
+		4BD0BAC1151124B2005E6232 /* placeholder-thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-thumb.png"; sourceTree = "<group>"; };
+		4BD0BAC2151124B2005E6232 /* placeholder-thumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-thumb@2x.png"; sourceTree = "<group>"; };
 		4BD123C3150FFF8100A108DA /* CloudHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudHelper.h; sourceTree = "<group>"; };
 		4BD123C4150FFF8100A108DA /* CloudHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudHelper.m; sourceTree = "<group>"; };
 		4BD1C21D14B7D05E00E8C942 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -1662,6 +1666,8 @@
 		4B20DEC814BE75B30042DC9D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4BD0BAC1151124B2005E6232 /* placeholder-thumb.png */,
+				4BD0BAC2151124B2005E6232 /* placeholder-thumb@2x.png */,
 				D608C9AC150D6BA2009BA9BD /* honeycomb.png */,
 				D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */,
 				4B2C6D0515049710009DFE1F /* placeholder@2x.png */,
@@ -1951,7 +1957,7 @@
 		4B71F78C14A5B08C00D26F4C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4B71F78B14A5B08C00D26F4C /* podster.app */,
+				4B71F78B14A5B08C00D26F4C /* Podster.app */,
 				4B71F7AC14A5B08C00D26F4C /* podsterTests.octest */,
 			);
 			name = Products;
@@ -2348,9 +2354,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4B71F78A14A5B08C00D26F4C /* podster */ = {
+		4B71F78A14A5B08C00D26F4C /* Podster */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4B71F7BE14A5B08C00D26F4C /* Build configuration list for PBXNativeTarget "podster" */;
+			buildConfigurationList = 4B71F7BE14A5B08C00D26F4C /* Build configuration list for PBXNativeTarget "Podster" */;
 			buildPhases = (
 				4B71F78714A5B08C00D26F4C /* Sources */,
 				4B71F78814A5B08C00D26F4C /* Frameworks */,
@@ -2360,9 +2366,9 @@
 			);
 			dependencies = (
 			);
-			name = podster;
+			name = Podster;
 			productName = podster;
-			productReference = 4B71F78B14A5B08C00D26F4C /* podster.app */;
+			productReference = 4B71F78B14A5B08C00D26F4C /* Podster.app */;
 			productType = "com.apple.product-type.application";
 		};
 		4B71F7AB14A5B08C00D26F4C /* podsterTests */ = {
@@ -2404,7 +2410,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4B71F78A14A5B08C00D26F4C /* podster */,
+				4B71F78A14A5B08C00D26F4C /* Podster */,
 				4B71F7AB14A5B08C00D26F4C /* podsterTests */,
 			);
 		};
@@ -2556,6 +2562,8 @@
 				4B8D1D8D150DD04F00E6D770 /* PrivacyPolicy.txt in Resources */,
 				D608C9BF150EDEFD009BA9BD /* Default.png in Resources */,
 				D608C9C1150EDF0B009BA9BD /* Default@2x.png in Resources */,
+				4BD0BAC3151124B2005E6232 /* placeholder-thumb.png in Resources */,
+				4BD0BAC4151124B2005E6232 /* placeholder-thumb@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3057,7 +3065,7 @@
 /* Begin PBXTargetDependency section */
 		4B71F7B214A5B08C00D26F4C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4B71F78A14A5B08C00D26F4C /* podster */;
+			target = 4B71F78A14A5B08C00D26F4C /* Podster */;
 			targetProxy = 4B71F7B114A5B08C00D26F4C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -3350,6 +3358,86 @@
 			};
 			name = Release;
 		};
+		4BD0BABE15111A84005E6232 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AppStore;
+		};
+		4BD0BABF15111A84005E6232 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "podster/podster-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-lxml2",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "C2FFC97B-D8F6-43F5-B4A8-D07C52701072";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C2FFC97B-D8F6-43F5-B4A8-D07C52701072";
+				VALID_ARCHS = armv7;
+				WRAPPER_EXTENSION = app;
+			};
+			name = AppStore;
+		};
+		4BD0BAC015111A84005E6232 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/podster.app/podster";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "podsterTests/podsterTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
+				);
+				OTHER_LDFLAGS = "-lxml2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = AppStore;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3358,16 +3446,18 @@
 			buildConfigurations = (
 				4B71F7BC14A5B08C00D26F4C /* Debug */,
 				4B71F7BD14A5B08C00D26F4C /* Release */,
+				4BD0BABE15111A84005E6232 /* AppStore */,
 				4B141FB014C9476100028CE4 /* Ad_Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4B71F7BE14A5B08C00D26F4C /* Build configuration list for PBXNativeTarget "podster" */ = {
+		4B71F7BE14A5B08C00D26F4C /* Build configuration list for PBXNativeTarget "Podster" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4B71F7BF14A5B08C00D26F4C /* Debug */,
 				4B71F7C014A5B08C00D26F4C /* Release */,
+				4BD0BABF15111A84005E6232 /* AppStore */,
 				4B141FB114C9476100028CE4 /* Ad_Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -3378,6 +3468,7 @@
 			buildConfigurations = (
 				4B71F7C214A5B08C00D26F4C /* Debug */,
 				4B71F7C314A5B08C00D26F4C /* Release */,
+				4BD0BAC015111A84005E6232 /* AppStore */,
 				4B141FB214C9476100028CE4 /* Ad_Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;

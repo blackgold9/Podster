@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -886,13 +886,17 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="sDD-bl-slx" id="k4j-wS-B13"/>
-                            <outlet property="delegate" destination="sDD-bl-slx" id="TVD-rX-ZUc"/>
+                            <outlet property="dataSource" destination="sDD-bl-slx" id="9LC-TK-Wp8"/>
+                            <outlet property="delegate" destination="sDD-bl-slx" id="Uf7-O4-lYj"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Directory" id="ywr-jP-E1o">
                         <barButtonItem key="backBarButtonItem" title="Directory" id="HEI-XI-eb1"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="fjO-8G-iUa" id="egi-9N-qOf"/>
+                        <outlet property="view" destination="fjO-8G-iUa" id="HZO-mG-rLU"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="-1543" y="732"/>
@@ -950,8 +954,11 @@
         <class className="OBSlider" superclassName="UISlider">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>
         </class>
-        <class className="SVCategoryListViewController" superclassName="UITableViewController">
+        <class className="SVCategoryListViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVCategoryListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="SVEpisodeDetailsViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeDetailsViewController.h"/>

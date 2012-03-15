@@ -9,7 +9,7 @@
 #endif
 
 #ifdef __OBJC__
-#define MR_SHORTHAND 1
+//#define MR_SHORTHAND 1
 #define ALLOW_IPHONE_SPECIAL_CASES 1
 #define DEFAULT_GRID_CELL_SIZE CGSizeMake(150, 150)
 #define IMAGE_LOAD_OPERATION_TAG 1
@@ -24,6 +24,7 @@
 #import "SVPodcatcherClient.h"
 #import "FlurryAnalytics.h"
 #import <BlocksKit/BlocksKit.h>
+#import "PodsterManagedDocument.h"
 #endif
 #ifdef DEBUG
 #define LOG_NETWORK(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"network",level,__VA_ARGS__)

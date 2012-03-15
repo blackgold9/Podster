@@ -108,7 +108,7 @@
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal  ];
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big-over.png"] forState:UIControlStateHighlighted];
 
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(premiumActivated) name:@"SVPremiumModeChanged" object:[SVSettings sharedInstance]];
                                                          // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -153,6 +153,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://policy-portal.truste.com/core/privacy-policy/Stephen-Vanterpool/6bcbf001-fefc-4ea7-86e6-aee92ceb40ad"]];
         } else if (indexPath.row == 2) {
             [self performSegueWithIdentifier:@"showLegal" sender:self];
+        } else if(indexPath.row == 3) {
+            [[PodsterIAPHelper sharedInstance] restoreTransactions];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     } else if (indexPath.section == 0) {
         if(![[SVSettings sharedInstance] premiumMode]) {
@@ -176,7 +179,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 cellCount = 3;
             break;
         case 1:
-            cellCount = 3;
+            // Show the restore purchase option if we're not already premium
+            cellCount = [[SVSettings sharedInstance] premiumMode] ? 3 : 4;
 
             break;
         default:
@@ -253,6 +257,13 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.textLabel.text = NSLocalizedString(@"LEGAL_INFO", @"Legal Information");
                 break;
+            case 3:
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                                 reuseIdentifier:@"Restore"];
+                   cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                   cell.textLabel.text = NSLocalizedString(@"RESTORE_PURCHASES", @"Restore Purchases");
+                   break;
             default:
             break;
 
@@ -349,6 +360,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                        
                                                                        [sheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@", name, price]
                                                                                            block:^{
+                                                                                               [FlurryAnalytics logEvent:@"PurchaseTapped" withParameters:[NSDictionary dictionaryWithObject:name forKey:@"sku"]];
                                                                                                [[PodsterIAPHelper sharedInstance] buyProductIdentifier:[product productIdentifier]];
                                                                                                 [self waitForPurchaseCompletion];
                                                                                            }];
@@ -378,7 +390,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     hud.dimBackground = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseComplete) name:kProductPurchaseFailedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseComplete) name:kProductPurchaseFailedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(premiumActivated) name:@"SVPremiumModeChanged" object:[SVSettings sharedInstance]];
+
     
 }
 
@@ -391,21 +403,28 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 -(void)premiumActivated
-{   
-    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SVPremiumModeChanged" object:[SVSettings sharedInstance]];
+{
     if ([[SVSettings sharedInstance] premiumMode]) {
-        NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
-        NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
-        BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
-        [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
-            [self.tableView reloadData];
-        }];
-        [alertView show];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SVPremiumModeChanged" object:[SVSettings sharedInstance]];
+        if ([[SVSettings sharedInstance] premiumMode]) {
+            NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
+            NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
+            BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
+            [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+                [self.tableView reloadData];
+            }];
+            [alertView show];
+        }
     }
-
 }
 - (IBAction)purchaseTapped:(id)sender {
-    [self showPurchaseOptions];      
+    if ([SKPaymentQueue canMakePayments]) {
+        [self showPurchaseOptions];
+    } else {
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"PURCHASE_DISABLED_TITLE", @"Purchasing Disabled") message:NSLocalizedString(@"PURCHASE_DISABLED_BODY", @"Your device is currently unable to make purchases. Make sure they are enabled in the settings application")];
+        [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:nil];
+        [alert show];
+    }
 }
 @end
