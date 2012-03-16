@@ -43,7 +43,7 @@
     
     self.smallLogoURL = [dictionary stringForKey:@"logo_small"];
     self.tinyLogoURL = [dictionary stringForKey:@"logo_tiny"];
-    self.thumbLogoURL = [dictionary stringForKey:@"logo_thumb"];    
+    self.thumbLogoURL = [dictionary stringForKey:@"logo_thumb"];   
 }
 
 -(NSString *)description
@@ -69,7 +69,7 @@
 - (void)updateNextItemDate
 {
     NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
-    [context performBlock:^{
+    [context performBlockAndWait:^{
         SVPodcast *localPodcast = [self inContext:context];
         SVPodcastEntry *entry = nil;
 

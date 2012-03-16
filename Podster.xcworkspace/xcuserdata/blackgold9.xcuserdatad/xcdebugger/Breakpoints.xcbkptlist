@@ -14,8 +14,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "84"
          endingLineNumber = "84"
-         landmarkName = "-processLinkInPasteboard"
-         landmarkType = "5">
+         landmarkName = "@implementation SVAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -28,8 +28,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "55"
          endingLineNumber = "55"
-         landmarkName = "-subscribeToFeedWithURL:"
-         landmarkType = "5">
+         landmarkName = "@implementation SVAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -56,8 +56,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "88"
          endingLineNumber = "88"
-         landmarkName = "-processLinkInPasteboard"
-         landmarkType = "5">
+         landmarkName = "@implementation SVAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -70,8 +70,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "91"
          endingLineNumber = "91"
-         landmarkName = "-processLinkInPasteboard"
-         landmarkType = "5">
+         landmarkName = "@implementation SVAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -84,8 +84,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "100"
          endingLineNumber = "100"
-         landmarkName = "-processLinkInPasteboard"
-         landmarkType = "5">
+         landmarkName = "@implementation SVAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -98,7 +98,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "106"
          endingLineNumber = "106"
-         landmarkName = "-processLinkInPasteboard"
+         landmarkName = "-handleCoreDataError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -112,7 +112,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "105"
          endingLineNumber = "105"
-         landmarkName = "-processLinkInPasteboard"
+         landmarkName = "-handleCoreDataError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -196,6 +196,58 @@
          startingLineNumber = "341"
          endingLineNumber = "341"
          landmarkName = "-notifyOfSubscriptionToFeed:onCompletion:onError:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVFeedParser.m"
+         timestampString = "353578703.978284"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "196"
+         endingLineNumber = "196"
+         landmarkName = "-feedParserDidFinish:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVFeedParser.m"
+         timestampString = "353578728.953766"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
+         landmarkName = "-feedParserDidFinish:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVFeedParser.m"
+         timestampString = "353578743.321771"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "207"
+         endingLineNumber = "207"
+         landmarkName = "-feedParserDidFinish:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVFeedParser.m"
+         timestampString = "353578744.041358"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "206"
+         endingLineNumber = "206"
+         landmarkName = "-feedParserDidFinish:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

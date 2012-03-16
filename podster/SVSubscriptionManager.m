@@ -46,7 +46,7 @@ static char const kRefreshInterval = -3;
 
      SVPodcastEntry *lastUnplayedEntry = [SVPodcastEntry findFirstWithPredicate:[NSPredicate predicateWithFormat:@"podcast == %@ AND played == NO", podcast]
                                    sortedBy:SVPodcastEntryAttributes.datePublished ascending:NO inContext:context];
-        podcast.lastUpdated = lastUnplayedEntry.datePublished;
+        podcast.nextItemDate = lastUnplayedEntry.datePublished;
     }];
 }
 -(void)refreshNextSubscription

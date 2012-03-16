@@ -193,6 +193,14 @@ forPodcastAtURL:(NSString *)feedURL
         
         [localContext performBlock:^void() {
             LOG_PARSING(2, @"Saving local context");
+            SVPodcastEntry *entry = nil;
+            
+            NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", localPodcast];
+            entry = [SVPodcastEntry findFirstWithPredicate:isChild 
+                                                  sortedBy:SVPodcastEntryAttributes.datePublished
+                                                 ascending:NO
+                                                 inContext:localContext];
+            localPodcast.nextItemDate = entry.datePublished;
             [localContext MR_saveWithErrorHandler:^(NSError *error) {
                 dispatch_async(originalQueue, ^void() {
                      self.errorCallback(error);
