@@ -39,18 +39,6 @@ static char const kRefreshInterval = -3;
     
     shouldCancel = YES;
 }
-//- (void)updateLastUpdatedForPodcast:(SVPodcast *)podcast 
-//                          inContext:(NSManagedObjectContext *)context
-//{
-//
-//    [context performBlock:^{
-//        
-//
-//     SVPodcastEntry *lastUnplayedEntry = [SVPodcastEntry MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"podcast == %@ AND played == NO", podcast]
-//                                   sortedBy:SVPodcastEntryAttributes.datePublished ascending:NO inContext:context];
-//        podcast.lastUpdated = lastUnplayedEntry.datePublished;
-//    }];
-//}
 -(void)refreshNextSubscription
 {
     __weak SVSubscriptionManager *weakSelf = self;

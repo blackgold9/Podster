@@ -2,96 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Documents/PodsterData/StoreContent/persistentStore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/01b4f57ac19b89f3c2b8700fa76b2bf0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/01b80673970172389fe7be6678eb16ad" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/04fab282be1121ce9b88005e4310981e" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/0c8798d7a603439d10809b2faa596295" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/0e1a5a3b620c7b4bf52cb83c68bc405b" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/10e4a2d08e2885592f04f8679053d1c1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/18ac351c9669feb111a97b87f990d6f7" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/190f0467fdc7723095bb217c283f08e4" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/1db03133d64bd2a0ad0a09973a9dece0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/28016d066a3107dba8b9b20b2d6df789" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/2aceb850b98bc2b4b18d84ec6aa493e2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/2fb89ccccb01d161119e2a52ab556fa2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/30a8673b57bc4fe3a16722194dfff646" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/32fdd2a8c375bb329f0663cd72d323ba" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/350cd344ad0ff0501690155f2bc7e3b8" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/3e6a500c33bb0d02d0188d7cfbfd8872" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/44216a7c619f52602fef44e18561d551" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/5c23a0be1a56c4ceea508b50facb6444" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/73114fc7c1502238c1f7b3633b02063b" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/7e2f44a81536201866aaeee205ee74a2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/7efaf6af15bf4623700fce1acac9e4fe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/a0d7ce34817cdaa76f2adc050d0fc2d1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/a1e6f0b08808c2c6008f4e25c5bc7ec4" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/a24dd1c416ef908f8a4727a893c72ff9" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/ac7dcc089472b1bca932cfb5ef3e9b56" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/b256fb6192b9a8e14bab215f482e51f3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/b3e4ec233ac03ff69d8069ecfa670274" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/bbd7d8f959cf09e89eeaa390fc19801e" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/bd333ad829495524b46f8ff628f68d67" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/c3af93d40dcd749d41c135185d2c70d3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/c4e81d24c9b38cc5254bb95ff87ba6c6" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/c5f11475f2507cc7b6ea378226e32a38" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/c9d383663aa71cebb09815cedffc4f0c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/d575665c137d15ac86c3549d773f64f3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/d672a532f2f2245ad4dc132cf89efc6a" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/fb27183e556434053eb24610a3e0636c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/fc88896ab1f9f91a1dbd7dee7d22172d" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/googleads.g.doubleclick.net/d04995ff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/media.admob.com/e9f6fb5" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/net.vanterpool.podster/com.apple.opengl/shaders.data" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/net.vanterpool.podster/com.apple.opengl/shaders.maps" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Cookies/Cookies.binarycookies" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/placeholder-thumb.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/placeholder-thumb@2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Caches/SDNetworkingURLCache/cacheInfo.plist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Preferences/.GlobalPreferences.plist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Preferences/com.apple.PeoplePicker.plist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppData/Library/Preferences/net.vanterpool.podster.plist" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/net.vanterpool.podster 2012-03-14 21.38.10.xcappdata/AppDataInfo.plist" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Submodules/UAModalPanel" afterPath="$PROJECT_DIR$/Submodules/UAModalPanel" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext+MagicalRecord.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext+MagicalRecord.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IAPHelper.h" afterPath="$PROJECT_DIR$/IAPHelper.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IAPHelper.m" afterPath="$PROJECT_DIR$/IAPHelper.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterManagedDocument.h" afterPath="$PROJECT_DIR$/PodsterManagedDocument.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterManagedDocument.m" afterPath="$PROJECT_DIR$/PodsterManagedDocument.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SVPodcastsSearchResultsViewController.m" afterPath="$PROJECT_DIR$/SVPodcastsSearchResultsViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/beta.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/beta.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster-release.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster-release.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/BannerViewController.m" afterPath="$PROJECT_DIR$/podster/BannerViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/HomeController.m" afterPath="$PROJECT_DIR$/podster/HomeController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/PodsterIAPHelper.h" afterPath="$PROJECT_DIR$/podster/PodsterIAPHelper.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/PodsterIAPHelper.m" afterPath="$PROJECT_DIR$/podster/PodsterIAPHelper.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVCategoryListViewController.h" afterPath="$PROJECT_DIR$/podster/SVCategoryListViewController.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVCategoryListViewController.m" afterPath="$PROJECT_DIR$/podster/SVCategoryListViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadManager.m" afterPath="$PROJECT_DIR$/podster/SVDownloadManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadOperation.m" afterPath="$PROJECT_DIR$/podster/SVDownloadOperation.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVFeedParser.m" afterPath="$PROJECT_DIR$/podster/SVFeedParser.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackManager.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastListCell.m" afterPath="$PROJECT_DIR$/podster/SVPodcastListCell.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSettings.h" afterPath="$PROJECT_DIR$/podster/SVSettings.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSettings.m" afterPath="$PROJECT_DIR$/podster/SVSettings.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionManager.h" afterPath="$PROJECT_DIR$/podster/SVSubscriptionManager.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/Settings.storyboard" afterPath="$PROJECT_DIR$/podster/Settings.storyboard" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" afterPath="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" afterPath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.m" afterPath="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/images/SettingsViewController.m" afterPath="$PROJECT_DIR$/podster/images/SettingsViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcast.m" afterPath="$PROJECT_DIR$/podster/models/SVPodcast.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Info.plist" afterPath="$PROJECT_DIR$/podster/podster-Info.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Prefix.pch" afterPath="$PROJECT_DIR$/podster/podster-Prefix.pch" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -110,115 +23,6 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="podster" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="SVAppDelegate.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="183" column="5" selection-start="11039" selection-end="11069" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IAPHelper.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IAPHelper.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="0" selection-start="2930" selection-end="2930" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IAPHelper.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IAPHelper.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="49" selection-start="124" selection-end="127" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVSettings.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVSettings.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BannerViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/BannerViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="39" selection-start="4560" selection-end="4560" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PodsterIAPHelper.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/PodsterIAPHelper.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="58" selection-start="2553" selection-end="2553" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PodsterIAPHelper.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/PodsterIAPHelper.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="3" selection-end="3" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVPodcastDetailsViewController.m" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="529" column="104" selection-start="22565" selection-end="22565" vertical-scroll-proportion="0.35740072">
-              <folding>
-                <element signature="e#170#212#0" expanded="true" />
-                <element signature="e#1486#1511#0" expanded="true" />
-                <element signature="e#3286#3411#0" expanded="true" />
-                <element signature="e#3434#3588#0" expanded="true" />
-                <element signature="e#3771#3842#0" expanded="true" />
-                <element signature="e#4239#4280#0" expanded="true" />
-                <element signature="e#7915#7994#0" expanded="true" />
-                <element signature="e#8062#8222#0" expanded="true" />
-                <element signature="e#8640#8835#0" expanded="true" />
-                <element signature="e#8874#8905#0" expanded="true" />
-                <element signature="e#11502#11555#0" expanded="true" />
-                <element signature="e#11623#11780#0" expanded="true" />
-                <element signature="e#19193#19260#0" expanded="true" />
-                <element signature="e#23649#23810#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Localizable.strings" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/en.lproj/Localizable.strings">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="53" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/images/SettingsViewController.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="264" column="69" selection-start="10893" selection-end="10893" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -328,16 +132,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="DirectoryView.Xcode">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Podster" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -380,6 +174,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Images" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="DirectoryView.Xcode">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -461,13 +265,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="714" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32767403" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.21005917" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.45467836" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.0" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39635158" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -618,9 +422,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/en.lproj/Localizable.strings">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="53" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="27" column="53" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/PodsterIAPHelper.h">
@@ -675,22 +477,7 @@
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="529" column="104" selection-start="22565" selection-end="22565" vertical-scroll-proportion="0.35740072">
-          <folding>
-            <element signature="e#170#212#0" expanded="true" />
-            <element signature="e#1486#1511#0" expanded="true" />
-            <element signature="e#3286#3411#0" expanded="true" />
-            <element signature="e#3434#3588#0" expanded="true" />
-            <element signature="e#3771#3842#0" expanded="true" />
-            <element signature="e#4239#4280#0" expanded="true" />
-            <element signature="e#7915#7994#0" expanded="true" />
-            <element signature="e#8062#8222#0" expanded="true" />
-            <element signature="e#8640#8835#0" expanded="true" />
-            <element signature="e#8874#8905#0" expanded="true" />
-            <element signature="e#11502#11555#0" expanded="true" />
-            <element signature="e#11623#11780#0" expanded="true" />
-            <element signature="e#19193#19260#0" expanded="true" />
-            <element signature="e#23649#23810#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>

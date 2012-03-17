@@ -23,7 +23,7 @@
     static SVPodcatcherClient *client;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSURL *url = [NSURL URLWithString:@"http://podstore.herokuapp.com"];
+        NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];//@"http://podstore.herokuapp.com"];
         client = [[SVPodcatcherClient alloc] initWithBaseURL:url];
 
             [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
@@ -144,9 +144,10 @@
                        onCompletion:(PodcastListResponeBlock)completion 
                             onError:(SVErrorBlock)errorBlock
 {
+     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     NSString *feedFinderURL = [NSString stringWithFormat:@"feeds/featured.json"];
     [self getPath:feedFinderURL
-       parameters:nil
+       parameters:[NSDictionary dictionaryWithObject:deviceId forKey:@"deviceId"]
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
               NSMutableArray *featured = [NSMutableArray array];

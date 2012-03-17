@@ -43,7 +43,7 @@
     
     self.smallLogoURL = [dictionary stringForKey:@"logo_small"];
     self.tinyLogoURL = [dictionary stringForKey:@"logo_tiny"];
-    self.thumbLogoURL = [dictionary stringForKey:@"logo_thumb"];    
+    self.thumbLogoURL = [dictionary stringForKey:@"logo_thumb"];   
 }
 
 -(NSString *)description
@@ -68,9 +68,9 @@
 
 - (void)updateNextItemDate
 {
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-    [context performBlock:^{
-        SVPodcast *localPodcast = [self MR_inContext:context];
+    NSManagedObjectContext *context = [NSManagedObjectContext defaultContext];
+    [context performBlockAndWait:^{
+        SVPodcast *localPodcast = [self inContext:context];
         SVPodcastEntry *entry = nil;
 
         NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", localPodcast];

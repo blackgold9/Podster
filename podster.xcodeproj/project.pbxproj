@@ -1254,6 +1254,7 @@
 		D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "honeycomb@2x.png"; sourceTree = "<group>"; };
 		D608C9BE150EDEFD009BA9BD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D608C9C0150EDF0B009BA9BD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D61F439D15132F5300595257 /* SVPodcastDatastore 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 12.xcdatamodel"; sourceTree = "<group>"; };
 		D622850414E50C48003084BB /* dark-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise.png"; sourceTree = "<group>"; };
 		D622850514E50C48003084BB /* dark-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3480,6 +3481,7 @@
 		4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D61F439D15132F5300595257 /* SVPodcastDatastore 12.xcdatamodel */,
 				4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */,
 				4B7A7CC414F6CFA700AD88F9 /* SVPodcastDatastore 10.xcdatamodel */,
 				4B8F6F4714EC63B400D328DE /* SVPodcastDatastore 9.xcdatamodel */,
@@ -3492,7 +3494,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */;
+			currentVersion = D61F439D15132F5300595257 /* SVPodcastDatastore 12.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
