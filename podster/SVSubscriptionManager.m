@@ -94,7 +94,8 @@ static char const kRefreshInterval = -3;
                 LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
                 [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
                                                                          withLowerPriority:YES
-                                                                                 inContext:context onCompletion:^{
+                                                                                 inContext:context 
+                                                                              onCompletion:^{
                                                                                      [context performBlock:^{
                                                                                          [context save:nil];
                                                                                      }];

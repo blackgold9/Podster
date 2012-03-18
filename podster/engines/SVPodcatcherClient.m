@@ -145,6 +145,10 @@
                             onError:(SVErrorBlock)errorBlock
 {
     NSString *feedFinderURL = [NSString stringWithFormat:@"feeds/featured.json"];
+    NSDictionary *params;
+    if (language) {
+        params = [NSDictionary dictionaryWithObject:language forKey:@"lang"];
+    }
     [self getPath:feedFinderURL
        parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {

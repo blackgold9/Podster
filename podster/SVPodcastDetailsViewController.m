@@ -71,7 +71,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-
+        
     }
     return self;
 }
@@ -98,13 +98,13 @@
 
 - (IBAction)sortControlTapped:(id)sender {
     localPodcast.sortNewestFirstValue = self.sortSegmentedControl.selectedSegmentIndex == 0;
-
+    
     [self reloadData];
 }
 - (BOOL)needsToSignUpForPremium {
-
+    
     NSInteger currentCount = (NSInteger )[SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"shouldNotify == YES AND isSubscribed == YES"] inContext:[PodsterManagedDocument defaultContext]];
-   return ![[SVSettings sharedInstance] premiumMode] && currentCount >= [[SVSettings sharedInstance] maxNonPremiumNotifications];
+    return ![[SVSettings sharedInstance] premiumMode] && currentCount >= [[SVSettings sharedInstance] maxNonPremiumNotifications];
 }
 
 - (void)showNotificationsUpsell
@@ -128,7 +128,7 @@
     }];
     [signupAlert show];
     [self.notifySwitch setOn:NO animated:YES];
-
+    
 }
 -(void)doNotificationChange
 {
@@ -203,13 +203,13 @@
 
 - (void)askUserIfTheyWantNotifications
 {
-// If notifications are enabled, figure out if we want to subscribe for this podcast
+    // If notifications are enabled, figure out if we want to subscribe for this podcast
     LOG_GENERAL(2, @"Checking if notifications are enabled");
     if([[SVSettings sharedInstance] notificationsEnabled]){
-
+        
         SVSettings *settings = [SVSettings sharedInstance];
         BOOL shouldAskAboutNotifications = [settings notificationsEnabled];
-
+        
         if (shouldAskAboutNotifications) {
             void (^subscribeWithErrorAlertBlock)() = ^{
                 if([self needsToSignUpForPremium]) {
@@ -236,7 +236,7 @@
                 }
             };
             
-
+            
             BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
                                                            message:NSLocalizedString(@"Would you like to be notified when new episodes become available?", @"Would you like to be notified when new episodes become available?")];
             [alert setCancelButtonWithTitle:@"No" block:^{
@@ -246,9 +246,9 @@
                                 block:^{
                                     subscribeWithErrorAlertBlock();
                                 }];
-
+            
             [alert show];
-
+            
         }
     }
 }
@@ -286,11 +286,11 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 complete(YES);                
             });
-
+            
         }
-   
+        
     };
-
+    
     [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:localPodcast.feedURL
                                                        onCompletion:succeeded
                                                             onError:^(NSError *error) {
@@ -314,11 +314,11 @@
         localPodcast.shouldNotifyValue = NO;
         
     }];
-
+    
     [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:localPodcast.feedURL
                                                            onCompletion:^{
                                                            } onError:^(NSError *error) {
-    }];
+                                                           }];
 }
 
 - (IBAction)subscribeTapped:(id)sender {
@@ -331,8 +331,8 @@
 }
 
 - (IBAction)optionsButtonTapped:(id)sender {
-   [self toggleOptionsPanel:!optionsOpen
-                   animated:YES];
+    [self toggleOptionsPanel:!optionsOpen
+                    animated:YES];
 }
 
 - (void)toggleOptionsPanel:(BOOL)open animated:(BOOL)animated
@@ -344,21 +344,21 @@
                              self.metadataView.frame = CGRectMake(0, 0, 320, 88);
                              self.optionsButton.transform = CGAffineTransformIdentity;
                              self.tableView.frame = CGRectMake(0, 88, 320, self.view.frame.size.height - 88);
-        }];
+                         }];
     } else {
         [UIView animateWithDuration:animated ? 0.33 : 0.0
                          animations:^{
-
+                             
                              self.metadataView.frame = CGRectMake(0, 0, 320, 220);
-                            
+                             
                              self.tableView.frame = CGRectMake(0, 220, 320, self.view.frame.size.height - 220);
-        }];
+                         }];
     }
     
     [UIView animateWithDuration:0.15 animations:^{
         self.optionsButton.transform = open ? CGAffineTransformMakeRotation((CGFloat) M_PI) : CGAffineTransformIdentity;
     }];
-
+    
 }
 
 #pragma mark - View lifecycle
@@ -369,32 +369,32 @@
 
 -(void)updateTableHeader
 {
-//    if (fetcher.fetchedObjects.count < 4) {
-//        if ([headerView superview]) {
-//            // header is showing and it shouldnt, remove it
-//            self.tableView.tableHeaderView = nil;
-//            self.tableView.contentOffset = CGPointMake(0, -headerView.frame.size.height);
-//        }
-//        
-//    } else {
-//        if (isInitialLoad) {
-//            // Only the first time do you need to do set the offset. 
-//            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
-//            isInitialLoad = NO;
-//        }
-//        
-//        // Should show yeader
-//        if(![headerView superview]) {
-//            // And it needs to be added.
-//            self.tableView.tableHeaderView = headerView; 
-//            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
-//            
-//        }
-//        
-//    }
-//    
-   
-
+    //    if (fetcher.fetchedObjects.count < 4) {
+    //        if ([headerView superview]) {
+    //            // header is showing and it shouldnt, remove it
+    //            self.tableView.tableHeaderView = nil;
+    //            self.tableView.contentOffset = CGPointMake(0, -headerView.frame.size.height);
+    //        }
+    //        
+    //    } else {
+    //        if (isInitialLoad) {
+    //            // Only the first time do you need to do set the offset. 
+    //            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
+    //            isInitialLoad = NO;
+    //        }
+    //        
+    //        // Should show yeader
+    //        if(![headerView superview]) {
+    //            // And it needs to be added.
+    //            self.tableView.tableHeaderView = headerView; 
+    //            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
+    //            
+    //        }
+    //        
+    //    }
+    //    
+    
+    
 }
 
 //- (SVPodcastEntry *)saveAndReturnItemAtIndexPath:(NSIndexPath*)indexPath
@@ -421,7 +421,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   }
+}
 - (void)loadFeedImage
 {
     [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image];
@@ -431,7 +431,7 @@
     [localContext performBlock:^{
         localPodcast.unseenEpsiodeCountValue = 0;
     }];
-
+    
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [FlurryAnalytics endTimedEvent:@"PodcastDetailsPageView"  withParameters:nil];
     fetcher.delegate = nil;
@@ -456,8 +456,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
-            isInitialLoad = YES;
+    GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
+    isInitialLoad = YES;
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0];
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
@@ -465,66 +465,53 @@
     
     [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
     isLoading = YES;
-
+    
     localContext = [PodsterManagedDocument defaultContext];
     __block BOOL blockHasSubscription = NO;
-   
+    
     [localContext performBlock:^{
         @try {
             
-                           LOG_GENERAL(2, @"Lookuing up podcast in data store");
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
-        localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
-                                           inContext:localContext];
-        
-        LOG_GENERAL(2, @"Retrived: %@", localPodcast);
-        if (!localPodcast) {
-            LOG_GENERAL(2, @"Podcast didn't exist, creating it");
-            localPodcast =[SVPodcast MR_createInContext:localContext];
-        }
-        
-        localPodcast.title = self.podcast.title;
-        localPodcast.summary = self.podcast.summary;
-        localPodcast.logoURL = self.podcast.logoURL;
-        localPodcast.feedURL = self.podcast.feedURL;
-        localPodcast.thumbLogoURL = [self.podcast thumbLogoURL];
-        localPodcast.smallLogoURL = [self.podcast smallLogoURL];
-        localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
-        localPodcast.unseenEpsiodeCountValue = 0;
-        blockHasSubscription = localPodcast.isSubscribedValue;
-
+            LOG_GENERAL(2, @"Lookuing up podcast in data store");
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
+            localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
+                                                      inContext:localContext];
+            
+            LOG_GENERAL(2, @"Retrived: %@", localPodcast);
+            if (!localPodcast) {
+                LOG_GENERAL(2, @"Podcast didn't exist, creating it");
+                localPodcast =[SVPodcast MR_createInContext:localContext];
+            }
+            
+            localPodcast.title = self.podcast.title;
+            localPodcast.summary = self.podcast.summary;
+            localPodcast.logoURL = self.podcast.logoURL;
+            localPodcast.feedURL = self.podcast.feedURL;
+            localPodcast.thumbLogoURL = [self.podcast thumbLogoURL];
+            localPodcast.smallLogoURL = [self.podcast smallLogoURL];
+            localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
+            localPodcast.unseenEpsiodeCountValue = 0;
+            blockHasSubscription = localPodcast.isSubscribedValue;
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-            self.descriptionLabel.text = localPodcast.summary;    
-            isSubscribed = blockHasSubscription;
-            self.notifySwitch.on = localPodcast.shouldNotifyValue;
-            self.subscribeButton.enabled = NO;
-            
-            [self setupSubscribeButton];
-            
-            __weak SVPodcastDetailsViewController *blockSelf = self;
-            
-            void (^loadCompleteHandler)() = ^{
-                [notificationView hideAnimated];
-                // Since we fetched directly on the background context,
-                // We need to triger the fetch manually when it's done
+                self.descriptionLabel.text = localPodcast.summary;    
+                isSubscribed = blockHasSubscription;
+                self.notifySwitch.on = localPodcast.shouldNotifyValue;
+                self.subscribeButton.enabled = NO;
                 
-                blockSelf->isLoading = NO;
+                [self setupSubscribeButton];
                 
-                LOG_GENERAL(2, @"Saving parent context");
-                [localContext performBlock:^{
+                __weak SVPodcastDetailsViewController *blockSelf = self;
+                
+                void (^loadCompleteHandler)() = ^{
+                    [notificationView hideAnimated];                    
+                    blockSelf->isLoading = NO;
+                    LOG_GENERAL(2, @"Done loading entries");                    
+                    [blockSelf loadFeedImage];
                     
-                    LOG_GENERAL(2, @"Done loading entries");
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [blockSelf reloadData];
-                         
-                        [blockSelf loadFeedImage];
-                    });
-                    
-                }];
+                };
                 
-            };
-
-
+                
                 if ([[[SVSubscriptionManager sharedInstance] currentURL] isEqualToString:localPodcast.feedURL]) {
                     // Skip doing anything since the background process is already on it
                     LOG_GENERAL(2, @"Subscription manager is already downlioading thi sone, just wait");
@@ -540,23 +527,23 @@
                                                                                                                                           message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
                                                                                            [alert setCancelButtonWithTitle:@"OK"
                                                                                                                      block:^{
-
+                                                                                                                         
                                                                                                                      }];
                                                                                            [alert show];
                                                                                        }];
-
+                    
                 }
-
-            [self reloadData];
-            [self toggleOptionsPanel:NO animated:NO]; 
-        });
+                
+                [self reloadData];
+                [self toggleOptionsPanel:NO animated:NO]; 
+            });
         }
         @catch (NSException *exception) {
             NSLog(@"%@", exception);
         }
-
+        
     }];
-
+    
 }
 
 -(void)reloadData
@@ -566,7 +553,7 @@
         [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         return;
     }
-        LOG_GENERAL(2, @"REload Data begun");
+    LOG_GENERAL(2, @"REload Data begun");
     self.hidePlayedSwitch.on = localPodcast.hidePlayedEpisodesValue;
     self.sortSegmentedControl.selectedSegmentIndex = localPodcast.sortNewestFirstValue ? 0 : 1;
     NSMutableArray *predicates = [NSMutableArray array];
@@ -575,9 +562,9 @@
         [predicates addObject:[NSPredicate predicateWithFormat:@"%K == NO", SVPodcastEntryAttributes.played]];
     }
     
- 
+    
     if(fetcher == nil) {
-                   LOG_GENERAL(2, @"Creating Fetcher For Podcast Details");
+        LOG_GENERAL(2, @"Creating Fetcher For Podcast Details");
         NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
                                                               ascending:!localPodcast.
                                    sortNewestFirstValue
@@ -593,9 +580,9 @@
         LOG_GENERAL(2, @"PErforming fetch");
         [fetcher performFetch:nil];
         LOG_GENERAL(2, @"Fetch complete");
-           LOG_GENERAL(2, @"Done creating Fetcher For Podcast Details");
+        LOG_GENERAL(2, @"Done creating Fetcher For Podcast Details");
     }
-   
+    
     [self.tableView reloadData];
     LOG_GENERAL(2, @"REload Data complete");
 }
@@ -637,7 +624,7 @@
         
         localPodcast.unseenEpsiodeCountValue = 0;
         [localPodcast updateNextItemDate];
- 
+        
     }];
     [[PodsterManagedDocument sharedInstance] save:nil];
 }
@@ -649,12 +636,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-       
+    
     [localContext performBlock:^{
         if ([localContext hasChanges]) {
             
         }
-         SVPodcastEntry *fetcherEpisode;
+        SVPodcastEntry *fetcherEpisode;
         fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
         SVPodcastEntry *episode = (SVPodcastEntry *)[[PodsterManagedDocument defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -686,12 +673,12 @@
                 
             }
         });
-
+        
     }];
-                // Download episode
-        //[[SVDownloadManager sharedInstance] downloadEntry:episode];
+    // Download episode
+    //[[SVDownloadManager sharedInstance] downloadEntry:episode];
     
-
+    
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
@@ -701,8 +688,8 @@
     details.episode =[fetcher objectAtIndexPath:indexPath];
     [[self navigationController] pushViewController:details
                                            animated:YES];
-
-
+    
+    
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     static UIColor *cellBackground;
@@ -714,11 +701,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-      SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView 
-                                                       dequeueReusableCellWithIdentifier:@"episodeCell"];
+    SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView 
+                                                     dequeueReusableCellWithIdentifier:@"episodeCell"];
     //cell.backgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"CarbonListBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsZero]];
     //cell.backgroundView.backgroundColor = ;
-        SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
+    SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
     
     [cell bind:episode];    
     
@@ -732,7 +719,7 @@
      forChangeType:(NSFetchedResultsChangeType)type 
       newIndexPath:(NSIndexPath *)newIndexPath 
 {
-
+    
     switch (type) {
         case NSFetchedResultsChangeInsert:
             [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
@@ -745,18 +732,18 @@
         default:
             break;
     }
-
+    
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
-
+    
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
     [self updateTableHeader];
-
+    
 }
 
 #pragma mark - datasource

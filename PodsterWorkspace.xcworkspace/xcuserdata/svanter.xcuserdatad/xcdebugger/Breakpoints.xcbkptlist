@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/engines/SVPodcatcherClient.m"
-         timestampString = "353220575.273327"
+         timestampString = "353703430.310682"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "375"
-         endingLineNumber = "375"
+         startingLineNumber = "379"
+         endingLineNumber = "379"
          landmarkName = "-changeNotificationSetting:forFeedWithURL:onCompletion:onError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1223,6 +1223,19 @@
          startingLineNumber = "115"
          endingLineNumber = "115"
          landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVFeedParser.m"
+         timestampString = "353703516.70605"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "101"
+         endingLineNumber = "101"
+         landmarkName = "-feedParser:didParseFeedItem:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
