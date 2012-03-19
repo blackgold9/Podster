@@ -78,7 +78,9 @@
                                               sortedBy:SVPodcastEntryAttributes.datePublished
                                              ascending:NO
                                              inContext:context];
-        localPodcast.nextItemDate = entry.datePublished;
+        if(entry) {
+            localPodcast.nextItemDate = entry.datePublished;
+        }
         
     }];
     

@@ -82,10 +82,10 @@
                                                         [[SVSettings sharedInstance] setPremiumMode:isPremium];
                                                     } onError:^(NSError *error) {
             LOG_GENERAL(0, @"Purchase failed with error: %@", error);
-            NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
-            NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
+            NSString *title = NSLocalizedString(@"PURCHASE_ERROR", nil);
+            NSString *body = NSLocalizedString(@"PURCHASE_VALIDATION_FAILED", nil);
             BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
-            [alertView setCancelButtonWithTitle:@"OK" block:^{
+            [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", nil)   block:^{
 
             }];
             [alertView show];

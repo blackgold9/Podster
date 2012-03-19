@@ -145,12 +145,14 @@
                             onError:(SVErrorBlock)errorBlock
 {
     NSString *feedFinderURL = [NSString stringWithFormat:@"feeds/featured.json"];
-    NSDictionary *params;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (language) {
-        params = [NSDictionary dictionaryWithObject:language forKey:@"lang"];
+      [params setObject:language forKey:@"lang"];
     }
+               NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+    [params setObject:deviceId forKey:@"deviceId"];
     [self getPath:feedFinderURL
-       parameters:nil
+       parameters:params
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
               NSMutableArray *featured = [NSMutableArray array];
