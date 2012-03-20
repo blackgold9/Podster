@@ -16,6 +16,7 @@ static char const kRefreshInterval = -3;
 @implementation SVSubscriptionManager {
     BOOL shouldCancel;
     NSDate *startDate; // The date the sync was begun, everything older than that should be synced.
+    NSOperationQueue *syncQueue;
 
 }
 @synthesize currentURL = _currentURL;
@@ -33,6 +34,7 @@ static char const kRefreshInterval = -3;
 }
 -(void)cancel
 {
+    LOG_GENERAL(2, @"Requesting cancellation");
     if(!self.isBusy) {
         return;
     }
@@ -53,9 +55,12 @@ static char const kRefreshInterval = -3;
 //}
 -(void)refreshNextSubscription
 {
+    if (shouldCancel) {
+        LOG_GENERAL(2, @"Cancelling subscription update");
+        return;
+    }
     __weak SVSubscriptionManager *weakSelf = self;
-    [[PodsterManagedDocument sharedInstance] performWhenReady: ^{
-        
+         
         
         NSCalendar *gregorian = [[NSCalendar alloc]
                                  initWithCalendarIdentifier:NSGregorianCalendar];
@@ -95,14 +100,20 @@ static char const kRefreshInterval = -3;
                                                                          withLowerPriority:YES
                                                                                  inContext:context 
                                                                               onCompletion:^{
-                                                                                     [context performBlock:^{
-                                                                                         [context save:nil];
-                                                                                     }];
-                                                                                     [self refreshNextSubscription];
+                                                                                  if(!weakSelf->shouldCancel) {
+                                                                                      LOG_GENERAL(2, @"Cancelling subscription update");
+                                                                                      [context performBlock:^{
+                                                                                          [context save:nil];
+                                                                                      }];
+                                                                                      [self refreshNextSubscription];
+                                                                                  }
                                                                                      weakSelf.currentURL = nil;
                                                                                      
                                                                                  } onError:^(NSError *error) {
-                                                                                     [self refreshNextSubscription];
+                                                                                     if(!weakSelf->shouldCancel) {
+                                                                                         LOG_GENERAL(2, @"Cancelling subscription update");
+                                                                                         [self refreshNextSubscription];
+                                                                                     }
                                                                                      weakSelf.currentURL = nil;
                                                                                  }];
             } else {
@@ -116,8 +127,6 @@ static char const kRefreshInterval = -3;
             }
             
         }];
-    }];
-    
 }
 -(void)refreshAllSubscriptions
 {
@@ -138,52 +147,53 @@ static char const kRefreshInterval = -3;
 - (void)processServerState:(NSDictionary *)serverState isPremium:(BOOL)isPremium
 {
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{
- 
-    }];
-    [[PodsterManagedDocument defaultContext] performBlock:^{
-        LOG_GENERAL(2, @"Server State: %@", serverState);
-        NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-        NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
-        NSArray *podcasts = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
         
-        if(!isPremium) {
-            // Only do this if we're not premium anymore. It's the only time this can get out of sync
-            for(SVPodcast *podcast in podcasts) {
-              
-                BOOL serverNotify = [[serverState objectForKey:podcast.feedURL] boolValue];
-                
-                LOG_GENERAL(1, @"Setting podcast notify value to match server value");
-                // Only do this if the user hasn't made a change. 
-                // When they have, we'll attempt to make their change later
-                if (podcast.shouldNotifyValue != serverNotify) {
-                    podcast.shouldNotifyValue = serverNotify;
+        
+        [[PodsterManagedDocument defaultContext] performBlock:^{
+            LOG_GENERAL(2, @"Server State: %@", serverState);
+            NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+            NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
+            NSArray *podcasts = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
+            
+            if(!isPremium) {
+                // Only do this if we're not premium anymore. It's the only time this can get out of sync
+                for(SVPodcast *podcast in podcasts) {
+                    
+                    BOOL serverNotify = [[serverState objectForKey:podcast.feedURL] boolValue];
+                    
+                    LOG_GENERAL(1, @"Setting podcast notify value to match server value");
+                    // Only do this if the user hasn't made a change. 
+                    // When they have, we'll attempt to make their change later
+                    if (podcast.shouldNotifyValue != serverNotify) {
+                        podcast.shouldNotifyValue = serverNotify;
+                    }
                 }
+            } 
+            NSPredicate *missingFromServer = [NSPredicate predicateWithFormat:@"NOT (feedURL in %@)", [serverState allKeys]];
+            NSArray *needsReconciling = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
+            for(SVPodcast *podcast in needsReconciling) {
+                [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:podcast.feedURL                                                                                                                           onCompletion:^{
+                    [[PodsterManagedDocument defaultContext] performBlock:^{
+                        podcast.isSubscribedValue = YES;
+                    }];
+                    
+                }
+                                                                        onError:nil];
             }
-        } 
-        NSPredicate *missingFromServer = [NSPredicate predicateWithFormat:@"NOT (feedURL in %@)", [serverState allKeys]];
-        NSArray *needsReconciling = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
-        for(SVPodcast *podcast in needsReconciling) {
-            [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:podcast.feedURL                                                                                                                           onCompletion:^{
-                [[PodsterManagedDocument defaultContext] performBlock:^{
-                    podcast.isSubscribedValue = YES;
-                }];
-                
-            }
-                                                                    onError:nil];
-        }
-        
-        // Now, delete items on the server that we're no-longer subscribed to
-        for(NSString *url in [serverState allKeys]) {
-            if ([SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url] inContext:[PodsterManagedDocument defaultContext]] == 0) {
-                // We arent subscribed to this anyumore, tell the server
-                [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:url
-                                                                       onCompletion:^{
-                                                                           LOG_GENERAL(2, @"Removing podcast subscription from server that we unsusbscribed from locally");
-                                                                           
-                                                                       }
-                                                                            onError:nil];
-            }
-         }     
+            
+            // Now, delete items on the server that we're no-longer subscribed to
+            for(NSString *url in [serverState allKeys]) {
+                if ([SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url] inContext:[PodsterManagedDocument defaultContext]] == 0) {
+                    // We arent subscribed to this anyumore, tell the server
+                    [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:url
+                                                                           onCompletion:^{
+                                                                               LOG_GENERAL(2, @"Removing podcast subscription from server that we unsusbscribed from locally");
+                                                                               
+                                                                           }
+                                                                                onError:nil];
+                }
+            }     
+        }];
     }];
     
 }

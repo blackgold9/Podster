@@ -163,8 +163,10 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 -(BOOL)adWhirlTestMode
 {
 #ifdef CONFIGURATION_Release
+    LOG_GENERAL(1, @"ADS: Running in release mode");
     return NO;
 #else
+        LOG_GENERAL(1, @"ADS: Running in TEST mode");
     return YES;
 #endif
 }

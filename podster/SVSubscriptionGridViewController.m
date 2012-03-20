@@ -52,11 +52,13 @@
     [super viewDidDisappear:animated];
     
     self.fetcher.delegate = nil;
-    self.fetcher = nil;
 }
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[PodsterManagedDocument sharedInstance] performWhenReady:^{                    
+        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    }];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -70,14 +72,18 @@
     self.gridView.backgroundColor = [UIColor clearColor];
     self.gridView.centerGrid = NO;
     
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [[PodsterManagedDocument sharedInstance] performWhenReady:^{                    
-            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        }];
-    });
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+    NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
+    
+    request.includesSubentities = NO;
+    self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                       managedObjectContext:[PodsterManagedDocument defaultContext] 
+                                                         sectionNameKeyPath:nil
+                                                                  cacheName:nil];
 
+    NSError *error= nil;
+    [self.fetcher performFetch:&error];
+    NSAssert(error == nil, @"Error!");
 }
 
 - (void)viewDidUnload
@@ -103,27 +109,10 @@
     LOG_GENERAL(2, @"ViewWillAppear");
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
 
-
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-    NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
-
-    request.includesSubentities = NO;
-    self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                       managedObjectContext:[PodsterManagedDocument defaultContext] 
-                                                         sectionNameKeyPath:nil
-                                                                  cacheName:nil];
     
     self.fetcher.delegate = self;
 
-
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(rootContextUpdated:)
-//                                                 name:NSManagedObjectContextDidSaveNotification
-//                                               object:[[PodsterManagedDocument defaultContext] parentContext]];
-    NSError *error= nil;
-    [self.fetcher performFetch:&error];
-    NSAssert(error == nil, @"Error!");
-    [self.gridView reloadData];
+        [self.gridView reloadData];
     self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
     self.noContentLabel.numberOfLines = 0;
     self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
@@ -134,7 +123,7 @@
     [super viewWillDisappear:animated];
     [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
     self.fetcher.delegate = nil;
-    self.fetcher = nil;
+    [[SVSubscriptionManager sharedInstance] cancel];
 
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -234,6 +223,7 @@
     if (!cell) 
     {
         cell = [[PodcastGridCell alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+        cell.reuseIdentifier =@"MySubscriptionsGridCell";
     }
     
     [cell bind:currentPodcast fadeImage:YES];

@@ -145,18 +145,22 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
     } else {            
         self.imageView.image =  [UIImage imageNamed:@"placeholder.png"];
     }
-    
-    UILabel *countLabel = (UILabel *)[self viewWithTag:1908];
-    UIImageView *countOverlay = (UIImageView *)[self viewWithTag:1909];
-    if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
-        countOverlay.hidden = NO;
-        countLabel.hidden = NO;
-        countLabel.text = [NSString stringWithFormat:@"%d", [[podcast unseenEpsiodeCount] integerValue]];
-    } else {
-        countLabel.hidden = YES;
-        countOverlay.hidden = YES;
-    }
-    
+   
+    [UIView animateWithDuration:0.33
+                     animations:^{
+                         
+                         
+                         UILabel *countLabel = (UILabel *)[self viewWithTag:1908];
+                         UIImageView *countOverlay = (UIImageView *)[self viewWithTag:1909];
+                         if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
+                             countOverlay.hidden = NO;
+                             countLabel.hidden = NO;
+                             countLabel.text = [NSString stringWithFormat:@"%d", [[podcast unseenEpsiodeCount] integerValue]];
+                         } else {
+                             countLabel.hidden = YES;
+                             countOverlay.hidden = YES;
+                         }
+                     }];    
 
     self.accessibilityLabel = [podcast title];
 

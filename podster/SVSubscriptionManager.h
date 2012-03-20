@@ -21,4 +21,6 @@ static NSString *const kPodcastHasBeenUpdated = @"PodcastHasBeenUpdated";
 // For the cases where they fall OUT of premium status
 // and to register new feeds the server missed (somehow out of sync)
 - (void)processServerState:(NSDictionary *)serverState isPremium:(BOOL)isPremium;
+
+- (void)cancel;
 @end
