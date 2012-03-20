@@ -16,7 +16,7 @@
 #import "UILabel+VerticalAlign.h"
 #import "PodcastGridCell.h"
 #import "UIColor+Hex.h"
-
+#import "PodsterManagedDocument.h"
 @interface SVSubscriptionGridViewController()
 
 @end
@@ -69,6 +69,15 @@
     [self.view sendSubviewToBack:image];
     self.gridView.backgroundColor = [UIColor clearColor];
     self.gridView.centerGrid = NO;
+    
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [[PodsterManagedDocument sharedInstance] performWhenReady:^{                    
+            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        }];
+    });
+
 }
 
 - (void)viewDidUnload
