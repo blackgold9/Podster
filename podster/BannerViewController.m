@@ -132,6 +132,7 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 }
 -(void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
 {
+    [FlurryAnalytics logEvent:@"AdsDidRecieveAd"];
     [UIView animateWithDuration:0.25 animations:^{
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];
@@ -169,6 +170,7 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 }
 -(void)adWhirlWillPresentFullScreenModal
 {
+    [FlurryAnalytics logEvent:@"AdsFullscreenShown"];
     //Pause playback?
     [[NSNotificationCenter defaultCenter] postNotificationName:BannerViewActionWillBegin object:self];
 }

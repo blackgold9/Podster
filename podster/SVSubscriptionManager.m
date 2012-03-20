@@ -88,7 +88,6 @@ static char const kRefreshInterval = -3;
                     self.isBusy = YES;
                 }
                 weakSelf.currentURL = nextPodcast.feedURL;
-                [FlurryAnalytics logEvent:@"UpdatingSubscriptions" timed:YES];
                 nextPodcast.lastSynced = [NSDate date];
                 [context save:nil];
                 LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
@@ -107,8 +106,6 @@ static char const kRefreshInterval = -3;
                                                                                      weakSelf.currentURL = nil;
                                                                                  }];
             } else {
-                [FlurryAnalytics endTimedEvent:@"UpdatingSubscriptions" 
-                                withParameters:nil];
                 if (self.isBusy) {
                     self.isBusy = NO;            
                 }

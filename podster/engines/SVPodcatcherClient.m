@@ -403,13 +403,10 @@ onCompletion:(void (^)(BOOL))onComplete
     [self postPath:@"subscriptions/destroy.json"  parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                completion();
-
-               [FlurryAnalytics logEvent:@"FeedUnsubscribed" withParameters:params];
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"unsubscribe failed with error: %@", error);
                onError(error);
-               [FlurryAnalytics logError:@"SubscribingToFeed" message:[error localizedDescription] error:error];
            }];
 }
 
