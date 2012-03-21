@@ -52,6 +52,7 @@
     [super viewDidDisappear:animated];
     
     self.fetcher.delegate = nil;
+    self.fetcher = nil;
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -59,6 +60,31 @@
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{                    
         [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
     }];
+    
+    if (!fetcher) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+        NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
+        
+        request.includesSubentities = NO;
+        self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                           managedObjectContext:[PodsterManagedDocument defaultContext] 
+                                                             sectionNameKeyPath:nil
+                                                                      cacheName:nil];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+
+        NSError *error= nil;
+        [self.fetcher performFetch:&error];
+        NSAssert(error == nil, @"Error!");
+            [self.gridView reloadData];
+            
+            self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
+            self.noContentLabel.numberOfLines = 0;
+            self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
+
+        });
+    }
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -72,51 +98,20 @@
     self.gridView.backgroundColor = [UIColor clearColor];
     self.gridView.centerGrid = NO;
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-    NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
-    
-    request.includesSubentities = NO;
-    self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                       managedObjectContext:[PodsterManagedDocument defaultContext] 
-                                                         sectionNameKeyPath:nil
-                                                                  cacheName:nil];
-
-    NSError *error= nil;
-    [self.fetcher performFetch:&error];
-    NSAssert(error == nil, @"Error!");
-}
+  }
 
 - (void)viewDidUnload
 {
     [self setNoContentLabel:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-//- (void)rootContextUpdated:(NSNotification *)notification
-//{
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        LOG_GENERAL(2, @"Root context changed. Refetching");
-//        NSError *error= nil;
-//        [self.fetcher performFetch:&error];
-//        NSAssert(error == nil, @"Error!");
-//    });
-//}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     LOG_GENERAL(2, @"ViewWillAppear");
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
-
-    
-    self.fetcher.delegate = self;
-
-        [self.gridView reloadData];
-    self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
-    self.noContentLabel.numberOfLines = 0;
-    self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
-}
+  }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -134,56 +129,61 @@
 #pragma  mark - fetchedresults
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    LOG_GENERAL(2, @"Controller will changecontent");
-    needsReload = NO;
+
+        LOG_GENERAL(2, @"Controller will changecontent");
+        needsReload = NO;
+
 }
 
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    LOG_GENERAL(2, @"Controller done changing content");
-    if (needsReload) {
-        LOG_GENERAL(2, @"Needs reload");
-        [self.gridView reloadData];
-    }
-    self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
+
+        LOG_GENERAL(2, @"Controller done changing content");
+        if (needsReload) {
+            LOG_GENERAL(2, @"Needs reload");
+            [self.gridView reloadData];
+        }
+        self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
+    
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    SVPodcast *podcast = [fetcher objectAtIndexPath:indexPath];
-    LOG_GENERAL(2, @"GRID:Working with: %@", podcast.title);
-//    SVPodcast *podcast = [self.fetcher objectAtIndexPath:indexPath];
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            
-            LOG_GENERAL(2, @"GRID:Inserting object at %d", indexPath.row);
-            [self.gridView insertObjectAtIndex:indexPath.row 
-                                 withAnimation:GMGridViewItemAnimationNone];
-            break;
-        case NSFetchedResultsChangeDelete:
-            LOG_GENERAL(2, @"GRID:Removing object at %d", indexPath.row);
-            [self.gridView removeObjectAtIndex:indexPath.row 
-                                 withAnimation:GMGridViewItemAnimationNone];
-            break;
-        case NSFetchedResultsChangeMove:
-            LOG_GENERAL(2, @"GRID:Object should move from %d to %d", indexPath.row, newIndexPath.row );
-            [self.gridView removeObjectAtIndex:indexPath.row 
-                                 withAnimation:GMGridViewItemAnimationNone];
-            [self.gridView insertObjectAtIndex:newIndexPath.row
-                                 withAnimation:GMGridViewItemAnimationNone];
-            needsReload = YES;
-            break;
-        case NSFetchedResultsChangeUpdate:
-        {
-            LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
-            [self.gridView reloadObjectAtIndex:indexPath.row
-                                 withAnimation:GMGridViewItemAnimationNone];
+
+        SVPodcast *podcast = [fetcher objectAtIndexPath:indexPath];
+        LOG_GENERAL(2, @"GRID:Working with: %@", podcast.title);
+        switch (type) {
+            case NSFetchedResultsChangeInsert:
+
+                LOG_GENERAL(2, @"GRID:Inserting object at %d", indexPath.row);
+                [self.gridView insertObjectAtIndex:indexPath.row
+                                     withAnimation:GMGridViewItemAnimationNone];
+                break;
+            case NSFetchedResultsChangeDelete:
+                LOG_GENERAL(2, @"GRID:Removing object at %d", indexPath.row);
+                [self.gridView removeObjectAtIndex:indexPath.row
+                                     withAnimation:GMGridViewItemAnimationNone];
+                break;
+            case NSFetchedResultsChangeMove:
+                LOG_GENERAL(2, @"GRID:Object should move from %d to %d", indexPath.row, newIndexPath.row );
+                [self.gridView removeObjectAtIndex:indexPath.row
+                                     withAnimation:GMGridViewItemAnimationNone];
+                [self.gridView insertObjectAtIndex:newIndexPath.row
+                                     withAnimation:GMGridViewItemAnimationNone];
+//            needsReload = YES;
+                break;
+            case NSFetchedResultsChangeUpdate:
+            {
+                LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
+                [self.gridView reloadObjectAtIndex:indexPath.row
+                                     withAnimation:GMGridViewItemAnimationNone];
+            }
+                break;
+            default:
+                LOG_GENERAL(2,@"GRID: Some other type of update");
+                break;
         }
-            break;
-        default:
-            LOG_GENERAL(2,@"GRID: Some other type of update");
-            break;
-    }
+    
     
 }
 -(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position

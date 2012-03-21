@@ -183,10 +183,7 @@
         // Notifications not enabled
         BlockAlertView *alertView = [BlockAlertView alertWithTitle:NSLocalizedString(@"NOTIFICATIONS_ARE_DISABLED", @"Notifications are disabled")
                                                            message:NSLocalizedString(@"NOTIFICATIONS_DISABLED_BODY", @"Please enable notifications in settings if you would like to recieve updates when new episodes are posted.")];
-        [alertView addButtonWithTitle:@"Settings" block:^{
-            
-        }];
-        [alertView setCancelButtonWithTitle:@"Not Now" block:^{
+        [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK",nil) block:^{
             
         }];
         [self.notifySwitch setOn:NO animated:YES];
@@ -256,6 +253,7 @@
 
 -(void)subscribeToPodcast
 {
+    
     [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
         if(success) {
             [self askUserIfTheyWantNotifications];
@@ -265,6 +263,7 @@
 
 - (void)subscribeToPodcastWithSuccessBlock:(void (^)(BOOL))complete
 {
+    isSubscribed = YES;
     dispatch_async(dispatch_get_main_queue(), ^void() {
         LOG_GENERAL(2, @"Creating a subscription for this podcast");
         // User is making this a favorite
@@ -297,8 +296,7 @@
                                                                 if (complete) {
                                                                     dispatch_async(dispatch_get_main_queue(), ^{
                                                                         complete(NO);                
-                                                                    });
-                                                                    
+                                                                    });                                                                    
                                                                 }
                                                             }];
 }
@@ -308,6 +306,7 @@
     [FlurryAnalytics logEvent:@"UnsubscribedFromPodcast"];
     self.subscribeButton.enabled = YES;
     self.subscribeButton.image = [UIImage imageNamed:@"heart.png"];
+    isSubscribed = NO;
     [self.notifySwitch setOn:NO animated:YES];
     [localContext performBlock:^void() {
         localPodcast.isSubscribedValue = NO;
@@ -504,10 +503,12 @@
                 __weak SVPodcastDetailsViewController *blockSelf = self;
                 
                 void (^loadCompleteHandler)() = ^{
-                    [notificationView hideAnimated];                    
-                    blockSelf->isLoading = NO;
-                    LOG_GENERAL(2, @"Done loading entries");                    
-                    [blockSelf loadFeedImage];
+                    if(blockSelf) {
+                        [notificationView hideAnimated];                    
+                        blockSelf->isLoading = NO;
+                        LOG_GENERAL(2, @"Done loading entries");                    
+                        [blockSelf loadFeedImage];
+                    }
                     
                 };
                 
@@ -522,14 +523,16 @@
                                                                                      inContext:localContext
                                                                                   onCompletion:loadCompleteHandler
                                                                                        onError:^(NSError *error) {
-                                                                                           [notificationView hideAnimated];
-                                                                                           BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                                                                                          message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
-                                                                                           [alert setCancelButtonWithTitle:@"OK"
-                                                                                                                     block:^{
-                                                                                                                         
-                                                                                                                     }];
-                                                                                           [alert show];
+                                                                                           if (blockSelf) {
+                                                                                               [notificationView hideAnimated];
+                                                                                               BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
+                                                                                                                                              message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
+                                                                                               [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
+                                                                                                                         block:^{
+                                                                                                                             
+                                                                                                                         }];
+                                                                                               [alert show];
+                                                                                           }
                                                                                        }];
                     
                 }

@@ -332,6 +332,10 @@ NSString *uuid();
     dispatch_async(dispatch_get_main_queue(), ^{
        LOG_GENERAL(2,@"Saving on entering background");
        [[PodsterManagedDocument sharedInstance] save:^(BOOL success) {
+                  LOG_GENERAL(2,@"Done Saving on entering background");
+           if (!success) {
+               LOG_GENERAL(2, @"Saving failed" );
+           }
            [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
            [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
            background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
