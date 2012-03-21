@@ -120,6 +120,7 @@ forPodcastAtURL:(NSString *)feedURL
             // Only update lastUpdated if it's a new episode
             if (isFirstItem) {
                 localPodcast.lastUpdated = item.date;
+                localPodcast.nextItemDate = item.date;
                 
             }
             episode = [SVPodcastEntry MR_createInContext:localContext];
@@ -193,16 +194,10 @@ forPodcastAtURL:(NSString *)feedURL
         
         [localContext performBlock:^void() {
             LOG_PARSING(2, @"Saving local context");
+            NSError *error = nil;
+            [localContext save:&error];
+            if (error) {
                 
-            SVPodcastEntry *entry = nil;
-            
-            NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", localPodcast];
-            entry = [SVPodcastEntry findFirstWithPredicate:isChild 
-                                                  sortedBy:SVPodcastEntryAttributes.datePublished
-                                                 ascending:NO
-                                                 inContext:localContext];
-            localPodcast.nextItemDate = entry.datePublished;
-            [localContext MR_saveWithErrorHandler:^(NSError *error) {
                 dispatch_async(originalQueue, ^void() {
                     self.errorCallback(error);
                 });

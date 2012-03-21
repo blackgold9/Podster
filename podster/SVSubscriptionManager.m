@@ -39,9 +39,10 @@ static char const kRefreshInterval = -3;
     
     shouldCancel = YES;
 }
+
 -(void)refreshNextSubscription
 {
-    __weak SVSubscriptionManager *weakSelf = self;
+      __weak SVSubscriptionManager *weakSelf = self;
     [[PodsterManagedDocument sharedInstance] performWhenReady: ^{
         
         
