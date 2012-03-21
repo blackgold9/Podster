@@ -188,7 +188,6 @@
     
     controller.searchString = searchBar.text;
     [searchBar resignFirstResponder];
-    searchBar.text = @"";
     [self.navigationController pushViewController:controller animated:YES];
 
     
