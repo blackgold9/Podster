@@ -350,6 +350,8 @@
 		4B2E524C14B3E1220030B7C1 /* _SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524814B3E1220030B7C1 /* _SVSubscription.m */; };
 		4B2E524D14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
 		4B2E524E14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
+		4B35BC97151AA4D300325DEF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B35BC96151AA4D300325DEF /* Appirater.m */; };
+		4B35BC98151AA4D300325DEF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B35BC96151AA4D300325DEF /* Appirater.m */; };
 		4B3E5ECA150C43F300010833 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E5EC9150C43F300010833 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B3E5EE1150C9A4F00010833 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E5EE0150C9A4E00010833 /* BannerViewController.m */; };
 		4B3E5EE2150C9A4F00010833 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E5EE0150C9A4E00010833 /* BannerViewController.m */; };
@@ -983,6 +985,8 @@
 		4B2E524814B3E1220030B7C1 /* _SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _SVSubscription.m; path = models/_SVSubscription.m; sourceTree = "<group>"; };
 		4B2E524914B3E1220030B7C1 /* SVSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVSubscription.h; path = models/SVSubscription.h; sourceTree = "<group>"; };
 		4B2E524A14B3E1220030B7C1 /* SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVSubscription.m; path = models/SVSubscription.m; sourceTree = "<group>"; };
+		4B35BC95151AA4D300325DEF /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		4B35BC96151AA4D300325DEF /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		4B3E5EC8150C43F300010833 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = "3rd Party/MBHud/MBProgressHUD.h"; sourceTree = "<group>"; };
 		4B3E5EC9150C43F300010833 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = "3rd Party/MBHud/MBProgressHUD.m"; sourceTree = "<group>"; };
 		4B3E5EDF150C9A4E00010833 /* BannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerViewController.h; sourceTree = "<group>"; };
@@ -2088,6 +2092,8 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B35BC95151AA4D300325DEF /* Appirater.h */,
+				4B35BC96151AA4D300325DEF /* Appirater.m */,
 				4B3E5EC7150C43DD00010833 /* MBHud */,
 				4B0A7B13150676E000BADEBB /* GoogleAdMobAdsSDKiOS-5.0.5 */,
 				4B0A7AE81506765000BADEBB /* TouchJSON */,
@@ -2866,6 +2872,7 @@
 				4B8D1D89150DC9C600E6D770 /* TextViewController.m in Sources */,
 				4B842BDE150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */,
 				4BD123C5150FFF8100A108DA /* CloudHelper.m in Sources */,
+				4B35BC97151AA4D300325DEF /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3057,6 +3064,7 @@
 				4B3E5EE2150C9A4F00010833 /* BannerViewController.m in Sources */,
 				4B842BDF150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */,
 				4BD123C6150FFF8100A108DA /* CloudHelper.m in Sources */,
+				4B35BC98151AA4D300325DEF /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

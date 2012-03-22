@@ -123,7 +123,7 @@
         
     }];
     
-    [signupAlert setCancelButtonWithTitle:NSLocalizedString(@"DECLINE", @"decline") block:^{
+    [signupAlert setCancelButtonWithTitle:NSLocalizedString(@"No, Thanks", @"No, Thanks") block:^{
         [FlurryAnalytics logEvent:@"LimitUpsellDeclined"];
     }];
     [signupAlert show];

@@ -106,7 +106,7 @@ forPodcastAtURL:(NSString *)feedURL
         NSAssert(guid != nil, @"Guid should not be nil at this point");
         NSPredicate *matchesGuid = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryAttributes.guid, guid];
         NSPredicate *inPodcast =[NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryRelationships.podcast, localPodcast ];
-        NSArray *allEpisodes = [SVPodcastEntry MR_findAllWithPredicate:inPodcast inContext:localContext];
+       
         SVPodcastEntry *episode = [SVPodcastEntry MR_findFirstWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:matchesGuid,inPodcast,nil]]
                                                                inContext:localContext];
         BOOL abort = NO;

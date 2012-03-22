@@ -28,7 +28,7 @@
 "HIT_MAX_NOTIFICATIONS_PROMPT_BODY" = "You have reached the maximum number of podcasts that you can monitor for free.\n\nSign up for the Premium Experience now!";
 
 "LEARN_MORE" = "Learn More...";
-"DECLINE" = "No Thanks";
+
 
 
 "Disabled" = "Disabled";
@@ -68,3 +68,9 @@
 "PURCHASE_DISABLED_TITLE" = "Purchasing Disabled";
 "PURCHASE_DISABLED_BODY" = "Your device is currently unable to make purchases. Make sure they are enabled in the settings application";
 "RESTORE_PURCHASES" = "Restore Purchases";
+
+// Appirater
+"If you enjoy using %@, would you mind taking a moment to rate it? It won't take more than a minute. Thanks for your support!" = "If you enjoy using %@, would you mind taking a moment to rate it? It won't take more than a minute. Thanks for your support!";
+"Rate %@" = "Rate %@";
+"No, Thanks" = "No, Thanks";
+"Remind me later" = "Remind me later";
