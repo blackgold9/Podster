@@ -45,17 +45,15 @@
 
 #import "BannerViewController.h"
 #import "SVSettings.h"
+#import "GADBannerView.h"
 NSString * const BannerViewActionWillBegin = @"BannerViewActionWillBegin";
 NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
 @implementation BannerViewController
 {
-    AdWhirlView *_bannerView;
+    GADBannerView *_bannerView;
+    BOOL _hasAd;
     UIViewController *_contentController;
-}
--(NSString *)adWhirlApplicationKey
-{
-    return @"91e9936604204bdb96316e8ebbf225ed";
 }
 
 - (UIViewController *)viewControllerForPresentingModalView {
@@ -65,8 +63,12 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 {
     self = [super init];
     if (self != nil) {
-        _bannerView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
+        _bannerView = [[GADBannerView alloc] initWithFrame:CGRectMake(0, 0, GAD_SIZE_320x50.width, GAD_SIZE_320x50.height)];
+        
         _bannerView.delegate = self;
+        _bannerView.adUnitID = @"6d623966567243f6";
+        _bannerView.rootViewController = self;
+        _hasAd = NO;
         _contentController = contentController;
     }
     return self;
@@ -85,53 +87,63 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     [contentView addSubview:_contentController.view];
     [_contentController didMoveToParentViewController:self];
     self.view = contentView;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(becameActive)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserverForName:@"SVPremiumModeChanged" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         
         if([[SVSettings sharedInstance] premiumMode]) {
-            [_bannerView ignoreNewAdRequests];
+            //[_bannerView removeFromSuperview];
         } else {
-            [_bannerView doNotIgnoreNewAdRequests];
+            GADRequest *request = [GADRequest request];
+            
+            request.testDevices = [NSArray arrayWithObjects:
+                                   GAD_SIMULATOR_ID,                                           // Simulator
+                                   @"6cf539351ee04cde8ee948a45725786527cb3c63",                                          // Test iOS Device
+                                   nil];
+            [_bannerView loadRequest:request];
         }
+        
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];
     }];
 }
 
+-(void)becameActive
+{
+    GADRequest *request = [GADRequest request];
+    
+    request.testDevices = [NSArray arrayWithObjects:
+                           GAD_SIMULATOR_ID,                                           // Simulator
+                           @"6cf539351ee04cde8ee948a45725786527cb3c63",                                          // Test iOS Device
+                           nil];
+    [_bannerView loadRequest:request];
+
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [self.view setNeedsLayout];
-    [self.view layoutIfNeeded];
-}
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return [_contentController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-}
-
-- (void)viewDidLayoutSubviews
-{
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    if ([_bannerView superview]) {
+//        [_bannerView loadRequest:[GADRequest request]];
+//        [self.view setNeedsLayout];
+//        [self.view layoutIfNeeded];
+//    }
+//}
    
-    CGRect contentFrame = self.view.bounds;
-    CGRect bannerFrame = _bannerView.frame;
-    if ([_bannerView adExists] && ![_bannerView isIgnoringNewAdRequests]) {
-
-        bannerFrame.size = [_bannerView actualAdSize];
-        contentFrame.size.height -= _bannerView.frame.size.height;
-        bannerFrame.origin.y = contentFrame.size.height;
-    } else {
-        bannerFrame.origin.y = contentFrame.size.height;
-    }
-    _contentController.view.frame = contentFrame;
-    _bannerView.frame = bannerFrame;
-}
--(void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
+- (void)adViewDidReceiveAd:(GADBannerView *)view
 {
+    _hasAd= YES;
+    LOG_GENERAL(2, @"Ad-View recieved ad");
+    if (![_bannerView superview]) {
+        LOG_GENERAL(2, @"Adding it to view");
+        [self.view addSubview:_bannerView];
+  
+    }
+    
     [FlurryAnalytics logEvent:@"AdsDidRecieveAd"];
     [UIView animateWithDuration:0.25 animations:^{
         [self.view setNeedsLayout];
@@ -139,26 +151,36 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     }];
 }
 
--(void)adWhirlDidFailToReceiveAd:(AdWhirlView *)adWhirlView usingBackup:(BOOL)yesOrNo
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    
-    if (!yesOrNo) {
-        LOG_GENERAL(2, @"Ad Controller failed to receive ad with no fallback");
-        [UIView animateWithDuration:0.25 animations:^{
-            [self.view setNeedsLayout];
-            [self.view layoutIfNeeded];
-        }];
-    } else {
-        LOG_GENERAL(2, @"Ad Controller failed to receive ad. Going to try fallback: %@", adWhirlView.lastError);
-    }
+    return [_contentController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
 }
--(void)adWhirlDidAnimateToNewAdIn:(AdWhirlView *)adWhirlView
+-(void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
+    _hasAd = NO;
     [UIView animateWithDuration:0.25 animations:^{
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];
     }];
 }
+- (void)viewDidLayoutSubviews
+{
+   
+    CGRect contentFrame = self.view.bounds;
+    CGRect bannerFrame = _bannerView.frame;
+    if (_hasAd) {
+        // Ad is on screen/has ad
+        bannerFrame.size = [_bannerView mediatedAdView].frame.size;
+        contentFrame.size.height -= _bannerView.frame.size.height;
+        bannerFrame.origin.y = contentFrame.size.height;
+    } else {
+        bannerFrame.origin.y = contentFrame.size.height;
+    }
+    
+    _contentController.view.frame = contentFrame;
+    _bannerView.frame = bannerFrame;
+}
+
 
 -(BOOL)adWhirlTestMode
 {
@@ -170,14 +192,16 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     return YES;
 #endif
 }
--(void)adWhirlWillPresentFullScreenModal
+
+-(void)adViewWillPresentScreen:(GADBannerView *)adView
 {
     [FlurryAnalytics logEvent:@"AdsFullscreenShown"];
     //Pause playback?
     [[NSNotificationCenter defaultCenter] postNotificationName:BannerViewActionWillBegin object:self];
+
 }
 
--(void)adWhirlDidDismissFullScreenModal
+-(void)adViewDidDismissScreen:(GADBannerView *)adView
 {
     // Resume playback?
     [[NSNotificationCenter defaultCenter] postNotificationName:BannerViewActionDidFinish object:self];

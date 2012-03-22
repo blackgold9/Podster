@@ -44,12 +44,13 @@
 /*  */
 
 #import <UIKit/UIKit.h>
-#import "AdWhirlView.h"
+#import "GADBannerView.h"
+#import "GADBannerViewDelegate.h"
 
 extern NSString * const BannerViewActionWillBegin;
 extern NSString * const BannerViewActionDidFinish;
 
-@interface BannerViewController : UIViewController <AdWhirlDelegate>
+@interface BannerViewController : UIViewController <GADBannerViewDelegate>
 
 - (id)initWithContentViewController:(UIViewController *)contentController;
 

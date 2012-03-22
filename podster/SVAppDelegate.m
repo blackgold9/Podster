@@ -5,7 +5,7 @@
 //  Created by Vanterpool, Stephen on 12/23/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
-
+#import "Appirater.h"
 #import "SVAppDelegate.h"
 #import "UIColor+Hex.h"
 #import "SVDownloadManager.h"
@@ -219,6 +219,7 @@ NSString *uuid();
         LOG_GENERAL(1, @"Starting in premium mode");
     }
     [self setupOfflineOverlayMonitoring];
+    [Appirater appLaunched:YES];
     return YES;    
 }
 
@@ -346,6 +347,7 @@ NSString *uuid();
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+        [Appirater appEnteredForeground:YES];
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
