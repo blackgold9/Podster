@@ -101,10 +101,10 @@
     
     [self reloadData];
 }
-- (BOOL)needsToSignUpForPremium {
+- (BOOL)hasHitNotificationLimit {
     
     NSInteger currentCount = (NSInteger )[SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"shouldNotify == YES AND isSubscribed == YES"] inContext:[PodsterManagedDocument defaultContext]];
-    return ![[SVSettings sharedInstance] premiumMode] && currentCount >= [[SVSettings sharedInstance] maxNonPremiumNotifications];
+    return ![[SVSettings sharedInstance] unlockedNotifications] && currentCount >= [[SVSettings sharedInstance] maxFreeNotifications];
 }
 
 - (void)showNotificationsUpsell
@@ -132,7 +132,7 @@
 }
 -(void)doNotificationChange
 {
-    if (self.notifySwitch.on && [self needsToSignUpForPremium])  {
+    if (self.notifySwitch.on && [self hasHitNotificationLimit])  {
         [self showNotificationsUpsell];
     } else {
         
@@ -167,16 +167,12 @@
 
 - (IBAction)notifySwitchChanged:(id)sender {
     if([[SVSettings sharedInstance] notificationsEnabled]){
-        if (!localPodcast.isSubscribedValue) {
+      
             [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
                 if (success) {
-                    [self doNotificationChange];
+                    
                 }
-            }];
-        } else {
-            [self doNotificationChange];
-            
-        }
+            }];        
     } 
     else 
     {
@@ -209,7 +205,7 @@
         
         if (shouldAskAboutNotifications) {
             void (^subscribeWithErrorAlertBlock)() = ^{
-                if([self needsToSignUpForPremium]) {
+                if([self hasHitNotificationLimit]) {
                     [self showNotificationsUpsell];
                 } else {
                     LOG_GENERAL(2, @"Creating notification subscription");

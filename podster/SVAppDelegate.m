@@ -211,13 +211,10 @@ NSString *uuid();
 //                                                  }];
    
 
-    if (![[SVSettings sharedInstance] premiumMode]) {
-        LOG_GENERAL(1, @"Starting in free mode");;
-        BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
-        self.window.rootViewController = controller;
-    } else {
-        LOG_GENERAL(1, @"Starting in premium mode");
-    }
+ 
+ 
+    BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
+    self.window.rootViewController = controller;
     [self setupOfflineOverlayMonitoring];
     [Appirater appLaunched:YES];
     return YES;    
@@ -246,12 +243,9 @@ NSString *uuid();
     [[SVPodcatcherClient sharedInstance] registerWithDeviceId:deviceId
             notificationToken:tokenAsString
                  onCompletion:^(NSDictionary *config ){
-                     BOOL isPremium = [(NSNumber *)[config valueForKey:@"premium"] boolValue];
                      NSDictionary *subscriptions = [config objectForKey:@"subscriptions"];
                      LOG_GENERAL(2, @"Updating Premium mode from hello");
-                     [[SVSettings sharedInstance] setPremiumMode:isPremium];
-                     [[SVSubscriptionManager sharedInstance] processServerState:subscriptions
-                                                                      isPremium:isPremium];
+                     [[SVSubscriptionManager sharedInstance] processServerState:subscriptions];
 
                      // TODO: Handle subscriptions from server
 

@@ -25,11 +25,9 @@
 -(BOOL)notificationsNeedSyncing;
 - (void)setNotificationsNeedSyncing:(BOOL)needSyncing;
 + (SVSettings *)sharedInstance;
-- (BOOL)premiumMode;
-- (void)setPremiumMode:(BOOL)premiumMode;
-- (NSInteger)maxNonPremiumNotifications;
+- (NSInteger)maxFreeNotifications;
 - (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications;
-- (BOOL)unlimitedNotificationsEnabled;
+- (BOOL)unlockedNotifications;
 - (BOOL)firstRun;
 
 - (void)setFirstRun:(BOOL)firstRun;

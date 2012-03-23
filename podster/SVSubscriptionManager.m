@@ -144,7 +144,7 @@ static char const kRefreshInterval = -3;
 
 }
 
-- (void)processServerState:(NSDictionary *)serverState isPremium:(BOOL)isPremium
+- (void)processServerState:(NSDictionary *)serverState
 {
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{
         
@@ -153,22 +153,8 @@ static char const kRefreshInterval = -3;
             LOG_GENERAL(2, @"Server State: %@", serverState);
             NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
             NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
-            NSArray *podcasts = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
-            
-            if(!isPremium) {
-                // Only do this if we're not premium anymore. It's the only time this can get out of sync
-                for(SVPodcast *podcast in podcasts) {
-                    
-                    BOOL serverNotify = [[serverState objectForKey:podcast.feedURL] boolValue];
-                    
-                    LOG_GENERAL(1, @"Setting podcast notify value to match server value");
-                    // Only do this if the user hasn't made a change. 
-                    // When they have, we'll attempt to make their change later
-                    if (podcast.shouldNotifyValue != serverNotify) {
-                        podcast.shouldNotifyValue = serverNotify;
-                    }
-                }
-            } 
+//            NSArray *podcasts = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
+//            
             NSPredicate *missingFromServer = [NSPredicate predicateWithFormat:@"NOT (feedURL in %@)", [serverState allKeys]];
             NSArray *needsReconciling = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
             for(SVPodcast *podcast in needsReconciling) {

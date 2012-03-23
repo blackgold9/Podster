@@ -92,25 +92,26 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(becameActive)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"SVPremiumModeChanged" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        
-        if([[SVSettings sharedInstance] premiumMode]) {
-            if([_bannerView superview]) {
-                _bannerView.delegate = nil;
-                [_bannerView removeFromSuperview];
-            }
-            
-        } else {
-                   
-        }
-        
-        [self.view setNeedsLayout];
-        [self.view layoutIfNeeded];
-    }];
+//    [[NSNotificationCenter defaultCenter] addObserverForName:@"SVPremiumModeChanged" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+//        
+//        if([[SVSettings sharedInstance] premiumMode]) {
+//            if([_bannerView superview]) {
+//                _bannerView.delegate = nil;
+//                [_bannerView removeFromSuperview];
+//            }
+//            
+//        } else {
+//                   
+//        }
+//        
+//        [self.view setNeedsLayout];
+//        [self.view layoutIfNeeded];
+//    }];
 }
 
 -(void)requestAd
 {
+    LOG_GENERAL(2, @"Sending ad request");
     GADRequest *request = [GADRequest request];
     
     request.testDevices = [NSArray arrayWithObjects:

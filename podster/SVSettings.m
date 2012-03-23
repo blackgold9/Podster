@@ -121,39 +121,19 @@ NSString *uuid(){
      
 }
 
-- (BOOL)premiumMode
-{
-    return [defaults boolForKey:@"premium"];
-
-}
-
-- (void)setPremiumMode:(BOOL)premiumMode
-{
-    if (premiumMode != [self premiumMode]) {
-        NSDictionary *params = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:premiumMode] forKey:@"Premium"];
-        [FlurryAnalytics logEvent:@"PremiumChanged" withParameters:params];
-        LOG_GENERAL(2, @"Premium changed: %@", premiumMode ? @"ON" : @"OFF");
-        [defaults setBool:premiumMode forKey:@"premium"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPremiumModeChanged" object:self];
-        
-    }
-
-
-}
-
-- (BOOL)unlimitedNotificationsEnabled
+- (BOOL)unlockedNotifications
 {
     return [defaults boolForKey:@"net.vanterpool.podster.notifications"];
 }
 
-- (NSInteger)maxNonPremiumNotifications
+- (NSInteger)maxFreeNotifications
 {
-    return MAX(3, [defaults integerForKey:@"MaxNonPremiumNotifications"]);
+    return MAX(3, [defaults integerForKey:@"MaxFreeNotifications"]);
 }
 
 - (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications
 {
-    [defaults setInteger:maxNotifications forKey:@"MaxNonPremiumNotifications"];
+    [defaults setInteger:maxNotifications forKey:@"MaxFreeNotifications"];
 }
 
 - (BOOL)firstRun

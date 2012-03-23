@@ -51,7 +51,7 @@
                                 [appInfo objectForKey:@"CFBundleShortVersionString"], 
                                 [appInfo objectForKey:@"CFBundleVersion"]];       
         
-        if ([[SVSettings sharedInstance] unlimitedNotificationsEnabled]) {
+        if ([[SVSettings sharedInstance] unlockedNotifications]) {
             // Append a p if it's premium
             versionNumber = [NSString stringWithFormat:@"%@N", versionNumber];
         }
@@ -108,7 +108,7 @@
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal  ];
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big-over.png"] forState:UIControlStateHighlighted];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsActivated) name:@"NotificationsPurchased" object:[SVSettings sharedInstance]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockedNotifications:) name:@"NotificationsPurchased" object:nil];
                                                          // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -154,11 +154,19 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         } else if (indexPath.row == 2) {
             [self performSegueWithIdentifier:@"showLegal" sender:self];
         } else if(indexPath.row == 3) {
-            [[PodsterIAPHelper sharedInstance] restoreTransactions];
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            if ([[SVSettings sharedInstance] unlockedNotifications]) {
+                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"net.vanterpool.podster.notifications"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [tableView reloadData];
+            } else {
+                [[PodsterIAPHelper sharedInstance] restoreTransactions];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                
+                
+            }
         }
     } else if (indexPath.section == 0) {
-        if(![[SVSettings sharedInstance] unlimitedNotificationsEnabled]) {
+        if(![[SVSettings sharedInstance] unlockedNotifications]) {
             [self showPurchaseOptions];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
@@ -173,15 +181,18 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     NSInteger cellCount;
     switch (section) {
         case 0:
-            if ([[SVSettings sharedInstance] unlimitedNotificationsEnabled])
+            if ([[SVSettings sharedInstance] unlockedNotifications])
                 cellCount = 1;
             else
                 cellCount = 3;
             break;
         case 1:
             // Show the restore purchase option if we're not already premium
-            cellCount = [[SVSettings sharedInstance] unlimitedNotificationsEnabled] ? 3 : 4;
-
+#if DEBUG
+            cellCount = 4;
+#else
+            cellCount = [[SVSettings sharedInstance] unlockedNotifications] ? 3 : 4;
+#endif
             break;
         default:
             cellCount = 1;
@@ -218,7 +229,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     UITableViewCell *cell = nil;
     if (indexPath.section == 0) {
         // Configure premium info section
-        if ([[SVSettings sharedInstance] unlimitedNotificationsEnabled]) {
+        if ([[SVSettings sharedInstance] unlockedNotifications]) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"unlimitedAlertsStatusCell"];
             cell.textLabel.text = NSLocalizedString(@"UNLIMITED_ALERTS", nil);
             cell.detailTextLabel.text = NSLocalizedString(@"Enabled", @"Enabled");
@@ -269,12 +280,21 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 cell.textLabel.text = NSLocalizedString(@"LEGAL_INFO", @"Legal Information");
                 break;
             case 3:
+                if ([[SVSettings sharedInstance] unlockedNotifications]) {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                                  reuseIdentifier:@"Restore"];
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.text = @"DEBUG: RESET PURCHASES";
+ 
+                } else {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                                  reuseIdentifier:@"Restore"];
                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                    cell.textLabel.text = NSLocalizedString(@"RESTORE_PURCHASES", @"Restore Purchases");
                    break;
+                }
             default:
             break;
 
@@ -401,18 +421,18 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
    
 }
 
--(void)unlimitedNotificationsActivated
+-(void)unlockedNotifications:(NSNotification *)notificaiton
 {
-    if ([[SVSettings sharedInstance] unlimitedNotificationsEnabled]) {
+    if ([[SVSettings sharedInstance] unlockedNotifications]) {
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NotificationsPurchased" object:[SVSettings sharedInstance]];
-            NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
-            NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
-            BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
-            [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
-                [self.tableView reloadData];
-            }];
-            [alertView show];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NotificationsPurchased" object:nil];
+        NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
+        NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
+        BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
+        [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+            [self.tableView reloadData];
+        }];
+        [alertView show];
         
     }
 }
