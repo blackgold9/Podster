@@ -286,10 +286,6 @@
 		4B2E524E14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
 		4B35BC97151AA4D300325DEF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B35BC96151AA4D300325DEF /* Appirater.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B35BC98151AA4D300325DEF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B35BC96151AA4D300325DEF /* Appirater.m */; };
-		4B35BCA6151AAD0B00325DEF /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B35BCA1151AAD0B00325DEF /* libAdapterIAd.a */; };
-		4B35BCA7151AAD0B00325DEF /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B35BCA1151AAD0B00325DEF /* libAdapterIAd.a */; };
-		4B35BCAE151AAD0B00325DEF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B35BCA5151AAD0B00325DEF /* libGoogleAdMobAds.a */; };
-		4B35BCAF151AAD0B00325DEF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B35BCA5151AAD0B00325DEF /* libGoogleAdMobAds.a */; };
 		4B3E5ECA150C43F300010833 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E5EC9150C43F300010833 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B3E5EE1150C9A4F00010833 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E5EE0150C9A4E00010833 /* BannerViewController.m */; };
 		4B3E5EE2150C9A4F00010833 /* BannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E5EE0150C9A4E00010833 /* BannerViewController.m */; };
@@ -851,14 +847,6 @@
 		4B2E524A14B3E1220030B7C1 /* SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVSubscription.m; path = models/SVSubscription.m; sourceTree = "<group>"; };
 		4B35BC95151AA4D300325DEF /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		4B35BC96151AA4D300325DEF /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
-		4B35BC9B151AACED00325DEF /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		4B35BC9C151AACED00325DEF /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		4B35BC9D151AACED00325DEF /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		4B35BC9E151AACED00325DEF /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		4B35BC9F151AACED00325DEF /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		4B35BCA0151AACED00325DEF /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		4B35BCA1151AAD0B00325DEF /* libAdapterIAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterIAd.a; sourceTree = "<group>"; };
-		4B35BCA5151AAD0B00325DEF /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		4B3E5EC8150C43F300010833 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = "3rd Party/MBHud/MBProgressHUD.h"; sourceTree = "<group>"; };
 		4B3E5EC9150C43F300010833 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = "3rd Party/MBHud/MBProgressHUD.m"; sourceTree = "<group>"; };
 		4B3E5EDF150C9A4E00010833 /* BannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerViewController.h; sourceTree = "<group>"; };
@@ -1164,8 +1152,6 @@
 				4B141FA914C9433A00028CE4 /* CrashReporter.framework in Frameworks */,
 				4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4BA02C6314E25AA600582306 /* BlocksKit.framework in Frameworks */,
-				4B35BCA6151AAD0B00325DEF /* libAdapterIAd.a in Frameworks */,
-				4B35BCAE151AAD0B00325DEF /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1185,8 +1171,6 @@
 				4B141FAA14C9433A00028CE4 /* CrashReporter.framework in Frameworks */,
 				4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4BA02C6414E25AA600582306 /* BlocksKit.framework in Frameworks */,
-				4B35BCA7151AAD0B00325DEF /* libAdapterIAd.a in Frameworks */,
-				4B35BCAF151AAD0B00325DEF /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1604,22 +1588,6 @@
 			name = generated;
 			sourceTree = "<group>";
 		};
-		4B35BC9A151AAC8E00325DEF /* AdMob */ = {
-			isa = PBXGroup;
-			children = (
-				4B35BCA1151AAD0B00325DEF /* libAdapterIAd.a */,
-				4B35BCA5151AAD0B00325DEF /* libGoogleAdMobAds.a */,
-				4B35BC9B151AACED00325DEF /* GADBannerView.h */,
-				4B35BC9C151AACED00325DEF /* GADBannerViewDelegate.h */,
-				4B35BC9D151AACED00325DEF /* GADInterstitial.h */,
-				4B35BC9E151AACED00325DEF /* GADInterstitialDelegate.h */,
-				4B35BC9F151AACED00325DEF /* GADRequest.h */,
-				4B35BCA0151AACED00325DEF /* GADRequestError.h */,
-			);
-			name = AdMob;
-			path = "3rd Party/AdMob";
-			sourceTree = "<group>";
-		};
 		4B3E5EC7150C43DD00010833 /* MBHud */ = {
 			isa = PBXGroup;
 			children = (
@@ -1847,7 +1815,6 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
-				4B35BC9A151AAC8E00325DEF /* AdMob */,
 				4B35BC95151AA4D300325DEF /* Appirater.h */,
 				4B35BC96151AA4D300325DEF /* Appirater.m */,
 				4B3E5EC7150C43DD00010833 /* MBHud */,

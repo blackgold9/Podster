@@ -22,8 +22,6 @@
 - (void)setHomeScreen:(HomePageScreenType)screenType;
 - (NSString *)deviceId;
 
--(BOOL)notificationsNeedSyncing;
-- (void)setNotificationsNeedSyncing:(BOOL)needSyncing;
 + (SVSettings *)sharedInstance;
 - (NSInteger)maxFreeNotifications;
 - (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications;

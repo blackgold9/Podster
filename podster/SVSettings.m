@@ -110,17 +110,6 @@ NSString *uuid(){
      
 }
 
--(BOOL)notificationsNeedSyncing
-{
-    return [defaults boolForKey:@"NotificationsNeedSyncing"];
-}
-
--(void)setNotificationsNeedSyncing:(BOOL)needSyncing
-{
-    [defaults setBool:needSyncing forKey:@"NotificationsNeedSyncing"];
-     
-}
-
 - (BOOL)unlockedNotifications
 {
     return [defaults boolForKey:@"net.vanterpool.podster.notifications"];

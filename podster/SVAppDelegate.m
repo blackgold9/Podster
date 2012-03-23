@@ -202,16 +202,6 @@ NSString *uuid();
 #endif
         //   #endif
     }];
-//    [[NSNotificationCenter defaultCenter] addObserverForName:kProductPurchasedNotification
-//                                                      object:nil
-//                                                       queue:nil
-//                                                  usingBlock:^(NSNotification *note) {
-//                                                     // Any purchase in this version is to premium status
-//                                                      [[SVSettings sharedInstance] setPremiumMode:YES];
-//                                                  }];
-   
-
- 
  
     BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
     self.window.rootViewController = controller;
