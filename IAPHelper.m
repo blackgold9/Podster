@@ -55,14 +55,13 @@
 }
 -(void)request:(SKRequest *)request didFailWithError:(NSError *)error
 {
-    LOG_GENERAL(0, @"StoreKit: request failed with error: %@", error            );
+    LOG_GENERAL(0, @"StoreKit: request failed with error: %@", error);
 }
 
 - (void)recordTransaction:(SKPaymentTransaction *)transaction {    
 }
 
-- (void)provideContent:(NSString *)productIdentifier {
-    
+- (void)provideContent:(NSString *)productIdentifier {       
     LOG_GENERAL(2,@"Toggling flag for: %@", productIdentifier);
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:productIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];

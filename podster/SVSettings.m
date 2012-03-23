@@ -127,7 +127,6 @@ NSString *uuid(){
 
 }
 
-
 - (void)setPremiumMode:(BOOL)premiumMode
 {
     if (premiumMode != [self premiumMode]) {
@@ -140,6 +139,11 @@ NSString *uuid(){
     }
 
 
+}
+
+- (BOOL)unlimitedNotificationsEnabled
+{
+    return [defaults boolForKey:@"net.vanterpool.podster.notifications"];
 }
 
 - (NSInteger)maxNonPremiumNotifications

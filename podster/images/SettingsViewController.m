@@ -51,9 +51,9 @@
                                 [appInfo objectForKey:@"CFBundleShortVersionString"], 
                                 [appInfo objectForKey:@"CFBundleVersion"]];       
         
-        if ([[SVSettings sharedInstance] premiumMode]) {
+        if ([[SVSettings sharedInstance] unlimitedNotificationsEnabled]) {
             // Append a p if it's premium
-            versionNumber = [NSString stringWithFormat:@"%@P", versionNumber];
+            versionNumber = [NSString stringWithFormat:@"%@N", versionNumber];
         }
         NSString *emailBody = [NSString stringWithFormat:NSLocalizedString(@"FEEDBACK_BODY", @"Template for support email"), versionNumber];
         [mailer setMessageBody:emailBody isHTML:NO];
@@ -108,7 +108,7 @@
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal  ];
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big-over.png"] forState:UIControlStateHighlighted];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(premiumActivated) name:@"SVPremiumModeChanged" object:[SVSettings sharedInstance]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationsActivated) name:@"NotificationsPurchased" object:[SVSettings sharedInstance]];
                                                          // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -158,7 +158,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     } else if (indexPath.section == 0) {
-        if(![[SVSettings sharedInstance] premiumMode]) {
+        if(![[SVSettings sharedInstance] unlimitedNotificationsEnabled]) {
             [self showPurchaseOptions];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
@@ -173,14 +173,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     NSInteger cellCount;
     switch (section) {
         case 0:
-            if ([[SVSettings sharedInstance] premiumMode])
+            if ([[SVSettings sharedInstance] unlimitedNotificationsEnabled])
                 cellCount = 1;
             else
                 cellCount = 3;
             break;
         case 1:
             // Show the restore purchase option if we're not already premium
-            cellCount = [[SVSettings sharedInstance] premiumMode] ? 3 : 4;
+            cellCount = [[SVSettings sharedInstance] unlimitedNotificationsEnabled] ? 3 : 4;
 
             break;
         default:
@@ -198,36 +198,47 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 1) {
-        return 95.0;
+        return 88.0;
     } else {
         return 44.0f;
     }
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *output;
+    if(section == 0) {
+        output = NSLocalizedString(@"UPGRADES", @"Upgrades");
+    }
+    
+    return output;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
     if (indexPath.section == 0) {
         // Configure premium info section
-        if ([[SVSettings sharedInstance] premiumMode]) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"premiumStatusCell"];
+        if ([[SVSettings sharedInstance] unlimitedNotificationsEnabled]) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"unlimitedAlertsStatusCell"];
+            cell.textLabel.text = NSLocalizedString(@"UNLIMITED_ALERTS", nil);
             cell.detailTextLabel.text = NSLocalizedString(@"Enabled", @"Enabled");
         } else {
             switch (indexPath.row) {
                 case 0:
-                    cell = [tableView dequeueReusableCellWithIdentifier:@"premiumStatusCell"];
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"unlimitedAlertsStatusCell"];
+                    cell.textLabel.text = NSLocalizedString(@"UNLIMITED_ALERTS", nil);
                     cell.detailTextLabel.text = NSLocalizedString(@"Disabled", @"Disabled");
                     break;
                 case 1:
                 {
                     cell = [tableView dequeueReusableCellWithIdentifier:@"premiumDescription"];
                     UILabel *label = (UILabel *)[cell viewWithTag:1906];
-                    label.text = NSLocalizedString(@"PREMIUM_DESCRIPTION", @"The Podster Premium Experience removes all ads, and enables you to monitor as many podcasts as you like for new episodes.");
+                    label.text = NSLocalizedString(@"UNLIMITED_ALERTS_DESCRIPTION",nil);
                     break;
                 }
                 case 2:
                     cell = [tableView dequeueReusableCellWithIdentifier:@"upgradeButton"];
-                    cell.textLabel.text = NSLocalizedString(@"TAP_TO_UPGRADE", @"Tap to Upgrade!");
+                    cell.textLabel.text = NSLocalizedString(@"TAP_TO_UNLOCK", @"Tap to Unlock");
                     break;
                 default:
                     break;
@@ -314,19 +325,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 #pragma mark - Table view delegate
 
-
-- (NSString *)nameForProductIdentifier:(NSString *)identifier
-{
-    if ([identifier isEqualToString:@"net.vanterpool.podster.premium1month"]) {
-        return NSLocalizedString(@"ONE_MONTH", @"Premium subscription for 1 month");
-    } else if ([identifier isEqualToString:@"net.vanterpool.podster.premium1year"]) {
-         return NSLocalizedString(@"ONE_YEAR", @"Premium subscription for 1 year");
-    } else if ([identifier isEqualToString:@"net.vanterpool.podster.premium3months"]) {
-        return NSLocalizedString(@"THREE_MONTHS", @"Premium subscription for 3 months");
-    } else {
-        return @"Invalid product ID";
-    }    
-}
 - (IBAction)premiumSwitchToggled:(id)sender {
 
    
@@ -345,7 +343,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                usingBlock:^(NSNotification *note) {
                                                                    [hud hide:YES];
                                                                    
-                                                                   BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@"Enable Premium Experience?"];
+                                                                   BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:NSLocalizedString(@"PURCHASE_PROMPT_TITLE", nil)];
                                                                    NSArray *products = [[PodsterIAPHelper sharedInstance] products];
                                                                    
                                                                    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -354,11 +352,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                    BOOL hasProducts = NO;
                                                                    for (SKProduct *product in products) {
                                                                        hasProducts = YES;
-                                                                       NSString *name = [self nameForProductIdentifier:product.productIdentifier];
+
+                                                                       NSString *name = [product localizedTitle];
                                                                        [numberFormatter setLocale:product.priceLocale];
                                                                        NSString *price = [numberFormatter stringFromNumber:product.price];
-                                                                       
-                                                                       [sheet addButtonWithTitle:[NSString stringWithFormat:@"%@ - %@", name, price]
+                                                                       NSString *buyFormatString = NSLocalizedString(@"BUY_FORMAT_STRING", @"Format string for listing buy option");
+                                                                       [sheet addButtonWithTitle:[NSString stringWithFormat:buyFormatString, name, price]
                                                                                            block:^{
                                                                                                [FlurryAnalytics logEvent:@"PurchaseTapped" withParameters:[NSDictionary dictionaryWithObject:name forKey:@"sku"]];
                                                                                                [[PodsterIAPHelper sharedInstance] buyProductIdentifier:[product productIdentifier]];
@@ -402,12 +401,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
    
 }
 
--(void)premiumActivated
+-(void)unlimitedNotificationsActivated
 {
-    if ([[SVSettings sharedInstance] premiumMode]) {
+    if ([[SVSettings sharedInstance] unlimitedNotificationsEnabled]) {
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"SVPremiumModeChanged" object:[SVSettings sharedInstance]];
-        if ([[SVSettings sharedInstance] premiumMode]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NotificationsPurchased" object:[SVSettings sharedInstance]];
             NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
             NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
             BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
@@ -415,7 +413,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 [self.tableView reloadData];
             }];
             [alertView show];
-        }
+        
     }
 }
 - (IBAction)purchaseTapped:(id)sender {

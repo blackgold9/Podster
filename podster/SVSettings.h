@@ -29,7 +29,7 @@
 - (void)setPremiumMode:(BOOL)premiumMode;
 - (NSInteger)maxNonPremiumNotifications;
 - (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications;
-
+- (BOOL)unlimitedNotificationsEnabled;
 - (BOOL)firstRun;
 
 - (void)setFirstRun:(BOOL)firstRun;

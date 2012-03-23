@@ -46,6 +46,8 @@
 #import "BannerViewController.h"
 #import "SVSettings.h"
 #import "GADBannerView.h"
+#import "SVPodcatcherClient.h"
+
 NSString * const BannerViewActionWillBegin = @"BannerViewActionWillBegin";
 NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
@@ -93,15 +95,13 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     [[NSNotificationCenter defaultCenter] addObserverForName:@"SVPremiumModeChanged" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         
         if([[SVSettings sharedInstance] premiumMode]) {
-            //[_bannerView removeFromSuperview];
-        } else {
-            GADRequest *request = [GADRequest request];
+            if([_bannerView superview]) {
+                _bannerView.delegate = nil;
+                [_bannerView removeFromSuperview];
+            }
             
-            request.testDevices = [NSArray arrayWithObjects:
-                                   GAD_SIMULATOR_ID,                                           // Simulator
-                                   @"6cf539351ee04cde8ee948a45725786527cb3c63",                                          // Test iOS Device
-                                   nil];
-            [_bannerView loadRequest:request];
+        } else {
+                   
         }
         
         [self.view setNeedsLayout];
@@ -109,7 +109,7 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     }];
 }
 
--(void)becameActive
+-(void)requestAd
 {
     GADRequest *request = [GADRequest request];
     
@@ -118,21 +118,18 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
                            @"6cf539351ee04cde8ee948a45725786527cb3c63",                                          // Test iOS Device
                            nil];
     [_bannerView loadRequest:request];
+}
+
+-(void)becameActive
+{
+    [self requestAd];
 
 }
 - (void)viewDidUnload
 {
+    _bannerView.delegate = nil;
     [super viewDidUnload];
 }
-
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    if ([_bannerView superview]) {
-//        [_bannerView loadRequest:[GADRequest request]];
-//        [self.view setNeedsLayout];
-//        [self.view layoutIfNeeded];
-//    }
-//}
    
 - (void)adViewDidReceiveAd:(GADBannerView *)view
 {
@@ -162,10 +159,22 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];
     }];
+    
+    if (error.code != kGADErrorNoFill){
+//        double delayInSeconds = 10.0;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            LOG_GENERAL(2, @"Requesting ad after failure");
+//            [self requestAd];
+//        });
+        [FlurryAnalytics logError:@"AdLoadFailed" message:[error localizedDescription] error:error];
+    }
+    
 }
+
+
 - (void)viewDidLayoutSubviews
-{
-   
+{   
     CGRect contentFrame = self.view.bounds;
     CGRect bannerFrame = _bannerView.frame;
     if (_hasAd) {
@@ -179,18 +188,6 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     
     _contentController.view.frame = contentFrame;
     _bannerView.frame = bannerFrame;
-}
-
-
--(BOOL)adWhirlTestMode
-{
-#ifdef CONFIGURATION_Release
-    LOG_GENERAL(1, @"ADS: Running in release mode");
-    return NO;
-#else
-        LOG_GENERAL(1, @"ADS: Running in TEST mode");
-    return YES;
-#endif
 }
 
 -(void)adViewWillPresentScreen:(GADBannerView *)adView

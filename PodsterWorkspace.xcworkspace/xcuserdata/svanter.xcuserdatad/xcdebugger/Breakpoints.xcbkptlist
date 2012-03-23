@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/images/SettingsViewController.m"
-         timestampString = "353458360.495487"
+         timestampString = "354157956.429803"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "302"
-         endingLineNumber = "302"
+         startingLineNumber = "313"
+         endingLineNumber = "313"
          landmarkName = "@implementation SettingsViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -21,12 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IAPHelper.m"
-         timestampString = "353173620.145176"
+         timestampString = "354157067.067256"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "97"
-         endingLineNumber = "97"
-         landmarkName = "-failedTransaction:"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
+         landmarkName = "-provideContent:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -34,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IAPHelper.m"
-         timestampString = "353173624.233612"
+         timestampString = "354157067.067256"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
-         landmarkName = "-completeTransaction:"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
+         landmarkName = "-provideContent:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -178,11 +178,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/images/SettingsViewController.m"
-         timestampString = "353458360.495487"
+         timestampString = "354157956.429803"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "208"
-         endingLineNumber = "208"
+         startingLineNumber = "217"
+         endingLineNumber = "217"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -191,11 +191,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/images/SettingsViewController.m"
-         timestampString = "353458360.495487"
+         timestampString = "354157956.429803"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "207"
-         endingLineNumber = "207"
+         startingLineNumber = "216"
+         endingLineNumber = "216"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -243,11 +243,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/images/SettingsViewController.m"
-         timestampString = "353458360.495487"
+         timestampString = "354157956.429803"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
+         startingLineNumber = "218"
+         endingLineNumber = "218"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -256,11 +256,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/images/SettingsViewController.m"
-         timestampString = "353458360.495487"
+         timestampString = "354157956.429803"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "210"
-         endingLineNumber = "210"
+         startingLineNumber = "219"
+         endingLineNumber = "219"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -308,7 +308,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/images/SettingsViewController.m"
-         timestampString = "353458360.495487"
+         timestampString = "354158297.144614"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "397"
+         endingLineNumber = "397"
+         landmarkName = "-purchaseComplete"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/images/SettingsViewController.m"
+         timestampString = "354158297.144614"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "398"
@@ -321,24 +334,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/images/SettingsViewController.m"
-         timestampString = "353458360.495487"
+         timestampString = "354158297.144614"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "399"
          endingLineNumber = "399"
-         landmarkName = "-purchaseComplete"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/images/SettingsViewController.m"
-         timestampString = "353458360.495487"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "400"
-         endingLineNumber = "400"
          landmarkName = "-purchaseComplete"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1061,76 +1061,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353466932.734755"
+         timestampString = "354157067.067256"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
-         landmarkName = "-recordTransaction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353466932.734755"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
-         landmarkName = "-recordTransaction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353466932.734755"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
-         landmarkName = "-recordTransaction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353466932.734755"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "80"
-         endingLineNumber = "80"
-         landmarkName = "-recordTransaction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353466932.734755"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
-         landmarkName = "-recordTransaction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353465254.970986"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
          landmarkName = "-paymentQueueRestoreCompletedTransactionsFinished:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1139,24 +1074,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353466932.734755"
+         timestampString = "354157067.067256"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
-         landmarkName = "-recordTransaction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353466656.301815"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
          landmarkName = "-restoreTransactions"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1165,11 +1087,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodsterIAPHelper.m"
-         timestampString = "353467743.859414"
+         timestampString = "354157067.067256"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
          landmarkName = "-paymentQueueRestoreCompletedTransactionsFinished:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1269,12 +1191,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/BannerViewController.m"
-         timestampString = "354092609.373809"
+         timestampString = "354157067.067256"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "168"
-         endingLineNumber = "168"
-         landmarkName = "-viewDidLayoutSubviews"
+         startingLineNumber = "157"
+         endingLineNumber = "157"
+         landmarkName = "-adView:didFailToReceiveAdWithError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1282,37 +1204,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/BannerViewController.m"
-         timestampString = "354092609.373809"
+         timestampString = "354157067.067256"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "134"
-         endingLineNumber = "134"
-         landmarkName = "@implementation BannerViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/BannerViewController.m"
-         timestampString = "354092609.373809"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
-         landmarkName = "-adView:didFailToReceiveAdWithError:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/BannerViewController.m"
-         timestampString = "354092609.373809"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "98"
-         endingLineNumber = "98"
+         startingLineNumber = "104"
+         endingLineNumber = "104"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>

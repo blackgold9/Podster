@@ -22,19 +22,22 @@
 
 // Purchase Success
 "THANK_YOU_REALLY" = "Thank You! (Really)";
-"PURCHASE_COMPLETE_MESSAGE" = "Your purchase was successful.\nThank you for purchasing Premium Mode!";
+"PURCHASE_COMPLETE_MESSAGE" = "Your purchase was successful.\nThank you!";
 // Upsell when user hits free limit
-"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE" = "Upgrade To Premium";
-"HIT_MAX_NOTIFICATIONS_PROMPT_BODY" = "You have reached the maximum number of podcasts that you can monitor for free.\n\nSign up for the Premium Experience now!";
+"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE" = "Unlock Unlimited Alerts";
+"HIT_MAX_NOTIFICATIONS_PROMPT_BODY" = "You have reached the maximum number of podcasts that you can monitor for free.\n\nUnlock unlimited alerts now!";
 
 "LEARN_MORE" = "Learn More...";
 
 
-
+"PURCHASE_PROMPT_TITLE" = "Become Awesome?";
 "Disabled" = "Disabled";
 "Enabled" = "Enabled";
-"TAP_TO_UPGRADE" = "Tap to Upgrade";
-"PREMIUM_DESCRIPTION" = "The Premium Experience unlocks:\n • Unlimited episode notificaitons!\n • NO Ads!\n • My neverending gratitude :)";
+"TAP_TO_UNLOCK" = "Tap to Unlock";
+"UNLIMITED_ALERTS" = "Unlimited Alerts";
+"BUY_FORMAT_STRING" = "Buy %@ (%@)";
+"UPGRADES" = "Upgrades";
+"UNLIMITED_ALERTS_DESCRIPTION" = "Unlock new episode alerts for as many podcasts as you like! Never miss a thing!";
 "PRIVACY_POLICY" = "Privacy Policy";
 "CONTACT_US" = "Contact Us";
 "LEGAL_INFO" = "Legal Information";
