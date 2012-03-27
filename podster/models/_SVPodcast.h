@@ -7,9 +7,11 @@
 extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *author;
 	__unsafe_unretained NSString *cachingLastModified;
+	__unsafe_unretained NSString *downloadPercentage;
 	__unsafe_unretained NSString *etag;
 	__unsafe_unretained NSString *feedURL;
 	__unsafe_unretained NSString *hidePlayedEpisodes;
+	__unsafe_unretained NSString *isDownloading;
 	__unsafe_unretained NSString *isSubscribed;
 	__unsafe_unretained NSString *lastSynced;
 	__unsafe_unretained NSString *lastUpdated;
@@ -61,6 +63,8 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+
+
 @interface SVPodcastID : NSManagedObjectID {}
 @end
 
@@ -89,6 +93,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber *downloadPercentage;
+
+
+@property float downloadPercentageValue;
+- (float)downloadPercentageValue;
+- (void)setDownloadPercentageValue:(float)value_;
+
+//- (BOOL)validateDownloadPercentage:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSString *etag;
 
 
@@ -113,6 +129,18 @@ extern const struct SVPodcastFetchedProperties {
 - (void)setHidePlayedEpisodesValue:(BOOL)value_;
 
 //- (BOOL)validateHidePlayedEpisodes:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *isDownloading;
+
+
+@property BOOL isDownloadingValue;
+- (BOOL)isDownloadingValue;
+- (void)setIsDownloadingValue:(BOOL)value_;
+
+//- (BOOL)validateIsDownloading:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -302,6 +330,15 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+- (NSNumber*)primitiveDownloadPercentage;
+- (void)setPrimitiveDownloadPercentage:(NSNumber*)value;
+
+- (float)primitiveDownloadPercentageValue;
+- (void)setPrimitiveDownloadPercentageValue:(float)value_;
+
+
+
+
 - (NSString*)primitiveEtag;
 - (void)setPrimitiveEtag:(NSString*)value;
 
@@ -319,6 +356,15 @@ extern const struct SVPodcastFetchedProperties {
 
 - (BOOL)primitiveHidePlayedEpisodesValue;
 - (void)setPrimitiveHidePlayedEpisodesValue:(BOOL)value_;
+
+
+
+
+- (NSNumber*)primitiveIsDownloading;
+- (void)setPrimitiveIsDownloading:(NSNumber*)value;
+
+- (BOOL)primitiveIsDownloadingValue;
+- (void)setPrimitiveIsDownloadingValue:(BOOL)value_;
 
 
 

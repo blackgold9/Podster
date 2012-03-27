@@ -6,9 +6,11 @@
 const struct SVPodcastAttributes SVPodcastAttributes = {
 	.author = @"author",
 	.cachingLastModified = @"cachingLastModified",
+	.downloadPercentage = @"downloadPercentage",
 	.etag = @"etag",
 	.feedURL = @"feedURL",
 	.hidePlayedEpisodes = @"hidePlayedEpisodes",
+	.isDownloading = @"isDownloading",
 	.isSubscribed = @"isSubscribed",
 	.lastSynced = @"lastSynced",
 	.lastUpdated = @"lastUpdated",
@@ -61,8 +63,16 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"downloadPercentageValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"downloadPercentage"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 	if ([key isEqualToString:@"hidePlayedEpisodesValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"hidePlayedEpisodes"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"isDownloadingValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isDownloading"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"isSubscribedValue"]) {
@@ -102,6 +112,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
+@dynamic downloadPercentage;
+
+
+
+- (float)downloadPercentageValue {
+	NSNumber *result = [self downloadPercentage];
+	return [result floatValue];
+}
+
+- (void)setDownloadPercentageValue:(float)value_ {
+	[self setDownloadPercentage:[NSNumber numberWithFloat:value_]];
+}
+
+- (float)primitiveDownloadPercentageValue {
+	NSNumber *result = [self primitiveDownloadPercentage];
+	return [result floatValue];
+}
+
+- (void)setPrimitiveDownloadPercentageValue:(float)value_ {
+	[self setPrimitiveDownloadPercentage:[NSNumber numberWithFloat:value_]];
+}
+
+
+
+
+
 @dynamic etag;
 
 
@@ -136,6 +172,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 - (void)setPrimitiveHidePlayedEpisodesValue:(BOOL)value_ {
 	[self setPrimitiveHidePlayedEpisodes:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
+@dynamic isDownloading;
+
+
+
+- (BOOL)isDownloadingValue {
+	NSNumber *result = [self isDownloading];
+	return [result boolValue];
+}
+
+- (void)setIsDownloadingValue:(BOOL)value_ {
+	[self setIsDownloading:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsDownloadingValue {
+	NSNumber *result = [self primitiveIsDownloading];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsDownloadingValue:(BOOL)value_ {
+	[self setPrimitiveIsDownloading:[NSNumber numberWithBool:value_]];
 }
 
 

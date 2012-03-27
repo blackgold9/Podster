@@ -12,6 +12,7 @@
 #import "UIImage+ForceDecompress.h"
 #import "ActsAsPodcast.h"
 #import "UIImageView+AFNetworking.h"
+#import "SVPodcast.h"
 @interface PodcastGridCell()
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -20,6 +21,9 @@
 {
     AFImageRequestOperation *imageLoadOp;
     id<ActsAsPodcast> storedPodcast;
+    id downloadPercentageObserverToken;
+    id isDownloadingObserverToken;
+    SVPodcast *coreDataPodcast;
 }
 @synthesize imageView = _imageView;
 @synthesize titleLabel = _titleLabel;
@@ -163,6 +167,41 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
                      }];    
 
     self.accessibilityLabel = [podcast title];
+    if ([podcast class] == [SVPodcast class]) {
+        UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        progressView.tag = 1337;
+        [self addSubview:progressView];
+        
+        // It's a core data podcast, do download monitoring
+        coreDataPodcast = (SVPodcast *)podcast;
+progressView.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0; 
+        
+        __weak UIProgressView *weakProgressView  = progressView;
+        downloadPercentageObserverToken = [coreDataPodcast addObserverForKeyPath:@"downloadPercentage" task:^(id obj, NSDictionary *change) { 
+            if (weakProgressView) {
+                LOG_GENERAL(2, @"Updating grid cell with download progress");
+                SVPodcast *local = obj;
+                weakProgressView.progress = local.downloadPercentageValue / 100.0f;
+            }
+        }];
+        
+        isDownloadingObserverToken = [coreDataPodcast addObserverForKeyPath:@"isDownloading" task:^(id obj, NSDictionary *change) {
+            if (weakProgressView) {
+
+                SVPodcast *local = obj;
+                if (local.isDownloadingValue) { 
+                    LOG_GENERAL(2, @"Downloading item");
+                } else {
+                                        LOG_GENERAL(2, @"Not Downloading item");
+                }
+                [UIView animateWithDuration:0.5
+                                 animations:^{
+                                     progressView.alpha = local.isDownloadingValue ? 1 : 0; 
+                                 }];
+            }
+        }];
+    }
+
 
 }
 
@@ -170,7 +209,16 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
 -(void)prepareForReuse
 {
     [super prepareForReuse];
-
+    if (coreDataPodcast) {
+        if (downloadPercentageObserverToken) {
+            [coreDataPodcast removeObserverForKeyPath:@"downloadPercentageValue" identifier:downloadPercentageObserverToken];
+        }
+        
+        if (isDownloadingObserverToken) {
+            [coreDataPodcast removeObserverForKeyPath:@"isDownloading" identifier:isDownloadingObserverToken];
+        }
+        coreDataPodcast = nil;
+    }
     [imageLoadOp cancel];
     UILabel *countLabel = (UILabel *)[self viewWithTag:1908];
     UIImageView *countOverlay = (UIImageView *)[self viewWithTag:1909];

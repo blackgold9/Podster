@@ -894,6 +894,7 @@
 		4B5CE8FF14B0E10400E17299 /* OBSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBSlider.m; sourceTree = "<group>"; };
 		4B5CE90214B1161D00E17299 /* SVPlaybackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlaybackManager.h; sourceTree = "<group>"; };
 		4B5CE90314B1161D00E17299 /* SVPlaybackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlaybackManager.m; sourceTree = "<group>"; };
+		4B610C6715218ED000D8F5CE /* SVPodcastDatastore 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 13.xcdatamodel"; sourceTree = "<group>"; };
 		4B68580714C878AA00496A38 /* back-btn-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-btn-big.png"; sourceTree = "<group>"; };
 		4B68580814C878AA00496A38 /* back-btn-big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-btn-big@2x.png"; sourceTree = "<group>"; };
 		4B68580E14C87A2300496A38 /* grid-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grid-icon.png"; sourceTree = "<group>"; };
@@ -3152,6 +3153,7 @@
 		4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				4B610C6715218ED000D8F5CE /* SVPodcastDatastore 13.xcdatamodel */,
 				4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */,
 				4B7A7CC414F6CFA700AD88F9 /* SVPodcastDatastore 10.xcdatamodel */,
 				4B8F6F4714EC63B400D328DE /* SVPodcastDatastore 9.xcdatamodel */,
@@ -3164,7 +3166,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */;
+			currentVersion = 4B610C6715218ED000D8F5CE /* SVPodcastDatastore 13.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

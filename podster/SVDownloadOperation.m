@@ -8,6 +8,7 @@
 
 #import "SVDownloadOperation.h"
 #import "SVDownload.h"
+#import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 #import "PodsterManagedDocument.h"
 #import "SVPodcatcherClient.h"
@@ -46,10 +47,19 @@
 
             localDownload.stateValue = SVDownloadStateDownloading;
             localDownload.progressValue = progress;
+            localDownload.entry.podcast.downloadPercentageValue = progress * 100;
+            if (!localDownload.entry.podcast.isDownloadingValue) {
+                localDownload.entry.podcast.isDownloadingValue = YES;
+            } 
+         
+         if (currentProgressPercentage == 100) {
+              localDownload.entry.podcast.isDownloadingValue = NO;
+         }
+
         }];
     }
-
 }
+
 - (void)done
 {
     if( networkOp ) {
@@ -64,6 +74,7 @@
     [self didChangeValueForKey:@"isFinished"];
     [self didChangeValueForKey:@"isExecuting"];
 }
+
 -(void)start
 {
     dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
@@ -151,7 +162,7 @@
    
     LOG_DOWNLOADS(2, @"Operation watiting for download to complete");
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    LOG_DOWNLOADS(2, @"Download complete");                            
+    LOG_DOWNLOADS(2, @"Download complete"); 
 
     
     
