@@ -16,6 +16,7 @@
 #import "DTLinkButton.h"
 #import "NSString+MW_HTML.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SVDownloadManager.h"
 @implementation SVEpisodeDetailsViewController {
     NSManagedObjectContext *context;
     SVPodcastEntry *episode;
@@ -70,6 +71,7 @@
 {
     [super viewWillAppear:animated];
     [FlurryAnalytics logEvent:@"EpisodeDetailsPageView"];
+    
 }
 -(void)bind:(SVPodcastEntry *)theEpisode
 {
@@ -95,6 +97,7 @@
     [self updatePlayedToggle];
        context = theEpisode.managedObjectContext;
     episode = theEpisode;
+    [[SVDownloadManager sharedInstance] downloadEntry:theEpisode];
 }
 
 - (void)viewDidLoad

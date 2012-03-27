@@ -85,8 +85,9 @@
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %d", SVDownloadAttributes.state, SVDownloadStatePending];
     SVDownload *nextUp = [SVDownload MR_findFirstWithPredicate:predicate
-                                                   sortedBy:SVDownloadAttributes.position
-                                                  ascending:YES inContext:[PodsterManagedDocument defaultContext]];
+                                                      sortedBy:SVDownloadAttributes.position
+                                                     ascending:YES 
+                                                     inContext:[PodsterManagedDocument defaultContext]];
     return nextUp;
 }
 
@@ -115,16 +116,17 @@
         start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
         headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
     }
-    
+        NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     SVDownload *lastDownlaod = [SVDownload MR_findFirstWithPredicate:nil
                                                             sortedBy:@"position"
-                                                           ascending:YES];
+                                                           ascending:YES inContext:localContext];
     NSInteger position = 0;
     if (lastDownlaod) {
         position = lastDownlaod.positionValue + 1;
     }
     __block SVDownload *download = nil;
-    [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) {
+
+    [localContext performBlockAndWait:^{
 
         SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
         download = localEntry.download;

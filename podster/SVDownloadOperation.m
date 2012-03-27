@@ -9,12 +9,13 @@
 #import "SVDownloadOperation.h"
 #import "SVDownload.h"
 #import "SVPodcastEntry.h"
+#import "PodsterManagedDocument.h"
 #import "SVPodcatcherClient.h"
 @implementation SVDownloadOperation {
     BOOL _isExecuting;
     BOOL _isFinished;
     SVDownload  *download;
-//    MKNetworkOperation *networkOp;
+    AFHTTPRequestOperation *networkOp;
     NSInteger currentProgressPercentage;
     NSString *basePath;
 }
@@ -26,7 +27,7 @@
     if (self) {
         NSParameterAssert(objectId);
         NSParameterAssert(path);
-//        NSAssert(![objectId isTemporaryID], @"Object id shoudl not be a temp id");
+
         self.downloadObjectID = objectId;
         basePath = [path copy];
         
@@ -41,101 +42,116 @@
         LOG_DOWNLOADS(4, @"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
         NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry identifier], @"identifier",[NSNumber numberWithDouble:progress], @"progress",  nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
-        [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *innerContext) {
-            SVDownload *innerDownload = (SVDownload *)[localDownload MR_inContext:innerContext];
-            innerDownload.stateValue = SVDownloadStateDownloading;
-            innerDownload.progressValue = progress;
+        [localContext performBlock: ^{
+
+            localDownload.stateValue = SVDownloadStateDownloading;
+            localDownload.progressValue = progress;
         }];
     }
 
 }
 - (void)done
 {
-//    if( networkOp ) {
-//        [networkOp cancel];
-//    }
-//    
-//    // Alert anyone that we are finished
-//    [self willChangeValueForKey:@"isExecuting"];
-//    [self willChangeValueForKey:@"isFinished"];
-//    _isExecuting = NO;
-//    _isFinished  = YES;
-//    [self didChangeValueForKey:@"isFinished"];
-//    [self didChangeValueForKey:@"isExecuting"];
+    if( networkOp ) {
+        [networkOp cancel];
+    }
+    
+    // Alert anyone that we are finished
+    [self willChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:@"isFinished"];
+    _isExecuting = NO;
+    _isFinished  = YES;
+    [self didChangeValueForKey:@"isFinished"];
+    [self didChangeValueForKey:@"isExecuting"];
 }
 -(void)start
 {
+    dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
+    NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
+    [localContext performBlockAndWait:^{
+        
+        
+        download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
+        LOG_DOWNLOADS(2, @"Starting episode download: %@", download.entry);
+        
+        NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
+        NSUInteger start = 0;
+        NSDictionary *headers = nil;
+        NSString *filePath = [basePath stringByAppendingPathComponent:[download.entry identifier]];
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+        if (fileExists) {
+            start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
+            headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
+        }
+        
+        SVDownload *lastDownlaod = [SVDownload MR_findFirstWithPredicate:nil
+                                                                sortedBy:@"position"
+                                                               ascending:YES inContext:localContext];
+        NSInteger position = 0;
+        if (lastDownlaod) {
+            position = lastDownlaod.positionValue + 1;
+        }
+        
+        [self willChangeValueForKey:@"isExecuting"];
+        _isExecuting = YES;
+        [self didChangeValueForKey:@"isExecuting"];
+        
+        SVDownload *localDownload = [download MR_inContext:localContext];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:download.filePath] && download.entry.downloadCompleteValue){
+            //Download already existed, file exists, and entry is marked as download.
+            // Nothing to see here
+            NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
+            return;
+        }
+        
+        localDownload.stateValue = SVDownloadStateDownloading;
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:localDownload.entry.mediaURL]];
+        if (headers){ 
+            NSLog(@"Set custom headers: %@", headers);
+            [request setAllHTTPHeaderFields:headers];
+        }
+        
+        
+        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [op setOutputStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
+        
+        [op setDownloadProgressBlock:^(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+            [self downloadProgressChanged:(double)totalBytesRead / (double)(totalBytesExpectedToRead + start)
+                              forDownload:localDownload 
+                                inContext:localContext];
+        }];
+        
+        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [localContext performBlock:^{
+                LOG_NETWORK(2, @"Downloaded episode: %@", localDownload.entry.title);
+                localDownload.entry.downloadCompleteValue = YES;
+                [localDownload MR_deleteInContext:localContext];    
+                [self done];
+                dispatch_semaphore_signal(semaphore);
+                
+            }];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [localContext
+             performBlock:^{
+                 LOG_DOWNLOADS(2, @"Download failed with Error: %@", error);        
+                 LOG_NETWORK(2, @"Failed to download episode: %@", localDownload.entry.title);
+                 localDownload.stateValue = SVDownloadStateFailed;
+                 dispatch_semaphore_signal(semaphore);
+                 
+             }];
+            
+        }];
+        networkOp = op;
+        [op start];
+    }];
 
-//    NSManagedObjectContext *localContext = [NSManagedObjectContext contextForCurrentThread];
-//    download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
-//    LOG_DOWNLOADS(2, @"Starting episode download: %@", download.entry);
-//    
-//    NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
-//    NSUInteger start = 0;
-//    NSDictionary *headers = nil;
-//    NSString *filePath = [basePath stringByAppendingPathComponent:[download.entry identifier]];
-//    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
-//    if (fileExists) {
-//        start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
-//        headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
-//    }
-//    
-//    SVDownload *lastDownlaod = [SVDownload MR_findFirstWithPredicate:nil
-//                                                            sortedBy:@"position"
-//                                                           ascending:YES];
-//    NSInteger position = 0;
-//    if (lastDownlaod) {
-//        position = lastDownlaod.positionValue + 1;
-//    }
-//    
-//    [self willChangeValueForKey:@"isExecuting"];
-//    _isExecuting = YES;
-//    [self didChangeValueForKey:@"isExecuting"];
-//    
-//    [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *localContext) {
-//        
-//        SVDownload *localDownload = [download MR_inContext:localContext];
-//        if ([[NSFileManager defaultManager] fileExistsAtPath:download.filePath] && download.entry.downloadCompleteValue){
-//            //Download already existed, file exists, and entry is marked as download.
-//            // Nothing to see here
-//            NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
-//            return;
-//        }
-//        
-//        localDownload.stateValue = SVDownloadStateDownloading;
-//        MKNetworkOperation *op = [[SVPodcatcherClient sharedInstance] operationWithURLString:download.entry.mediaURL];
-//        if (headers){ 
-//            NSLog(@"Set custom headers: %@", headers);
-//            [op addHeaders:headers];
-//        }
-//        
-//        [op addDownloadStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
-//        [op onDownloadProgressChanged:^(double progress) {
-//            [self downloadProgressChanged:progress
-//                              forDownload:localDownload 
-//                                inContext:localContext];
-//        }];
-//        
-//        [op onCompletion:^(MKNetworkOperation *completedOperation) {
-//            [MRCoreDataAction saveDataWithBlock:^(NSManagedObjectContext *innerContext) {
-//                SVDownload *innerDownload = (SVDownload *)[localDownload inContext:innerContext];
-//                LOG_NETWORK(2, @"Downloaded episode: %@", innerDownload.entry.title);
-//                innerDownload.entry.downloadCompleteValue = YES;
-//                [innerDownload deleteInContext:innerContext];    
-//                [self done];
-//            }];
-//        } onError:^(NSError *error) {
-//            LOG_DOWNLOADS(2, @"Download failed with Error: %@", error);
-//            [MRCoreDataAction saveDataInBackgroundWithBlock:^(NSManagedObjectContext *innerContext) {
-//                SVDownload *innerDownload = (SVDownload *)[localDownload inContext:innerContext];
-//                LOG_NETWORK(2, @"Failed to download episode: %@", innerDownload.entry.title);
-//                innerDownload.stateValue = SVDownloadStateFailed;
-//            } saveParentContext:YES];
-//            
-//        }];
-//        
-//        [[SVPodcatcherClient sharedInstance] enqueueOperation:op];
-//    }];
+   
+    LOG_DOWNLOADS(2, @"Operation watiting for download to complete");
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    LOG_DOWNLOADS(2, @"Download complete");                            
 
     
     
@@ -155,13 +171,13 @@
 }
 -(void)cancel
 {
-//    [networkOp cancel];
-//    [self willChangeValueForKey:@"isExecuting"];
-//    _isExecuting = NO;
-//    [self didChangeValueForKey:@"isExecuting"];
-//    [self willChangeValueForKey:@"isFinished"];
-//    _isFinished = YES;;
-//    [self didChangeValueForKey:@"isFinished"];
+    [networkOp cancel];
+    [self willChangeValueForKey:@"isExecuting"];
+    _isExecuting = NO;
+    [self didChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:@"isFinished"];
+    _isFinished = YES;;
+    [self didChangeValueForKey:@"isFinished"];
     
 }
 @end
