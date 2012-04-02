@@ -166,7 +166,7 @@ void audioRouteChangeListenerCallback (
                 // Mark as played when you pass the played percentage
                 if (blockSelf.currentEpisode.playedValue != YES) {
                     blockSelf.currentEpisode.playedValue = YES;
-                    [blockSelf.currentPodcast updateNextItemDate];
+                    [blockSelf.currentPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
                 }
             }
         }];
@@ -254,7 +254,7 @@ void audioRouteChangeListenerCallback (
     [[PodsterManagedDocument defaultContext] performBlock:^{
         self.currentEpisode.playedValue = YES;
         self.currentEpisode.positionInSecondsValue = 0;   
-        [self.currentPodcast updateNextItemDate];
+        [self.currentPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
     }];
 }
 -(void)play

@@ -11,6 +11,7 @@
 @class SVPodcastEntry;
 @interface SVDownloadManager : NSObject
 + (id)sharedInstance;
-- (void)downloadEntry:(SVPodcastEntry *)entry;
+
+- (void)downloadEntry:(SVPodcastEntry *)entry manualDownload:(BOOL)isManualDownload;
 - (void)resumeDownloads;
 @end

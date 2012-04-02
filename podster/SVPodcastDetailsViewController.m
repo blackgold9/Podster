@@ -32,6 +32,7 @@
 #import "BlockAlertView.h"
 #import "GCDiscreetNotificationView.h"
 #import "SVSubscriptionManager.h"
+#import "_SVPodcastEntry.h"
 @interface SVPodcastDetailsViewController ()
 
 - (void)saveLocalContextIncludingParent:(BOOL)includeParent;
@@ -44,14 +45,13 @@
     MWFeedInfo *feedInfo;
     MWFeedParser *feedParser;
     NSManagedObjectContext *localContext;
-    NSFetchedResultsController *fetcher;
     BOOL shouldSave;
     SVPodcast *localPodcast;
     UIView *headerView;
     BOOL optionsOpen;
     BOOL isInitialLoad;
     BOOL isSubscribed;
-    
+    NSArray *items;
     NSManagedObjectContext *context;
 }
 @synthesize notifySwitch;
@@ -71,6 +71,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        items = [NSArray array];
         
     }
     return self;
@@ -362,58 +363,6 @@
     LOG_GENERAL(2, @"dealloc");
 }
 
--(void)updateTableHeader
-{
-    //    if (fetcher.fetchedObjects.count < 4) {
-    //        if ([headerView superview]) {
-    //            // header is showing and it shouldnt, remove it
-    //            self.tableView.tableHeaderView = nil;
-    //            self.tableView.contentOffset = CGPointMake(0, -headerView.frame.size.height);
-    //        }
-    //        
-    //    } else {
-    //        if (isInitialLoad) {
-    //            // Only the first time do you need to do set the offset. 
-    //            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
-    //            isInitialLoad = NO;
-    //        }
-    //        
-    //        // Should show yeader
-    //        if(![headerView superview]) {
-    //            // And it needs to be added.
-    //            self.tableView.tableHeaderView = headerView; 
-    //            self.tableView.contentOffset = CGPointMake(0, headerView.frame.size.height);
-    //            
-    //        }
-    //        
-    //    }
-    //    
-    
-    
-}
-
-//- (SVPodcastEntry *)saveAndReturnItemAtIndexPath:(NSIndexPath*)indexPath
-//{
-//    // NEed to save now
-//    LOG_GENERAL(3, @"Starting save operation");
-//    __block SVPodcastEntry *entry = nil;
-//    [localContext performBlockAndWait:^{
-//        entry = [fetcher objectAtIndexPath:indexPath];
-//        [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:entry] error:nil];
-//        LOG_GENERAL(2, @"Saving local context");
-//        [localContext save];
-//        LOG_GENERAL(2, @"local context saved");
-//    }];
-//    
-//    NSError *error;
-//    [fetcher performFetch:&error];
-//    NSAssert(error == nil, @"there should be no error");
-//    SVPodcastEntry *fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
-//    [localContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:fetcherEpisode] error:nil];
-//    LOG_GENERAL(3, @"Save complete");
-//    return fetcherEpisode;
-//}
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
 }
@@ -429,7 +378,6 @@
     
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [FlurryAnalytics endTimedEvent:@"PodcastDetailsPageView"  withParameters:nil];
-    fetcher.delegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -450,6 +398,7 @@
 
 - (void)viewDidLoad
 {
+    LOG_GENERAL(2, @"%s", sel_getName(_cmd));
     [super viewDidLoad];
     GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
     isInitialLoad = YES;
@@ -466,22 +415,28 @@
     
     [localContext performBlock:^{
         @try {
-            
-            LOG_GENERAL(2, @"Lookuing up podcast in data store");
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, self.podcast.feedURL];
+
+            NSString *feedURL = [self.podcast.feedURL lowercaseString];
+            LOG_GENERAL(2, @"Lookuing up podcast in data store with URL: %@", feedURL);
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, feedURL];
             localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
                                                       inContext:localContext];
             
-            LOG_GENERAL(2, @"Retrived: %@", localPodcast);
+
             if (!localPodcast) {
-                LOG_GENERAL(2, @"Podcast didn't exist, creating it");
-                localPodcast =[SVPodcast MR_createInContext:localContext];
+                LOG_GENERAL(2, @"Podcast named %@ with url %@ didn't exist, creating it", self.podcast.title,feedURL);
+                localPodcast = [SVPodcast MR_createInContext:localContext];
+                [localContext performBlock:^{
+                    [localContext save:nil];
+                }];
+            } else {
+                LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
             }
             
             localPodcast.title = self.podcast.title;
             localPodcast.summary = self.podcast.summary;
             localPodcast.logoURL = self.podcast.logoURL;
-            localPodcast.feedURL = self.podcast.feedURL;
+            localPodcast.feedURL = feedURL;
             localPodcast.thumbLogoURL = [self.podcast thumbLogoURL];
             localPodcast.smallLogoURL = [self.podcast smallLogoURL];
             localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
@@ -504,33 +459,37 @@
                         blockSelf->isLoading = NO;
                         LOG_GENERAL(2, @"Done loading entries");                    
                         [blockSelf loadFeedImage];
+                        [localContext performBlock:^{
+                            [localContext save:nil];
+                        }];
+                        [self reloadData];
                     }
                     
                 };
                 
                 
-                if ([[[SVSubscriptionManager sharedInstance] currentURL] isEqualToString:localPodcast.feedURL]) {
+                if ([[[SVSubscriptionManager sharedInstance] currentURL] isEqualToString:feedURL]) {
                     // Skip doing anything since the background process is already on it
                     LOG_GENERAL(2, @"Subscription manager is already downlioading thi sone, just wait");
                 } else {
                     [notificationView show:YES];
-                    [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:localPodcast.feedURL
-                                                                             withLowerPriority:NO
-                                                                                     inContext:localContext
-                                                                                  onCompletion:loadCompleteHandler
-                                                                                       onError:^(NSError *error) {
-                                                                                           if (blockSelf) {
-                                                                                               [notificationView hideAnimated];
-                                                                                               BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                                                                                              message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
-                                                                                               [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
-                                                                                                                         block:^{
-                                                                                                                             
-                                                                                                                         }];
-                                                                                               [alert show];
-                                                                                           }
-                                                                                       }];
-                    
+                    [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcast:localPodcast
+                                                                  withLowerPriority:NO
+                                                                          inContext:localContext
+                                                                       onCompletion:loadCompleteHandler
+                                                                            onError:^(NSError *error) {
+                                                                                if (blockSelf) {
+                                                                                    [notificationView hideAnimated];
+                                                                                    BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
+                                                                                                                                   message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
+                                                                                    [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
+                                                                                                              block:^{
+
+                                                                                                              }];
+                                                                                    [alert show];
+                                                                                }
+                                                                            }];
+
                 }
                 
                 [self reloadData];
@@ -555,33 +514,12 @@
     LOG_GENERAL(2, @"REload Data begun");
     self.hidePlayedSwitch.on = localPodcast.hidePlayedEpisodesValue;
     self.sortSegmentedControl.selectedSegmentIndex = localPodcast.sortNewestFirstValue ? 0 : 1;
-    NSMutableArray *predicates = [NSMutableArray array];
-    [predicates addObject:[NSPredicate predicateWithFormat:@"podcast.feedURL == %@", localPodcast.feedURL]];
-    if (localPodcast.hidePlayedEpisodesValue){
-        [predicates addObject:[NSPredicate predicateWithFormat:@"%K == NO", SVPodcastEntryAttributes.played]];
+
+    items = [localPodcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue]]];
+    if (localPodcast.hidePlayedEpisodesValue) {
+        items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
     }
-    
-    
-    if(fetcher == nil) {
-        LOG_GENERAL(2, @"Creating Fetcher For Podcast Details");
-        NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                                              ascending:!localPodcast.
-                                   sortNewestFirstValue
-                                                          withPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:predicates]
-                                                              inContext:[PodsterManagedDocument defaultContext]];
-        
-        fetcher.delegate = nil;
-        fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                      managedObjectContext:[PodsterManagedDocument defaultContext]
-                                                        sectionNameKeyPath:nil
-                                                                 cacheName:nil];
-        fetcher.delegate = self;
-        LOG_GENERAL(2, @"PErforming fetch");
-        [fetcher performFetch:nil];
-        LOG_GENERAL(2, @"Fetch complete");
-        LOG_GENERAL(2, @"Done creating Fetcher For Podcast Details");
-    }
-    
+
     [self.tableView reloadData];
     LOG_GENERAL(2, @"REload Data complete");
 }
@@ -612,6 +550,7 @@
 {
     [super viewDidAppear:animated];
     [self reloadData];
+
 }
 
 
@@ -622,11 +561,12 @@
     [localContext performBlock:^{
         
         localPodcast.unseenEpsiodeCountValue = 0;
-        [localPodcast updateNextItemDate];
+        [localPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
         
     }];
     [[PodsterManagedDocument sharedInstance] save:nil];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -637,12 +577,7 @@
 {
     
     [localContext performBlock:^{
-        if ([localContext hasChanges]) {
-            
-        }
-        SVPodcastEntry *fetcherEpisode;
-        fetcherEpisode = [fetcher objectAtIndexPath:indexPath];
-        SVPodcastEntry *episode = (SVPodcastEntry *)[[PodsterManagedDocument defaultContext] existingObjectWithID:fetcherEpisode.objectID error:nil];
+        SVPodcastEntry *episode = [items objectAtIndex:(NSUInteger) indexPath.row];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             
@@ -651,13 +586,10 @@
             isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
             isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
             if (isVideo) {
-                //        if ([[SVPodcatcherClient sharedInstance] isOnWifi]) {
                 MPMoviePlayerViewController *player =
                 [[MPMoviePlayerViewController alloc] initWithContentURL: [NSURL URLWithString:[episode mediaURL]]];
                 [self presentMoviePlayerViewControllerAnimated:player
                  ];
-                
-                //        }
             }else {
                 
                 LOG_GENERAL(3,@"Triggering playback");
@@ -684,7 +616,7 @@
 {
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
     SVEpisodeDetailsViewController *details = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"episodeDetails"];    
-    details.episode =[fetcher objectAtIndexPath:indexPath];
+    details.episode =[items objectAtIndex:(NSUInteger) indexPath.row];
     [[self navigationController] pushViewController:details
                                            animated:YES];
     
@@ -704,44 +636,11 @@
                                                      dequeueReusableCellWithIdentifier:@"episodeCell"];
     //cell.backgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"CarbonListBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsZero]];
     //cell.backgroundView.backgroundColor = ;
-    SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
+    SVPodcastEntry *episode= [items objectAtIndex:(NSUInteger) indexPath.row];
     
     [cell bind:episode];    
     
     return cell;
-    
-}
-#pragma mark - fetcher delegate
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject 
-       atIndexPath:(NSIndexPath *)indexPath 
-     forChangeType:(NSFetchedResultsChangeType)type 
-      newIndexPath:(NSIndexPath *)newIndexPath 
-{
-    
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                                    withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                                    withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        default:
-            break;
-    }
-    
-}
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
-    
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
-    [self updateTableHeader];
     
 }
 
@@ -753,7 +652,6 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[fetcher sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    return items.count;
 }
 @end

@@ -3,6 +3,8 @@
 #import "MWFeedInfo.h"
 #import "SVPodcastEntry.h"
 #import "NSString+MD5Addition.h"
+#import "SVDownloadManager.h"
+#import "_SVPodcastEntry.h"
 @implementation SVPodcast
 -(void)updatePodcastWithFeedInfo:(MWFeedInfo *)info
 {
@@ -66,24 +68,31 @@
     return entry;
 }
 
-- (void)updateNextItemDate
+- (void)updateNextItemDateAndDownloadIfNeccesary:(BOOL)shouldDownload
 {
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-    [context performBlock:^{
-        SVPodcast *localPodcast = [self MR_inContext:context];
+
+    if (self.isSubscribedValue) {
         SVPodcastEntry *entry = nil;
 
-        NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", localPodcast];
-        entry = [SVPodcastEntry MR_findFirstWithPredicate:isChild 
-                                              sortedBy:SVPodcastEntryAttributes.datePublished
-                                             ascending:NO
-                                             inContext:context];
-        if(entry) {
-            localPodcast.nextItemDate = entry.datePublished;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"played == NO"];
+
+
+        if (self.items.count > 0) {
+
+            NSArray *sortedItems = [self.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:NO]]];
+            sortedItems = [sortedItems filteredArrayUsingPredicate:predicate];
+            entry = [sortedItems objectAtIndex:0];
         }
-        
-    }];
-    
+        if(entry) {
+
+            self.nextItemDate = entry.datePublished;
+            if (!entry.playedValue && entry.download == nil && shouldDownload) {
+                LOG_GENERAL(2, @"Queing entry for download");
+                // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
+                [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NULL];
+            }
+        }
+    }
 }
 
 

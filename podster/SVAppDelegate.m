@@ -154,7 +154,7 @@ NSString *uuid();
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#if defined (CONFIGURATION_Release)
+#if defined (CONFIGURATION_AppStore)
 [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];

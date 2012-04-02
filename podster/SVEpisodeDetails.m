@@ -97,7 +97,6 @@
     [self updatePlayedToggle];
        context = theEpisode.managedObjectContext;
     episode = theEpisode;
-    [[SVDownloadManager sharedInstance] downloadEntry:theEpisode];
 }
 
 - (void)viewDidLoad
@@ -199,7 +198,7 @@
             episode.positionInSecondsValue = 0;            
         }
         
-        [episode.podcast updateNextItemDate];
+        [episode.podcast updateNextItemDateAndDownloadIfNeccesary:YES];
 
     }];
 

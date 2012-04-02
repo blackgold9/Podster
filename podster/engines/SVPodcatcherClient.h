@@ -60,9 +60,9 @@ typedef void (^SVErrorBlock)(NSError *error);
                      onCompletion:(PodcastListResponeBlock)completion 
                           onError:(SVErrorBlock)errorBlock;
 
--(void)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
+-(void)downloadAndPopulatePodcast:(SVPodcast *)podcast
                            withLowerPriority:(BOOL)lowPriority
-                                   inContext:(NSManagedObjectContext *)context
+                                   inContext:(NSManagedObjectContext *)localContext
                                 onCompletion:(void (^)(void))onComplete
                                      onError:(SVErrorBlock)onError;
 

@@ -41,13 +41,13 @@
     if (currentProgressPercentage != percentage) {
         currentProgressPercentage = percentage;
         LOG_DOWNLOADS(4, @"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
-        NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry identifier], @"identifier",[NSNumber numberWithDouble:progress], @"progress",  nil];
+        NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry identifier], @"identifier", [NSNumber numberWithDouble:progress], @"progress",  nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
         [localContext performBlock: ^{
 
             localDownload.stateValue = SVDownloadStateDownloading;
-            localDownload.progressValue = progress;
-            localDownload.entry.podcast.downloadPercentageValue = progress * 100;
+            localDownload.progressValue = (float) progress;
+            localDownload.entry.podcast.downloadPercentageValue = (float) (progress * 100);
             if (!localDownload.entry.podcast.isDownloadingValue) {
                 localDownload.entry.podcast.isDownloadingValue = YES;
             } 
@@ -95,14 +95,6 @@
             headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
         }
         
-        SVDownload *lastDownlaod = [SVDownload MR_findFirstWithPredicate:nil
-                                                                sortedBy:@"position"
-                                                               ascending:YES inContext:localContext];
-        NSInteger position = 0;
-        if (lastDownlaod) {
-            position = lastDownlaod.positionValue + 1;
-        }
-        
         [self willChangeValueForKey:@"isExecuting"];
         _isExecuting = YES;
         [self didChangeValueForKey:@"isExecuting"];
@@ -142,8 +134,7 @@
                 dispatch_semaphore_signal(semaphore);
                 
             }];
-            
-            
+                        
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [localContext
              performBlock:^{

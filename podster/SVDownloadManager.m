@@ -60,7 +60,7 @@
         NSArray *downloads = [SVDownload MR_findAllSortedBy:@"position" ascending:YES inContext:localContext];
         for (SVDownload *download in downloads) {
             // HACK: This should retrigger the download
-            [self downloadEntry:download.entry];
+            [self downloadEntry:download.entry manualDownload:NULL];
         }
 
     }];
@@ -91,19 +91,7 @@
     return nextUp;
 }
 
--(void)startNextDownloadIfNeccesary
-{
-    LOG_DOWNLOADS(2, @"Checking for next download");
-    SVDownload *nextUp = [self nextUpDownload];
-    if (nextUp) {
-        LOG_DOWNLOADS(2, @"Found something else to download. Starting!");
-        [self downloadEntry:nextUp.entry];
-    } else {
-        LOG_DOWNLOADS(2, @"Nothing else pending");
-    }
-}
-
--(void)downloadEntry:(SVPodcastEntry *)entry
+- (void)downloadEntry:(SVPodcastEntry *)entry manualDownload:(BOOL)isManualDownload
 {
     LOG_DOWNLOADS(2, @"Downloading entry %@", entry);
     NSParameterAssert(entry);
@@ -116,7 +104,8 @@
         start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
         headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
     }
-        NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
+
+    NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     SVDownload *lastDownlaod = [SVDownload MR_findFirstWithPredicate:nil
                                                             sortedBy:@"position"
                                                            ascending:YES inContext:localContext];
@@ -147,7 +136,6 @@
     SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID 
                                                                    downloadBasePath:[self downloadsPath]];
     [queue addOperation:op];
-
 }
 
 -(NSString *)downloadsPath

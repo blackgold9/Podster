@@ -170,11 +170,12 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
     if ([podcast class] == [SVPodcast class]) {
         UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
         progressView.tag = 1337;
+        progressView.frame = CGRectMake(20, self.frame.size.height / 2 - 5, self.frame.size.width - 40, 10);
         [self addSubview:progressView];
         
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
-progressView.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0; 
+        progressView.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0; 
         
         __weak UIProgressView *weakProgressView  = progressView;
         downloadPercentageObserverToken = [coreDataPodcast addObserverForKeyPath:@"downloadPercentage" task:^(id obj, NSDictionary *change) { 
@@ -187,12 +188,12 @@ progressView.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0;
         
         isDownloadingObserverToken = [coreDataPodcast addObserverForKeyPath:@"isDownloading" task:^(id obj, NSDictionary *change) {
             if (weakProgressView) {
-
+                
                 SVPodcast *local = obj;
                 if (local.isDownloadingValue) { 
                     LOG_GENERAL(2, @"Downloading item");
                 } else {
-                                        LOG_GENERAL(2, @"Not Downloading item");
+                    LOG_GENERAL(2, @"Not Downloading item");
                 }
                 [UIView animateWithDuration:0.5
                                  animations:^{
@@ -201,8 +202,8 @@ progressView.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0;
             }
         }];
     }
-
-
+    
+    
 }
 
 
@@ -217,6 +218,12 @@ progressView.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0;
         if (isDownloadingObserverToken) {
             [coreDataPodcast removeObserverForKeyPath:@"isDownloading" identifier:isDownloadingObserverToken];
         }
+        
+        UIProgressView *progressView = (UIProgressView *)[self viewWithTag:1337];
+        if ([progressView superview]) {
+            [progressView removeFromSuperview];
+        }
+        
         coreDataPodcast = nil;
     }
     [imageLoadOp cancel];

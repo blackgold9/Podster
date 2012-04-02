@@ -9,7 +9,6 @@
 #import "IAPHelper.h"
 
 @interface PodsterIAPHelper : IAPHelper
-- (NSUInteger)durationInDaysForProduct:(NSString *)productIdentifier;
 
 + (PodsterIAPHelper *)sharedInstance;
 - (void)restoreTransactions;

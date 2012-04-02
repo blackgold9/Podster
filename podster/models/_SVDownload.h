@@ -5,6 +5,7 @@
 
 
 extern const struct SVDownloadAttributes {
+	__unsafe_unretained NSString *auto;
 	__unsafe_unretained NSString *downloadedBytes;
 	__unsafe_unretained NSString *filePath;
 	__unsafe_unretained NSString *position;
@@ -29,6 +30,7 @@ extern const struct SVDownloadFetchedProperties {
 
 
 
+
 @interface SVDownloadID : NSManagedObjectID {}
 @end
 
@@ -37,6 +39,18 @@ extern const struct SVDownloadFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SVDownloadID*)objectID;
+
+
+
+
+@property (nonatomic, strong) NSNumber *auto;
+
+
+@property BOOL autoValue;
+- (BOOL)autoValue;
+- (void)setAutoValue:(BOOL)value_;
+
+//- (BOOL)validateAuto:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -124,6 +138,15 @@ extern const struct SVDownloadFetchedProperties {
 @end
 
 @interface _SVDownload (CoreDataGeneratedPrimitiveAccessors)
+
+
+- (NSNumber*)primitiveAuto;
+- (void)setPrimitiveAuto:(NSNumber*)value;
+
+- (BOOL)primitiveAutoValue;
+- (void)setPrimitiveAutoValue:(BOOL)value_;
+
+
 
 
 - (NSNumber*)primitiveDownloadedBytes;

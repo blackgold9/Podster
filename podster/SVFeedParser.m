@@ -10,17 +10,17 @@
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 #import "NSString+MD5Addition.h"
+#import "_SVPodcast.h"
+#import "SVPodcastModalView.h"
 @interface SVFeedParser ()
 @property (nonatomic, copy) SVErrorBlock errorCallback;
 @property (nonatomic, copy) CompletionBlock completionCallback;
 @end
 @implementation SVFeedParser {
     BOOL failed;
-    SVPodcast *localPodcast;
+    SVPodcast *podcast;
     NSManagedObjectContext *localContext;
-    BOOL shouldSaveParentContext;
     MWFeedParser *feedParser;
-    NSString *feedURL;
     dispatch_queue_t originalQueue;
     BOOL isFirstItem;
     NSInteger itemsParsed;
@@ -29,24 +29,17 @@
 }
 @synthesize errorCallback, completionCallback;
 
-+ (id)parseData:(NSData *)data
-       withETag:(NSString *)etag
-andLastModified:(NSString *)cachingLastModified
-forPodcastAtURL:(NSString *)feedURL
-             inContext:(NSManagedObjectContext *)context
-            onComplete:(CompletionBlock)complete
-               onError:(SVErrorBlock)error
++ (id)parseData:(NSData *)data withETag:(NSString *)etag andLastModified:(NSString *)cachingLastModified forPodcast:(SVPodcast *)podcast onComplete:(CompletionBlock)complete onError:(SVErrorBlock)error
 {
-    NSParameterAssert(feedURL);
-    NSParameterAssert(context);
+    NSParameterAssert(podcast);
     NSParameterAssert(data);
 
     SVFeedParser *parser = [SVFeedParser new];
     parser->originalQueue = dispatch_get_current_queue();
     parser.completionCallback = complete;
     parser.errorCallback = error;
-    parser->localContext = context;
-    parser->feedURL = feedURL;
+    parser->localContext = podcast.managedObjectContext;
+    parser->podcast = podcast;
     parser->failed = NO;
     parser->itemsParsed = 0;
     parser->etag = etag;
@@ -63,52 +56,59 @@ forPodcastAtURL:(NSString *)feedURL
 }
 -(void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info
 {
-
-    NSAssert(localContext != [PodsterManagedDocument defaultContext], @"We should not be using the main context here");
-    [localContext performBlock:^void() {
-
-        localPodcast = [SVPodcast MR_findFirstWithPredicate:        [NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
-                                             inContext:localContext];
-        if (!localPodcast) {
-
-            localPodcast = [SVPodcast MR_createInContext:localContext];
-            localPodcast.feedURL = feedURL; 
-            localPodcast.urlHash = [localPodcast.feedURL stringFromMD5];
-        } 
-        
-        NSAssert(localPodcast.feedURL != nil, @"There should be a feedURL");        
-        [localPodcast updatePodcastWithFeedInfo:info];
-        if (!localPodcast.etag || ![localPodcast.etag isEqualToString:etag]) {
-            localPodcast.etag = etag;
+    [localContext performBlockAndWait:^void() {
+        [podcast updatePodcastWithFeedInfo:info];
+        LOG_GENERAL(2, @"Podcasst currently has %d entries on disk", podcast.items.count);
+        if (!podcast.etag || ![podcast.etag isEqualToString:etag]) {
+            podcast.etag = etag;
         }
         
-        if (!localPodcast || ![localPodcast.urlHash isEqualToString:[localPodcast.feedURL stringFromMD5]]) {
-            localPodcast.urlHash = [localPodcast.feedURL stringFromMD5];
+        if (!podcast || ![podcast.urlHash isEqualToString:[podcast.feedURL stringFromMD5]]) {
+            podcast.urlHash = [podcast.feedURL stringFromMD5];
         }
 
     }];
 }
 
+- (NSString *)guidForFeedItem:(MWFeedItem *)item{
+    NSString *guid;
+    if (item.identifier) {
+        guid = item.identifier;
+        LOG_PARSING(2, @"item had guid");
+    } else {
+        LOG_PARSING(1, @"Item had no guid, using mediaurl");
+        if (item.enclosures.count > 0) {
+                guid = [item.enclosures.lastObject objectForKey:@"url"];
+        } else {
+            NSAssert(false, @"Should never have item with no identifier");
+        }
+    }
+
+
+    return guid;
+}
 -(void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item
 {
-    if (item.enclosures.count == 0) {
-        [FlurryAnalytics logEvent:@"ParsedItemHadNoEnclosure" withParameters:[NSDictionary dictionaryWithObject:feedURL
-                                                                                                         forKey:@"URL"]];
-        return;
-    }
+
       
     [localContext performBlockAndWait:^void() {
-        LOG_PARSING(4, @"Processing feed item %@", item);
-        NSString *guid = item.identifier;
-        if (!guid) {
-            guid = [item.enclosures.lastObject objectForKey:@"url"];
+        if (item.enclosures.count == 0) {
+            [FlurryAnalytics logEvent:@"ParsedItemHadNoEnclosure" withParameters:[NSDictionary dictionaryWithObject:podcast.feedURL
+                                                                                                             forKey:@"URL"]];
+            return;
         }
+        LOG_PARSING(4, @"Processing feed item %@", item);
+        NSString *guid = [self guidForFeedItem:item];
         NSAssert(guid != nil, @"Guid should not be nil at this point");
-        NSPredicate *matchesGuid = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryAttributes.guid, guid];
-        NSPredicate *inPodcast =[NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryRelationships.podcast, localPodcast ];
-       
-        SVPodcastEntry *episode = [SVPodcastEntry MR_findFirstWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:matchesGuid,inPodcast,nil]]
-                                                               inContext:localContext];
+
+        SVPodcastEntry *episode;
+        for (SVPodcastEntry *current in podcast.items) {
+            if ([current.guid isEqualToString:guid]) {
+                episode = current;
+                break;
+            }
+        }
+
         BOOL abort = NO;
         if (episode) {
             //Items are date ordered, so we don't need to reparse stuff
@@ -116,15 +116,16 @@ forPodcastAtURL:(NSString *)feedURL
             LOG_PARSING(2, @"Hit an item we already know about. Aborting after processing it.");
             abort = YES;
         } else {
-            LOG_PARSING(2, @"Episode did not exist matching %@. Creaitng one.", item);
+            LOG_PARSING(2, @"Episode did not exist matching %@ - %@ in context %@. Creaitng one.", item.title, item.identifier, localContext);
             
             // Only update lastUpdated if it's a new episode
             if (isFirstItem) {
-                localPodcast.lastUpdated = item.date;
+                podcast.lastUpdated = item.date;
                 LOG_PARSING(2, @"Updating next item date");
-                localPodcast.nextItemDate = item.date;                                                
+                podcast.nextItemDate = item.date;                                                
             }
             episode = [SVPodcastEntry MR_createInContext:localContext];
+            [podcast addItemsObject:episode];
         }
         
         NSParameterAssert(episode);
@@ -133,29 +134,28 @@ forPodcastAtURL:(NSString *)feedURL
         episode.summary = item.summary;
         episode.mediaURL = [item.enclosures.lastObject objectForKey:@"url"];
         NSParameterAssert(episode.mediaURL);
-        episode.guid = item.identifier;
-        if(!item.identifier) {
-            episode.guid = episode.mediaURL;
-        }
+        episode.guid = guid;
+
         NSParameterAssert(episode.guid);
         episode.imageURL = item.imageURL;
         episode.datePublished = item.date;
         episode.content = item.content;
         episode.durationValue = [item.duration secondsFromDurationString];
-        episode.podcast = localPodcast;
+
+
 
         if (!abort) {
             // Only update unseen count if we aren't already aborting
             // if we ARE aborting, it means we already knew about this, we're just updating to be safe
-            localPodcast.unseenEpsiodeCountValue ++;
+            podcast.unseenEpsiodeCountValue ++;
         }
         
         itemsParsed += 1;
-        if (itemsParsed % 20 == 0){
-                [localContext save:nil];
-        } else {
-            LOG_PARSING(4, @"Skipping parent save");
-        }
+//        if (itemsParsed % 20 == 0){
+//                [localContext save:nil];
+//        } else {
+//            LOG_PARSING(4, @"Skipping parent save");
+//        }
         
         // Don't parse more than 100 items
         if (itemsParsed >= 100) {
@@ -179,7 +179,7 @@ forPodcastAtURL:(NSString *)feedURL
     });
     
     [FlurryAnalytics logEvent:@"ParsingFailed"
-               withParameters:[NSDictionary dictionaryWithObject:feedURL forKey:@"URL"]];
+               withParameters:[NSDictionary dictionaryWithObject:podcast.feedURL forKey:@"URL"]];
     LOG_PARSING(1, @"Parsing feed \"%@\" failed with error: %@", parser.url, error);
 }
 

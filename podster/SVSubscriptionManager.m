@@ -41,18 +41,7 @@ static char const kRefreshInterval = -3;
     
     shouldCancel = YES;
 }
-//- (void)updateLastUpdatedForPodcast:(SVPodcast *)podcast 
-//                          inContext:(NSManagedObjectContext *)context
-//{
-//
-//    [context performBlock:^{
-//        
-//
-//     SVPodcastEntry *lastUnplayedEntry = [SVPodcastEntry MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"podcast == %@ AND played == NO", podcast]
-//                                   sortedBy:SVPodcastEntryAttributes.datePublished ascending:NO inContext:context];
-//        podcast.lastUpdated = lastUnplayedEntry.datePublished;
-//    }];
-//}
+
 -(void)refreshNextSubscription
 {
     if (shouldCancel) {
@@ -73,10 +62,10 @@ static char const kRefreshInterval = -3;
                                                        options:0];
         
         __block SVPodcast *nextPodcast = nil;
-        NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        
+        //NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
         // Get the root context to work against
-        context.parentContext = [PodsterManagedDocument defaultContext];
+
         NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
         LOG_GENERAL(2, @"About to look for a subscription to refresh");
         [context performBlock:^{
@@ -95,21 +84,24 @@ static char const kRefreshInterval = -3;
                 weakSelf.currentURL = nextPodcast.feedURL;
                 nextPodcast.lastSynced = [NSDate date];
                 [context save:nil];
-                LOG_NETWORK(2, @"Found One!: Updating feed: %@", nextPodcast.title);
-                [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:nextPodcast.feedURL
+                LOG_NETWORK(2, @"Found One: Updating feed: %@ - %@", nextPodcast.title, nextPodcast.objectID);
+                [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcast:nextPodcast
                                                                          withLowerPriority:YES
                                                                                  inContext:context 
                                                                               onCompletion:^{
                                                                                   if(!weakSelf->shouldCancel) {
                                                                                       LOG_GENERAL(2, @"Cancelling subscription update");
+
                                                                                       [context performBlock:^{
-                                                                                          [context save:nil];
+
+                                                                                          [nextPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
                                                                                       }];
-                                                                                      [self refreshNextSubscription];
                                                                                   }
-                                                                                     weakSelf.currentURL = nil;
-                                                                                     
-                                                                                 } onError:^(NSError *error) {
+                                                                                  [context performBlock:^{
+                                                                                      [context save:nil ];
+                                                                                  }];
+
+                                                                              } onError:^(NSError *error) {
                                                                                      if(!weakSelf->shouldCancel) {
                                                                                          LOG_GENERAL(2, @"Cancelling subscription update");
                                                                                          [self refreshNextSubscription];
@@ -170,7 +162,7 @@ static char const kRefreshInterval = -3;
             // Now, delete items on the server that we're no-longer subscribed to
             for(NSString *url in [serverState allKeys]) {
                 if ([SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url] inContext:[PodsterManagedDocument defaultContext]] == 0) {
-                    // We arent subscribed to this anyumore, tell the server
+                    // We arent subscribed to this anymore, tell the server
                     [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:url
                                                                            onCompletion:^{
                                                                                LOG_GENERAL(2, @"Removing podcast subscription from server that we unsusbscribed from locally");

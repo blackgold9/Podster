@@ -216,26 +216,20 @@
           }];
 }
 
--(void)downloadAndPopulatePodcastWithFeedURL:(NSString *)feedURL
+-(void)downloadAndPopulatePodcast:(SVPodcast *)podcast
                            withLowerPriority:(BOOL)lowPriority
-                                   inContext:(NSManagedObjectContext *)context
+                                   inContext:(NSManagedObjectContext *)localContext
                                 onCompletion:(void (^)(void))onComplete
                                      onError:(SVErrorBlock)onError
 {
-    NSParameterAssert(feedURL);
-    NSParameterAssert(context);
+    NSParameterAssert(podcast);
+    NSParameterAssert(localContext);
     LOG_GENERAL(2,@">>>>> %@", NSStringFromSelector(_cmd) );
-    NSDictionary *loggingParamters = [NSDictionary dictionaryWithObject:feedURL forKey:@"FeedURL"];
-    [FlurryAnalytics logEvent:@"ParsingFeed" withParameters:loggingParamters timed:YES];
-    NSManagedObjectContext *localContext= [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    localContext.parentContext = context;
-    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:feedURL parameters:nil];
-   
+    NSDictionary *loggingParameters = [NSDictionary dictionaryWithObject:podcast.feedURL forKey:@"FeedURL"];
+    [FlurryAnalytics logEvent:@"ParsingFeed" withParameters:loggingParameters timed:YES];
+    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:podcast.feedURL parameters:nil];
+
     [localContext performBlock:^{
-        
-        LOG_GENERAL(2, @"Fetching podcast in local context");        
-        SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@", feedURL]
-                                           inContext:localContext];
 
 
     if (podcast && podcast.etag) {       
@@ -248,25 +242,20 @@
                                                                           NSString *returnedETag = [[[operation response] allHeaderFields] valueForKey:@"ETag"];
                                                                           NSString *cachingLastModified = [[[operation response] allHeaderFields] valueForKey:@"Last-Modified"];
                                                                           LOG_NETWORK(3, @"Returned ETag: %@", returnedETag );
-                                                                          [SVFeedParser parseData:responseObject
-                                                                                         withETag:returnedETag
-                                                                                  andLastModified:cachingLastModified
-                                                                                  forPodcastAtURL:feedURL
-                                                                                        inContext:localContext
-                                                                                       onComplete:^{
-                                                                                           LOG_GENERAL(2, @"Parssing complete");
-                                                                                           [FlurryAnalytics endTimedEvent:@"ParsingFeed" 
-                                                                                                           withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"Success"]];
-                                                                                           [localContext save:nil];
-                                                                                           onComplete();
-                                                                                       } onError:^(NSError *error) {
-                                                                                           LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
-                                                                                           
-                                                                                           [FlurryAnalytics endTimedEvent:@"ParsingFeed" 
-                                                                                                           withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"Success"]];
-                                                                                           [FlurryAnalytics logError:@"ParsingError" message:[error localizedDescription] error:error];
-                                                                                           onError(error);
-                                                                                       }];
+                                                                          [SVFeedParser                                                                          parseData:responseObject withETag:returnedETag andLastModified:cachingLastModified forPodcast:podcast onComplete:^{
+                                                                                                                                                                     LOG_GENERAL(2, @"Parssing complete");
+                                                                                                                                                                     [FlurryAnalytics endTimedEvent:@"ParsingFeed"
+                                                                                                                                                                                     withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"Success"]];
+
+                                                                                                                                                                     onComplete();
+                                                                                                                                                                 } onError:^(NSError *error) {
+                                                                                                                                                                     LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
+
+                                                                                                                                                                     [FlurryAnalytics endTimedEvent:@"ParsingFeed"
+                                                                                                                                                                                     withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"Success"]];
+                                                                                                                                                                     [FlurryAnalytics logError:@"ParsingError" message:[error localizedDescription] error:error];
+                                                                                                                                                                     onError(error);
+                                                                                                                                                                 }];
                                                                           
                                                                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                                                           if ([[operation response] statusCode] == 304) {
@@ -278,6 +267,7 @@
                                                                           
                                                                               LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed. %@", error);
                                                                               [FlurryAnalytics logError:@"Downloading a feed failed" message:[error localizedDescription] error:error];
+                                                                              onError(error);
                                                                           }
                                                                           
                                                                       }];
