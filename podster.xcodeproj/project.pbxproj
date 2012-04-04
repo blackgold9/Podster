@@ -151,34 +151,6 @@
 		4B10D0AE14BFF91100DF4DBD /* listen.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10D0AB14BFF90F00DF4DBD /* listen.png */; };
 		4B10D0AF14BFF91100DF4DBD /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10D0AC14BFF91000DF4DBD /* download.png */; };
 		4B10D0B014BFF91100DF4DBD /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10D0AC14BFF91000DF4DBD /* download.png */; };
-		4B141F8C14C942FF00028CE4 /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7714C942FF00028CE4 /* BWApp.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F8D14C942FF00028CE4 /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7714C942FF00028CE4 /* BWApp.m */; };
-		4B141F8E14C942FF00028CE4 /* BWGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7914C942FF00028CE4 /* BWGlobal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F8F14C942FF00028CE4 /* BWGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7914C942FF00028CE4 /* BWGlobal.m */; };
-		4B141F9014C942FF00028CE4 /* BWHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7B14C942FF00028CE4 /* BWHockeyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F9114C942FF00028CE4 /* BWHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7B14C942FF00028CE4 /* BWHockeyManager.m */; };
-		4B141F9214C942FF00028CE4 /* BWHockeySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7D14C942FF00028CE4 /* BWHockeySettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F9314C942FF00028CE4 /* BWHockeySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7D14C942FF00028CE4 /* BWHockeySettingsViewController.m */; };
-		4B141F9414C942FF00028CE4 /* BWHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7F14C942FF00028CE4 /* BWHockeyViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F9514C942FF00028CE4 /* BWHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F7F14C942FF00028CE4 /* BWHockeyViewController.m */; };
-		4B141F9614C942FF00028CE4 /* NSString+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8214C942FF00028CE4 /* NSString+HockeyAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F9714C942FF00028CE4 /* NSString+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8214C942FF00028CE4 /* NSString+HockeyAdditions.m */; };
-		4B141F9814C942FF00028CE4 /* PSAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8414C942FF00028CE4 /* PSAppStoreHeader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F9914C942FF00028CE4 /* PSAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8414C942FF00028CE4 /* PSAppStoreHeader.m */; };
-		4B141F9A14C942FF00028CE4 /* PSStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8614C942FF00028CE4 /* PSStoreButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F9B14C942FF00028CE4 /* PSStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8614C942FF00028CE4 /* PSStoreButton.m */; };
-		4B141F9C14C942FF00028CE4 /* PSWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8814C942FF00028CE4 /* PSWebTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F9D14C942FF00028CE4 /* PSWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8814C942FF00028CE4 /* PSWebTableViewCell.m */; };
-		4B141F9E14C942FF00028CE4 /* UIImage+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8A14C942FF00028CE4 /* UIImage+HockeyAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141F9F14C942FF00028CE4 /* UIImage+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141F8A14C942FF00028CE4 /* UIImage+HockeyAdditions.m */; };
-		4B141FA014C942FF00028CE4 /* Hockey.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B141F8B14C942FF00028CE4 /* Hockey.bundle */; };
-		4B141FA114C942FF00028CE4 /* Hockey.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B141F8B14C942FF00028CE4 /* Hockey.bundle */; };
-		4B141FA714C9433A00028CE4 /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FA414C9433A00028CE4 /* BWQuincyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B141FA814C9433A00028CE4 /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FA414C9433A00028CE4 /* BWQuincyManager.m */; };
-		4B141FA914C9433A00028CE4 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FA514C9433A00028CE4 /* CrashReporter.framework */; };
-		4B141FAA14C9433A00028CE4 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FA514C9433A00028CE4 /* CrashReporter.framework */; };
-		4B141FAB14C9433A00028CE4 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B141FA614C9433A00028CE4 /* Quincy.bundle */; };
-		4B141FAC14C9433A00028CE4 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B141FA614C9433A00028CE4 /* Quincy.bundle */; };
 		4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
 		4B141FBB14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
 		4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */; };
@@ -284,6 +256,8 @@
 		4B2E524C14B3E1220030B7C1 /* _SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524814B3E1220030B7C1 /* _SVSubscription.m */; };
 		4B2E524D14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
 		4B2E524E14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
+		4B314762152C2DA900629659 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B314760152C2DA900629659 /* libTestFlight.a */; };
+		4B314763152C2DA900629659 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B314760152C2DA900629659 /* libTestFlight.a */; };
 		4B35BC97151AA4D300325DEF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B35BC96151AA4D300325DEF /* Appirater.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B35BC98151AA4D300325DEF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B35BC96151AA4D300325DEF /* Appirater.m */; };
 		4B3E5ECA150C43F300010833 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E5EC9150C43F300010833 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -712,31 +686,6 @@
 		4B10D0A514BFB44500DF4DBD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4B10D0AB14BFF90F00DF4DBD /* listen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listen.png; sourceTree = "<group>"; };
 		4B10D0AC14BFF91000DF4DBD /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
-		4B141F7614C942FF00028CE4 /* BWApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWApp.h; sourceTree = "<group>"; };
-		4B141F7714C942FF00028CE4 /* BWApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWApp.m; sourceTree = "<group>"; };
-		4B141F7814C942FF00028CE4 /* BWGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWGlobal.h; sourceTree = "<group>"; };
-		4B141F7914C942FF00028CE4 /* BWGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWGlobal.m; sourceTree = "<group>"; };
-		4B141F7A14C942FF00028CE4 /* BWHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyManager.h; sourceTree = "<group>"; };
-		4B141F7B14C942FF00028CE4 /* BWHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyManager.m; sourceTree = "<group>"; };
-		4B141F7C14C942FF00028CE4 /* BWHockeySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeySettingsViewController.h; sourceTree = "<group>"; };
-		4B141F7D14C942FF00028CE4 /* BWHockeySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeySettingsViewController.m; sourceTree = "<group>"; };
-		4B141F7E14C942FF00028CE4 /* BWHockeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyViewController.h; sourceTree = "<group>"; };
-		4B141F7F14C942FF00028CE4 /* BWHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyViewController.m; sourceTree = "<group>"; };
-		4B141F8114C942FF00028CE4 /* NSString+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HockeyAdditions.h"; sourceTree = "<group>"; };
-		4B141F8214C942FF00028CE4 /* NSString+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HockeyAdditions.m"; sourceTree = "<group>"; };
-		4B141F8314C942FF00028CE4 /* PSAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAppStoreHeader.h; sourceTree = "<group>"; };
-		4B141F8414C942FF00028CE4 /* PSAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAppStoreHeader.m; sourceTree = "<group>"; };
-		4B141F8514C942FF00028CE4 /* PSStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStoreButton.h; sourceTree = "<group>"; };
-		4B141F8614C942FF00028CE4 /* PSStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStoreButton.m; sourceTree = "<group>"; };
-		4B141F8714C942FF00028CE4 /* PSWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebTableViewCell.h; sourceTree = "<group>"; };
-		4B141F8814C942FF00028CE4 /* PSWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebTableViewCell.m; sourceTree = "<group>"; };
-		4B141F8914C942FF00028CE4 /* UIImage+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HockeyAdditions.h"; sourceTree = "<group>"; };
-		4B141F8A14C942FF00028CE4 /* UIImage+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HockeyAdditions.m"; sourceTree = "<group>"; };
-		4B141F8B14C942FF00028CE4 /* Hockey.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Hockey.bundle; sourceTree = "<group>"; };
-		4B141FA314C9433A00028CE4 /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
-		4B141FA414C9433A00028CE4 /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
-		4B141FA514C9433A00028CE4 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		4B141FA614C9433A00028CE4 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
 		4B141FB314CA9AFD00028CE4 /* SVPodcastDatastore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 3.xcdatamodel"; sourceTree = "<group>"; };
 		4B141FB814CB220000028CE4 /* SVCustomApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomApplication.h; sourceTree = "<group>"; };
 		4B141FB914CB220100028CE4 /* SVCustomApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomApplication.m; sourceTree = "<group>"; };
@@ -845,6 +794,8 @@
 		4B2E524814B3E1220030B7C1 /* _SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _SVSubscription.m; path = models/_SVSubscription.m; sourceTree = "<group>"; };
 		4B2E524914B3E1220030B7C1 /* SVSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVSubscription.h; path = models/SVSubscription.h; sourceTree = "<group>"; };
 		4B2E524A14B3E1220030B7C1 /* SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVSubscription.m; path = models/SVSubscription.m; sourceTree = "<group>"; };
+		4B314760152C2DA900629659 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		4B314761152C2DA900629659 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		4B35BC95151AA4D300325DEF /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		4B35BC96151AA4D300325DEF /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		4B3E5EC8150C43F300010833 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = "3rd Party/MBHud/MBProgressHUD.h"; sourceTree = "<group>"; };
@@ -1150,9 +1101,9 @@
 				4B71F79014A5B08C00D26F4C /* UIKit.framework in Frameworks */,
 				4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */,
 				4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */,
-				4B141FA914C9433A00028CE4 /* CrashReporter.framework in Frameworks */,
 				4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4BA02C6314E25AA600582306 /* BlocksKit.framework in Frameworks */,
+				4B314762152C2DA900629659 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1169,9 +1120,9 @@
 				4B71F7AE14A5B08C00D26F4C /* SenTestingKit.framework in Frameworks */,
 				4B71F7AF14A5B08C00D26F4C /* UIKit.framework in Frameworks */,
 				4B71F7B014A5B08C00D26F4C /* Foundation.framework in Frameworks */,
-				4B141FAA14C9433A00028CE4 /* CrashReporter.framework in Frameworks */,
 				4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4BA02C6414E25AA600582306 /* BlocksKit.framework in Frameworks */,
+				4B314763152C2DA900629659 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1310,53 +1261,6 @@
 			);
 			name = DTCoreText;
 			path = "3rd Party/DTCoreText";
-			sourceTree = "<group>";
-		};
-		4B141F7514C942CE00028CE4 /* Hockeykit */ = {
-			isa = PBXGroup;
-			children = (
-				4B141F7614C942FF00028CE4 /* BWApp.h */,
-				4B141F7714C942FF00028CE4 /* BWApp.m */,
-				4B141F7814C942FF00028CE4 /* BWGlobal.h */,
-				4B141F7914C942FF00028CE4 /* BWGlobal.m */,
-				4B141F7A14C942FF00028CE4 /* BWHockeyManager.h */,
-				4B141F7B14C942FF00028CE4 /* BWHockeyManager.m */,
-				4B141F7C14C942FF00028CE4 /* BWHockeySettingsViewController.h */,
-				4B141F7D14C942FF00028CE4 /* BWHockeySettingsViewController.m */,
-				4B141F7E14C942FF00028CE4 /* BWHockeyViewController.h */,
-				4B141F7F14C942FF00028CE4 /* BWHockeyViewController.m */,
-				4B141F8014C942FF00028CE4 /* Helper */,
-				4B141F8B14C942FF00028CE4 /* Hockey.bundle */,
-			);
-			name = Hockeykit;
-			sourceTree = "<group>";
-		};
-		4B141F8014C942FF00028CE4 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				4B141F8114C942FF00028CE4 /* NSString+HockeyAdditions.h */,
-				4B141F8214C942FF00028CE4 /* NSString+HockeyAdditions.m */,
-				4B141F8314C942FF00028CE4 /* PSAppStoreHeader.h */,
-				4B141F8414C942FF00028CE4 /* PSAppStoreHeader.m */,
-				4B141F8514C942FF00028CE4 /* PSStoreButton.h */,
-				4B141F8614C942FF00028CE4 /* PSStoreButton.m */,
-				4B141F8714C942FF00028CE4 /* PSWebTableViewCell.h */,
-				4B141F8814C942FF00028CE4 /* PSWebTableViewCell.m */,
-				4B141F8914C942FF00028CE4 /* UIImage+HockeyAdditions.h */,
-				4B141F8A14C942FF00028CE4 /* UIImage+HockeyAdditions.m */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
-		4B141FA214C9430800028CE4 /* QuincyKit */ = {
-			isa = PBXGroup;
-			children = (
-				4B141FA314C9433A00028CE4 /* BWQuincyManager.h */,
-				4B141FA414C9433A00028CE4 /* BWQuincyManager.m */,
-				4B141FA514C9433A00028CE4 /* CrashReporter.framework */,
-				4B141FA614C9433A00028CE4 /* Quincy.bundle */,
-			);
-			name = QuincyKit;
 			sourceTree = "<group>";
 		};
 		4B1BC92D15034EA000F5F799 /* NRGridView */ = {
@@ -1816,6 +1720,8 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B314760152C2DA900629659 /* libTestFlight.a */,
+				4B314761152C2DA900629659 /* TestFlight.h */,
 				4B35BC95151AA4D300325DEF /* Appirater.h */,
 				4B35BC96151AA4D300325DEF /* Appirater.m */,
 				4B3E5EC7150C43DD00010833 /* MBHud */,
@@ -1829,8 +1735,6 @@
 				4B434BFB14D59D64004A5E89 /* SDURLCache */,
 				4B434B9C14D4E31A004A5E89 /* AFNetworking */,
 				4BB2055E14D0F3130038EB7D /* Panel */,
-				4B141FA214C9430800028CE4 /* QuincyKit */,
-				4B141F7514C942CE00028CE4 /* Hockeykit */,
 				4B91BF4E14C77B5800B33776 /* JMTabView */,
 				4BD733CA14C535E200B8EF52 /* NSString+MD5Addition.h */,
 				4BD733CB14C535E600B8EF52 /* NSString+MD5Addition.m */,
@@ -2199,8 +2103,6 @@
 				4B68582E14C892DA00496A38 /* grid-button@2x.png in Resources */,
 				4B68583014C892DA00496A38 /* list-button.png in Resources */,
 				4B68583214C892DA00496A38 /* list-button@2x.png in Resources */,
-				4B141FA014C942FF00028CE4 /* Hockey.bundle in Resources */,
-				4B141FAB14C9433A00028CE4 /* Quincy.bundle in Resources */,
 				4BB2057314D0F3130038EB7D /* close.png in Resources */,
 				4BB2057514D0F3130038EB7D /* close@2x.png in Resources */,
 				4BB2059114D101500038EB7D /* SVPodcastDetailsModalView.xib in Resources */,
@@ -2346,8 +2248,6 @@
 				4B68582F14C892DA00496A38 /* grid-button@2x.png in Resources */,
 				4B68583114C892DA00496A38 /* list-button.png in Resources */,
 				4B68583314C892DA00496A38 /* list-button@2x.png in Resources */,
-				4B141FA114C942FF00028CE4 /* Hockey.bundle in Resources */,
-				4B141FAC14C9433A00028CE4 /* Quincy.bundle in Resources */,
 				4BB2057414D0F3130038EB7D /* close.png in Resources */,
 				4BB2057614D0F3130038EB7D /* close@2x.png in Resources */,
 				4BB2059214D101500038EB7D /* SVPodcastDetailsModalView.xib in Resources */,
@@ -2496,17 +2396,6 @@
 				4B91BF8E14C7A8E800B33776 /* SVCategoryListViewController.m in Sources */,
 				4B91BF9914C7C74100B33776 /* SVSubscriptionGridViewController.m in Sources */,
 				4B91BF9D14C7F39F00B33776 /* SVPodcastListCell.m in Sources */,
-				4B141F8C14C942FF00028CE4 /* BWApp.m in Sources */,
-				4B141F8E14C942FF00028CE4 /* BWGlobal.m in Sources */,
-				4B141F9014C942FF00028CE4 /* BWHockeyManager.m in Sources */,
-				4B141F9214C942FF00028CE4 /* BWHockeySettingsViewController.m in Sources */,
-				4B141F9414C942FF00028CE4 /* BWHockeyViewController.m in Sources */,
-				4B141F9614C942FF00028CE4 /* NSString+HockeyAdditions.m in Sources */,
-				4B141F9814C942FF00028CE4 /* PSAppStoreHeader.m in Sources */,
-				4B141F9A14C942FF00028CE4 /* PSStoreButton.m in Sources */,
-				4B141F9C14C942FF00028CE4 /* PSWebTableViewCell.m in Sources */,
-				4B141F9E14C942FF00028CE4 /* UIImage+HockeyAdditions.m in Sources */,
-				4B141FA714C9433A00028CE4 /* BWQuincyManager.m in Sources */,
 				4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */,
 				4B141FC014CCCAB500028CE4 /* SVGridCell.m in Sources */,
 				4BB2057114D0F3130038EB7D /* UIView+JMNoise.m in Sources */,
@@ -2666,17 +2555,6 @@
 				4B91BF8F14C7A8E800B33776 /* SVCategoryListViewController.m in Sources */,
 				4B91BF9A14C7C74100B33776 /* SVSubscriptionGridViewController.m in Sources */,
 				4B91BF9E14C7F39F00B33776 /* SVPodcastListCell.m in Sources */,
-				4B141F8D14C942FF00028CE4 /* BWApp.m in Sources */,
-				4B141F8F14C942FF00028CE4 /* BWGlobal.m in Sources */,
-				4B141F9114C942FF00028CE4 /* BWHockeyManager.m in Sources */,
-				4B141F9314C942FF00028CE4 /* BWHockeySettingsViewController.m in Sources */,
-				4B141F9514C942FF00028CE4 /* BWHockeyViewController.m in Sources */,
-				4B141F9714C942FF00028CE4 /* NSString+HockeyAdditions.m in Sources */,
-				4B141F9914C942FF00028CE4 /* PSAppStoreHeader.m in Sources */,
-				4B141F9B14C942FF00028CE4 /* PSStoreButton.m in Sources */,
-				4B141F9D14C942FF00028CE4 /* PSWebTableViewCell.m in Sources */,
-				4B141F9F14C942FF00028CE4 /* UIImage+HockeyAdditions.m in Sources */,
-				4B141FA814C9433A00028CE4 /* BWQuincyManager.m in Sources */,
 				4B141FBB14CB220200028CE4 /* SVCustomApplication.m in Sources */,
 				4B141FC114CCCAB500028CE4 /* SVGridCell.m in Sources */,
 				4BB2057214D0F3130038EB7D /* UIView+JMNoise.m in Sources */,
@@ -2779,7 +2657,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2787,9 +2665,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "71E9FEAC-B97A-45E6-846C-C50D3DFB1C6F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "71E9FEAC-B97A-45E6-846C-C50D3DFB1C6F";
+				PROVISIONING_PROFILE = "98FE7B52-E69D-437A-B675-E6CBA7E81554";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98FE7B52-E69D-437A-B675-E6CBA7E81554";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Ad_Hoc;
@@ -2798,7 +2677,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = podster/podster.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2822,8 +2701,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9DB0E41-7115-416D-928E-27B55434C2CA";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E9DB0E41-7115-416D-928E-27B55434C2CA";
+				PROVISIONING_PROFILE = "EDE193D2-8C8C-4651-8EEB-1ACDA75B3C48";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98FE7B52-E69D-437A-B675-E6CBA7E81554";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2881,6 +2760,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -2891,7 +2771,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2900,6 +2780,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3036,7 +2917,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -3046,6 +2927,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = NO;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;

@@ -10,8 +10,6 @@
 #import "UIColor+Hex.h"
 #import "SVDownloadManager.h"
 #import "SVPodcatcherClient.h"
-#import "BWHockeyManager.h"
-#import "BWQuincyManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import "SVPlaybackManager.h"
 #import "SVPodcastDetailsViewController.h"
@@ -25,6 +23,7 @@
 #import "BannerViewController.h"
 #import "PodsterManagedDocument.h"
 #import "MBProgressHUD.h"
+#import "SVSettings.h"
 
 @implementation SVAppDelegate
 {
@@ -154,23 +153,23 @@ NSString *uuid();
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"6b271c66137f6fab967e63af81587f71_NTQ2ODMyMDEyLTAxLTE5IDE0OjU5OjM5LjU0OTg4Mw"];
+
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
 #if defined (CONFIGURATION_AppStore)
-[[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
+
    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
 #endif
 #if defined (CONFIGURATION_Ad_Hoc)
-    [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
-    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
-    [[BWQuincyManager sharedQuincyManager] setAutoSubmitDeviceUDID:YES];
+  
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
 
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
 
 #endif
+
 //    double delayInSeconds = 5.0;
 //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
 //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
