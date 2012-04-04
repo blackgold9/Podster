@@ -3,7 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--Podcast Directory View Controller - Popular Tags-->
@@ -365,9 +365,12 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="McF-Qx-rxl" id="kLl-qb-okb"/>
+                        <outlet property="hidePlayedItemsLabel" destination="t20-lH-ueE" id="aQn-vP-Gab"/>
                         <outlet property="hidePlayedSwitch" destination="RrJ-eo-52n" id="bdk-gy-uP0"/>
                         <outlet property="imageView" destination="uzv-F6-J3U" id="AvW-IH-c03"/>
                         <outlet property="metadataView" destination="ZhJ-GG-EuI" id="6b5-qE-fTW"/>
+                        <outlet property="notifyDescriptionLabel" destination="iVJ-O9-1KO" id="iln-Kt-R6o"/>
+                        <outlet property="notifyOnUpdateLabel" destination="844-vP-yoG" id="1Dq-cC-dga"/>
                         <outlet property="notifySwitch" destination="vKX-s3-A9R" id="xDS-AQ-sLd"/>
                         <outlet property="optionsButton" destination="030-T3-Xti" id="8RT-bg-bR5"/>
                         <outlet property="sortSegmentedControl" destination="S8Y-9H-tMT" id="ZU7-nc-4TF"/>
@@ -1015,9 +1018,12 @@
                 <relationship kind="action" name="sortControlTapped:"/>
                 <relationship kind="action" name="subscribeTapped:"/>
                 <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="hidePlayedItemsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="hidePlayedSwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="metadataView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="notifyDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="notifyOnUpdateLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="notifySwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="sortSegmentedControl" candidateClass="UISegmentedControl"/>

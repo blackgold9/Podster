@@ -24,6 +24,9 @@
 - (IBAction)sortControlTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UISwitch *notifySwitch;
 - (IBAction)notifySwitchChanged:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *notifyOnUpdateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *notifyDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *hidePlayedItemsLabel;
 
 - (IBAction)subscribeTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *subscribeButton;

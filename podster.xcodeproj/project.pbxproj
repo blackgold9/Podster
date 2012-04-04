@@ -169,6 +169,11 @@
 		4B1BC93615034EBA00F5F799 /* NRGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC93015034EBA00F5F799 /* NRGridView.m */; };
 		4B1BC93715034EBA00F5F799 /* NRGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC93215034EBA00F5F799 /* NRGridViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B1BC93815034EBA00F5F799 /* NRGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1BC93215034EBA00F5F799 /* NRGridViewCell.m */; };
+		4B1CD59A152CB5DA0028EF0D /* Description.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4B1CD599152CB5DA0028EF0D /* Description.txt */; };
+		4B1CD5A3152CC3B10028EF0D /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1CD5A1152CC3B10028EF0D /* libAdapterIAd.a */; };
+		4B1CD5A4152CC3B10028EF0D /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1CD5A1152CC3B10028EF0D /* libAdapterIAd.a */; };
+		4B1CD5A5152CC3B10028EF0D /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1CD5A2152CC3B10028EF0D /* libGoogleAdMobAds.a */; };
+		4B1CD5A6152CC3B10028EF0D /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1CD5A2152CC3B10028EF0D /* libGoogleAdMobAds.a */; };
 		4B1F3F7014D2130000CECBA2 /* SVVideoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */; };
 		4B1F3F7114D2130000CECBA2 /* SVVideoPlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */; };
 		4B1F3F7C14D249F600CECBA2 /* 265.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1F3F7B14D249F600CECBA2 /* 265.png */; };
@@ -456,8 +461,6 @@
 		4B91BF7A14C7802F00B33776 /* bg-gunmetal.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BF7714C7802F00B33776 /* bg-gunmetal.png */; };
 		4B91BF7B14C7802F00B33776 /* bg-gunmetal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BF7814C7802F00B33776 /* bg-gunmetal@2x.png */; };
 		4B91BF7C14C7802F00B33776 /* bg-gunmetal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BF7814C7802F00B33776 /* bg-gunmetal@2x.png */; };
-		4B91BF8314C7839F00B33776 /* SVCategoryGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF8214C7839F00B33776 /* SVCategoryGridViewController.m */; };
-		4B91BF8414C7839F00B33776 /* SVCategoryGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF8214C7839F00B33776 /* SVCategoryGridViewController.m */; };
 		4B91BF8E14C7A8E800B33776 /* SVCategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF8D14C7A8E800B33776 /* SVCategoryListViewController.m */; };
 		4B91BF8F14C7A8E800B33776 /* SVCategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF8D14C7A8E800B33776 /* SVCategoryListViewController.m */; };
 		4B91BF9914C7C74100B33776 /* SVSubscriptionGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF9814C7C74100B33776 /* SVSubscriptionGridViewController.m */; };
@@ -707,6 +710,16 @@
 		4B1BC93215034EBA00F5F799 /* NRGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NRGridViewCell.m; path = "3rd Party/NRGridView/NRGridViewCell.m"; sourceTree = "<group>"; };
 		4B1BC93315034EBA00F5F799 /* NRGridViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridViewDataSource.h; path = "3rd Party/NRGridView/NRGridViewDataSource.h"; sourceTree = "<group>"; };
 		4B1BC93415034EBA00F5F799 /* NRGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridViewDelegate.h; path = "3rd Party/NRGridView/NRGridViewDelegate.h"; sourceTree = "<group>"; };
+		4B1CD598152CB4500028EF0D /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4B1CD599152CB5DA0028EF0D /* Description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Description.txt; sourceTree = "<group>"; };
+		4B1CD59B152CC3B10028EF0D /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		4B1CD59C152CC3B10028EF0D /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		4B1CD59D152CC3B10028EF0D /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		4B1CD59E152CC3B10028EF0D /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		4B1CD59F152CC3B10028EF0D /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		4B1CD5A0152CC3B10028EF0D /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		4B1CD5A1152CC3B10028EF0D /* libAdapterIAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterIAd.a; sourceTree = "<group>"; };
+		4B1CD5A2152CC3B10028EF0D /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		4B1F3F6E14D2130000CECBA2 /* SVVideoPlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVVideoPlaybackView.h; sourceTree = "<group>"; };
 		4B1F3F6F14D2130000CECBA2 /* SVVideoPlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVVideoPlaybackView.m; sourceTree = "<group>"; };
 		4B1F3F7B14D249F600CECBA2 /* 265.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 265.png; sourceTree = "<group>"; };
@@ -992,8 +1005,6 @@
 		4B91BF6414C77B6600B33776 /* BarBackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarBackgroundLayer.m; sourceTree = "<group>"; };
 		4B91BF7714C7802F00B33776 /* bg-gunmetal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-gunmetal.png"; sourceTree = "<group>"; };
 		4B91BF7814C7802F00B33776 /* bg-gunmetal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-gunmetal@2x.png"; sourceTree = "<group>"; };
-		4B91BF8114C7839F00B33776 /* SVCategoryGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCategoryGridViewController.h; sourceTree = "<group>"; };
-		4B91BF8214C7839F00B33776 /* SVCategoryGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCategoryGridViewController.m; sourceTree = "<group>"; };
 		4B91BF8C14C7A8E800B33776 /* SVCategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCategoryListViewController.h; sourceTree = "<group>"; };
 		4B91BF8D14C7A8E800B33776 /* SVCategoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCategoryListViewController.m; sourceTree = "<group>"; };
 		4B91BF9714C7C74100B33776 /* SVSubscriptionGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSubscriptionGridViewController.h; sourceTree = "<group>"; };
@@ -1104,6 +1115,8 @@
 				4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4BA02C6314E25AA600582306 /* BlocksKit.framework in Frameworks */,
 				4B314762152C2DA900629659 /* libTestFlight.a in Frameworks */,
+				4B1CD5A3152CC3B10028EF0D /* libAdapterIAd.a in Frameworks */,
+				4B1CD5A5152CC3B10028EF0D /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1123,6 +1136,8 @@
 				4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4BA02C6414E25AA600582306 /* BlocksKit.framework in Frameworks */,
 				4B314763152C2DA900629659 /* libTestFlight.a in Frameworks */,
+				4B1CD5A4152CC3B10028EF0D /* libAdapterIAd.a in Frameworks */,
+				4B1CD5A6152CC3B10028EF0D /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,8 +1163,6 @@
 				4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */,
 				4B10D02314BFA6A800DF4DBD /* SVEpisodeDetails.h */,
 				4B10D02414BFA6A800DF4DBD /* SVEpisodeDetails.m */,
-				4B91BF8114C7839F00B33776 /* SVCategoryGridViewController.h */,
-				4B91BF8214C7839F00B33776 /* SVCategoryGridViewController.m */,
 				4B91BF8C14C7A8E800B33776 /* SVCategoryListViewController.h */,
 				4B91BF8D14C7A8E800B33776 /* SVCategoryListViewController.m */,
 				4B91BF9714C7C74100B33776 /* SVSubscriptionGridViewController.h */,
@@ -1275,6 +1288,21 @@
 				4B1BC93415034EBA00F5F799 /* NRGridViewDelegate.h */,
 			);
 			name = NRGridView;
+			sourceTree = "<group>";
+		};
+		4B1CD5A7152CC3B60028EF0D /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				4B1CD59B152CC3B10028EF0D /* GADBannerView.h */,
+				4B1CD59C152CC3B10028EF0D /* GADBannerViewDelegate.h */,
+				4B1CD59D152CC3B10028EF0D /* GADInterstitial.h */,
+				4B1CD59E152CC3B10028EF0D /* GADInterstitialDelegate.h */,
+				4B1CD59F152CC3B10028EF0D /* GADRequest.h */,
+				4B1CD5A0152CC3B10028EF0D /* GADRequestError.h */,
+				4B1CD5A1152CC3B10028EF0D /* libAdapterIAd.a */,
+				4B1CD5A2152CC3B10028EF0D /* libGoogleAdMobAds.a */,
+			);
+			name = AdMob;
 			sourceTree = "<group>";
 		};
 		4B20240114D9F28000820391 /* Flurry */ = {
@@ -1571,6 +1599,7 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
+				4B1CD599152CB5DA0028EF0D /* Description.txt */,
 				4B842BDC150FDC5D003F4BF5 /* PodsterManagedDocument.h */,
 				4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */,
 				D608C9C0150EDF0B009BA9BD /* Default@2x.png */,
@@ -1720,6 +1749,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B1CD5A7152CC3B60028EF0D /* AdMob */,
 				4B314760152C2DA900629659 /* libTestFlight.a */,
 				4B314761152C2DA900629659 /* TestFlight.h */,
 				4B35BC95151AA4D300325DEF /* Appirater.h */,
@@ -2035,6 +2065,11 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
+				"zh-Hant",
+				"zh-Hans",
+				zh,
+				"zh-Hans-CN",
 			);
 			mainGroup = 4B71F78014A5B08C00D26F4C;
 			productRefGroup = 4B71F78C14A5B08C00D26F4C /* Products */;
@@ -2191,6 +2226,7 @@
 				D608C9C1150EDF0B009BA9BD /* Default@2x.png in Resources */,
 				4BD0BAC3151124B2005E6232 /* placeholder-thumb.png in Resources */,
 				4BD0BAC4151124B2005E6232 /* placeholder-thumb@2x.png in Resources */,
+				4B1CD59A152CB5DA0028EF0D /* Description.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2392,7 +2428,6 @@
 				4B91BF7114C77B6600B33776 /* JMTabItem.m in Sources */,
 				4B91BF7314C77B6600B33776 /* JMTabView.m in Sources */,
 				4B91BF7514C77B6600B33776 /* BarBackgroundLayer.m in Sources */,
-				4B91BF8314C7839F00B33776 /* SVCategoryGridViewController.m in Sources */,
 				4B91BF8E14C7A8E800B33776 /* SVCategoryListViewController.m in Sources */,
 				4B91BF9914C7C74100B33776 /* SVSubscriptionGridViewController.m in Sources */,
 				4B91BF9D14C7F39F00B33776 /* SVPodcastListCell.m in Sources */,
@@ -2551,7 +2586,6 @@
 				4B91BF7214C77B6600B33776 /* JMTabItem.m in Sources */,
 				4B91BF7414C77B6600B33776 /* JMTabView.m in Sources */,
 				4B91BF7614C77B6600B33776 /* BarBackgroundLayer.m in Sources */,
-				4B91BF8414C7839F00B33776 /* SVCategoryGridViewController.m in Sources */,
 				4B91BF8F14C7A8E800B33776 /* SVCategoryListViewController.m in Sources */,
 				4B91BF9A14C7C74100B33776 /* SVSubscriptionGridViewController.m in Sources */,
 				4B91BF9E14C7F39F00B33776 /* SVPodcastListCell.m in Sources */,
@@ -2618,6 +2652,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4B154DEF150F8E4A00D80771 /* en */,
+				4B1CD598152CB4500028EF0D /* zh-Hans-CN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -91,7 +91,7 @@
 
 -(NSString *)gridView:(NRGridView *)gridView titleForHeaderInSection:(NSInteger)section
 {
-    return [[featured objectAtIndex:section] valueForKey:@"name"];
+    return NSLocalizedString([[featured objectAtIndex:section] valueForKey:@"name"], @"Localized header");
 
 }
 

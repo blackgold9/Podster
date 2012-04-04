@@ -44,13 +44,17 @@
 /*  */
 
 #import <UIKit/UIKit.h>
-#import <iAd/iAd.h>
+#import "GADBannerView.h"
+#import "GADBannerViewDelegate.h"
 
 extern NSString * const BannerViewActionWillBegin;
 extern NSString * const BannerViewActionDidFinish;
 
-@interface BannerViewController : UIViewController <ADBannerViewDelegate>
+@interface BannerViewController : UIViewController <GADBannerViewDelegate>
 
 - (id)initWithContentViewController:(UIViewController *)contentController;
+
 - (UIViewController *)contentController;
+
+
 @end

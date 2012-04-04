@@ -51,7 +51,7 @@
 {
     [super provideContent:productIdentifier];
     if ([productIdentifier isEqualToString:@"net.vanterpool.podster.notifications"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationsPurchased" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PremiumPurchased" object:nil];
     }
 
 }

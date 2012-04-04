@@ -25,7 +25,7 @@
 + (SVSettings *)sharedInstance;
 - (NSInteger)maxFreeNotifications;
 - (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications;
-- (BOOL)unlockedNotifications;
+- (BOOL)premiumModeUnlocked;
 - (BOOL)firstRun;
 
 - (void)setFirstRun:(BOOL)firstRun;

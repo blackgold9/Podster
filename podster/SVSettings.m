@@ -110,7 +110,7 @@ NSString *uuid(){
      
 }
 
-- (BOOL)unlockedNotifications
+- (BOOL)premiumModeUnlocked
 {
     return [defaults boolForKey:@"net.vanterpool.podster.notifications"];
 }

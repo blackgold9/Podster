@@ -39,6 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 //    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -120,7 +121,7 @@
 
     SVCategory *category = [categories objectAtIndex:(NSUInteger) indexPath.row];
 
-    cell.textLabel.text =  category.name;
+    cell.textLabel.text = NSLocalizedString(category.name, @"translated category string");
     cell.textLabel.textColor = [UIColor blackColor];
 
     // Configure the cell...

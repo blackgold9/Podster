@@ -190,10 +190,7 @@
     self.currentScreen = screenType;
     
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:screenType forKey:@"HomeScreenType"];
-    [defaults synchronize];
-
+    [[SVSettings sharedInstance] setHomeScreen:screenType];
 }
 
 #pragma mark - View lifecycle

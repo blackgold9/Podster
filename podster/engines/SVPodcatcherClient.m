@@ -31,6 +31,11 @@
     
     return client;
 }
+- (NSString *)countryCode
+{
+    NSLocale *current = [NSLocale currentLocale];
+    return [(NSString *)[current objectForKey:NSLocaleCountryCode] lowercaseString];
+}
 -(id)initWithBaseURL:(NSURL *)url
 {
     self = [super initWithBaseURL:url];
@@ -95,7 +100,8 @@
              onCompletion:(PodcastListResponeBlock)completion 
                   onError:(SVErrorBlock)errorBlock
 {
-    NSString *feedFinderURL = [NSString stringWithFormat:@"categories/%d/feeds.json?start=%d&limit=%d", categoryId, start, limit];
+    
+    NSString *feedFinderURL = [NSString stringWithFormat:@"categories/%d/feeds.json?cc=%@&start=%d&limit=%d", categoryId,[self countryCode], start, limit];
     [self getPath:feedFinderURL
        parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -146,9 +152,9 @@
 {
     NSString *feedFinderURL = [NSString stringWithFormat:@"feeds/featured.json"];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if (language) {
-      [params setObject:language forKey:@"lang"];
-    }
+  //  if (language) {
+      [params setObject:NSLocaleCountryCode forKey:@"cc"];
+   // }
                NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     [params setObject:deviceId forKey:@"deviceId"];
     [self getPath:feedFinderURL
@@ -193,7 +199,7 @@
     NSParameterAssert(completion);
     NSParameterAssert(errorHandler);
 
-    NSString *queryPath = [NSString stringWithFormat:@"feeds.json?query=%@", AFURLEncodedStringFromStringWithEncoding(query, NSUTF8StringEncoding)];
+    NSString *queryPath = [NSString stringWithFormat:@"feeds.json?cc=%@,query=%@", [self countryCode], AFURLEncodedStringFromStringWithEncoding(query, NSUTF8StringEncoding)];
     [self getPath:queryPath parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSArray *returnedData = responseObject;
@@ -312,6 +318,9 @@ onCompletion:(void (^)(BOOL))onComplete
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:  deviceId, @"deviceId",@"ios", @"platform",version, @"version", nil];
     if (token) {
         [params setValue:token forKey:@"deviceToken"];
+    }
+    if ([[SVSettings sharedInstance] premiumModeUnlocked]) {
+        [params setValue:@"true" forKey:@"PremiumMode"];
     }
     
     [self postPath:@"devices/create.json" parameters:params

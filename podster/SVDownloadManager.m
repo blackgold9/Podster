@@ -49,6 +49,8 @@
         queue = [NSOperationQueue new];
         [queue setMaxConcurrentOperationCount:1];
         queue.name = @"com.vantertech.podster.downloads";
+        NSString *lostWifi = NSLocalizedString(@"Downloads have been paused because you lost WI-FI connectivity", @"Downloads have been paused because you lost WI-FI connectivity");
+
     }
     
     return self;
@@ -152,7 +154,7 @@
     op.completionBlock = ^void() {
         if (queue.operationCount == 0) {
             UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
-            downloadedNotification.alertBody = @"All downloads have completed";
+            downloadedNotification.alertBody = NSLocalizedString(@"All downloads have completed", @"All downloads have completed");
             [[UIApplication sharedApplication] presentLocalNotificationNow:downloadedNotification];
         }
 

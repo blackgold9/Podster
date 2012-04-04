@@ -1,0 +1,114 @@
+/* 
+  Localizable.strings
+  podster
+
+  Created by Vanterpool, Stephen on 3/10/12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+
+"FAVORITES" = "Favorites";
+"WHATS_HOT" = "What's Hot";
+"ONE_MONTH" = "1 month subscription";
+"ONE_YEAR" = "1 year subscription";
+"THREE_MONTHS" = "3 month subscription";
+
+// Feedback strings
+"FEEDBACK_SUBJECT" = "Feedback from a Podster Customer!";
+"FEEDBACK_BODY" = "Type your message here:\n\n---------------------\n\nPodster Version:\t%@"; 
+
+// Purchase error
+"PURCHASE_ERROR" = "Purchase Error";
+"PURCHASE_VALIDATION_FAILED" = "We apologize, but there was a problem verifying your subscription.\n\nWe will try again the next time you start the app.";
+
+// Purchase Success
+"THANK_YOU_REALLY" = "Thank You! (Really)";
+"PURCHASE_COMPLETE_MESSAGE" = "Your purchase was successful.\nThank you!";
+// Upsell when user hits free limit
+"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE" = "Unlock Unlimited Alerts";
+"HIT_MAX_NOTIFICATIONS_PROMPT_BODY" = "You have reached the maximum number of podcasts that you can monitor for free.\n\nUnlock unlimited alerts now!";
+
+"LEARN_MORE" = "Learn More...";
+
+
+"PURCHASE_PROMPT_TITLE" = "Become Awesome?";
+"Disabled" = "Disabled";
+"Enabled" = "Enabled";
+"TAP_TO_UNLOCK" = "Tap to Unlock";
+"PREMIUM_MODE" = "Unlimited Alerts";
+"BUY_FORMAT_STRING" = "Buy %@ (%@)";
+"UPGRADES" = "Upgrades";
+"PREMIUM_MODE" = "Unlock new episode alerts for as many podcasts as you like! Never miss a thing!";
+"PRIVACY_POLICY" = "Privacy Policy";
+"CONTACT_US" = "Contact Us";
+"LEGAL_INFO" = "Legal Information";
+"Waiting for connection..." = "Waiting for connection...";
+"OFFLINE" = "OFFLINE";
+
+"FAVORITES_NO_CONTENT" = "Podcasts you have marked as a favorite will appear here.\n(Give it a try!)";
+
+// Notifications
+"EPISODE_NOTIFICATION" = "A new episode of \"%@\" is available!";
+
+"OK" = "OK";
+"There was a problem playing this podcast. Please try again later." = "There was a problem playing this podcast. Please try again later.";
+
+"ERROR_TITLE_ONE" = "Awww Shucks!";
+"ERROR_TITLE_TWO" = "So Sorry!";
+"ERROR_TITLE_THREE" = "Oh No!";
+"ERROR_TITLE_FOUR" = "An Error Has Occured";
+"ERROR_TITLE_FIVE" = "Ooops!";
+"Not a Favorite" = "Not a Favorite";
+"You cannot recieve notifications about a podcast unless it is marked as a Favorite" = "You cannot recieve notifications about a podcast unless it is marked as a Favorite";
+"NOTIFICATIONS_ARE_DISABLED" = "Notifications are disabled";
+"NOTIFICATIONS_DISABLED_BODY" = "Please enable notifications in settings if you would like to recieve updates when new episodes are posted.";
+"NOTIFICAITONS_SUBSCRIBE_FAILED" = "Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area.";
+"Notifications" = "Notifications";
+"Would you like to be notified when new episodes become available?" = "Would you like to be notified when new episodes become available?";
+
+"Loading new episodes" = "Loading new episodes";
+"There was an error downloading this podcast. Please try again later" = "There was an error downloading this podcast. Please try again later";
+"Yes" = "Yes";
+"PURCHASE_DISABLED_TITLE" = "Purchasing Disabled";
+"PURCHASE_DISABLED_BODY" = "Your device is currently unable to make purchases. Make sure they are enabled in the settings application";
+"RESTORE_PURCHASES" = "Restore Purchases";
+
+// Appirater
+"If you enjoy using %@, would you mind taking a moment to rate it? It won't take more than a minute. Thanks for your support!" = "If you enjoy using %@, would you mind taking a moment to rate it? It won't take more than a minute. Thanks for your support!";
+"Rate %@" = "Rate %@";
+"No, Thanks" = "No, Thanks";
+"Remind me later" = "Remind me later";
+"Podster can only download for 10 minutes in the background. Please re-open it to continue." = "Podster can only download for 10 minutes in the background. Please re-open it to continue.";
+"Downloading..." = "Downloading...";
+
+// Categories
+"Arts" = "Arts";
+"Business" = "Business";
+"Comedy" = "Comedy";
+"Education" = "Education";
+"Games & Entertainment" = "Games & Entertainment";
+"Government & Organizations" = "Government & Organizations";
+"Health" = "Health";
+"Kids & Family" = "Kids & Family";
+"Music" = "Music";
+"News & Politics" = "News & Politics";
+"Religion & Spirituality" = "Religion & Spirituality";
+"Science & Medicine" = "Science & Medicine";
+"Society & Culture" = "Society & Culture";
+"Sports & Recreation" = "Sports & Recreation";
+"Technology" = "Technology";
+"TV & Film" = "TV & Film";
+
+// Pdocast details (episode list screen)
+"Details" = "Details";
+"Notify Me On Update" = "Notify Me On Update";
+"Poster will send you an alert when new episodes of this podcast are available" = "Poster will send you an alert when new episodes of this podcast are available";
+"Hide Played Items" = "Hide Played Items";
+"Oldest First" = "Oldest First";
+"Newest First" = "Newest First";
+
+// What's hot on home page
+"Popular Last Week" = "Popular Last Week";
+"Top Rated" = "Top Rated";
+"Reccomendations" = "Reccomendations";
+"All downloads have completed" = "All downloads have completed";
+"Downloads have been paused because you lost WI-FI connectivity" = "Downloads have been paused because you lost WI-FI connectivity";

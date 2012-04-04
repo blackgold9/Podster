@@ -19,6 +19,7 @@
 #import "BannerViewController.h"
 #import "_SVDownload.h"
 #import "SVDownload.h"
+#import "BannerViewController.h"
 
 // The percentage after which a podcast is marked as played
 #define PLAYED_PERCENTAGE 0.95

@@ -54,6 +54,9 @@
     NSArray *items;
     NSManagedObjectContext *context;
 }
+@synthesize notifyOnUpdateLabel;
+@synthesize notifyDescriptionLabel;
+@synthesize hidePlayedItemsLabel;
 @synthesize notifySwitch;
 @synthesize sortSegmentedControl;
 @synthesize hidePlayedSwitch;
@@ -105,7 +108,7 @@
 - (BOOL)hasHitNotificationLimit {
     
     NSInteger currentCount = (NSInteger )[SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"shouldNotify == YES AND isSubscribed == YES"] inContext:[PodsterManagedDocument defaultContext]];
-    return ![[SVSettings sharedInstance] unlockedNotifications] && currentCount >= [[SVSettings sharedInstance] maxFreeNotifications];
+    return ![[SVSettings sharedInstance] premiumModeUnlocked] && currentCount >= [[SVSettings sharedInstance] maxFreeNotifications];
 }
 
 - (void)showNotificationsUpsell
@@ -402,6 +405,13 @@
     [super viewDidLoad];
     GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
     isInitialLoad = YES;
+
+    self.navigationItem.title = NSLocalizedString(@"Details", @"Details");
+    self.notifyDescriptionLabel.text = NSLocalizedString(@"Poster will send you an alert when new episodes of this podcast are available", @"Poster will send you an alert when new episodes of this podcast are available");
+    self.notifyOnUpdateLabel.text =  NSLocalizedString(@"Notify Me On Update", @"Notify Me On Update");
+    self.hidePlayedItemsLabel.text = NSLocalizedString(@"Hide Played Items", @"Hide Played Items");
+    [self.sortSegmentedControl setTitle:NSLocalizedString(@"Newest First", @"Newest First") forSegmentAtIndex:0];
+    [self.sortSegmentedControl setTitle:NSLocalizedString(@"Oldest First", @"Oldest First") forSegmentAtIndex:1];
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0];
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
@@ -536,6 +546,9 @@
     [self setNotifySwitch:nil];
     [self setOptionsButton:nil];
     [self setOptionsButton:nil];
+    [self setNotifyOnUpdateLabel:nil];
+    [self setNotifyDescriptionLabel:nil];
+    [self setHidePlayedItemsLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

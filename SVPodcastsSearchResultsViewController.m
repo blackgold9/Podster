@@ -125,12 +125,12 @@ static const NSInteger kDefaultPageSize = 50;
     // Insert the loading row
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:podcasts.count inSection:0]] 
                             withRowAnimation:UITableViewRowAnimationAutomatic];
-    self.navigationItem.title = self.category.name;
+    self.navigationItem.title = NSLocalizedString(self.category.name, @"localized category name");
 
     NSInteger startIndex = currentPage * kDefaultPageSize;
     
     if (self.searchString) {
-        //    [TestFlight passCheckpoint:@"SEARCH"];
+           [TestFlight passCheckpoint:@"SEARCH"];
 
         self.navigationItem.title = self.searchString;
         

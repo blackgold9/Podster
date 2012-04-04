@@ -51,7 +51,7 @@
                                 [appInfo objectForKey:@"CFBundleShortVersionString"], 
                                 [appInfo objectForKey:@"CFBundleVersion"]];       
         
-        if ([[SVSettings sharedInstance] unlockedNotifications]) {
+        if ([[SVSettings sharedInstance] premiumModeUnlocked]) {
             // Append a p if it's premium
             versionNumber = [NSString stringWithFormat:@"%@N", versionNumber];
         }
@@ -108,7 +108,7 @@
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal  ];
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big-over.png"] forState:UIControlStateHighlighted];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockedNotifications:) name:@"NotificationsPurchased" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockedNotifications:) name:@"PremiumPurchased" object:nil];
                                                          // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -154,7 +154,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         } else if (indexPath.row == 2) {
             [self performSegueWithIdentifier:@"showLegal" sender:self];
         } else if(indexPath.row == 3) {
-            if ([[SVSettings sharedInstance] unlockedNotifications]) {
+            if ([[SVSettings sharedInstance] premiumModeUnlocked]) {
                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"net.vanterpool.podster.notifications"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [tableView reloadData];
@@ -166,7 +166,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             }
         }
     } else if (indexPath.section == 0) {
-        if(![[SVSettings sharedInstance] unlockedNotifications]) {
+        if(![[SVSettings sharedInstance] premiumModeUnlocked]) {
             [self showPurchaseOptions];
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
@@ -181,7 +181,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     NSInteger cellCount;
     switch (section) {
         case 0:
-            if ([[SVSettings sharedInstance] unlockedNotifications])
+            if ([[SVSettings sharedInstance] premiumModeUnlocked])
                 cellCount = 1;
             else
                 cellCount = 3;
@@ -208,6 +208,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     if (indexPath.section == 0 && indexPath.row == 1) {
         return 88.0;
     } else {
@@ -219,7 +220,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *output;
     if(section == 0) {
-        output = NSLocalizedString(@"UPGRADES", @"Upgrades");
+        output = NSLocalizedString(@"PREMIUM_MODE", @"Premium Mode");
     }
     
     return output;
@@ -229,22 +230,22 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     UITableViewCell *cell = nil;
     if (indexPath.section == 0) {
         // Configure premium info section
-        if ([[SVSettings sharedInstance] unlockedNotifications]) {
+        if ([[SVSettings sharedInstance] premiumModeUnlocked]) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"unlimitedAlertsStatusCell"];
-            cell.textLabel.text = NSLocalizedString(@"UNLIMITED_ALERTS", nil);
+            cell.textLabel.text = NSLocalizedString(@"PREMIUM_MODE", nil);
             cell.detailTextLabel.text = NSLocalizedString(@"Enabled", @"Enabled");
         } else {
             switch (indexPath.row) {
                 case 0:
                     cell = [tableView dequeueReusableCellWithIdentifier:@"unlimitedAlertsStatusCell"];
-                    cell.textLabel.text = NSLocalizedString(@"UNLIMITED_ALERTS", nil);
+                    cell.textLabel.text = NSLocalizedString(@"PREMIUM_MODE", nil);
                     cell.detailTextLabel.text = NSLocalizedString(@"Disabled", @"Disabled");
                     break;
                 case 1:
                 {
                     cell = [tableView dequeueReusableCellWithIdentifier:@"premiumDescription"];
                     UILabel *label = (UILabel *)[cell viewWithTag:1906];
-                    label.text = NSLocalizedString(@"UNLIMITED_ALERTS_DESCRIPTION",nil);
+                    label.text = NSLocalizedString(@"PREMIUM_MODE_DESCRIPTION",nil);
                     break;
                 }
                 case 2:
@@ -280,7 +281,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 cell.textLabel.text = NSLocalizedString(@"LEGAL_INFO", @"Legal Information");
                 break;
             case 3:
-                if ([[SVSettings sharedInstance] unlockedNotifications]) {
+                if ([[SVSettings sharedInstance] premiumModeUnlocked]) {
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
                                                   reuseIdentifier:@"Restore"];
                     cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -423,9 +424,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(void)unlockedNotifications:(NSNotification *)notificaiton
 {
-    if ([[SVSettings sharedInstance] unlockedNotifications]) {
+    if ([[SVSettings sharedInstance] premiumModeUnlocked]) {
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NotificationsPurchased" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PremiumPurchased" object:nil];
         NSString *title = NSLocalizedString(@"THANK_YOU_REALLY", nil);
         NSString *body = NSLocalizedString(@"PURCHASE_COMPLETE_MESSAGE", nil);
         BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
