@@ -60,7 +60,7 @@
         NSArray *downloads = [SVDownload MR_findAllSortedBy:@"position" ascending:YES inContext:localContext];
         for (SVDownload *download in downloads) {
             // HACK: This should retrigger the download
-            [self downloadEntry:download.entry manualDownload:NULL];
+            [self downloadEntry:download.entry manualDownload:NO];
         }
 
     }];
@@ -121,7 +121,9 @@
         download = localEntry.download;
         localEntry.download.positionValue = position;
         if (!download) {
+
             download = [SVDownload MR_createInContext:localContext];
+            download.manuallyTriggeredValue = isManualDownload;
             localEntry.download = download;
             download.filePath = [[self downloadsPath] stringByAppendingPathComponent:[localEntry identifier]];
             download.stateValue = SVDownloadStatePending;
@@ -131,10 +133,33 @@
             NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
             return;
         }
-        
+
     }];
-    SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID 
+    SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
                                                                    downloadBasePath:[self downloadsPath]];
+
+    __block UIBackgroundTaskIdentifier background_task; //Create a task object
+
+    background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
+        [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
+        background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
+        UILocalNotification *notDone = [[UILocalNotification alloc] init];
+        notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
+        [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
+
+    }];
+
+    op.completionBlock = ^void() {
+        if (queue.operationCount == 0) {
+            UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
+            downloadedNotification.alertBody = @"All downloads have completed";
+            [[UIApplication sharedApplication] presentLocalNotificationNow:downloadedNotification];
+        }
+
+        [[UIApplication sharedApplication] endBackgroundTask: background_task];
+        background_task = UIBackgroundTaskInvalid;
+    };
+
     [queue addOperation:op];
 }
 

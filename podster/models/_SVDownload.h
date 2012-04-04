@@ -5,9 +5,9 @@
 
 
 extern const struct SVDownloadAttributes {
-	__unsafe_unretained NSString *auto;
 	__unsafe_unretained NSString *downloadedBytes;
 	__unsafe_unretained NSString *filePath;
+	__unsafe_unretained NSString *manuallyTriggered;
 	__unsafe_unretained NSString *position;
 	__unsafe_unretained NSString *progress;
 	__unsafe_unretained NSString *state;
@@ -43,18 +43,6 @@ extern const struct SVDownloadFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *auto;
-
-
-@property BOOL autoValue;
-- (BOOL)autoValue;
-- (void)setAutoValue:(BOOL)value_;
-
-//- (BOOL)validateAuto:(id*)value_ error:(NSError**)error_;
-
-
-
-
 @property (nonatomic, strong) NSNumber *downloadedBytes;
 
 
@@ -71,6 +59,18 @@ extern const struct SVDownloadFetchedProperties {
 
 
 //- (BOOL)validateFilePath:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *manuallyTriggered;
+
+
+@property BOOL manuallyTriggeredValue;
+- (BOOL)manuallyTriggeredValue;
+- (void)setManuallyTriggeredValue:(BOOL)value_;
+
+//- (BOOL)validateManuallyTriggered:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -140,15 +140,6 @@ extern const struct SVDownloadFetchedProperties {
 @interface _SVDownload (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSNumber*)primitiveAuto;
-- (void)setPrimitiveAuto:(NSNumber*)value;
-
-- (BOOL)primitiveAutoValue;
-- (void)setPrimitiveAutoValue:(BOOL)value_;
-
-
-
-
 - (NSNumber*)primitiveDownloadedBytes;
 - (void)setPrimitiveDownloadedBytes:(NSNumber*)value;
 
@@ -160,6 +151,15 @@ extern const struct SVDownloadFetchedProperties {
 
 - (NSString*)primitiveFilePath;
 - (void)setPrimitiveFilePath:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveManuallyTriggered;
+- (void)setPrimitiveManuallyTriggered:(NSNumber*)value;
+
+- (BOOL)primitiveManuallyTriggeredValue;
+- (void)setPrimitiveManuallyTriggeredValue:(BOOL)value_;
 
 
 

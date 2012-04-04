@@ -80,15 +80,16 @@
     dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     [localContext performBlockAndWait:^{
-        
-        
         download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
+        NSURL *mediaURL = [NSURL URLWithString:download.entry.mediaURL];
         LOG_DOWNLOADS(2, @"Starting episode download: %@", download.entry);
         
         NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
         NSUInteger start = 0;
         NSDictionary *headers = nil;
         NSString *filePath = [basePath stringByAppendingPathComponent:[download.entry identifier]];
+        filePath = [filePath stringByAppendingPathExtension:[mediaURL pathExtension]];
+        LOG_DOWNLOADS(2, @"Local FilePath: %@", filePath);
         BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
         if (fileExists) {
             start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
@@ -128,7 +129,9 @@
             
             [localContext performBlock:^{
                 LOG_NETWORK(2, @"Downloaded episode: %@", localDownload.entry.title);
-                localDownload.entry.downloadCompleteValue = YES;
+                SVPodcastEntry *entry = localDownload.entry;
+                entry.downloadCompleteValue = YES;
+                entry.localFilePath = filePath;
                 [localDownload MR_deleteInContext:localContext];    
                 [self done];
                 dispatch_semaphore_signal(semaphore);

@@ -11,6 +11,7 @@ const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
 	.guid = @"guid",
 	.imageURL = @"imageURL",
 	.isVideo = @"isVideo",
+	.localFilePath = @"localFilePath",
 	.markedForDownload = @"markedForDownload",
 	.mediaURL = @"mediaURL",
 	.played = @"played",
@@ -190,6 +191,13 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 - (void)setPrimitiveIsVideoValue:(BOOL)value_ {
 	[self setPrimitiveIsVideo:[NSNumber numberWithBool:value_]];
 }
+
+
+
+
+
+@dynamic localFilePath;
+
 
 
 

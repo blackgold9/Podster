@@ -17,6 +17,8 @@
 #import "SVPlaybackController.h"
 #import "MessageGenerator.h"
 #import "BannerViewController.h"
+#import "_SVDownload.h"
+#import "SVDownload.h"
 
 // The percentage after which a podcast is marked as played
 #define PLAYED_PERCENTAGE 0.95
@@ -176,23 +178,27 @@ void audioRouteChangeListenerCallback (
 - (void)playEpisode:(SVPodcastEntry *)episode
           ofPodcast:(SVPodcast *)podcast{
     LOG_GENERAL(4, @"Assigning new current podcast/episode");
-    self.currentEpisode = [episode MR_inContext:[PodsterManagedDocument defaultContext]];;
-    self.currentPodcast = [podcast MR_inContext:[PodsterManagedDocument defaultContext]];;
+
     NSParameterAssert(episode);
     NSParameterAssert(podcast);
+    self.currentEpisode = episode;
+    self.currentPodcast = podcast;
     NSAssert(episode.mediaURL != nil, @"The podcast must have a mediaURL");
    
     NSError *error;
     [[AVAudioSession sharedInstance] setActive: YES error: &error];
     NSAssert(error == nil, @"There should be no error starting the session");
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
-    
 
-  
+    BOOL isDownloaded = self.currentEpisode.downloadCompleteValue;
+    NSURL *url = isDownloaded ? [NSURL fileURLWithPath:self.currentEpisode.localFilePath]: [NSURL URLWithString:currentEpisode.mediaURL];
+    LOG_GENERAL(2, @"Playing %@ version", isDownloaded ? @"local" : @"streaming");
+
+
     [[AVAudioSession sharedInstance] setDelegate:self];
     if (!_player) {    
         LOG_GENERAL(4, @"Initializing player");
-        _player = [AVPlayer playerWithURL:[NSURL URLWithString:episode.mediaURL]];
+        _player = [AVPlayer playerWithURL:url];
         LOG_GENERAL(4, @"Player Initialized");
         monitorQueue = dispatch_queue_create("com.vantertech.podster.playbackmonitor", DISPATCH_QUEUE_SERIAL);
         [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
@@ -203,12 +209,14 @@ void audioRouteChangeListenerCallback (
 //        [self startPositionMonitoring];
     }
     
-    LOG_PLAYBACK(2, @"Loading media at URL:%@", episode.mediaURL);
+    LOG_PLAYBACK(2, @"Loading media at URL:%@", url);
     if (currentItem) {
         [currentItem removeObserver:self forKeyPath:@"status"];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:currentItem];
     }//
-    currentItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:episode.mediaURL]];
+
+
+    currentItem = [[AVPlayerItem alloc] initWithURL:url];
     [currentItem addObserver:self 
                   forKeyPath:@"status" 
                      options:NSKeyValueObservingOptionNew 

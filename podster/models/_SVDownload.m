@@ -4,9 +4,9 @@
 #import "_SVDownload.h"
 
 const struct SVDownloadAttributes SVDownloadAttributes = {
-	.auto = @"auto",
 	.downloadedBytes = @"downloadedBytes",
 	.filePath = @"filePath",
+	.manuallyTriggered = @"manuallyTriggered",
 	.position = @"position",
 	.progress = @"progress",
 	.state = @"state",
@@ -46,12 +46,12 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
-	if ([key isEqualToString:@"autoValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"auto"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-	}
 	if ([key isEqualToString:@"downloadedBytesValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"downloadedBytes"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"manuallyTriggeredValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"manuallyTriggered"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"positionValue"]) {
@@ -73,32 +73,6 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 
 	return keyPaths;
 }
-
-
-
-
-@dynamic auto;
-
-
-
-- (BOOL)autoValue {
-	NSNumber *result = [self auto];
-	return [result boolValue];
-}
-
-- (void)setAutoValue:(BOOL)value_ {
-	[self setAuto:[NSNumber numberWithBool:value_]];
-}
-
-- (BOOL)primitiveAutoValue {
-	NSNumber *result = [self primitiveAuto];
-	return [result boolValue];
-}
-
-- (void)setPrimitiveAutoValue:(BOOL)value_ {
-	[self setPrimitiveAuto:[NSNumber numberWithBool:value_]];
-}
-
 
 
 
@@ -131,6 +105,32 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 
 @dynamic filePath;
 
+
+
+
+
+
+@dynamic manuallyTriggered;
+
+
+
+- (BOOL)manuallyTriggeredValue {
+	NSNumber *result = [self manuallyTriggered];
+	return [result boolValue];
+}
+
+- (void)setManuallyTriggeredValue:(BOOL)value_ {
+	[self setManuallyTriggered:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveManuallyTriggeredValue {
+	NSNumber *result = [self primitiveManuallyTriggered];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveManuallyTriggeredValue:(BOOL)value_ {
+	[self setPrimitiveManuallyTriggered:[NSNumber numberWithBool:value_]];
+}
 
 
 

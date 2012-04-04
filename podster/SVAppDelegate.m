@@ -405,25 +405,25 @@ NSString *uuid();
 
 -(void)setupOfflineOverlayMonitoring
 {
-    __block UIViewController *rootController = self.window.rootViewController;
-    __block BOOL isShowingOfflineOverlay = NO;
-    [[SVPodcatcherClient sharedInstance] setReachabilityStatusChangeBlock:^(BOOL isNetworkReachable) {
-        if (!isNetworkReachable&& !isShowingOfflineOverlay) {
-            LOG_GENERAL(1, @"App is offline, showing overlay");
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:rootController.view animated:YES];
-            hud.labelText = NSLocalizedString(@"OFFLINE", @"App is Offline");
-            hud.detailsLabelText = NSLocalizedString(@"Waiting for connection...", @"App is waiting for a connection");
-            hud.dimBackground = YES;
-            isShowingOfflineOverlay =YES;
-        } else {
-            if (isShowingOfflineOverlay) {
-                LOG_GENERAL(1, @"App is online, hiding overlay");
-                [MBProgressHUD hideHUDForView:rootController.view animated:YES];
-                isShowingOfflineOverlay = NO;
-            }
-        }
-        
-    }];
+//    __block UIViewController *rootController = self.window.rootViewController;
+//    __block BOOL isShowingOfflineOverlay = NO;
+//    [[SVPodcatcherClient sharedInstance] setReachabilityStatusChangeBlock:^(BOOL isNetworkReachable) {
+//        if (!isNetworkReachable&& !isShowingOfflineOverlay) {
+//            LOG_GENERAL(1, @"App is offline, showing overlay");
+//            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:rootController.view animated:YES];
+//            hud.labelText = NSLocalizedString(@"OFFLINE", @"App is Offline");
+//            hud.detailsLabelText = NSLocalizedString(@"Waiting for connection...", @"App is waiting for a connection");
+//            hud.dimBackground = YES;
+//            isShowingOfflineOverlay =YES;
+//        } else {
+//            if (isShowingOfflineOverlay) {
+//                LOG_GENERAL(1, @"App is online, hiding overlay");
+//                [MBProgressHUD hideHUDForView:rootController.view animated:YES];
+//                isShowingOfflineOverlay = NO;
+//            }
+//        }
+//
+//    }];
 
 }
 @end

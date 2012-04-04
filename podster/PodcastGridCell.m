@@ -8,11 +8,13 @@
 
 #import "PodcastGridCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import "UIColor+Hex.h"
 #import "UIImage+ForceDecompress.h"
 #import "ActsAsPodcast.h"
 #import "UIImageView+AFNetworking.h"
 #import "SVPodcast.h"
+#import "UIView+Size.h"
 @interface PodcastGridCell()
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -168,14 +170,26 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
 
     self.accessibilityLabel = [podcast title];
     if ([podcast class] == [SVPodcast class]) {
+        UIView *downloadBackground =  [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 35)];
+        [self addSubview:downloadBackground];
+        downloadBackground.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
         UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-        progressView.tag = 1337;
-        progressView.frame = CGRectMake(20, self.frame.size.height / 2 - 5, self.frame.size.width - 40, 10);
-        [self addSubview:progressView];
-        
+        downloadBackground.tag = 1337;
+        progressView.frame = CGRectMake(10, 5, self.frame.size.width - 20, 10);
+
+        [downloadBackground addSubview:progressView];
+        UILabel *downloadLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        downloadLabel.text = NSLocalizedString(@"Downloading...", @"Downloading...");
+        downloadLabel.font = [UIFont systemFontOfSize:10];
+        [downloadLabel sizeToFit];
+        downloadLabel.center = CGPointMake(downloadBackground.size.width / 2, 25 );
+        downloadLabel.frame = CGRectIntegral(downloadLabel.frame);
+        downloadLabel.backgroundColor = [UIColor clearColor];
+        downloadLabel.textColor =[UIColor whiteColor];
+        [downloadBackground addSubview:downloadLabel];
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
-        progressView.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0; 
+        downloadBackground.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0;
         
         __weak UIProgressView *weakProgressView  = progressView;
         downloadPercentageObserverToken = [coreDataPodcast addObserverForKeyPath:@"downloadPercentage" task:^(id obj, NSDictionary *change) { 
@@ -197,7 +211,7 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
                 }
                 [UIView animateWithDuration:0.5
                                  animations:^{
-                                     progressView.alpha = local.isDownloadingValue ? 1 : 0; 
+                                     downloadBackground.alpha = local.isDownloadingValue ? 1 : 0;
                                  }];
             }
         }];

@@ -12,6 +12,7 @@ extern const struct SVPodcastEntryAttributes {
 	__unsafe_unretained NSString *guid;
 	__unsafe_unretained NSString *imageURL;
 	__unsafe_unretained NSString *isVideo;
+	__unsafe_unretained NSString *localFilePath;
 	__unsafe_unretained NSString *markedForDownload;
 	__unsafe_unretained NSString *mediaURL;
 	__unsafe_unretained NSString *played;
@@ -31,6 +32,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 @class SVDownload;
 @class SVPodcast;
+
 
 
 
@@ -123,6 +125,14 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (void)setIsVideoValue:(BOOL)value_;
 
 //- (BOOL)validateIsVideo:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSString *localFilePath;
+
+
+//- (BOOL)validateLocalFilePath:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -270,6 +280,12 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 - (BOOL)primitiveIsVideoValue;
 - (void)setPrimitiveIsVideoValue:(BOOL)value_;
+
+
+
+
+- (NSString*)primitiveLocalFilePath;
+- (void)setPrimitiveLocalFilePath:(NSString*)value;
 
 
 

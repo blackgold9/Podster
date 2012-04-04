@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Download" representedClassName="SVDownload" syncable="YES">
-        <attribute name="auto" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="downloadedBytes" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="manuallyTriggered" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="progress" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="state" attributeType="Integer 16" maxValueString="3" defaultValueString="0" syncable="YES"/>
@@ -45,6 +45,7 @@
         <attribute name="guid" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isVideo" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="localFilePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="markedForDownload" optional="YES" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="mediaURL" attributeType="String" syncable="YES"/>
         <attribute name="played" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -64,7 +65,7 @@
     <elements>
         <element name="Download" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Podcast" positionX="160" positionY="192" width="128" height="420"/>
-        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="285"/>
+        <element name="PodcastEntry" positionX="160" positionY="192" width="128" height="300"/>
         <element name="Subscription" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

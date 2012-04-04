@@ -68,6 +68,8 @@
     return entry;
 }
 
+
+
 - (void)updateNextItemDateAndDownloadIfNeccesary:(BOOL)shouldDownload
 {
 
@@ -86,7 +88,7 @@
         if(entry) {
 
             self.nextItemDate = entry.datePublished;
-            if (!entry.playedValue && entry.download == nil && shouldDownload) {
+            if (!entry.playedValue && entry.download == nil && !entry.downloadCompleteValue && shouldDownload) {
                 LOG_GENERAL(2, @"Queing entry for download");
                 // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
                 [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NULL];
