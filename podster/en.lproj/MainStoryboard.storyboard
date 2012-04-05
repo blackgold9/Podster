@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -448,12 +447,20 @@
                         <subviews>
                             <view contentMode="scaleToFill" id="M2B-WB-k1v" userLabel="container">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <userGuides>
+                                    <userLayoutGuide location="7" affinity="minX"/>
+                                </userGuides>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="d14-IY-Nj3" userLabel="AlbumArt Label" propertyAccessControl="none">
+                                    <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFill" image="honeycomb.png" id="TgQ-OS-p4J" userLabel="AlbumArt Label" propertyAccessControl="none">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" alpha="0.50000000000000011" contentMode="scaleAspectFill" id="d14-IY-Nj3" userLabel="AlbumArt Label" propertyAccessControl="none">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" image="playback-bottom-back.png" id="288-hJ-SCX">
                                         <rect key="frame" x="0.0" y="336" width="320" height="125"/>
@@ -506,43 +513,81 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="kxd-sA-q69">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                                        <userGuides>
+                                            <userLayoutGuide location="37" affinity="minY"/>
+                                        </userGuides>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="urB-tX-oaZ" customClass="OBSlider">
-                                                <rect key="frame" x="15" y="26" width="290" height="23"/>
+                                                <rect key="frame" x="7" y="19" width="220" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <color key="maximumTrackTintColor" red="0.0" green="0.40000003576278687" blue="0.64313727617263794" alpha="1" colorSpace="deviceRGB"/>
                                                 <connections>
                                                     <action selector="sliderChanged:" destination="qhM-Sb-G9s" eventType="valueChanged" id="xkE-go-uMa"/>
                                                 </connections>
                                             </slider>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0:00" lineBreakMode="tailTruncation" minimumFontSize="10" id="fiR-nu-Q92">
-                                                <rect key="frame" x="20" y="2" width="54" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="TimePanel.png" id="ui9-kT-lJZ">
+                                                <rect key="frame" x="233" y="5" width="80" height="80"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="fiR-nu-Q92">
+                                                <rect key="frame" x="240" y="20" width="68" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-1:00" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="HVg-Lg-xBW">
-                                                <rect key="frame" x="254" y="2" width="49" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-1:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="HVg-Lg-xBW">
+                                                <rect key="frame" x="240" y="54" width="68" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podcast Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="C3p-Tm-Scu">
-                                                <rect key="frame" x="72" y="3" width="175" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <view tag="1111" contentMode="scaleToFill" id="1cD-gr-bnI">
+                                                <rect key="frame" x="70" y="56" width="25" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            </view>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zHK-OT-I0b">
+                                                <rect key="frame" x="201" y="55" width="24" height="18"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" image="action.png">
+                                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="actionTapped:" destination="qhM-Sb-G9s" eventType="touchUpInside" id="0tv-NA-Phd"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dBx-JB-gtd">
+                                                <rect key="frame" x="-10" y="49" width="54" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.42999999999999999" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LONG PODCAST LABEL" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="C3p-Tm-Scu">
+                                        <rect key="frame" x="147" y="155" width="161" height="125"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="gtS-in-4fS">
+                                        <rect key="frame" x="7" y="162" width="123" height="112"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -551,8 +596,10 @@
                     <connections>
                         <outlet property="artworkImage" destination="d14-IY-Nj3" id="pOo-m0-tXV"/>
                         <outlet property="containerView" destination="M2B-WB-k1v" id="mh0-xX-VT6"/>
+                        <outlet property="foregroundAlbumArt" destination="gtS-in-4fS" id="opV-dX-Imx"/>
                         <outlet property="playButton" destination="l5I-Xo-ljL" id="4Wc-MX-OYx"/>
                         <outlet property="progressSlider" destination="urB-tX-oaZ" id="yy3-C4-iEA"/>
+                        <outlet property="rateLabel" destination="dBx-JB-gtd" id="I7t-nb-Rni"/>
                         <outlet property="skipBackButton" destination="TMJ-4G-Djt" id="Xj3-no-Bvb"/>
                         <outlet property="skipForwardButton" destination="vzV-ZV-qro" id="e23-BU-VSy"/>
                         <outlet property="timeElapsedLabel" destination="fiR-nu-Q92" id="Ke7-to-m5p"/>
@@ -907,154 +954,21 @@
     </scenes>
     <resources>
         <image name="DropdownTriangle.png" width="44" height="22"/>
+        <image name="TimePanel.png" width="80" height="80"/>
         <image name="Unplayed.png" width="11" height="11"/>
+        <image name="action.png" width="24" height="18"/>
         <image name="bigPause.png" width="100" height="100"/>
         <image name="bigplay.png" width="100" height="100"/>
         <image name="clockSmall.png" width="12" height="12"/>
         <image name="down.png" width="24" height="13"/>
         <image name="heart.png" width="30" height="30"/>
+        <image name="honeycomb.png" width="320" height="480"/>
         <image name="list-item.png" width="320" height="88"/>
         <image name="playback-bottom-back.png" width="320" height="125"/>
         <image name="skipback.png" width="24" height="24"/>
         <image name="skipforward.png" width="24" height="24"/>
         <image name="unplayed-flag.png" width="22" height="22"/>
     </resources>
-    <classes>
-        <class className="DTAttributedTextView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DTAttributedTextView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="backgroundView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="textDelegate"/>
-            </relationships>
-        </class>
-        <class className="FeaturedController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="featuedGrid" candidateClass="NRGridView"/>
-                <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
-            </relationships>
-        </class>
-        <class className="GMGridView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GMGridView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="actionDelegate" candidateClass="NSObject"/>
-                <relationship kind="outlet" name="dataSource" candidateClass="NSObject"/>
-                <relationship kind="outlet" name="layoutStrategy"/>
-                <relationship kind="outlet" name="mainSuperView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sortingDelegate" candidateClass="NSObject"/>
-                <relationship kind="outlet" name="transformDelegate" candidateClass="NSObject"/>
-            </relationships>
-        </class>
-        <class className="HomeController" superclassName="SVViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="NRGridView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NRGridView.h"/>
-        </class>
-        <class className="OBSlider" superclassName="UISlider">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>
-        </class>
-        <class className="SVCategoryListViewController" superclassName="SVViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVCategoryListViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SVEpisodeDetailsViewController" superclassName="SVViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="downloadTapped:"/>
-                <relationship kind="action" name="listenTapped:"/>
-                <relationship kind="action" name="markAsPlayedTapped:"/>
-                <relationship kind="outlet" name="downloadButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imageBackground" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="listenButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="markAsPlayedButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="summaryView" candidateClass="DTAttributedTextView"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SVEpisodeListCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeListCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="downloadedIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="durationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="progressIndicator" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="subtitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="unplayedIndicator" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="SVPlaybackController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPlaybackController.h"/>
-            <relationships>
-                <relationship kind="action" name="playTapped:"/>
-                <relationship kind="action" name="skipBackTapped:"/>
-                <relationship kind="action" name="skipForwardTapped:"/>
-                <relationship kind="action" name="sliderChanged:"/>
-                <relationship kind="outlet" name="artworkImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="progressSlider" candidateClass="OBSlider"/>
-                <relationship kind="outlet" name="skipBackButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="skipForwardButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="timeElapsedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="timeRemainingLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outletCollection" name="chromeViews" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="SVPodcastDetailsViewController" superclassName="SVViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="hidePlayedSwitchedByUser:"/>
-                <relationship kind="action" name="infoTapped:"/>
-                <relationship kind="action" name="notifySwitchChanged:"/>
-                <relationship kind="action" name="optionsButtonTapped:"/>
-                <relationship kind="action" name="sortControlTapped:"/>
-                <relationship kind="action" name="subscribeTapped:"/>
-                <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="hidePlayedItemsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="hidePlayedSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="metadataView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="notifyDescriptionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="notifyOnUpdateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="notifySwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="sortSegmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="subscribeButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SVPodcastDirectoryViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDirectoryViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonTapped:"/>
-            </relationships>
-        </class>
-        <class className="SVPodcastsSearchResultsViewController" superclassName="SVViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastsSearchResultsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SVSubscriptionGridViewController" superclassName="SVViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVSubscriptionGridViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
-                <relationship kind="outlet" name="noContentLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SVViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

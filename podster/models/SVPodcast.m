@@ -91,8 +91,10 @@
             if (!entry.playedValue && entry.download == nil && !entry.downloadCompleteValue && shouldDownload) {
                 LOG_GENERAL(2, @"Queing entry for download");
                 // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
-                [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NULL];
+                [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NO];
             }
+        } else {
+            self.nextItemDate = [NSDate distantPast];
         }
     }
 }

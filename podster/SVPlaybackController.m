@@ -14,11 +14,17 @@
 #import "SVPlaybackManager.h"
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
+#import <MediaPlayer/MediaPlayer.h>
+
+
 @implementation SVPlaybackController {
     AVPlayer *player;
     id playerObserver;
+    CGFloat playbackSpeed;
 }
 @synthesize containerView;
+@synthesize rateLabel;
+@synthesize foregroundAlbumArt;
 @synthesize skipForwardButton;
 @synthesize skipBackButton;
 @synthesize chromeViews;
@@ -52,6 +58,7 @@
     [FlurryAnalytics logEvent:@"PlaybackPageView" timed:YES];
     NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
     [self.artworkImage setImageWithURL:imageURL placeholderImage:nil];
+    [self.foregroundAlbumArt setImageWithURL:[NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.thumbLogoURL]];
 
 }
 -(void)viewDidDisappear:(BOOL)animated
@@ -113,9 +120,35 @@
 {
     LOG_GENERAL(4, @"Super viewdidload");
     [super viewDidLoad];
-
     
+    UIView *placeholder = [self.view viewWithTag:1111];
+    CGRect placeholderFrame = placeholder.frame;
+    UIView *placeholderSuperView = [placeholder superview];
+    [placeholder removeFromSuperview];
+
+    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:placeholderFrame];
+    volumeView.showsRouteButton = YES;
+    volumeView.showsVolumeSlider = NO;
+    [placeholderSuperView addSubview:volumeView];
+          
     player = [[SVPlaybackManager sharedInstance] player];
+    rateLabel.userInteractionEnabled = YES;
+    rateLabel.text = player.rate == 1.5 ? @"1.5x" : @"1x";
+    playbackSpeed = player.rate;
+    [rateLabel whenTapped:^{
+
+        if (player.rate == 1.5) {
+            rateLabel.text = @"1x";
+            player.rate = 1;
+            playbackSpeed =1.0;
+        } else {
+            rateLabel.text = @"1.5x";
+            player.rate = 1.5;
+            playbackSpeed = 1.5;
+        }
+
+
+    }]; 
 }
 
 - (void)viewDidUnload
@@ -129,6 +162,8 @@
     [self setArtworkImage:nil];
     [self setTitleLabel:nil];
     [self setContainerView:nil];
+    [self setForegroundAlbumArt:nil];
+    [self setRateLabel:nil];
     [super viewDidUnload];
         // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -169,7 +204,7 @@
 }
 - (IBAction)playTapped:(id)sender {
     if (player.rate == 0) {
-        [player play];
+        player.rate = playbackSpeed;
         [FlurryAnalytics logEvent:@"PlayTapped"];
     } else {
         [player pause];
@@ -217,5 +252,7 @@
         return [NSString stringWithFormat:@"%02d:%02d", minutes,seconds];
 
     }
+}
+- (IBAction)actionTapped:(id)sender {
 }
 @end

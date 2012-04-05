@@ -113,6 +113,7 @@ void audioRouteChangeListenerCallback (
     AVPlayer *_player;
     AVPlayerItem *currentItem;
     dispatch_queue_t monitorQueue;
+    BOOL playing;
     id monitorId;
     // Represents whether the user has triggered playback.
     // This is used to decide whether ot not to start playback after an interruption (phone call) has completed
@@ -316,9 +317,12 @@ void audioRouteChangeListenerCallback (
                     
                     [_player removeTimeObserver:monitorId];
                 } else {
-                    LOG_PLAYBACK(2, @"Playback started");
-                    [self startPositionMonitoring];
-                    self.playbackState = kPlaybackStatePlaying;
+                    if (self.playbackState !=kPlaybackStatePlaying) {
+                        LOG_PLAYBACK(3, @"Starting playback");
+                        [self startPositionMonitoring];
+                        self.playbackState = kPlaybackStatePlaying;
+                    }
+                    
                     
                 }
             }

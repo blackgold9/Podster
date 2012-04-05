@@ -164,6 +164,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 
                 
             }
+        } else if (indexPath.row == 4) {
+            [TestFlight openFeedbackView];
         }
     } else if (indexPath.section == 0) {
         if(![[SVSettings sharedInstance] premiumModeUnlocked]) {
@@ -189,9 +191,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         case 1:
             // Show the restore purchase option if we're not already premium
 #if DEBUG
-            cellCount = 4;
+            cellCount = 5;
 #else
-            cellCount = [[SVSettings sharedInstance] unlockedNotifications] ? 3 : 4;
+            cellCount = [[SVSettings sharedInstance] premiumModeUnlocked] ? 3 : 4;
 #endif
             break;
         default:
@@ -296,6 +298,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                    cell.textLabel.text = NSLocalizedString(@"RESTORE_PURCHASES", @"Restore Purchases");
                    break;
                 }
+            case 4:
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                              reuseIdentifier:@"Restore"];
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textLabel.text = @"DEBUG: Send feedback";
             default:
             break;
 
@@ -381,6 +389,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                        [sheet addButtonWithTitle:[NSString stringWithFormat:buyFormatString, name, price]
                                                                                            block:^{
                                                                                                [FlurryAnalytics logEvent:@"PurchaseTapped" withParameters:[NSDictionary dictionaryWithObject:name forKey:@"sku"]];
+                                                                                               
                                                                                                [[PodsterIAPHelper sharedInstance] buyProductIdentifier:[product productIdentifier]];
                                                                                                 [self waitForPurchaseCompletion];
                                                                                            }];

@@ -173,7 +173,7 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 {   
     CGRect contentFrame = self.view.bounds;
     CGRect bannerFrame = _bannerView.frame;
-    if (_hasAd) {
+    if (_hasAd && [_bannerView  superview]) {
         // Ad is on screen/has ad
         bannerFrame.size = [_bannerView mediatedAdView].frame.size;
         contentFrame.size.height -= _bannerView.frame.size.height;

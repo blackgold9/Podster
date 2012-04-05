@@ -95,6 +95,7 @@
 
 - (void)downloadEntry:(SVPodcastEntry *)entry manualDownload:(BOOL)isManualDownload
 {
+    return;
     LOG_DOWNLOADS(2, @"Downloading entry %@", entry);
     NSParameterAssert(entry);
     NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");

@@ -35,7 +35,6 @@
 #import "_SVPodcastEntry.h"
 @interface SVPodcastDetailsViewController ()
 
-- (void)saveLocalContextIncludingParent:(BOOL)includeParent;
 
 - (void)reloadData;
 @end

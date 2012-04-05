@@ -155,14 +155,14 @@ NSString *uuid();
 {
     [TestFlight takeOff:@"6b271c66137f6fab967e63af81587f71_NTQ2ODMyMDEyLTAxLTE5IDE0OjU5OjM5LjU0OTg4Mw"];
 
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    
 #if defined (CONFIGURATION_AppStore)
 
    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
 #endif
 #if defined (CONFIGURATION_Ad_Hoc)
-  
+  [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
 

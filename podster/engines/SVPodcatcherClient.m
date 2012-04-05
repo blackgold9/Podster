@@ -34,7 +34,9 @@
 - (NSString *)countryCode
 {
     NSLocale *current = [NSLocale currentLocale];
-    return [(NSString *)[current objectForKey:NSLocaleCountryCode] lowercaseString];
+    NSString *code = [(NSString *)[current objectForKey:NSLocaleCountryCode] lowercaseString];
+    LOG_NETWORK(2, @"Making call with country code %@",code);
+    return code;
 }
 -(id)initWithBaseURL:(NSURL *)url
 {
@@ -153,7 +155,7 @@
     NSString *feedFinderURL = [NSString stringWithFormat:@"feeds/featured.json"];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
   //  if (language) {
-      [params setObject:NSLocaleCountryCode forKey:@"cc"];
+      [params setObject:[self countryCode] forKey:@"cc"];
    // }
                NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     [params setObject:deviceId forKey:@"deviceId"];

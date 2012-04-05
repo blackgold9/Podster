@@ -119,7 +119,7 @@
             LOG_PARSING(2, @"Episode did not exist matching %@ - %@ in context %@. Creaitng one.", item.title, item.identifier, localContext);
             
             // Only update lastUpdated if it's a new episode
-            if (isFirstItem) {
+            if (isFirstItem && item.date) {
                 podcast.lastUpdated = item.date;
                 LOG_PARSING(2, @"Updating next item date");
                 podcast.nextItemDate = item.date;                                                
