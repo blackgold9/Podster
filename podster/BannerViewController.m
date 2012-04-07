@@ -65,12 +65,15 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 {
     self = [super init];
     if (self != nil) {
-        _bannerView = [[GADBannerView alloc] initWithFrame:CGRectMake(0, 0, GAD_SIZE_320x50.width, GAD_SIZE_320x50.height)];
+        if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
+            _bannerView = [[GADBannerView alloc] initWithFrame:CGRectMake(0, 0, GAD_SIZE_320x50.width, GAD_SIZE_320x50.height)];
+            
+            _bannerView.delegate = self;
+            _bannerView.adUnitID = @"6d623966567243f6";
+            _bannerView.rootViewController = self;
+            _hasAd = NO;
+        }
         
-        _bannerView.delegate = self;
-        _bannerView.adUnitID = @"6d623966567243f6";
-        _bannerView.rootViewController = self;
-        _hasAd = NO;
         _contentController = contentController;
     }
     return self;
@@ -84,7 +87,9 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 - (void)loadView
 {
     UIView *contentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [contentView addSubview:_bannerView];
+    if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
+        [contentView addSubview:_bannerView];   
+    }
     [self addChildViewController:_contentController];
     [contentView addSubview:_contentController.view];
     [_contentController didMoveToParentViewController:self];

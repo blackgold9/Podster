@@ -95,75 +95,74 @@
 
 - (void)downloadEntry:(SVPodcastEntry *)entry manualDownload:(BOOL)isManualDownload
 {
-    return;
-    LOG_DOWNLOADS(2, @"Downloading entry %@", entry);
-    NSParameterAssert(entry);
-    NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
-    NSUInteger start = 0;
-    NSDictionary *headers = nil;
-    NSString *filePath = [[self downloadsPath] stringByAppendingPathComponent:[entry identifier]];
-    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
-    if (fileExists) {
-        start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
-        headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
-    }
-
-    NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
-    SVDownload *lastDownlaod = [SVDownload MR_findFirstWithPredicate:nil
-                                                            sortedBy:@"position"
-                                                           ascending:YES inContext:localContext];
-    NSInteger position = 0;
-    if (lastDownlaod) {
-        position = lastDownlaod.positionValue + 1;
-    }
-    __block SVDownload *download = nil;
-
-    [localContext performBlockAndWait:^{
-
-        SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
-        download = localEntry.download;
-        localEntry.download.positionValue = position;
-        if (!download) {
-
-            download = [SVDownload MR_createInContext:localContext];
-            download.manuallyTriggeredValue = isManualDownload;
-            localEntry.download = download;
-            download.filePath = [[self downloadsPath] stringByAppendingPathComponent:[localEntry identifier]];
-            download.stateValue = SVDownloadStatePending;
-        } else if ([[NSFileManager defaultManager] fileExistsAtPath:download.filePath] && download.entry.downloadCompleteValue){
-            //Download already existed, file exists, and entry is marked as download.
-            // Nothing to see here
-            NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
-            return;
-        }
-
-    }];
-    SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
-                                                                   downloadBasePath:[self downloadsPath]];
-
-    __block UIBackgroundTaskIdentifier background_task; //Create a task object
-
-    background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
-        [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
-        background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
-        UILocalNotification *notDone = [[UILocalNotification alloc] init];
-        notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
-        [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
-
-    }];
-
-    op.completionBlock = ^void() {
-        if (queue.operationCount == 0) {
-            UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
-            downloadedNotification.alertBody = NSLocalizedString(@"All downloads have completed", @"All downloads have completed");
-            [[UIApplication sharedApplication] presentLocalNotificationNow:downloadedNotification];
-        }
-
-        [[UIApplication sharedApplication] endBackgroundTask: background_task];
-        background_task = UIBackgroundTaskInvalid;
-    };
-
-    [queue addOperation:op];
+//    LOG_DOWNLOADS(2, @"Downloading entry %@", entry);
+//    NSParameterAssert(entry);
+//    NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
+//    NSUInteger start = 0;
+//    NSDictionary *headers = nil;
+//    NSString *filePath = [[self downloadsPath] stringByAppendingPathComponent:[entry identifier]];
+//    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+//    if (fileExists) {
+//        start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
+//        headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
+//    }
+//
+//    NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
+//    SVDownload *lastDownlaod = [SVDownload MR_findFirstWithPredicate:nil
+//                                                            sortedBy:@"position"
+//                                                           ascending:YES inContext:localContext];
+//    NSInteger position = 0;
+//    if (lastDownlaod) {
+//        position = lastDownlaod.positionValue + 1;
+//    }
+//    __block SVDownload *download = nil;
+//
+//    [localContext performBlockAndWait:^{
+//
+//        SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
+//        download = localEntry.download;
+//        localEntry.download.positionValue = position;
+//        if (!download) {
+//
+//            download = [SVDownload MR_createInContext:localContext];
+//            download.manuallyTriggeredValue = isManualDownload;
+//            localEntry.download = download;
+//            download.filePath = [[self downloadsPath] stringByAppendingPathComponent:[localEntry identifier]];
+//            download.stateValue = SVDownloadStatePending;
+//        } else if ([[NSFileManager defaultManager] fileExistsAtPath:download.filePath] && download.entry.downloadCompleteValue){
+//            //Download already existed, file exists, and entry is marked as download.
+//            // Nothing to see here
+//            NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
+//            return;
+//        }
+//
+//    }];
+//    SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
+//                                                                   downloadBasePath:[self downloadsPath]];
+//
+//    __block UIBackgroundTaskIdentifier background_task; //Create a task object
+//
+//    background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
+//        [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
+//        background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
+//        UILocalNotification *notDone = [[UILocalNotification alloc] init];
+//        notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
+//        [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
+//
+//    }];
+//
+//    op.completionBlock = ^void() {
+//        if (queue.operationCount == 0) {
+//            UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
+//            downloadedNotification.alertBody = NSLocalizedString(@"All downloads have completed", @"All downloads have completed");
+//            [[UIApplication sharedApplication] presentLocalNotificationNow:downloadedNotification];
+//        }
+//
+//        [[UIApplication sharedApplication] endBackgroundTask: background_task];
+//        background_task = UIBackgroundTaskInvalid;
+//    };
+//
+//    [queue addOperation:op];
 }
 
 -(NSString *)downloadsPath

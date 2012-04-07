@@ -223,6 +223,10 @@
 		4B2C6D0A15049C9C009DFE1F /* alert.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4B2C6D0915049C9C009DFE1F /* alert.aiff */; };
 		4B2D06E4152DE4FE00CF6F87 /* BlocksKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2D06E3152DE4FE00CF6F87 /* BlocksKit.framework */; };
 		4B2D06E5152DE4FE00CF6F87 /* BlocksKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2D06E3152DE4FE00CF6F87 /* BlocksKit.framework */; };
+		4B2D0700152FA1EE00CF6F87 /* arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D06FE152FA1EE00CF6F87 /* arrows.png */; };
+		4B2D0701152FA1EE00CF6F87 /* arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D06FE152FA1EE00CF6F87 /* arrows.png */; };
+		4B2D0702152FA1EE00CF6F87 /* arrows@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D06FF152FA1EE00CF6F87 /* arrows@2x.png */; };
+		4B2D0703152FA1EE00CF6F87 /* arrows@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D06FF152FA1EE00CF6F87 /* arrows@2x.png */; };
 		4B2E51CD14B2C85D0030B7C1 /* SVDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E51CC14B2C85D0030B7C1 /* SVDownloadManager.m */; };
 		4B2E51CE14B2C85D0030B7C1 /* SVDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E51CC14B2C85D0030B7C1 /* SVDownloadManager.m */; };
 		4B2E51DB14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */; };
@@ -697,6 +701,7 @@
 		4B10D0A514BFB44500DF4DBD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4B10D0AB14BFF90F00DF4DBD /* listen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listen.png; sourceTree = "<group>"; };
 		4B10D0AC14BFF91000DF4DBD /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
+		4B11ED99152FA997004B9091 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4B141FB314CA9AFD00028CE4 /* SVPodcastDatastore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 3.xcdatamodel"; sourceTree = "<group>"; };
 		4B141FB814CB220000028CE4 /* SVCustomApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomApplication.h; sourceTree = "<group>"; };
 		4B141FB914CB220100028CE4 /* SVCustomApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomApplication.m; sourceTree = "<group>"; };
@@ -718,7 +723,6 @@
 		4B1BC93215034EBA00F5F799 /* NRGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NRGridViewCell.m; path = "3rd Party/NRGridView/NRGridViewCell.m"; sourceTree = "<group>"; };
 		4B1BC93315034EBA00F5F799 /* NRGridViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridViewDataSource.h; path = "3rd Party/NRGridView/NRGridViewDataSource.h"; sourceTree = "<group>"; };
 		4B1BC93415034EBA00F5F799 /* NRGridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NRGridViewDelegate.h; path = "3rd Party/NRGridView/NRGridViewDelegate.h"; sourceTree = "<group>"; };
-		4B1CD598152CB4500028EF0D /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4B1CD599152CB5DA0028EF0D /* Description.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Description.txt; sourceTree = "<group>"; };
 		4B1CD59B152CC3B10028EF0D /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
 		4B1CD59C152CC3B10028EF0D /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
@@ -772,6 +776,8 @@
 		4B2C6D0615049710009DFE1F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		4B2C6D0915049C9C009DFE1F /* alert.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alert.aiff; sourceTree = "<group>"; };
 		4B2D06E3152DE4FE00CF6F87 /* BlocksKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BlocksKit.framework; path = "3rd Party/BlocksKit.framework"; sourceTree = "<group>"; };
+		4B2D06FE152FA1EE00CF6F87 /* arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrows.png; sourceTree = "<group>"; };
+		4B2D06FF152FA1EE00CF6F87 /* arrows@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrows@2x.png"; sourceTree = "<group>"; };
 		4B2E51CB14B2C85D0030B7C1 /* SVDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadManager.h; sourceTree = "<group>"; };
 		4B2E51CC14B2C85D0030B7C1 /* SVDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadManager.m; sourceTree = "<group>"; };
 		4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SVPodcastDatastore.xcdatamodel; sourceTree = "<group>"; };
@@ -1338,6 +1344,8 @@
 		4B20DEC814BE75B30042DC9D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4B2D06FE152FA1EE00CF6F87 /* arrows.png */,
+				4B2D06FF152FA1EE00CF6F87 /* arrows@2x.png */,
 				4B1CD5AE152CF8710028EF0D /* action.png */,
 				4B1CD5AF152CF8710028EF0D /* action@2x.png */,
 				4B1CD5A8152CEF4C0028EF0D /* TimePanel.png */,
@@ -2247,6 +2255,8 @@
 				4B1CD5AC152CEF4C0028EF0D /* TimePanel@2x.png in Resources */,
 				4B1CD5B0152CF8710028EF0D /* action.png in Resources */,
 				4B1CD5B2152CF8710028EF0D /* action@2x.png in Resources */,
+				4B2D0700152FA1EE00CF6F87 /* arrows.png in Resources */,
+				4B2D0702152FA1EE00CF6F87 /* arrows@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2329,6 +2339,8 @@
 				4B1CD5AD152CEF4C0028EF0D /* TimePanel@2x.png in Resources */,
 				4B1CD5B1152CF8710028EF0D /* action.png in Resources */,
 				4B1CD5B3152CF8710028EF0D /* action@2x.png in Resources */,
+				4B2D0701152FA1EE00CF6F87 /* arrows.png in Resources */,
+				4B2D0703152FA1EE00CF6F87 /* arrows@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2676,7 +2688,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4B154DEF150F8E4A00D80771 /* en */,
-				4B1CD598152CB4500028EF0D /* zh-Hans-CN */,
+				4B11ED99152FA997004B9091 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2736,7 +2748,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = podster/podster.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2761,7 +2773,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EDE193D2-8C8C-4651-8EEB-1ACDA75B3C48";
+				PROVISIONING_PROFILE = "98FE7B52-E69D-437A-B675-E6CBA7E81554";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98FE7B52-E69D-437A-B675-E6CBA7E81554";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

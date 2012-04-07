@@ -8,17 +8,10 @@
 
 "FAVORITES" = "Favorites";
 "WHATS_HOT" = "What's Hot";
-"ONE_MONTH" = "1 month subscription";
-"ONE_YEAR" = "1 year subscription";
-"THREE_MONTHS" = "3 month subscription";
 
 // Feedback strings
 "FEEDBACK_SUBJECT" = "Feedback from a Podster Customer!";
 "FEEDBACK_BODY" = "Type your message here:\n\n---------------------\n\nPodster Version:\t%@"; 
-
-// Purchase error
-"PURCHASE_ERROR" = "Purchase Error";
-"PURCHASE_VALIDATION_FAILED" = "We apologize, but there was a problem verifying your subscription.\n\nWe will try again the next time you start the app.";
 
 // Purchase Success
 "THANK_YOU_REALLY" = "Thank You! (Really)";
@@ -58,10 +51,9 @@
 "ERROR_TITLE_FOUR" = "An Error Has Occured";
 "ERROR_TITLE_FIVE" = "Ooops!";
 "Not a Favorite" = "Not a Favorite";
-"You cannot recieve notifications about a podcast unless it is marked as a Favorite" = "You cannot recieve notifications about a podcast unless it is marked as a Favorite";
 "NOTIFICATIONS_ARE_DISABLED" = "Notifications are disabled";
 "NOTIFICATIONS_DISABLED_BODY" = "Please enable notifications in settings if you would like to recieve updates when new episodes are posted.";
-"NOTIFICAITONS_SUBSCRIBE_FAILED" = "Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area.";
+
 "Notifications" = "Notifications";
 "Would you like to be notified when new episodes become available?" = "Would you like to be notified when new episodes become available?";
 
@@ -112,3 +104,5 @@
 "Reccomendations" = "Reccomendations";
 "All downloads have completed" = "All downloads have completed";
 "Downloads have been paused because you lost WI-FI connectivity" = "Downloads have been paused because you lost WI-FI connectivity";
+"DIRECTORY" = "Directory";
+"SEARCH_WATERMARK" = "Search for a specific podcast";

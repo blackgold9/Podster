@@ -15,6 +15,7 @@
     NSArray *categories;
     BOOL _isLoading;
 }
+@synthesize searchBar;
 @synthesize tableView;
 - (id)initWithCoder:(NSCoder *)coder
 {
@@ -39,7 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.navigationItem.title = NSLocalizedString(@"DIRECTORY", nil);
+    self.searchBar.placeholder = NSLocalizedString(@"SEARCH_WATERMARK", nil);
 //    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -52,6 +54,7 @@
 - (void)viewDidUnload
 {
     [self setTableView:nil];
+    [self setSearchBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

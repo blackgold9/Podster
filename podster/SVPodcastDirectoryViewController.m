@@ -14,6 +14,7 @@
     BOOL isLoading;
     NSArray *categories;
 }
+@synthesize searchBar;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
@@ -52,6 +53,7 @@
 }
 
 - (void)viewDidUnload {
+    [self setSearchBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

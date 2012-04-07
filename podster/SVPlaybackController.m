@@ -28,6 +28,7 @@
 @synthesize skipForwardButton;
 @synthesize skipBackButton;
 @synthesize chromeViews;
+@synthesize rateImage;
 @synthesize titleLabel;
 @synthesize artworkImage;
 @synthesize progressSlider;
@@ -132,17 +133,17 @@
     [placeholderSuperView addSubview:volumeView];
           
     player = [[SVPlaybackManager sharedInstance] player];
-    rateLabel.userInteractionEnabled = YES;
-    rateLabel.text = player.rate == 1.5 ? @"1.5x" : @"1x";
+    rateImage.userInteractionEnabled = YES;
+    rateImage.alpha = player.rate == 1.5 ? 1.0 : 0.5;
     playbackSpeed = player.rate;
-    [rateLabel whenTapped:^{
+    [rateImage whenTapped:^{
 
         if (player.rate == 1.5) {
-            rateLabel.text = @"1x";
+            rateImage.alpha = 0.5;   
             player.rate = 1;
             playbackSpeed =1.0;
         } else {
-            rateLabel.text = @"1.5x";
+            rateImage.alpha = 1.0;
             player.rate = 1.5;
             playbackSpeed = 1.5;
         }
@@ -164,6 +165,7 @@
     [self setContainerView:nil];
     [self setForegroundAlbumArt:nil];
     [self setRateLabel:nil];
+    [self setRateImage:nil];
     [super viewDidUnload];
         // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

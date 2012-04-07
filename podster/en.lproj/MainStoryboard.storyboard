@@ -70,6 +70,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="0a3-iW-gYY" id="gLj-Xd-cqP"/>
                         <segue destination="7eF-mi-Iw1" kind="push" identifier="podcastsForTag" id="khh-F1-tm9"/>
                     </connections>
                 </tableViewController>
@@ -452,7 +453,7 @@
                                 </userGuides>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFill" image="honeycomb.png" id="TgQ-OS-p4J" userLabel="AlbumArt Label" propertyAccessControl="none">
+                                    <imageView userInteractionEnabled="NO" alpha="0.50000000000000011" contentMode="scaleAspectFill" image="honeycomb.png" id="TgQ-OS-p4J" userLabel="AlbumArt Label" propertyAccessControl="none">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -565,13 +566,10 @@
                                                     <action selector="actionTapped:" destination="qhM-Sb-G9s" eventType="touchUpInside" id="0tv-NA-Phd"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dBx-JB-gtd">
-                                                <rect key="frame" x="-10" y="49" width="54" height="41"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="arrows.png" id="JHY-gq-etR">
+                                                <rect key="frame" x="11" y="56" width="27" height="20"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.42999999999999999" colorSpace="calibratedWhite"/>
                                     </view>
@@ -599,7 +597,7 @@
                         <outlet property="foregroundAlbumArt" destination="gtS-in-4fS" id="opV-dX-Imx"/>
                         <outlet property="playButton" destination="l5I-Xo-ljL" id="4Wc-MX-OYx"/>
                         <outlet property="progressSlider" destination="urB-tX-oaZ" id="yy3-C4-iEA"/>
-                        <outlet property="rateLabel" destination="dBx-JB-gtd" id="I7t-nb-Rni"/>
+                        <outlet property="rateImage" destination="JHY-gq-etR" id="mwF-Pt-xHt"/>
                         <outlet property="skipBackButton" destination="TMJ-4G-Djt" id="Xj3-no-Bvb"/>
                         <outlet property="skipForwardButton" destination="vzV-ZV-qro" id="e23-BU-VSy"/>
                         <outlet property="timeElapsedLabel" destination="fiR-nu-Q92" id="Ke7-to-m5p"/>
@@ -944,6 +942,7 @@
                         <barButtonItem key="backBarButtonItem" title="Directory" id="HEI-XI-eb1"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="IfC-EV-j6b" id="Wcr-xv-mZT"/>
                         <outlet property="tableView" destination="fjO-8G-iUa" id="egi-9N-qOf"/>
                         <outlet property="view" destination="fjO-8G-iUa" id="HZO-mG-rLU"/>
                     </connections>
@@ -957,6 +956,7 @@
         <image name="TimePanel.png" width="80" height="80"/>
         <image name="Unplayed.png" width="11" height="11"/>
         <image name="action.png" width="24" height="18"/>
+        <image name="arrows.png" width="27" height="20"/>
         <image name="bigPause.png" width="100" height="100"/>
         <image name="bigplay.png" width="100" height="100"/>
         <image name="clockSmall.png" width="12" height="12"/>
@@ -969,6 +969,148 @@
         <image name="skipforward.png" width="24" height="24"/>
         <image name="unplayed-flag.png" width="22" height="22"/>
     </resources>
+    <classes>
+        <class className="DTAttributedTextView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DTAttributedTextView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backgroundView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="textDelegate"/>
+            </relationships>
+        </class>
+        <class className="FeaturedController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="featuedGrid" candidateClass="NRGridView"/>
+                <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
+            </relationships>
+        </class>
+        <class className="GMGridView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GMGridView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="actionDelegate" candidateClass="NSObject"/>
+                <relationship kind="outlet" name="dataSource" candidateClass="NSObject"/>
+                <relationship kind="outlet" name="layoutStrategy"/>
+                <relationship kind="outlet" name="mainSuperView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="sortingDelegate" candidateClass="NSObject"/>
+                <relationship kind="outlet" name="transformDelegate" candidateClass="NSObject"/>
+            </relationships>
+        </class>
+        <class className="HomeController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="NRGridView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NRGridView.h"/>
+        </class>
+        <class className="OBSlider" superclassName="UISlider">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>
+        </class>
+        <class className="SVCategoryListViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVCategoryListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="SVEpisodeDetailsViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="downloadTapped:"/>
+                <relationship kind="action" name="listenTapped:"/>
+                <relationship kind="action" name="markAsPlayedTapped:"/>
+                <relationship kind="outlet" name="downloadButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imageBackground" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="listenButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="markAsPlayedButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="summaryView" candidateClass="DTAttributedTextView"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SVEpisodeListCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeListCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="downloadedIndicator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="durationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="progressIndicator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="subtitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="unplayedIndicator" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="SVPlaybackController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPlaybackController.h"/>
+            <relationships>
+                <relationship kind="action" name="actionTapped:"/>
+                <relationship kind="action" name="playTapped:"/>
+                <relationship kind="action" name="skipBackTapped:"/>
+                <relationship kind="action" name="skipForwardTapped:"/>
+                <relationship kind="action" name="sliderChanged:"/>
+                <relationship kind="outlet" name="artworkImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="foregroundAlbumArt" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="progressSlider" candidateClass="OBSlider"/>
+                <relationship kind="outlet" name="rateImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="rateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="skipBackButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="skipForwardButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeElapsedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="timeRemainingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outletCollection" name="chromeViews" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="SVPodcastDetailsViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="hidePlayedSwitchedByUser:"/>
+                <relationship kind="action" name="infoTapped:"/>
+                <relationship kind="action" name="notifySwitchChanged:"/>
+                <relationship kind="action" name="optionsButtonTapped:"/>
+                <relationship kind="action" name="sortControlTapped:"/>
+                <relationship kind="action" name="subscribeTapped:"/>
+                <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="hidePlayedItemsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="hidePlayedSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="metadataView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="notifyDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="notifyOnUpdateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="notifySwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="sortSegmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="subscribeButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SVPodcastDirectoryViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDirectoryViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonTapped:"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="SVPodcastsSearchResultsViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastsSearchResultsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="SVSubscriptionGridViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVSubscriptionGridViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>
+                <relationship kind="outlet" name="noContentLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SVViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

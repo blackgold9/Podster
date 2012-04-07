@@ -1,0 +1,116 @@
+/* 
+  Localizable.strings
+  podster
+
+  Created by Vanterpool, Stephen on 3/10/12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+
+"FAVORITES" = "收藏夹";
+"WHATS_HOT" = "热门精选";
+"ONE_MONTH" = "订阅1个月";
+"ONE_YEAR" = "订阅1年";
+"THREE_MONTHS" = "订阅3个月";
+
+// Feedback strings
+"FEEDBACK_SUBJECT" = "Podster 用户反馈！";
+"FEEDBACK_BODY" = "请在此输入您的信息:\n\n---------------------\n\nPodster 版本:\t%@"; 
+
+// Purchase error
+"PURCHASE_ERROR" = "购买错误";
+"PURCHASE_VALIDATION_FAILED" = "非常抱歉，但我们在核实您的订阅时出现了问题。\n\n我们会在您下次启动此应用时再试。";
+
+// Purchase Success
+"THANK_YOU_REALLY" = "由衷地感谢您！";
+"PURCHASE_COMPLETE_MESSAGE" = "您已成功购买。\n谢谢您！";
+// Upsell when user hits free limit
+"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE" = "解锁高级模式";
+"HIT_MAX_NOTIFICATIONS_PROMPT_BODY" = "您已达到免费监控播客的限额。\n\n解锁高级模式以获得无限提示（且无广告）！";
+
+"LEARN_MORE" = "了解更多......";
+
+
+"PURCHASE_PROMPT_TITLE" = "变得很棒？";
+"Disabled" = "禁用";
+"Enabled" = "启用";
+"TAP_TO_UNLOCK" = "点击以解锁";
+"PREMIUM_MODE" = "高级模式";
+"BUY_FORMAT_STRING" = "购买%@ (%@)";
+"UPGRADES" = "升级";
+"PREMIUM_MODE_DESCRIPTION" = "-禁用广告\n-无限新内容提示\n-所有未来的高级功能\n-我永远的感激";
+"PRIVACY_POLICY" = "隐私政策";
+"CONTACT_US" = "联系我们";
+"LEGAL_INFO" = "法律信息";
+"Waiting for connection..." = "等待连接......";
+"OFFLINE" = "离线";
+
+"FAVORITES_NO_CONTENT" = "您标记为最喜欢的播客会出现在这里。\n(试一下吧！)";
+
+// Notifications
+"EPISODE_NOTIFICATION" = "\"%@\" 出新集了！";
+
+"OK" = "OK";
+"There was a problem playing this podcast. Please try again later." = "无法播放此播客，请稍后再试。";
+
+"ERROR_TITLE_ONE" = "唔，太糟糕了！";
+"ERROR_TITLE_TWO" = "非常对不起！";
+"ERROR_TITLE_THREE" = "哦，不！";
+"ERROR_TITLE_FOUR" = "出现错误";
+"ERROR_TITLE_FIVE" = "哎呀！";
+"Not a Favorite" = "不是最喜欢的";
+"You cannot recieve notifications about a podcast unless it is marked as a Favorite" = "除非此播客被标记为最喜欢的，否则您就无法收到通知";
+"NOTIFICATIONS_ARE_DISABLED" = "通知被禁用";
+"NOTIFICATIONS_DISABLED_BODY" = "如果您想在新内容公布时得到更新，请启用设置中的通知功能";
+"NOTIFICAITONS_SUBSCRIBE_FAILED" = "Podster无法为此播客连接到服务器创建通知功能。请在此播客的设置中稍后再试。";
+"Notifications" = "通知";
+"Would you like to be notified when new episodes become available?" = "您想在新片段出现时得到通知吗？";
+
+"Loading new episodes" = "上传新集";
+"There was an error downloading this podcast. Please try again later" = "下载此播客时出错，请稍后再试";
+"Yes" = "好";
+"PURCHASE_DISABLED_TITLE" = "购买被禁用";
+"PURCHASE_DISABLED_BODY" = "您的设备目前无法进行购买。请确保设置程序中已启动购买功能";
+"RESTORE_PURCHASES" = "恢复购买";
+
+// Appirater
+"If you enjoy using %@, would you mind taking a moment to rate it? It won't take more than a minute. Thanks for your support!" = "如果您喜欢%@,您介意花一点点时间给它评分吗？用不了您一分钟的时间。感谢您的支持！";
+"Rate %@" = "评价 %@";
+"No, Thanks" = "不，谢谢";
+"Remind me later" = "稍后提醒我";
+"Podster can only download for 10 minutes in the background. Please re-open it to continue." = "Podster 后台下载只有10分钟的时间，请重新打开以继续。";
+"Downloading..." = "下载中......";
+
+// Categories
+"Arts" = "艺术";
+"Business" = "商业";
+"Comedy" = "喜剧";
+"Education" = "教育";
+"Games & Entertainment" = "游戏及娱乐";
+"Government & Organizations" = "政府和组织";
+"Health" = "健康";
+"Kids & Family" = "孩子和家庭";
+"Music" = "音乐";
+"News & Politics" = "新闻和政治";
+"Religion & Spirituality" = "宗教和精神";
+"Science & Medicine" = "科学和医药";
+"Society & Culture" = "社会和文化";
+"Sports & Recreation" = "体育和休闲";
+"Technology" = "科技";
+"TV & Film" = "电视和电影";
+
+// Pdocast details (episode list screen)
+"Details" = "详细内容";
+"Notify Me On Update" = "通知我最近的更新";
+"Poster will send you an alert when new episodes of this podcast are available" = "当此播客有新片段时，Podster 会给您发送提示。";
+"Hide Played Items" = "隐藏播放过的内容";
+"Oldest First" = "从最旧的开始";
+"Newest First" = "从最新的开始";
+
+// What's hot on home page
+"Popular Last Week" = "上周最受欢迎的";
+"Top Rated" = "最受欢迎的";
+"Reccomendations" = "推荐内容";
+"All downloads have completed" = "已完成所有下载";
+"Downloads have been paused because you lost WI-FI connectivity" = "因无法连接到WI-FI，下载暂停";
+"DIRECTORY" = "目录";
+"SEARCH_WATERMARK" = "搜索...";

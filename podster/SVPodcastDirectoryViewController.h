@@ -10,6 +10,7 @@
 
 
 @interface SVPodcastDirectoryViewController : UITableViewController <UISearchBarDelegate>
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 - (IBAction)cancelButtonTapped:(id)sender;
 @end
