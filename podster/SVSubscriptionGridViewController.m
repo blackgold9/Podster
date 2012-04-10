@@ -17,6 +17,7 @@
 #import "PodcastGridCell.h"
 #import "UIColor+Hex.h"
 #import "PodsterManagedDocument.h"
+#import "PodcastGridCellView.h"
 @interface SVSubscriptionGridViewController()
 
 @end
@@ -75,12 +76,10 @@
             
 
         NSError *error= nil;
-        [self.fetcher performFetch:&error];
-        NSAssert(error == nil, @"Error!");
-            [self.gridView reloadData];
             
-            self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
-            self.noContentLabel.numberOfLines = 0;
+            [self.fetcher performFetch:&error];
+            NSAssert(error == nil, @"Error!");
+            [self.gridView reloadData];
             self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
 
         });
@@ -92,7 +91,7 @@
 {
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.view addSubview:image];
     [self.view sendSubviewToBack:image];
     self.gridView.backgroundColor = [UIColor clearColor];
@@ -110,6 +109,10 @@
 {
     [super viewWillAppear:animated];
     LOG_GENERAL(2, @"ViewWillAppear");
+    self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
+    self.noContentLabel.numberOfLines = 0;
+
+
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
   }
 
@@ -215,18 +218,31 @@
 
 -(GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
 {
+    static UINib *podcastNib = nil;
+    if (podcastNib == nil) {
+      podcastNib = [UINib nibWithNibName:@"PodcastGridCellView" bundle:nil];   
+    }
     SVPodcast *currentPodcast = (SVPodcast *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];    
     CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
     
-    PodcastGridCell *cell = (PodcastGridCell *)[gridView dequeueReusableCellWithIdentifier:@"MySubscriptionsGridCell"];
+    GMGridViewCell *cell = (GMGridViewCell *)[gridView dequeueReusableCellWithIdentifier:@"MySubscriptionsGridCell"];
     
     if (!cell) 
     {
-        cell = [[PodcastGridCell alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        cell.reuseIdentifier =@"MySubscriptionsGridCell";
+        cell = [[GMGridViewCell alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+        cell.reuseIdentifier = @"MySubscriptionsGridCell";
+        PodcastGridCellView *newCell = [[podcastNib instantiateWithOwner:nil options:nil] objectAtIndex:0]; 
+
+        cell.contentView = newCell;
+
+
+    } else {
+           PodcastGridCellView *podcastCell =(PodcastGridCellView *) cell.contentView ;
+        [podcastCell prepareForReuse];
     }
     
-    [cell bind:currentPodcast fadeImage:YES];
+    PodcastGridCellView *podcastCell =(PodcastGridCellView *) cell.contentView ;
+    [podcastCell bind:currentPodcast];
 
     return cell;
 }

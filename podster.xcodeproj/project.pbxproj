@@ -149,8 +149,28 @@
 		4B10D0A614BFB44500DF4DBD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B10D0A514BFB44500DF4DBD /* CoreText.framework */; };
 		4B10D0AD14BFF91100DF4DBD /* listen.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10D0AB14BFF90F00DF4DBD /* listen.png */; };
 		4B10D0AE14BFF91100DF4DBD /* listen.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10D0AB14BFF90F00DF4DBD /* listen.png */; };
-		4B10D0AF14BFF91100DF4DBD /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10D0AC14BFF91000DF4DBD /* download.png */; };
-		4B10D0B014BFF91100DF4DBD /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10D0AC14BFF91000DF4DBD /* download.png */; };
+		4B11ED9D153151CD004B9091 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B11ED9B153151CD004B9091 /* background.png */; };
+		4B11ED9E153151CD004B9091 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B11ED9C153151CD004B9091 /* background@2x.png */; };
+		4B11EDA015315BFF004B9091 /* PodcastGridCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B11ED9F15315BFF004B9091 /* PodcastGridCellView.xib */; };
+		4B11EDA3153162AE004B9091 /* Downloaded-Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDA1153162AE004B9091 /* Downloaded-Overlay.png */; };
+		4B11EDA4153162AE004B9091 /* Downloaded-Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDA2153162AE004B9091 /* Downloaded-Overlay@2x.png */; };
+		4B11EDA715316695004B9091 /* PodcastGridCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDA615316695004B9091 /* PodcastGridCellView.m */; };
+		4B11EDB015328A6B004B9091 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDA915328A6B004B9091 /* .gitattributes */; };
+		4B11EDB115328A6B004B9091 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDAA15328A6B004B9091 /* .gitignore */; };
+		4B11EDB215328A6B004B9091 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDAB15328A6B004B9091 /* LICENSE */; };
+		4B11EDB315328A6B004B9091 /* MTStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDAD15328A6B004B9091 /* MTStatusBarOverlay.m */; };
+		4B11EDB415328A6B004B9091 /* Readme.mdown in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDAE15328A6B004B9091 /* Readme.mdown */; };
+		4B11EDB515328A6B004B9091 /* TODO.mdown in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDAF15328A6B004B9091 /* TODO.mdown */; };
+		4B11EDB81532974D004B9091 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDB61532974D004B9091 /* download.png */; };
+		4B11EDB91532974D004B9091 /* download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDB71532974D004B9091 /* download@2x.png */; };
+		4B11EDCB1532B214004B9091 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDBC1532B214004B9091 /* DDAbstractDatabaseLogger.m */; };
+		4B11EDCC1532B214004B9091 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDBE1532B214004B9091 /* DDASLLogger.m */; };
+		4B11EDCD1532B214004B9091 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC01532B214004B9091 /* DDFileLogger.m */; };
+		4B11EDCE1532B214004B9091 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC21532B214004B9091 /* DDLog.m */; };
+		4B11EDCF1532B214004B9091 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC41532B214004B9091 /* DDTTYLogger.m */; };
+		4B11EDD01532B214004B9091 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC71532B214004B9091 /* ContextFilterLogFormatter.m */; };
+		4B11EDD11532B214004B9091 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC91532B214004B9091 /* DispatchQueueLogFormatter.m */; };
+		4B11EDD21532B214004B9091 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDCA1532B214004B9091 /* README.txt */; };
 		4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
 		4B141FBB14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
 		4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */; };
@@ -700,8 +720,38 @@
 		4B10D06814BFB43400DF4DBD /* UIDevice+DTVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+DTVersion.m"; sourceTree = "<group>"; };
 		4B10D0A514BFB44500DF4DBD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4B10D0AB14BFF90F00DF4DBD /* listen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listen.png; sourceTree = "<group>"; };
-		4B10D0AC14BFF91000DF4DBD /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
 		4B11ED99152FA997004B9091 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4B11ED9B153151CD004B9091 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		4B11ED9C153151CD004B9091 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		4B11ED9F15315BFF004B9091 /* PodcastGridCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PodcastGridCellView.xib; sourceTree = "<group>"; };
+		4B11EDA1153162AE004B9091 /* Downloaded-Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Downloaded-Overlay.png"; sourceTree = "<group>"; };
+		4B11EDA2153162AE004B9091 /* Downloaded-Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Downloaded-Overlay@2x.png"; sourceTree = "<group>"; };
+		4B11EDA515316695004B9091 /* PodcastGridCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastGridCellView.h; sourceTree = "<group>"; };
+		4B11EDA615316695004B9091 /* PodcastGridCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastGridCellView.m; sourceTree = "<group>"; };
+		4B11EDA915328A6B004B9091 /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		4B11EDAA15328A6B004B9091 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		4B11EDAB15328A6B004B9091 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4B11EDAC15328A6B004B9091 /* MTStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTStatusBarOverlay.h; sourceTree = "<group>"; };
+		4B11EDAD15328A6B004B9091 /* MTStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTStatusBarOverlay.m; sourceTree = "<group>"; };
+		4B11EDAE15328A6B004B9091 /* Readme.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.mdown; sourceTree = "<group>"; };
+		4B11EDAF15328A6B004B9091 /* TODO.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.mdown; sourceTree = "<group>"; };
+		4B11EDB61532974D004B9091 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
+		4B11EDB71532974D004B9091 /* download@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download@2x.png"; sourceTree = "<group>"; };
+		4B11EDBB1532B214004B9091 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		4B11EDBC1532B214004B9091 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		4B11EDBD1532B214004B9091 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		4B11EDBE1532B214004B9091 /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		4B11EDBF1532B214004B9091 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		4B11EDC01532B214004B9091 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		4B11EDC11532B214004B9091 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		4B11EDC21532B214004B9091 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		4B11EDC31532B214004B9091 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		4B11EDC41532B214004B9091 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		4B11EDC61532B214004B9091 /* ContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		4B11EDC71532B214004B9091 /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		4B11EDC81532B214004B9091 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		4B11EDC91532B214004B9091 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		4B11EDCA1532B214004B9091 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		4B141FB314CA9AFD00028CE4 /* SVPodcastDatastore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 3.xcdatamodel"; sourceTree = "<group>"; };
 		4B141FB814CB220000028CE4 /* SVCustomApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomApplication.h; sourceTree = "<group>"; };
 		4B141FB914CB220100028CE4 /* SVCustomApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomApplication.m; sourceTree = "<group>"; };
@@ -1294,6 +1344,50 @@
 			path = "3rd Party/DTCoreText";
 			sourceTree = "<group>";
 		};
+		4B11EDA815328A6B004B9091 /* MTStatusBarOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				4B11EDA915328A6B004B9091 /* .gitattributes */,
+				4B11EDAA15328A6B004B9091 /* .gitignore */,
+				4B11EDAB15328A6B004B9091 /* LICENSE */,
+				4B11EDAC15328A6B004B9091 /* MTStatusBarOverlay.h */,
+				4B11EDAD15328A6B004B9091 /* MTStatusBarOverlay.m */,
+				4B11EDAE15328A6B004B9091 /* Readme.mdown */,
+				4B11EDAF15328A6B004B9091 /* TODO.mdown */,
+			);
+			path = MTStatusBarOverlay;
+			sourceTree = "<group>";
+		};
+		4B11EDBA1532B214004B9091 /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				4B11EDBB1532B214004B9091 /* DDAbstractDatabaseLogger.h */,
+				4B11EDBC1532B214004B9091 /* DDAbstractDatabaseLogger.m */,
+				4B11EDBD1532B214004B9091 /* DDASLLogger.h */,
+				4B11EDBE1532B214004B9091 /* DDASLLogger.m */,
+				4B11EDBF1532B214004B9091 /* DDFileLogger.h */,
+				4B11EDC01532B214004B9091 /* DDFileLogger.m */,
+				4B11EDC11532B214004B9091 /* DDLog.h */,
+				4B11EDC21532B214004B9091 /* DDLog.m */,
+				4B11EDC31532B214004B9091 /* DDTTYLogger.h */,
+				4B11EDC41532B214004B9091 /* DDTTYLogger.m */,
+				4B11EDC51532B214004B9091 /* Extensions */,
+			);
+			path = Lumberjack;
+			sourceTree = "<group>";
+		};
+		4B11EDC51532B214004B9091 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4B11EDC61532B214004B9091 /* ContextFilterLogFormatter.h */,
+				4B11EDC71532B214004B9091 /* ContextFilterLogFormatter.m */,
+				4B11EDC81532B214004B9091 /* DispatchQueueLogFormatter.h */,
+				4B11EDC91532B214004B9091 /* DispatchQueueLogFormatter.m */,
+				4B11EDCA1532B214004B9091 /* README.txt */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4B1BC92D15034EA000F5F799 /* NRGridView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1344,6 +1438,12 @@
 		4B20DEC814BE75B30042DC9D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4B11EDB61532974D004B9091 /* download.png */,
+				4B11EDB71532974D004B9091 /* download@2x.png */,
+				4B11EDA1153162AE004B9091 /* Downloaded-Overlay.png */,
+				4B11EDA2153162AE004B9091 /* Downloaded-Overlay@2x.png */,
+				4B11ED9B153151CD004B9091 /* background.png */,
+				4B11ED9C153151CD004B9091 /* background@2x.png */,
 				4B2D06FE152FA1EE00CF6F87 /* arrows.png */,
 				4B2D06FF152FA1EE00CF6F87 /* arrows@2x.png */,
 				4B1CD5AE152CF8710028EF0D /* action.png */,
@@ -1424,7 +1524,6 @@
 				4B22F16D14C4F048001B8595 /* nav-bar.png */,
 				4B22F16E14C4F048001B8595 /* nav-bar@2x.png */,
 				4B10D0AB14BFF90F00DF4DBD /* listen.png */,
-				4B10D0AC14BFF91000DF4DBD /* download.png */,
 				4B10D01D14BF9EC400DF4DBD /* clockSmall.png */,
 				4B10D01E14BF9EC500DF4DBD /* clockSmall@2x.png */,
 				4B10D01514BF95C900DF4DBD /* down@2x.png */,
@@ -1773,6 +1872,8 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B11EDBA1532B214004B9091 /* Lumberjack */,
+				4B11EDA815328A6B004B9091 /* MTStatusBarOverlay */,
 				4B2D06E3152DE4FE00CF6F87 /* BlocksKit.framework */,
 				4B1CD5A7152CC3B60028EF0D /* AdMob */,
 				4B314760152C2DA900629659 /* libTestFlight.a */,
@@ -1998,6 +2099,7 @@
 		4BB2058214D0F41B0038EB7D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				4B11ED9F15315BFF004B9091 /* PodcastGridCellView.xib */,
 				4BB2058B14D0F8C70038EB7D /* SVPodcastModalView.h */,
 				4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */,
 				4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */,
@@ -2006,6 +2108,8 @@
 				4B1F3F7E14D24B2600CECBA2 /* SVPodcastSettingsView.xib */,
 				4B1F3F8114D24DB200CECBA2 /* SVPodcastSettingsView.h */,
 				4B1F3F8214D24DB200CECBA2 /* SVPodcastSettingsView.m */,
+				4B11EDA515316695004B9091 /* PodcastGridCellView.h */,
+				4B11EDA615316695004B9091 /* PodcastGridCellView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -2134,7 +2238,6 @@
 				4B10D01F14BF9EC500DF4DBD /* clockSmall.png in Resources */,
 				4B10D02114BF9EC500DF4DBD /* clockSmall@2x.png in Resources */,
 				4B10D0AD14BFF91100DF4DBD /* listen.png in Resources */,
-				4B10D0AF14BFF91100DF4DBD /* download.png in Resources */,
 				4B22F16F14C4F048001B8595 /* nav-bar.png in Resources */,
 				4B22F17114C4F048001B8595 /* nav-bar@2x.png in Resources */,
 				4B91BF7914C7802F00B33776 /* bg-gunmetal.png in Resources */,
@@ -2257,6 +2360,19 @@
 				4B1CD5B2152CF8710028EF0D /* action@2x.png in Resources */,
 				4B2D0700152FA1EE00CF6F87 /* arrows.png in Resources */,
 				4B2D0702152FA1EE00CF6F87 /* arrows@2x.png in Resources */,
+				4B11ED9D153151CD004B9091 /* background.png in Resources */,
+				4B11ED9E153151CD004B9091 /* background@2x.png in Resources */,
+				4B11EDA015315BFF004B9091 /* PodcastGridCellView.xib in Resources */,
+				4B11EDA3153162AE004B9091 /* Downloaded-Overlay.png in Resources */,
+				4B11EDA4153162AE004B9091 /* Downloaded-Overlay@2x.png in Resources */,
+				4B11EDB015328A6B004B9091 /* .gitattributes in Resources */,
+				4B11EDB115328A6B004B9091 /* .gitignore in Resources */,
+				4B11EDB215328A6B004B9091 /* LICENSE in Resources */,
+				4B11EDB415328A6B004B9091 /* Readme.mdown in Resources */,
+				4B11EDB515328A6B004B9091 /* TODO.mdown in Resources */,
+				4B11EDB81532974D004B9091 /* download.png in Resources */,
+				4B11EDB91532974D004B9091 /* download@2x.png in Resources */,
+				4B11EDD21532B214004B9091 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2286,7 +2402,6 @@
 				4B10D02014BF9EC500DF4DBD /* clockSmall.png in Resources */,
 				4B10D02214BF9EC500DF4DBD /* clockSmall@2x.png in Resources */,
 				4B10D0AE14BFF91100DF4DBD /* listen.png in Resources */,
-				4B10D0B014BFF91100DF4DBD /* download.png in Resources */,
 				4B22F17014C4F048001B8595 /* nav-bar.png in Resources */,
 				4B22F17214C4F048001B8595 /* nav-bar@2x.png in Resources */,
 				4B91BF7A14C7802F00B33776 /* bg-gunmetal.png in Resources */,
@@ -2520,6 +2635,15 @@
 				4B842BDE150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */,
 				4BD123C5150FFF8100A108DA /* CloudHelper.m in Sources */,
 				4B35BC97151AA4D300325DEF /* Appirater.m in Sources */,
+				4B11EDA715316695004B9091 /* PodcastGridCellView.m in Sources */,
+				4B11EDB315328A6B004B9091 /* MTStatusBarOverlay.m in Sources */,
+				4B11EDCB1532B214004B9091 /* DDAbstractDatabaseLogger.m in Sources */,
+				4B11EDCC1532B214004B9091 /* DDASLLogger.m in Sources */,
+				4B11EDCD1532B214004B9091 /* DDFileLogger.m in Sources */,
+				4B11EDCE1532B214004B9091 /* DDLog.m in Sources */,
+				4B11EDCF1532B214004B9091 /* DDTTYLogger.m in Sources */,
+				4B11EDD01532B214004B9091 /* ContextFilterLogFormatter.m in Sources */,
+				4B11EDD11532B214004B9091 /* DispatchQueueLogFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

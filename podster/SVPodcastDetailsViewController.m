@@ -31,6 +31,7 @@
 #import "SVPodcastSettingsView.h"
 #import "BlockAlertView.h"
 #import "GCDiscreetNotificationView.h"
+#import "MTStatusBarOverlay.h"
 #import "SVSubscriptionManager.h"
 #import "_SVPodcastEntry.h"
 @interface SVPodcastDetailsViewController ()
@@ -52,6 +53,7 @@
     BOOL isSubscribed;
     NSArray *items;
     NSManagedObjectContext *context;
+    NSTimer *gracePeriodTimer;
 }
 @synthesize notifyOnUpdateLabel;
 @synthesize notifyDescriptionLabel;
@@ -402,7 +404,8 @@
 {
     LOG_GENERAL(2, @"%s", sel_getName(_cmd));
     [super viewDidLoad];
-    GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
+
+    //    GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
     isInitialLoad = YES;
 
     self.navigationItem.title = NSLocalizedString(@"Details", @"Details");
@@ -464,7 +467,10 @@
                 
                 void (^loadCompleteHandler)() = ^{
                     if(blockSelf) {
-                        [notificationView hideAnimated];                    
+                        if ([gracePeriodTimer isValid]) {
+                            [gracePeriodTimer invalidate];
+                        }
+                        [[MTStatusBarOverlay sharedInstance] hide];
                         blockSelf->isLoading = NO;
                         LOG_GENERAL(2, @"Done loading entries");                    
                         [blockSelf loadFeedImage];
@@ -474,32 +480,33 @@
                         [self reloadData];
                     }
                     
-                };
+                };                
+                gracePeriodTimer = [NSTimer timerWithTimeInterval:0.5
+                                                            block:^(NSTimeInterval time) {
+                                                                [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") ];
+                                                                
+                                                            } 
+                                                          repeats:NO];
+                [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
+
+                [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcast:localPodcast
+                                                              withLowerPriority:NO
+                                                                      inContext:localContext
+                                                                   onCompletion:loadCompleteHandler
+                                                                        onError:^(NSError *error) {
+                                                                            if (blockSelf) {
+                                                                                [[MTStatusBarOverlay sharedInstance] hide]; 
+                                                                                BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
+                                                                                                                               message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
+                                                                                [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
+                                                                                                          block:^{
+                                                                                                              
+                                                                                                          }];
+                                                                                [alert show];
+                                                                            }
+                                                                        }];
                 
                 
-                if ([[[SVSubscriptionManager sharedInstance] currentURL] isEqualToString:feedURL]) {
-                    // Skip doing anything since the background process is already on it
-                    LOG_GENERAL(2, @"Subscription manager is already downlioading thi sone, just wait");
-                } else {
-                    [notificationView show:YES];
-                    [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcast:localPodcast
-                                                                  withLowerPriority:NO
-                                                                          inContext:localContext
-                                                                       onCompletion:loadCompleteHandler
-                                                                            onError:^(NSError *error) {
-                                                                                if (blockSelf) {
-                                                                                    [notificationView hideAnimated];
-                                                                                    BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                                                                                   message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
-                                                                                    [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
-                                                                                                              block:^{
-
-                                                                                                              }];
-                                                                                    [alert show];
-                                                                                }
-                                                                            }];
-
-                }
                 
                 [self reloadData];
                 [self toggleOptionsPanel:NO animated:NO]; 

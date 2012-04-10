@@ -27,8 +27,6 @@
 
 @implementation SVAppDelegate
 {
-    NSTimer *saveTimer;
-    UIColor *backgrondTexture;
 }
 
 NSString *uuid();
@@ -106,16 +104,16 @@ NSString *uuid();
 }
 - (void)configureTheming
 {
-    backgrondTexture =[UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
     UIColor *colorOne = [UIColor colorWithRed:0.15 green:0.15 blue:0.16 alpha:1.0]; // [UIColor colorWithHex:0x1E1E27];
     UIColor *colorTwo = [UIColor colorWithHex:0x65F4FF];
     UIColor *colorThree = [UIColor colorWithHex:0x41EA29];
     UIColor *colorFour = [UIColor colorWithHex:0xC0C0E8];
     
     UIColor *colorFive = [UIColor colorWithHex:0x000000];
-        UIImage *image = [UIImage imageNamed:@"nav-bar.png"];
+    UIImage *image = [UIImage imageNamed:@"nav-bar.png"];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackOpaque];
     [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setTintColor:colorOne];
+    [[UINavigationBar appearance] setTintColor:colorOne];
     [[UISegmentedControl appearance] setTintColor:colorOne];
     [[UIToolbar appearance] setTintColor:colorOne];
     [[UIBarButtonItem appearance] setTintColor:colorOne];
@@ -138,7 +136,7 @@ NSString *uuid();
     
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal 
                                                     barMetrics:UIBarMetricsDefault];
-    
+  
     UIImage *minImage = [UIImage imageNamed:@"slider-fill.png"];
     //UIImage *maxImage = [UIImage imageNamed:@"slider-bg.png"];
     UIImage *thumbImage = [UIImage imageNamed:@"slider-cap.png"];
@@ -148,7 +146,8 @@ NSString *uuid();
                                        forState:UIControlStateNormal];
     [[UISlider appearance] setThumbImage:thumbImage 
                                 forState:UIControlStateNormal];
-
+    [[UISlider appearance] setMaximumTrackTintColor:colorOne];
+  //  [[UIProgressView appearance] setMaximumTrackTintColor:colorOne];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -376,25 +375,30 @@ NSString *uuid();
         switch (receivedEvent.subtype) {
             case UIEventSubtypeRemoteControlStop:
             case UIEventSubtypeRemoteControlPause:
-                if( _player) {
-                    _player.rate = 0;
-                }
+                
+                [[SVPlaybackManager sharedInstance] pause];
+                
                 break;
             case UIEventSubtypeRemoteControlPlay:
-                if(_player) {
-                    _player.rate = 1;
-                }
+                
+                [[SVPlaybackManager sharedInstance] play];
+                
                 break;
             case UIEventSubtypeRemoteControlTogglePlayPause:
-                if( _player) {
-                    if ( _player.rate != 0) {
-                        _player.rate = 0;
-                    } else {
-                        _player.rate = 1;
-                    }
-                }
+                
+                if ( _player.rate != 0) {
+                    [[SVPlaybackManager sharedInstance] pause];
+                } else {
+                    [[SVPlaybackManager sharedInstance] play];
+                }            
                 break;
-
+            case UIEventSubtypeRemoteControlNextTrack:
+                [[SVPlaybackManager sharedInstance] skipForward];
+                break;
+            case UIEventSubtypeRemoteControlPreviousTrack:
+                [[SVPlaybackManager sharedInstance] skipBack];
+                break;
+                
             default:
                 break;
         }

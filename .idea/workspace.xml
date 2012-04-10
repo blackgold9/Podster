@@ -2,18 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MTStatusBarOverlay" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/Downloaded-Overlay.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/Downloaded-Overlay@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/background.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/background@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/download@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/shine-overlay.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/images/shine-overlay@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDASLLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDASLLogger.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDAbstractDatabaseLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDAbstractDatabaseLogger.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDFileLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDFileLogger.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDLog.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDLog.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDTTYLogger.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/DDTTYLogger.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/Extensions/ContextFilterLogFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/Extensions/ContextFilterLogFormatter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/Extensions/DispatchQueueLogFormatter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/Extensions/DispatchQueueLogFormatter.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Lumberjack/Extensions/README.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/PodcastGridCellView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/PodcastGridCellView.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/PodcastGridCellView.xib" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/images/download.png" afterPath="$PROJECT_DIR$/podster/images/download.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster-release.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster-release.xcscheme" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/BannerViewController.m" afterPath="$PROJECT_DIR$/podster/BannerViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/FeaturedController.m" afterPath="$PROJECT_DIR$/podster/FeaturedController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadManager.m" afterPath="$PROJECT_DIR$/podster/SVDownloadManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" afterPath="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Info.plist" afterPath="$PROJECT_DIR$/podster/podster-Info.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/zh-Hans-CN.lproj/Localizable.strings" afterPath="$PROJECT_DIR$/podster/zh-Hans-CN.lproj/Localizable.strings" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackController.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackManager.h" afterPath="$PROJECT_DIR$/podster/SVPlaybackManager.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPlaybackManager.m" afterPath="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" afterPath="$PROJECT_DIR$/podster/en.lproj/MainStoryboard.storyboard" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Prefix.pch" afterPath="$PROJECT_DIR$/podster/podster-Prefix.pch" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,19 +65,6 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="podster" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Localizable.strings" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/podster/en.lproj/Localizable.strings">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="83" selection-start="1890" selection-end="1890" vertical-scroll-proportion="0.021875">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -194,17 +210,17 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="183" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="688" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="690" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="688" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="182" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="179" />
     <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="179" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="" />
-    <property name="options.splitter.details.proportions" value="0.49760765" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.49760765" />
   </component>
   <component name="RunManager" selected="Application.podster">
     <configuration default="true" type="OCUnitRunConfiguration" factoryName="OCUnit" PROJECT_NAME="podster" TARGET_NAME="podsterTests" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.1_1" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
@@ -273,13 +289,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32767403" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.21005917" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.0" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0" sideWeight="0.0" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -462,9 +478,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/en.lproj/Localizable.strings">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="83" selection-start="1890" selection-end="1890" vertical-scroll-proportion="0.021875">
-          <folding />
-        </state>
+        <state line="51" column="83" selection-start="1890" selection-end="1890" vertical-scroll-proportion="0.021875" />
       </provider>
     </entry>
   </component>

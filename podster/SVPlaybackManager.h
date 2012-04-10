@@ -24,6 +24,9 @@ typedef enum {
 - (AVPlayer *)player;
 - (void)play;
 - (void)pause;
+- (void)skipForward;
+- (void)skipBack;
 - (BOOL)startedPlayback;
 - (void)playEpisode:(SVPodcastEntry *)episode ofPodcast:(SVPodcast *)podcast;
+- (void)setPlaybackRate:(CGFloat)rate;
 @end

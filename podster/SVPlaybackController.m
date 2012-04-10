@@ -140,11 +140,11 @@
 
         if (player.rate == 1.5) {
             rateImage.alpha = 0.5;   
-            player.rate = 1;
+            [[SVPlaybackManager sharedInstance] setPlaybackRate:1];
             playbackSpeed =1.0;
         } else {
             rateImage.alpha = 1.0;
-            player.rate = 1.5;
+            [[SVPlaybackManager sharedInstance] setPlaybackRate:1.5];
             playbackSpeed = 1.5;
         }
 
@@ -189,7 +189,7 @@
             if ([keyPath isEqualToString:@"status"]) {
         
                 if (player.status == AVPlayerStatusReadyToPlay) {
-                    [player play];
+                    [[SVPlaybackManager sharedInstance] play];
                     LOG_GENERAL(3, @"Started Playback");
                 } else {
                     LOG_GENERAL(3, @"Error downloing");
@@ -206,10 +206,10 @@
 }
 - (IBAction)playTapped:(id)sender {
     if (player.rate == 0) {
-        player.rate = playbackSpeed;
+        [[SVPlaybackManager sharedInstance] play];
         [FlurryAnalytics logEvent:@"PlayTapped"];
     } else {
-        [player pause];
+        [[SVPlaybackManager sharedInstance] pause];
         [FlurryAnalytics logEvent:@"PauseTapped"];
     }
 }
@@ -230,15 +230,14 @@
 
 - (IBAction)skipForwardTapped:(id)sender {
     [FlurryAnalytics logEvent:@"SkipBackTapped"];
-    CMTime ammount = CMTimeMake(30, 1);
-    [player seekToTime:CMTimeAdd(ammount, player.currentTime)];
+    [[SVPlaybackManager sharedInstance] skipForward];
+    
 }
 
 - (IBAction)skipBackTapped:(id)sender {
     [FlurryAnalytics logEvent:@"SkipForwardTapped"];
-    CMTime ammount = CMTimeMake(7, 1);
-    [player seekToTime:CMTimeSubtract(player.currentTime, ammount)];
-}
+        [[SVPlaybackManager sharedInstance] skipBack];
+  }
 #pragma mark - helpers
 
 

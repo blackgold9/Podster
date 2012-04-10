@@ -98,7 +98,7 @@ void audioRouteChangeListenerCallback (
 		if (routeChangeReason == kAudioSessionRouteChangeReason_OldDeviceUnavailable || 
             (routeChangeReason == kAudioSessionRouteChangeReason_NewDeviceAvailable && connectedToA2DP)) {
 
-			[[[SVPlaybackManager sharedInstance] player] pause];
+			[[SVPlaybackManager sharedInstance]  pause];
 
 		} else {
 
@@ -113,11 +113,12 @@ void audioRouteChangeListenerCallback (
     AVPlayer *_player;
     AVPlayerItem *currentItem;
     dispatch_queue_t monitorQueue;
-    BOOL playing;
+    BOOL userWantsPlayback;
     id monitorId;
     // Represents whether the user has triggered playback.
     // This is used to decide whether ot not to start playback after an interruption (phone call) has completed
     BOOL playingWhenInterrupted;
+    CGFloat playbackRate;
 }
 @synthesize currentPodcast;
 @synthesize currentEpisode;
@@ -128,6 +129,7 @@ void audioRouteChangeListenerCallback (
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback 
                                                error:nil];
         self.playbackState = kPlaybackStateStopped;
+        playbackRate = 1.0;
     }
 
     return self;
@@ -150,6 +152,14 @@ void audioRouteChangeListenerCallback (
 
 - (BOOL)startedPlayback {
     return _player != nil;
+}
+
+-(void)setPlaybackRate:(CGFloat)rate
+{
+    playbackRate = rate;
+    if (playbackState == kPlaybackStatePlaying) {
+        [_player setRate:playbackRate];
+    }
 }
 
 - (void)startPositionMonitoring
@@ -186,7 +196,7 @@ void audioRouteChangeListenerCallback (
     self.currentEpisode = episode;
     self.currentPodcast = podcast;
     NSAssert(episode.mediaURL != nil, @"The podcast must have a mediaURL");
-   
+    playbackRate = 1.0; // REset playback rate
     NSError *error;
     [[AVAudioSession sharedInstance] setActive: YES error: &error];
     NSAssert(error == nil, @"There should be no error starting the session");
@@ -227,7 +237,7 @@ void audioRouteChangeListenerCallback (
                                              selector:@selector(itemReachedEnd) 
                                                  name:AVPlayerItemDidPlayToEndTimeNotification object:currentItem];
     [_player replaceCurrentItemWithPlayerItem:currentItem];
-    [_player play];
+    [self play];
  
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:episode.title, MPMediaItemPropertyTitle,
                             podcast.author, MPMediaItemPropertyArtist,
@@ -270,26 +280,43 @@ void audioRouteChangeListenerCallback (
 -(void)play
 {
     if (_player) {
-        [_player play];
+        userWantsPlayback = YES;
+        [_player setRate:playbackRate];
     }
 }
 
 -(void)pause
 {
     if (_player) {
+        userWantsPlayback = NO;
         [_player pause];
     }
 }
 
+- (void)skipForward
+{
+    CMTime ammount = CMTimeMake(30, 1);
+    [_player seekToTime:CMTimeAdd(ammount, _player.currentTime)];
+}
+
+- (void)skipBack
+{
+    CMTime ammount = CMTimeMake(7, 1);
+    [_player seekToTime:CMTimeSubtract(_player.currentTime, ammount)];
+
+}
+
 #pragma mark - AVAudioSessionDelegate
 - (void)endInterruptionWithFlags:(NSUInteger)flags {
-   if (flags == AVAudioSessionInterruptionFlags_ShouldResume && self.playbackState == kPlaybackStatePlaying) {
+   if (flags == AVAudioSessionInterruptionFlags_ShouldResume && userWantsPlayback) {
        NSAssert(_player !=nil, @"The player is expected to exist here");
-       [_player play];
+       [self play];
        [[AVAudioSession sharedInstance] setActive: YES error: nil];
    }
 
 }
+
+
 
 #pragma mark - KVO
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -299,7 +326,7 @@ void audioRouteChangeListenerCallback (
             if ([keyPath isEqualToString:@"status"]) {
 
                 if (_player.status == AVPlayerStatusReadyToPlay) {
-                    [_player play];
+                    [self play];
                     LOG_PLAYBACK(2,@"Started Playback");
                 } else if (_player.status == AVPlayerItemStatusFailed) {
                     LOG_PLAYBACK(1,@"Playback failed with error: %@", _player.error);

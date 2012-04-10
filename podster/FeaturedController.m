@@ -8,7 +8,7 @@
 
 #import "FeaturedController.h"
 #import "ActsAsPodcast.h"
-#import "PodcastGridCell.h"
+#import "PodcastGridCellView.h"
 #import <QuartzCore/QuartzCore.h>
 #include <stdlib.h>
 #import "SVPodcastsSearchResultsViewController.h"
@@ -55,11 +55,11 @@
     [super viewDidLoad];
 //    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
 //    self.gridView.centerGrid = NO;
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.view addSubview:image];
     [self.view sendSubviewToBack:image];
      
-    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
+    self.featuedGrid.cellSize = CGSizeMake(160, 170);
     self.featuedGrid.backgroundColor = [UIColor clearColor]; //[UIColor colorWithPatternImage:[UIImage imageNamed:@"honeycomb.png"]];
     self.featuedGrid.dataSource = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -124,55 +124,24 @@
     if(cell == nil){
         cell = [[NRGridViewCell alloc] initWithReuseIdentifier:MyCellIdentifier];
 
+        static UINib *podcastNib = nil;
+        if (podcastNib == nil) {
+            podcastNib = [UINib nibWithNibName:@"PodcastGridCellView" bundle:nil];   
+        }
+        
+        PodcastGridCellView *podCell = [[podcastNib instantiateWithOwner:nil options:nil] objectAtIndex:0]; 
+        podCell.tag = 29;
+        podCell.frame = CGRectOffset(podCell.frame, 5, 0);
 
-        PodcastGridCell *podCell = [[PodcastGridCell alloc] initWithFrame:CGRectMake(0, 0, 140, 140)];
-        podCell.tag = 9;
-//        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0,0,140,140)];
-//        //view.backgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
-//        //        view.layer.masksToBounds = NO;
-//        //        //view.layer.cornerRadius = 8;
-//        //        view.layer.shadowColor = [UIColor whiteColor].CGColor;
-//        //        view.layer.shadowOpacity = 0.5;
-//        //        view.layer.shadowOffset = CGSizeMake(0, 0);
-//        //        view.layer.shadowPath = [UIBezierPath bezierPathWithRect:view.bounds].CGPath;
-//        //        view.layer.shadowRadius = 3;
-//        view.layer.borderColor = [[UIColor colorWithRed:0.48 green:0.48 blue:0.52  alpha:1] CGColor];
-//        view.layer.borderWidth = 2;
-//
-//        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholder.png"]];
-//        backgroundImage.frame = view.frame;
-//        [view addSubview:backgroundImage];
-//
-//        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectInset(view.bounds, 10,10)];
-//       titleLabel.textColor = [UIColor whiteColor];
-//       titleLabel.backgroundColor = [UIColor clearColor];
-//
-//       titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:27];
-//       titleLabel.numberOfLines = 0;
-//       titleLabel.tag = 1907;
-//       titleLabel.opaque = NO;
-//        [view addSubview:titleLabel];
-//
-//        UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectInset(view.frame, 0, 0)];
-//        imageView.tag = 1906;
-//        [view addSubview:imageView];
         [cell.contentView addSubview:podCell];
         
     }
 
-
-//    UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:1906];
-//    imageView.image = nil;
-//    UILabel *label = (UILabel *)[cell.contentView viewWithTag:1907];
-
     NSDictionary *sectionDict = [featured objectAtIndex:indexPath.section];
     NSArray *feeds = [sectionDict valueForKey:@"feeds"];
     id<ActsAsPodcast> podcast = [feeds objectAtIndex:indexPath.row];
-    PodcastGridCell *gridCell = (PodcastGridCell *) [[cell contentView] viewWithTag:9];
-        [gridCell bind:podcast fadeImage:YES];
-    //label.text = [podcast title];
-    //[imageView setImageWithURL:[NSURL URLWithString:[podcast thumbLogoURL]]
-      //                             placeholderImage:nil];
+    PodcastGridCellView *gridCell = (PodcastGridCellView *) [[cell contentView] viewWithTag:29];
+        [gridCell bind:podcast];
     return cell;
 }
 
