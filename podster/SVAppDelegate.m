@@ -24,6 +24,7 @@
 #import "PodsterManagedDocument.h"
 #import "MBProgressHUD.h"
 #import "SVSettings.h"
+#import "BWHockeyManager.h"
 
 @implementation SVAppDelegate
 {
@@ -152,16 +153,18 @@ NSString *uuid();
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"6b271c66137f6fab967e63af81587f71_NTQ2ODMyMDEyLTAxLTE5IDE0OjU5OjM5LjU0OTg4Mw"];
-
-    
+        
 #if defined (CONFIGURATION_AppStore)
 
    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
 #endif
 #if defined (CONFIGURATION_Ad_Hoc)
-  [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
+    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
+//    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
+//    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+//    [[BWQuincyManager sharedQuincyManager] setAutoSubmitDeviceUDID:YES];
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
 

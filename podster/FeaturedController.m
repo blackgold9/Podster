@@ -1,3 +1,4 @@
+
 //
 //  FeaturedController.m
 //  podster
@@ -55,12 +56,13 @@
     [super viewDidLoad];
 //    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
 //    self.gridView.centerGrid = NO;
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    [self.view addSubview:image];
-    [self.view sendSubviewToBack:image];
+    UIImage *image = [UIImage imageNamed:@"background-gradient.jpg"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    [self.view addSubview:imageView];
+    [self.view sendSubviewToBack:imageView];
      
     self.featuedGrid.cellSize = CGSizeMake(160, 170);
-    self.featuedGrid.backgroundColor = [UIColor clearColor]; //[UIColor colorWithPatternImage:[UIImage imageNamed:@"honeycomb.png"]];
+    self.featuedGrid.backgroundColor = [UIColor clearColor];
     self.featuedGrid.dataSource = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[SVPodcatcherClient sharedInstance] featuredPodcastsForLanguage:nil

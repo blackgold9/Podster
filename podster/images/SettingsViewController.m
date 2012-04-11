@@ -165,7 +165,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                 
             }
         } else if (indexPath.row == 4) {
-            [TestFlight openFeedbackView];
+           // [TestFlight openFeedbackView];
         }
     } else if (indexPath.section == 0) {
         if(![[SVSettings sharedInstance] premiumModeUnlocked]) {

@@ -2,30 +2,96 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/podster/SVPodcastSettingsView.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/podster/SVPodcastSettingsView.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/podster/SVPodcastSettingsView.xib" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/podster/SVVideoPlaybackView.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/podster/SVVideoPlaybackView.m" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/IconGradient.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/IconGradient@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/authorize_denied.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/authorize_denied@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/authorize_request.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/authorize_request@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/buttonHighlight.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/buttonHighlight@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/gear.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/gear@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InMobi iOS SDK Bundle/libInMobi_iOS.a" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWApp.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWApp.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWGlobal.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWGlobal.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWHockeyManager.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWHockeyManager.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWHockeySettingsViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWHockeySettingsViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWHockeyViewController.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/BWHockeyViewController.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/NSString+HockeyAdditions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/NSString+HockeyAdditions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/PSAppStoreHeader.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/PSAppStoreHeader.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/PSStoreButton.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/PSStoreButton.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/PSWebTableViewCell.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/PSWebTableViewCell.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/UIImage+HockeyAdditions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Helper/UIImage+HockeyAdditions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/de.lproj/Hockey.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/en.lproj/Hockey.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/it.lproj/Hockey.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/Hockey.bundle/sv.lproj/Hockey.strings" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HockeyKit/README.mkdown" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InMobi iOS SDK Bundle/IMAdDelegate.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InMobi iOS SDK Bundle/IMAdError.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InMobi iOS SDK Bundle/IMAdInterstitial.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InMobi iOS SDK Bundle/IMAdInterstitialDelegate.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InMobi iOS SDK Bundle/IMAdRequest.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InMobi iOS SDK Bundle/IMAdView.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InMobi iOS SDK Bundle/IMSDKUtil.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/CDataScanner.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/CDataScanner.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/Extensions/CDataScanner_Extensions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/Extensions/CDataScanner_Extensions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/Extensions/NSCharacterSet_Extensions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/Extensions/NSCharacterSet_Extensions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/Extensions/NSDictionary_JSONExtensions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/Extensions/NSDictionary_JSONExtensions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/Extensions/NSScanner_Extensions.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/Extensions/NSScanner_Extensions.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CJSONDataSerializer.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CJSONDataSerializer.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CJSONDeserializer.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CJSONDeserializer.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CJSONScanner.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CJSONScanner.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CJSONSerializer.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CJSONSerializer.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CSerializedJSONData.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TouchJSON/JSON/CSerializedJSONData.m" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GADBannerView.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GADBannerViewDelegate.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GADInterstitial.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GADInterstitialDelegate.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GADRequest.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GADRequestError.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TestFlight.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libAdapterIAd.a" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libGoogleAdMobAds.a" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/libTestFlight.a" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/podster/images/background-gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/podster/images/background-gradient@2x.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MTStatusBarOverlay" afterPath="$PROJECT_DIR$/MTStatusBarOverlay" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/PodsterWorkspace.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/images/placeholder.png" afterPath="$PROJECT_DIR$/podster/images/placeholder.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/images/placeholder@2x.png" afterPath="$PROJECT_DIR$/podster/images/placeholder@2x.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/AFNetworking/AFHTTPClient.m" afterPath="$PROJECT_DIR$/3rd Party/AFNetworking/AFHTTPClient.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NSString+MD5Addition.m" afterPath="$PROJECT_DIR$/NSString+MD5Addition.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SVPodcastsSearchResultsViewController.m" afterPath="$PROJECT_DIR$/SVPodcastsSearchResultsViewController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/HomeController.m" afterPath="$PROJECT_DIR$/podster/HomeController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/PodcastGridCellView.m" afterPath="$PROJECT_DIR$/podster/PodcastGridCellView.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/PodcastGridCellView.xib" afterPath="$PROJECT_DIR$/podster/PodcastGridCellView.xib" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadManager.m" afterPath="$PROJECT_DIR$/podster/SVDownloadManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/BannerViewController.h" afterPath="$PROJECT_DIR$/podster/BannerViewController.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/BannerViewController.m" afterPath="$PROJECT_DIR$/podster/BannerViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/FeaturedController.m" afterPath="$PROJECT_DIR$/podster/FeaturedController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" afterPath="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcast.h" afterPath="$PROJECT_DIR$/podster/models/SVPodcast.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcast.m" afterPath="$PROJECT_DIR$/podster/models/SVPodcast.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/zh-Hans.lproj/Localizable.strings" afterPath="$PROJECT_DIR$/podster/zh-Hans.lproj/Localizable.strings" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/images/SettingsViewController.m" afterPath="$PROJECT_DIR$/podster/images/SettingsViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Prefix.pch" afterPath="$PROJECT_DIR$/podster/podster-Prefix.pch" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,9 +121,7 @@
         <entry file="file://$PROJECT_DIR$/podster/models/SVPodcast.m">
           <provider selected="true" editor-type-id="text-editor">
             <state line="102" column="16" selection-start="3592" selection-end="3592" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,10 +139,7 @@
         <entry file="file://$PROJECT_DIR$/podster/PodcastGridCellView.m">
           <provider selected="true" editor-type-id="text-editor">
             <state line="88" column="139" selection-start="3328" selection-end="3328" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#3255#3310#0" expanded="true" />
-                <element signature="e#5820#5875#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -86,16 +147,25 @@
       <file leaf-file-name="SVSubscriptionGridViewController.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="31" selection-start="1756" selection-end="1756" vertical-scroll-proportion="-1.5">
+            <state line="66" column="31" selection-start="1756" selection-end="1756" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AFHTTPClient.m" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BannerViewController.m" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/podster/BannerViewController.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="87" column="45" selection-start="3830" selection-end="3830" vertical-scroll-proportion="0.3546875">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AFHTTPClient.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFHTTPClient.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="296" column="4" selection-start="13724" selection-end="13724" vertical-scroll-proportion="0.7350993">
+            <state line="296" column="0" selection-start="13724" selection-end="13724" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -113,12 +183,8 @@
       <file leaf-file-name="HomeController.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="213" column="0" selection-start="8412" selection-end="8412" vertical-scroll-proportion="-5.8076925">
-              <folding>
-                <element signature="e#153#179#0" expanded="true" />
-                <element signature="e#8469#8530#0" expanded="true" />
-                <element signature="e#10408#10452#0" expanded="true" />
-              </folding>
+            <state line="213" column="0" selection-start="8412" selection-end="8412" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -160,7 +226,6 @@
         <option value="$PROJECT_DIR$/podster/PodsterIAPHelper.m" />
         <option value="$PROJECT_DIR$/podster/SVSettings.m" />
         <option value="$PROJECT_DIR$/podster/SVPlaybackManager.m" />
-        <option value="$PROJECT_DIR$/podster/BannerViewController.m" />
         <option value="$PROJECT_DIR$/podster/SVPlaybackController.m" />
         <option value="$PROJECT_DIR$/podster/engines/SVPodcatcherClient.m" />
         <option value="$PROJECT_DIR$/podster/en.lproj/Localizable.strings" />
@@ -171,6 +236,7 @@
         <option value="$PROJECT_DIR$/podster/HomeController.m" />
         <option value="$PROJECT_DIR$/podster/SVDownloadManager.m" />
         <option value="$PROJECT_DIR$/3rd Party/AFNetworking/AFHTTPClient.m" />
+        <option value="$PROJECT_DIR$/podster/BannerViewController.m" />
       </list>
     </option>
   </component>
@@ -386,21 +452,21 @@
     <frame x="0" y="22" width="1280" height="774" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31617647" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32767403" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32205883" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.21005917" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.7632353" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3293556" sideWeight="0.0" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2367647" sideWeight="0.9988453" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2367647" sideWeight="0.9988453" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32205883" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31617647" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39966834" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -490,11 +556,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MWFeedParser.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="474" column="0" selection-start="15036" selection-end="15036" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPlaybackController.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="155" column="60" selection-start="5672" selection-end="5672" vertical-scroll-proportion="0.0" />
@@ -520,81 +581,61 @@
         <state line="51" column="83" selection-start="1890" selection-end="1890" vertical-scroll-proportion="0.021875" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/podster/models/SVPodcast.m">
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk/System/Library/Frameworks/SystemConfiguration.framework/Headers/SCNetworkReachability.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="16" selection-start="3592" selection-end="3592" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalRecord.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="14" selection-start="565" selection-end="565" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/PodcastGridCellView.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="139" selection-start="3328" selection-end="3328" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#3255#3310#0" expanded="true" />
-            <element signature="e#5820#5875#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="230" column="0" selection-start="9568" selection-end="9568" vertical-scroll-proportion="0.33194155" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVSubscriptionManager.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="86" selection-start="4208" selection-end="4208" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="93" column="86" selection-start="4208" selection-end="4208" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="421" column="0" selection-start="18805" selection-end="18805" vertical-scroll-proportion="0.0">
+        <state line="421" column="0" selection-start="18805" selection-end="18805" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="0" selection-start="8412" selection-end="8412" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="1642" selection-end="1642" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFHTTPClient.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="296" column="0" selection-start="13724" selection-end="13724" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="31" selection-start="1756" selection-end="1756" vertical-scroll-proportion="-1.5">
-          <folding />
-        </state>
+        <state line="66" column="31" selection-start="1756" selection-end="1756" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/podster/HomeController.m">
+    <entry file="file://$PROJECT_DIR$/podster/PodcastGridCellView.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="213" column="0" selection-start="8412" selection-end="8412" vertical-scroll-proportion="-5.8076925">
-          <folding>
-            <element signature="e#153#179#0" expanded="true" />
-            <element signature="e#8469#8530#0" expanded="true" />
-            <element signature="e#10408#10452#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="88" column="139" selection-start="3328" selection-end="3328" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
+    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalRecord.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="1642" selection-end="1642" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="26" column="14" selection-start="565" selection-end="565" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk/System/Library/Frameworks/SystemConfiguration.framework/Headers/SCNetworkReachability.h">
+    <entry file="file://$PROJECT_DIR$/podster/models/SVPodcast.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="0" selection-start="9568" selection-end="9568" vertical-scroll-proportion="0.33194155">
-          <folding />
-        </state>
+        <state line="102" column="16" selection-start="3592" selection-end="3592" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFHTTPClient.m">
+    <entry file="file://$PROJECT_DIR$/podster/BannerViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="296" column="4" selection-start="13724" selection-end="13724" vertical-scroll-proportion="0.7350993">
+        <state line="87" column="45" selection-start="3830" selection-end="3830" vertical-scroll-proportion="0.3546875">
           <folding />
         </state>
       </provider>

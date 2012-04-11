@@ -26,7 +26,7 @@
 #import "FlurryAnalytics.h"
 #import <BlocksKit/BlocksKit.h>
 #import "PodsterManagedDocument.h"
-#import "TestFlight.h"
+
 #endif
 #ifdef DEBUG
 #define LOG_NETWORK(level, ...)   NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"network",level,__VA_ARGS__)

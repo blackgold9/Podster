@@ -130,7 +130,6 @@ static const NSInteger kDefaultPageSize = 50;
     NSInteger startIndex = currentPage * kDefaultPageSize;
     
     if (self.searchString) {
-           [TestFlight passCheckpoint:@"SEARCH"];
 
         self.navigationItem.title = self.searchString;
         

@@ -91,7 +91,7 @@
 {
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background-gradient.jpg"]];
     [self.view addSubview:image];
     [self.view sendSubviewToBack:image];
     self.gridView.backgroundColor = [UIColor clearColor];
