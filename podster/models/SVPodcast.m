@@ -99,5 +99,11 @@
     }
 }
 
+- (NSUInteger)downloadedEpisodes
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadComplete = YES && podcast = %@", self];
+    return [SVPodcastEntry MR_countOfEntitiesWithPredicate:predicate inContext:self.managedObjectContext];
+}
+
 
 @end

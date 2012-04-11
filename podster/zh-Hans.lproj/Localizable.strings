@@ -114,3 +114,5 @@
 "Downloads have been paused because you lost WI-FI connectivity" = "因无法连接到WI-FI，下载暂停";
 "DIRECTORY" = "目录";
 "SEARCH_WATERMARK" = "搜索...";
+"Downloaded: %d" = "Downloaded: %d";
+"Updating Podcasts" = "Updating Podcasts";

@@ -89,21 +89,20 @@ static char const kRefreshInterval = -3;
                                                                          withLowerPriority:YES
                                                                                  inContext:context 
                                                                               onCompletion:^{
-                                                                                  if(!weakSelf->shouldCancel) {
-                                                                                      LOG_GENERAL(2, @"Cancelling subscription update");
-
-                                                                                      [context performBlock:^{
-
-                                                                                          [nextPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
-                                                                                      }];
-                                                                                  }
-                                                                                  [context performBlock:^{
+                                                                                  [context performBlock:^{                                                                                      
+                                                                                      [nextPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
                                                                                       [context save:nil ];
-                                                                                  }];
 
+                                                                                  }];
+                                                                                  weakSelf.currentURL = nil;
+
+                                                                                  if(weakSelf->shouldCancel) {
+                                                                                      LOG_PARSING(2, @"Cancelling");
+                                                                                  } else {
+                                                                                      [weakSelf refreshNextSubscription];
+                                                                                  }                                                                                  
                                                                               } onError:^(NSError *error) {
-                                                                                     if(!weakSelf->shouldCancel) {
-                                                                                         LOG_GENERAL(2, @"Cancelling subscription update");
+                                                                                     if(!weakSelf->shouldCancel) {                                                                                       
                                                                                          [self refreshNextSubscription];
                                                                                      }
                                                                                      weakSelf.currentURL = nil;

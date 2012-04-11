@@ -28,7 +28,6 @@
 #import "SVPlaybackController.h"
 #import "SVPodcastModalView.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "SVPodcastSettingsView.h"
 #import "BlockAlertView.h"
 #import "GCDiscreetNotificationView.h"
 #import "MTStatusBarOverlay.h"

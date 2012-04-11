@@ -111,6 +111,7 @@
     LOG_GENERAL(2, @"ViewWillAppear");
     self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
     self.noContentLabel.numberOfLines = 0;
+    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
 
 
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
@@ -124,6 +125,8 @@
     [[SVSubscriptionManager sharedInstance] cancel];
 
 }
+
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations

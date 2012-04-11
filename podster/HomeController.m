@@ -18,6 +18,7 @@
 #import "PodsterManagedDocument.h"
 #import "PodsterIAPHelper.h"
 #import "BlockAlertView.h"
+#import "MTStatusBarOverlay.h"
 @interface HomeController ()
 @property(nonatomic, strong) SVSubscriptionGridViewController *subscriptionsController;
 @property(nonatomic, strong) FeaturedController *featuredController;
@@ -121,11 +122,9 @@
     
     [self.view addGestureRecognizer:rightSwipe];
 
-    notificationView = [[GCDiscreetNotificationView alloc] initWithText:@"Updating Podcasts" 
-                                                           showActivity:YES 
-                                                     inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
-                                                                 inView:self.view];
+
                                    [placeHolder removeFromSuperview];
+
                         
      }];
 
@@ -212,7 +211,7 @@
                                                 context:nil];
     
     if ([[SVSubscriptionManager sharedInstance] isBusy]) {
-        [notificationView show:YES];
+        [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Updating Podcasts", @"Updating Podcasts")];
     }
 }
 
@@ -262,9 +261,9 @@
         
         if ([keyPath isEqualToString:@"isBusy"]){
             if([[SVSubscriptionManager sharedInstance] isBusy]) {
-                [notificationView showAnimated]; 
+                [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Updating Podcasts", nil)];
             } else {
-                [notificationView hideAnimated];
+                [[MTStatusBarOverlay sharedInstance] hide];
             }
         }
     });

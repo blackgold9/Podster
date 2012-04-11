@@ -15,6 +15,7 @@
     AFImageRequestOperation *imageLoadOp;
     id downloadPercentageObserverToken;
     id isDownloadingObserverToken;
+    id newEpisodeCountObserverToken;
     SVPodcast *coreDataPodcast;
 }
 @synthesize progressBackground;
@@ -80,10 +81,12 @@
     if ([podcast class] == [SVPodcast class]) {
         
         
-        self.downloadCountLabel.text = @"Downloaded: 3";
+
         self.downloadCountLabel.alpha = 1.0;
+
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
+        self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), [coreDataPodcast downloadedEpisodes]];
         if (coreDataPodcast.isDownloadingValue) {
             //Downloading, so configure ui
             self.downloadCountLabel.text = NSLocalizedString(@"Downloading...", @"Downloading...");
@@ -92,7 +95,21 @@
             self.progressBar.alpha = 1.0;
         }
         
-        
+        newEpisodeCountObserverToken = [coreDataPodcast addObserverForKeyPath:@"unseenEpisodeCount" task:^(id obj, NSDictionary *change) {
+            [UIView animateWithDuration:0.33
+                             animations:^{
+                                 
+                                 
+                                 if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
+                                     self.unseenCountFlagImage.alpha = 1.0;
+                                     self.unseenCountLabel.alpha = 1.0;
+                                     self.unseenCountLabel.text = [NSString stringWithFormat:@"%d", [[podcast unseenEpsiodeCount] integerValue]];
+                                 } else {
+                                     self.unseenCountLabel.alpha = 0;
+                                     self.unseenCountFlagImage.alpha = 0;
+                                 }
+                             }];     
+        }];
         __weak UIProgressView *weakProgressView  = self.progressBar;
         __weak UIView *WeakprogressBackground = self.progressBackground;
         downloadPercentageObserverToken = [coreDataPodcast addObserverForKeyPath:@"downloadPercentage" task:^(id obj, NSDictionary *change) { 
@@ -102,16 +119,17 @@
                 weakProgressView.progress = local.downloadPercentageValue / 100.0f;
             }
         }];
-        
-        
+                
         isDownloadingObserverToken = [coreDataPodcast addObserverForKeyPath:@"isDownloading" task:^(id obj, NSDictionary *change) {
             if (weakProgressView) {
                 
                 SVPodcast *local = obj;
                 if (local.isDownloadingValue) { 
                     LOG_GENERAL(2, @"Downloading item");
+                    self.downloadCountLabel.text = NSLocalizedString(@"Downloading...", @"Downloading...");
                 } else {
                     LOG_GENERAL(2, @"Not Downloading item");
+                    self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), [local downloadedEpisodes]];
                 }
                 [UIView animateWithDuration:0.5
                                  animations:^{
@@ -132,6 +150,10 @@
         
         if (isDownloadingObserverToken) {
             [coreDataPodcast removeObserverForKeyPath:@"isDownloading" identifier:isDownloadingObserverToken];
+        }
+        
+        if (newEpisodeCountObserverToken) {
+            [coreDataPodcast removeObserverForKeyPath:@"unseenEpisodeCount" identifier:newEpisodeCountObserverToken];
         }
         
         self.progressBackground.alpha = 0;

@@ -7,5 +7,8 @@
 -(void)updatePodcastWithFeedInfo:(MWFeedInfo *)info;
 
 - (void)updateNextItemDateAndDownloadIfNeccesary:(BOOL)shouldDownload;
+
+- (NSUInteger)downloadedEpisodes;
+
 - (SVPodcastEntry *)firstUnplayedInPodcastOrder;
 @end

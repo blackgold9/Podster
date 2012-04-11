@@ -51,6 +51,7 @@
         queue.name = @"com.vantertech.podster.downloads";
         NSString *lostWifi = NSLocalizedString(@"Downloads have been paused because you lost WI-FI connectivity", @"Downloads have been paused because you lost WI-FI connectivity");
 
+
     }
     
     return self;
