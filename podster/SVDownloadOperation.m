@@ -18,11 +18,11 @@
     SVDownload  *download;
     AFHTTPRequestOperation *networkOp;
     NSInteger currentProgressPercentage;
-    NSString *basePath;
+    NSString *filePath;
 }
 @synthesize downloadObjectID;
 -(id)initWithDownloadObjectID:(NSManagedObjectID *)objectId
-             downloadBasePath:(NSString *)path
+             filePath:(NSString *)path
 {
     self = [super init];
     if (self) {
@@ -30,7 +30,7 @@
         NSParameterAssert(path);
 
         self.downloadObjectID = objectId;
-        basePath = [path copy];
+        filePath = [path copy];
         
     }
     return self;
@@ -87,9 +87,7 @@
         NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
         NSUInteger start = 0;
         NSDictionary *headers = nil;
-        NSString *filePath = [basePath stringByAppendingPathComponent:[download.entry identifier]];
-        filePath = [filePath stringByAppendingPathExtension:[mediaURL pathExtension]];
-        LOG_DOWNLOADS(2, @"Local FilePath: %@", filePath);
+
         BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
         if (fileExists) {
             start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
@@ -176,6 +174,7 @@
 }
 -(void)cancel
 {
+    
     [networkOp cancel];
     [self willChangeValueForKey:@"isExecuting"];
     _isExecuting = NO;

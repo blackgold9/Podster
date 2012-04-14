@@ -88,20 +88,33 @@
         if(entry) {
 
             self.nextItemDate = entry.datePublished;
+            // If item hasn't been listened to
             if (!entry.playedValue && entry.download == nil && !entry.downloadCompleteValue && shouldDownload) {
                 LOG_GENERAL(2, @"Queing entry for download");
                 // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
                 [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NO];
             }
+            [[self managedObjectContext] save:nil];
         } else {
             self.nextItemDate = [NSDate distantPast];
         }
     }
+
+    // Cleanup downloads
+    NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"played == YES && downloadComplete == YES"];
+    NSSet *needDeleting = [self.items filteredSetUsingPredicate:needsDeletingPredicate];
+    LOG_DOWNLOADS(2, @"Deleting %d items", needDeleting.count);
+    for (SVPodcastEntry *toDelete in needDeleting) {
+        [[SVDownloadManager sharedInstance] deleteFileForEntry:toDelete];
+        toDelete.downloadCompleteValue = NO;
+    }
+
+
 }
 
 - (NSUInteger)downloadedEpisodes
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"downloadComplete = YES && podcast = %@", self];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = YES && %K= %@",SVPodcastEntryAttributes.downloadComplete, SVPodcastEntryRelationships.podcast, self];
     return [SVPodcastEntry MR_countOfEntitiesWithPredicate:predicate inContext:self.managedObjectContext];
 }
 

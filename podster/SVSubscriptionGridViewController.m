@@ -72,18 +72,20 @@
                                                              sectionNameKeyPath:nil
                                                                       cacheName:nil];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
 
-        NSError *error= nil;
-            
-            [self.fetcher performFetch:&error];
-            NSAssert(error == nil, @"Error!");
-            [self.gridView reloadData];
-            self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
-
-        });
     }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+
+            NSError *error= nil;
+
+                [self.fetcher performFetch:&error];
+                NSAssert(error == nil, @"Error!");
+                [self.gridView reloadData];
+                self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
+
+            });
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -172,11 +174,7 @@
                 break;
             case NSFetchedResultsChangeMove:
                 LOG_GENERAL(2, @"GRID:Object should move from %d to %d", indexPath.row, newIndexPath.row );
-                [self.gridView removeObjectAtIndex:indexPath.row
-                                     withAnimation:GMGridViewItemAnimationNone];
-                [self.gridView insertObjectAtIndex:newIndexPath.row
-                                     withAnimation:GMGridViewItemAnimationNone];
-//            needsReload = YES;
+                [self.gridView reloadData];
                 break;
             case NSFetchedResultsChangeUpdate:
             {
@@ -248,14 +246,6 @@
     [podcastCell bind:currentPodcast];
 
     return cell;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
-        [super observeValueForKeyPath:keyPath
-                         ofObject:object
-                           change:change
-                          context:context];
 }
 
 @end

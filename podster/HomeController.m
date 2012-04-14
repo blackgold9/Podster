@@ -209,10 +209,17 @@
                                              forKeyPath:@"isBusy"
                                                 options:NSKeyValueObservingOptionNew 
                                                 context:nil];
-    
+
+    [MTStatusBarOverlay sharedInstance]
+    .animation = MTStatusBarOverlayAnimationShrink;
+
     if ([[SVSubscriptionManager sharedInstance] isBusy]) {
         [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Updating Podcasts", @"Updating Podcasts")];
     }
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[MTStatusBarOverlay sharedInstance] hide];
 }
 
 - (void)viewDidUnload

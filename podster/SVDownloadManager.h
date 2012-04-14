@@ -13,5 +13,8 @@
 + (id)sharedInstance;
 
 - (void)downloadEntry:(SVPodcastEntry *)entry manualDownload:(BOOL)isManualDownload;
+
+- (void)deleteFileForEntry:(SVPodcastEntry *)entry;
+
 - (void)resumeDownloads;
 @end

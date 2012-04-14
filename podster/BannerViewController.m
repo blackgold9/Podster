@@ -45,7 +45,6 @@
 
 #import "BannerViewController.h"
 #import "SVSettings.h"
-#import "GADBannerView.h"
 #import "SVPodcatcherClient.h"
 
 NSString * const BannerViewActionWillBegin = @"BannerViewActionWillBegin";

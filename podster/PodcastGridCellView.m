@@ -82,10 +82,11 @@
         
         
 
-        self.downloadCountLabel.alpha = 1.0;
+
 
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
+        self.downloadCountLabel.alpha = coreDataPodcast.isDownloadingValue? 1 : 0;
         self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), [coreDataPodcast downloadedEpisodes]];
         if (coreDataPodcast.isDownloadingValue) {
             //Downloading, so configure ui
@@ -112,6 +113,7 @@
         }];
         __weak UIProgressView *weakProgressView  = self.progressBar;
         __weak UIView *WeakprogressBackground = self.progressBackground;
+        __weak PodcastGridCellView *weakSelf = self;
         downloadPercentageObserverToken = [coreDataPodcast addObserverForKeyPath:@"downloadPercentage" task:^(id obj, NSDictionary *change) { 
             if (weakProgressView) {
                 LOG_GENERAL(2, @"Updating grid cell with download progress");
@@ -128,13 +130,18 @@
                     LOG_GENERAL(2, @"Downloading item");
                     self.downloadCountLabel.text = NSLocalizedString(@"Downloading...", @"Downloading...");
                 } else {
+                    NSUInteger  count = [local downloadedEpisodes];
                     LOG_GENERAL(2, @"Not Downloading item");
-                    self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), [local downloadedEpisodes]];
+                    if (count > 0) {
+                        self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), count];
+                    }
                 }
+
                 [UIView animateWithDuration:0.5
                                  animations:^{
                                      WeakprogressBackground.alpha = local.isDownloadingValue ? 0.5 : 0;
                                      weakProgressView.alpha = local.isDownloadingValue? 1 : 0;
+                                     weakSelf.downloadCountLabel.alpha = local.isDownloadingValue? 1 : 0;
                                  }];
             }
         }];

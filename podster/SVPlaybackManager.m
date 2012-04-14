@@ -123,6 +123,7 @@ void audioRouteChangeListenerCallback (
 @synthesize currentPodcast;
 @synthesize currentEpisode;
 @synthesize playbackState;
+@synthesize isStreaming;
 - (id)init {
     self = [super init];
     if (self) {
@@ -178,7 +179,7 @@ void audioRouteChangeListenerCallback (
             CGFloat progresPercentage = currentPosition / totalDuration;
             if (progresPercentage > PLAYED_PERCENTAGE) {
                 // Mark as played when you pass the played percentage
-                if (blockSelf.currentEpisode.playedValue != YES) {
+                if (blockSelf.currentEpisode.playedValue == NO) {
                     blockSelf.currentEpisode.playedValue = YES;
                     [blockSelf.currentPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
                 }
@@ -204,7 +205,14 @@ void audioRouteChangeListenerCallback (
 
     BOOL isDownloaded = self.currentEpisode.downloadCompleteValue;
     NSURL *url = isDownloaded ? [NSURL fileURLWithPath:self.currentEpisode.localFilePath]: [NSURL URLWithString:currentEpisode.mediaURL];
+    isStreaming = !isDownloaded;
+    
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:self.currentEpisode.localFilePath];
+    if(isDownloaded) {
+        NSAssert(fileExists, @"The file should exist at this point");
+    }
     LOG_GENERAL(2, @"Playing %@ version", isDownloaded ? @"local" : @"streaming");
+    
 
 
     [[AVAudioSession sharedInstance] setDelegate:self];

@@ -135,4 +135,14 @@ NSString *uuid(){
     [defaults setBool:!firstRun forKey:@"SVHasRun"];
 }
 
+- (BOOL)downloadOn3g
+{
+    return [defaults boolForKey:@"SVDownloadOn3g"];
+}
+
+- (void)setDownloadOn3g:(BOOL )shouldDownload
+{
+    [defaults setBool:shouldDownload forKey:@"SVDownloadOn3g"];
+}
+
 @end

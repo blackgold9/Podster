@@ -12,5 +12,5 @@
 
 @property (copy) NSManagedObjectID *downloadObjectID;
 -(id)initWithDownloadObjectID:(NSManagedObjectID *)objectId
-             downloadBasePath:(NSString *)path;
+             filePath:(NSString *)path;
 @end

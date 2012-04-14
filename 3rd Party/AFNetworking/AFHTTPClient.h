@@ -38,7 +38,19 @@ extern NSString * const AFNetworkingReachabilityDidChangeNotification;
 #endif
 
 /**
- Method used to encode parameters into request body. 
+ Specifies network reachability of the client to its `baseURL` domain.
+ */
+#ifdef _SYSTEMCONFIGURATION_H
+typedef enum {
+    AFNetworkReachabilityStatusUnknown          = -1,
+    AFNetworkReachabilityStatusNotReachable     = 0,
+    AFNetworkReachabilityStatusReachableViaWWAN = 1,
+    AFNetworkReachabilityStatusReachableViaWiFi = 2,
+} AFNetworkReachabilityStatus;
+#endif
+
+/**
+ Specifies the method used to encode parameters into request body. 
  */
 typedef enum {
     AFFormURLParameterEncoding,
@@ -139,6 +151,8 @@ extern NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *paramete
 
 /**
  The `AFHTTPClientParameterEncoding` value corresponding to how parameters are encoded into a request body. This is `AFFormURLParameterEncoding` by default.
+
+ @warning JSON encoding will automatically use JSONKit, SBJSON, YAJL, or NextiveJSON, if provided. Otherwise, the built-in `NSJSONSerialization` class is used, if available (iOS 5.0 and Mac OS 10.7). If the build target does not either support `NSJSONSerialization` or include a third-party JSON library, a runtime exception will be thrown when attempting to encode parameters as JSON.
  */
 @property (nonatomic, assign) AFHTTPClientParameterEncoding parameterEncoding;
 
@@ -146,6 +160,15 @@ extern NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *paramete
  The operation queue which manages operations enqueued by the HTTP client.
  */
 @property (readonly, nonatomic, retain) NSOperationQueue *operationQueue;
+
+/**
+ The reachability status from the device to the current `baseURL` of the `AFHTTPClient`.
+
+  @warning This property requires the `SystemConfiguration` framework. Add it in the active target's "Link Binary With Library" build phase, and add `#import <SystemConfiguration/SystemConfiguration.h>` to the header prefix of the project (Prefix.pch).
+ */
+#ifdef _SYSTEMCONFIGURATION_H
+@property (readonly, nonatomic, assign) AFNetworkReachabilityStatus networkReachabilityStatus;
+#endif
 
 ///---------------------------------------------
 /// @name Creating and Initializing HTTP Clients
@@ -178,12 +201,12 @@ extern NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *paramete
 /**
  Sets a callback to be executed when the network availability of the `baseURL` host changes.
  
- @param block A block object to be executed when the network availability of the `baseURL` host changes.. This block has no return value and takes a single argument, which is `YES` if the host is available, otherwise `NO`.
+ @param block A block object to be executed when the network availability of the `baseURL` host changes.. This block has no return value and takes a single argument which represents the various reachability states from the device to the `baseURL`.
  
  @warning This method requires the `SystemConfiguration` framework. Add it in the active target's "Link Binary With Library" build phase, and add `#import <SystemConfiguration/SystemConfiguration.h>` to the header prefix of the project (Prefix.pch).
  */
 #ifdef _SYSTEMCONFIGURATION_H
-- (void)setReachabilityStatusChangeBlock:(void (^)(BOOL isNetworkReachable))block;
+- (void)setReachabilityStatusChangeBlock:(void (^)(AFNetworkReachabilityStatus status))block;
 #endif
 
 ///-------------------------------

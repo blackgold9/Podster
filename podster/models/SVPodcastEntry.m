@@ -9,4 +9,11 @@
     NSParameterAssert(self.guid);
     return [[self.podcast.feedURL stringByAppendingFormat:@":%@", self.guid] stringFromMD5];
 }
+
+- (NSString *)downloadFilePathForBasePath:(NSString *)basePath
+{
+    NSAssert(basePath != nil, @"Must have base path");
+    NSString *filePath = [basePath stringByAppendingPathComponent:[self identifier]];
+    return [filePath stringByAppendingPathExtension:[self.mediaURL pathExtension]];
+}
 @end

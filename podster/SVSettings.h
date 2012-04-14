@@ -30,5 +30,9 @@
 
 - (void)setFirstRun:(BOOL)firstRun;
 
+- (BOOL)downloadOn3g;
+
+- (void)setDownloadOn3g:(BOOL)shouldDownload;
+
 
 @end

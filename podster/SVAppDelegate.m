@@ -180,7 +180,8 @@ NSString *uuid();
 //        });
 //    });
 
-    
+    //Disable network activity manager
+          [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:NO];
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
    
     SDURLCache *urlCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024   // 1MB mem cache
@@ -413,8 +414,10 @@ NSString *uuid();
 {
     __block UIViewController *rootController = self.window.rootViewController;
     __block BOOL isShowingOfflineOverlay = NO;
-    [[SVPodcatcherClient sharedInstance] setReachabilityStatusChangeBlock:^(BOOL isNetworkReachable) {
-        if (!isNetworkReachable&& !isShowingOfflineOverlay) {
+   
+    [[SVPodcatcherClient sharedInstance] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        if (status == AFNetworkReachabilityStatusNotReachable && !isShowingOfflineOverlay) {
             LOG_GENERAL(1, @"App is offline, showing overlay");
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:rootController.view animated:YES];
             hud.labelText = NSLocalizedString(@"OFFLINE", @"App is Offline");
@@ -428,7 +431,7 @@ NSString *uuid();
                 [MBProgressHUD hideHUDForView:rootController.view animated:YES];
                 isShowingOfflineOverlay = NO;
             }
-        }
+        }        
 
     }];
 

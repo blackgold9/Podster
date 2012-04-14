@@ -108,7 +108,7 @@
     
     [self bind:self.episode];
     [self.titleLabel alignTop];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
     
     [self.markAsPlayedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.markAsPlayedButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal ];

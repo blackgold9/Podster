@@ -25,8 +25,8 @@
     dispatch_once(&onceToken, ^{
         NSURL *url = [NSURL URLWithString:@"http://podstore.herokuapp.com"];
         client = [[SVPodcatcherClient alloc] initWithBaseURL:url];
-
-            [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+        
+        [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     });
     
     return client;
@@ -44,10 +44,11 @@
     if (!self) {
         return nil;
     }
-    
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    //[self setDefaultHeader:@"Accept" value:@"application/json"];
 
+    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [self registerHTTPOperationClass:[AFXMLRequestOperation class]];
+    //[self setDefaultHeader:@"Accept" value:@"application/json"];
+    
     return self;
 }
 -(void)findFeedFromLink:(NSString *)pageURL onCompletion:(FeedResponseBlock)completion onError:(SVErrorBlock)errorBlock
@@ -61,7 +62,7 @@
         } else {
             completion(nil);
         }
-            
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         errorBlock(error);
     }];
@@ -70,7 +71,7 @@
 - (void)categoriesInLanguage:(NSString *)language
                 onCompletion:(CategoryResponseBlock)completion 
                      onError:(SVErrorBlock)errorBlock {
-
+    
     [self getPath:@"categories.json" 
        parameters:nil 
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -154,10 +155,10 @@
 {
     NSString *feedFinderURL = [NSString stringWithFormat:@"feeds/featured.json"];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-  //  if (language) {
-      [params setObject:[self countryCode] forKey:@"cc"];
-   // }
-               NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+    //  if (language) {
+    [params setObject:[self countryCode] forKey:@"cc"];
+    // }
+    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     [params setObject:deviceId forKey:@"deviceId"];
     [self getPath:feedFinderURL
        parameters:params
@@ -177,18 +178,18 @@
                       [podcasts addObject:result];
                       
                   }
-              [bucketDict setValue:podcasts forKey:@"feeds"];
-              [featured addObject:bucketDict];
+                  [bucketDict setValue:podcasts forKey:@"feeds"];
+                  [featured addObject:bucketDict];
+                  
+              }
               
-          }
-     
-     completion(featured);
-     } 
+              completion(featured);
+          } 
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               LOG_NETWORK(1, @"feedsByCategory faild with error: %@", error);
               errorBlock(error);
           }];
-
+    
 }
 
 
@@ -200,8 +201,8 @@
     NSParameterAssert(query);
     NSParameterAssert(completion);
     NSParameterAssert(errorHandler);
-
-    NSString *queryPath = [NSString stringWithFormat:@"feeds.json?cc=%@,query=%@", [self countryCode], AFURLEncodedStringFromStringWithEncoding(query, NSUTF8StringEncoding)];
+    
+    NSString *queryPath = [NSString stringWithFormat:@"feeds.json?cc=%@&query=%@", [self countryCode], AFURLEncodedStringFromStringWithEncoding(query, NSUTF8StringEncoding)];
     [self getPath:queryPath parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSArray *returnedData = responseObject;
@@ -214,21 +215,21 @@
               dispatch_async(dispatch_get_main_queue(), ^{
                   completion(podcasts);
               });
-
+              
           } 
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               dispatch_async(dispatch_get_main_queue(), ^{
-                   errorHandler(error);
+                  errorHandler(error);
               });
               
           }];
 }
 
 -(void)downloadAndPopulatePodcast:(SVPodcast *)podcast
-                           withLowerPriority:(BOOL)lowPriority
-                                   inContext:(NSManagedObjectContext *)localContext
-                                onCompletion:(void (^)(void))onComplete
-                                     onError:(SVErrorBlock)onError
+                withLowerPriority:(BOOL)lowPriority
+                        inContext:(NSManagedObjectContext *)localContext
+                     onCompletion:(void (^)(void))onComplete
+                          onError:(SVErrorBlock)onError
 {
     NSParameterAssert(podcast);
     NSParameterAssert(localContext);
@@ -236,61 +237,61 @@
     NSDictionary *loggingParameters = [NSDictionary dictionaryWithObject:podcast.feedURL forKey:@"FeedURL"];
     [FlurryAnalytics logEvent:@"ParsingFeed" withParameters:loggingParameters timed:YES];
     NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:podcast.feedURL parameters:nil];
-
-    [localContext performBlock:^{
-
-
-    if (podcast && podcast.etag) {       
-        [request setValue:podcast.etag forHTTPHeaderField:@"If-None-Match"];
-    }
-
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request 
-                                                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-                                                                          NSString *returnedETag = [[[operation response] allHeaderFields] valueForKey:@"ETag"];
-                                                                          NSString *cachingLastModified = [[[operation response] allHeaderFields] valueForKey:@"Last-Modified"];
-                                                                          LOG_NETWORK(3, @"Returned ETag: %@", returnedETag );
-                                                                          [SVFeedParser                                                                          parseData:responseObject withETag:returnedETag andLastModified:cachingLastModified forPodcast:podcast onComplete:^{
-                                                                                                                                                                     LOG_GENERAL(2, @"Parssing complete");
-                                                                                                                                                                     [FlurryAnalytics endTimedEvent:@"ParsingFeed"
-                                                                                                                                                                                     withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"Success"]];
-
-                                                                                                                                                                     onComplete();
-                                                                                                                                                                 } onError:^(NSError *error) {
-                                                                                                                                                                     LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
-
-                                                                                                                                                                     [FlurryAnalytics endTimedEvent:@"ParsingFeed"
-                                                                                                                                                                                     withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"Success"]];
-                                                                                                                                                                     [FlurryAnalytics logError:@"ParsingError" message:[error localizedDescription] error:error];
-                                                                                                                                                                     onError(error);
-                                                                                                                                                                 }];
-                                                                          
-                                                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                                          if ([[operation response] statusCode] == 304) {
-                                                                              // This is a valid case
-                                                                              LOG_NETWORK(2, @"Feed has not changed (Server returned 304");
-                                                                              [FlurryAnalytics logEvent:@"FeedNotChangedYAY"];
-                                                                              onComplete();
-                                                                          } else {
-                                                                          
-                                                                              LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed. %@", error);
-                                                                              [FlurryAnalytics logError:@"Downloading a feed failed" message:[error localizedDescription] error:error];
-                                                                              onError(error);
-                                                                          }
-                                                                          
-                                                                      }];
     
-    operation.queuePriority = lowPriority ? NSOperationQueuePriorityLow : NSOperationQueuePriorityNormal;
-    [self enqueueHTTPRequestOperation:operation];
+    [localContext performBlock:^{
+        
+        
+        if (podcast && podcast.etag) {       
+            [request setValue:podcast.etag forHTTPHeaderField:@"If-None-Match"];
+        }
+        
+        
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            NSString *returnedETag = [[[operation response] allHeaderFields] valueForKey:@"ETag"];
+            NSString *cachingLastModified = [[[operation response] allHeaderFields] valueForKey:@"Last-Modified"];
+            LOG_NETWORK(3, @"Returned ETag: %@", returnedETag );
+            [SVFeedParser                                                                          parseData:responseObject withETag:returnedETag andLastModified:cachingLastModified forPodcast:podcast onComplete:^{
+                LOG_GENERAL(2, @"Parssing complete");
+                [FlurryAnalytics endTimedEvent:@"ParsingFeed"
+                                withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"Success"]];
+                
+                onComplete();
+            } onError:^(NSError *error) {
+                LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
+                
+                [FlurryAnalytics endTimedEvent:@"ParsingFeed"
+                                withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"Success"]];
+                [FlurryAnalytics logError:@"ParsingError" message:[error localizedDescription] error:error];
+                onError(error);
+            }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if ([[operation response] statusCode] == 304) {
+                // This is a valid case
+                LOG_NETWORK(2, @"Feed has not changed (Server returned 304");
+                [FlurryAnalytics logEvent:@"FeedNotChangedYAY"];
+                onComplete();
+            } else {
+                
+                LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed. %@", error);
+                [FlurryAnalytics logError:@"Downloading a feed failed" message:[error localizedDescription] error:error];
+                onError(error);
+            }
+            
+        }];
+        
+        operation.queuePriority = lowPriority ? NSOperationQueuePriorityLow : NSOperationQueuePriorityNormal;
+        [self enqueueHTTPRequestOperation:operation];
     }];
 }
 - (void)updateDeviceReceipt:(NSString *)receipt
-onCompletion:(void (^)(BOOL))onComplete
-              onError:(SVErrorBlock)onError
+               onCompletion:(void (^)(BOOL))onComplete
+                    onError:(SVErrorBlock)onError
 {
-            NSString *deviceId = [[SVSettings sharedInstance] deviceId];
-   NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:receipt, @"receipt", deviceId,@"deviceId", nil];
-        NSParameterAssert(receipt);
+    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+    NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:receipt, @"receipt", deviceId,@"deviceId", nil];
+    NSParameterAssert(receipt);
     [self postPath:@"devices/update.json"
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -327,9 +328,9 @@ onCompletion:(void (^)(BOOL))onComplete
     
     [self postPath:@"devices/create.json" parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              dispatch_async(dispatch_get_main_queue(), ^{
-               onComplete(responseObject);
-              });
+               dispatch_async(dispatch_get_main_queue(), ^{
+                   onComplete(responseObject);
+               });
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                dispatch_async(dispatch_get_main_queue(), ^{
@@ -344,14 +345,14 @@ onCompletion:(void (^)(BOOL))onComplete
                            onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedURL);
-        NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
     
     [self postPath:@"subscriptions/create.json" 
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 completion();
-                         } 
+               completion();
+           } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"subscribe failed with error: %@", error);
                [FlurryAnalytics logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
@@ -400,7 +401,7 @@ onCompletion:(void (^)(BOOL))onComplete
     NSParameterAssert(feedURL);
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
-   
+    
     [self postPath:@"subscriptions/destroy.json"  parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                completion();
