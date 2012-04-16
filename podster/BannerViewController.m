@@ -120,6 +120,11 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
 
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+     [self viewDidLayoutSubviews];
+}
 - (void)viewDidUnload
 {
     _bannerView.delegate = nil;
