@@ -43,22 +43,21 @@
     NSString *logoString = podcast.smallLogoURL;
     if (!logoString) {
         logoString = podcast.logoURL;
-            }
-        self.titleLabel.hidden = NO;
-        if(logoString) {
-            NSURL *imageURL = [NSURL URLWithString: logoString];
-            NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-            
-            [self.podcastArtImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                         self.titleLabel.hidden = YES;
-                                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                         
-                                                     }];
-        } else {            
-            self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
-        }
-
+    }
+    self.titleLabel.hidden = NO;
+    if(logoString) {
+        NSURL *imageURL = [NSURL URLWithString: logoString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+        [self.podcastArtImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                     self.titleLabel.hidden = YES;
+                                                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                     
+                                                 }];
+    } else {            
+        self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
+    }
+    
     self.podcastArtImageView.layer.borderColor = [[UIColor colorWithWhite:0.7 alpha:1.0] CGColor];
     self.podcastArtImageView.layer.borderWidth = 2.0;
     self.unseenCountFlagImage.alpha = 0.0;
@@ -81,9 +80,9 @@
     if ([podcast class] == [SVPodcast class]) {
         
         
-
-
-
+        
+        
+        
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
         self.downloadCountLabel.alpha = coreDataPodcast.isDownloadingValue? 1 : 0;

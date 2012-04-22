@@ -16,7 +16,6 @@
 #import "SVPodcast.h"
 #import "SDURLCache.h"
 #import "GMGridView.h"
-#import "SVSubscription.h"
 #import "SVSubscriptionManager.h"
 #import "PodsterIAPHelper.h"
 #import <CoreText/CoreText.h>
@@ -190,9 +189,9 @@ NSString *uuid();
     [NSURLCache setSharedURLCache:urlCache];
     //[[SVDownloadManager sharedInstance] resumeDownloads];
     [self configureTheming];
-
+    
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{
-        
+
         
         // Actually register
 #ifndef CONFIGURATION_Debug
@@ -234,8 +233,27 @@ NSString *uuid();
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     [[SVPodcatcherClient sharedInstance] registerWithDeviceId:deviceId
             notificationToken:tokenAsString
-                 onCompletion:^(NSDictionary *config ){
-                     NSDictionary *subscriptions = [config objectForKey:@"subscriptions"];
+                 onCompletion:^(id response ){
+                     NSArray *subscriptions = response;
+                     NSArray *oldPodcasts = [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"podstoreId == nil "]
+                                                          inContext:[PodsterManagedDocument defaultContext]];
+                     if (oldPodcasts.count > 0) {
+                         // We had old (pre changeover) version podcasts in here. Subscribe to the new server with them
+                         for (SVPodcast *podcast in oldPodcasts) {
+                             [[SVPodcatcherClient sharedInstance]                               subscribeToFeedWithURL:podcast.feedURL shouldNotify:NO onCompletion:^void(id innerResponse) {
+                                                                                                                 NSDictionary *dict = innerResponse;
+                                                                                                                 NSDictionary *subDict = [dict objectForKey:@"subscription"];
+                                                                                                                 NSNumber *feedId = [subDict objectForKey:@"feed_id"];
+                                                                                                                 [[PodsterManagedDocument defaultContext] performBlock:^void() {
+                                                                                                                     podcast.podstoreIdValue = [feedId intValue];
+                                                                                                                 }];
+                                                                                                             } onError:^void(NSError *error) {
+
+                                                          }];
+
+                         }
+
+                     }
                      LOG_GENERAL(2, @"Updating Premium mode from hello");
                      [[SVSubscriptionManager sharedInstance] processServerState:subscriptions];
 

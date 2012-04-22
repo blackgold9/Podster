@@ -12,15 +12,18 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.hidePlayedEpisodes = @"hidePlayedEpisodes",
 	.isDownloading = @"isDownloading",
 	.isSubscribed = @"isSubscribed",
+	.isVideo = @"isVideo",
 	.lastSynced = @"lastSynced",
 	.lastUpdated = @"lastUpdated",
 	.logoURL = @"logoURL",
 	.nextItemDate = @"nextItemDate",
+	.podstoreId = @"podstoreId",
 	.shouldNotify = @"shouldNotify",
 	.smallLogoURL = @"smallLogoURL",
 	.sortNewestFirst = @"sortNewestFirst",
 	.subtitle = @"subtitle",
 	.summary = @"summary",
+	.thumbImageData = @"thumbImageData",
 	.thumbLogoURL = @"thumbLogoURL",
 	.tinyLogoURL = @"tinyLogoURL",
 	.title = @"title",
@@ -31,7 +34,6 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 
 const struct SVPodcastRelationships SVPodcastRelationships = {
 	.items = @"items",
-	.subscription = @"subscription",
 };
 
 const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
@@ -77,6 +79,14 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	}
 	if ([key isEqualToString:@"isSubscribedValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"isSubscribed"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"isVideoValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isVideo"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"podstoreIdValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"podstoreId"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"shouldNotifyValue"]) {
@@ -230,6 +240,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
+@dynamic isVideo;
+
+
+
+- (BOOL)isVideoValue {
+	NSNumber *result = [self isVideo];
+	return [result boolValue];
+}
+
+- (void)setIsVideoValue:(BOOL)value_ {
+	[self setIsVideo:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsVideoValue {
+	NSNumber *result = [self primitiveIsVideo];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsVideoValue:(BOOL)value_ {
+	[self setPrimitiveIsVideo:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
 @dynamic lastSynced;
 
 
@@ -253,6 +289,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 @dynamic nextItemDate;
 
+
+
+
+
+
+@dynamic podstoreId;
+
+
+
+- (int)podstoreIdValue {
+	NSNumber *result = [self podstoreId];
+	return [result intValue];
+}
+
+- (void)setPodstoreIdValue:(int)value_ {
+	[self setPodstoreId:[NSNumber numberWithInt:value_]];
+}
+
+- (int)primitivePodstoreIdValue {
+	NSNumber *result = [self primitivePodstoreId];
+	return [result intValue];
+}
+
+- (void)setPrimitivePodstoreIdValue:(int)value_ {
+	[self setPrimitivePodstoreId:[NSNumber numberWithInt:value_]];
+}
 
 
 
@@ -331,6 +393,13 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
+@dynamic thumbImageData;
+
+
+
+
+
+
 @dynamic thumbLogoURL;
 
 
@@ -403,10 +472,6 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	[self didAccessValueForKey:@"items"];
 	return result;
 }
-	
-
-@dynamic subscription;
-
 	
 
 

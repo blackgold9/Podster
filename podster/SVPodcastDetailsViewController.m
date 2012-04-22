@@ -290,15 +290,13 @@
         
     };
     
-    [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:localPodcast.feedURL
-                                                       onCompletion:succeeded
-                                                            onError:^(NSError *error) {
-                                                                if (complete) {
-                                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                                        complete(NO);                
-                                                                    });                                                                    
-                                                                }
-                                                            }];
+    [[SVPodcatcherClient sharedInstance] subscribeToFeedWithURL:localPodcast.feedURL shouldNotify:NO onCompletion:succeeded onError:^(NSError *error) {
+                                                                    if (complete) {
+                                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                                            complete(NO);
+                                                                        });
+                                                                    }
+                                                                }];
 }
 
 - (void)unsubscribeFromPodcast

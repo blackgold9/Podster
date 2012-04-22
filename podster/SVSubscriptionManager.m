@@ -7,7 +7,7 @@
 //
 
 #import "SVSubscriptionManager.h"
-#import "SVSubscription.h"
+
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 #import "PodsterManagedDocument.h"
@@ -135,42 +135,49 @@ static char const kRefreshInterval = -3;
 
 }
 
-- (void)processServerState:(NSDictionary *)serverState
+- (void)processServerState:(NSArray *)serverState
 {
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
+   [[PodsterManagedDocument sharedInstance] performWhenReady:^{
         
         
-        [[PodsterManagedDocument defaultContext] performBlock:^{
-            LOG_GENERAL(2, @"Server State: %@", serverState);
-            NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-            NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
-//            NSArray *podcasts = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
-//            
-            NSPredicate *missingFromServer = [NSPredicate predicateWithFormat:@"NOT (feedURL in %@)", [serverState allKeys]];
-            NSArray *needsReconciling = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
-            for(SVPodcast *podcast in needsReconciling) {
-                [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:podcast.feedURL                                                                                                                           onCompletion:^{
-                    [[PodsterManagedDocument defaultContext] performBlock:^{
-                        podcast.isSubscribedValue = YES;
-                    }];
-                    
-                }
-                                                                        onError:nil];
-            }
-            
-            // Now, delete items on the server that we're no-longer subscribed to
-            for(NSString *url in [serverState allKeys]) {
-                if ([SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url] inContext:[PodsterManagedDocument defaultContext]] == 0) {
-                    // We arent subscribed to this anymore, tell the server
-                    [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:url
-                                                                           onCompletion:^{
-                                                                               LOG_GENERAL(2, @"Removing podcast subscription from server that we unsusbscribed from locally");
-                                                                               
-                                                                           }
-                                                                                onError:nil];
-                }
-            }     
-        }];
+//        [[PodsterManagedDocument defaultContext] performBlock:^{
+//            LOG_GENERAL(2, @"Server State: %@", serverState);
+//            NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+//
+//            NSArray *oldPodcasts = [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"podstoreId == nil "]
+//                                     inContext:[PodsterManagedDocument defaultContext]];
+//            for (SVPodcast *podcast in oldPodcasts) {
+//
+//            }
+//
+////            NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
+//////            NSArray *podcasts = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
+//////
+////            NSPredicate *missingFromServer = [NSPredicate predicateWithFormat:@"NOT (feedURL in %@)", [serverState allKeys]];
+////            NSArray *needsReconciling = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
+////            for(SVPodcast *podcast in needsReconciling) {
+////                [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:podcast.feedURL                                                                                                                           onCompletion:^{
+////                    [[PodsterManagedDocument defaultContext] performBlock:^{
+////                        podcast.isSubscribedValue = YES;
+////                    }];
+////
+////                }
+////                                                                        onError:nil];
+////            }
+////
+////            // Now, delete items on the server that we're no-longer subscribed to
+////            for(NSString *url in [serverState allKeys]) {
+////                if ([SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url] inContext:[PodsterManagedDocument defaultContext]] == 0) {
+////                    // We arent subscribed to this anymore, tell the server
+////                    [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:url
+////                                                                           onCompletion:^{
+////                                                                               LOG_GENERAL(2, @"Removing podcast subscription from server that we unsusbscribed from locally");
+////
+////                                                                           }
+////                                                                                onError:nil];
+////                }
+////            }
+//        }];
     }];
     
 }

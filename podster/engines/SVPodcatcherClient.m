@@ -17,13 +17,14 @@
 #import "SVPodcastSearchResult.h"
 #import "NSString+URLEncoding.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "SVPodcastModalView.h"
 @implementation SVPodcatcherClient
 + (id)sharedInstance
 {
     static SVPodcatcherClient *client;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSURL *url = [NSURL URLWithString:@"http://podstore.herokuapp.com"];
+        NSURL *url = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
         client = [[SVPodcatcherClient alloc] initWithBaseURL:url];
         
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
@@ -225,6 +226,12 @@
           }];
 }
 
+- (void)updateExistingEpisodesToDirectModeForPodcast:(SVPodcast *)podcast
+{
+    
+}
+
+
 -(void)downloadAndPopulatePodcast:(SVPodcast *)podcast
                 withLowerPriority:(BOOL)lowPriority
                         inContext:(NSManagedObjectContext *)localContext
@@ -314,7 +321,7 @@
 }
 
 #pragma mark - push related
-- (void)registerWithDeviceId:(NSString *)deviceId notificationToken:(NSString *)token onCompletion:(void (^)(NSDictionary *))onComplete onError:(SVErrorBlock)onError
+- (void)registerWithDeviceId:(NSString *)deviceId notificationToken:(NSString *)token onCompletion:(void (^)(id))onComplete onError:(SVErrorBlock)onError
 { 
     NSParameterAssert(deviceId);
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -340,19 +347,39 @@
            }];
 }
 
-- (void)notifyOfSubscriptionToFeed:(NSString *)feedURL
-                      onCompletion:(void (^)(void))completion
-                           onError:(SVErrorBlock)onError
+- (void)subscribeToFeedWithURL:(NSString *)feedURL shouldNotify:(BOOL)notify onCompletion:(void (^)(id))completion onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedURL);
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", [NSNumber numberWithBool:notify], @"should_notify", nil];
     
-    [self postPath:@"subscriptions/create.json" 
+    [self postPath:@"subscriptions.json" 
+        parameters:params
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               completion(responseObject);
+           } 
+           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               LOG_NETWORK(1, @"subscribe failed with error: %@", error);
+               [FlurryAnalytics logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
+               if (onError) {
+                   onError(error);
+               }
+           }];
+}
+
+- (void)subscribeToFeedWithId:(NSNumber *)feedId
+                      onCompletion:(void (^)(void))completion
+                           onError:(SVErrorBlock)onError
+{
+    NSParameterAssert(feedId);
+    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedId, @"feedId",  deviceId, @"deviceId", nil];
+
+    [self postPath:@"subscriptions/create.json"
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                completion();
-           } 
+           }
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"subscribe failed with error: %@", error);
                [FlurryAnalytics logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
@@ -412,5 +439,12 @@
            }];
 }
 
+
+- (void)syncPodcastWithId:(NSNumber *)podstoreId
+         withLastSyncDate:(NSDate *)lastSycned
+                 complete:(void (^)(id, NSError *))onComplete
+{
+
+}
 
 @end

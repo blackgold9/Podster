@@ -13,15 +13,18 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *hidePlayedEpisodes;
 	__unsafe_unretained NSString *isDownloading;
 	__unsafe_unretained NSString *isSubscribed;
+	__unsafe_unretained NSString *isVideo;
 	__unsafe_unretained NSString *lastSynced;
 	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *logoURL;
 	__unsafe_unretained NSString *nextItemDate;
+	__unsafe_unretained NSString *podstoreId;
 	__unsafe_unretained NSString *shouldNotify;
 	__unsafe_unretained NSString *smallLogoURL;
 	__unsafe_unretained NSString *sortNewestFirst;
 	__unsafe_unretained NSString *subtitle;
 	__unsafe_unretained NSString *summary;
+	__unsafe_unretained NSString *thumbImageData;
 	__unsafe_unretained NSString *thumbLogoURL;
 	__unsafe_unretained NSString *tinyLogoURL;
 	__unsafe_unretained NSString *title;
@@ -32,14 +35,15 @@ extern const struct SVPodcastAttributes {
 
 extern const struct SVPodcastRelationships {
 	__unsafe_unretained NSString *items;
-	__unsafe_unretained NSString *subscription;
 } SVPodcastRelationships;
 
 extern const struct SVPodcastFetchedProperties {
 } SVPodcastFetchedProperties;
 
 @class SVPodcastEntry;
-@class SVSubscription;
+
+
+
 
 
 
@@ -157,6 +161,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber *isVideo;
+
+
+@property BOOL isVideoValue;
+- (BOOL)isVideoValue;
+- (void)setIsVideoValue:(BOOL)value_;
+
+//- (BOOL)validateIsVideo:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSDate *lastSynced;
 
 
@@ -185,6 +201,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateNextItemDate:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *podstoreId;
+
+
+@property int podstoreIdValue;
+- (int)podstoreIdValue;
+- (void)setPodstoreIdValue:(int)value_;
+
+//- (BOOL)validatePodstoreId:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -233,6 +261,14 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateSummary:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSData *thumbImageData;
+
+
+//- (BOOL)validateThumbImageData:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -293,13 +329,6 @@ extern const struct SVPodcastFetchedProperties {
 @property (nonatomic, strong) NSSet* items;
 
 - (NSMutableSet*)itemsSet;
-
-
-
-
-@property (nonatomic, strong) SVSubscription* subscription;
-
-//- (BOOL)validateSubscription:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -378,6 +407,15 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+- (NSNumber*)primitiveIsVideo;
+- (void)setPrimitiveIsVideo:(NSNumber*)value;
+
+- (BOOL)primitiveIsVideoValue;
+- (void)setPrimitiveIsVideoValue:(BOOL)value_;
+
+
+
+
 - (NSDate*)primitiveLastSynced;
 - (void)setPrimitiveLastSynced:(NSDate*)value;
 
@@ -398,6 +436,15 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSDate*)primitiveNextItemDate;
 - (void)setPrimitiveNextItemDate:(NSDate*)value;
+
+
+
+
+- (NSNumber*)primitivePodstoreId;
+- (void)setPrimitivePodstoreId:(NSNumber*)value;
+
+- (int)primitivePodstoreIdValue;
+- (void)setPrimitivePodstoreIdValue:(int)value_;
 
 
 
@@ -434,6 +481,12 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveSummary;
 - (void)setPrimitiveSummary:(NSString*)value;
+
+
+
+
+- (NSData*)primitiveThumbImageData;
+- (void)setPrimitiveThumbImageData:(NSData*)value;
 
 
 
@@ -480,11 +533,6 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSMutableSet*)primitiveItems;
 - (void)setPrimitiveItems:(NSMutableSet*)value;
-
-
-
-- (SVSubscription*)primitiveSubscription;
-- (void)setPrimitiveSubscription:(SVSubscription*)value;
 
 
 @end

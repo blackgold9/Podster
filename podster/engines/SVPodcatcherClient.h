@@ -28,7 +28,9 @@ typedef void (^SVErrorBlock)(NSError *error);
                                          onCompletion:(PodcastListResponeBlock)completion
                                               onError:(SVErrorBlock)error;
 
-- (void)changeNotificationSetting:(BOOL)shouldNotify 
+- (void)subscribeToFeedWithId:(NSNumber *)feedId onCompletion:(void (^)())completion onError:(SVErrorBlock)onError;
+
+- (void)changeNotificationSetting:(BOOL)shouldNotify
                    forFeedWithURL:(NSString *)feedURL 
                      onCompletion:(void (^)())completion
                           onError:(SVErrorBlock)onError;
@@ -37,9 +39,7 @@ typedef void (^SVErrorBlock)(NSError *error);
                                           onCompletion:(void(^)(void))completion
                                                onError:(SVErrorBlock)error;
 
-- (void)notifyOfSubscriptionToFeed:(NSString *)feedURL                                    
-                                      onCompletion:(void(^)(void))completion
-                                           onError:(SVErrorBlock)error;
+- (void)subscribeToFeedWithURL:(NSString *)feedURL shouldNotify:(BOOL)notify onCompletion:(void (^)(id))completion onError:(SVErrorBlock)onError;
 
 - (void)getAppConfigWithLanguage:(NSString *)language
                                    onCompletion:(void(^)(void))completion
@@ -66,7 +66,7 @@ typedef void (^SVErrorBlock)(NSError *error);
                                 onCompletion:(void (^)(void))onComplete
                                      onError:(SVErrorBlock)onError;
 
-- (void)registerWithDeviceId:(NSString *)deviceId notificationToken:(NSString *)token onCompletion:(void (^)(NSDictionary *))onComplete onError:(SVErrorBlock)onError;
+- (void)registerWithDeviceId:(NSString *)deviceId notificationToken:(NSString *)token onCompletion:(void (^)(id))onComplete onError:(SVErrorBlock)onError;
 
 - (void)featuredPodcastsForLanguage:(NSString *)language
                        onCompletion:(PodcastListResponeBlock)completion 
@@ -74,4 +74,5 @@ typedef void (^SVErrorBlock)(NSError *error);
 - (void)updateDeviceReceipt:(NSString *)receipt
                onCompletion:(void (^)(BOOL))onComplete
                     onError:(SVErrorBlock)onError;
+- (void)updatePodcastsToDirectMode:(void (^)(BOOL success))complete;
 @end

@@ -373,10 +373,6 @@
 		4B2E524014B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E523414B3BBB80030B7C1 /* SVPodcastEntry.m */; };
 		4B2E524414B3BF260030B7C1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2E524314B3BF260030B7C1 /* CoreData.framework */; };
 		4B2E524514B3BF2E0030B7C1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2E524314B3BF260030B7C1 /* CoreData.framework */; };
-		4B2E524B14B3E1220030B7C1 /* _SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524814B3E1220030B7C1 /* _SVSubscription.m */; };
-		4B2E524C14B3E1220030B7C1 /* _SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524814B3E1220030B7C1 /* _SVSubscription.m */; };
-		4B2E524D14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
-		4B2E524E14B3E1220030B7C1 /* SVSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2E524A14B3E1220030B7C1 /* SVSubscription.m */; };
 		4B35BC97151AA4D300325DEF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B35BC96151AA4D300325DEF /* Appirater.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B35BC98151AA4D300325DEF /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B35BC96151AA4D300325DEF /* Appirater.m */; };
 		4B3E5ECA150C43F300010833 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3E5EC9150C43F300010833 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1036,10 +1032,6 @@
 		4B2E523314B3BBB80030B7C1 /* SVPodcastEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcastEntry.h; path = models/SVPodcastEntry.h; sourceTree = "<group>"; };
 		4B2E523414B3BBB80030B7C1 /* SVPodcastEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcastEntry.m; path = models/SVPodcastEntry.m; sourceTree = "<group>"; };
 		4B2E524314B3BF260030B7C1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		4B2E524714B3E1210030B7C1 /* _SVSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _SVSubscription.h; path = models/_SVSubscription.h; sourceTree = "<group>"; };
-		4B2E524814B3E1220030B7C1 /* _SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _SVSubscription.m; path = models/_SVSubscription.m; sourceTree = "<group>"; };
-		4B2E524914B3E1220030B7C1 /* SVSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVSubscription.h; path = models/SVSubscription.h; sourceTree = "<group>"; };
-		4B2E524A14B3E1220030B7C1 /* SVSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVSubscription.m; path = models/SVSubscription.m; sourceTree = "<group>"; };
 		4B35BC95151AA4D300325DEF /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		4B35BC96151AA4D300325DEF /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		4B3E5EC8150C43F300010833 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = "3rd Party/MBHud/MBProgressHUD.h"; sourceTree = "<group>"; };
@@ -1255,6 +1247,7 @@
 		4B91BFAF14C7FF4D00B33776 /* slider-fill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider-fill@2x.png"; sourceTree = "<group>"; };
 		4B91BFC014C7FF7600B33776 /* list-item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-item.png"; sourceTree = "<group>"; };
 		4B91BFC114C7FF7600B33776 /* list-item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-item@2x.png"; sourceTree = "<group>"; };
+		4B91FEB9153C8CB900CE3B6A /* SVPodcastDatastore 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 14.xcdatamodel"; sourceTree = "<group>"; };
 		4BA02C6514E25AEF00582306 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 11.xcdatamodel"; sourceTree = "<group>"; };
 		4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -1882,8 +1875,6 @@
 				4B2E523314B3BBB80030B7C1 /* SVPodcastEntry.h */,
 				4B2E523414B3BBB80030B7C1 /* SVPodcastEntry.m */,
 				4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */,
-				4B2E524914B3E1220030B7C1 /* SVSubscription.h */,
-				4B2E524A14B3E1220030B7C1 /* SVSubscription.m */,
 				4B4B5FCF14BCD7D800C40A95 /* SVPodcastSearchResult.h */,
 				4B4B5FD014BCD7D800C40A95 /* SVPodcastSearchResult.m */,
 				4B6D494014BE499C00E7B11F /* ActsAsPodcast.h */,
@@ -1948,8 +1939,6 @@
 		4B2E524214B3BBBF0030B7C1 /* generated */ = {
 			isa = PBXGroup;
 			children = (
-				4B2E524714B3E1210030B7C1 /* _SVSubscription.h */,
-				4B2E524814B3E1220030B7C1 /* _SVSubscription.m */,
 				4B2E522914B3BBB80030B7C1 /* _SVDownload.h */,
 				4B2E522A14B3BBB80030B7C1 /* _SVDownload.m */,
 				4B2E522B14B3BBB80030B7C1 /* _SVPodcast.h */,
@@ -2840,8 +2829,6 @@
 				4B2E523914B3BBB80030B7C1 /* _SVPodcastEntry.m in Sources */,
 				4B2E523D14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E523F14B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
-				4B2E524B14B3E1220030B7C1 /* _SVSubscription.m in Sources */,
-				4B2E524D14B3E1220030B7C1 /* SVSubscription.m in Sources */,
 				4B08537314B4315300847BAA /* SVDownload.m in Sources */,
 				4B86242D14B576A900A4B320 /* SVDownloadsViewController.m in Sources */,
 				4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */,
@@ -3046,8 +3033,6 @@
 				4B2E523A14B3BBB80030B7C1 /* _SVPodcastEntry.m in Sources */,
 				4B2E523E14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E524014B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
-				4B2E524C14B3E1220030B7C1 /* _SVSubscription.m in Sources */,
-				4B2E524E14B3E1220030B7C1 /* SVSubscription.m in Sources */,
 				4B08537414B4315300847BAA /* SVDownload.m in Sources */,
 				4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */,
 				4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */,
@@ -3652,6 +3637,7 @@
 		4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				4B91FEB9153C8CB900CE3B6A /* SVPodcastDatastore 14.xcdatamodel */,
 				4B610C6715218ED000D8F5CE /* SVPodcastDatastore 13.xcdatamodel */,
 				4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */,
 				4B7A7CC414F6CFA700AD88F9 /* SVPodcastDatastore 10.xcdatamodel */,
@@ -3665,7 +3651,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4B610C6715218ED000D8F5CE /* SVPodcastDatastore 13.xcdatamodel */;
+			currentVersion = 4B91FEB9153C8CB900CE3B6A /* SVPodcastDatastore 14.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

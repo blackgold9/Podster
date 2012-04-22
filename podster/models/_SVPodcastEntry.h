@@ -16,6 +16,7 @@ extern const struct SVPodcastEntryAttributes {
 	__unsafe_unretained NSString *markedForDownload;
 	__unsafe_unretained NSString *mediaURL;
 	__unsafe_unretained NSString *played;
+	__unsafe_unretained NSString *podstoreId;
 	__unsafe_unretained NSString *positionInSeconds;
 	__unsafe_unretained NSString *summary;
 	__unsafe_unretained NSString *title;
@@ -32,6 +33,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 @class SVDownload;
 @class SVPodcast;
+
 
 
 
@@ -165,6 +167,18 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (void)setPlayedValue:(BOOL)value_;
 
 //- (BOOL)validatePlayed:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *podstoreId;
+
+
+@property int podstoreIdValue;
+- (int)podstoreIdValue;
+- (void)setPodstoreIdValue:(int)value_;
+
+//- (BOOL)validatePodstoreId:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -310,6 +324,15 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 - (BOOL)primitivePlayedValue;
 - (void)setPrimitivePlayedValue:(BOOL)value_;
+
+
+
+
+- (NSNumber*)primitivePodstoreId;
+- (void)setPrimitivePodstoreId:(NSNumber*)value;
+
+- (int)primitivePodstoreIdValue;
+- (void)setPrimitivePodstoreIdValue:(int)value_;
 
 
 

@@ -12,7 +12,7 @@
 #import "SVPodcast.h"
 #import "SVDownload.h"
 #import "SVDownloadOperation.h"
-#import "SVSubscription.h"
+
 #include <sys/xattr.h>
 #import "DDLog.h"
 #import "Reachability.h"

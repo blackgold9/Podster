@@ -15,6 +15,7 @@ const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
 	.markedForDownload = @"markedForDownload",
 	.mediaURL = @"mediaURL",
 	.played = @"played",
+	.podstoreId = @"podstoreId",
 	.positionInSeconds = @"positionInSeconds",
 	.summary = @"summary",
 	.title = @"title",
@@ -73,6 +74,10 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 	}
 	if ([key isEqualToString:@"playedValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"played"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"podstoreIdValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"podstoreId"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 	if ([key isEqualToString:@"positionInSecondsValue"]) {
@@ -256,6 +261,32 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 - (void)setPrimitivePlayedValue:(BOOL)value_ {
 	[self setPrimitivePlayed:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
+@dynamic podstoreId;
+
+
+
+- (int)podstoreIdValue {
+	NSNumber *result = [self podstoreId];
+	return [result intValue];
+}
+
+- (void)setPodstoreIdValue:(int)value_ {
+	[self setPodstoreId:[NSNumber numberWithInt:value_]];
+}
+
+- (int)primitivePodstoreIdValue {
+	NSNumber *result = [self primitivePodstoreId];
+	return [result intValue];
+}
+
+- (void)setPrimitivePodstoreIdValue:(int)value_ {
+	[self setPrimitivePodstoreId:[NSNumber numberWithInt:value_]];
 }
 
 

@@ -47,52 +47,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/engines/SVPodcatcherClient.m"
-         timestampString = "355934031.627574"
+         timestampString = "356333269.512803"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "389"
-         endingLineNumber = "389"
-         landmarkName = "-changeNotificationSetting:forFeedWithURL:onCompletion:onError:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVSubscriptionManager.m"
-         timestampString = "355811286.504414"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "146"
-         endingLineNumber = "146"
-         landmarkName = "-processServerState:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVSubscriptionManager.m"
-         timestampString = "355811286.504414"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
-         landmarkName = "-processServerState:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVSubscriptionManager.m"
-         timestampString = "355811286.504414"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
-         landmarkName = "-processServerState:"
-         landmarkType = "5">
+         startingLineNumber = "441"
+         endingLineNumber = "441"
+         landmarkName = "@implementation SVPodcatcherClient"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -234,7 +195,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "85"
          endingLineNumber = "85"
-         landmarkName = "-guidForFeedItem:"
+         landmarkName = "-feedParser:didParseFeedInfo:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -749,11 +710,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "351"
-         endingLineNumber = "351"
+         startingLineNumber = "352"
+         endingLineNumber = "352"
          landmarkName = "-applicationWillTerminate:"
          landmarkType = "5">
          <Locations>
@@ -788,11 +749,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "353"
-         endingLineNumber = "353"
+         startingLineNumber = "354"
+         endingLineNumber = "354"
          landmarkName = "-applicationWillTerminate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -801,11 +762,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "352"
-         endingLineNumber = "352"
+         startingLineNumber = "353"
+         endingLineNumber = "353"
          landmarkName = "-applicationWillTerminate:"
          landmarkType = "5">
          <Locations>
@@ -840,11 +801,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "234"
-         endingLineNumber = "234"
+         startingLineNumber = "235"
+         endingLineNumber = "235"
          landmarkName = "-registerWithOptionalNotificationToken:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -853,11 +814,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
+         startingLineNumber = "200"
+         endingLineNumber = "200"
          landmarkName = "-application:didFinishLaunchingWithOptions:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -866,11 +827,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "203"
-         endingLineNumber = "203"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
          landmarkName = "-application:didFinishLaunchingWithOptions:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -879,11 +840,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "219"
-         endingLineNumber = "219"
+         startingLineNumber = "220"
+         endingLineNumber = "220"
          landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -892,11 +853,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "292"
-         endingLineNumber = "292"
+         startingLineNumber = "293"
+         endingLineNumber = "293"
          landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -905,20 +866,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "319"
-         endingLineNumber = "319"
-         landmarkName = "-applicationDidEnterBackground:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "320"
@@ -931,11 +879,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356331431.83029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "326"
-         endingLineNumber = "326"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
+         landmarkName = "-applicationDidEnterBackground:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVAppDelegate.m"
+         timestampString = "356331431.83029"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "327"
+         endingLineNumber = "327"
          landmarkName = "-applicationDidEnterBackground:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1078,7 +1039,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "101"
          endingLineNumber = "101"
-         landmarkName = "-feedParser:didParseFeedItem:"
+         landmarkName = "-feedParser:didParseFeedInfo:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1104,7 +1065,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "109"
          endingLineNumber = "109"
-         landmarkName = "-feedParser:didParseFeedItem:"
+         landmarkName = "-feedParser:didParseFeedInfo:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1537,11 +1498,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "355871386.448413"
+         timestampString = "356330557.307842"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "184"
-         endingLineNumber = "184"
+         startingLineNumber = "183"
+         endingLineNumber = "183"
          landmarkName = "-application:didFinishLaunchingWithOptions:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1689,19 +1650,6 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/engines/SVPodcatcherClient.m"
-         timestampString = "355903293.036771"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "234"
-         endingLineNumber = "234"
-         landmarkName = "-downloadAndPopulatePodcast:withLowerPriority:inContext:onCompletion:onError:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
@@ -1725,6 +1673,19 @@
          startingLineNumber = "207"
          endingLineNumber = "207"
          landmarkName = "-playEpisode:ofPodcast:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVSubscriptionManager.m"
+         timestampString = "356737250.118103"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
+         landmarkName = "-processServerState:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
