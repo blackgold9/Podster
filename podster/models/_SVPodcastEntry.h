@@ -5,7 +5,6 @@
 
 
 extern const struct SVPodcastEntryAttributes {
-	__unsafe_unretained NSString *content;
 	__unsafe_unretained NSString *datePublished;
 	__unsafe_unretained NSString *downloadComplete;
 	__unsafe_unretained NSString *duration;
@@ -18,9 +17,11 @@ extern const struct SVPodcastEntryAttributes {
 	__unsafe_unretained NSString *played;
 	__unsafe_unretained NSString *podstoreId;
 	__unsafe_unretained NSString *positionInSeconds;
+	__unsafe_unretained NSString *rawSummary;
 	__unsafe_unretained NSString *summary;
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *totalBytes;
+	__unsafe_unretained NSString *webURL;
 } SVPodcastEntryAttributes;
 
 extern const struct SVPodcastEntryRelationships {
@@ -51,6 +52,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
+
 @interface SVPodcastEntryID : NSManagedObjectID {}
 @end
 
@@ -59,14 +61,6 @@ extern const struct SVPodcastEntryFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SVPodcastEntryID*)objectID;
-
-
-
-
-@property (nonatomic, strong) NSString *content;
-
-
-//- (BOOL)validateContent:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -195,6 +189,14 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString *rawSummary;
+
+
+//- (BOOL)validateRawSummary:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSString *summary;
 
 
@@ -223,6 +225,14 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString *webURL;
+
+
+//- (BOOL)validateWebURL:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @property (nonatomic, strong) SVDownload* download;
 
@@ -245,12 +255,6 @@ extern const struct SVPodcastEntryFetchedProperties {
 @end
 
 @interface _SVPodcastEntry (CoreDataGeneratedPrimitiveAccessors)
-
-
-- (NSString*)primitiveContent;
-- (void)setPrimitiveContent:(NSString*)value;
-
-
 
 
 - (NSDate*)primitiveDatePublished;
@@ -346,6 +350,12 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
+- (NSString*)primitiveRawSummary;
+- (void)setPrimitiveRawSummary:(NSString*)value;
+
+
+
+
 - (NSString*)primitiveSummary;
 - (void)setPrimitiveSummary:(NSString*)value;
 
@@ -363,6 +373,12 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 - (int)primitiveTotalBytesValue;
 - (void)setPrimitiveTotalBytesValue:(int)value_;
+
+
+
+
+- (NSString*)primitiveWebURL;
+- (void)setPrimitiveWebURL:(NSString*)value;
 
 
 

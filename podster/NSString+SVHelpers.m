@@ -39,4 +39,21 @@
     return output;
     
 }
+
+- (NSDate *)dateFromRailsDate
+{
+  static NSDateFormatter *dateFormatter;
+    if (!dateFormatter){
+       dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+        NSLocale *locale = [[NSLocale alloc]
+            initWithLocaleIdentifier:@"en_US_POSIX"];
+          [dateFormatter setLocale:locale];
+    }
+
+
+
+
+ return  [dateFormatter dateFromString:self];
+}
 @end

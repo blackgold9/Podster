@@ -37,6 +37,7 @@
     NSParameterAssert(self.title);
     self.summary = [dictionary stringForKey:@"summary"];
     self.feedURL = [dictionary stringForKey:@"feed_url"];
+    self.author = [dictionary stringForKey:@"author"];
     NSParameterAssert(self.feedURL);
     self.subtitle = [dictionary stringForKey:@"subtitle"];
     self.websiteURL = [dictionary stringForKey:@"website_url"];
@@ -49,6 +50,15 @@
     self.podstoreId = [dictionary objectForKey:@"id"];
 }
 
+- (void)downloadOfflineImageData
+{
+    // Download images here to store in binary fields. DO this when subscribing
+}
+
+- (void)deleteOfflineImageData
+{
+
+}
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"%@: %@", [super description], self.title];
@@ -113,9 +123,27 @@
 
 }
 
-- (void)syncWithServer
+- (void)getNewEpisodes:(void (^)(BOOL))complete
 {
+    NSDate *syncDate = [NSDate date];
+    [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podstoreId
+                                                 withLastSyncDate:[NSDate distantPast]// self.lastSynced
+                                                         complete:^void(id response) {
+                                                                [self.managedObjectContext performBlock:^void() {
+                                                                    self.lastSynced = syncDate;
+                                                                    NSArray *episodes = response;
+                                                                    for (NSDictionary *episode in episodes) {
+                                                                        SVPodcastEntry *newEntry = [SVPodcastEntry MR_createInContext:self.managedObjectContext];
+                                                                        [newEntry populateWithDictionary:episode];
+                                                                        [self addItemsObject:newEntry];
+                                                                    }
 
+                                                                    complete(YES);
+                                                                }];
+                                                         } onError:^void(NSError *error) {
+        complete(NO);
+        // handle it;
+    }];
 }
 - (NSUInteger)downloadedEpisodes
 {

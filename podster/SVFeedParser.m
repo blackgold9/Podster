@@ -139,7 +139,7 @@
         NSParameterAssert(episode.guid);
         episode.imageURL = item.imageURL;
         episode.datePublished = item.date;
-        episode.content = item.content;
+        //ssepisode.content = item.content;
         episode.durationValue = [item.duration secondsFromDurationString];
 
 

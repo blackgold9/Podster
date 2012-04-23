@@ -48,7 +48,8 @@
 
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [self registerHTTPOperationClass:[AFXMLRequestOperation class]];
-    //[self setDefaultHeader:@"Accept" value:@"application/json"];
+    [self setDefaultHeader:@"Accept" value:@"application/json"];
+
     
     return self;
 }
@@ -440,10 +441,28 @@
 }
 
 
-- (void)syncPodcastWithId:(NSNumber *)podstoreId
-         withLastSyncDate:(NSDate *)lastSycned
-                 complete:(void (^)(id, NSError *))onComplete
+- (void)getNewItemsForFeedWithId:(NSNumber *)podstoreId
+                withLastSyncDate:(NSDate *)lastSycned
+                        complete:(void (^)(id))onComplete
+                         onError:(SVErrorBlock)onError
 {
+    NSParameterAssert(podstoreId);
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+
+    [parameters setObject:podstoreId forKey:@"feed_id"];
+    [parameters setObject:[NSNumber numberWithInt:100] forKey:@"limit"];
+    if (lastSycned) {
+        [parameters setObject:lastSycned forKey:@"after"];
+    }
+
+    [self getPath:@"feed_items"
+       parameters:parameters
+          success:^void(AFHTTPRequestOperation *operation, id responseObject) {
+              onComplete(responseObject);
+          } failure:^void(AFHTTPRequestOperation *operation, NSError *error) {
+        onError(error);
+
+    }];
 
 }
 

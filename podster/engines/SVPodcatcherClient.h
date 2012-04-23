@@ -39,6 +39,9 @@ typedef void (^SVErrorBlock)(NSError *error);
                                           onCompletion:(void(^)(void))completion
                                                onError:(SVErrorBlock)error;
 
+- (void)getNewItemsForFeedWithId:(NSNumber *)podstoreId withLastSyncDate:(NSDate *)lastSycned complete:(void (^)(id))onComplete onError:(SVErrorBlock)onError;
+
+
 - (void)subscribeToFeedWithURL:(NSString *)feedURL shouldNotify:(BOOL)notify onCompletion:(void (^)(id))completion onError:(SVErrorBlock)onError;
 
 - (void)getAppConfigWithLanguage:(NSString *)language

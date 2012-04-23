@@ -254,8 +254,6 @@ NSString *uuid();
                          }
 
                      }
-                     LOG_GENERAL(2, @"Updating Premium mode from hello");
-                     [[SVSubscriptionManager sharedInstance] processServerState:subscriptions];
 
                      // TODO: Handle subscriptions from server
 

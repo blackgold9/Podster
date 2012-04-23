@@ -33,6 +33,7 @@
 #import "MTStatusBarOverlay.h"
 #import "SVSubscriptionManager.h"
 #import "_SVPodcastEntry.h"
+#import "_SVPodcast.h"
 @interface SVPodcastDetailsViewController ()
 
 
@@ -425,15 +426,16 @@
     [localContext performBlock:^{
         @try {
 
-            NSString *feedURL = [self.podcast.feedURL lowercaseString];
-            LOG_GENERAL(2, @"Lookuing up podcast in data store with URL: %@", feedURL);
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.feedURL, feedURL];
+            NSNumber *feedId= self.podcast.podstoreId;
+            NSAssert(feedId, @"Feed id should be present");
+            LOG_GENERAL(2, @"Lookuing up podcast in data store with Id: %@", feedId);
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
             localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
                                                       inContext:localContext];
             
 
             if (!localPodcast) {
-                LOG_GENERAL(2, @"Podcast named %@ with url %@ didn't exist, creating it", self.podcast.title,feedURL);
+                LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
                 localPodcast = [SVPodcast MR_createInContext:localContext];
                 [localContext performBlock:^{
                     [localContext save:nil];
@@ -445,10 +447,11 @@
             localPodcast.title = self.podcast.title;
             localPodcast.summary = self.podcast.summary;
             localPodcast.logoURL = self.podcast.logoURL;
-            localPodcast.feedURL = feedURL;
+            localPodcast.feedURL = self.podcast.feedURL;
             localPodcast.thumbLogoURL = [self.podcast thumbLogoURL];
             localPodcast.smallLogoURL = [self.podcast smallLogoURL];
             localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
+            localPodcast.podstoreId = [self.podcast podstoreId];
             localPodcast.unseenEpsiodeCountValue = 0;
             blockHasSubscription = localPodcast.isSubscribedValue;
             
@@ -486,24 +489,28 @@
                                                           repeats:NO];
                 [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
 
-                [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcast:localPodcast
-                                                              withLowerPriority:NO
-                                                                      inContext:localContext
-                                                                   onCompletion:loadCompleteHandler
-                                                                        onError:^(NSError *error) {
-                                                                            if (blockSelf) {
-                                                                                [[MTStatusBarOverlay sharedInstance] hide]; 
-                                                                                BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                                                                               message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
-                                                                                [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
-                                                                                                          block:^{
-                                                                                                              
-                                                                                                          }];
-                                                                                [alert show];
-                                                                            }
-                                                                        }];
                 
-                
+                [localContext performBlock:^{
+                    [localPodcast getNewEpisodes:^(BOOL success) {
+                        if (!success) {
+                            if (blockSelf) {
+                                [[MTStatusBarOverlay sharedInstance] hide]; 
+                                BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
+                                                                               message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
+                                [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
+                                                          block:^{
+                                                              
+                                                          }];
+                                [alert show];
+                            }
+
+                        }
+                        else {
+                            loadCompleteHandler();
+                        }
+                    }];
+                }];
+                                
                 
                 [self reloadData];
                 [self toggleOptionsPanel:NO animated:NO]; 
@@ -524,14 +531,18 @@
         [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         return;
     }
+
     LOG_GENERAL(2, @"REload Data begun");
     self.hidePlayedSwitch.on = localPodcast.hidePlayedEpisodesValue;
     self.sortSegmentedControl.selectedSegmentIndex = localPodcast.sortNewestFirstValue ? 0 : 1;
 
-    items = [localPodcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue]]];
-    if (localPodcast.hidePlayedEpisodesValue) {
-        items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
-    }
+    [localContext performBlockAndWait:^void() {
+        items = [localPodcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue]]];
+            if (localPodcast.hidePlayedEpisodesValue) {
+                items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
+            }
+    }];
+
 
     [self.tableView reloadData];
     LOG_GENERAL(2, @"REload Data complete");

@@ -11,4 +11,7 @@
 @interface NSString (SVHelpers)
 +(NSString *)formattedStringRepresentationOfSeconds:(NSInteger)totalSeconds;
 -(NSInteger)secondsFromDurationString;
+
+- (NSDate *)dateFromRailsDate;
+
 @end

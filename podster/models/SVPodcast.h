@@ -8,6 +8,8 @@
 
 - (void)updateNextItemDateAndDownloadIfNeccesary:(BOOL)shouldDownload;
 
+- (void)getNewEpisodes:(void (^)(BOOL))complete;
+
 - (NSUInteger)downloadedEpisodes;
 
 - (SVPodcastEntry *)firstUnplayedInPodcastOrder;

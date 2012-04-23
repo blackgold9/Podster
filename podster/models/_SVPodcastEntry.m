@@ -4,7 +4,6 @@
 #import "_SVPodcastEntry.h"
 
 const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
-	.content = @"content",
 	.datePublished = @"datePublished",
 	.downloadComplete = @"downloadComplete",
 	.duration = @"duration",
@@ -17,9 +16,11 @@ const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
 	.played = @"played",
 	.podstoreId = @"podstoreId",
 	.positionInSeconds = @"positionInSeconds",
+	.rawSummary = @"rawSummary",
 	.summary = @"summary",
 	.title = @"title",
 	.totalBytes = @"totalBytes",
+	.webURL = @"webURL",
 };
 
 const struct SVPodcastEntryRelationships SVPodcastEntryRelationships = {
@@ -91,13 +92,6 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 	return keyPaths;
 }
-
-
-
-
-@dynamic content;
-
-
 
 
 
@@ -319,6 +313,13 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 
 
+@dynamic rawSummary;
+
+
+
+
+
+
 @dynamic summary;
 
 
@@ -354,6 +355,13 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 - (void)setPrimitiveTotalBytesValue:(int)value_ {
 	[self setPrimitiveTotalBytes:[NSNumber numberWithInt:value_]];
 }
+
+
+
+
+
+@dynamic webURL;
+
 
 
 
