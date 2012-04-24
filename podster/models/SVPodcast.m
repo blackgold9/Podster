@@ -52,12 +52,45 @@
 
 - (void)downloadOfflineImageData
 {
-    // Download images here to store in binary fields. DO this when subscribing
+    
+    if (self.smallLogoURL != nil) {
+        NSURLRequest *gridRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:self.smallLogoURL]];
+        //    AFHTTPRequestOperation *gridOp = AFHTTPRe        
+        //        AFHTTPRequestOperation *gridOp = AFH 
+        AFHTTPRequestOperation *gridOp = [[AFHTTPRequestOperation alloc] initWithRequest:gridRequest];
+        [gridOp setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self.managedObjectContext performBlock:^{
+                
+                
+                self.gridSizeImageData = responseObject; 
+                LOG_GENERAL(2, @"Downloaded grid image offline data");
+            }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            LOG_GENERAL(2, @"Failed to download grid image data for offline store");
+        }];
+        [gridOp start];
+    }   
+    
+    if (self.thumbLogoURL != nil) {
+        NSURLRequest *listSizeRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:self.thumbLogoURL]];
+        //    AFHTTPRequestOperation *gridOp = AFHTTPRe        
+        //        AFHTTPRequestOperation *gridOp = AFH 
+        AFHTTPRequestOperation *listImageOp = [[AFHTTPRequestOperation alloc] initWithRequest:listSizeRequest];
+        [listImageOp setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self.managedObjectContext performBlock:^{
+                self.listSizeImageData = responseObject; 
+                LOG_GENERAL(2, @"Downloaded list image offline data");
+            }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            LOG_GENERAL(2, @"Failed to download list image data for offline store");
+        }];
+        [listImageOp start];
+    }
+
 }
 
 - (void)deleteOfflineImageData
 {
-
 }
 -(NSString *)description
 {
@@ -127,14 +160,21 @@
 {
     NSDate *syncDate = [NSDate date];
     [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podstoreId
-                                                 withLastSyncDate:[NSDate distantPast]// self.lastSynced
+                                                 withLastSyncDate:self.lastSynced == nil ? [NSDate distantPast] : self.lastSynced
                                                          complete:^void(id response) {
                                                                 [self.managedObjectContext performBlock:^void() {
                                                                     self.lastSynced = syncDate;
                                                                     NSArray *episodes = response;
+                                                                    BOOL isFirst = YES;
                                                                     for (NSDictionary *episode in episodes) {
                                                                         SVPodcastEntry *newEntry = [SVPodcastEntry MR_createInContext:self.managedObjectContext];
+
                                                                         [newEntry populateWithDictionary:episode];
+                                                                        if (isFirst) {
+                                                                            self.nextItemDate = newEntry.datePublished;
+                                                                            isFirst = NO;
+                                                                        }
+                                                                        
                                                                         [self addItemsObject:newEntry];
                                                                     }
 
@@ -148,7 +188,9 @@
 - (NSUInteger)downloadedEpisodes
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = YES && %K= %@",SVPodcastEntryAttributes.downloadComplete, SVPodcastEntryRelationships.podcast, self];
-    return [SVPodcastEntry MR_countOfEntitiesWithPredicate:predicate inContext:self.managedObjectContext];
+    NSUInteger count = [SVPodcastEntry MR_countOfEntitiesWithPredicate:predicate inContext:self.managedObjectContext];
+    LOG_GENERAL(2, @"Podcast has %d downloaded episodes", count);
+    return count;
 }
 
 

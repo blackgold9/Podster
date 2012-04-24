@@ -34,16 +34,9 @@
     }
     return self;
 }
-- (void)bind:(id<ActsAsPodcast>)podcast
+- (void)loadWebImageWithURL:(NSString *)logoString
 {
     
-    [imageLoadOp cancel];
-    
-    self.titleLabel.text = podcast.title;
-    NSString *logoString = podcast.smallLogoURL;
-    if (!logoString) {
-        logoString = podcast.logoURL;
-    }
     self.titleLabel.hidden = NO;
     if(logoString) {
         NSURL *imageURL = [NSURL URLWithString: logoString];
@@ -57,7 +50,31 @@
     } else {            
         self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
     }
+
+}
+- (void)loadImageWithPodcast:(id<ActsAsPodcast>)podcast
+{
+      if ([podcast class] == [SVPodcast class]) {
+          SVPodcast *coreCast = (SVPodcast *)podcast;
+          if (coreCast.gridSizeImageData) {
+              LOG_GENERAL(3, @"Loaded local image");
+              UIImage *image = [UIImage imageWithData:coreCast.gridSizeImageData];
+              self.podcastArtImageView.image = image;
+          } else {
+              [self loadWebImageWithURL:[podcast smallLogoURL]];
+          }
+      } else {
+          [self loadWebImageWithURL:[podcast smallLogoURL]];
+      }
     
+}
+- (void)bind:(id<ActsAsPodcast>)podcast
+{
+    
+    [imageLoadOp cancel];
+    [self loadImageWithPodcast:podcast];
+    self.titleLabel.text = podcast.title;
+       
     self.podcastArtImageView.layer.borderColor = [[UIColor colorWithWhite:0.7 alpha:1.0] CGColor];
     self.podcastArtImageView.layer.borderWidth = 2.0;
     self.unseenCountFlagImage.alpha = 0.0;
@@ -66,9 +83,7 @@
     self.progressBar.alpha = 0;
     self.progressBackground.alpha = 0;
     [UIView animateWithDuration:0.33
-                     animations:^{
-                         
-                         
+                     animations:^{                                                  
                          if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
                              self.unseenCountFlagImage.alpha = 1.0;
                              self.unseenCountLabel.alpha = 1.0;
@@ -93,80 +108,77 @@
             self.downloadCountLabel.alpha = 1.0;
             self.progressBackground.alpha = 0.5;
             self.progressBar.alpha = 1.0;
-        }
+        } 
         
-        newEpisodeCountObserverToken = [coreDataPodcast addObserverForKeyPath:@"unseenEpisodeCount" task:^(id obj, NSDictionary *change) {
-            [UIView animateWithDuration:0.33
-                             animations:^{
-                                 
-                                 
-                                 if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
-                                     self.unseenCountFlagImage.alpha = 1.0;
-                                     self.unseenCountLabel.alpha = 1.0;
-                                     self.unseenCountLabel.text = [NSString stringWithFormat:@"%d", [[podcast unseenEpsiodeCount] integerValue]];
-                                 } else {
-                                     self.unseenCountLabel.alpha = 0;
-                                     self.unseenCountFlagImage.alpha = 0;
-                                 }
-                             }];     
-        }];
-        __weak UIProgressView *weakProgressView  = self.progressBar;
-        __weak UIView *WeakprogressBackground = self.progressBackground;
-        __weak PodcastGridCellView *weakSelf = self;
-        downloadPercentageObserverToken = [coreDataPodcast addObserverForKeyPath:@"downloadPercentage" task:^(id obj, NSDictionary *change) { 
-            if (weakProgressView) {
-                LOG_GENERAL(2, @"Updating grid cell with download progress");
-                SVPodcast *local = obj;
-                weakProgressView.progress = local.downloadPercentageValue / 100.0f;
-            }
-        }];
-                
-        isDownloadingObserverToken = [coreDataPodcast addObserverForKeyPath:@"isDownloading" task:^(id obj, NSDictionary *change) {
-            if (weakProgressView) {
-                
-                SVPodcast *local = obj;
-                if (local.isDownloadingValue) { 
-                    LOG_GENERAL(2, @"Downloading item");
-                    self.downloadCountLabel.text = NSLocalizedString(@"Downloading...", @"Downloading...");
-                } else {
-                    NSUInteger  count = [local downloadedEpisodes];
-                    LOG_GENERAL(2, @"Not Downloading item");
-                    if (count > 0) {
-                        self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), count];
-                    }
-                }
+        [UIView animateWithDuration:0.33
+                         animations:^{
+                             
+                             
+                             if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
+                                 self.unseenCountFlagImage.alpha = 1.0;
+                                 self.unseenCountLabel.alpha = 1.0;
+                                 self.unseenCountLabel.text = [NSString stringWithFormat:@"%d", [[podcast unseenEpsiodeCount] integerValue]];
+                             } else {
+                                 self.unseenCountLabel.alpha = 0;
+                                 self.unseenCountFlagImage.alpha = 0;
+                             }
+                         }];     
 
-                [UIView animateWithDuration:0.5
-                                 animations:^{
-                                     WeakprogressBackground.alpha = local.isDownloadingValue ? 0.5 : 0;
-                                     weakProgressView.alpha = local.isDownloadingValue? 1 : 0;
-                                     weakSelf.downloadCountLabel.alpha = local.isDownloadingValue? 1 : 0;
-                                 }];
-            }
-        }];
+        [coreDataPodcast addObserver:self forKeyPath:@"downloadPercentage" options:NSKeyValueObservingOptionNew context:nil];
+        [coreDataPodcast addObserver:self forKeyPath:@"isDownloading" options:NSKeyValueObservingOptionNew context:nil];
+
     }
 }
     
 -(void)prepareForReuse
 {
     if (coreDataPodcast) {
-        if (downloadPercentageObserverToken) {
-            [coreDataPodcast removeObserverForKeyPath:@"downloadPercentageValue" identifier:downloadPercentageObserverToken];
-        }
-        
-        if (isDownloadingObserverToken) {
-            [coreDataPodcast removeObserverForKeyPath:@"isDownloading" identifier:isDownloadingObserverToken];
-        }
-        
-        if (newEpisodeCountObserverToken) {
-            [coreDataPodcast removeObserverForKeyPath:@"unseenEpisodeCount" identifier:newEpisodeCountObserverToken];
-        }
+     [coreDataPodcast removeObserver:self forKeyPath:@"downloadPercentage"];
+     [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];        
+//        if (newEpisodeCountObserverToken) {
+//            [coreDataPodcast removeObserverForKeyPath:@"unseenEpisodeCount" identifier:newEpisodeCountObserverToken];
+//        }
         
         self.progressBackground.alpha = 0;
         self.progressBar.alpha = 0;
         coreDataPodcast = nil;
     }
     [imageLoadOp cancel];
+}
+
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if(object == coreDataPodcast) { 
+        if ([keyPath isEqualToString:@"downloadPercentage"]) {
+ 
+            LOG_GENERAL(2, @"Updating grid cell with download progress");
+            SVPodcast *local = object;
+            self.progressBar.progress = local.downloadPercentageValue / 100.0f;
+        } else if ([keyPath isEqualToString:@"isDownloading"]) {
+            SVPodcast *local = object;
+            if (local.isDownloadingValue) { 
+                LOG_GENERAL(2, @"Downloading item");
+                self.downloadCountLabel.text = NSLocalizedString(@"Downloading...", nil);
+            } else {
+                LOG_GENERAL(2, @"Not Downloading item");
+                NSUInteger downloaded = [coreDataPodcast downloadedEpisodes];
+                if (downloaded > 0) {
+                    self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), downloaded];                    
+                } else {
+                    self.downloadCountLabel.text = @"";
+                }
+            }
+
+            [UIView animateWithDuration:0.5
+                             animations:^{
+                                 self.progressBackground.alpha = local.isDownloadingValue ? 1 : 0;
+                                 self.progressBar.alpha = local.isDownloadingValue ? 1 : 0;
+                             }];
+            
+        }
+    }
+    
 }
 
 

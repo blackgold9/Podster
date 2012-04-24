@@ -136,22 +136,23 @@
     rateImage.userInteractionEnabled = YES;
     rateImage.alpha = player.rate == 1.5 ? 1.0 : 0.5;
     playbackSpeed = player.rate;
-    [rateImage whenTapped:^{
-
-        if (player.rate == 1.5) {
-            rateImage.alpha = 0.5;   
-            [[SVPlaybackManager sharedInstance] setPlaybackRate:1];
-            playbackSpeed =1.0;
-        } else {
-            rateImage.alpha = 1.0;
-            [[SVPlaybackManager sharedInstance] setPlaybackRate:1.5];
-            playbackSpeed = 1.5;
-        }
-
-
-    }]; 
+    UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rateTapped:)];
+    [rateImage addGestureRecognizer:tapRec];
 }
-
+- (void)rateTapped:(UIGestureRecognizer *)sender
+{
+    if (player.rate == 1.5) {
+        rateImage.alpha = 0.5;   
+        [[SVPlaybackManager sharedInstance] setPlaybackRate:1];
+        playbackSpeed =1.0;
+    } else {
+        rateImage.alpha = 1.0;
+        [[SVPlaybackManager sharedInstance] setPlaybackRate:1.5];
+        playbackSpeed = 1.5;
+    }
+    
+ 
+}
 - (void)viewDidUnload
 {
     [self setProgressSlider:nil];

@@ -323,8 +323,6 @@
 		4B2C6D0715049710009DFE1F /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2C6D0515049710009DFE1F /* placeholder@2x.png */; };
 		4B2C6D0815049710009DFE1F /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2C6D0615049710009DFE1F /* placeholder.png */; };
 		4B2C6D0A15049C9C009DFE1F /* alert.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4B2C6D0915049C9C009DFE1F /* alert.aiff */; };
-		4B2D06E4152DE4FE00CF6F87 /* BlocksKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2D06E3152DE4FE00CF6F87 /* BlocksKit.framework */; };
-		4B2D06E5152DE4FE00CF6F87 /* BlocksKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B2D06E3152DE4FE00CF6F87 /* BlocksKit.framework */; };
 		4B2D0700152FA1EE00CF6F87 /* arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D06FE152FA1EE00CF6F87 /* arrows.png */; };
 		4B2D0701152FA1EE00CF6F87 /* arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D06FE152FA1EE00CF6F87 /* arrows.png */; };
 		4B2D0702152FA1EE00CF6F87 /* arrows@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D06FF152FA1EE00CF6F87 /* arrows@2x.png */; };
@@ -624,6 +622,8 @@
 		4BB2058E14D0F8C70038EB7D /* SVPodcastModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */; };
 		4BB2059114D101500038EB7D /* SVPodcastDetailsModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */; };
 		4BB2059214D101500038EB7D /* SVPodcastDetailsModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */; };
+		4BC8D1E41545E20E009C113C /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8D1E31545E20D009C113C /* ISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4BC8D1E51545E20E009C113C /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8D1E31545E20D009C113C /* ISO8601DateFormatter.m */; };
 		4BCE682014F7638C005B0324 /* SVSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE681F14F7638C005B0324 /* SVSettings.m */; };
 		4BCE682114F7638C005B0324 /* SVSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE681F14F7638C005B0324 /* SVSettings.m */; };
 		4BD0BAC3151124B2005E6232 /* placeholder-thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD0BAC1151124B2005E6232 /* placeholder-thumb.png */; };
@@ -985,7 +985,6 @@
 		4B2C6D0515049710009DFE1F /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		4B2C6D0615049710009DFE1F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		4B2C6D0915049C9C009DFE1F /* alert.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alert.aiff; sourceTree = "<group>"; };
-		4B2D06E3152DE4FE00CF6F87 /* BlocksKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BlocksKit.framework; path = "3rd Party/BlocksKit.framework"; sourceTree = "<group>"; };
 		4B2D06FE152FA1EE00CF6F87 /* arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrows.png; sourceTree = "<group>"; };
 		4B2D06FF152FA1EE00CF6F87 /* arrows@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrows@2x.png"; sourceTree = "<group>"; };
 		4B2E51CB14B2C85D0030B7C1 /* SVDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadManager.h; sourceTree = "<group>"; };
@@ -1268,6 +1267,8 @@
 		4BB2058B14D0F8C70038EB7D /* SVPodcastModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastModalView.h; sourceTree = "<group>"; };
 		4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastModalView.m; sourceTree = "<group>"; };
 		4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVPodcastDetailsModalView.xib; sourceTree = "<group>"; };
+		4BC8D1E21545E20D009C113C /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
+		4BC8D1E31545E20D009C113C /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
 		4BCE681E14F7638C005B0324 /* SVSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSettings.h; sourceTree = "<group>"; };
 		4BCE681F14F7638C005B0324 /* SVSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVSettings.m; sourceTree = "<group>"; };
 		4BD0BAC1151124B2005E6232 /* placeholder-thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-thumb.png"; sourceTree = "<group>"; };
@@ -1336,7 +1337,6 @@
 				4B71F79214A5B08C00D26F4C /* Foundation.framework in Frameworks */,
 				4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */,
 				4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */,
-				4B2D06E4152DE4FE00CF6F87 /* BlocksKit.framework in Frameworks */,
 				4B05C028153639E10078DF13 /* libInMobi_iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1355,7 +1355,6 @@
 				4B71F7AF14A5B08C00D26F4C /* UIKit.framework in Frameworks */,
 				4B71F7B014A5B08C00D26F4C /* Foundation.framework in Frameworks */,
 				4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */,
-				4B2D06E5152DE4FE00CF6F87 /* BlocksKit.framework in Frameworks */,
 				4B05C029153639E10078DF13 /* libInMobi_iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2177,6 +2176,8 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4BC8D1E21545E20D009C113C /* ISO8601DateFormatter.h */,
+				4BC8D1E31545E20D009C113C /* ISO8601DateFormatter.m */,
 				4B05C0371536449B0078DF13 /* Reachability.m */,
 				4B05C0381536449B0078DF13 /* Reachability.h */,
 				4B05C01F153639E00078DF13 /* InMobi iOS SDK Bundle */,
@@ -2185,7 +2186,6 @@
 				4B05BF25153556E00078DF13 /* HockeyKit */,
 				4B11EDBA1532B214004B9091 /* Lumberjack */,
 				4B11EDA815328A6B004B9091 /* MTStatusBarOverlay */,
-				4B2D06E3152DE4FE00CF6F87 /* BlocksKit.framework */,
 				4B35BC95151AA4D300325DEF /* Appirater.h */,
 				4B35BC96151AA4D300325DEF /* Appirater.m */,
 				4B3E5EC7150C43DD00010833 /* MBHud */,
@@ -2488,7 +2488,7 @@
 		4B71F78214A5B08C00D26F4C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 4B71F78514A5B08C00D26F4C /* Build configuration list for PBXProject "podster" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2990,6 +2990,7 @@
 				4B05C01B1536368C0078DF13 /* CJSONSerializer.m in Sources */,
 				4B05C01D1536368C0078DF13 /* CSerializedJSONData.m in Sources */,
 				4B05C0391536449B0078DF13 /* Reachability.m in Sources */,
+				4BC8D1E41545E20E009C113C /* ISO8601DateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3177,6 +3178,7 @@
 				4B05C01C1536368C0078DF13 /* CJSONSerializer.m in Sources */,
 				4B05C01E1536368C0078DF13 /* CSerializedJSONData.m in Sources */,
 				4B05C03A1536449B0078DF13 /* Reachability.m in Sources */,
+				4BC8D1E51545E20E009C113C /* ISO8601DateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

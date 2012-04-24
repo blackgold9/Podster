@@ -778,7 +778,15 @@ static BOOL randSeeded = NO;
     return;
   }
   AWLogDebug(@"Received ad from adapter (nid %@)", adapter.networkConfig.nid);
-
+    for (UIView *subview in [[[view subviews] lastObject] subviews]){
+        if ([subview isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *scroller = (UIScrollView *)subview;
+            if (scroller.scrollsToTop) {
+                LOG_GENERAL(2, @"ADS: resetting scrolls to top");
+                scroller.scrollsToTop = NO;
+            }
+        }
+    }
   // UIView operations should be performed on main thread
   [self performSelectorOnMainThread:@selector(transitionToView:)
                          withObject:view

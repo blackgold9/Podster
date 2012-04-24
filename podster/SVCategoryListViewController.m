@@ -112,11 +112,11 @@
     return _isLoading  ? 0 : categories.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"categoryCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [theTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
@@ -184,14 +184,14 @@
 }
 */
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+-(void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
     LOG_GENERAL(2, @"User tapped search");
     SVPodcastsSearchResultsViewController *controller =[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"searchResultsController"];
     
     
-    controller.searchString = searchBar.text;
-    [searchBar resignFirstResponder];
+    controller.searchString = theSearchBar.text;
+    [theSearchBar resignFirstResponder];
     [self.navigationController pushViewController:controller animated:YES];
 
     

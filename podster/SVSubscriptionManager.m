@@ -74,7 +74,7 @@ static char const kRefreshInterval = -3;
             
             NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate, olderThanSyncStart,stale, nil]];
             
-            nextPodcast = [SVPodcast MR_findFirstInContext:context]; //[SVPodcast MR_findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
+            nextPodcast = [SVPodcast MR_findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
             
             LOG_NETWORK(2, @"Finding subscription that needs refreshing");
             if (nextPodcast && !shouldCancel) {

@@ -13,4 +13,5 @@
 - (NSUInteger)downloadedEpisodes;
 
 - (SVPodcastEntry *)firstUnplayedInPodcastOrder;
+- (void)downloadOfflineImageData;
 @end

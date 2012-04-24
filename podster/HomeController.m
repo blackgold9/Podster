@@ -81,16 +81,13 @@
     [self.view addSubview:placeHolder];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"] 
                                                                               style:UIBarButtonItemStylePlain
-                                                                            handler:^(id sender) {
-                                                                                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-                                                                                [self.navigationController pushViewController:[storyboard instantiateViewControllerWithIdentifier:@"categoryListView"] animated:YES];
-                                                                            }];
+                                                                             target:self
+                                                                             action:@selector(directoryButtonTapped:)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-        [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController] animated:YES];
-        
-    }];
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] 
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(settingsTapped:)];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.dimBackground = YES;
 
@@ -99,27 +96,14 @@
         [self configureTabView];
     self.scrollView.contentOffset = CGPointMake(0, 0);
     
-    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        if (state == UIGestureRecognizerStateRecognized) {
-            if (self.currentScreen == HomePageFeaturedScreen) {
-                [self configureViewControllerForScreenType:HomePageSubscriptionsScreen];
-            }
-        }
-    }];
+        UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
     
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     
     [self.view addGestureRecognizer:leftSwipe];
     
     [self configureViewControllerForScreenType:[[SVSettings sharedInstance] homeScreen]];
-    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        if (state == UIGestureRecognizerStateRecognized) {
-            if (self.currentScreen == HomePageSubscriptionsScreen) {
-                [self configureViewControllerForScreenType:HomePageFeaturedScreen];
-            }
-        }
-    }];
-    
+        UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];    
     [self.view addGestureRecognizer:rightSwipe];
 
 
@@ -131,6 +115,36 @@
     //[[PodsterIAPHelper sharedInstance] r]
 }
 
+- (void)directoryButtonTapped:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    [self.navigationController pushViewController:[storyboard instantiateViewControllerWithIdentifier:@"categoryListView"] animated:YES];
+}
+
+- (void)settingsTapped:(id)sender
+{
+    [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController] animated:YES];
+
+}
+- (void)swipeLeft:(UIGestureRecognizer *)rec
+{
+    if (rec.state == UIGestureRecognizerStateRecognized) {
+        if (self.currentScreen == HomePageFeaturedScreen) {
+            [self configureViewControllerForScreenType:HomePageSubscriptionsScreen];
+        }
+    }
+
+}
+
+- (void)swipeRight:(UIGestureRecognizer *)rec
+{
+    if (rec.state == UIGestureRecognizerStateRecognized) {
+        if (self.currentScreen == HomePageSubscriptionsScreen) {
+            [self configureViewControllerForScreenType:HomePageFeaturedScreen];
+        }
+    }
+
+}
 - (UIViewController *)controllerForScreenType:(HomePageScreenType)screenType
 {
     UIViewController *output = nil;
@@ -153,6 +167,8 @@
     NSAssert(output, @"There should be a view controller returned");
     return output;
 }
+
+
 
 - (void)configureViewControllerForScreenType:(HomePageScreenType)screenType
 {

@@ -172,12 +172,12 @@
 
 - (IBAction)notifySwitchChanged:(id)sender {
     if([[SVSettings sharedInstance] notificationsEnabled]){
-      
-            [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
-                if (success) {
-                    
-                }
-            }];        
+        
+        [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
+            if (success) {
+                
+            }
+        }];        
     } 
     else 
     {
@@ -260,6 +260,7 @@
             [self askUserIfTheyWantNotifications];
         }
     }];
+    [localPodcast downloadOfflineImageData];
 }
 
 - (void)subscribeToPodcastWithSuccessBlock:(void (^)(BOOL))complete
@@ -292,12 +293,12 @@
     };
     
     [[SVPodcatcherClient sharedInstance] subscribeToFeedWithURL:localPodcast.feedURL shouldNotify:NO onCompletion:succeeded onError:^(NSError *error) {
-                                                                    if (complete) {
-                                                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                                                            complete(NO);
-                                                                        });
-                                                                    }
-                                                                }];
+        if (complete) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complete(NO);
+            });
+        }
+    }];
 }
 
 - (void)unsubscribeFromPodcast
@@ -402,10 +403,10 @@
 {
     LOG_GENERAL(2, @"%s", sel_getName(_cmd));
     [super viewDidLoad];
-
+    
     //    GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
     isInitialLoad = YES;
-
+    
     self.navigationItem.title = NSLocalizedString(@"Details", @"Details");
     self.notifyDescriptionLabel.text = NSLocalizedString(@"Poster will send you an alert when new episodes of this podcast are available", @"Poster will send you an alert when new episodes of this podcast are available");
     self.notifyOnUpdateLabel.text =  NSLocalizedString(@"Notify Me On Update", @"Notify Me On Update");
@@ -425,7 +426,7 @@
     
     [localContext performBlock:^{
         @try {
-
+            
             NSNumber *feedId= self.podcast.podstoreId;
             NSAssert(feedId, @"Feed id should be present");
             LOG_GENERAL(2, @"Lookuing up podcast in data store with Id: %@", feedId);
@@ -433,7 +434,7 @@
             localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
                                                       inContext:localContext];
             
-
+            
             if (!localPodcast) {
                 LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
                 localPodcast = [SVPodcast MR_createInContext:localContext];
@@ -481,14 +482,12 @@
                     }
                     
                 };                
-                gracePeriodTimer = [NSTimer timerWithTimeInterval:0.5
-                                                            block:^(NSTimeInterval time) {
-                                                                [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") ];
-                                                                
-                                                            } 
-                                                          repeats:NO];
+             
+                gracePeriodTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 
+                                                                    target:self selector:@selector(gracePeriodTimerFired:) 
+                                                                  userInfo:nil
+                                                                   repeats:NO];
                 [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
-
                 
                 [localContext performBlock:^{
                     [localPodcast getNewEpisodes:^(BOOL success) {
@@ -503,14 +502,12 @@
                                                           }];
                                 [alert show];
                             }
-
                         }
                         else {
                             loadCompleteHandler();
                         }
                     }];
                 }];
-                                
                 
                 [self reloadData];
                 [self toggleOptionsPanel:NO animated:NO]; 
@@ -518,12 +515,15 @@
         }
         @catch (NSException *exception) {
             NSLog(@"%@", exception);
-        }
-        
-    }];
-    
+        }        
+    }];    
 }
+- (void)gracePeriodTimerFired:(NSTimer *)timer
+{
+    [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") ];
+    
 
+}
 -(void)reloadData
 {
     if (![NSThread isMainThread]) {
@@ -531,19 +531,19 @@
         [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         return;
     }
-
+    
     LOG_GENERAL(2, @"REload Data begun");
     self.hidePlayedSwitch.on = localPodcast.hidePlayedEpisodesValue;
     self.sortSegmentedControl.selectedSegmentIndex = localPodcast.sortNewestFirstValue ? 0 : 1;
-
+    
     [localContext performBlockAndWait:^void() {
         items = [localPodcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue]]];
-            if (localPodcast.hidePlayedEpisodesValue) {
-                items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
-            }
+        if (localPodcast.hidePlayedEpisodesValue) {
+            items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
+        }
     }];
-
-
+    
+    
     [self.tableView reloadData];
     LOG_GENERAL(2, @"REload Data complete");
 }
@@ -577,7 +577,7 @@
 {
     [super viewDidAppear:animated];
     [self reloadData];
-
+    
 }
 
 

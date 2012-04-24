@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <MessageUI/MessageUI.h>
 @interface SettingsViewController : UITableViewController<MFMailComposeViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UISwitch *premiumSwitch;
 - (IBAction)premiumSwitchToggled:(id)sender;

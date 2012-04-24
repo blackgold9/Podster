@@ -41,7 +41,7 @@
     if (currentProgressPercentage != percentage) {
         currentProgressPercentage = percentage;
         LOG_DOWNLOADS(4, @"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
-        NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry identifier], @"identifier", [NSNumber numberWithDouble:progress], @"progress",  nil];
+        NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry podstoreId], @"podstoreId", [NSNumber numberWithDouble:progress], @"progress",  nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
         [localContext performBlock: ^{
 
@@ -81,7 +81,7 @@
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     [localContext performBlockAndWait:^{
         download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
-        NSURL *mediaURL = [NSURL URLWithString:download.entry.mediaURL];
+//        NSURL *mediaURL = [NSURL URLWithString:download.entry.mediaURL];
         LOG_DOWNLOADS(2, @"Starting episode download: %@", download.entry);
         
         NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
@@ -116,7 +116,9 @@
         
         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         [op setOutputStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
-        
+        [op setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
+            return nil;
+        }];
         [op setDownloadProgressBlock:^(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
             [self downloadProgressChanged:(double)totalBytesRead / (double)(totalBytesExpectedToRead + start)
                               forDownload:localDownload 

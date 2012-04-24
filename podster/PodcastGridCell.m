@@ -176,6 +176,7 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
         downloadBackground.tag = 1337;
         progressView.frame = CGRectMake(10, 5, self.frame.size.width - 20, 10);
+        progressView.tag = 1338;
 
         [downloadBackground addSubview:progressView];
         UILabel *downloadLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -191,30 +192,11 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         coreDataPodcast = (SVPodcast *)podcast;
         downloadBackground.alpha = coreDataPodcast.isDownloadingValue ? 1 : 0;
         
-        __weak UIProgressView *weakProgressView  = progressView;
-        downloadPercentageObserverToken = [coreDataPodcast addObserverForKeyPath:@"downloadPercentage" task:^(id obj, NSDictionary *change) { 
-            if (weakProgressView) {
-                LOG_GENERAL(2, @"Updating grid cell with download progress");
-                SVPodcast *local = obj;
-                weakProgressView.progress = local.downloadPercentageValue / 100.0f;
-            }
-        }];
+        [coreDataPodcast addObserver:self
+                          forKeyPath:@"downloadPercentage"
+                             options:NSKeyValueObservingOptionNew
+                             context:nil];
         
-        isDownloadingObserverToken = [coreDataPodcast addObserverForKeyPath:@"isDownloading" task:^(id obj, NSDictionary *change) {
-            if (weakProgressView) {
-                
-                SVPodcast *local = obj;
-                if (local.isDownloadingValue) { 
-                    LOG_GENERAL(2, @"Downloading item");
-                } else {
-                    LOG_GENERAL(2, @"Not Downloading item");
-                }
-                [UIView animateWithDuration:0.5
-                                 animations:^{
-                                     downloadBackground.alpha = local.isDownloadingValue ? 1 : 0;
-                                 }];
-            }
-        }];
     }
     
     
@@ -225,15 +207,11 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
 {
     [super prepareForReuse];
     if (coreDataPodcast) {
-        if (downloadPercentageObserverToken) {
-            [coreDataPodcast removeObserverForKeyPath:@"downloadPercentageValue" identifier:downloadPercentageObserverToken];
-        }
         
-        if (isDownloadingObserverToken) {
-            [coreDataPodcast removeObserverForKeyPath:@"isDownloading" identifier:isDownloadingObserverToken];
-        }
-        
-        UIProgressView *progressView = (UIProgressView *)[self viewWithTag:1337];
+        [coreDataPodcast removeObserver:self forKeyPath:@"downloadPercentageValue"];
+        [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];
+                 
+        UIView *progressView = (UIView *)[self viewWithTag:1337];
         if ([progressView superview]) {
             [progressView removeFromSuperview];
         }
@@ -245,5 +223,30 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
     UIImageView *countOverlay = (UIImageView *)[self viewWithTag:1909];
     countLabel.hidden = YES;
     countOverlay.hidden = YES;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    
+    if ([keyPath isEqualToString:@"downloadPercentageValue"]) {
+        UIProgressView *progressView = (UIProgressView *)[self viewWithTag:1338];
+        LOG_GENERAL(2, @"Updating grid cell with download progress");
+        SVPodcast *local = object;
+        progressView.progress = local.downloadPercentageValue / 100.0f;
+    } else if ([keyPath isEqualToString:@"isDownloading"]) {
+        SVPodcast *local = object;
+        if (local.isDownloadingValue) { 
+            LOG_GENERAL(2, @"Downloading item");
+        } else {
+            LOG_GENERAL(2, @"Not Downloading item");
+        }
+                UIView *progressView = (UIView *)[self viewWithTag:1337];
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             progressView.alpha = local.isDownloadingValue ? 1 : 0;
+                         }];
+
+    }
+
 }
 @end

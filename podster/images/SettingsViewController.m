@@ -9,9 +9,11 @@
 #import "SettingsViewController.h"
 #import "BlockActionSheet.h"
 #import <StoreKit/StoreKit.h>
+#import <MessageUI/MessageUI.h>
 #import "PodsterIAPHelper.h"
 #import "MBProgressHUD.h"
 #import "BlockAlertView.h"
+
 @interface SettingsViewController ()
 
 @end
@@ -41,10 +43,6 @@
 
         NSArray *toRecipients = [NSArray arrayWithObjects:@"support@vanterpool.net", nil];
         [mailer setToRecipients:toRecipients];
-        
-//        UIImage *myImage = [UIImage imageNamed:@"mobiletuts-logo.png"];
-//        NSData *imageData = UIImagePNGRepresentation(myImage);
-//        [mailer addAttachmentData:imageData mimeType:@"image/png" fileName:@"mobiletutsImage"]; 
         
         NSDictionary *appInfo = [[NSBundle mainBundle] infoDictionary];
         NSString *versionNumber = [NSString stringWithFormat:@"%@ (%@)", 

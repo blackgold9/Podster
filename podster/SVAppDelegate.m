@@ -105,11 +105,11 @@ NSString *uuid();
 - (void)configureTheming
 {
     UIColor *colorOne = [UIColor colorWithRed:0.15 green:0.15 blue:0.16 alpha:1.0]; // [UIColor colorWithHex:0x1E1E27];
-    UIColor *colorTwo = [UIColor colorWithHex:0x65F4FF];
-    UIColor *colorThree = [UIColor colorWithHex:0x41EA29];
-    UIColor *colorFour = [UIColor colorWithHex:0xC0C0E8];
-    
-    UIColor *colorFive = [UIColor colorWithHex:0x000000];
+//    UIColor *colorTwo = [UIColor colorWithHex:0x65F4FF];
+//    UIColor *colorThree = [UIColor colorWithHex:0x41EA29];
+//    UIColor *colorFour = [UIColor colorWithHex:0xC0C0E8];
+//    
+//    UIColor *colorFive = [UIColor colorWithHex:0x000000];
     UIImage *image = [UIImage imageNamed:@"nav-bar.png"];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackOpaque];
     [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];

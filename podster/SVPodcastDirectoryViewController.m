@@ -80,11 +80,11 @@
     return YES;
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     SVPodcastsSearchResultsViewController *destination = [mainStoryboard instantiateViewControllerWithIdentifier:@"podcastSearchResults"];
-    destination.navigationItem.title = searchBar.text;
-    destination.searchString = searchBar.text;
+    destination.navigationItem.title = theSearchBar.text;
+    destination.searchString = theSearchBar.text;
     [self.navigationController pushViewController:destination animated:YES];
 }
 #pragma mark - Table view data source

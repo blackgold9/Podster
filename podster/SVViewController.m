@@ -157,23 +157,23 @@
             [[SVPodcatcherClient sharedInstance] enqueueHTTPRequestOperation:imageLoadOp];
         __weak SVViewController *weakSelf = self;
         [imageView setUserInteractionEnabled:YES];
-        [imageView whenTapped:^{
-            [weakSelf showNowPlayingController];
-        }];
+//        [imageView whenTapped:^{
+//            [weakSelf showNowPlayingController];
+//        }];
         UIBarButtonItem *nowPlaying = [[UIBarButtonItem alloc] initWithCustomView:imageView];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,self.view.bounds.size.width - 60, 30)];
         label.text = episode.title;
         label.font = [UIFont systemFontOfSize:13];
         [label setUserInteractionEnabled:YES];
-        [label whenTapped:^{
-            [weakSelf showNowPlayingController];
-        }];
+//        [label whenTapped:^{
+//            [weakSelf showNowPlayingController];
+//        }];
 
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor whiteColor];
         UIBarButtonItem *title = [[UIBarButtonItem alloc] initWithCustomView:label];
         
-        [self setToolbarItems:[NSArray arrayWithObjects:nowPlaying, title,[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace handler:nil], nil]];
+//        [self setToolbarItems:[NSArray arrayWithObjects:nowPlaying, title,[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace handler:nil], nil]];
         
     }
 

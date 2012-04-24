@@ -52,8 +52,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "441"
          endingLineNumber = "441"
-         landmarkName = "@implementation SVPodcatcherClient"
-         landmarkType = "3">
+         landmarkName = "-notifyOfUnsubscriptionFromFeed:onCompletion:onError:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -78,7 +78,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "231"
          endingLineNumber = "231"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkName = "-tableView:titleForHeaderInSection:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -91,7 +91,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "230"
          endingLineNumber = "230"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkName = "-tableView:titleForHeaderInSection:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -104,8 +104,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "205"
          endingLineNumber = "205"
-         landmarkName = "@implementation SettingsViewController"
-         landmarkType = "3">
+         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -117,7 +117,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "206"
          endingLineNumber = "206"
-         landmarkName = "-numberOfSectionsInTableView:"
+         landmarkName = "-tableView:numberOfRowsInSection:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -130,8 +130,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "181"
          endingLineNumber = "181"
-         landmarkName = "-tableView:numberOfRowsInSection:"
-         landmarkType = "5">
+         landmarkName = "@implementation SettingsViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -208,8 +208,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "427"
          endingLineNumber = "427"
-         landmarkName = "-purchaseComplete"
-         landmarkType = "5">
+         landmarkName = "@implementation SettingsViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -502,12 +502,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/HomeController.m"
-         timestampString = "355934031.627574"
+         timestampString = "356883542.265728"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "236"
-         endingLineNumber = "236"
-         landmarkName = "-configureTabView"
+         startingLineNumber = "252"
+         endingLineNumber = "252"
+         landmarkName = "-shouldAutorotateToInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -715,7 +715,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "352"
          endingLineNumber = "352"
-         landmarkName = "-applicationWillTerminate:"
+         landmarkName = "-applicationWillEnterForeground:"
          landmarkType = "5">
          <Locations>
             <Location
@@ -754,7 +754,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "354"
          endingLineNumber = "354"
-         landmarkName = "-applicationWillTerminate:"
+         landmarkName = "-applicationWillEnterForeground:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -767,7 +767,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "353"
          endingLineNumber = "353"
-         landmarkName = "-applicationWillTerminate:"
+         landmarkName = "-applicationWillEnterForeground:"
          landmarkType = "5">
          <Locations>
             <Location
@@ -858,7 +858,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "293"
          endingLineNumber = "293"
-         landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
+         landmarkName = "-application:didReceiveRemoteNotification:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -871,8 +871,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "320"
          endingLineNumber = "320"
-         landmarkName = "-applicationDidEnterBackground:"
-         landmarkType = "5">
+         landmarkName = "@implementation SVAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -905,11 +905,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/HomeController.m"
-         timestampString = "353457347.098714"
+         timestampString = "356883542.265728"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "129"
-         endingLineNumber = "129"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
          <Locations>
@@ -1203,11 +1203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadOperation.m"
-         timestampString = "354525527.757832"
+         timestampString = "356889448.930799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "161"
+         endingLineNumber = "161"
          landmarkName = "-start"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1216,11 +1216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadOperation.m"
-         timestampString = "354525527.757832"
+         timestampString = "356889448.930799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "152"
+         endingLineNumber = "152"
          landmarkName = "-start"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1229,11 +1229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadOperation.m"
-         timestampString = "354525527.757832"
+         timestampString = "356889448.930799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "139"
-         endingLineNumber = "139"
+         startingLineNumber = "141"
+         endingLineNumber = "141"
          landmarkName = "-start"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1242,11 +1242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadOperation.m"
-         timestampString = "354525527.757832"
+         timestampString = "356889448.930799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
          landmarkName = "-start"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1310,32 +1310,6 @@
          timestampString = "354693759.484804"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "198"
-         endingLineNumber = "198"
-         landmarkName = "-bind:fadeImage:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodcastGridCell.m"
-         timestampString = "354693759.484804"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "200"
-         endingLineNumber = "200"
-         landmarkName = "-bind:fadeImage:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodcastGridCell.m"
-         timestampString = "354693759.484804"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "177"
          endingLineNumber = "177"
          landmarkName = "-bind:fadeImage:"
@@ -1359,61 +1333,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastGridCell.m"
-         timestampString = "354693759.484804"
+         timestampString = "356883542.265728"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "190"
-         endingLineNumber = "190"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
          landmarkName = "-bind:fadeImage:"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodcastGridCell.m"
-         timestampString = "354693759.484804"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "201"
-         endingLineNumber = "201"
-         landmarkName = "-bind:fadeImage:"
-         landmarkType = "5">
-         <Locations>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               urlString = "file://localhost/Users/svanter/git/podster/podster/PodcastGridCell.m"
-               timestampString = "354525151.398457"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "194"
-               endingLineNumber = "194">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               urlString = "file://localhost/Users/svanter/git/podster/podster/PodcastGridCell.m"
-               timestampString = "354525151.398862"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "194"
-               endingLineNumber = "194">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               urlString = "file://localhost/Users/svanter/git/podster/podster/PodcastGridCell.m"
-               timestampString = "354525151.399173"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "194"
-               endingLineNumber = "194">
-            </Location>
-         </Locations>
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1436,47 +1362,8 @@
          timestampString = "355278992.957329"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "141"
-         endingLineNumber = "141"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPlaybackController.m"
-         timestampString = "355278992.957329"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "140"
-         endingLineNumber = "140"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPlaybackController.m"
-         timestampString = "355278992.957329"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "136"
          endingLineNumber = "136"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPlaybackController.m"
-         timestampString = "355278992.957329"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "142"
-         endingLineNumber = "142"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1511,11 +1398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastGridCellView.m"
-         timestampString = "355810689.575955"
+         timestampString = "356927582.571846"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
          landmarkName = "-bind:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1537,11 +1424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastGridCellView.m"
-         timestampString = "355810689.575955"
+         timestampString = "356927582.571846"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "40"
-         endingLineNumber = "40"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
          landmarkName = "-bind:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1602,11 +1489,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastGridCellView.m"
-         timestampString = "355810689.575955"
+         timestampString = "356927582.571846"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "39"
-         endingLineNumber = "39"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
          landmarkName = "-bind:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1679,25 +1566,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "356852354.601081"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "492"
-         endingLineNumber = "492"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "podster/models/SVPodcast.m"
-         timestampString = "356823485.407181"
+         timestampString = "356921743.075753"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "128"
-         endingLineNumber = "128"
+         startingLineNumber = "161"
+         endingLineNumber = "161"
          landmarkName = "-getNewEpisodes:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1706,11 +1580,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/models/SVPodcast.m"
-         timestampString = "356823518.40472"
+         timestampString = "356921743.075753"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
+         startingLineNumber = "165"
+         endingLineNumber = "165"
          landmarkName = "-getNewEpisodes:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1732,7 +1606,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "356852453.029166"
+         timestampString = "356921823.065234"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "492"
+         endingLineNumber = "492"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVPodcastDetailsViewController.m"
+         timestampString = "356921823.065234"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "493"
@@ -1745,33 +1632,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "356852454.170194"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "491"
-         endingLineNumber = "491"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "356852514.398547"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "494"
-         endingLineNumber = "494"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "356852543.263896"
+         timestampString = "356921823.065234"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "490"
@@ -1784,11 +1645,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "356852546.358155"
+         timestampString = "356921823.065234"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "459"
-         endingLineNumber = "459"
+         startingLineNumber = "460"
+         endingLineNumber = "460"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1797,12 +1658,155 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "356852589.33704"
+         timestampString = "356921823.065234"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "495"
-         endingLineNumber = "495"
+         startingLineNumber = "494"
+         endingLineNumber = "494"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/BannerViewController.m"
+         timestampString = "356887888.129512"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "153"
+         endingLineNumber = "153"
+         landmarkName = "-adWhirlDidReceiveAd:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "3rd Party/AdWhirl/internal/AdWhirlView.m"
+         timestampString = "356887877.72162"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "782"
+         endingLineNumber = "782"
+         landmarkName = "-adapter:didReceiveAdView:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "3rd Party/AdWhirl/internal/AdWhirlView.m"
+         timestampString = "356887878.457033"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "781"
+         endingLineNumber = "781"
+         landmarkName = "-adapter:didReceiveAdView:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/models/SVPodcast.m"
+         timestampString = "356921743.075753"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
+         landmarkName = "-getNewEpisodes:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/models/SVPodcastEntry.m"
+         timestampString = "356902260.176586"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "28"
+         endingLineNumber = "28"
+         landmarkName = "-populateWithDictionary:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/models/SVPodcast.m"
+         timestampString = "356921743.075753"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
+         landmarkName = "-getNewEpisodes:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/NSString+SVHelpers.m"
+         timestampString = "356901748.361558"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "53"
+         endingLineNumber = "53"
+         landmarkName = "-dateFromRailsDate"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/PodcastGridCellView.m"
+         timestampString = "356927582.571846"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
+         landmarkName = "-loadImageWithPodcast:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/PodcastGridCellView.m"
+         timestampString = "356930032.719169"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "160"
+         endingLineNumber = "160"
+         landmarkName = "-observeValueForKeyPath:ofObject:change:context:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/PodcastGridCellView.m"
+         timestampString = "356930032.719169"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
+         landmarkName = "-observeValueForKeyPath:ofObject:change:context:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/PodcastGridCellView.m"
+         timestampString = "356930032.719169"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "159"
+         endingLineNumber = "159"
+         landmarkName = "-observeValueForKeyPath:ofObject:change:context:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

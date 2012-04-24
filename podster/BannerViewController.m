@@ -149,7 +149,8 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 }
 -(void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
 {
-
+    
+    
     [UIView animateWithDuration:0.25 animations:^{
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];

@@ -24,7 +24,7 @@
     static SVPodcatcherClient *client;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSURL *url = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
+        NSURL *url = [NSURL URLWithString:@"http://api.podsterapp.com/api/v1/"];
         client = [[SVPodcatcherClient alloc] initWithBaseURL:url];
         
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
@@ -369,7 +369,7 @@
 }
 
 - (void)subscribeToFeedWithId:(NSNumber *)feedId
-                      onCompletion:(void (^)(void))completion
+                      onCompletion:(void (^)())completion
                            onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedId);

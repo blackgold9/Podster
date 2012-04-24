@@ -39,7 +39,7 @@
 
 @optional
 - (void)gridView:(NRGridView*)gridView willSelectCellAtIndexPath:(NSIndexPath*)indexPath;
-- (void)gridView:(NRGridView*)gridView didSelectCellAtIndexPath:(NSIndexPath*)indexPath;
+- (void)gridView:(NRGridView*)theGridView didSelectCellAtIndexPath:(NSIndexPath*)indexPath;
 - (void)gridView:(NRGridView*)gridView willDisplayCell:(NRGridViewCell*)cell atIndexPath:(NSIndexPath*)indexPath;
 
 - (void)gridView:(NRGridView*)gridView didSelectHeaderForSection:(NSInteger)section;
