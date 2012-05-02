@@ -7,6 +7,7 @@
 extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *author;
 	__unsafe_unretained NSString *cachingLastModified;
+	__unsafe_unretained NSString *downloadCount;
 	__unsafe_unretained NSString *downloadPercentage;
 	__unsafe_unretained NSString *etag;
 	__unsafe_unretained NSString *feedURL;
@@ -25,12 +26,13 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *shouldNotify;
 	__unsafe_unretained NSString *smallLogoURL;
 	__unsafe_unretained NSString *sortNewestFirst;
+	__unsafe_unretained NSString *subscribedDate;
 	__unsafe_unretained NSString *subtitle;
 	__unsafe_unretained NSString *summary;
 	__unsafe_unretained NSString *thumbLogoURL;
 	__unsafe_unretained NSString *tinyLogoURL;
 	__unsafe_unretained NSString *title;
-	__unsafe_unretained NSString *unseenEpsiodeCount;
+	__unsafe_unretained NSString *unlistenedSinceSubscribedCount;
 	__unsafe_unretained NSString *urlHash;
 	__unsafe_unretained NSString *websiteURL;
 } SVPodcastAttributes;
@@ -43,6 +45,8 @@ extern const struct SVPodcastFetchedProperties {
 } SVPodcastFetchedProperties;
 
 @class SVPodcastEntry;
+
+
 
 
 
@@ -97,6 +101,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateCachingLastModified:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSNumber *downloadCount;
+
+
+@property int downloadCountValue;
+- (int)downloadCountValue;
+- (void)setDownloadCountValue:(int)value_;
+
+//- (BOOL)validateDownloadCount:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -277,6 +293,14 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSDate *subscribedDate;
+
+
+//- (BOOL)validateSubscribedDate:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSString *subtitle;
 
 
@@ -317,14 +341,14 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *unseenEpsiodeCount;
+@property (nonatomic, strong) NSNumber *unlistenedSinceSubscribedCount;
 
 
-@property int unseenEpsiodeCountValue;
-- (int)unseenEpsiodeCountValue;
-- (void)setUnseenEpsiodeCountValue:(int)value_;
+@property int unlistenedSinceSubscribedCountValue;
+- (int)unlistenedSinceSubscribedCountValue;
+- (void)setUnlistenedSinceSubscribedCountValue:(int)value_;
 
-//- (BOOL)validateUnseenEpsiodeCount:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateUnlistenedSinceSubscribedCount:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -375,6 +399,15 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveCachingLastModified;
 - (void)setPrimitiveCachingLastModified:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveDownloadCount;
+- (void)setPrimitiveDownloadCount:(NSNumber*)value;
+
+- (int)primitiveDownloadCountValue;
+- (void)setPrimitiveDownloadCountValue:(int)value_;
 
 
 
@@ -511,6 +544,12 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+- (NSDate*)primitiveSubscribedDate;
+- (void)setPrimitiveSubscribedDate:(NSDate*)value;
+
+
+
+
 - (NSString*)primitiveSubtitle;
 - (void)setPrimitiveSubtitle:(NSString*)value;
 
@@ -541,11 +580,11 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-- (NSNumber*)primitiveUnseenEpsiodeCount;
-- (void)setPrimitiveUnseenEpsiodeCount:(NSNumber*)value;
+- (NSNumber*)primitiveUnlistenedSinceSubscribedCount;
+- (void)setPrimitiveUnlistenedSinceSubscribedCount:(NSNumber*)value;
 
-- (int)primitiveUnseenEpsiodeCountValue;
-- (void)setPrimitiveUnseenEpsiodeCountValue:(int)value_;
+- (int)primitiveUnlistenedSinceSubscribedCountValue;
+- (void)setPrimitiveUnlistenedSinceSubscribedCountValue:(int)value_;
 
 
 

@@ -12,7 +12,6 @@
 #import "SVCategory.h"
 #import "GTMNSString+HTML.h"
 #import "SVPodcastEntry.h"
-#import "SVFeedParser.h"
 #import "AFNetworking.h"
 #import "SVPodcastSearchResult.h"
 #import "NSString+URLEncoding.h"
@@ -232,97 +231,10 @@
     
 }
 
-
--(void)downloadAndPopulatePodcast:(SVPodcast *)podcast
-                withLowerPriority:(BOOL)lowPriority
-                        inContext:(NSManagedObjectContext *)localContext
-                     onCompletion:(void (^)(void))onComplete
-                          onError:(SVErrorBlock)onError
-{
-    NSParameterAssert(podcast);
-    NSParameterAssert(localContext);
-    LOG_GENERAL(2,@">>>>> %@", NSStringFromSelector(_cmd) );
-    NSDictionary *loggingParameters = [NSDictionary dictionaryWithObject:podcast.feedURL forKey:@"FeedURL"];
-    [FlurryAnalytics logEvent:@"ParsingFeed" withParameters:loggingParameters timed:YES];
-    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:podcast.feedURL parameters:nil];
-    
-    [localContext performBlock:^{
-        
-        
-        if (podcast && podcast.etag) {       
-            [request setValue:podcast.etag forHTTPHeaderField:@"If-None-Match"];
-        }
-        
-        
-        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
-            NSString *returnedETag = [[[operation response] allHeaderFields] valueForKey:@"ETag"];
-            NSString *cachingLastModified = [[[operation response] allHeaderFields] valueForKey:@"Last-Modified"];
-            LOG_NETWORK(3, @"Returned ETag: %@", returnedETag );
-            [SVFeedParser                                                                          parseData:responseObject withETag:returnedETag andLastModified:cachingLastModified forPodcast:podcast onComplete:^{
-                LOG_GENERAL(2, @"Parssing complete");
-                [FlurryAnalytics endTimedEvent:@"ParsingFeed"
-                                withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"Success"]];
-                
-                onComplete();
-            } onError:^(NSError *error) {
-                LOG_PARSING(2, @"Failure occured while parsing podcast: %@", error);
-                
-                [FlurryAnalytics endTimedEvent:@"ParsingFeed"
-                                withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:@"Success"]];
-                [FlurryAnalytics logError:@"ParsingError" message:[error localizedDescription] error:error];
-                onError(error);
-            }];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if ([[operation response] statusCode] == 304) {
-                // This is a valid case
-                LOG_NETWORK(2, @"Feed has not changed (Server returned 304");
-                [FlurryAnalytics logEvent:@"FeedNotChangedYAY"];
-                onComplete();
-            } else {
-                
-                LOG_NETWORK(1, @"A network error occured while trying to download a podcast feed. %@", error);
-                [FlurryAnalytics logError:@"Downloading a feed failed" message:[error localizedDescription] error:error];
-                onError(error);
-            }
-            
-        }];
-        
-        operation.queuePriority = lowPriority ? NSOperationQueuePriorityLow : NSOperationQueuePriorityNormal;
-        [self enqueueHTTPRequestOperation:operation];
-    }];
-}
-- (void)updateDeviceReceipt:(NSString *)receipt
-               onCompletion:(void (^)(BOOL))onComplete
-                    onError:(SVErrorBlock)onError
-{
-    NSString *deviceId = [[SVSettings sharedInstance] deviceId];
-    NSDictionary *params= [NSDictionary dictionaryWithObjectsAndKeys:receipt, @"receipt", deviceId,@"deviceId", nil];
-    NSParameterAssert(receipt);
-    [self postPath:@"devices/update.json"
-        parameters:params
-           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               BOOL isPremium = [(NSNumber *)[responseObject valueForKey:@"premium"] boolValue];
-               if(onComplete) {
-                   dispatch_async(dispatch_get_main_queue(), ^{
-                       onComplete(isPremium);
-                   });
-               }
-           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               if (onError) {
-                   dispatch_async(dispatch_get_main_queue(), ^{
-                       [FlurryAnalytics logError:@"FailedToUpdateReceipt"
-                                         message:[error localizedDescription] 
-                                           error:error];
-                       onError(error);
-                   });
-               }
-           }];
-}
-
 #pragma mark - push related
-- (void)registerWithDeviceId:(NSString *)deviceId notificationToken:(NSString *)token onCompletion:(void (^)(id))onComplete onError:(SVErrorBlock)onError
+- (void)registerWithDeviceId:(NSString *)deviceId 
+           notificationToken:(NSString *)token
+                onCompletion:(void (^)(id))onComplete onError:(SVErrorBlock)onError
 { 
     NSParameterAssert(deviceId);
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -348,7 +260,10 @@
            }];
 }
 
-- (void)subscribeToFeedWithURL:(NSString *)feedURL shouldNotify:(BOOL)notify onCompletion:(void (^)(id))completion onError:(SVErrorBlock)onError
+- (void)subscribeToFeedWithURL:(NSString *)feedURL 
+                  shouldNotify:(BOOL)notify
+                  onCompletion:(void (^)(id))completion
+                       onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedURL);
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
@@ -376,7 +291,7 @@
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedId, @"feedId",  deviceId, @"deviceId", nil];
 
-    [self postPath:@"subscriptions/create.json"
+    [self postPath:@"subscriptions"
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                completion();
@@ -391,14 +306,14 @@
 }
 
 - (void)changeNotificationSetting:(BOOL)shouldNotify
-                   forFeedWithURL:(NSString *)feedURL
+                   forFeedWithId:(NSNumber *)feedId
                      onCompletion:(void (^)())completion
                           onError:(SVErrorBlock)onError
 {
-    NSParameterAssert(feedURL);
+    NSParameterAssert(feedId);
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     [self postPath:@"subscriptions/update.json"
-        parameters:[NSDictionary dictionaryWithObjectsAndKeys:deviceId, @"deviceId", feedURL, @"feedUrl", shouldNotify ? @"true" : @"false",@"should_notify", nil]
+        parameters:[NSDictionary dictionaryWithObjectsAndKeys:deviceId, @"deviceId", feedId, @"feedId", shouldNotify ? @"true" : @"false",@"should_notify", nil]
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
                if (completion) {
                    dispatch_async(dispatch_get_main_queue(), ^{
@@ -422,13 +337,13 @@
 }
 
 
--(void)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL 
+-(void)unsubscribeFromFeedWithId:(NSNumber *)podstoreId 
                          onCompletion:(void (^)(void))completion 
                               onError:(SVErrorBlock)onError
 {
-    NSParameterAssert(feedURL);
+    NSParameterAssert(podstoreId);
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedURL, @"feedUrl",  deviceId, @"deviceId", nil];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:podstoreId, @"feedId",  deviceId, @"deviceId", nil];
     
     [self postPath:@"subscriptions/destroy.json"  parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {

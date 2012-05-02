@@ -117,7 +117,11 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
 -(void)becameActive
 {
-
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view setNeedsLayout];
+        [self.view layoutIfNeeded];
+    }];
 
 }
 
@@ -161,7 +165,6 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 {
     
     if (!yesOrNo) {
-        LOG_GENERAL(2, @"Ad Controller failed to receive ad with no fallback");
         [UIView animateWithDuration:0.25 animations:^{
             [self.view setNeedsLayout];
             [self.view layoutIfNeeded];

@@ -20,7 +20,9 @@
     }
     self.isVideoValue = [(NSNumber *)[data objectForKey:@"is_video"] boolValue];
     self.mediaURL = [data objectForKey:@"content_url"];
-    self.webURL = [data objectForKey:@"link"];
+    if ([data objectForKey:@"link"] != [NSNull null]) {
+        self.webURL = [data objectForKey:@"link"];
+    }
     if ([data objectForKey:@"duration"] != [NSNull null]) {
         self.durationValue =[[data objectForKey:@"duration"] secondsFromDurationString];
     }

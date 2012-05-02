@@ -12,5 +12,5 @@
 
 + (PodsterIAPHelper *)sharedInstance;
 - (void)restoreTransactions;
-
+- (void)provideContent:(NSString *)productIdentifier;
 @end

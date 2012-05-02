@@ -34,6 +34,7 @@
 #import "SVSubscriptionManager.h"
 #import "_SVPodcastEntry.h"
 #import "_SVPodcast.h"
+#import <Twitter/Twitter.h>
 @interface SVPodcastDetailsViewController ()
 
 
@@ -55,6 +56,7 @@
     NSManagedObjectContext *context;
     NSTimer *gracePeriodTimer;
 }
+@synthesize shareButton;
 @synthesize notifyOnUpdateLabel;
 @synthesize notifyDescriptionLabel;
 @synthesize hidePlayedItemsLabel;
@@ -142,7 +144,7 @@
     } else {
         
         [[SVPodcatcherClient sharedInstance] changeNotificationSetting:self.notifySwitch.on
-                                                        forFeedWithURL:localPodcast.feedURL
+                                                        forFeedWithId:localPodcast.feedURL
                                                           onCompletion:^{
                                                               [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
                                                                          withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.notifySwitch.on] forKey:@"ON"]];
@@ -215,19 +217,17 @@
                 } else {
                     LOG_GENERAL(2, @"Creating notification subscription");
                     [[SVPodcatcherClient sharedInstance] changeNotificationSetting:YES
-                                                                    forFeedWithURL:localPodcast.feedURL
+                                                                    forFeedWithId:localPodcast.feedURL
                                                                       onCompletion:^{
                                                                           LOG_GENERAL(2, @"Succeed creating notification subscription");
-                                                                          self.subscribeButton.enabled = YES;
                                                                           localPodcast.shouldNotifyValue = YES;
-                                                                          
                                                                           [self.notifySwitch setOn:YES animated:YES];
                                                                       }
                                                                            onError:^(NSError *error) {
                                                                                LOG_GENERAL(2, @"Failed creating notification subscription");
                                                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                                                    [self showFeedNotificationSubscriptionError];
-                                                                                   self.subscribeButton.enabled = YES;
+                                                                                
                                                                                });
                                                                                
                                                                            }];
@@ -238,7 +238,7 @@
             BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
                                                            message:NSLocalizedString(@"Would you like to be notified when new episodes become available?", @"Would you like to be notified when new episodes become available?")];
             [alert setCancelButtonWithTitle:@"No" block:^{
-                self.subscribeButton.enabled = YES;
+
             }];
             [alert addButtonWithTitle:@"Yes"
                                 block:^{
@@ -254,34 +254,31 @@
 
 -(void)subscribeToPodcast
 {
-    
+    [localContext performBlock:^void() {
+        [localPodcast subscribe];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self configureToolbar];            
+        });
+    }];
+
     [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
         if(success) {
             [self askUserIfTheyWantNotifications];
         }
     }];
-    [localPodcast downloadOfflineImageData];
 }
 
 - (void)subscribeToPodcastWithSuccessBlock:(void (^)(BOOL))complete
 {
-    isSubscribed = YES;
+    
     dispatch_async(dispatch_get_main_queue(), ^void() {
         LOG_GENERAL(2, @"Creating a subscription for this podcast");
         // User is making this a favorite
-        self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
+     //   self.subscribeButton.image = [UIImage imageNamed:@"heart-highlighted.png"];
     });
     [FlurryAnalytics logEvent:@"SubscribedToFeed"];
     
-    [localContext performBlock:^void() {
-        localPodcast.isSubscribedValue = YES;
         
-        LOG_GENERAL(2, @"Communication pending with server. Setting Needs reconcile to YES");
-        // Start out needing reconciling
-        localPodcast.unseenEpsiodeCountValue = 0;
-        
-    }];
-    
     void (^succeeded)() = ^{
         if (complete) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -292,7 +289,9 @@
         
     };
     
-    [[SVPodcatcherClient sharedInstance] subscribeToFeedWithURL:localPodcast.feedURL shouldNotify:NO onCompletion:succeeded onError:^(NSError *error) {
+    [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:localPodcast.podstoreId
+                                                  onCompletion:succeeded
+                                                       onError:^(NSError *error) {
         if (complete) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 complete(NO);
@@ -304,17 +303,16 @@
 - (void)unsubscribeFromPodcast
 {
     [FlurryAnalytics logEvent:@"UnsubscribedFromPodcast"];
-    self.subscribeButton.enabled = YES;
-    self.subscribeButton.image = [UIImage imageNamed:@"heart.png"];
-    isSubscribed = NO;
+   
     [self.notifySwitch setOn:NO animated:YES];
     [localContext performBlock:^void() {
-        localPodcast.isSubscribedValue = NO;
-        localPodcast.shouldNotifyValue = NO;
-        
+        [localPodcast unsubscribe];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self configureToolbar];            
+        });        
     }];
     
-    [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:localPodcast.feedURL
+    [[SVPodcatcherClient sharedInstance] unsubscribeFromFeedWithId:localPodcast.podstoreId
                                                            onCompletion:^{
                                                            } onError:^(NSError *error) {
                                                            }];
@@ -322,11 +320,12 @@
 
 - (IBAction)subscribeTapped:(id)sender {
     LOG_GENERAL(2, @"Subscribe tapped");
-    if(!isSubscribed) {
+    if(!localPodcast.isSubscribedValue) {
         [self subscribeToPodcast];
     } else {
         [self unsubscribeFromPodcast];             
     } 
+
 }
 
 - (IBAction)optionsButtonTapped:(id)sender {
@@ -359,7 +358,35 @@
     }];
     
 }
+- (void)configureToolbar
+{
+    NSMutableArray *barItems = [NSMutableArray array];
+    if (localPodcast.isSubscribedValue) {
 
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star.png"]
+                                                   landscapeImagePhone:nil
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(subscribeTapped:)];
+        item.tintColor = [UIColor yellowColor];
+        [barItems addObject:item];
+        
+    } else {
+        [barItems addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"empty-star.png"]
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(subscribeTapped:)]];
+    }
+    
+    if ([TWTweetComposeViewController canSendTweet]) {
+        [barItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+        [barItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                          target:self
+                                                                          action:@selector(shareTapped:)]];
+    }
+        
+    [self setToolbarItems:barItems animated:YES];
+}
 #pragma mark - View lifecycle
 -(void)dealloc
 {
@@ -375,9 +402,7 @@
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
-    [localContext performBlock:^{
-        localPodcast.unseenEpsiodeCountValue = 0;
-    }];
+    
     
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [FlurryAnalytics endTimedEvent:@"PodcastDetailsPageView"  withParameters:nil];
@@ -453,7 +478,6 @@
             localPodcast.smallLogoURL = [self.podcast smallLogoURL];
             localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
             localPodcast.podstoreId = [self.podcast podstoreId];
-            localPodcast.unseenEpsiodeCountValue = 0;
             blockHasSubscription = localPodcast.isSubscribedValue;
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -563,6 +587,7 @@
     [self setNotifyOnUpdateLabel:nil];
     [self setNotifyDescriptionLabel:nil];
     [self setHidePlayedItemsLabel:nil];
+    [self setShareButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -577,7 +602,7 @@
 {
     [super viewDidAppear:animated];
     [self reloadData];
-    
+     [self configureToolbar];
 }
 
 
@@ -587,7 +612,6 @@
     NSAssert(localPodcast != nil, @"Local podcast should not be nil");
     [localContext performBlock:^{
         
-        localPodcast.unseenEpsiodeCountValue = 0;
         [localPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
         
     }];
@@ -597,6 +621,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:NO animated:NO];
+   
+
     [FlurryAnalytics logEvent:@"PodcastDetailsPageView" timed:YES];       
 }
 
@@ -613,13 +640,15 @@
             isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
             isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
             if (isVideo) {
+                NSURL *contentUrl = episode.downloadCompleteValue ? [NSURL fileURLWithPath: episode.localFilePath] :  [NSURL URLWithString:episode.mediaURL];
+                
                 MPMoviePlayerViewController *player =
-                [[MPMoviePlayerViewController alloc] initWithContentURL: [NSURL URLWithString:[episode mediaURL]]];
+                [[MPMoviePlayerViewController alloc] initWithContentURL: contentUrl];
                 [self presentMoviePlayerViewControllerAnimated:player
                  ];
             }else {
                 
-                LOG_GENERAL(3,@"Triggering playback");
+                LOG_GENERAL(3,@"Triggering playback");                
                 [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
                 LOG_GENERAL(3,@"Playback triggered");
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
@@ -680,5 +709,22 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return items.count;
+}
+- (IBAction)shareTapped:(id)sender {
+    TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
+    [tweet setInitialText:[NSString stringWithFormat:@"%@ (via @ItsPodster)", localPodcast.title]];
+    [tweet addURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.podsterapp.com/feeds/%d", localPodcast.podstoreIdValue]]];
+    
+    // Show the controller
+    [self presentModalViewController:tweet animated:YES];
+    
+    // Called when the tweet dialog has been closed
+    tweet.completionHandler = ^(TWTweetComposeViewControllerResult result) 
+    {
+
+        
+        // Dismiss the controller
+        [self dismissModalViewControllerAnimated:YES];
+    };
 }
 @end

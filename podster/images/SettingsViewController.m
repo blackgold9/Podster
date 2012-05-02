@@ -441,10 +441,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             [self.tableView reloadData];
         }];
         [alertView show];
-        
     }
 }
 - (IBAction)purchaseTapped:(id)sender {
+#ifdef CONFIGURATION_Ad_Hoc
+    [[PodsterIAPHelper sharedInstance] provideContent:@"net.vanterpool.podster.notifications"];
+#else
     if ([SKPaymentQueue canMakePayments]) {
         [self showPurchaseOptions];
     } else {
@@ -452,5 +454,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:nil];
         [alert show];
     }
+#endif
 }
+
 @end

@@ -10,6 +10,7 @@
 #import "ActsAsPodcast.h"
 #import "SVPodcast.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GridCellCountOverlay.h"
 
 @implementation PodcastGridCellView {
     AFImageRequestOperation *imageLoadOp;
@@ -22,9 +23,9 @@
 @synthesize progressBar;
 @synthesize podcastArtImageView;
 @synthesize titleLabel;
-@synthesize downloadCountLabel;
 @synthesize unseenCountFlagImage;
 @synthesize unseenCountLabel;
+@synthesize countOverlay;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -50,22 +51,22 @@
     } else {            
         self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
     }
-
+    
 }
 - (void)loadImageWithPodcast:(id<ActsAsPodcast>)podcast
 {
-      if ([podcast class] == [SVPodcast class]) {
-          SVPodcast *coreCast = (SVPodcast *)podcast;
-          if (coreCast.gridSizeImageData) {
-              LOG_GENERAL(3, @"Loaded local image");
-              UIImage *image = [UIImage imageWithData:coreCast.gridSizeImageData];
-              self.podcastArtImageView.image = image;
-          } else {
-              [self loadWebImageWithURL:[podcast smallLogoURL]];
-          }
-      } else {
-          [self loadWebImageWithURL:[podcast smallLogoURL]];
-      }
+    if ([podcast class] == [SVPodcast class]) {
+        SVPodcast *coreCast = (SVPodcast *)podcast;
+        if (coreCast.gridSizeImageData) {
+            LOG_GENERAL(3, @"Loaded local image");
+            UIImage *image = [UIImage imageWithData:coreCast.gridSizeImageData];
+            self.podcastArtImageView.image = image;
+        } else {
+            [self loadWebImageWithURL:[podcast smallLogoURL]];
+        }
+    } else {
+        [self loadWebImageWithURL:[podcast smallLogoURL]];
+    }
     
 }
 - (void)bind:(id<ActsAsPodcast>)podcast
@@ -74,22 +75,13 @@
     [imageLoadOp cancel];
     [self loadImageWithPodcast:podcast];
     self.titleLabel.text = podcast.title;
-       
+
     self.podcastArtImageView.layer.borderColor = [[UIColor colorWithWhite:0.7 alpha:1.0] CGColor];
     self.podcastArtImageView.layer.borderWidth = 2.0;
     self.unseenCountFlagImage.alpha = 0.0;
     self.unseenCountLabel.alpha = 0.0;
-    self.downloadCountLabel.alpha = 0;
     self.progressBar.alpha = 0;
     self.progressBackground.alpha = 0;
-    [UIView animateWithDuration:0.33
-                     animations:^{                                                  
-                         if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
-                             self.unseenCountFlagImage.alpha = 1.0;
-                             self.unseenCountLabel.alpha = 1.0;
-                             self.unseenCountLabel.text = [NSString stringWithFormat:@"%d", [[podcast unseenEpsiodeCount] integerValue]];
-                         } 
-                     }];    
     
     self.accessibilityLabel = [podcast title];
     if ([podcast class] == [SVPodcast class]) {
@@ -100,44 +92,38 @@
         
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
-        self.downloadCountLabel.alpha = coreDataPodcast.isDownloadingValue? 1 : 0;
-        self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), [coreDataPodcast downloadedEpisodes]];
-        if (coreDataPodcast.isDownloadingValue) {
-            //Downloading, so configure ui
-            self.downloadCountLabel.text = NSLocalizedString(@"Downloading...", @"Downloading...");
-            self.downloadCountLabel.alpha = 1.0;
+        if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
+            [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
+            [self.countOverlay sizeToFit];
+            CGRect newFrame = self.countOverlay.frame;
+            newFrame.origin.x = self.frame.size.width - newFrame.size.width;
+            self.countOverlay.frame = newFrame;
+            self.countOverlay.hidden = NO;
+        }
+        
+        if (coreDataPodcast.isDownloadingValue) {         
             self.progressBackground.alpha = 0.5;
             self.progressBar.alpha = 1.0;
         } 
+      
         
-        [UIView animateWithDuration:0.33
-                         animations:^{
-                             
-                             
-                             if ([[podcast unseenEpsiodeCount] integerValue] > 0) {
-                                 self.unseenCountFlagImage.alpha = 1.0;
-                                 self.unseenCountLabel.alpha = 1.0;
-                                 self.unseenCountLabel.text = [NSString stringWithFormat:@"%d", [[podcast unseenEpsiodeCount] integerValue]];
-                             } else {
-                                 self.unseenCountLabel.alpha = 0;
-                                 self.unseenCountFlagImage.alpha = 0;
-                             }
-                         }];     
-
         [coreDataPodcast addObserver:self forKeyPath:@"downloadPercentage" options:NSKeyValueObservingOptionNew context:nil];
         [coreDataPodcast addObserver:self forKeyPath:@"isDownloading" options:NSKeyValueObservingOptionNew context:nil];
-
+        [coreDataPodcast addObserver:self forKeyPath:@"unlistenedSinceSubscribedCount" options:NSKeyValueObservingOptionNew context:nil];
+        
     }
 }
-    
+
 -(void)prepareForReuse
 {
     if (coreDataPodcast) {
-     [coreDataPodcast removeObserver:self forKeyPath:@"downloadPercentage"];
-     [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];        
-//        if (newEpisodeCountObserverToken) {
-//            [coreDataPodcast removeObserverForKeyPath:@"unseenEpisodeCount" identifier:newEpisodeCountObserverToken];
-//        }
+        self.countOverlay.hidden = YES;
+        [coreDataPodcast removeObserver:self forKeyPath:@"downloadPercentage"];
+        [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];        
+        [coreDataPodcast removeObserver:self forKeyPath:@"unlistenedSinceSubscribedCount"]; 
+        //        if (newEpisodeCountObserverToken) {
+        //            [coreDataPodcast removeObserverForKeyPath:@"unseenEpisodeCount" identifier:newEpisodeCountObserverToken];
+        //        }
         
         self.progressBackground.alpha = 0;
         self.progressBar.alpha = 0;
@@ -151,31 +137,31 @@
 {
     if(object == coreDataPodcast) { 
         if ([keyPath isEqualToString:@"downloadPercentage"]) {
- 
+            
             LOG_GENERAL(2, @"Updating grid cell with download progress");
             SVPodcast *local = object;
             self.progressBar.progress = local.downloadPercentageValue / 100.0f;
         } else if ([keyPath isEqualToString:@"isDownloading"]) {
             SVPodcast *local = object;
-            if (local.isDownloadingValue) { 
-                LOG_GENERAL(2, @"Downloading item");
-                self.downloadCountLabel.text = NSLocalizedString(@"Downloading...", nil);
-            } else {
-                LOG_GENERAL(2, @"Not Downloading item");
-                NSUInteger downloaded = [coreDataPodcast downloadedEpisodes];
-                if (downloaded > 0) {
-                    self.downloadCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Downloaded: %d", @"Downloaded: %d"), downloaded];                    
-                } else {
-                    self.downloadCountLabel.text = @"";
-                }
-            }
-
+                     
             [UIView animateWithDuration:0.5
                              animations:^{
                                  self.progressBackground.alpha = local.isDownloadingValue ? 1 : 0;
                                  self.progressBar.alpha = local.isDownloadingValue ? 1 : 0;
                              }];
             
+        } else if ([keyPath isEqualToString:SVPodcastAttributes.unlistenedSinceSubscribedCount]) {
+            if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
+                [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
+                [self.countOverlay sizeToFit];
+                CGRect newFrame = self.countOverlay.frame;
+                newFrame.origin.x = self.frame.size.width - newFrame.size.width;
+                self.countOverlay.frame = newFrame;
+                self.countOverlay.hidden = NO;
+            } else {
+                self.countOverlay.hidden = YES;
+            }
+
         }
     }
     

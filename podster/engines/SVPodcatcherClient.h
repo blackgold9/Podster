@@ -31,14 +31,13 @@ typedef void (^SVErrorBlock)(NSError *error);
 - (void)subscribeToFeedWithId:(NSNumber *)feedId onCompletion:(void (^)())completion onError:(SVErrorBlock)onError;
 
 - (void)changeNotificationSetting:(BOOL)shouldNotify
-                   forFeedWithURL:(NSString *)feedURL 
+                   forFeedWithId:(NSNumber *)feedId
                      onCompletion:(void (^)())completion
                           onError:(SVErrorBlock)onError;
 
-- (void)notifyOfUnsubscriptionFromFeed:(NSString *)feedURL                                    
-                                          onCompletion:(void(^)(void))completion
-                                               onError:(SVErrorBlock)error;
-
+-(void)unsubscribeFromFeedWithId:(NSNumber *)podstoreId 
+                    onCompletion:(void (^)(void))completion 
+                         onError:(SVErrorBlock)onError;
 - (void)getNewItemsForFeedWithId:(NSNumber *)podstoreId withLastSyncDate:(NSDate *)lastSycned complete:(void (^)(id))onComplete onError:(SVErrorBlock)onError;
 
 

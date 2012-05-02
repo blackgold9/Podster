@@ -178,6 +178,7 @@ static const NSInteger kDefaultPageSize = 50;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

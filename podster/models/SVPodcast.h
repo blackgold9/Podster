@@ -10,8 +10,9 @@
 
 - (void)getNewEpisodes:(void (^)(BOOL))complete;
 
-- (NSUInteger)downloadedEpisodes;
-
 - (SVPodcastEntry *)firstUnplayedInPodcastOrder;
 - (void)downloadOfflineImageData;
+- (void)subscribe;
+- (void)unsubscribe;
+- (void)updateFromV1:(void (^)(void))complete;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GridCellCountOverlay;
 @protocol ActsAsPodcast;
 @interface PodcastGridCellView : UIView
 @property (strong, nonatomic) IBOutlet UIView *progressBackground;
@@ -14,9 +15,9 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *podcastArtImageView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *downloadCountLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *unseenCountFlagImage;
 @property (strong, nonatomic) IBOutlet UILabel *unseenCountLabel;
+@property (strong, nonatomic) IBOutlet GridCellCountOverlay *countOverlay;
 
 -(void)prepareForReuse;
 - (void)bind:(id<ActsAsPodcast>)podcast;

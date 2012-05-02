@@ -33,4 +33,6 @@
 @property (weak) id<ActsAsPodcast> podcast;
 @property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 - (IBAction)optionsButtonTapped:(id)sender;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *shareButton;
+- (IBAction)shareTapped:(id)sender;
 @end

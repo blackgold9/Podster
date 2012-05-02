@@ -85,33 +85,27 @@ static char const kRefreshInterval = -3;
                 nextPodcast.lastSynced = [NSDate date];
                 [context save:nil];
                 LOG_NETWORK(2, @"Found One: Updating feed: %@ - %@", nextPodcast.title, nextPodcast.objectID);
-                [nextPodcast getNewEpisodes:^void(BOOL i) {
-
+                [nextPodcast getNewEpisodes:^void(BOOL success) {
+                    if (success) {
+                        [context performBlock:^{
+                            [nextPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
+                            [context save:nil ];
+                            
+                        }];
+                    }
+                    
+                    weakSelf.currentURL = nil;
+                    
+                    if(weakSelf->shouldCancel) {
+                        LOG_PARSING(2, @"Cancelling");
+                    } else {
+                        LOG_NETWORK(2, @"Refreshing next subscription");
+                        [weakSelf refreshNextSubscription];
+                    }                                                                
                 }];
-
-//                [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcast:nextPodcast
-//                                                                         withLowerPriority:YES
-//                                                                                 inContext:context
-//                                                                              onCompletion:^{
-//                                                                                  [context performBlock:^{
-//                                                                                      [nextPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
-//                                                                                      [context save:nil ];
-//
-//                                                                                  }];
-//                                                                                  weakSelf.currentURL = nil;
-//
-//                                                                                  if(weakSelf->shouldCancel) {
-//                                                                                      LOG_PARSING(2, @"Cancelling");
-//                                                                                  } else {
-//                                                                                      [weakSelf refreshNextSubscription];
-//                                                                                  }
-//                                                                              } onError:^(NSError *error) {
-//                                                                                     if(!weakSelf->shouldCancel) {
-//                                                                                         [self refreshNextSubscription];
-//                                                                                     }
-//                                                                                     weakSelf.currentURL = nil;
-//                                                                                 }];
+                                                                                  
             } else {
+                LOG_PARSING(2, @"No more podcasts need updating");
                 if (self.isBusy) {
                     self.isBusy = NO;            
                 }

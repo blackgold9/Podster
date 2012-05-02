@@ -155,7 +155,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="zBW-st-oQR">
-                                <rect key="frame" x="0.0" y="220" width="320" height="194"/>
+                                <rect key="frame" x="0.0" y="220" width="320" height="196"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -207,7 +207,7 @@
                                                     <rect key="frame" x="13" y="11" width="11" height="11"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="download.png" id="TOF-CW-nxH">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="download-white.png" id="TOF-CW-nxH">
                                                     <rect key="frame" x="11" y="38" width="15" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -356,13 +356,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Details" id="51T-lo-c3z">
-                        <barButtonItem key="rightBarButtonItem" image="heart.png" style="plain" id="tJ0-3t-8nC">
-                            <connections>
-                                <action selector="subscribeTapped:" destination="Xyd-co-oUC" id="AhE-Dv-oSI"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Details" id="51T-lo-c3z"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="McF-Qx-rxl" id="kLl-qb-okb"/>
@@ -375,7 +369,6 @@
                         <outlet property="notifySwitch" destination="vKX-s3-A9R" id="xDS-AQ-sLd"/>
                         <outlet property="optionsButton" destination="030-T3-Xti" id="8RT-bg-bR5"/>
                         <outlet property="sortSegmentedControl" destination="S8Y-9H-tMT" id="ZU7-nc-4TF"/>
-                        <outlet property="subscribeButton" destination="tJ0-3t-8nC" id="vCs-wI-d6p"/>
                         <outlet property="tableView" destination="zBW-st-oQR" id="gfx-Wz-qt4"/>
                         <outlet property="titleLabel" destination="pCs-j8-aWo" id="b1J-MP-fhH"/>
                     </connections>
@@ -763,7 +756,7 @@
         <scene sceneID="GTp-18-0Rf">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w0Q-rf-d8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="mainNavigationController" toolbarHidden="NO" id="rH6-DC-ajB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainNavigationController" id="rH6-DC-ajB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -953,8 +946,7 @@
         <image name="bigPause.png" width="100" height="100"/>
         <image name="bigplay.png" width="100" height="100"/>
         <image name="clockSmall.png" width="12" height="12"/>
-        <image name="download.png" width="25" height="28"/>
-        <image name="heart.png" width="30" height="30"/>
+        <image name="download-white.png" width="16" height="16"/>
         <image name="list-item.png" width="320" height="88"/>
         <image name="playback-bottom-back.png" width="320" height="125"/>
         <image name="skipback.png" width="24" height="24"/>
@@ -1009,7 +1001,6 @@
         <class className="SVEpisodeDetailsViewController" superclassName="SVViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeDetailsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="downloadTapped:"/>
                 <relationship kind="action" name="listenTapped:"/>
                 <relationship kind="action" name="markAsPlayedTapped:"/>
                 <relationship kind="outlet" name="downloadButton" candidateClass="UIButton"/>
@@ -1062,6 +1053,7 @@
                 <relationship kind="action" name="infoTapped:"/>
                 <relationship kind="action" name="notifySwitchChanged:"/>
                 <relationship kind="action" name="optionsButtonTapped:"/>
+                <relationship kind="action" name="shareTapped:"/>
                 <relationship kind="action" name="sortControlTapped:"/>
                 <relationship kind="action" name="subscribeTapped:"/>
                 <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
@@ -1073,6 +1065,7 @@
                 <relationship kind="outlet" name="notifyOnUpdateLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="notifySwitch" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="sortSegmentedControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="subscribeButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>

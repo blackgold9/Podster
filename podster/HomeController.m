@@ -79,15 +79,19 @@
     UIImageView *placeHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
     placeHolder.frame = self.view.bounds;
     [self.view addSubview:placeHolder];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"] 
-                                                                              style:UIBarButtonItemStylePlain
-                                                                             target:self
-                                                                             action:@selector(directoryButtonTapped:)];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] 
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(settingsTapped:)];
+    NSMutableArray *items = [NSMutableArray array];
+    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] 
+                                                      style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(settingsTapped:)]];
+        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"] 
+                                                      style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(directoryButtonTapped:)]];
+
+    self.toolbarItems = items;
+    [self.navigationController setToolbarHidden:NO animated:NO];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.dimBackground = YES;
 
@@ -230,6 +234,7 @@
     .animation = MTStatusBarOverlayAnimationShrink;
 
     if ([[SVSubscriptionManager sharedInstance] isBusy]) {
+        LOG_GENERAL(2, @"showing  updating message");
         [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Updating Podcasts", @"Updating Podcasts")];
     }
 }
@@ -284,8 +289,10 @@
         
         if ([keyPath isEqualToString:@"isBusy"]){
             if([[SVSubscriptionManager sharedInstance] isBusy]) {
+                LOG_GENERAL(2, @"showing  updating message");
                 [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Updating Podcasts", nil)];
             } else {
+                LOG_GENERAL(2, @"hiding  updating message");
                 [[MTStatusBarOverlay sharedInstance] hide];
             }
         }

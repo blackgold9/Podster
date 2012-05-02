@@ -113,10 +113,11 @@ NSString *uuid();
     UIImage *image = [UIImage imageNamed:@"nav-bar.png"];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackOpaque];
     [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"bottom-toolbar.png"] forToolbarPosition:UIToolbarPositionBottom barMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTintColor:colorOne];
     [[UISegmentedControl appearance] setTintColor:colorOne];
     [[UIToolbar appearance] setTintColor:colorOne];
-    [[UIBarButtonItem appearance] setTintColor:colorOne];
+    //[[UIBarButtonItem appearance] setTintColor:colorOne];
    
    // [[GMGridView appearance] setBackgroundColor:backgrondTexture];
    // [[UIScrollView appearance] setBackgroundColor:backgrondTexture];
@@ -157,42 +158,29 @@ NSString *uuid();
 
    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
+    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
 #endif
 #if defined (CONFIGURATION_Ad_Hoc)
     [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
     [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-//    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-//    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
-//    [[BWQuincyManager sharedQuincyManager] setAutoSubmitDeviceUDID:YES];
+    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
+    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
 
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
-
+    
 #endif
-
-//    double delayInSeconds = 5.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-//            [self initializeCoreText];        
-//        });
-//    });
-
+    
+ 
     //Disable network activity manager
-          [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:NO];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:NO];
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
-   
-    SDURLCache *urlCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024   // 1MB mem cache
-                                                         diskCapacity:1024*1024*50 // 50MB disk cache
-                                                             diskPath:[SDURLCache defaultCachePath]];
-    [NSURLCache setSharedURLCache:urlCache];
+    
     //[[SVDownloadManager sharedInstance] resumeDownloads];
     [self configureTheming];
     
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
-
-        
+    [[PodsterManagedDocument sharedInstance] performWhenReady:^{            
         // Actually register
 #ifndef CONFIGURATION_Debug
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
@@ -203,10 +191,10 @@ NSString *uuid();
 #endif
         //   #endif
     }];
- 
+    
     BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
     self.window.rootViewController = controller;
-    [self setupOfflineOverlayMonitoring];
+    //[self setupOfflineOverlayMonitoring];
     [Appirater appLaunched:YES];
     return YES;    
 }
@@ -232,38 +220,37 @@ NSString *uuid();
 {
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     [[SVPodcatcherClient sharedInstance] registerWithDeviceId:deviceId
-            notificationToken:tokenAsString
-                 onCompletion:^(id response ){
-                     NSArray *subscriptions = response;
-                     NSArray *oldPodcasts = [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"podstoreId == nil "]
-                                                          inContext:[PodsterManagedDocument defaultContext]];
-                     if (oldPodcasts.count > 0) {
-                         // We had old (pre changeover) version podcasts in here. Subscribe to the new server with them
-                         for (SVPodcast *podcast in oldPodcasts) {
-                             [[SVPodcatcherClient sharedInstance]                               subscribeToFeedWithURL:podcast.feedURL shouldNotify:NO onCompletion:^void(id innerResponse) {
-                                                                                                                 NSDictionary *dict = innerResponse;
-                                                                                                                 NSDictionary *subDict = [dict objectForKey:@"subscription"];
-                                                                                                                 NSNumber *feedId = [subDict objectForKey:@"feed_id"];
-                                                                                                                 [[PodsterManagedDocument defaultContext] performBlock:^void() {
-                                                                                                                     podcast.podstoreIdValue = [feedId intValue];
-                                                                                                                 }];
-                                                                                                             } onError:^void(NSError *error) {
+                                            notificationToken:tokenAsString
+                                                 onCompletion:^(id response ){
+                                                     NSArray *subscriptions = response;
+                                                     [self registeredWithService];
+                                                     
+                                                     // TODO: Handle subscriptions from server
+                                                     
+                                                     
+                                                 } onError:^(NSError *error) {
+                                                     [FlurryAnalytics logError:@"RegistrationFailed"
+                                                                       message:[error localizedDescription]
+                                                                         error:error];
+                                                     LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
+                                                 }]; // custom method
+}
 
-                                                          }];
-
-                         }
-
-                     }
-
-                     // TODO: Handle subscriptions from server
-
-
-                 } onError:^(NSError *error) {
-        [FlurryAnalytics logError:@"RegistrationFailed"
-                          message:[error localizedDescription]
-                            error:error];
-        LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
-    }]; // custom method
+- (void)registeredWithService
+{
+    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    // Now that we're registered, check for needing an update (from 1.0 to 1.1+
+    NSArray *oldPodcasts = [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"podstoreId == nil "]
+                                                    inContext:context];
+    if (oldPodcasts.count > 0) {
+        LOG_GENERAL(2, @"Updating from v1");
+        // We had old (pre changeover) version podcasts in here. Subscribe to the new server with them,and update the items with feed_ids
+        for (SVPodcast *podcast in oldPodcasts) {
+            [podcast updateFromV1:^{
+                LOG_GENERAL(2, @"Updating from v1 complete");
+            }];
+        } 
+    }
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -361,7 +348,7 @@ NSString *uuid();
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SVReloadData" object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

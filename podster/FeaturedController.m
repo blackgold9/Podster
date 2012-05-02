@@ -61,7 +61,7 @@
     [self.view addSubview:imageView];
     [self.view sendSubviewToBack:imageView];
      
-    self.featuedGrid.cellSize = CGSizeMake(160, 170);
+    self.featuedGrid.cellSize = CGSizeMake(160, 160);
     self.featuedGrid.backgroundColor = [UIColor clearColor];
     self.featuedGrid.dataSource = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -165,7 +165,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)gridView:(NRGridView *)gridView didSelectCellAtIndexPath:(NSIndexPath *)indexPath
+- (void)gridView:(NRGridView *)theGridView didSelectCellAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *sectionDict = [featured objectAtIndex:indexPath.section];
         NSArray *feeds = [sectionDict valueForKey:@"feeds"];
@@ -174,7 +174,7 @@
         controller.podcast = podcast;
     [self.navigationController pushViewController:controller animated:YES];
 
-    [gridView deselectCellAtIndexPath:indexPath animated:NO];
+    [theGridView deselectCellAtIndexPath:indexPath animated:NO];
 
 }
 

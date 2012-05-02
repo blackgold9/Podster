@@ -75,24 +75,7 @@ extern NSString * const AFNetworkingOperationDidFinishNotification;
  
  @warning Attempting to load a `file://` URL in iOS 4 may result in an `NSInvalidArgumentException`, caused by the connection returning `NSURLResponse` rather than `NSHTTPURLResponse`, which is the behavior as of iOS 5.
  */
-@interface AFURLConnectionOperation : NSOperation {
-@private
-    unsigned short _state;
-    BOOL _cancelled;
-    NSRecursiveLock *_lock;
-    
-    NSSet *_runLoopModes;
-    
-    NSURLConnection *_connection;
-    NSURLRequest *_request;
-    NSHTTPURLResponse *_response;
-    NSError *_error;
-
-    NSData *_responseData;
-    NSInteger _totalBytesRead;
-    NSMutableData *_dataAccumulator;
-    NSOutputStream *_outputStream;
-}
+@interface AFURLConnectionOperation : NSOperation
 
 ///-------------------------------
 /// @name Accessing Run Loop Modes
@@ -152,7 +135,7 @@ extern NSString * const AFNetworkingOperationDidFinishNotification;
 /**
  The output stream that is used to write data received until the request is finished.
  
- @discussion By default, data is accumulated into a buffer that is stored into `responseData` upon completion of the request. When `outputStream` is set, the data will not be accumulated into an internal buffer, and as a result, the `responseData` property of the completed request will be `nil`.
+ @discussion By default, data is accumulated into a buffer that is stored into `responseData` upon completion of the request. When `outputStream` is set, the data will not be accumulated into an internal buffer, and as a result, the `responseData` property of the completed request will be `nil`. The output stream will be scheduled in the network thread runloop upon being set.
  */
 @property (nonatomic, retain) NSOutputStream *outputStream;
 
@@ -168,6 +151,31 @@ extern NSString * const AFNetworkingOperationDidFinishNotification;
  @discussion This is the designated initializer.
  */
 - (id)initWithRequest:(NSURLRequest *)urlRequest;
+
+///----------------------------------
+/// @name Pausing / Resuming Requests
+///----------------------------------
+
+/**
+ Pauses the execution of the request operation.
+ 
+ @discussion A paused operation returns `NO` for `-isReady`, `-isExecuting`, and `-isFinished`. As such, it will remain in an `NSOperationQueue` until it is either cancelled or resumed. Pausing a finished or cancelled operation has no effect.
+ */
+- (void)pause;
+
+/**
+ Whether the request operation is currently paused.
+ 
+ @return `YES` if the operation is currently paused, otherwise `NO`.
+ */
+- (BOOL)isPaused;
+
+/**
+ Resumes the execution of the paused request operation.
+ 
+ @discussion Pause/Resume behavior varies depending on the underlying implementation for the operation class. In its base implementation, resuming a paused requests restarts the original request. However, since HTTP defines a specification for how to request a specific content range, `AFHTTPRequestOperation` will resume downloading the request from where it left off, instead of restarting the original request.
+ */
+- (void)resume;
 
 ///----------------------------------------------
 /// @name Configuring Backgrounding Task Behavior
@@ -193,7 +201,7 @@ extern NSString * const AFNetworkingOperationDidFinishNotification;
  
  @see setDownloadProgressBlock
  */
-- (void)setUploadProgressBlock:(void (^)(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))block;
+- (void)setUploadProgressBlock:(void (^)(NSInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))block;
 
 /**
  Sets a callback to be called when an undetermined number of bytes have been downloaded from the server.
@@ -202,7 +210,7 @@ extern NSString * const AFNetworkingOperationDidFinishNotification;
  
  @see setUploadProgressBlock
  */
-- (void)setDownloadProgressBlock:(void (^)(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead))block;
+- (void)setDownloadProgressBlock:(void (^)(NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))block;
 
 ///-------------------------------------------------
 /// @name Setting NSURLConnection Delegate Callbacks

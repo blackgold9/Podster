@@ -6,6 +6,7 @@
 const struct SVPodcastAttributes SVPodcastAttributes = {
 	.author = @"author",
 	.cachingLastModified = @"cachingLastModified",
+	.downloadCount = @"downloadCount",
 	.downloadPercentage = @"downloadPercentage",
 	.etag = @"etag",
 	.feedURL = @"feedURL",
@@ -24,12 +25,13 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.shouldNotify = @"shouldNotify",
 	.smallLogoURL = @"smallLogoURL",
 	.sortNewestFirst = @"sortNewestFirst",
+	.subscribedDate = @"subscribedDate",
 	.subtitle = @"subtitle",
 	.summary = @"summary",
 	.thumbLogoURL = @"thumbLogoURL",
 	.tinyLogoURL = @"tinyLogoURL",
 	.title = @"title",
-	.unseenEpsiodeCount = @"unseenEpsiodeCount",
+	.unlistenedSinceSubscribedCount = @"unlistenedSinceSubscribedCount",
 	.urlHash = @"urlHash",
 	.websiteURL = @"websiteURL",
 };
@@ -67,6 +69,10 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"downloadCountValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"downloadCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 	if ([key isEqualToString:@"downloadPercentageValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"downloadPercentage"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -99,8 +105,8 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 		NSSet *affectingKey = [NSSet setWithObject:@"sortNewestFirst"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
-	if ([key isEqualToString:@"unseenEpsiodeCountValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"unseenEpsiodeCount"];
+	if ([key isEqualToString:@"unlistenedSinceSubscribedCountValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"unlistenedSinceSubscribedCount"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 
@@ -119,6 +125,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 @dynamic cachingLastModified;
 
+
+
+
+
+
+@dynamic downloadCount;
+
+
+
+- (int)downloadCountValue {
+	NSNumber *result = [self downloadCount];
+	return [result intValue];
+}
+
+- (void)setDownloadCountValue:(int)value_ {
+	[self setDownloadCount:[NSNumber numberWithInt:value_]];
+}
+
+- (int)primitiveDownloadCountValue {
+	NSNumber *result = [self primitiveDownloadCount];
+	return [result intValue];
+}
+
+- (void)setPrimitiveDownloadCountValue:(int)value_ {
+	[self setPrimitiveDownloadCount:[NSNumber numberWithInt:value_]];
+}
 
 
 
@@ -402,6 +434,13 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
+@dynamic subscribedDate;
+
+
+
+
+
+
 @dynamic subtitle;
 
 
@@ -437,26 +476,26 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
-@dynamic unseenEpsiodeCount;
+@dynamic unlistenedSinceSubscribedCount;
 
 
 
-- (int)unseenEpsiodeCountValue {
-	NSNumber *result = [self unseenEpsiodeCount];
+- (int)unlistenedSinceSubscribedCountValue {
+	NSNumber *result = [self unlistenedSinceSubscribedCount];
 	return [result intValue];
 }
 
-- (void)setUnseenEpsiodeCountValue:(int)value_ {
-	[self setUnseenEpsiodeCount:[NSNumber numberWithInt:value_]];
+- (void)setUnlistenedSinceSubscribedCountValue:(int)value_ {
+	[self setUnlistenedSinceSubscribedCount:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveUnseenEpsiodeCountValue {
-	NSNumber *result = [self primitiveUnseenEpsiodeCount];
+- (int)primitiveUnlistenedSinceSubscribedCountValue {
+	NSNumber *result = [self primitiveUnlistenedSinceSubscribedCount];
 	return [result intValue];
 }
 
-- (void)setPrimitiveUnseenEpsiodeCountValue:(int)value_ {
-	[self setPrimitiveUnseenEpsiodeCount:[NSNumber numberWithInt:value_]];
+- (void)setPrimitiveUnlistenedSinceSubscribedCountValue:(int)value_ {
+	[self setPrimitiveUnlistenedSinceSubscribedCount:[NSNumber numberWithInt:value_]];
 }
 
 

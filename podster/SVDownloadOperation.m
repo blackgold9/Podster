@@ -77,7 +77,7 @@
 
 -(void)start
 {
-    dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
+  //  dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     [localContext performBlockAndWait:^{
         download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
@@ -86,14 +86,7 @@
         
         NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
         NSUInteger start = 0;
-        NSDictionary *headers = nil;
-
-        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
-        if (fileExists) {
-            start = [[[[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil] objectForKey:NSFileSize] unsignedIntegerValue];
-            headers = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"bytes=%d-", start] forKey:@"Range"];
-        }
-        
+               
         [self willChangeValueForKey:@"isExecuting"];
         _isExecuting = YES;
         [self didChangeValueForKey:@"isExecuting"];
@@ -107,11 +100,7 @@
         }
         
         localDownload.stateValue = SVDownloadStateDownloading;
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:localDownload.entry.mediaURL]];
-        if (headers){ 
-            NSLog(@"Set custom headers: %@", headers);
-            [request setAllHTTPHeaderFields:headers];
-        }
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:localDownload.entry.mediaURL]];        
         
         
         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -119,22 +108,24 @@
         [op setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
             return nil;
         }];
-        [op setDownloadProgressBlock:^(NSInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+        [op setDownloadProgressBlock:^(NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
             [self downloadProgressChanged:(double)totalBytesRead / (double)(totalBytesExpectedToRead + start)
                               forDownload:localDownload 
                                 inContext:localContext];
-        }];
+        }];      
         
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            [localContext performBlock:^{
+            [localContext performBlockAndWait:^{
                 LOG_NETWORK(2, @"Downloaded episode: %@", localDownload.entry.title);
                 SVPodcastEntry *entry = localDownload.entry;
-                entry.downloadCompleteValue = YES;
+                entry.downloadCompleteValue = YES;                
                 entry.localFilePath = filePath;
+
+                entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
+                LOG_DOWNLOADS(2, @"Podcast %@ no has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
                 [localDownload MR_deleteInContext:localContext];    
                 [self done];
-                dispatch_semaphore_signal(semaphore);
                 
             }];
                         
@@ -144,7 +135,9 @@
                  LOG_DOWNLOADS(2, @"Download failed with Error: %@", error);        
                  LOG_NETWORK(2, @"Failed to download episode: %@", localDownload.entry.title);
                  localDownload.stateValue = SVDownloadStateFailed;
-                 dispatch_semaphore_signal(semaphore);
+                 [self done];
+                 
+               //  dispatch_semaphore_signal(semaphore);
                  
              }];
             
@@ -152,11 +145,11 @@
         networkOp = op;
         [op start];
     }];
-
-   
-    LOG_DOWNLOADS(2, @"Operation watiting for download to complete");
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    LOG_DOWNLOADS(2, @"Download complete"); 
+//
+//   
+//    LOG_DOWNLOADS(2, @"Operation watiting for download to complete");
+//    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+//    LOG_DOWNLOADS(2, @"Download complete"); 
 
     
     
