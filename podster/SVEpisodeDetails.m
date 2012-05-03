@@ -17,6 +17,7 @@
 #import "NSString+MW_HTML.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SVDownloadManager.h"
+#import <Twitter/Twitter.h>
 @implementation SVEpisodeDetailsViewController {
     NSManagedObjectContext *context;
     SVPodcastEntry *episode;
@@ -28,6 +29,7 @@
 @synthesize summaryView;
 @synthesize episode;
 @synthesize markAsPlayedButton;
+@synthesize webView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -88,31 +90,98 @@
     self.summaryView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
     self.summaryView.contentOffset = CGPointMake(0, -10);
 //    NSString *bodyText = theEpisode.content ? theEpisode.content : theEpisode.summary;
-    NSData *stringData = [[theEpisode.rawSummary stringWithNewLinesAsBRs] dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.4",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
-    self.summaryView.textDelegate = self;
-    NSAttributedString *string = [NSAttributedString attributedStringWithHTML:stringData options:dictionary];
-    [self.summaryView setAttributedString:string];
+//    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.4",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
+//    self.summaryView.textDelegate = self;
+//    NSAttributedString *string = [NSAttributedString attributedStringWithHTML:stringData options:dictionary];
+//    [self.summaryView setAttributedString:string];
+    NSString *myDescriptionHTML = [NSString stringWithFormat:@"<html> \n"
+                                   "<head> \n"
+                                   "<style type=\"text/css\"> \n"
+                                   "body {font-family: \"%@\"; font-size: %@; color:#fff;}\n"
+                                   "img { max-width: 300;} \n"
+                                   "</style> \n"
+                                   "</head> \n"
+                                   "<body>%@</body> \n"
+                                   "</html>", @"HelveticaNeue", [NSNumber numberWithInt:15], [theEpisode.rawSummary stringWithNewLinesAsBRs]];
+    [self.webView loadHTMLString:myDescriptionHTML
+                         baseURL:nil];
 
-    [self updatePlayedToggle];
-       context = theEpisode.managedObjectContext;
+    context = theEpisode.managedObjectContext;
     episode = theEpisode;
+        [self configureToolbar];
+}
+- (void)configureToolbar
+{
+    UIImage *playedStatusImage;
+    if (episode.playedValue) {
+        playedStatusImage = [UIImage imageNamed:@"played-toolbar.png"];
+    } else {
+        if (episode.positionInSecondsValue > 0) {
+            playedStatusImage = [UIImage imageNamed:@"partialplay-toolbar.png"];
+        } else {
+            playedStatusImage = [UIImage imageNamed:@"unplayed-toolbar.png"];
+        }
+    }
+    
+    UIBarButtonItem *playedItem = [[UIBarButtonItem alloc] initWithImage:playedStatusImage
+                                                                   style:UIBarButtonItemStylePlain target:self action:@selector(markAsPlayedTapped:)];
+    
+    UIImage *downloadImage;
+    if (episode.downloadCompleteValue) {
+        downloadImage = [UIImage imageNamed:@"trash-can.png"];        
+    } else if (episode.download != nil) {
+        // Not downloaded, but one is scheduled
+        downloadImage = [UIImage imageNamed:@"cancel.png"];        
+    } else {
+       downloadImage = [UIImage imageNamed:@"download.png"];   
+    }
+//    
+//    UIBarButtonItem *downloadItem = [[UIBarButtonItem alloc] initWithImage:downloadImage
+//                                                                     style:UIBarButtonItemStylePlain
+//                                                                    target:self
+//                                                                    action:@selector(downloadTapped:)];
+    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                               target:self action:@selector(shareTapped:)];
+    
+    UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [self setToolbarItems:[NSArray arrayWithObjects:playedItem,separator,shareItem, nil] animated:YES];
 }
 
+- (void)downloadTapped:(id)sender
+{
+    
+}
+
+- (void)shareTapped:(id)sender
+{
+    TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
+    [tweet setInitialText:[NSString stringWithFormat:@"Shaing an episode of %@ (via @ItsPodster)",     episode.podcast.title]];
+    [tweet addURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.podsterapp.com/feed_items/%d",episode.podstoreIdValue]]];
+    
+    // Show the controller
+    [self presentModalViewController:tweet animated:YES];
+    
+    // Called when the tweet dialog has been closed
+    tweet.completionHandler = ^(TWTweetComposeViewControllerResult result) 
+    {
+        
+        
+        // Dismiss the controller
+        [self dismissModalViewControllerAnimated:YES];
+    };
+
+}
 - (void)viewDidLoad
 {
 
     [super viewDidLoad];
     NSAssert(episode, @"There should be an episode here");
-    self.summaryView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    //self.summaryView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
     [self bind:self.episode];
     [self.titleLabel alignTop];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
-    
-    [self.markAsPlayedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.markAsPlayedButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal ];
-    [self.markAsPlayedButton setBackgroundImage:[UIImage imageNamed:@"standard-big-over.png"] forState:UIControlStateHighlighted];
+   // self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
 
     
 }
@@ -127,6 +196,7 @@
     [self setSummaryView:nil];
     [self setImageBackground:nil];
     [self setMarkAsPlayedButton:nil];
+    [self setWebView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -149,23 +219,6 @@
     LOG_GENERAL(3, @"Navigating to player");
     [[self navigationController] pushViewController:controller animated:YES];
 
-}
-
-- (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame
-{
-	DTLinkButton *button = [[DTLinkButton alloc] initWithFrame:frame];
-	button.url = url;
-	button.minimumHitSize = CGSizeMake(25, 25); // adjusts it's bounds so that button is always large enough
-	button.guid = identifier;
-	
-	// use normal push action for opening URL
-	[button addTarget:self action:@selector(linkPushed:) forControlEvents:UIControlEventTouchUpInside];
-	
-	// demonstrate combination with long press
-	UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(linkLongPressed:)];
-	[button addGestureRecognizer:longPress];
-	
-	return button;
 }
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame
@@ -203,6 +256,6 @@
     }];
 
        
-    [self updatePlayedToggle];    
+    [self configureToolbar];    
 }
 @end

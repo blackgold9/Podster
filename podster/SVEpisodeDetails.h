@@ -20,6 +20,7 @@
 - (IBAction)listenTapped:(id)sender;
 @property (strong) SVPodcastEntry *episode;
 @property (weak, nonatomic) IBOutlet UIButton *markAsPlayedButton;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 - (IBAction)markAsPlayedTapped:(id)sender;
 
 @end

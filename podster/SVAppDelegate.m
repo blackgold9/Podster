@@ -24,7 +24,7 @@
 #import "MBProgressHUD.h"
 #import "SVSettings.h"
 #import "BWHockeyManager.h"
-
+#import "BWQuincyManager.h"
 @implementation SVAppDelegate
 {
 }
