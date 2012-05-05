@@ -27,15 +27,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation SVSubscriptionGridViewController {
     NSUInteger tappedIndex;
     BOOL needsReload;
+    NSArray *items;
 }
 @synthesize noContentLabel;
-@synthesize fetcher;
 @synthesize gridView = _gridView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
+        items = [NSArray array];
     }
     return self;
 }
@@ -67,7 +67,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                              selector:@selector(reloadNotificationRecieved:)
                                                  name:@"SVReloadData" 
                                                object:nil];
-    
 
 
 
@@ -76,20 +75,48 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
         NSError *error= nil;
         
-        [self.fetcher performFetch:&error];
         NSAssert(error == nil, @"Error!");
         DDLogVerbose(@"Listing fetched items");
-        for (SVPodcast *podcast in self.fetcher.fetchedObjects) {
+        for (SVPodcast *podcast in items) {
             DDLogVerbose(@"%@", podcast.title);
         }
         [self.gridView reloadData];
         self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
         self.noContentLabel.numberOfLines = 0;
         
-        self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
+        self.noContentLabel.hidden = items.count > 0;
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
     });
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(contextChanged:)
+                                          name:NSManagedObjectContextDidSaveNotification
+                                          object:[PodsterManagedDocument defaultContext]];
+}
+
+- (void)contextChanged:(NSNotification *)notification
+{
+    NSSet *inserted = [[notification userInfo] valueForKey:NSInsertedObjectsKey];
+    NSSet *deleted = [[notification userInfo] valueForKey:NSDeletedObjectsKey];
+    NSSet *combined = [inserted setByAddingObjectsFromSet:deleted];
+    if (inserted.count > 0) {
+        BOOL hasNewSubscriptions = NO;
+        for (NSManagedObject * o in combined    ) {
+
+            if ([o isKindOfClass:[SVPodcast class]]) {
+                SVPodcast *podcast = o;
+                if (podcast.isSubscribedValue) {
+                    hasNewSubscriptions = YES;
+                    break;
+                }
+            }
+        }
+        if (hasNewSubscriptions) {
+            [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        }
+    }
+
 }
 
 - (void)reloadNotificationRecieved:(NSNotification *)notification
@@ -121,7 +148,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     [super viewWillAppear:animated];
     LOG_GENERAL(2, @"ViewWillAppear");
-    noContentLabel.hidden = YES;
+    self.noContentLabel.hidden = YES;
     [MBProgressHUD showHUDAddedTo:self.view animated:NO];
     
     
@@ -141,27 +168,19 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
     // NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
-    NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title
-                                                     ascending:YES
-                                                 withPredicate:predicate
-                                                     inContext:[PodsterManagedDocument defaultContext]];
-
-    request.includesSubentities = NO;
-    if (self.fetcher) {
-        //self.fetcher.delegate = nil;
-        self.fetcher = nil;
-    }
-    self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                       managedObjectContext:[PodsterManagedDocument defaultContext]
-                                                         sectionNameKeyPath:nil
-                                                                  cacheName:nil];
-    //self.fetcher.delegate = self;
-    [[self fetcher] performFetch:nil];
-    [[self gridView] reloadData];
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
-        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    [context performBlock:^{
+        items = [SVPodcast MR_findAllSortedBy:SVPodcastAttributes.title 
+                                    ascending:YES withPredicate:predicate
+                                    inContext:context];
+        [[self gridView] reloadData];
+        self.noContentLabel.hidden = items.count > 0;
+        [[PodsterManagedDocument sharedInstance] performWhenReady:^{
+            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        }];
+        
     }];
-
+     
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -174,6 +193,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"SVReloadData"
                                                   object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSManagedObjectContextDidSaveNotification
+                                                  object:[PodsterManagedDocument defaultContext]];
     
 }
 
@@ -200,48 +223,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         LOG_GENERAL(2, @"Needs reload");
         [self.gridView reloadData];
     }
-    self.noContentLabel.hidden = self.fetcher.fetchedObjects.count > 0;
+    self.noContentLabel.hidden = items.count > 0;
     
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    
-    SVPodcast *podcast = [fetcher objectAtIndexPath:indexPath];
-    LOG_GENERAL(2, @"GRID:Working with: %@", podcast.title);
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            
-            LOG_GENERAL(2, @"GRID:Inserting object at %d", indexPath.row);
-            [self.gridView insertObjectAtIndex:indexPath.row
-                                 withAnimation:GMGridViewItemAnimationNone];
-            break;
-        case NSFetchedResultsChangeDelete:
-            LOG_GENERAL(2, @"GRID:Removing object at %d", indexPath.row);
-            [self.gridView removeObjectAtIndex:indexPath.row
-                                 withAnimation:GMGridViewItemAnimationNone];
-            break;
-        case NSFetchedResultsChangeMove:
-            LOG_GENERAL(2, @"GRID:Object should move from %d to %d", indexPath.row, newIndexPath.row );
-          //  [self.gridView reloadData];
-            break;
-        case NSFetchedResultsChangeUpdate:
-        {
-            // Items update via kvo
-        }
-            break;
-        default:
-            LOG_GENERAL(2,@"GRID: Some other type of update");
-            break;
-    }
-    
-    
-}
 -(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
-    self.fetcher.delegate= nil;
+
     tappedIndex = position;
-    SVPodcast *podcast =  [fetcher objectAtIndexPath:[NSIndexPath indexPathForRow:position inSection:0]];
+    SVPodcast *podcast =  [items objectAtIndex:position];
     
     SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
     controller.podcast = podcast;
@@ -254,9 +244,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #pragma mark - grid data
 -(NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[[self fetcher] sections] objectAtIndex:0];
-    LOG_GENERAL(2, @"Displaying %d podcats",  [sectionInfo numberOfObjects]);
-    return [sectionInfo numberOfObjects];
+    LOG_GENERAL(2, @"Displaying %d podcats",  items.count);
+    return [items count];
 }
 
 -(CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -270,7 +259,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     if (podcastNib == nil) {
         podcastNib = [UINib nibWithNibName:@"PodcastGridCellView" bundle:nil];   
     }
-    SVPodcast *currentPodcast = (SVPodcast *)[[self fetcher] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];    
+    SVPodcast *currentPodcast = (SVPodcast *)[items objectAtIndex:index];
     CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
     
     GMGridViewCell *cell = (GMGridViewCell *)[gridView dequeueReusableCellWithIdentifier:@"MySubscriptionsGridCell"];

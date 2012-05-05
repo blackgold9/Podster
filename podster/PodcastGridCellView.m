@@ -11,7 +11,7 @@
 #import "SVPodcast.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GridCellCountOverlay.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation PodcastGridCellView {
     AFImageRequestOperation *imageLoadOp;
     SVPodcast *coreDataPodcast;

@@ -107,20 +107,11 @@
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big-over.png"] forState:UIControlStateHighlighted];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockedNotifications:) name:@"PremiumPurchased" object:nil];
-                                                         // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [[NSNotificationCenter defaultCenter] addObserver:self 
-//                                             selector:@selector(purchaseSuccessful) 
-//                                                 name:@"SVPremiumModeChanged" 
-//                                               object:[SVSettings sharedInstance]];
     [FlurryAnalytics logEvent:@"SettingsPageView"];
 }
 
@@ -320,44 +311,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 }
 */
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (IBAction)premiumSwitchToggled:(id)sender {
 
    
 }
+
 -(void)showPurchaseOptions
 {
+#if defined (CONFIGURATION_AppStore)    
     [[PodsterIAPHelper sharedInstance] requestProducts];
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     hud.dimBackground = YES;
@@ -367,7 +330,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     tmpObserver= [[NSNotificationCenter defaultCenter] addObserverForName:kProductsLoadedNotification
                                                                    object:nil
                                                                     queue:[NSOperationQueue mainQueue]
-                                                               usingBlock:^(NSNotification *note) {
+                                                                 usingBlock:^(NSNotification *note) {
                                                                    [hud hide:YES];
                                                                    
                                                                    BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:NSLocalizedString(@"PURCHASE_PROMPT_TITLE", nil)];
@@ -379,7 +342,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                    BOOL hasProducts = NO;
                                                                    for (SKProduct *product in products) {
                                                                        hasProducts = YES;
-
+                                                                       
                                                                        NSString *name = [product localizedTitle];
                                                                        [numberFormatter setLocale:product.priceLocale];
                                                                        NSString *price = [numberFormatter stringFromNumber:product.price];
@@ -389,7 +352,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                                                [FlurryAnalytics logEvent:@"PurchaseTapped" withParameters:[NSDictionary dictionaryWithObject:name forKey:@"sku"]];
                                                                                                
                                                                                                [[PodsterIAPHelper sharedInstance] buyProductIdentifier:[product productIdentifier]];
-                                                                                                [self waitForPurchaseCompletion];
+                                                                                               [self waitForPurchaseCompletion];
                                                                                            }];
                                                                    }
                                                                    
@@ -405,10 +368,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                                                    [[NSNotificationCenter defaultCenter] removeObserver:tmpObserver
                                                                                                                    name:kProductsLoadedNotification
                                                                                                                  object:nil];
-                                                                  
+                                                                   
                                                                }];
     
-
+#else
+    [[PodsterIAPHelper sharedInstance] provideContent:@"net.vanterpool.podster.notifications"];
+#endif
 }
 
 -(void) waitForPurchaseCompletion

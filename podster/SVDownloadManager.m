@@ -31,6 +31,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSInteger maxConcurrentDownloads;
     NSOperationQueue *queue;
     BOOL cancelling;
+    NSMutableArray *currentDownloads;
 }
 + (id)sharedInstance
 {
@@ -52,6 +53,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         //customHeaderFields:nil];
         operationLookup = [NSMutableDictionary dictionary];
         maxConcurrentDownloads = 2;
+        currentDownloads = [NSMutableArray array];
         queue = [NSOperationQueue new];
         [queue setMaxConcurrentOperationCount:maxConcurrentDownloads];
         queue.name = @"com.vantertech.podster.downloads";
@@ -159,7 +161,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     __block SVDownload *download = nil;
 
     [localContext performBlockAndWait:^{
-
+        NSString *title = entry.podcast.title.length > 100 ? [[entry.podcast.title substringToIndex:97] stringByAppendingString:@"..."] : entry.podcast.title;
+        [currentDownloads addObject:title];
         SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
         download = localEntry.download;
         localEntry.download.positionValue = position;
@@ -203,11 +206,20 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
         op.completionBlock = ^void() {
             if (queue.operationCount == 0) {
-                if(!op.isCancelled) {
+
+                if(!cancelling) {
                     UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
-                    downloadedNotification.alertBody = NSLocalizedString(@"All downloads have completed", @"All downloads have completed");
-                    downloadedNotification.soundName = @"alert.aiff";
+                    if (currentDownloads.count > 1) {
+                    downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" and %d other podcasts have finished downloading", @"%@ and %d other podcasts finished downloading"), [currentDownloads objectAtIndex:0], currentDownloads.count];
+                    } else {
+                        downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" has finished downloading",@"\"%@\" has finished downloading"), [currentDownloads objectAtIndex:0]];
+                    }
+                            downloadedNotification.soundName = @"alert.aiff";
                     [[UIApplication sharedApplication] presentLocalNotificationNow:downloadedNotification];
+                    [currentDownloads removeAllObjects];
+
+                }  else {
+                    cancelling = NO;
                 }
                 [localContext performBlock:^{
                     download.stateValue = SVDownloadStateFailed;
