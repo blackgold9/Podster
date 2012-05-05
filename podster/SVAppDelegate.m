@@ -25,8 +25,16 @@
 #import "SVSettings.h"
 #import "BWHockeyManager.h"
 #import "BWQuincyManager.h"
+#import "DDFileLogger.h"
+#import "DDTTYLogger.h"
+#import "DDASLLogger.h"
+#import "DDNSLoggerLogger.h"
+#import "Lockbox.h"
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation SVAppDelegate
 {
+    DDFileLogger *fileLogger;
+    BOOL isFirstRun;
 }
 
 NSString *uuid();
@@ -153,14 +161,22 @@ NSString *uuid();
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-        
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [DDLog addLogger:[DDNSLoggerLogger sharedInstance]];
+    fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    
+    [DDLog addLogger:fileLogger];
 #if defined (CONFIGURATION_AppStore)
-
+         DDLogVerbose(@"Running in Appstore mode");
    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
 #endif
 #if defined (CONFIGURATION_Ad_Hoc)
+    DDLogVerbose(@"Running in Ad_Hoc mode");
     [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
     [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
@@ -171,7 +187,10 @@ NSString *uuid();
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
     
 #endif
-    
+    isFirstRun = [[SVSettings sharedInstance] firstRun];
+    SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*20 diskPath:[SDURLCache defaultCachePath]];
+    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
+    [NSURLCache setSharedURLCache:URLCache];
  
     //Disable network activity manager
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:NO];
@@ -196,6 +215,7 @@ NSString *uuid();
     self.window.rootViewController = controller;
     //[self setupOfflineOverlayMonitoring];
     [Appirater appLaunched:YES];
+    [[SVSettings sharedInstance] setFirstRun:NO];
     return YES;    
 }
 
@@ -222,7 +242,7 @@ NSString *uuid();
     [[SVPodcatcherClient sharedInstance] registerWithDeviceId:deviceId
                                             notificationToken:tokenAsString
                                                  onCompletion:^(id response ){
-                                                     NSArray *subscriptions = response;
+//                                                     NSArray *subscriptions = response;
                                                      [self registeredWithService];
                                                      
                                                      // TODO: Handle subscriptions from server
@@ -250,6 +270,17 @@ NSString *uuid();
                 LOG_GENERAL(2, @"Updating from v1 complete");
             }];
         } 
+    }
+
+    if (isFirstRun) {
+        NSArray *subscriptions = [Lockbox arrayForKey:@"subscriptions"];
+        if (subscriptions && subscriptions.count > 0)  {
+            for (NSNumber *feedId in subscriptions) {
+                [SVPodcast fetchAndSubscribeToPodcastWithId:feedId];
+            }
+
+        }
+
     }
 }
 
@@ -307,31 +338,39 @@ NSString *uuid();
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    
- 
-   __block UIBackgroundTaskIdentifier background_task; //Create a task object
-   
-   background_task = [application beginBackgroundTaskWithExpirationHandler: ^ {
-       [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
-       background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
-       
-       //System will be shutting down the app at any point in time now
-   }];
+
+
+    __block UIBackgroundTaskIdentifier background_task; //Create a task object
+
+    background_task = [application beginBackgroundTaskWithExpirationHandler: ^ {
+        [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
+        background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
+
+        //System will be shutting down the app at any point in time now
+    }];
     [FlurryAnalytics logEvent:@"SavingOnEnteringBackground" timed:YES];
-   //Background tasks require you to use asyncrous tasks
+    //Background tasks require you to use asynchronous tasks
     dispatch_async(dispatch_get_main_queue(), ^{
-       LOG_GENERAL(2,@"Saving on entering background");
-       [[PodsterManagedDocument sharedInstance] save:^(BOOL success) {
-                  LOG_GENERAL(2,@"Done Saving on entering background");
-           if (!success) {
-               LOG_GENERAL(2, @"Saving failed" );
-           }
-           [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
-           [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
-           background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
-           
-       }];
-   });
+        LOG_GENERAL(2,@"Saving on entering background");
+
+        [[PodsterManagedDocument defaultContext] performBlockAndWait:^void() {
+            NSArray *subscriptions= [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"isSubscribed == YES"]
+                                                             inContext:[PodsterManagedDocument defaultContext] ];
+            NSArray *keys = [subscriptions valueForKey:@"podstoreId"];
+            [Lockbox setArray:keys forKey:@"subscriptions"];
+        }];
+
+        [[PodsterManagedDocument sharedInstance] save:^(BOOL success) {
+            LOG_GENERAL(2,@"Done Saving on entering background");
+            if (!success) {
+                LOG_GENERAL(2, @"Saving failed" );
+            }
+            [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
+            [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
+            background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
+
+        }];
+    });
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

@@ -80,13 +80,17 @@
         if (weakSelf == nil) {
             return;
         }
+        
+        
         CMTime duration = weakSelf->player.currentItem.duration;
         CMTimeValue currentTimeInSeconds = time.value / time.timescale;
         NSInteger remaining = (duration.value / duration.timescale) - (currentTimeInSeconds);
         weakSelf.timeElapsedLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:(currentTimeInSeconds)];
         weakSelf.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:remaining];
-        if(!weakSelf.progressSlider.isTracking) {
-            weakSelf.progressSlider.value = (float) (currentTimeInSeconds) / (duration.value / duration.timescale);
+        if (player.rate != 0 && remaining != 0) {
+            if(!weakSelf.progressSlider.isTracking) {
+                weakSelf.progressSlider.value = (float) (currentTimeInSeconds) / (duration.value / duration.timescale);
+            }
         }
     }];
     

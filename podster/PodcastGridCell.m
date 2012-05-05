@@ -194,7 +194,11 @@ static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize s
         
         [coreDataPodcast addObserver:self
                           forKeyPath:@"downloadPercentage"
-                             options:NSKeyValueObservingOptionNew
+                             options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                             context:nil];
+        [coreDataPodcast addObserver:self
+                          forKeyPath:@"isDownloading"
+                             options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                              context:nil];
         
     }

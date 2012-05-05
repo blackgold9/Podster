@@ -7,8 +7,8 @@
 //
 
 #import "SVPodcastModalView.h"
-#import "DTAttributedTextView.h"
-#import "DTAttributedTextView.h"
+
+
 #import "ActsAsPodcast.h"
 #import "NSAttributedString+HTML.h"
 @implementation SVPodcastModalView {

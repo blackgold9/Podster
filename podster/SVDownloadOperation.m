@@ -12,6 +12,7 @@
 #import "SVPodcastEntry.h"
 #import "PodsterManagedDocument.h"
 #import "SVPodcatcherClient.h"
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation SVDownloadOperation {
     BOOL _isExecuting;
     BOOL _isFinished;
@@ -37,7 +38,7 @@
 }
 - (void)downloadProgressChanged:(double)progress forDownload:(SVDownload *)localDownload inContext:(NSManagedObjectContext *)localContext
 {
-    NSInteger percentage = (NSInteger)(progress * 100);
+    NSInteger percentage = MIN(100,(NSInteger)(progress * 100));
     if (currentProgressPercentage != percentage) {
         currentProgressPercentage = percentage;
         LOG_DOWNLOADS(4, @"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
@@ -47,7 +48,7 @@
 
             localDownload.stateValue = SVDownloadStateDownloading;
             localDownload.progressValue = (float) progress;
-            localDownload.entry.podcast.downloadPercentageValue = (float) (progress * 100);
+            localDownload.entry.podcast.downloadPercentageValue = percentage;
             if (!localDownload.entry.podcast.isDownloadingValue) {
                 localDownload.entry.podcast.isDownloadingValue = YES;
             } 
@@ -81,11 +82,11 @@
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     [localContext performBlockAndWait:^{
         download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
+        DDLogInfo(@"Downloading file at URL: %@", download.filePath);
 //        NSURL *mediaURL = [NSURL URLWithString:download.entry.mediaURL];
         LOG_DOWNLOADS(2, @"Starting episode download: %@", download.entry);
         
         NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
-        NSUInteger start = 0;
                
         [self willChangeValueForKey:@"isExecuting"];
         _isExecuting = YES;
@@ -109,7 +110,8 @@
             return nil;
         }];
         [op setDownloadProgressBlock:^(NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-            [self downloadProgressChanged:(double)totalBytesRead / (double)(totalBytesExpectedToRead + start)
+            double progress = [[NSNumber numberWithDouble:totalBytesRead] doubleValue] / [[NSNumber numberWithDouble:totalBytesExpectedToRead] doubleValue];
+            [self downloadProgressChanged:progress
                               forDownload:localDownload 
                                 inContext:localContext];
         }];      

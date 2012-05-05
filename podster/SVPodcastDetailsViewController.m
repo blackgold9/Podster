@@ -7,9 +7,6 @@
 //
 
 #import "SVPodcastDetailsViewController.h"
-#import "MWFeedItem.h"
-#import "MWFeedParser.h"
-#import "MWFeedInfo.h"
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 #import "SVPodcatcherClient.h"
@@ -44,7 +41,6 @@
     BOOL isLoading;
     NSMutableArray *feedItems;
     MWFeedInfo *feedInfo;
-    MWFeedParser *feedParser;
     NSManagedObjectContext *localContext;
     BOOL shouldSave;
     SVPodcast *localPodcast;
@@ -144,7 +140,7 @@
     } else {
         
         [[SVPodcatcherClient sharedInstance] changeNotificationSetting:self.notifySwitch.on
-                                                        forFeedWithId:localPodcast.feedURL
+                                                        forFeedWithId:localPodcast.podstoreId
                                                           onCompletion:^{
                                                               [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
                                                                          withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.notifySwitch.on] forKey:@"ON"]];
@@ -217,7 +213,7 @@
                 } else {
                     LOG_GENERAL(2, @"Creating notification subscription");
                     [[SVPodcatcherClient sharedInstance] changeNotificationSetting:YES
-                                                                    forFeedWithId:localPodcast.feedURL
+                                                                    forFeedWithId:localPodcast.podstoreId
                                                                       onCompletion:^{
                                                                           LOG_GENERAL(2, @"Succeed creating notification subscription");
                                                                           localPodcast.shouldNotifyValue = YES;
@@ -398,7 +394,17 @@
 }
 - (void)loadFeedImage
 {
-    [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image];
+    if ([localPodcast isKindOfClass:[SVPodcast class]]) {
+        SVPodcast *coredataPodcast = (SVPodcast *)localPodcast;
+        if (coredataPodcast.listSizeImageData) {
+           UIImage *img = [UIImage imageWithData:coredataPodcast.listSizeImageData];
+        } else {
+            [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image];
+        }
+    } else {
+        [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image];
+    }
+
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -469,15 +475,7 @@
             } else {
                 LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
             }
-            
-            localPodcast.title = self.podcast.title;
-            localPodcast.summary = self.podcast.summary;
-            localPodcast.logoURL = self.podcast.logoURL;
-            localPodcast.feedURL = self.podcast.feedURL;
-            localPodcast.thumbLogoURL = [self.podcast thumbLogoURL];
-            localPodcast.smallLogoURL = [self.podcast smallLogoURL];
-            localPodcast.tinyLogoURL = [self.podcast tinyLogoURL];
-            localPodcast.podstoreId = [self.podcast podstoreId];
+            [localPodcast populateWithPodcast:self.podcast];
             blockHasSubscription = localPodcast.isSubscribedValue;
             
             dispatch_async(dispatch_get_main_queue(), ^{

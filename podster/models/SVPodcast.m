@@ -1,10 +1,11 @@
 #import "SVPodcast.h"
 #import "NSDictionary+safeGetters.h"
-#import "MWFeedInfo.h"
 #import "SVPodcastEntry.h"
 #import "NSString+MD5Addition.h"
 #import "SVDownloadManager.h"
 #import "_SVPodcastEntry.h"
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+
 @implementation SVPodcast {
     BOOL isUpdatingFromV1;
 }
@@ -21,13 +22,25 @@
     NSParameterAssert(self.feedURL);
     self.subtitle = [dictionary stringForKey:@"subtitle"];
     self.websiteURL = [dictionary stringForKey:@"website_url"];
-
+    
     self.logoURL = [dictionary stringForKey:@"logo"];
     
     self.smallLogoURL = [dictionary stringForKey:@"logo_small"];
     self.tinyLogoURL = [dictionary stringForKey:@"logo_tiny"];
     self.thumbLogoURL = [dictionary stringForKey:@"logo_thumb"];
     self.podstoreId = [dictionary objectForKey:@"id"];
+}
+
+- (void)populateWithPodcast:(id<ActsAsPodcast>)podcast
+{
+    self.title =podcast.title;
+    self.summary = podcast.summary;
+    self.logoURL = podcast.logoURL;
+    self.feedURL = podcast.feedURL;
+    self.thumbLogoURL = [podcast thumbLogoURL];
+    self.smallLogoURL = [podcast smallLogoURL];
+    self.tinyLogoURL = [podcast tinyLogoURL];
+    self.podstoreId = [podcast podstoreId];
 }
 
 - (void)awakeFromInsert
@@ -47,8 +60,10 @@
         newCount = [SVPodcastEntry MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"%K == %@ && %K > %@ && %K == false", SVPodcastEntryRelationships.podcast, self, SVPodcastEntryAttributes.datePublished, self.subscribedDate, SVPodcastEntryAttributes.played] inContext:self.managedObjectContext];
     }   
     LOG_GENERAL(2, @"New episode count for %@ : %d", self.title, newCount);
-    self.unlistenedSinceSubscribedCountValue = newCount;
-
+    if (self.unlistenedSinceSubscribedCountValue != newCount) {
+        self.unlistenedSinceSubscribedCountValue = newCount;        
+    }
+    
 }
 - (void)awakeFromFetch
 {
@@ -71,7 +86,7 @@
             self.nextItemDate = [NSDate distantPast];
         }
     }
-
+    
 }
 
 - (void)downloadOfflineImageData
@@ -110,7 +125,7 @@
         }];
         [listImageOp start];
     }
-
+    
     if (self.logoURL != nil) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.logoURL]];
         //    AFHTTPRequestOperation *gridOp = AFHTTPRe        
@@ -126,7 +141,7 @@
         }];
         [op start];
     }
-
+    
 }
 
 - (void)subscribe
@@ -162,8 +177,8 @@
     [context performBlockAndWait:^{
         NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", self];
         entry = [SVPodcast MR_findFirstWithPredicate:isChild 
-                                 sortedBy:SVPodcastEntryAttributes.datePublished
-                                ascending:!self.sortNewestFirstValue inContext:[PodsterManagedDocument defaultContext]];
+                                            sortedBy:SVPodcastEntryAttributes.datePublished
+                                           ascending:!self.sortNewestFirstValue inContext:[PodsterManagedDocument defaultContext]];
         
     }];
     
@@ -173,59 +188,90 @@
 {
     
 }
+
++ (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId
+{
+        [[SVPodcatcherClient sharedInstance] fetchPodcastWithId:podcastId
+                                                   onCompletion:^void(NSArray *podcasts) {
+
+                                                       if (podcasts.count > 0) {
+                                                           NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+                                                           [context performBlock:^{
+                                                               SVPodcast *localPodcast = [SVPodcast MR_createInContext:context];
+                                                               
+                                                               
+                                                               [localPodcast populateWithPodcast:[podcasts objectAtIndex:0]];
+                                                               [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:podcastId
+                                                                                                             onCompletion:^void() {
+                                                                                                                 [context performBlock:^void() {
+                                                                                                                     DDLogInfo(@"Successfully subscribed to podcast %@", localPodcast);
+                                                                                                                     [localPodcast subscribe];
+                                                                                                                 }];
+
+                                                                                                             } onError:^void(NSError *error) {
+                                                                                                                 DDLogError(@"Failed to subscribe to podcast %@", localPodcast);
+                                                                                                             }];
+                                                           }];
+                                                       }
+                                                   } onError:^void(NSError *error) {
+            DDLogError(@"Failed to fetch podcast with id %@", podcastId);
+        }];
+}
 - (void)updateNextItemDateAndDownloadIfNeccesary:(BOOL)shouldDownload
 {
-    [self updateNewEpisodeCount];
-    if (self.isSubscribedValue) {
-        SVPodcastEntry *entry = nil;
-
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"played == NO"];
-
-
-        if (self.items.count > 0) {
-
-            NSArray *sortedItems = [self.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:NO]]];
-            sortedItems = [sortedItems filteredArrayUsingPredicate:predicate];
-            entry = [sortedItems objectAtIndex:0];
-        }
-        if(entry) {
-
-            self.nextItemDate = entry.datePublished;
-            // If item hasn't been listened to
-            if (!entry.playedValue && entry.download == nil && !entry.downloadCompleteValue && shouldDownload) {
-                LOG_GENERAL(2, @"Queing entry for download");
-                // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
-                [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NO];
+    DDLogInfo(@"Calculating next item for %@", self.title);
+    [self.managedObjectContext performBlock:^{
+        
+        
+        if (self.isSubscribedValue) {
+            SVPodcastEntry *entry = nil;
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"played == NO"];
+            
+            
+            if (self.items.count > 0) {
+                
+                NSArray *sortedItems = [self.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:NO]]];
+                sortedItems = [sortedItems filteredArrayUsingPredicate:predicate];
+                entry = [sortedItems objectAtIndex:0];
             }
-            [[self managedObjectContext] save:nil];
-        } else {
-            self.nextItemDate = [NSDate distantPast];
+            if(entry) {
+                DDLogVerbose(@"Had a qualified entry. Date: %@", entry.datePublished);
+                self.nextItemDate = entry.datePublished;
+                // If item hasn't been listened to
+                if (!entry.playedValue && entry.download == nil && !entry.downloadCompleteValue && shouldDownload) {
+                    LOG_GENERAL(2, @"Queing entry for download");
+                    // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
+                    [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NO];
+                }
+                [[self managedObjectContext] save:nil];
+            } else {
+                DDLogVerbose(@"No qualified entry. Setting date to the distant past");
+                self.nextItemDate = [NSDate distantPast];
+            }
         }
-    }
-
-    // Cleanup downloads
-    NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"played == YES && downloadComplete == YES"];
-    NSSet *needDeleting = [self.items filteredSetUsingPredicate:needsDeletingPredicate];
-    LOG_DOWNLOADS(2, @"Deleting %d items", needDeleting.count);
-    for (SVPodcastEntry *toDelete in needDeleting) {
-        [[SVDownloadManager sharedInstance] deleteFileForEntry:toDelete];
-        toDelete.downloadCompleteValue = NO;
-    }
-
-
+        
+        // Cleanup downloads
+        NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"played == YES && downloadComplete == YES"];
+        NSSet *needDeleting = [self.items filteredSetUsingPredicate:needsDeletingPredicate];
+        DDLogInfo(@"Cleaning up. Deleting %d items", needDeleting.count);
+        for (SVPodcastEntry *toDelete in needDeleting) {
+            [[SVDownloadManager sharedInstance] deleteFileForEntry:toDelete];
+            toDelete.downloadCompleteValue = NO;
+        }
+    }];
 }
 
 - (void)getNewEpisodes:(void (^)(BOOL))complete
 {
     NSDate *syncDate = [NSDate date];
-
     [self.managedObjectContext performBlockAndWait:^{
-            SVPodcastEntry *entry;
+        SVPodcastEntry *entry;
         if (self.items.count > 0) {
             entry = [[self.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:NO]]] objectAtIndex:0];
         }    
         
-        LOG_GENERAL(2,@"Getting new items %@", isUpdatingFromV1 ? @"updatingfromv1" : @"normally");
+        DDLogInfo(@"Getting new items %@", isUpdatingFromV1 ? @"updatingfromv1" : @"normally");
         [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podstoreId
                                                      withLastSyncDate:entry == nil || isUpdatingFromV1 ? [NSDate distantPast] : entry.datePublished
                                                              complete:^void(id response) {
@@ -233,7 +279,7 @@
                                                                      self.lastSynced = syncDate;
                                                                      NSArray *episodes = response;
                                                                      if (episodes) {
-                                                                         LOG_GENERAL(2, @"Added %d episodes to %@", episodes.count, self.title);
+                                                                         DDLogInfo( @"Added %d episodes to %@", episodes.count, self.title);
                                                                      }
                                                                      NSMutableDictionary *upgradeLookupByGUID;
                                                                      if(isUpdatingFromV1) {
@@ -269,7 +315,7 @@
                                                                              isFirst = NO;
                                                                          }         
                                                                          
-
+                                                                         
                                                                      }                            
                                                                      
                                                                      [self updateNewEpisodeCount];
@@ -278,9 +324,9 @@
                                                              } onError:^void(NSError *error) {
                                                                  complete(NO);
                                                              }];
-
+        
     }];
-    }
+}
 
 - (void)updateFromV1:(void (^)(void))complete
 {
@@ -300,7 +346,7 @@
                                                            }];
                                                            
                                                        }];
-                                                      
+                                                       
                                                        
                                                    } onError:^void(NSError *error) {
                                                        complete();

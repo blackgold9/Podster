@@ -57,9 +57,9 @@ static char const kRefreshInterval = -3;
         
         [offsetComponents setMinute:kRefreshInterval];
         
-        NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
-                                                        toDate:[NSDate date]
-                                                       options:0];
+//        NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
+//                                                        toDate:[NSDate date]
+//                                                       options:0];
         
         __block SVPodcast *nextPodcast = nil;
         //NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
@@ -70,9 +70,9 @@ static char const kRefreshInterval = -3;
         LOG_GENERAL(2, @"About to look for a subscription to refresh");
         [context performBlock:^{
             NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];       
-            NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@ OR %K == nil",SVPodcastAttributes.lastSynced, syncWindow, SVPodcastAttributes.lastSynced];
+        //    NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@ OR %K == nil",SVPodcastAttributes.lastSynced, syncWindow, SVPodcastAttributes.lastSynced];
             
-            NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate, olderThanSyncStart,stale, nil]];
+            NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate, olderThanSyncStart, nil]];
             
             nextPodcast = [SVPodcast MR_findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
             
@@ -81,9 +81,8 @@ static char const kRefreshInterval = -3;
                 if (!self.isBusy) {
                     self.isBusy = YES;
                 }
-                weakSelf.currentURL = nextPodcast.feedURL;
-                nextPodcast.lastSynced = [NSDate date];
-                [context save:nil];
+                weakSelf.currentURL = nextPodcast.feedURL;              
+//                [context save:nil];
                 LOG_NETWORK(2, @"Found One: Updating feed: %@ - %@", nextPodcast.title, nextPodcast.objectID);
                 [nextPodcast getNewEpisodes:^void(BOOL success) {
                     if (success) {

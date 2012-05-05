@@ -9,6 +9,7 @@
 #import "SVSettings.h"
 #import "HomeController.h"
 #import "BlockAlertView.h"
+#import "Lockbox.h"
 @implementation SVSettings {
     NSUserDefaults *defaults;
 }
@@ -62,11 +63,15 @@ NSString *uuid(){
 
 - (NSString *)deviceId
 {
-    NSString *deviceId = [defaults objectForKey:@"deviceId"];
+    NSString *deviceId = [Lockbox stringForKey:@"deviceId"];
     if (deviceId == nil) {
-        deviceId = uuid();
-        [[NSUserDefaults standardUserDefaults] setObject:deviceId forKey:@"deviceId"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        // If device id is nil, read it from the user defaults (affects v1 users)
+        deviceId = [defaults stringForKey:@"deviceId"];
+        if (deviceId == nil) {
+            //if it's STILL nil, make a new one
+            deviceId = uuid();
+            [Lockbox setString:deviceId forKey:@"deviceId"];
+        }
     }
 
     return deviceId;

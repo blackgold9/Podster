@@ -25,7 +25,7 @@
     dispatch_once(&onceToken, ^{
         NSURL *url = [NSURL URLWithString:@"http://api.podsterapp.com/api/v1/"];
         client = [[SVPodcatcherClient alloc] initWithBaseURL:url];
-        
+
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     });
     
@@ -106,31 +106,6 @@
 {
     
     NSString *feedFinderURL = [NSString stringWithFormat:@"categories/%d/feeds.json?cc=%@&start=%d&limit=%d", categoryId,[self countryCode], start, limit];
-    [self getPath:feedFinderURL
-       parameters:nil
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSArray *returnedData = responseObject;
-              NSMutableArray *podcasts = [NSMutableArray array];
-              for(NSDictionary *dict in returnedData) {
-                  SVPodcastSearchResult *result = [SVPodcastSearchResult new];
-                  [result populateWithDictionary:dict];
-                  [podcasts addObject:result];
-              }
-              
-              completion(podcasts);
-          } 
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              LOG_NETWORK(1, @"feedsByCategory faild with error: %@", error);
-              errorBlock(error);
-          }];
-}
-
--(void)topPodcastsStartingAtIndex:(NSInteger)start
-                            limit:(NSInteger)limit
-                     onCompletion:(PodcastListResponeBlock)completion 
-                          onError:(SVErrorBlock)errorBlock
-{
-    NSString *feedFinderURL = [NSString stringWithFormat:@"feeds.json?start=%d&limit=%d", start, limit];
     [self getPath:feedFinderURL
        parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -281,6 +256,35 @@
                    onError(error);
                }
            }];
+}
+
+- (void)fetchPodcastWithId:(NSNumber *)feedId onCompletion:(PodcastListResponeBlock)completion onError:(SVErrorBlock)errorHandler
+{
+    NSParameterAssert(feedId);
+    NSParameterAssert(completion);
+    NSParameterAssert(errorHandler);
+
+    NSString *queryPath = [NSString stringWithFormat:@"feeds.json?cc=%@&feedId=%@", [self countryCode], feedId];
+    [self getPath:queryPath parameters:nil
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSArray *returnedData = responseObject;
+              NSMutableArray *podcasts = [NSMutableArray array];
+              for(NSDictionary *dict in returnedData) {
+                  SVPodcastSearchResult *result = [SVPodcastSearchResult new];
+                  [result populateWithDictionary:dict];
+                  [podcasts addObject:result];
+              }
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  completion(podcasts);
+              });
+
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  errorHandler(error);
+              });
+
+          }];
 }
 
 - (void)subscribeToFeedWithId:(NSNumber *)feedId

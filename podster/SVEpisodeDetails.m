@@ -11,9 +11,7 @@
 #import "SVPodcast.h"
 #import "SVPlaybackManager.h"
 #import "UILabel+VerticalAlign.h"
-#import "DTAttributedTextView.h"
 #import "NSAttributedString+HTML.h"
-#import "DTLinkButton.h"
 #import "NSString+MW_HTML.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SVDownloadManager.h"
@@ -24,9 +22,6 @@
 }
 @synthesize imageBackground;
 @synthesize titleLabel;
-@synthesize listenButton;
-@synthesize downloadButton;
-@synthesize summaryView;
 @synthesize episode;
 @synthesize markAsPlayedButton;
 @synthesize webView;
@@ -85,10 +80,9 @@
     self.imageBackground.layer.shadowOpacity=0.5;
     
     self.imageBackground.frame = CGRectMake(0, 0, self.view.bounds.size.width, titleSize.height+20);
-       self.summaryView.frame = CGRectMake(10, titleSize.height + 30, self.view.bounds.size.width - 20, self.view.bounds.size.height - 30 - titleSize.height - 64);
-
-    self.summaryView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
-    self.summaryView.contentOffset = CGPointMake(0, -10);
+    
+    CGRect webFrame = CGRectMake(0, CGRectGetMaxY(self.imageBackground.frame), 320, self.view.frame.size.height - CGRectGetMaxY(self.imageBackground.frame));
+    self.webView.frame = webFrame;
 //    NSString *bodyText = theEpisode.content ? theEpisode.content : theEpisode.summary;
 //    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.4",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
 //    self.summaryView.textDelegate = self;
@@ -96,19 +90,34 @@
 //    [self.summaryView setAttributedString:string];
     NSString *myDescriptionHTML = [NSString stringWithFormat:@"<html> \n"
                                    "<head> \n"
+                                   "<meta name = \"viewport\" content = \"width = 320,"
+                                   "initial-scale = 2.3, user-scalable = no\">"
                                    "<style type=\"text/css\"> \n"
                                    "body {font-family: \"%@\"; font-size: %@; color:#fff;}\n"
-                                   "img { max-width: 300;} \n"
+                                   "img { max-width: 280;} \n"
+                                   "a { color:#9af} \n"
                                    "</style> \n"
                                    "</head> \n"
                                    "<body>%@</body> \n"
                                    "</html>", @"HelveticaNeue", [NSNumber numberWithInt:15], [theEpisode.rawSummary stringWithNewLinesAsBRs]];
     [self.webView loadHTMLString:myDescriptionHTML
                          baseURL:nil];
+    self.webView.delegate = self;
 
     context = theEpisode.managedObjectContext;
     episode = theEpisode;
         [self configureToolbar];
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType; 
+{
+    NSURL *requestURL = [request URL]; 
+    if ( ( [ [ requestURL scheme ] isEqualToString: @"http" ] || [ [ requestURL scheme ] isEqualToString: @"https" ] || [ [ requestURL scheme ] isEqualToString: @"mailto" ]) 
+        && ( navigationType == UIWebViewNavigationTypeLinkClicked ) ) { 
+        [FlurryAnalytics logEvent:@"UserTappedLinkFromShowNotes"];
+        return ![ [ UIApplication sharedApplication ] openURL: requestURL ]; 
+    }
+    return YES; 
 }
 - (void)configureToolbar
 {
@@ -148,6 +157,8 @@
     [self setToolbarItems:[NSArray arrayWithObjects:playedItem,separator,shareItem, nil] animated:YES];
 }
 
+
+
 - (void)downloadTapped:(id)sender
 {
     
@@ -156,7 +167,7 @@
 - (void)shareTapped:(id)sender
 {
     TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
-    [tweet setInitialText:[NSString stringWithFormat:@"Shaing an episode of %@ (via @ItsPodster)",     episode.podcast.title]];
+    [tweet setInitialText:[NSString stringWithFormat:@"Sharing an episode of %@ (via @ItsPodster)",     episode.podcast.title]];
     [tweet addURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.podsterapp.com/feed_items/%d",episode.podstoreIdValue]]];
     
     // Show the controller
@@ -181,7 +192,7 @@
     
     [self bind:self.episode];
     [self.titleLabel alignTop];
-   // self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
 
     
 }
@@ -191,9 +202,6 @@
 - (void)viewDidUnload
 {
     [self setTitleLabel:nil];
-    [self setListenButton:nil];
-    [self setDownloadButton:nil];
-    [self setSummaryView:nil];
     [self setImageBackground:nil];
     [self setMarkAsPlayedButton:nil];
     [self setWebView:nil];
@@ -221,28 +229,6 @@
 
 }
 
-- (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForAttachment:(DTTextAttachment *)attachment frame:(CGRect)frame
-{
-    if (attachment.contentType == DTTextAttachmentTypeImage)
-	{
-		// if the attachment has a hyperlinkURL then this is currently ignored
-		UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-
-		if (attachment.contents)
-		{
-			imageView.image = attachment.contents;
-		}
-		
-		[imageView setImageWithURL:attachment.contentURL placeholderImage:nil];		
-		return imageView;
-	}
-	return nil;
-}
-- (void)linkPushed:(DTLinkButton *)button
-{
-    [FlurryAnalytics logEvent:@"UserTappedLinkFromShowNotes"];
-	[[UIApplication sharedApplication] openURL:[button.url absoluteURL]];
-}
 - (IBAction)markAsPlayedTapped:(id)sender {
     [context performBlockAndWait:^{
         episode.playedValue = !episode.playedValue;  

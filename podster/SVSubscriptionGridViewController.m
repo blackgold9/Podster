@@ -19,6 +19,7 @@
 #import "PodsterManagedDocument.h"
 #import "PodcastGridCellView.h"
 #import "MBProgressHUD.h"
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVSubscriptionGridViewController()
 
 @end
@@ -53,8 +54,7 @@
 {
     [super viewDidDisappear:animated];
     
-    self.fetcher.delegate = nil;
-    self.fetcher = nil;
+   //self.fetcher.delegate = nil;
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -68,27 +68,20 @@
                                                  name:@"SVReloadData" 
                                                object:nil];
     
-    
-    if (!fetcher) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-        NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
-        
-        request.includesSubentities = NO;
-        self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                           managedObjectContext:[PodsterManagedDocument defaultContext] 
-                                                             sectionNameKeyPath:nil
-                                                                      cacheName:nil];
-        
-        
-    }
-    
+
+
+
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        
+        [[SVPodcatcherClient sharedInstance] addObserver:self forKeyPath:@"networkReachabilityStatus"
+                                                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
         NSError *error= nil;
         
         [self.fetcher performFetch:&error];
         NSAssert(error == nil, @"Error!");
+        DDLogVerbose(@"Listing fetched items");
+        for (SVPodcast *podcast in self.fetcher.fetchedObjects) {
+            DDLogVerbose(@"%@", podcast.title);
+        }
         [self.gridView reloadData];
         self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
         self.noContentLabel.numberOfLines = 0;
@@ -128,6 +121,7 @@
 {
     [super viewWillAppear:animated];
     LOG_GENERAL(2, @"ViewWillAppear");
+    noContentLabel.hidden = YES;
     [MBProgressHUD showHUDAddedTo:self.view animated:NO];
     
     
@@ -136,17 +130,45 @@
 
 - (void)reloadData
 {
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{                    
+    NSPredicate *predicate;
+    if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
+        predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES && downloadCount > 0"];
+    }  else {
+        predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+    }
+
+
+
+
+    // NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
+    NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title
+                                                     ascending:YES
+                                                 withPredicate:predicate
+                                                     inContext:[PodsterManagedDocument defaultContext]];
+
+    request.includesSubentities = NO;
+    if (self.fetcher) {
+        //self.fetcher.delegate = nil;
+        self.fetcher = nil;
+    }
+    self.fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                       managedObjectContext:[PodsterManagedDocument defaultContext]
+                                                         sectionNameKeyPath:nil
+                                                                  cacheName:nil];
+    //self.fetcher.delegate = self;
+    [[self fetcher] performFetch:nil];
+    [[self gridView] reloadData];
+    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
         [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
     }];
-    
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
-    self.fetcher.delegate = nil;
+   // self.fetcher.delegate = nil;
     [[SVSubscriptionManager sharedInstance] cancel];
     LOG_GENERAL(2, @"WilDisappear");
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -201,13 +223,11 @@
             break;
         case NSFetchedResultsChangeMove:
             LOG_GENERAL(2, @"GRID:Object should move from %d to %d", indexPath.row, newIndexPath.row );
-            [self.gridView reloadData];
+          //  [self.gridView reloadData];
             break;
         case NSFetchedResultsChangeUpdate:
         {
-            LOG_GENERAL(2, @"GRID: Refreshing item at %d", indexPath.row);
-            [self.gridView reloadObjectAtIndex:indexPath.row
-                                 withAnimation:GMGridViewItemAnimationNone];
+            // Items update via kvo
         }
             break;
         default:
@@ -274,5 +294,11 @@
     
     return cell;
 }
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (object == [SVPodcatcherClient sharedInstance]) {
+        // It's a reachability change. Reload
+        [self performSelectorOnMainThread:@selector(reloadData )withObject:nil waitUntilDone:NO];
+    }
+}
 @end

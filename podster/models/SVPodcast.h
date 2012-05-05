@@ -4,6 +4,9 @@
 
 @interface SVPodcast : _SVPodcast<ActsAsPodcast> {}
 -(void)populateWithDictionary:(NSDictionary *)dictionary;
+
+- (void)populateWithPodcast:(id <ActsAsPodcast>)podcast;
+
 -(void)updatePodcastWithFeedInfo:(MWFeedInfo *)info;
 
 - (void)updateNextItemDateAndDownloadIfNeccesary:(BOOL)shouldDownload;
@@ -11,6 +14,9 @@
 - (void)getNewEpisodes:(void (^)(BOOL))complete;
 
 - (SVPodcastEntry *)firstUnplayedInPodcastOrder;
+
++ (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId;
+
 - (void)downloadOfflineImageData;
 - (void)subscribe;
 - (void)unsubscribe;

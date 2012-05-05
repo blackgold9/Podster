@@ -444,7 +444,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     }
 }
 - (IBAction)purchaseTapped:(id)sender {
-#ifdef CONFIGURATION_Ad_Hoc
+#if defined (CONFIGURATION_Ad_Hoc)
     [[PodsterIAPHelper sharedInstance] provideContent:@"net.vanterpool.podster.notifications"];
 #else
     if ([SKPaymentQueue canMakePayments]) {

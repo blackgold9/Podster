@@ -23,6 +23,7 @@
 
 // The percentage after which a podcast is marked as played
 #define PLAYED_PERCENTAGE 0.95
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 // Prototype for following callbakc function
 void audioRouteChangeListenerCallback (
                                        void                      *inUserData,
@@ -197,29 +198,41 @@ void audioRouteChangeListenerCallback (
     self.currentEpisode = episode;
     self.currentPodcast = podcast;
     NSAssert(episode.mediaURL != nil, @"The podcast must have a mediaURL");
-    playbackRate = 1.0; // REset playback rate
+    playbackRate = 1.0; // Reset playback rate
     NSError *error;
     [[AVAudioSession sharedInstance] setActive: YES error: &error];
     NSAssert(error == nil, @"There should be no error starting the session");
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
 
     BOOL isDownloaded = self.currentEpisode.downloadCompleteValue;
-    NSURL *url = isDownloaded ? [NSURL fileURLWithPath:self.currentEpisode.localFilePath]: [NSURL URLWithString:currentEpisode.mediaURL];
-    isStreaming = !isDownloaded;
-    
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:self.currentEpisode.localFilePath];
-    if(isDownloaded) {
-        NSAssert(fileExists, @"The file should exist at this point");
-    }
-    LOG_GENERAL(2, @"Playing %@ version", isDownloaded ? @"local" : @"streaming");
-    
 
+    BOOL actuallyDownloaded = isDownloaded && fileExists;
+    NSURL *url = actuallyDownloaded ? [NSURL fileURLWithPath:self.currentEpisode.localFilePath]: [NSURL URLWithString:currentEpisode.mediaURL];
+    isStreaming = !actuallyDownloaded;
+
+    if(isDownloaded && !fileExists) {
+        NSAssert(fileExists, @"The file should exist at this point");
+
+        // If we're in this error state. Clean up.
+        [self.currentEpisode.managedObjectContext performBlock:^void() {
+            self.currentEpisode.downloadCompleteValue = NO;
+        }];
+
+        DDLogError(@"!!!!Expected to find a file for episode with id %d, did not.", self.currentEpisode.podstoreIdValue);
+    }
+
+    DDLogInfo(@"Playing %@ - %@ at URL: %@", self.currentEpisode.podcast.title, self.currentEpisode.title, url);
+    DDLogInfo(@"Playing %@ version", actuallyDownloaded ? @"local" : @"streaming");
 
     [[AVAudioSession sharedInstance] setDelegate:self];
     if (!_player) {    
         LOG_GENERAL(4, @"Initializing player");
         _player = [AVPlayer playerWithURL:url];
         LOG_GENERAL(4, @"Player Initialized");
+        if (monitorQueue) {
+            dispatch_release(monitorQueue);
+        }
         monitorQueue = dispatch_queue_create("com.vantertech.podster.playbackmonitor", DISPATCH_QUEUE_SERIAL);
         [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
         [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
@@ -369,6 +382,7 @@ void audioRouteChangeListenerCallback (
                     [FlurryAnalytics logError:@"PlaybackFailed" 
                                       message:[currentItem.error localizedDescription] 
                                         error:currentItem.error];
+                    DDLogError(@"Playback Error:  %@", currentItem.error);
                     BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:[MessageGenerator randomErrorAlertTitle]
                                                                               message:NSLocalizedString(@"There was a problem playing this podcast. Please try again later.", @"There was a problem playing this podcast. Please try again later.")];
                     [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", @"OK") block:^{

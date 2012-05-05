@@ -25,6 +25,7 @@
 #import "SVPodcatcherClient.h"
 #import "FlurryAnalytics.h"
 #import "PodsterManagedDocument.h"
+#import "DDLog.h"
 
 #endif
 #ifdef DEBUG

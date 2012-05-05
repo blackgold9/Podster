@@ -36,7 +36,8 @@
 - (NSString *)downloadFilePathForBasePath:(NSString *)basePath
 {
     NSAssert(basePath != nil, @"Must have base path");
+
     NSString *filePath = [basePath stringByAppendingPathComponent:[[self podstoreId] stringValue]];
-    return [filePath stringByAppendingPathExtension:[self.mediaURL pathExtension]];
+    return [filePath stringByAppendingPathExtension:[[[[self mediaURL] pathExtension] componentsSeparatedByString:@"?"] objectAtIndex:0]];
 }
 @end

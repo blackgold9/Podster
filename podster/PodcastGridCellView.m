@@ -11,12 +11,9 @@
 #import "SVPodcast.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GridCellCountOverlay.h"
-
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation PodcastGridCellView {
     AFImageRequestOperation *imageLoadOp;
-    id downloadPercentageObserverToken;
-    id isDownloadingObserverToken;
-    id newEpisodeCountObserverToken;
     SVPodcast *coreDataPodcast;
 }
 @synthesize progressBackground;
@@ -43,9 +40,9 @@
         NSURL *imageURL = [NSURL URLWithString: logoString];
         NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
         [self.podcastArtImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                 success:^(NSURLRequest *req, NSHTTPURLResponse *response, UIImage *image) {
                                                      self.titleLabel.hidden = YES;
-                                                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                 } failure:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error) {
                                                      
                                                  }];
     } else {            
@@ -85,11 +82,6 @@
     
     self.accessibilityLabel = [podcast title];
     if ([podcast class] == [SVPodcast class]) {
-        
-        
-        
-        
-        
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
         if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
@@ -105,8 +97,7 @@
             self.progressBackground.alpha = 0.5;
             self.progressBar.alpha = 1.0;
         } 
-      
-        
+
         [coreDataPodcast addObserver:self forKeyPath:@"downloadPercentage" options:NSKeyValueObservingOptionNew context:nil];
         [coreDataPodcast addObserver:self forKeyPath:@"isDownloading" options:NSKeyValueObservingOptionNew context:nil];
         [coreDataPodcast addObserver:self forKeyPath:@"unlistenedSinceSubscribedCount" options:NSKeyValueObservingOptionNew context:nil];
@@ -120,10 +111,7 @@
         self.countOverlay.hidden = YES;
         [coreDataPodcast removeObserver:self forKeyPath:@"downloadPercentage"];
         [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];        
-        [coreDataPodcast removeObserver:self forKeyPath:@"unlistenedSinceSubscribedCount"]; 
-        //        if (newEpisodeCountObserverToken) {
-        //            [coreDataPodcast removeObserverForKeyPath:@"unseenEpisodeCount" identifier:newEpisodeCountObserverToken];
-        //        }
+        [coreDataPodcast removeObserver:self forKeyPath:@"unlistenedSinceSubscribedCount"];
         
         self.progressBackground.alpha = 0;
         self.progressBar.alpha = 0;
@@ -137,30 +125,37 @@
 {
     if(object == coreDataPodcast) { 
         if ([keyPath isEqualToString:@"downloadPercentage"]) {
-            
+            DDLogVerbose(@"%@ - download percentage: %f", coreDataPodcast.title, coreDataPodcast.downloadPercentageValue);
             LOG_GENERAL(2, @"Updating grid cell with download progress");
             SVPodcast *local = object;
             self.progressBar.progress = local.downloadPercentageValue / 100.0f;
         } else if ([keyPath isEqualToString:@"isDownloading"]) {
             SVPodcast *local = object;
-                     
+            DDLogVerbose(@"isDownloading changed to %@",  local.isDownloadingValue ? @"true" : @"false");
             [UIView animateWithDuration:0.5
                              animations:^{
-                                 self.progressBackground.alpha = local.isDownloadingValue ? 1 : 0;
+                                 self.progressBackground.alpha = local.isDownloadingValue ? 0.5 : 0;
                                  self.progressBar.alpha = local.isDownloadingValue ? 1 : 0;
                              }];
             
         } else if ([keyPath isEqualToString:SVPodcastAttributes.unlistenedSinceSubscribedCount]) {
-            if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
-                [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
-                [self.countOverlay sizeToFit];
-                CGRect newFrame = self.countOverlay.frame;
-                newFrame.origin.x = self.frame.size.width - newFrame.size.width;
-                self.countOverlay.frame = newFrame;
-                self.countOverlay.hidden = NO;
-            } else {
-                self.countOverlay.hidden = YES;
-            }
+            [UIView transitionWithView:self.countOverlay
+                              duration:0.33
+                               options:UIViewAnimationOptionTransitionCurlDown
+                            animations:^{
+                                
+                                
+                                if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
+                                    [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
+                                    [self.countOverlay sizeToFit];
+                                    CGRect newFrame = self.countOverlay.frame;
+                                    newFrame.origin.x = self.frame.size.width - newFrame.size.width;
+                                    self.countOverlay.frame = newFrame;
+                                    self.countOverlay.hidden = NO;
+                                } else {
+                                    self.countOverlay.hidden = YES;
+                                }
+                            } completion:nil];
 
         }
     }

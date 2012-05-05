@@ -17,6 +17,7 @@
 #import "DDLog.h"
 #import "Reachability.h"
 #import "SVPlaybackManager.h"
+
 @interface SVDownloadManager()
 -(NSString *)downloadsPath;
 -(void)ensureDownloadsDirectory;
@@ -145,7 +146,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     LOG_DOWNLOADS(2, @"Downloading entry %@", entry);
     NSParameterAssert(entry);
     NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
-
+    NSAssert(entry.download == nil, @"There was already a download scheduled");
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     SVDownload *lastDownload = [SVDownload MR_findFirstWithPredicate:nil
                                                             sortedBy:@"position"
@@ -172,7 +173,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         } else if ([[NSFileManager defaultManager] fileExistsAtPath:download.filePath] && download.entry.downloadCompleteValue){
             //Download already existed, file exists, and entry is marked as download.
             // Nothing to see here
-            NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
+            DDLogWarn(@"Attempting to download a file that was already downloaded");
+          //  NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
+
             return;
         }
 
@@ -228,11 +231,13 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     if (![path isEqualToString:entry.localFilePath]) {
         NSAssert(false, @"should match");
     }
+    
+    DDLogInfo(@"Deleting File: %@", path);
 
     NSError *error;
     [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
     if(error != nil) {
-        LOG_DOWNLOADS(0, @"Error deleting entry: %@", error);
+        DDLogError( @"Error deleting entry: %@", error);
         NSAssert(error == nil, @"Failure deleting entry");
     }
 
