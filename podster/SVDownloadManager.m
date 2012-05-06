@@ -162,7 +162,20 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
     [localContext performBlockAndWait:^{
         NSString *title = entry.podcast.title.length > 100 ? [[entry.podcast.title substringToIndex:97] stringByAppendingString:@"..."] : entry.podcast.title;
-        [currentDownloads addObject:title];
+
+        BOOL hasTitle  = NO;
+        for (NSString *currentTitle in currentDownloads) {
+            if ([currentTitle isEqualToString:title]) {
+                hasTitle = YES;
+                DDLogWarn(@"WARNING: Attempting to add a title to the download list that was already downloading");
+                break;
+            }
+        }
+
+        if (!hasTitle) {
+            [currentDownloads addObject:title];
+        }
+
         SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
         download = localEntry.download;
         localEntry.download.positionValue = position;
@@ -210,6 +223,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 if(!cancelling) {
                     UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
                     if (currentDownloads.count > 1) {
+                        DDLogVerbose(@"Downloading Complete");
+                        for (NSString *title in currentDownloads) {
+                            DDLogVerbose(@"Downloaded: %@", [currentDownloads componentsJoinedByString:@", "]);
+                        }
                     downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" and %d other podcasts have finished downloading", @"%@ and %d other podcasts finished downloading"), [currentDownloads objectAtIndex:0], currentDownloads.count];
                     } else {
                         downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" has finished downloading",@"\"%@\" has finished downloading"), [currentDownloads objectAtIndex:0]];

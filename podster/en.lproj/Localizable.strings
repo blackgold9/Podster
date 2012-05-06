@@ -109,3 +109,5 @@
 "Downloaded: %d" = "Downloaded: %d";
 "Updating Podcasts" = "Updating Podcasts";
 "NOTIFICAITONS_SUBSCRIBE_FAILED" = "Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area.";
+"\"%@\" has finished downloading" = "\"%@\" has finished downloading";
+"\"%@\" and %d other podcasts have finished downloading" = "\"%@\" and %d other podcasts have finished downloading";

@@ -116,3 +116,5 @@
 "SEARCH_WATERMARK" = "搜索...";
 "Downloaded: %d" = "Downloaded: %d";
 "Updating Podcasts" = "Updating Podcasts";
+"\"%@\" has finished downloading" = "\"%@\" has finished downloading";
+"\"%@\" and %d other podcasts have finished downloading" = "\"%@\" and %d other podcasts have finished downloading";
