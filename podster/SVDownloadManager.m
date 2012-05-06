@@ -48,6 +48,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self = [super init];
     if (self) {
         [self ensureDownloadsDirectory];
+        
         currentProgressPercentage = 0;
         //  downloadEngine = [[MKNetworkEngine alloc] initWithHostName:nil
         //customHeaderFields:nil];
@@ -279,15 +280,26 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 }
 
+- (void)disableBackupForPath:(NSString *)path
+{
+    const char* attrName = "com.apple.MobileBackup";
+    u_int8_t attrValue = 1;
+    
+    int result = setxattr([path fileSystemRepresentation], attrName, &attrValue, sizeof(attrValue), 0, 0);       
+    NSAssert(result == 0, @"Did not set no-backup attribute correctly");
+
+}
+
 -(void)ensureDownloadsDirectory
 {
     NSString *downloadsPath = [self downloadsPath];
-    u_int8_t b = 1;
-    [[NSFileManager defaultManager] createDirectoryAtPath:downloadsPath
-                              withIntermediateDirectories:YES
-                                               attributes:nil
-                                                    error:nil];
-    int result = setxattr([downloadsPath fileSystemRepresentation], "com.apple.MobileBackup", &b, 1, 0, 0);
-    NSAssert(result == 0, @"Did not set no-backup attribute correctly");
+    if (![[NSFileManager defaultManager] fileExistsAtPath:downloadsPath]) {
+
+        [[NSFileManager defaultManager] createDirectoryAtPath:downloadsPath
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:nil];
+        [self disableBackupForPath:downloadsPath];
+    }
 }
 @end

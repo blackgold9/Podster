@@ -233,7 +233,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 
                 NSArray *sortedItems = [self.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:NO]]];
                 sortedItems = [sortedItems filteredArrayUsingPredicate:predicate];
-                entry = [sortedItems objectAtIndex:0];
+
+                if (sortedItems.count > 0) {
+                    entry = [sortedItems objectAtIndex:0];
+                }
             }
             if(entry) {
                 DDLogVerbose(@"Had a qualified entry. Date: %@", entry.datePublished);

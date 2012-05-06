@@ -218,7 +218,7 @@ void audioRouteChangeListenerCallback (
         [self.currentEpisode.managedObjectContext performBlock:^void() {
             self.currentEpisode.downloadCompleteValue = NO;
         }];
-
+        [FlurryAnalytics logEvent:@"MissingLocalFile"];
         DDLogError(@"!!!!Expected to find a file for episode with id %d, did not.", self.currentEpisode.podstoreIdValue);
     }
 

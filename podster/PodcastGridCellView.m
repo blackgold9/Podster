@@ -119,6 +119,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     [imageLoadOp cancel];
 }
+-(void)dealloc
+{
+    if (coreDataPodcast) {
+        [coreDataPodcast removeObserver:self forKeyPath:@"downloadPercentage"];
+        [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];        
+        [coreDataPodcast removeObserver:self forKeyPath:@"unlistenedSinceSubscribedCount"];
+    }
+}
 
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

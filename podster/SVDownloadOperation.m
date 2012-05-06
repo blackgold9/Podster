@@ -12,6 +12,7 @@
 #import "SVPodcastEntry.h"
 #import "PodsterManagedDocument.h"
 #import "SVPodcatcherClient.h"
+#import <sys/xattr.h>
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation SVDownloadOperation {
     BOOL _isExecuting;
@@ -123,7 +124,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 SVPodcastEntry *entry = localDownload.entry;
                 entry.downloadCompleteValue = YES;                
                 entry.localFilePath = filePath;
-
+                [self disableBackupForPath:filePath];
                 entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
                 LOG_DOWNLOADS(2, @"Podcast %@ no has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
                 [localDownload MR_deleteInContext:localContext];    
@@ -179,6 +180,16 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [self willChangeValueForKey:@"isFinished"];
     _isFinished = YES;;
     [self didChangeValueForKey:@"isFinished"];
+    
+}
+
+- (void)disableBackupForPath:(NSString *)path
+{
+    const char* attrName = "com.apple.MobileBackup";
+    u_int8_t attrValue = 1;
+    DDLogVerbose(@"Disabling backup for %@", path);
+    int result = setxattr([path fileSystemRepresentation], attrName, &attrValue, sizeof(attrValue), 0, 0);       
+    NSAssert(result == 0, @"Did not set no-backup attribute correctly");
     
 }
 @end
