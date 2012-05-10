@@ -13,7 +13,6 @@
 #import <QuartzCore/QuartzCore.h>
 @interface SVViewController() 
 -(void)showNowPlayingController;
--(void)updateNowPlayingControls;
 // Private Properties:
 @property (retain, nonatomic) UIPanGestureRecognizer *navigationBarPanGestureRecognizer;
 
@@ -127,52 +126,6 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-
--(void)updateNowPlayingControls
-{
-//    SVPodcastEntry *episode = [[SVPlaybackManager sharedInstance] currentEpisode];
-//    if ([[SVPlaybackManager sharedInstance] currentEpisode]) {
-//
-//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-//        imageView.layer.cornerRadius = 3;
-//        imageView.layer.masksToBounds = YES;
-//        [NSURL URLWithString:[[SVPlaybackManager sharedInstance] currentPodcast].tinyLogoURL];
-//        imageView.image = AFImageByScalingAndCroppingImageToSize([UIImage imageNamed:@"Thumb-Placeholder.png"], imageView.frame.size) ;
-//
-//        NSURL *url =  [NSURL URLWithString:[[SVPlaybackManager sharedInstance] currentPodcast].tinyLogoURL];
-//            AFImageRequestOperation *imageLoadOp = [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:url]
-//                                                                                        imageProcessingBlock:^UIImage *(UIImage *returnedImage) {
-//                                                                                            return AFImageByScalingAndCroppingImageToSize(returnedImage, imageView.frame.size);
-//                                                                                        } cacheName:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-//                                                                                            imageView.image = image;
-//                                                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-//                                                                   
-//                                                                                        }];
-//            
-//            [[SVPodcatcherClient sharedInstance] enqueueHTTPRequestOperation:imageLoadOp];
-//        __weak SVViewController *weakSelf = self;
-//        [imageView setUserInteractionEnabled:YES];
-////        [imageView whenTapped:^{
-////            [weakSelf showNowPlayingController];
-////        }];
-//        UIBarButtonItem *nowPlaying = [[UIBarButtonItem alloc] initWithCustomView:imageView];
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,self.view.bounds.size.width - 60, 30)];
-//        label.text = episode.title;
-//        label.font = [UIFont systemFontOfSize:13];
-//        [label setUserInteractionEnabled:YES];
-////        [label whenTapped:^{
-////            [weakSelf showNowPlayingController];
-////        }];
-//
-//        label.backgroundColor = [UIColor clearColor];
-//        label.textColor = [UIColor whiteColor];
-//        UIBarButtonItem *title = [[UIBarButtonItem alloc] initWithCustomView:label];
-//        
-////        [self setToolbarItems:[NSArray arrayWithObjects:nowPlaying, title,[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace handler:nil], nil]];
-//        
-//    }
-
-}
 
 static UIImage * AFImageByScalingAndCroppingImageToSize(UIImage *image, CGSize size) {
     if (image == nil) {

@@ -17,6 +17,7 @@
 #import "NSString+URLEncoding.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "SVPodcastModalView.h"
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation SVPodcatcherClient
 + (id)sharedInstance
 {
@@ -368,6 +369,7 @@
     NSParameterAssert(podstoreId);
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 
+    DDLogVerbose(@"Getting newitems for %@ withlast modifided: %@", podstoreId, lastSycned);
     [parameters setObject:podstoreId forKey:@"feed_id"];
     [parameters setObject:[NSNumber numberWithInt:100] forKey:@"limit"];
     if (lastSycned) {

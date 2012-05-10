@@ -32,6 +32,7 @@
 #import "_SVPodcastEntry.h"
 #import "_SVPodcast.h"
 #import <Twitter/Twitter.h>
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVPodcastDetailsViewController ()
 
 
@@ -397,7 +398,8 @@
     if ([localPodcast isKindOfClass:[SVPodcast class]]) {
         SVPodcast *coredataPodcast = (SVPodcast *)localPodcast;
         if (coredataPodcast.listSizeImageData) {
-           UIImage *img = [UIImage imageWithData:coredataPodcast.listSizeImageData];
+            UIImage *img = [UIImage imageWithData:coredataPodcast.listSizeImageData];
+            self.imageView.image = img;
         } else {
             [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image];
         }
@@ -412,7 +414,6 @@
     
     [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
     [FlurryAnalytics endTimedEvent:@"PodcastDetailsPageView"  withParameters:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setupSubscribeButton
@@ -460,18 +461,15 @@
             
             NSNumber *feedId= self.podcast.podstoreId;
             NSAssert(feedId, @"Feed id should be present");
-            LOG_GENERAL(2, @"Lookuing up podcast in data store with Id: %@", feedId);
+            LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
             localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
                                                       inContext:localContext];
-            
+            DDLogVerbose(@"Lookup complete");
             
             if (!localPodcast) {
                 LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
-                localPodcast = [SVPodcast MR_createInContext:localContext];
-                [localContext performBlock:^{
-                    [localContext save:nil];
-                }];
+                localPodcast = [SVPodcast MR_createInContext:localContext];                
             } else {
                 LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
             }
@@ -497,9 +495,7 @@
                         blockSelf->isLoading = NO;
                         LOG_GENERAL(2, @"Done loading entries");                    
                         [blockSelf loadFeedImage];
-                        [localContext performBlock:^{
-                            [localContext save:nil];
-                        }];
+                    
                         [self reloadData];
                     }
                     
@@ -558,16 +554,32 @@
     self.hidePlayedSwitch.on = localPodcast.hidePlayedEpisodesValue;
     self.sortSegmentedControl.selectedSegmentIndex = localPodcast.sortNewestFirstValue ? 0 : 1;
     
-    [localContext performBlockAndWait:^void() {
+    [localContext performBlock:^void() {
+        @try {
+            
+               DDLogVerbose(@"Reload block started");
         items = [localPodcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue]]];
         if (localPodcast.hidePlayedEpisodesValue) {
             items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self tableView] reloadData];
+            DDLogVerbose(@"REload Data complete");
+        });
+        }
+        @catch (NSException *exception) {
+            DDLogError(@"Error occured while reloading data: %@", exception);
+        }
+        @finally {
+            
+        }
+
+
     }];
     
     
-    [self.tableView reloadData];
-    LOG_GENERAL(2, @"REload Data complete");
+
+
 }
 - (void)viewDidUnload
 {
@@ -607,13 +619,9 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    NSAssert(localPodcast != nil, @"Local podcast should not be nil");
-    [localContext performBlock:^{
-        
-        [localPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
-        
-    }];
-    [[PodsterManagedDocument sharedInstance] save:nil];
+    NSAssert(localPodcast != nil, @"Local podcast should not be nil");            
+//    [localPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
+            
 }
 
 -(void)viewWillAppear:(BOOL)animated

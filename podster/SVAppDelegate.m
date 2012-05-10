@@ -30,7 +30,7 @@
 #import "DDASLLogger.h"
 #import "DDNSLoggerLogger.h"
 #import "Lockbox.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation SVAppDelegate
 {
     DDFileLogger *fileLogger;
@@ -188,12 +188,12 @@ NSString *uuid();
     
 #endif
     isFirstRun = [[SVSettings sharedInstance] firstRun];
-    SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*20 diskPath:[SDURLCache defaultCachePath]];
-    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
-    [NSURLCache setSharedURLCache:URLCache];
+//    SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*20 diskPath:[SDURLCache defaultCachePath]];
+//    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
+//    [NSURLCache setSharedURLCache:URLCache];
  
     //Disable network activity manager
-    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:NO];
+//    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:NO];
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
     
     //[[SVDownloadManager sharedInstance] resumeDownloads];
@@ -258,29 +258,19 @@ NSString *uuid();
 
 - (void)registeredWithService
 {
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-    // Now that we're registered, check for needing an update (from 1.0 to 1.1+
-    NSArray *oldPodcasts = [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"podstoreId == nil "]
-                                                    inContext:context];
-    if (oldPodcasts.count > 0) {
-        LOG_GENERAL(2, @"Updating from v1");
-        // We had old (pre changeover) version podcasts in here. Subscribe to the new server with them,and update the items with feed_ids
-        for (SVPodcast *podcast in oldPodcasts) {
-            [podcast updateFromV1:^{
-                LOG_GENERAL(2, @"Updating from v1 complete");
-            }];
-        } 
-    }
-
-    if (isFirstRun) {
+    NSUInteger existingCount = [SVPodcast MR_countOfEntitiesWithContext:[PodsterManagedDocument defaultContext]];
+    if (isFirstRun && existingCount == 0) {
         NSArray *subscriptions = [Lockbox arrayForKey:@"subscriptions"];
         if (subscriptions && subscriptions.count > 0)  {
-            for (NSNumber *feedId in subscriptions) {
-                [SVPodcast fetchAndSubscribeToPodcastWithId:feedId];
+            for (NSDictionary *sub in subscriptions) {
+                [SVPodcast fetchAndSubscribeToPodcastWithId:[sub objectForKey:@"podstoreId"]
+                                       shouldNotify:[[sub objectForKey:@"shouldNotify"] boolValue]];
             }
-
+            
         }
-
+        
+    } else {
+        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
     }
 }
 
@@ -351,19 +341,24 @@ NSString *uuid();
     [FlurryAnalytics logEvent:@"SavingOnEnteringBackground" timed:YES];
     //Background tasks require you to use asynchronous tasks
     dispatch_async(dispatch_get_main_queue(), ^{
-        LOG_GENERAL(2,@"Saving on entering background");
+
 
         [[PodsterManagedDocument defaultContext] performBlockAndWait:^void() {
             NSArray *subscriptions= [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"isSubscribed == YES"]
                                                              inContext:[PodsterManagedDocument defaultContext] ];
-            NSArray *keys = [subscriptions valueForKey:@"podstoreId"];
-            [Lockbox setArray:keys forKey:@"subscriptions"];
+            NSMutableArray *subscriptionData = [NSMutableArray arrayWithCapacity:subscriptions.count];
+            for(SVPodcast *podcast in subscriptions) {
+                id data = [NSDictionary dictionaryWithObjectsAndKeys:podcast.podstoreId,@"podstoreId",podcast.shouldNotify, @"shouldNotify",  nil];
+                [subscriptionData addObject:data];
+            }
+            [Lockbox setArray:subscriptionData forKey:@"subscriptions"];
+
         }];
 
         [[PodsterManagedDocument sharedInstance] save:^(BOOL success) {
-            LOG_GENERAL(2,@"Done Saving on entering background");
+            DDLogInfo(@"Done Saving on entering background");
             if (!success) {
-                LOG_GENERAL(2, @"Saving failed" );
+                DDLogError(@"Saving failed" );
             }
             [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
             [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform

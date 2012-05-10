@@ -11,15 +11,16 @@
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 #import "PodsterManagedDocument.h"
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 static char const kRefreshInterval = -3;
 
 @implementation SVSubscriptionManager {
     BOOL shouldCancel;
     NSDate *startDate; // The date the sync was begun, everything older than that should be synced.
     NSOperationQueue *syncQueue;
+    NSArray *subscribedPodcasts;
 
 }
-@synthesize currentURL = _currentURL;
 @synthesize isBusy = _isBusy;
 + (id)sharedInstance
 {
@@ -32,150 +33,100 @@ static char const kRefreshInterval = -3;
     
     return sharedInstance;
 }
--(void)cancel
+
+- (NSArray *)subscribedPodcasts
 {
-    LOG_GENERAL(2, @"Requesting cancellation");
-    if(!self.isBusy) {
-        return;
-    }
-    
-    shouldCancel = YES;
+    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title
+                                                     ascending:YES
+                                                 withPredicate:[NSPredicate predicateWithFormat:@"%K == YES", SVPodcastAttributes.isSubscribed]
+                                                     inContext:context];
+    [request setReturnsObjectsAsFaults:NO];
+    [request setIncludesSubentities:NO];
+    __block NSArray *array; 
+    [context performBlockAndWait:^{
+        NSError *error;
+        array = [context executeFetchRequest:request error:&error];
+        if (error) {
+            DDLogError(@"Error fetching podcasts to refresh: %@", error);
+        }
+    }];
+    return array;
 }
-
--(void)refreshNextSubscription
+- (void)updateFromFirstVersionIfNeccesary:(void (^)(void))complete
 {
-    if (shouldCancel) {
-        LOG_GENERAL(2, @"Cancelling subscription update");
-        return;
-    }
-    __weak SVSubscriptionManager *weakSelf = self;
-         
-        
-        NSCalendar *gregorian = [[NSCalendar alloc]
-                                 initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-        
-        [offsetComponents setMinute:kRefreshInterval];
-        
-//        NSDate *syncWindow = [gregorian dateByAddingComponents:offsetComponents
-//                                                        toDate:[NSDate date]
-//                                                       options:0];
-        
-        __block SVPodcast *nextPodcast = nil;
-        //NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-        // Get the root context to work against
+    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    // Now that we're registered, check for needing an update (from 1.0 to 1.1+
+    NSArray *oldPodcasts = [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"podstoreId == nil "]
+                                                    inContext:context];
 
-        NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-        LOG_GENERAL(2, @"About to look for a subscription to refresh");
-        [context performBlock:^{
-            NSPredicate *olderThanSyncStart = [NSPredicate predicateWithFormat:@"%K <= %@ OR %K == nil", SVPodcastAttributes.lastSynced, startDate,SVPodcastAttributes.lastSynced];       
-        //    NSPredicate *stale = [NSPredicate predicateWithFormat:@"%K < %@ OR %K == nil",SVPodcastAttributes.lastSynced, syncWindow, SVPodcastAttributes.lastSynced];
-            
-            NSPredicate *itemToRefresh = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate, olderThanSyncStart, nil]];
-            
-            nextPodcast = [SVPodcast MR_findFirstWithPredicate:itemToRefresh sortedBy:SVPodcastAttributes.lastSynced ascending:NO inContext:context];
-            
-            LOG_NETWORK(2, @"Finding subscription that needs refreshing");
-            if (nextPodcast && !shouldCancel) {
-                if (!self.isBusy) {
-                    self.isBusy = YES;
-                }
-                weakSelf.currentURL = nextPodcast.feedURL;              
-//                [context save:nil];
-                LOG_NETWORK(2, @"Found One: Updating feed: %@ - %@", nextPodcast.title, nextPodcast.objectID);
-                [nextPodcast getNewEpisodes:^void(BOOL success) {
-                    if (success) {
-                        [context performBlock:^{
-                            [nextPodcast updateNextItemDateAndDownloadIfNeccesary:YES];
-                            [context save:nil ];
-                            
-                        }];
-                    }
-                    
-                    weakSelf.currentURL = nil;
-                    
-                    if(weakSelf->shouldCancel) {
-                        LOG_PARSING(2, @"Cancelling");
-                    } else {
-                        LOG_NETWORK(2, @"Refreshing next subscription");
-                        [weakSelf refreshNextSubscription];
-                    }                                                                
-                }];
-                                                                                  
-            } else {
-                LOG_PARSING(2, @"No more podcasts need updating");
-                if (self.isBusy) {
-                    self.isBusy = NO;            
-                }
-                [context performBlock:^{
-                    [context save:nil];
-                }];
-                LOG_NETWORK(2, @"Updating subscriptions complete");
-            }
-            
-        }];
+    if (oldPodcasts.count > 0) {
+        dispatch_group_t group = dispatch_group_create();
+        LOG_GENERAL(2, @"Updating from v1");
+        // We had old (pre changeover) version podcasts in here. Subscribe to the new server with them,and update the items with feed_ids
+        for (SVPodcast *podcast in oldPodcasts) {
+            dispatch_group_enter(group);
+            [podcast updateFromV1:^{
+                LOG_GENERAL(2, @"Updating from v1 complete");
+                dispatch_group_leave(group);
+            }];
+        } 
+        
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            dispatch_release(group);
+            complete();
+
+        });
+    }  else {
+        complete();
+    }
 }
 -(void)refreshAllSubscriptions
 {
     shouldCancel = NO;
     if (self.isBusy) {
-        LOG_NETWORK(3, @"Subscription Manager busy. Refresh cancelled");
+        DDLogWarn(@"Subscription Manager busy. Refresh cancelled");
         return;
         
     }
-    LOG_NETWORK(2, @"Refreshing subscriptions");
-    startDate = [NSDate date];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self refreshNextSubscription];        
-    });
+    self.isBusy = YES;
+    [self updateFromFirstVersionIfNeccesary:^{
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            
+            
+            NSMutableArray *array = [[self subscribedPodcasts] mutableCopy];
+            dispatch_group_t group = dispatch_group_create();
+            DDLogInfo(@"Refreshing subscriptions");
+            BOOL hadAny = NO;
+            for(SVPodcast *podcast in array) {
+                hadAny = YES;
+                dispatch_group_enter(group);
+                [podcast getNewEpisodes:^(BOOL success) {                    
+                    [podcast updateNextItemDateAndDownloadIfNeccesary:YES];
+                    dispatch_group_leave(group); 
+                }];
+            }
 
+            if (!hadAny) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                self.isBusy = NO;                    
+                });
+            }
+            
+            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+                self.isBusy = NO;
+                DDLogInfo(@"Refreshing Subscriptions is complete");
+                dispatch_release(group);
+            });
+        });
+    }];
+   
 }
 
 - (void)processServerState:(NSArray *)serverState
 {
-   [[PodsterManagedDocument sharedInstance] performWhenReady:^{
-        
-        
-//        [[PodsterManagedDocument defaultContext] performBlock:^{
-//            LOG_GENERAL(2, @"Server State: %@", serverState);
-//            NSPredicate *subscribedPredicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-//
-//            NSArray *oldPodcasts = [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"podstoreId == nil "]
-//                                     inContext:[PodsterManagedDocument defaultContext]];
-//            for (SVPodcast *podcast in oldPodcasts) {
-//
-//            }
-//
-////            NSPredicate *matchesServerPredicate = [NSPredicate predicateWithFormat:@"feedURL IN %@", [serverState allKeys]];
-//////            NSArray *podcasts = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:subscribedPredicate,matchesServerPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
-//////
-////            NSPredicate *missingFromServer = [NSPredicate predicateWithFormat:@"NOT (feedURL in %@)", [serverState allKeys]];
-////            NSArray *needsReconciling = [SVPodcast MR_findAllWithPredicate:[NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:missingFromServer, subscribedPredicate, nil]] inContext:[PodsterManagedDocument defaultContext]];
-////            for(SVPodcast *podcast in needsReconciling) {
-////                [[SVPodcatcherClient sharedInstance] notifyOfSubscriptionToFeed:podcast.feedURL                                                                                                                           onCompletion:^{
-////                    [[PodsterManagedDocument defaultContext] performBlock:^{
-////                        podcast.isSubscribedValue = YES;
-////                    }];
-////
-////                }
-////                                                                        onError:nil];
-////            }
-////
-////            // Now, delete items on the server that we're no-longer subscribed to
-////            for(NSString *url in [serverState allKeys]) {
-////                if ([SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"feedURL == %@ && isSubscribed == YES", url] inContext:[PodsterManagedDocument defaultContext]] == 0) {
-////                    // We arent subscribed to this anymore, tell the server
-////                    [[SVPodcatcherClient sharedInstance] notifyOfUnsubscriptionFromFeed:url
-////                                                                           onCompletion:^{
-////                                                                               LOG_GENERAL(2, @"Removing podcast subscription from server that we unsusbscribed from locally");
-////
-////                                                                           }
-////                                                                                onError:nil];
-////                }
-////            }
-//        }];
-    }];
     
 }
 @end

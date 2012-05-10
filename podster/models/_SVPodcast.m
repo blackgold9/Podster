@@ -32,6 +32,7 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.tinyLogoURL = @"tinyLogoURL",
 	.title = @"title",
 	.unlistenedSinceSubscribedCount = @"unlistenedSinceSubscribedCount",
+	.updating = @"updating",
 	.urlHash = @"urlHash",
 	.websiteURL = @"websiteURL",
 };
@@ -107,6 +108,10 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	}
 	if ([key isEqualToString:@"unlistenedSinceSubscribedCountValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"unlistenedSinceSubscribedCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
+	if ([key isEqualToString:@"updatingValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"updating"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
 
@@ -496,6 +501,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 - (void)setPrimitiveUnlistenedSinceSubscribedCountValue:(int)value_ {
 	[self setPrimitiveUnlistenedSinceSubscribedCount:[NSNumber numberWithInt:value_]];
+}
+
+
+
+
+
+@dynamic updating;
+
+
+
+- (BOOL)updatingValue {
+	NSNumber *result = [self updating];
+	return [result boolValue];
+}
+
+- (void)setUpdatingValue:(BOOL)value_ {
+	[self setUpdating:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveUpdatingValue {
+	NSNumber *result = [self primitiveUpdating];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveUpdatingValue:(BOOL)value_ {
+	[self setPrimitiveUpdating:[NSNumber numberWithBool:value_]];
 }
 
 

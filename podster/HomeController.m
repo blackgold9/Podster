@@ -14,11 +14,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GCDiscreetNotificationView.h"
 #import "SVSubscriptionManager.h"
-#import "MBProgressHUD.h"
 #import "PodsterManagedDocument.h"
 #import "PodsterIAPHelper.h"
 #import "BlockAlertView.h"
-#import "MTStatusBarOverlay.h"
 @interface HomeController ()
 @property(nonatomic, strong) SVSubscriptionGridViewController *subscriptionsController;
 @property(nonatomic, strong) FeaturedController *featuredController;
@@ -35,6 +33,7 @@
 
 @implementation HomeController {
     GCDiscreetNotificationView *notificationView;
+    UIView *loadingView;
 }
 
 @synthesize scrollView = _scrollView;
@@ -72,33 +71,61 @@
 
     return self;
 }
+- (void)configureToolbar:(BOOL)animated
+{
+    NSMutableArray *items = [NSMutableArray array];
+    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] 
+                                                      style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(settingsTapped:)]];
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [items addObject:spacer];        
+    [items addObject:[[UIBarButtonItem alloc] initWithCustomView:loadingView]];
+    [items addObject:spacer];
+    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"] 
+                                                      style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(directoryButtonTapped:)]];
+    
+    [self setToolbarItems:items animated:animated];
 
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     UIImageView *placeHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
     placeHolder.frame = self.view.bounds;
     [self.view addSubview:placeHolder];
-    NSMutableArray *items = [NSMutableArray array];
-    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] 
-                                                      style:UIBarButtonItemStylePlain
-                                                     target:self
-                                                     action:@selector(settingsTapped:)]];
-        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"] 
-                                                      style:UIBarButtonItemStylePlain
-                                                     target:self
-                                                     action:@selector(directoryButtonTapped:)]];
 
-    self.toolbarItems = items;
-    [self.navigationController setToolbarHidden:NO animated:NO];
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.dimBackground = YES;
+    
+    loadingView = [[UIView alloc] initWithFrame:CGRectZero];    
+    loadingView.backgroundColor = [UIColor clearColor];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [loadingView addSubview:spinner];
+    [spinner setHidesWhenStopped:YES];
+    [spinner setTag:1906];
+    
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
+    loadingLabel.text = NSLocalizedString(@"Updating...", @"Updating Podcasts");
+    [loadingLabel sizeToFit];
+    loadingLabel.backgroundColor = [UIColor clearColor];
+    loadingLabel.textColor = [UIColor whiteColor];
+
+    CGRect newFrame = loadingLabel.frame;
+    newFrame.origin = CGPointMake(spinner.frame.size.width + 5, (spinner.frame.size.height - loadingLabel.frame.size.height) / 2);
+    loadingLabel.frame = newFrame;
+    [loadingView addSubview:loadingLabel];
+    loadingView.frame = CGRectMake(0, 0, CGRectGetMaxX(loadingLabel.frame), spinner.frame.size.height);
+    loadingView.alpha = 0;
+    
+        [self configureToolbar:NO];
+       [self.navigationController setToolbarHidden:NO animated:NO];
 
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
         [self configureTabView];
-    self.scrollView.contentOffset = CGPointMake(0, 0);
+        self.scrollView.contentOffset = CGPointMake(0, 0);
     
         UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
     
@@ -222,31 +249,27 @@
 
 }
 
+
+
 -(void)viewDidAppear:(BOOL)animated
 {
     
     [[SVSubscriptionManager sharedInstance] addObserver:self
                                              forKeyPath:@"isBusy"
-                                                options:NSKeyValueObservingOptionNew 
+                                                options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                                                 context:nil];
 
-    [MTStatusBarOverlay sharedInstance]
-    .animation = MTStatusBarOverlayAnimationShrink;
-
-    if ([[SVSubscriptionManager sharedInstance] isBusy]) {
-        LOG_GENERAL(2, @"showing  updating message");
-        [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Updating Podcasts", @"Updating Podcasts")];
-    }
-}
+   }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[MTStatusBarOverlay sharedInstance] hide];
+
 }
 
 - (void)viewDidUnload
 {
     [self setScrollView:nil];
     [super viewDidUnload];
+    loadingView = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -288,13 +311,23 @@
         
         
         if ([keyPath isEqualToString:@"isBusy"]){
+            UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[loadingView viewWithTag:1906];
             if([[SVSubscriptionManager sharedInstance] isBusy]) {
                 LOG_GENERAL(2, @"showing  updating message");
-                [[MTStatusBarOverlay sharedInstance] postMessage:NSLocalizedString(@"Updating Podcasts", nil)];
+                [spinner startAnimating];
             } else {
-                LOG_GENERAL(2, @"hiding  updating message");
-                [[MTStatusBarOverlay sharedInstance] hide];
+                LOG_GENERAL(2, @"hiding  updating message");                
             }
+            
+           [UIView animateWithDuration:0.33
+                            animations:^{
+                                loadingView.alpha = [[SVSubscriptionManager sharedInstance] isBusy] ? 1.0 :0.0;
+                            } completion:^(BOOL finished) {
+                                if(![[SVSubscriptionManager sharedInstance] isBusy]) {
+                                    [spinner stopAnimating];
+                                }
+                            }];
+
         }
     });
     

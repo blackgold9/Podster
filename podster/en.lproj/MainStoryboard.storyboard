@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -521,12 +520,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view tag="1111" contentMode="scaleToFill" id="1cD-gr-bnI">
-                                                <rect key="frame" x="70" y="56" width="25" height="20"/>
+                                                <rect key="frame" x="105" y="56" width="25" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zHK-OT-I0b">
-                                                <rect key="frame" x="201" y="55" width="24" height="18"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zHK-OT-I0b">
+                                                <rect key="frame" x="60" y="56" width="24" height="18"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <state key="normal" image="action.png">
@@ -538,6 +537,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="actionTapped:" destination="qhM-Sb-G9s" eventType="touchUpInside" id="0tv-NA-Phd"/>
+                                                    <action selector="shareTapped:" destination="qhM-Sb-G9s" eventType="touchUpInside" id="fKF-3b-z11"/>
                                                 </connections>
                                             </button>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="arrows.png" id="JHY-gq-etR">
@@ -939,13 +939,6 @@
         <image name="unplayed-flag.png" width="22" height="22"/>
     </resources>
     <classes>
-        <class className="DTAttributedTextView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DTAttributedTextView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="backgroundView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="textDelegate"/>
-            </relationships>
-        </class>
         <class className="FeaturedController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedController.h"/>
             <relationships>
@@ -988,11 +981,8 @@
             <relationships>
                 <relationship kind="action" name="listenTapped:"/>
                 <relationship kind="action" name="markAsPlayedTapped:"/>
-                <relationship kind="outlet" name="downloadButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="imageBackground" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="listenButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="markAsPlayedButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="summaryView" candidateClass="DTAttributedTextView"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
@@ -1014,6 +1004,7 @@
             <relationships>
                 <relationship kind="action" name="actionTapped:"/>
                 <relationship kind="action" name="playTapped:"/>
+                <relationship kind="action" name="shareTapped:"/>
                 <relationship kind="action" name="skipBackTapped:"/>
                 <relationship kind="action" name="skipForwardTapped:"/>
                 <relationship kind="action" name="sliderChanged:"/>

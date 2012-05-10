@@ -15,7 +15,7 @@
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
-
+#import <Twitter/Twitter.h>
 
 @implementation SVPlaybackController {
     AVPlayer *player;
@@ -243,6 +243,26 @@
     [FlurryAnalytics logEvent:@"SkipForwardTapped"];
         [[SVPlaybackManager sharedInstance] skipBack];
   }
+
+- (IBAction)shareTapped:(id)sender {
+    TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
+    [tweet setInitialText:[NSString stringWithFormat:@"Sharing an episode of %@ (via @ItsPodster)",     [SVPlaybackManager sharedInstance].currentPodcast.title]];
+    [tweet addURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.podsterapp.com/feed_items/%d",[SVPlaybackManager sharedInstance].currentEpisode.podstoreIdValue]]];
+    
+    // Show the controller
+    [self presentModalViewController:tweet animated:YES];
+    
+    // Called when the tweet dialog has been closed
+    tweet.completionHandler = ^(TWTweetComposeViewControllerResult result) 
+    {
+        
+        
+        // Dismiss the controller
+        [self dismissModalViewControllerAnimated:YES];
+    };
+    
+
+}
 #pragma mark - helpers
 
 

@@ -12,7 +12,6 @@ static NSString *const kPodcastHasBeenUpdated = @"PodcastHasBeenUpdated";
 
 @interface SVSubscriptionManager : NSObject
 @property (assign) BOOL isBusy;
-@property (strong) NSString *currentURL;
 -(void)refreshAllSubscriptions;
 + (id)sharedInstance;
 
@@ -22,5 +21,4 @@ static NSString *const kPodcastHasBeenUpdated = @"PodcastHasBeenUpdated";
 // and to register new feeds the server missed (somehow out of sync)
 - (void)processServerState:(NSArray *)serverState;
 
-- (void)cancel;
 @end

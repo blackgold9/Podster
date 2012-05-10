@@ -42,7 +42,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSInteger percentage = MIN(100,(NSInteger)(progress * 100));
     if (currentProgressPercentage != percentage) {
         currentProgressPercentage = percentage;
-        LOG_DOWNLOADS(4, @"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
+        DDLogVerbose(@"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
         NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry podstoreId], @"podstoreId", [NSNumber numberWithDouble:progress], @"progress",  nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
         [localContext performBlock: ^{
@@ -83,10 +83,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     [localContext performBlockAndWait:^{
         download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
-        DDLogInfo(@"Downloading file at URL: %@", download.filePath);
-//        NSURL *mediaURL = [NSURL URLWithString:download.entry.mediaURL];
-        LOG_DOWNLOADS(2, @"Starting episode download: %@", download.entry);
-        
+        DDLogInfo(@"Downloading %@ - %@  at URL: %@", download.entry.podcast.title, download.entry.title, download.filePath);
         NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
                
         [self willChangeValueForKey:@"isExecuting"];
@@ -102,9 +99,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         }
         
         localDownload.stateValue = SVDownloadStateDownloading;
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:localDownload.entry.mediaURL]];        
-        
-        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:localDownload.entry.mediaURL]];
         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         [op setOutputStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
         [op setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
@@ -118,16 +113,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         }];      
         
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            
             [localContext performBlockAndWait:^{
-                LOG_NETWORK(2, @"Downloaded episode: %@", localDownload.entry.title);
+                DDLogInfo(@"Downloading file %@ complete", localDownload.filePath);
                 SVPodcastEntry *entry = localDownload.entry;
                 entry.downloadCompleteValue = YES;                
                 entry.localFilePath = filePath;
                 [self disableBackupForPath:filePath];
                 entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
-                LOG_DOWNLOADS(2, @"Podcast %@ no has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
-                [localDownload MR_deleteInContext:localContext];    
+                DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
+                if (localDownload) {
+                    [localDownload MR_deleteInContext:localContext];
+                }
                 [self done];
                 
             }];
@@ -135,29 +131,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [localContext
              performBlock:^{
-                 LOG_DOWNLOADS(2, @"Download failed with Error: %@", error);        
-                 LOG_NETWORK(2, @"Failed to download episode: %@", localDownload.entry.title);
+                 DDLogError(@"Failed to download episode: %@ with error %@", localDownload.entry.title, error);
                  localDownload.stateValue = SVDownloadStateFailed;
                  [self done];
-                 
-               //  dispatch_semaphore_signal(semaphore);
-                 
              }];
             
         }];
         networkOp = op;
         [op start];
     }];
-//
-//   
-//    LOG_DOWNLOADS(2, @"Operation watiting for download to complete");
-//    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-//    LOG_DOWNLOADS(2, @"Download complete"); 
-
-    
-    
-    
 }
+
 -(BOOL)isConcurrent 
 {
     return YES;

@@ -27,6 +27,7 @@
 - (IBAction)sliderChanged:(id)sender;
 - (IBAction)skipForwardTapped:(id)sender;
 - (IBAction)skipBackTapped:(id)sender;
+- (IBAction)shareTapped:(id)sender;
 
 +(NSString *)formattedStringRepresentationOfSeconds:(NSInteger)seconds;
 @end

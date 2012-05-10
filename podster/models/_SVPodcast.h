@@ -33,6 +33,7 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *tinyLogoURL;
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *unlistenedSinceSubscribedCount;
+	__unsafe_unretained NSString *updating;
 	__unsafe_unretained NSString *urlHash;
 	__unsafe_unretained NSString *websiteURL;
 } SVPodcastAttributes;
@@ -45,6 +46,7 @@ extern const struct SVPodcastFetchedProperties {
 } SVPodcastFetchedProperties;
 
 @class SVPodcastEntry;
+
 
 
 
@@ -353,6 +355,18 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber *updating;
+
+
+@property BOOL updatingValue;
+- (BOOL)updatingValue;
+- (void)setUpdatingValue:(BOOL)value_;
+
+//- (BOOL)validateUpdating:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSString *urlHash;
 
 
@@ -585,6 +599,15 @@ extern const struct SVPodcastFetchedProperties {
 
 - (int)primitiveUnlistenedSinceSubscribedCountValue;
 - (void)setPrimitiveUnlistenedSinceSubscribedCountValue:(int)value_;
+
+
+
+
+- (NSNumber*)primitiveUpdating;
+- (void)setPrimitiveUpdating:(NSNumber*)value;
+
+- (BOOL)primitiveUpdatingValue;
+- (void)setPrimitiveUpdatingValue:(BOOL)value_;
 
 
 

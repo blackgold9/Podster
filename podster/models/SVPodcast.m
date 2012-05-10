@@ -4,7 +4,7 @@
 #import "NSString+MD5Addition.h"
 #import "SVDownloadManager.h"
 #import "_SVPodcastEntry.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @implementation SVPodcast {
     BOOL isUpdatingFromV1;
@@ -43,50 +43,38 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self.podstoreId = [podcast podstoreId];
 }
 
-- (void)awakeFromInsert
-{
-    LOG_GENERAL(2, @"Initially creating podcast core data object");
-    [super awakeFromInsert];
-    self.nextItemDate = [NSDate distantPast];
-    self.downloadCountValue = 0;
-}
 - (void)updateNewEpisodeCount
 {
-    NSUInteger newCount = 0;
-    if (self.isSubscribedValue) {
-        if (self.subscribedDate == nil) {
-            self.subscribedDate = [NSDate date];
-        }
-        newCount = [SVPodcastEntry MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"%K == %@ && %K > %@ && %K == false", SVPodcastEntryRelationships.podcast, self, SVPodcastEntryAttributes.datePublished, self.subscribedDate, SVPodcastEntryAttributes.played] inContext:self.managedObjectContext];
-    }   
-    LOG_GENERAL(2, @"New episode count for %@ : %d", self.title, newCount);
-    if (self.unlistenedSinceSubscribedCountValue != newCount) {
-        self.unlistenedSinceSubscribedCountValue = newCount;        
-    }
-    
-}
-- (void)awakeFromFetch
-{
-    [self updateNewEpisodeCount];
-    if (self.isSubscribedValue) {
-        SVPodcastEntry *entry = nil;
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"played == NO"];
-        
-        
-        if (self.items.count > 0) {
+    NSManagedObjectContext *context =  self.managedObjectContext;
+    [context performBlock:^{
+        @try {
             
-            NSArray *sortedItems = [self.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:NO]]];
-            sortedItems = [sortedItems filteredArrayUsingPredicate:predicate];
-            entry = [sortedItems objectAtIndex:0];
+       
+        SVPodcast *podcast = self;
+        NSUInteger newCount = 0;
+        NSAssert(self.isSubscribed, @"IsSubscribed should have a value");
+        NSNumber *subscribedNumber= [self isSubscribed];
+        BOOL subscribed = [subscribedNumber boolValue];
+
+        if (subscribed) {
+            if (podcast.subscribedDate == nil) {
+                podcast.subscribedDate = [NSDate date];
+            }
+            newCount = [SVPodcastEntry MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"%K == %@ && %K > %@ && %K == false", SVPodcastEntryRelationships.podcast, self, SVPodcastEntryAttributes.datePublished, self.subscribedDate, SVPodcastEntryAttributes.played] inContext:podcast.managedObjectContext];
+        }   
+        LOG_GENERAL(2, @"New episode count for %@ : %d", self.title, newCount);
+        if (self.unlistenedSinceSubscribedCountValue != newCount) {
+            self.unlistenedSinceSubscribedCountValue = newCount;        
         }
-        if(entry) {            
-            self.nextItemDate = entry.datePublished;
-        } else {
-            self.nextItemDate = [NSDate distantPast];
         }
-    }
-    
+        @catch (NSException *exception) {
+            DDLogError(@"EXCEPTION: %@", exception);
+        }
+        @finally {
+            
+        }
+    }];
+       
 }
 
 - (void)downloadOfflineImageData
@@ -148,7 +136,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     self.subscribedDate = [NSDate date];
     self.isSubscribedValue = YES;
-    [self downloadOfflineImageData];
+    //[self downloadOfflineImageData];
 }
 
 - (void)unsubscribe
@@ -170,26 +158,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     return [NSString stringWithFormat:@"%@: %@", [super description], self.title];
 }
 
-- (SVPodcastEntry *)firstUnplayedInPodcastOrder
-{
-    NSManagedObjectContext *context = self.managedObjectContext;
-    __block SVPodcastEntry *entry = nil;
-    [context performBlockAndWait:^{
-        NSPredicate *isChild = [NSPredicate predicateWithFormat:@"podcast == %@ && played == NO", self];
-        entry = [SVPodcast MR_findFirstWithPredicate:isChild 
-                                            sortedBy:SVPodcastEntryAttributes.datePublished
-                                           ascending:!self.sortNewestFirstValue inContext:[PodsterManagedDocument defaultContext]];
-        
-    }];
-    
-    return entry;
-}
 - (void)updateNextItemDate
 {
     
 }
 
-+ (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId
++ (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId shouldNotify:(BOOL)shouldNotify
 {
         [[SVPodcatcherClient sharedInstance] fetchPodcastWithId:podcastId
                                                    onCompletion:^void(NSArray *podcasts) {
@@ -201,12 +175,22 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                
                                                                
                                                                [localPodcast populateWithPodcast:[podcasts objectAtIndex:0]];
-                                                               [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:podcastId
-                                                                                                             onCompletion:^void() {
-                                                                                                                 [context performBlock:^void() {
-                                                                                                                     DDLogInfo(@"Successfully subscribed to podcast %@", localPodcast);
-                                                                                                                     [localPodcast subscribe];
-                                                                                                                 }];
+
+                                                                   [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:podcastId
+                                                                                                                 onCompletion:^void() {
+                                                                                                                     [context performBlock:^void() {
+                                                                                                                         DDLogInfo(@"Successfully subscribed to podcast %@", localPodcast);
+                                                                                                                         [localPodcast subscribe];
+                                                                                                                                                                                        if (shouldNotify){
+                                                                                                                         [[SVPodcatcherClient sharedInstance] changeNotificationSetting:shouldNotify forFeedWithId:podcastId
+                                                                                                                                                                           onCompletion:^{
+                                                                                                                                                                           }
+                                                                                                                                                                                onError:^(NSError *error) {
+                                                                                                                                                                                    
+                                                                                                                                                                                }];
+                                                                                                                                                                                        }
+                                                                                                                     }];
+                                                                                                                 
 
                                                                                                              } onError:^void(NSError *error) {
                                                                                                                  DDLogError(@"Failed to subscribe to podcast %@", localPodcast);
@@ -221,58 +205,85 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     DDLogInfo(@"Calculating next item for %@", self.title);
     [self.managedObjectContext performBlock:^{
-        
-        
-        if (self.isSubscribedValue) {
-            SVPodcastEntry *entry = nil;
-            
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"played == NO"];
-            
-            
-            if (self.items.count > 0) {
-                
-                NSArray *sortedItems = [self.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:NO]]];
-                sortedItems = [sortedItems filteredArrayUsingPredicate:predicate];
 
-                if (sortedItems.count > 0) {
-                    entry = [sortedItems objectAtIndex:0];
-                }
-            }
+        NSAssert(self.isSubscribed, @"IsSubscribed should have a value");
+        NSNumber *subscribedNumber= [self isSubscribed];
+        BOOL subscribed = [subscribedNumber boolValue];
+        DDLogInfo(@"Block began");
+        if (subscribed) {
+                    DDLogVerbose(@"Podcast is Subscribed");
+            SVPodcastEntry *entry = nil;
+
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND played == NO", SVPodcastEntryRelationships.podcast, self];
+            DDLogVerbose(@"querying the next unplayed item");
+            entry = [SVPodcastEntry MR_findFirstWithPredicate:predicate
+                                                     sortedBy:SVPodcastEntryAttributes.datePublished
+                                                    ascending:NO
+                                                    inContext:self.managedObjectContext];
             if(entry) {
                 DDLogVerbose(@"Had a qualified entry. Date: %@", entry.datePublished);
                 self.nextItemDate = entry.datePublished;
                 // If item hasn't been listened to
                 if (!entry.playedValue && entry.download == nil && !entry.downloadCompleteValue && shouldDownload) {
-                    LOG_GENERAL(2, @"Queing entry for download");
+                    DDLogInfo(@"Queing entry for download");
                     // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
                     [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NO];
-                }
-                [[self managedObjectContext] save:nil];
+                }               
             } else {
                 DDLogVerbose(@"No qualified entry. Setting date to the distant past");
                 self.nextItemDate = [NSDate distantPast];
             }
+            
+            
+            // Cleanup downloads
+            DDLogVerbose(@"Cleaning up played podcasts");
+            NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"%K == %@ AND played == YES AND downloadComplete == YES", SVPodcastEntryRelationships.podcast, self];
+            DDLogVerbose(@"Looking for items that need deleting");        
+            NSArray *needDeleting = [SVPodcastEntry MR_findAllWithPredicate:needsDeletingPredicate
+                                                                  inContext:self.managedObjectContext];
+            DDLogInfo(@"Cleaning up. Deleting %d items", needDeleting.count);
+            for (SVPodcastEntry *toDelete in needDeleting) {
+                [[SVDownloadManager sharedInstance] deleteFileForEntry:toDelete];
+                toDelete.downloadCompleteValue = NO;
+            }
+
+        } else {
+            DDLogInfo(@"Not subscribed");
         }
         
-        // Cleanup downloads
-        NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"played == YES && downloadComplete == YES"];
-        NSSet *needDeleting = [self.items filteredSetUsingPredicate:needsDeletingPredicate];
-        DDLogInfo(@"Cleaning up. Deleting %d items", needDeleting.count);
-        for (SVPodcastEntry *toDelete in needDeleting) {
-            [[SVDownloadManager sharedInstance] deleteFileForEntry:toDelete];
-            toDelete.downloadCompleteValue = NO;
-        }
-    }];
+        }];
 }
 
 - (void)getNewEpisodes:(void (^)(BOOL))complete
 {
+    DDLogWarn(@"Getting new episodes");
+
+    // TODO: ensure object id
+    
     NSDate *syncDate = [NSDate date];
-    [self.managedObjectContext performBlockAndWait:^{
+    [self.managedObjectContext performBlock:^{
+        if (self.updatingValue) {
+            DDLogVerbose(@"Aborting since we are already updating");
+            return;
+        };
+        
+        self.updatingValue = YES;
+        [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
         SVPodcastEntry *entry;
-        if (self.items.count > 0) {
-            entry = [[self.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:NO]]] objectAtIndex:0];
-        }    
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryRelationships.podcast, self];
+        NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                                              ascending:NO
+                                                          withPredicate:predicate
+                                                              inContext:self.managedObjectContext];        
+        [request setIncludesPendingChanges:YES];
+        [request setReturnsObjectsAsFaults:NO];
+        [request setFetchLimit:1];
+        NSArray *fetched = [self.managedObjectContext executeFetchRequest:request error:nil];
+        NSAssert(fetched.count < 2, @"There should be at most 1 item in there");
+        entry = [fetched lastObject];
+        if(!entry) {
+            DDLogWarn(@"Did NOT find previous entry");
+        }
         
         DDLogInfo(@"Getting new items %@", isUpdatingFromV1 ? @"updatingfromv1" : @"normally");
         [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podstoreId
@@ -322,9 +333,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                      }                            
                                                                      
                                                                      [self updateNewEpisodeCount];
+                                                                     self.updatingValue = NO;
                                                                      complete(YES);
                                                                  }];
                                                              } onError:^void(NSError *error) {
+                                                                 self.updatingValue = NO;
                                                                  complete(NO);
                                                              }];
         

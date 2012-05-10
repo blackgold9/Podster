@@ -230,7 +230,7 @@
 }
 
 - (IBAction)markAsPlayedTapped:(id)sender {
-    [context performBlockAndWait:^{
+    [context performBlock:^{
         episode.playedValue = !episode.playedValue;  
         if (!episode.playedValue) {
             // If we are now unplayed, reset playback location
@@ -238,10 +238,10 @@
         }
         
         [episode.podcast updateNextItemDateAndDownloadIfNeccesary:YES];
-
+        [self performSelectorOnMainThread:@selector(configureToolbar) withObject:nil waitUntilDone:NO];
     }];
 
        
-    [self configureToolbar];    
+      
 }
 @end

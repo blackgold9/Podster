@@ -18,7 +18,6 @@
 #import "UIColor+Hex.h"
 #import "PodsterManagedDocument.h"
 #import "PodcastGridCellView.h"
-#import "MBProgressHUD.h"
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVSubscriptionGridViewController()
 
@@ -85,10 +84,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         self.noContentLabel.numberOfLines = 0;
         
         self.noContentLabel.hidden = items.count > 0;
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
         
     });
 
+    DDLogVerbose(@"Registering for context change notification");
     [[NSNotificationCenter defaultCenter] addObserver:self
                                           selector:@selector(contextChanged:)
                                           name:NSManagedObjectContextDidSaveNotification
@@ -149,7 +148,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [super viewWillAppear:animated];
     LOG_GENERAL(2, @"ViewWillAppear");
     self.noContentLabel.hidden = YES;
-    [MBProgressHUD showHUDAddedTo:self.view animated:NO];
     
     
     [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
@@ -170,15 +168,23 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     // NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
     NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
     [context performBlock:^{
-        items = [SVPodcast MR_findAllSortedBy:SVPodcastAttributes.title 
+        NSFetchRequest *request =   [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title 
                                     ascending:YES withPredicate:predicate
                                     inContext:context];
-        [[self gridView] reloadData];
-        self.noContentLabel.hidden = items.count > 0;
-        [[PodsterManagedDocument sharedInstance] performWhenReady:^{
-            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        }];
+        [request setReturnsObjectsAsFaults:NO];
+        [request setIncludesSubentities:NO];
+        [request setIncludesPendingChanges:YES];
+
+        NSError *error;
+        items = [context executeFetchRequest:request error:&error];
+        NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
         
+        dispatch_async(dispatch_get_main_queue(), ^{                        
+            [[self gridView] reloadData];
+            self.noContentLabel.hidden = items.count > 0;
+            
+        });
+        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
     }];
      
 }
@@ -188,7 +194,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [super viewWillDisappear:animated];
     [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
    // self.fetcher.delegate = nil;
-    [[SVSubscriptionManager sharedInstance] cancel];
     LOG_GENERAL(2, @"WilDisappear");
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"SVReloadData"
@@ -200,7 +205,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
 }
 
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations

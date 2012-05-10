@@ -15,6 +15,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation PodcastGridCellView {
     AFImageRequestOperation *imageLoadOp;
     SVPodcast *coreDataPodcast;
+   
 }
 @synthesize progressBackground;
 @synthesize progressBar;
@@ -31,6 +32,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         // Initialization code
     }
     return self;
+}
+- (NSCache *)cache
+{
+     static NSCache *thumbCache;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        thumbCache = [[NSCache alloc] init];
+    });
+    
+    return thumbCache;
 }
 - (void)loadWebImageWithURL:(NSString *)logoString
 {
@@ -55,8 +66,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([podcast class] == [SVPodcast class]) {
         SVPodcast *coreCast = (SVPodcast *)podcast;
         if (coreCast.gridSizeImageData) {
-            LOG_GENERAL(3, @"Loaded local image");
-            UIImage *image = [UIImage imageWithData:coreCast.gridSizeImageData];
+            NSCache *cache = [self cache];
+            UIImage *image = [cache objectForKey:coreCast.objectID];
+            if (image == nil) {
+                DDLogVerbose( @"Loaded local image");
+                image = [UIImage imageWithData:coreCast.gridSizeImageData];
+                [cache setObject:image forKey:coreCast.objectID];
+            } else {
+                DDLogVerbose(@"Loaded cached Image");
+            }
             self.podcastArtImageView.image = image;
         } else {
             [self loadWebImageWithURL:[podcast smallLogoURL]];
@@ -134,7 +152,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if(object == coreDataPodcast) { 
         if ([keyPath isEqualToString:@"downloadPercentage"]) {
             DDLogVerbose(@"%@ - download percentage: %f", coreDataPodcast.title, coreDataPodcast.downloadPercentageValue);
-            LOG_GENERAL(2, @"Updating grid cell with download progress");
             SVPodcast *local = object;
             self.progressBar.progress = local.downloadPercentageValue / 100.0f;
         } else if ([keyPath isEqualToString:@"isDownloading"]) {

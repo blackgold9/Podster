@@ -15,7 +15,7 @@
 
 - (SVPodcastEntry *)firstUnplayedInPodcastOrder;
 
-+ (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId;
++ (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId shouldNotify:(BOOL)shouldNotify;
 
 - (void)downloadOfflineImageData;
 - (void)subscribe;
