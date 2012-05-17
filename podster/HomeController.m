@@ -17,6 +17,10 @@
 #import "PodsterManagedDocument.h"
 #import "PodsterIAPHelper.h"
 #import "BlockAlertView.h"
+
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static NSString *const kIsBusyKey = @"isBusy";
+
 @interface HomeController ()
 @property(nonatomic, strong) SVSubscriptionGridViewController *subscriptionsController;
 @property(nonatomic, strong) FeaturedController *featuredController;
@@ -65,8 +69,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.currentScreen = HomePageFeaturedScreen;
-
+        self.currentScreen = HomePageFeaturedScreen;    
     }
 
     return self;
@@ -94,16 +97,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIImageView *placeHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
-    placeHolder.frame = self.view.bounds;
-    [self.view addSubview:placeHolder];
-
+//    UIImageView *placeHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background-gradient.jpg"]];
+//    placeHolder.frame = self.view.bounds;
+//    [self.view addSubview:placeHolder];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
     
     loadingView = [[UIView alloc] initWithFrame:CGRectZero];    
     loadingView.backgroundColor = [UIColor clearColor];
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [loadingView addSubview:spinner];
-    [spinner setHidesWhenStopped:YES];
+    [spinner setHidesWhenStopped:NO];
     [spinner setTag:1906];
     
     UILabel *loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
@@ -120,7 +123,7 @@
     loadingView.alpha = 0;
     
         [self configureToolbar:NO];
-       [self.navigationController setToolbarHidden:NO animated:NO];
+
 
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{
 
@@ -138,7 +141,7 @@
     [self.view addGestureRecognizer:rightSwipe];
 
 
-                                   [placeHolder removeFromSuperview];
+                                //   [placeHolder removeFromSuperview];
 
                         
      }];
@@ -154,8 +157,12 @@
 
 - (void)settingsTapped:(id)sender
 {
-    [self.navigationController pushViewController:[[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController] animated:YES];
-
+    UIViewController *controller =[[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
+    controller.modalPresentationStyle = UIModalPresentationFullScreen;
+    controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:controller 
+                       animated:YES
+                     completion:NULL];
 }
 - (void)swipeLeft:(UIGestureRecognizer *)rec
 {
@@ -176,6 +183,7 @@
     }
 
 }
+
 - (UIViewController *)controllerForScreenType:(HomePageScreenType)screenType
 {
     UIViewController *output = nil;
@@ -198,8 +206,6 @@
     NSAssert(output, @"There should be a view controller returned");
     return output;
 }
-
-
 
 - (void)configureViewControllerForScreenType:(HomePageScreenType)screenType
 {
@@ -243,26 +249,25 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     [[SVSubscriptionManager sharedInstance] removeObserver:self
-                                                forKeyPath:@"isBusy"
-     ];
+                                                forKeyPath:kIsBusyKey];
 
 }
 
-
-
 -(void)viewDidAppear:(BOOL)animated
 {
-    
+    [super viewDidAppear:animated];
     [[SVSubscriptionManager sharedInstance] addObserver:self
-                                             forKeyPath:@"isBusy"
-                                                options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                                                context:nil];
+                                             forKeyPath:kIsBusyKey
+                                                options:NSKeyValueObservingOptionNew 
+                                                context:NULL];
+}
 
-   }
--(void)viewWillDisappear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-
+    [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:NO animated:NO];
 }
 
 - (void)viewDidUnload
@@ -306,28 +311,32 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
+
+    BOOL updating = [[SVSubscriptionManager sharedInstance] isBusy];
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        
-        if ([keyPath isEqualToString:@"isBusy"]){
+        if ([keyPath isEqualToString:kIsBusyKey]){
             UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[loadingView viewWithTag:1906];
-            if([[SVSubscriptionManager sharedInstance] isBusy]) {
-                LOG_GENERAL(2, @"showing  updating message");
+
+            if(updating) {
+                DDLogVerbose(@"showing updating message");
                 [spinner startAnimating];
             } else {
-                LOG_GENERAL(2, @"hiding  updating message");                
+                DDLogVerbose(@"hiding updating message");                
             }
             
-           [UIView animateWithDuration:0.33
-                            animations:^{
-                                loadingView.alpha = [[SVSubscriptionManager sharedInstance] isBusy] ? 1.0 :0.0;
-                            } completion:^(BOOL finished) {
-                                if(![[SVSubscriptionManager sharedInstance] isBusy]) {
-                                    [spinner stopAnimating];
-                                }
-                            }];
-
+            CGFloat targetAlpha = updating ? 1.0 :0.0;
+            if (targetAlpha != loadingView.alpha) {
+                [UIView animateWithDuration:0.33
+                                      delay:0
+                                    options:UIViewAnimationOptionBeginFromCurrentState
+                                 animations:^{
+                                     loadingView.alpha = targetAlpha;
+                                 } completion:^(BOOL finished) {
+                                     if(!updating) {
+                                         [spinner stopAnimating];
+                                     }
+                                 }];
+            }           
         }
     });
     
@@ -335,6 +344,11 @@
                          ofObject:object
                            change:change
                           context:context];
+}
+
+- (void)tabView:(JMTabView *)tabView didSelectTabAtIndex:(NSUInteger)itemIndex
+{
+    
 }
 
 @end

@@ -14,7 +14,7 @@
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+VerticalAlign.h"
-#import "PodcastGridCell.h"
+
 #import "UIColor+Hex.h"
 #import "PodsterManagedDocument.h"
 #import "PodcastGridCellView.h"
@@ -104,7 +104,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         for (NSManagedObject * o in combined    ) {
 
             if ([o isKindOfClass:[SVPodcast class]]) {
-                SVPodcast *podcast = o;
+                SVPodcast *podcast = (SVPodcast *) o;
                 if (podcast.isSubscribedValue) {
                     hasNewSubscriptions = YES;
                     break;

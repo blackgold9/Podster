@@ -88,17 +88,17 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
 }
 
-- (void)loadView
+- (void)viewDidLoad
 {
     UIView *contentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.view addSubview:contentView];
     if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
         [contentView addSubview:_bannerView];   
     }
     [self addChildViewController:_contentController];
     [contentView addSubview:_contentController.view];
     [_contentController didMoveToParentViewController:self];
-    self.view = contentView;
-    [[NSNotificationCenter defaultCenter] addObserver:self
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(becameActive)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
    [[NSNotificationCenter defaultCenter] addObserverForName:@"PremiumPurchased" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
@@ -116,18 +116,20 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
 
 -(void)becameActive
-{
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        [self.view setNeedsLayout];
-        [self.view layoutIfNeeded];
-    }];
-
+{        
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];    
 }
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];    
+ 
+}
 - (void)viewWillAppear:(BOOL)animated
 {
-     [self viewDidLayoutSubviews];
+    [super viewWillAppear:animated];
+   
+    [self viewDidLayoutSubviews];
 }
 - (void)viewDidUnload
 {
@@ -136,8 +138,7 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 }
    
 - (void)viewDidLayoutSubviews
-{
-    
+{    
     CGRect contentFrame = self.view.bounds;
     CGRect bannerFrame = _bannerView.frame;
     if ([_bannerView adExists] && ![_bannerView isIgnoringNewAdRequests]) {

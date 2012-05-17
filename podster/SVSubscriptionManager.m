@@ -104,7 +104,7 @@ static char const kRefreshInterval = -3;
                 hadAny = YES;
                 dispatch_group_enter(group);
                 [podcast getNewEpisodes:^(BOOL success) {                    
-                    [podcast updateNextItemDateAndDownloadIfNeccesary:YES];
+                    [podcast updateNextItemDateAndDownloadIfNecessary:YES];
                     dispatch_group_leave(group); 
                 }];
             }
@@ -113,13 +113,13 @@ static char const kRefreshInterval = -3;
                 dispatch_async(dispatch_get_main_queue(), ^{
                 self.isBusy = NO;                    
                 });
+            } else {                
+                dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+                    self.isBusy = NO;
+                    DDLogInfo(@"Refreshing Subscriptions is complete");
+                    dispatch_release(group);
+                });
             }
-            
-            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-                self.isBusy = NO;
-                DDLogInfo(@"Refreshing Subscriptions is complete");
-                dispatch_release(group);
-            });
         });
     }];
    

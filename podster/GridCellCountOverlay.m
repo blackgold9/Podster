@@ -64,7 +64,6 @@
 {
     count = theCount;
     countLabel.text = [NSString stringWithFormat:@"%d", count];
-   // [countLabel sizeToFit];
     LOG_GENERAL(3, @"%@ - %@", NSStringFromCGRect(countLabel.frame), countLabel.text);
     [self setNeedsLayout];
     [self setNeedsDisplay];
@@ -89,10 +88,9 @@
     [path setLineWidth:1.0];
     [[UIColor colorWithWhite:0.0 alpha:0.8] setFill];
     [[UIColor colorWithWhite:0.7 alpha:0.8] setStroke];
-
+    
     [path fill];
-        [path stroke];
-
+    [path stroke];
 }
 
 @end

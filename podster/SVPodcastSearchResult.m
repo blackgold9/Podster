@@ -9,7 +9,7 @@
 #import "SVPodcastSearchResult.h"
 #import "NSDictionary+safeGetters.h"
 @implementation SVPodcastSearchResult
-@synthesize title, summary, feedURL, podstoreId,  websiteURL, logoURL, tinyLogoURL,smallLogoURL,thumbLogoURL, subtitle, unseenEpsiodeCount, lastSynced, lastUpdated;
+@synthesize title, summary, feedURL, podstoreId,  websiteURL, logoURL, tinyLogoURL,smallLogoURL,thumbLogoURL, subtitle, lastSynced, lastUpdated;
 -(void)populateWithDictionary:(NSDictionary *)dataDict
 {
     NSDictionary *dictionary = [dataDict objectForKey:@"feed"];
@@ -29,5 +29,4 @@
     self.thumbLogoURL = [dictionary stringForKey:@"logo_thumb"];  
     self.podstoreId = [dictionary objectForKey
                        :@"id"];
-    self.unseenEpsiodeCount = [NSNumber numberWithInteger:0];
 }@end

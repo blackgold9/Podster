@@ -7,18 +7,19 @@
 
 - (void)populateWithPodcast:(id <ActsAsPodcast>)podcast;
 
--(void)updatePodcastWithFeedInfo:(MWFeedInfo *)info;
 
-- (void)updateNextItemDateAndDownloadIfNeccesary:(BOOL)shouldDownload;
+- (void)updateNextItemDateAndDownloadIfNecessary:(BOOL)shouldDownload;
 
 - (void)getNewEpisodes:(void (^)(BOOL))complete;
 
-- (SVPodcastEntry *)firstUnplayedInPodcastOrder;
-
+// Used when installing the app fresh and restoring old subscriptions
 + (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId shouldNotify:(BOOL)shouldNotify;
 
+// Downloads the various images neccesary for displaying the podcast
 - (void)downloadOfflineImageData;
 - (void)subscribe;
 - (void)unsubscribe;
+
+// Hack for getting off the v1 servers
 - (void)updateFromV1:(void (^)(void))complete;
 @end

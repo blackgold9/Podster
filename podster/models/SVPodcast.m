@@ -47,25 +47,22 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     NSManagedObjectContext *context =  self.managedObjectContext;
     [context performBlock:^{
-        @try {
+        @try {                        
+            SVPodcast *podcast = self;
+            NSUInteger newCount = 0;
+            NSAssert(self.isSubscribed, @"IsSubscribed should have a value");
+            NSNumber *subscribedNumber= [self isSubscribed];
+            BOOL subscribed = [subscribedNumber boolValue];
             
-       
-        SVPodcast *podcast = self;
-        NSUInteger newCount = 0;
-        NSAssert(self.isSubscribed, @"IsSubscribed should have a value");
-        NSNumber *subscribedNumber= [self isSubscribed];
-        BOOL subscribed = [subscribedNumber boolValue];
-
-        if (subscribed) {
-            if (podcast.subscribedDate == nil) {
-                podcast.subscribedDate = [NSDate date];
+            if (subscribed) {
+                if (podcast.subscribedDate == nil) {
+                    podcast.subscribedDate = [NSDate date];
+                }
+                newCount = [SVPodcastEntry MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"%K == %@ && %K > %@ && %K == false", SVPodcastEntryRelationships.podcast, self, SVPodcastEntryAttributes.datePublished, self.subscribedDate, SVPodcastEntryAttributes.played] inContext:podcast.managedObjectContext];
+            }   
+            if (self.unlistenedSinceSubscribedCountValue != newCount) {
+                self.unlistenedSinceSubscribedCountValue = newCount;        
             }
-            newCount = [SVPodcastEntry MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"%K == %@ && %K > %@ && %K == false", SVPodcastEntryRelationships.podcast, self, SVPodcastEntryAttributes.datePublished, self.subscribedDate, SVPodcastEntryAttributes.played] inContext:podcast.managedObjectContext];
-        }   
-        LOG_GENERAL(2, @"New episode count for %@ : %d", self.title, newCount);
-        if (self.unlistenedSinceSubscribedCountValue != newCount) {
-            self.unlistenedSinceSubscribedCountValue = newCount;        
-        }
         }
         @catch (NSException *exception) {
             DDLogError(@"EXCEPTION: %@", exception);
@@ -76,67 +73,39 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }];
        
 }
-
-- (void)downloadOfflineImageData
+- (void)downloadImageDataWithURLString:(NSString *)imageURL forKeyPath:(NSString *)keyPath
 {
-    
-    if (self.smallLogoURL != nil) {
-        NSURLRequest *gridRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:self.smallLogoURL]];
-        //    AFHTTPRequestOperation *gridOp = AFHTTPRe        
-        //        AFHTTPRequestOperation *gridOp = AFH 
-        AFHTTPRequestOperation *gridOp = [[AFHTTPRequestOperation alloc] initWithRequest:gridRequest];
-        [gridOp setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [self.managedObjectContext performBlock:^{
-                
-                
-                self.gridSizeImageData = responseObject; 
-                LOG_GENERAL(2, @"Downloaded grid image offline data");
-            }];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            LOG_GENERAL(2, @"Failed to download grid image data for offline store");
-        }];
-        [gridOp start];
-    }   
-    
-    if (self.thumbLogoURL != nil) {
-        NSURLRequest *listSizeRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:self.thumbLogoURL]];
-        //    AFHTTPRequestOperation *gridOp = AFHTTPRe        
-        //        AFHTTPRequestOperation *gridOp = AFH 
-        AFHTTPRequestOperation *listImageOp = [[AFHTTPRequestOperation alloc] initWithRequest:listSizeRequest];
-        [listImageOp setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [self.managedObjectContext performBlock:^{
-                self.listSizeImageData = responseObject; 
-                LOG_GENERAL(2, @"Downloaded list image offline data");
-            }];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            LOG_GENERAL(2, @"Failed to download list image data for offline store");
-        }];
-        [listImageOp start];
-    }
-    
-    if (self.logoURL != nil) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.logoURL]];
-        //    AFHTTPRequestOperation *gridOp = AFHTTPRe        
-        //        AFHTTPRequestOperation *gridOp = AFH 
+    if ([self valueForKey:keyPath] != nil) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imageURL]];
         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             [self.managedObjectContext performBlock:^{
-                self.fullIsizeImageData = responseObject; 
-                LOG_GENERAL(2, @"Downloaded list image offline data");
+
+                [self setValue:responseObject forKey:keyPath];
+                DDLogVerbose(@"Downloaded %@ offline data", keyPath);
             }];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            LOG_GENERAL(2, @"Failed to download list image data for offline store");
+            DDLogVerbose(@"Failed to download %@ offline data", keyPath);
         }];
         [op start];
     }
-    
+}
+
+- (void)downloadOfflineImageData
+{
+    [self downloadImageDataWithURLString:self.smallLogoURL
+                              forKeyPath:@"gridSizeImageData"];
+    [self downloadImageDataWithURLString:self.thumbLogoURL
+                              forKeyPath:@"listSizeImageData"];
+    [self downloadImageDataWithURLString:self.logoURL
+                              forKeyPath:@"fullIsizeImageData"];
 }
 
 - (void)subscribe
 {
     self.subscribedDate = [NSDate date];
     self.isSubscribedValue = YES;
-    //[self downloadOfflineImageData];
+    [self downloadOfflineImageData];
 }
 
 - (void)unsubscribe
@@ -153,55 +122,55 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.fullIsizeImageData = nil;
     self.listSizeImageData = nil;
 }
+
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"%@: %@", [super description], self.title];
 }
 
-- (void)updateNextItemDate
-{
-    
-}
 
 + (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId shouldNotify:(BOOL)shouldNotify
 {
-        [[SVPodcatcherClient sharedInstance] fetchPodcastWithId:podcastId
-                                                   onCompletion:^void(NSArray *podcasts) {
+    // First, we grab the data
+    [[SVPodcatcherClient sharedInstance] fetchPodcastWithId:podcastId
+                                               onCompletion:^void(NSArray *podcasts) {
+                                                   NSAssert(podcasts.count == 1, @"There should be 1 podcast returned");
+                                                   if (podcasts.count > 0) {
+                                                       NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+                                                       [context performBlock:^{
+                                                           // Then we make a new podcast in the data store
+                                                           SVPodcast *localPodcast = [SVPodcast MR_createInContext:context];
+                                                           [localPodcast populateWithPodcast:[podcasts objectAtIndex:0]];
 
-                                                       if (podcasts.count > 0) {
-                                                           NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-                                                           [context performBlock:^{
-                                                               SVPodcast *localPodcast = [SVPodcast MR_createInContext:context];
-                                                               
-                                                               
-                                                               [localPodcast populateWithPodcast:[podcasts objectAtIndex:0]];
+                                                           // Now that we have the podcast populated. Subscribe on the
+                                                           [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:podcastId
+                                                                                                         onCompletion:^void() {
+                                                                                                             [context performBlock:^void() {
+                                                                                                                 DDLogInfo(@"Successfully subscribed to podcast %@", localPodcast);
+                                                                                                                 [localPodcast subscribe];
 
-                                                                   [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:podcastId
-                                                                                                                 onCompletion:^void() {
-                                                                                                                     [context performBlock:^void() {
-                                                                                                                         DDLogInfo(@"Successfully subscribed to podcast %@", localPodcast);
-                                                                                                                         [localPodcast subscribe];
-                                                                                                                                                                                        if (shouldNotify){
-                                                                                                                         [[SVPodcatcherClient sharedInstance] changeNotificationSetting:shouldNotify forFeedWithId:podcastId
-                                                                                                                                                                           onCompletion:^{
-                                                                                                                                                                           }
-                                                                                                                                                                                onError:^(NSError *error) {
-                                                                                                                                                                                    
-                                                                                                                                                                                }];
-                                                                                                                                                                                        }
-                                                                                                                     }];
-                                                                                                                 
+                                                                                                                 // Now that we're subscribed, request notifications if necessary
+                                                                                                                 if (shouldNotify){
+                                                                                                                     [[SVPodcatcherClient sharedInstance] changeNotificationSetting:shouldNotify forFeedWithId:podcastId
+                                                                                                                                                                       onCompletion:^{
 
-                                                                                                             } onError:^void(NSError *error) {
-                                                                                                                 DDLogError(@"Failed to subscribe to podcast %@", localPodcast);
+                                                                                                                                                                       }
+                                                                                                                                                                            onError:^(NSError *error) {                                                                                                                                                                                DDLogError(@"Failed to subscribe to notifications. Error: %@", error);                                                                                                                                                                            }];
+                                                                                                                 }
                                                                                                              }];
+
+
+                                                                                                         } onError:^void(NSError *error) {
+                                                               DDLogError(@"Failed to subscribe to podcast %@", localPodcast);
                                                            }];
-                                                       }
-                                                   } onError:^void(NSError *error) {
-            DDLogError(@"Failed to fetch podcast with id %@", podcastId);
-        }];
+                                                       }];
+                                                   }
+                                               } onError:^void(NSError *error) {
+        DDLogError(@"Failed to fetch podcast with id %@", podcastId);
+    }];
 }
-- (void)updateNextItemDateAndDownloadIfNeccesary:(BOOL)shouldDownload
+
+- (void)updateNextItemDateAndDownloadIfNecessary:(BOOL)shouldDownload
 {
     DDLogInfo(@"Calculating next item for %@", self.title);
     [self.managedObjectContext performBlock:^{
@@ -211,7 +180,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         BOOL subscribed = [subscribedNumber boolValue];
         DDLogInfo(@"Block began");
         if (subscribed) {
-                    DDLogVerbose(@"Podcast is Subscribed");
+            DDLogVerbose(@"Podcast is Subscribed");
             SVPodcastEntry *entry = nil;
 
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND played == NO", SVPodcastEntryRelationships.podcast, self];
@@ -228,21 +197,29 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                     DDLogInfo(@"Queing entry for download");
                     // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
                     [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NO];
-                }               
+                }
             } else {
                 DDLogVerbose(@"No qualified entry. Setting date to the distant past");
                 self.nextItemDate = [NSDate distantPast];
             }
-            
-            
-            // Cleanup downloads
+
+
+            // Cleanup all but the last download
             DDLogVerbose(@"Cleaning up played podcasts");
-            NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"%K == %@ AND played == YES AND downloadComplete == YES", SVPodcastEntryRelationships.podcast, self];
-            DDLogVerbose(@"Looking for items that need deleting");        
-            NSArray *needDeleting = [SVPodcastEntry MR_findAllWithPredicate:needsDeletingPredicate
-                                                                  inContext:self.managedObjectContext];
-            DDLogInfo(@"Cleaning up. Deleting %d items", needDeleting.count);
+            NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"%K == %@ AND downloadComplete == YES", SVPodcastEntryRelationships.podcast, self];
+            DDLogVerbose(@"Looking for items that need deleting");
+            NSArray *needDeleting = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                                             ascending:NO
+                                                         withPredicate:needsDeletingPredicate
+                                                             inContext:self.managedObjectContext];
+            
+            BOOL isFirst = YES;
             for (SVPodcastEntry *toDelete in needDeleting) {
+                if (isFirst) {
+                    // Skip deleting the most recent thing
+                    isFirst = NO;
+                    continue;
+                }
                 [[SVDownloadManager sharedInstance] deleteFileForEntry:toDelete];
                 toDelete.downloadCompleteValue = NO;
             }
@@ -250,25 +227,25 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         } else {
             DDLogInfo(@"Not subscribed");
         }
-        
-        }];
+    }];
 }
 
 - (void)getNewEpisodes:(void (^)(BOOL))complete
 {
     DDLogWarn(@"Getting new episodes");
-
-    // TODO: ensure object id
-    
     NSDate *syncDate = [NSDate date];
     [self.managedObjectContext performBlock:^{
         if (self.updatingValue) {
             DDLogVerbose(@"Aborting since we are already updating");
             return;
-        };
+        }
         
         self.updatingValue = YES;
+
+        // Force permanent ids to be obtained. This is so that we're not dealing with temp ids later and screwing up relationships
         [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
+
+        // Find the last entry that belongs to this podcast, if it exists
         SVPodcastEntry *entry;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastEntryRelationships.podcast, self];
         NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
@@ -307,29 +284,27 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                      for (NSDictionary *episode in episodes) {
                                                                          NSDictionary *data = [episode objectForKey:@"feed_item"];
                                                                          NSString *guid = [data objectForKey:@"guid"];
-                                                                         SVPodcastEntry *entry;
+                                                                         SVPodcastEntry *localEntry;
                                                                          
                                                                          if (isUpdatingFromV1 && [upgradeLookupByGUID objectForKey:guid]!= nil) {
                                                                              // If we're updating from v1, and this is an existing episode, update the podstoreid
-                                                                             entry = [upgradeLookupByGUID objectForKey:guid];
+                                                                             localEntry = [upgradeLookupByGUID objectForKey:guid];
                                                                              NSNumber *entryId= [data objectForKey:@"id"];
-                                                                             entry.podstoreIdValue = [entryId intValue];
+                                                                             localEntry.podstoreIdValue = [entryId intValue];
                                                                          } else {
                                                                              // Completely new item, create it,add it, be happy
-                                                                             entry = [SVPodcastEntry MR_createInContext:self.managedObjectContext];
+                                                                             localEntry = [SVPodcastEntry MR_createInContext:self.managedObjectContext];
                                                                              
-                                                                             [entry populateWithDictionary:episode];
+                                                                             [localEntry populateWithDictionary:episode];
                                                                              
                                                                              
-                                                                             [self addItemsObject:entry];
+                                                                             [self addItemsObject:localEntry];
                                                                          }
                                                                          
                                                                          if (isFirst) {
-                                                                             self.nextItemDate = entry.datePublished;
+                                                                             self.nextItemDate = localEntry.datePublished;
                                                                              isFirst = NO;
-                                                                         }         
-                                                                         
-                                                                         
+                                                                         }
                                                                      }                            
                                                                      
                                                                      [self updateNewEpisodeCount];

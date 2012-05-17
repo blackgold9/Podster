@@ -279,7 +279,7 @@ static CGSize const _kNRGridViewCellLayoutSpacing = {5,5};
                                          CGRectGetHeight(cellBounds) - _kNRGridViewCellLayoutPadding.height*2);
     [[self contentView] setFrame:contentViewFrame];
 
-    CGRect contentViewBounds = [[self contentView] bounds];
+//    CGRect contentViewBounds = [[self contentView] bounds];
     
     // Layout content...
 }

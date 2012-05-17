@@ -65,17 +65,17 @@
 {
     [super viewWillAppear:animated];
     [self clearNowPlayingIcon];
-    if(localManager.playbackState == kPlaybackStateStopped) {
 
-    } else {
+    
+    [localManager addObserver:self
+                   forKeyPath:@"currentEpisode" 
+                      options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)
+                      context:nil];
 
-        if (localManager.currentEpisode) {
-
-            [self showNowPLayingIcon];
-        } 
-    }
-    [localManager addObserver:self forKeyPath:@"currentEpisode" options:NSKeyValueObservingOptionNew context:nil];
-    [localManager addObserver:self forKeyPath:@"playbackState" options:NSKeyValueObservingOptionNew context:nil];
+    [localManager addObserver:self 
+                   forKeyPath:@"playbackState" 
+                      options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial)
+                      context:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -89,7 +89,7 @@
     [localManager removeObserver:self forKeyPath:@"currentEpisode"];
     [localManager removeObserver:self forKeyPath:@"playbackState"];
 
-   }
+}
 
 - (void)viewDidDisappear:(BOOL)animated
 {

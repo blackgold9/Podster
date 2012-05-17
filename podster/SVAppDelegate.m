@@ -110,6 +110,7 @@ NSString *uuid();
 {
     LOG_GENERAL(0, @"Core data error: %@", error);
 }
+
 - (void)configureTheming
 {
     UIColor *colorOne = [UIColor colorWithRed:0.15 green:0.15 blue:0.16 alpha:1.0]; // [UIColor colorWithHex:0x1E1E27];
@@ -125,14 +126,6 @@ NSString *uuid();
     [[UINavigationBar appearance] setTintColor:colorOne];
     [[UISegmentedControl appearance] setTintColor:colorOne];
     [[UIToolbar appearance] setTintColor:colorOne];
-    //[[UIBarButtonItem appearance] setTintColor:colorOne];
-   
-   // [[GMGridView appearance] setBackgroundColor:backgrondTexture];
-   // [[UIScrollView appearance] setBackgroundColor:backgrondTexture];
-    //[[UIScrollView appearance] setBackgroundColor:backgrondTexture];
-   // NSDictionary *navTextProperties = [NSDictionary dictionaryWithObject:colorFour
-   //                                                               forKey:UITextAttributeTextColor];
-   // [[UINavigationBar appearance] setTitleTextAttributes:navTextProperties];
     [[UISearchBar appearance] setBarStyle:UIBarStyleBlack];
     
     
@@ -170,8 +163,8 @@ NSString *uuid();
     
     [DDLog addLogger:fileLogger];
 #if defined (CONFIGURATION_AppStore)
-         DDLogVerbose(@"Running in Appstore mode");
-   [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
+    DDLogVerbose(@"Running in Appstore mode");
+    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
 #endif
@@ -187,13 +180,12 @@ NSString *uuid();
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
     
 #endif
+    
     isFirstRun = [[SVSettings sharedInstance] firstRun];
-//    SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*20 diskPath:[SDURLCache defaultCachePath]];
-//    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
-//    [NSURLCache setSharedURLCache:URLCache];
+    SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*50 diskPath:[SDURLCache defaultCachePath]];
+    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
+    [NSURLCache setSharedURLCache:URLCache];
  
-    //Disable network activity manager
-//    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:NO];
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
     
     //[[SVDownloadManager sharedInstance] resumeDownloads];
@@ -213,21 +205,19 @@ NSString *uuid();
     
     BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
     self.window.rootViewController = controller;
-    //[self setupOfflineOverlayMonitoring];
     [Appirater appLaunched:YES];
     [[SVSettings sharedInstance] setFirstRun:NO];
     return YES;    
 }
 
-
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
 
-    LOG_GENERAL(2, @"Successuflly got a notification token from apple");
+    DDLogInfo(@"Successuflly got a notification token from apple");
     NSString * tokenAsString = [[[devToken description]
             stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
             stringByReplacingOccurrencesOfString:@" " withString:@""];
-#ifndef CONFIGURATION_Release
-    LOG_NETWORK(2, @"Notification Token: %@", tokenAsString);
+#ifndef CONFIGURATION_AppStore
+    DDLogInfo(@"Notification Token: %@", tokenAsString);
 #endif
     [[SVSettings sharedInstance] setNotificationsEnabled:YES];
     [[NSUserDefaults standardUserDefaults] setObject:tokenAsString forKey:@"notificationsToken"];
@@ -263,10 +253,11 @@ NSString *uuid();
         NSArray *subscriptions = [Lockbox arrayForKey:@"subscriptions"];
         if (subscriptions && subscriptions.count > 0)  {
             for (NSDictionary *sub in subscriptions) {
-                [SVPodcast fetchAndSubscribeToPodcastWithId:[sub objectForKey:@"podstoreId"]
-                                       shouldNotify:[[sub objectForKey:@"shouldNotify"] boolValue]];
-            }
-            
+                NSNumber *notifySetting = [sub objectForKey:@"shouldNotify"];
+                
+                [SVPodcast fetchAndSubscribeToPodcastWithId:(NSNumber *)[sub objectForKey:@"podstoreId"]
+                                       shouldNotify:[notifySetting boolValue]];
+            }            
         }
         
     } else {
@@ -370,18 +361,11 @@ NSString *uuid();
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-        [Appirater appEnteredForeground:YES];
-    /*
-     Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-     */
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-//        [self performSelectorOnMainThread:@selector(processLinkInPasteboard) withObject:self waitUntilDone:NO];
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SVReloadData" object:nil];
 }
 
@@ -393,7 +377,9 @@ NSString *uuid();
      See also applicationDidEnterBackground:.
      */
 }
+
 #pragma mark - remote control
+
 -(void)startListening
 {
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
@@ -405,10 +391,12 @@ NSString *uuid();
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [self resignFirstResponder];
 }
+
 -(BOOL)canBecomeFirstResponder
 {
     return YES;
 }
+
 - (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
     AVPlayer *_player = [[SVPlaybackManager sharedInstance] player];
     if (receivedEvent.type == UIEventTypeRemoteControl) {
@@ -446,31 +434,4 @@ NSString *uuid();
     }
 }
 
-
--(void)setupOfflineOverlayMonitoring
-{
-    __block UIViewController *rootController = self.window.rootViewController;
-    __block BOOL isShowingOfflineOverlay = NO;
-   
-    [[SVPodcatcherClient sharedInstance] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        
-        if (status == AFNetworkReachabilityStatusNotReachable && !isShowingOfflineOverlay) {
-            LOG_GENERAL(1, @"App is offline, showing overlay");
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:rootController.view animated:YES];
-            hud.labelText = NSLocalizedString(@"OFFLINE", @"App is Offline");
-            hud.detailsLabelText = NSLocalizedString(@"Waiting for connection...", @"App is waiting for a connection");
-            hud.dimBackground = YES;
-            isShowingOfflineOverlay =YES;
-
-        } else {
-            if (isShowingOfflineOverlay) {
-                LOG_GENERAL(1, @"App is online, hiding overlay");
-                [MBProgressHUD hideHUDForView:rootController.view animated:YES];
-                isShowingOfflineOverlay = NO;
-            }
-        }        
-
-    }];
-
-}
 @end

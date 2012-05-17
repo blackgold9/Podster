@@ -20,6 +20,5 @@
 @property (strong) NSString *thumbLogoURL;
 @property (strong) NSString *tinyLogoURL;
 @property (strong) NSString *subtitle;
-@property (strong) NSNumber *unseenEpsiodeCount;
 @property (strong) NSNumber *podstoreId;
 @end

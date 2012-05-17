@@ -237,7 +237,7 @@
             episode.positionInSecondsValue = 0;            
         }
         
-        [episode.podcast updateNextItemDateAndDownloadIfNeccesary:YES];
+        [episode.podcast updateNextItemDateAndDownloadIfNecessary:YES];
         [self performSelectorOnMainThread:@selector(configureToolbar) withObject:nil waitUntilDone:NO];
     }];
 

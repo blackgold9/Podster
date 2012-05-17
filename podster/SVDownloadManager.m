@@ -204,18 +204,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 dispatch_group_notify(completionGroup, dispatch_get_main_queue(), ^{
                           DDLogVerbose(@"Empty queue block triggered");
                           if(!cancelling && currentDownloads.count > 0) {
-                              DDLogVerbose(@"Queue was in progress when it was emptied");
-                              UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
-                              if (currentDownloads.count > 1) {
-
-                                      DDLogVerbose(@"Downloaded: %@", [currentDownloads componentsJoinedByString:@", "]);
-
-                                  downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" and %d other podcasts have finished downloading", @"%@ and %d other podcasts finished downloading"), [currentDownloads objectAtIndex:0], currentDownloads.count];
-                              } else {
-                                  downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" has finished downloading",@"\"%@\" has finished downloading"), [currentDownloads objectAtIndex:0]];
-                              }
-                              downloadedNotification.soundName = @"alert.aiff";
-                              [[UIApplication sharedApplication] presentLocalNotificationNow:downloadedNotification];
+//                              UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
+//                              if (currentDownloads.count > 1) {
+//
+//                                      DDLogVerbose(@"Downloaded: %@", [currentDownloads componentsJoinedByString:@", "]);
+//
+//                                  downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" and %d other podcasts have finished downloading", @"%@ and %d other podcasts finished downloading"), [currentDownloads objectAtIndex:0], currentDownloads.count];
+//                              } else {
+//                                  downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" has finished downloading",@"\"%@\" has finished downloading"), [currentDownloads objectAtIndex:0]];
+//                              }
+//                              downloadedNotification.soundName = @"alert.aiff";
+//                              [[UIApplication sharedApplication] presentLocalNotificationNow:downloadedNotification];
                               [currentDownloads removeAllObjects];
 
                           }  else {
@@ -248,7 +247,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
     if(error != nil) {
         DDLogError( @"Error deleting entry: %@", error);
-        NSAssert(error == nil, @"Failure deleting entry");
     }
 
 }

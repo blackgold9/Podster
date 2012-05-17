@@ -10,6 +10,7 @@
 #import "HomeController.h"
 #import "BlockAlertView.h"
 #import "Lockbox.h"
+
 @implementation SVSettings {
     NSUserDefaults *defaults;
 }

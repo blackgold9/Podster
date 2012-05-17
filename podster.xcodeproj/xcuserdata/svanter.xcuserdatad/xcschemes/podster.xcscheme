@@ -90,6 +90,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Ad_Hoc"
+      customArchiveName = "podster"
       revealArchiveInOrganizer = "YES">
       <PostActions>
          <ExecutionAction

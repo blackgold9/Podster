@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -11,7 +12,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vp7-3z-zqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController title="Popular Tags" id="DOf-8L-uXT" customClass="SVPodcastDirectoryViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Acv-6u-gG0">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" barStyle="blackOpaque" placeholder="Search for a specific Podcast" id="0a3-iW-gYY">
@@ -83,7 +84,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcO-Yx-a7f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="searchResultsController" id="7eF-mi-Iw1" customClass="SVPodcastsSearchResultsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czt-4I-mD4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -150,11 +151,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fq8-FL-BUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="podcastDetailsController" title="Podcast Details" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hra-2Y-S1w">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="zBW-st-oQR">
-                                <rect key="frame" x="0.0" y="220" width="320" height="196"/>
+                                <rect key="frame" x="0.0" y="220" width="320" height="240"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -594,149 +595,6 @@
             </objects>
             <point key="canvasLocation" x="-879" y="122"/>
         </scene>
-        <!--Rear Controller-->
-        <scene sceneID="BeD-CB-ZzO">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E6e-tn-6Ko" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="rearController" id="M7V-qZ-eET" customClass="RearController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="u4K-tZ-NYr">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <sections>
-                            <tableViewSection headerTitle="Discover New Podcasts" id="eQe-m0-zeV">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="165" id="zXx-jj-WmD">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="165"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" id="z7D-2E-OSg" customClass="GMGridView">
-                                                    <rect key="frame" x="20" y="7" width="260" height="106"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <connections>
-                                                        <outlet property="actionDelegate" destination="M7V-qZ-eET" id="8sn-lb-8pT"/>
-                                                        <outlet property="dataSource" destination="M7V-qZ-eET" id="jEm-5O-tvP"/>
-                                                    </connections>
-                                                </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RUG-xd-9zd">
-                                                    <rect key="frame" x="20" y="114" width="230" height="37"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" title="Podcast Directory">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="directoryTapped:" destination="M7V-qZ-eET" eventType="touchUpInside" id="CpQ-pz-keT"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Add your own" id="osn-f2-oMj">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="117" id="Hsv-Hy-vGt">
-                                        <rect key="frame" x="0.0" y="209" width="320" height="117"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a podcast URL here" minimumFontSize="17" id="yB6-pX-hmg">
-                                                    <rect key="frame" x="20" y="20" width="230" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.94509810209274292" green="0.94509810209274292" blue="0.95294123888015747" alpha="1" colorSpace="deviceRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="urlTextFieldValueChanged:" destination="M7V-qZ-eET" eventType="valueChanged" id="ekJ-5n-LoP"/>
-                                                    </connections>
-                                                </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nd4-aU-Roe">
-                                                    <rect key="frame" x="20" y="59" width="230" height="37"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" title="Add It">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="addURLTapped:" destination="M7V-qZ-eET" eventType="touchUpInside" id="Ryu-o1-LRl"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Notifications" id="wrM-y8-AAz">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="109" id="txp-Wn-1Bh">
-                                        <rect key="frame" x="0.0" y="348" width="320" height="109"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Hjr-A0-XLZ">
-                                                    <rect key="frame" x="171" y="11" width="79" height="27"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="notificationsChanged:" destination="M7V-qZ-eET" eventType="valueChanged" id="09d-JJ-Snc"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Enable Notifications" lineBreakMode="tailTruncation" minimumFontSize="10" id="ntR-WZ-xEr">
-                                                    <rect key="frame" x="20" y="14" width="157" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Podster can alert you when new episodes of your favorite podcasts are released." lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="zaS-bv-xW0">
-                                                    <rect key="frame" x="20" y="40" width="230" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="M7V-qZ-eET" id="hQk-xx-lbT"/>
-                            <outlet property="delegate" destination="M7V-qZ-eET" id="YYp-H6-yDc"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <outlet property="addUrlButton" destination="nd4-aU-Roe" id="aLp-iS-ijP"/>
-                        <outlet property="gridView" destination="z7D-2E-OSg" id="Mwy-6W-AD5"/>
-                        <outlet property="notificationsSwitch" destination="Hjr-A0-XLZ" id="jbb-cH-fma"/>
-                        <outlet property="urlTextField" destination="yB6-pX-hmg" id="itk-Uv-bAN"/>
-                        <outlet property="view" destination="u4K-tZ-NYr" id="kdW-lh-cGU"/>
-                    </connections>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="-1036" y="784"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="GTp-18-0Rf">
             <objects>
@@ -761,24 +619,6 @@
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="-1298" y="1514"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="mam-K3-Myx">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eNf-AJ-ixJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="HKN-iT-AvW" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="tYp-Lf-HuM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="DOf-8L-uXT" kind="relationship" relationship="rootViewController" id="dcP-PY-9mf"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="517" y="22"/>
         </scene>
         <!--Home Controller-->
         <scene sceneID="2JF-xa-zuy">
@@ -1062,7 +902,7 @@
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="SVSubscriptionGridViewController" superclassName="SVViewController">
+        <class className="SVSubscriptionGridViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SVSubscriptionGridViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="gridView" candidateClass="GMGridView"/>

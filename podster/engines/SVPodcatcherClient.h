@@ -46,9 +46,6 @@ typedef void (^SVErrorBlock)(NSError *error);
 
 - (void)subscribeToFeedWithURL:(NSString *)feedURL shouldNotify:(BOOL)notify onCompletion:(void (^)(id))completion onError:(SVErrorBlock)onError;
 
-- (void)getAppConfigWithLanguage:(NSString *)language
-                                   onCompletion:(void(^)(void))completion
-                                         onError:(SVErrorBlock)error;
 
 -(void)findFeedFromLink:(NSString *)pageURL 
            onCompletion:(FeedResponseBlock)completion

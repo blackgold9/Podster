@@ -28,6 +28,7 @@ static const NSInteger kDefaultPageSize = 50;
 @synthesize category;
 @synthesize searchString;
 @synthesize tableView = _tableView;
+
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,6 +40,7 @@ static const NSInteger kDefaultPageSize = 50;
     
     return self;
 }
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -58,11 +60,6 @@ static const NSInteger kDefaultPageSize = 50;
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc {
-    LOG_GENERAL(4, @"Dealloc");
-
-}
-
 #pragma mark - View lifecycle
 - (UINib *)listNib
 {
@@ -73,7 +70,7 @@ static const NSInteger kDefaultPageSize = 50;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
+    self.tableView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
     [self.tableView registerNib:[self listNib] forCellReuseIdentifier:@"SVPodcastListCell"];
     self.tableView.rowHeight = 88;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

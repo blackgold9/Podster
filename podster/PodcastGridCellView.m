@@ -78,12 +78,27 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             self.podcastArtImageView.image = image;
         } else {
             [self loadWebImageWithURL:[podcast smallLogoURL]];
+            DDLogWarn(@"Didnt have expected image data stored locally. Redownloading");
+            [coreCast downloadOfflineImageData];
         }
     } else {
         [self loadWebImageWithURL:[podcast smallLogoURL]];
     }
+}
+
+- (void)setDownloadProgressHidden:(BOOL)hidden animated:(BOOL)animated
+{
+    [UIView animateWithDuration:animated ? 0.5 : 0
+                     animations:^{
+                         self.progressBackground.alpha = hidden ? 0 : 0.5;
+                         self.progressBar.alpha = hidden ? 0 : 1;
+                     }];
+}
+- (void)loadImage
+{
     
 }
+
 - (void)bind:(id<ActsAsPodcast>)podcast
 {
     
@@ -146,30 +161,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
-
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if(object == coreDataPodcast) { 
         if ([keyPath isEqualToString:@"downloadPercentage"]) {
             DDLogVerbose(@"%@ - download percentage: %f", coreDataPodcast.title, coreDataPodcast.downloadPercentageValue);
-            SVPodcast *local = object;
-            self.progressBar.progress = local.downloadPercentageValue / 100.0f;
+            self.progressBar.progress = coreDataPodcast.downloadPercentageValue / 100.0f;
         } else if ([keyPath isEqualToString:@"isDownloading"]) {
-            SVPodcast *local = object;
-            DDLogVerbose(@"isDownloading changed to %@",  local.isDownloadingValue ? @"true" : @"false");
-            [UIView animateWithDuration:0.5
-                             animations:^{
-                                 self.progressBackground.alpha = local.isDownloadingValue ? 0.5 : 0;
-                                 self.progressBar.alpha = local.isDownloadingValue ? 1 : 0;
-                             }];
+            DDLogVerbose(@"isDownloading changed to %@",  coreDataPodcast.isDownloadingValue ? @"true" : @"false");
+            [self setDownloadProgressHidden:!coreDataPodcast.isDownloadingValue animated:YES];
             
         } else if ([keyPath isEqualToString:SVPodcastAttributes.unlistenedSinceSubscribedCount]) {
             [UIView transitionWithView:self.countOverlay
                               duration:0.33
-                               options:UIViewAnimationOptionTransitionCurlDown
-                            animations:^{
-                                
-                                
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{                                                                
                                 if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
                                     [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
                                     [self.countOverlay sizeToFit];
@@ -181,10 +187,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                     self.countOverlay.hidden = YES;
                                 }
                             } completion:nil];
-
         }
-    }
-    
+    }    
 }
 
 

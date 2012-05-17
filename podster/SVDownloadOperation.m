@@ -13,7 +13,7 @@
 #import "PodsterManagedDocument.h"
 #import "SVPodcatcherClient.h"
 #import <sys/xattr.h>
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation SVDownloadOperation {
     BOOL _isExecuting;
     BOOL _isFinished;

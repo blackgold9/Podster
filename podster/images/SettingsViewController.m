@@ -97,10 +97,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"honeycomb.png"]];
-//    [self.view addSubview:image];
-//    [self.view sendSubviewToBack:image];
-//    self.tableView.backgroundColor = [UIColor clearColor];
+
     [self.buyButton  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
     [self.buyButton setBackgroundImage:[UIImage imageNamed:@"standard-big.png"] forState:UIControlStateNormal  ];
@@ -112,6 +109,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationItem.title = NSLocalizedString(@"Settings", @"Settings");
     [FlurryAnalytics logEvent:@"SettingsPageView"];
 }
 
@@ -162,6 +160,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }
+//    else {
+//        [self performSegueWithIdentifier:@"showDownloadSettings" sender:self];
+//    }
 		
 }
 
@@ -177,6 +178,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             else
                 cellCount = 3;
             break;
+//        case 1:
+//            cellCount = 1;
+//            break;
         case 1:
             // Show the restore purchase option if we're not already premium
 #if DEBUG
@@ -248,6 +252,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             }
         }
 
+//    } else if (indexPath.section == 1) {
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCell"];
+//        cell.textLabel.text = @"Download Settings";
     } else if (indexPath.section == 1) {
         switch (indexPath.row) {
             case 0:
@@ -415,11 +422,17 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     if ([SKPaymentQueue canMakePayments]) {
         [self showPurchaseOptions];
     } else {
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"PURCHASE_DISABLED_TITLE", @"Purchasing Disabled") message:NSLocalizedString(@"PURCHASE_DISABLED_BODY", @"Your device is currently unable to make purchases. Make sure they are enabled in the settings application")];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"PURCHASE_DISABLED_TITLE", @"Purchasing Disabled")
+                                                       message:NSLocalizedString(@"PURCHASE_DISABLED_BODY", @"Your device is currently unable to make purchases. Make sure they are enabled in the settings application")];
         [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:nil];
         [alert show];
     }
 #endif
+}
+
+- (IBAction)doneTapped:(id)sender {
+    [self dismissViewControllerAnimated:YES 
+                             completion:NULL];
 }
 
 @end

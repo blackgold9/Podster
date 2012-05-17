@@ -471,8 +471,8 @@
 		4B7A7C8014F59CEB00AD88F9 /* alert-window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7A7C6A14F59CEB00AD88F9 /* alert-window@2x.png */; };
 		4B842BDE150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */; };
 		4B842BDF150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */; };
-		4B86242D14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
-		4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */; };
+		4B86242D14B576A900A4B320 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4B86242E14B576A900A4B320 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
 		4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
 		4B8D1D89150DC9C600E6D770 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8D1D88150DC9C500E6D770 /* TextViewController.m */; };
@@ -494,8 +494,6 @@
 		4B8F6F3E14E9B2BC00D328DE /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F6F3C14E9B2BC00D328DE /* HomeController.m */; };
 		4B8F6F4114EA425800D328DE /* FeaturedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F6F4014EA425700D328DE /* FeaturedController.m */; };
 		4B8F6F4214EA425800D328DE /* FeaturedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F6F4014EA425700D328DE /* FeaturedController.m */; };
-		4B8F6F4514EA44D700D328DE /* PodcastGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F6F4414EA44D700D328DE /* PodcastGridCell.m */; };
-		4B8F6F4614EA44D700D328DE /* PodcastGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F6F4414EA44D700D328DE /* PodcastGridCell.m */; };
 		4B8F6FA914ED9DAB00D328DE /* UIImage+ForceDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F6FA814ED9DAB00D328DE /* UIImage+ForceDecompress.m */; };
 		4B8F6FAA14ED9DAB00D328DE /* UIImage+ForceDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F6FA814ED9DAB00D328DE /* UIImage+ForceDecompress.m */; };
 		4B90FC8814E490130082C155 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B90FC8714E490120082C155 /* Debug.storyboard */; };
@@ -1108,8 +1106,6 @@
 		4B7A7CC414F6CFA700AD88F9 /* SVPodcastDatastore 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 10.xcdatamodel"; sourceTree = "<group>"; };
 		4B842BDC150FDC5D003F4BF5 /* PodsterManagedDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodsterManagedDocument.h; sourceTree = "<group>"; };
 		4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodsterManagedDocument.m; sourceTree = "<group>"; };
-		4B86242B14B576A900A4B320 /* SVDownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadsViewController.h; sourceTree = "<group>"; };
-		4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadsViewController.m; sourceTree = "<group>"; };
 		4B86242F14B57C7500A4B320 /* SVDownloadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDownloadCell.h; sourceTree = "<group>"; };
 		4B86243014B57C7500A4B320 /* SVDownloadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVDownloadCell.m; sourceTree = "<group>"; };
 		4B8D1D87150DC9C500E6D770 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
@@ -1126,8 +1122,6 @@
 		4B8F6F3C14E9B2BC00D328DE /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
 		4B8F6F3F14EA425700D328DE /* FeaturedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturedController.h; sourceTree = "<group>"; };
 		4B8F6F4014EA425700D328DE /* FeaturedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedController.m; sourceTree = "<group>"; };
-		4B8F6F4314EA44D700D328DE /* PodcastGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastGridCell.h; sourceTree = "<group>"; };
-		4B8F6F4414EA44D700D328DE /* PodcastGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastGridCell.m; sourceTree = "<group>"; };
 		4B8F6F4714EC63B400D328DE /* SVPodcastDatastore 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 9.xcdatamodel"; sourceTree = "<group>"; };
 		4B8F6FA714ED9DAB00D328DE /* UIImage+ForceDecompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ForceDecompress.h"; sourceTree = "<group>"; };
 		4B8F6FA814ED9DAB00D328DE /* UIImage+ForceDecompress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ForceDecompress.m"; sourceTree = "<group>"; };
@@ -1549,8 +1543,6 @@
 				4B189B3214A7D771001E378A /* SVPodcastDetailsViewController.m */,
 				4B189B3514AFAD12001E378A /* SVPlaybackController.h */,
 				4B189B3614AFAD13001E378A /* SVPlaybackController.m */,
-				4B86242B14B576A900A4B320 /* SVDownloadsViewController.h */,
-				4B86242C14B576A900A4B320 /* SVDownloadsViewController.m */,
 				4B10D02314BFA6A800DF4DBD /* SVEpisodeDetails.h */,
 				4B10D02414BFA6A800DF4DBD /* SVEpisodeDetails.m */,
 				4B91BF8C14C7A8E800B33776 /* SVCategoryListViewController.h */,
@@ -1577,8 +1569,6 @@
 				4B91BF9F14C7FB6800B33776 /* SVPodcastListCell.xib */,
 				4B141FBE14CCCAB500028CE4 /* SVGridCell.h */,
 				4B141FBF14CCCAB500028CE4 /* SVGridCell.m */,
-				4B8F6F4314EA44D700D328DE /* PodcastGridCell.h */,
-				4B8F6F4414EA44D700D328DE /* PodcastGridCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -2813,7 +2803,7 @@
 				4B2E523D14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E523F14B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
 				4B08537314B4315300847BAA /* SVDownload.m in Sources */,
-				4B86242D14B576A900A4B320 /* SVDownloadsViewController.m in Sources */,
+				4B86242D14B576A900A4B320 /* (null) in Sources */,
 				4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 				4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */,
 				4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
@@ -2871,7 +2861,6 @@
 				4B28C98014E7873800E1453E /* UIView+GMGridViewAdditions.m in Sources */,
 				4B8F6F3D14E9B2BC00D328DE /* HomeController.m in Sources */,
 				4B8F6F4114EA425800D328DE /* FeaturedController.m in Sources */,
-				4B8F6F4514EA44D700D328DE /* PodcastGridCell.m in Sources */,
 				4B8F6FA914ED9DAB00D328DE /* UIImage+ForceDecompress.m in Sources */,
 				4B48756E14F49781007E9092 /* SVPodcastImageCache.m in Sources */,
 				4B48757314F497A9007E9092 /* SVPodcastImage.m in Sources */,
@@ -2988,7 +2977,7 @@
 				4B2E523E14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E524014B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
 				4B08537414B4315300847BAA /* SVDownload.m in Sources */,
-				4B86242E14B576A900A4B320 /* SVDownloadsViewController.m in Sources */,
+				4B86242E14B576A900A4B320 /* (null) in Sources */,
 				4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 				4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */,
 				4BD1C22414B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
@@ -3040,7 +3029,6 @@
 				4B20247714DD0BF200820391 /* GCDiscreetNotificationView.m in Sources */,
 				4B8F6F3E14E9B2BC00D328DE /* HomeController.m in Sources */,
 				4B8F6F4214EA425800D328DE /* FeaturedController.m in Sources */,
-				4B8F6F4614EA44D700D328DE /* PodcastGridCell.m in Sources */,
 				4B8F6FAA14ED9DAB00D328DE /* UIImage+ForceDecompress.m in Sources */,
 				4B48756F14F49781007E9092 /* SVPodcastImageCache.m in Sources */,
 				4B48757414F497A9007E9092 /* SVPodcastImage.m in Sources */,
