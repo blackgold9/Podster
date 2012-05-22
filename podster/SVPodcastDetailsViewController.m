@@ -496,6 +496,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
                 
                 [localContext performBlock:^{
+                    if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] != AFNetworkReachabilityStatusNotReachable) {
                     [localPodcast getNewEpisodes:^(BOOL success) {
                         if (!success) {
                             if (blockSelf) {
@@ -507,12 +508,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                               
                                                           }];
                                 [alert show];
+                                [localPodcast updateNextItemDateAndDownloadIfNecessary:YES];
                             }
                         }
                         else {
                             loadCompleteHandler();
                         }
                     }];
+                    } else {
+                        loadCompleteHandler();
+                    }
                 }];
                 
                 [self reloadData];
@@ -602,6 +607,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [super viewWillDisappear:animated];
     NSAssert(localPodcast != nil, @"Local podcast should not be nil");
     [localPodcast updateNextItemDateAndDownloadIfNecessary:YES];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -613,37 +619,54 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    [localContext performBlock:^{
-        SVPodcastEntry *episode = [items objectAtIndex:(NSUInteger) indexPath.row];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            
-            BOOL isVideo = NO;
-            isVideo |=  [episode.mediaURL rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
-            isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
-            isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
-            if (isVideo) {
-                NSURL *contentUrl = episode.downloadCompleteValue ? [NSURL fileURLWithPath: episode.localFilePath] :  [NSURL URLWithString:episode.mediaURL];
-                MPMoviePlayerViewController *player =
-                [[MPMoviePlayerViewController alloc] initWithContentURL: contentUrl];
-                [self presentMoviePlayerViewControllerAnimated:player];
-            }else {
-
-                DDLogInfo(@"Triggering playback");
-                [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
-                DDLogInfo(@"Playback triggered");
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-                UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
-                NSParameterAssert(controller);
-                
-                DDLogInfo(@"Navigating to player");
-                [[self navigationController] pushViewController:controller animated:YES];
-                
-            }
-        });
+    SVPodcastEntry *episode = [items objectAtIndex:(NSUInteger) indexPath.row];
+    if (episode == [[SVPlaybackManager sharedInstance] currentEpisode]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
+        NSParameterAssert(controller);
         
-    }];
+        DDLogInfo(@"Navigating to player");
+        [[self navigationController] pushViewController:controller animated:YES];
+    } else {
+        
+        [localContext performBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (episode.downloadCompleteValue || ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] != AFNetworkReachabilityStatusNotReachable)) {
+                    // If it's downloaded or we're online, play it
+                    BOOL isVideo = NO;
+                    isVideo |=  [episode.mediaURL rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
+                    isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
+                    isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
+                    if (isVideo) {
+                        NSURL *contentUrl = episode.downloadCompleteValue ? [NSURL fileURLWithPath: episode.localFilePath] :  [NSURL URLWithString:episode.mediaURL];
+                        MPMoviePlayerViewController *player =
+                        [[MPMoviePlayerViewController alloc] initWithContentURL: contentUrl];
+                        [self presentMoviePlayerViewControllerAnimated:player];
+                    }else {                    
+                        DDLogInfo(@"Triggering playback");
+                        [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
+                        DDLogInfo(@"Playback triggered");
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+                        UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
+                        NSParameterAssert(controller);
+                        
+                        DDLogInfo(@"Navigating to player");
+                        [[self navigationController] pushViewController:controller animated:YES];
+                        
+                    }
+                } else {
+                    BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"Offline", @"offline")
+                                                                   message:NSLocalizedString(@"This episode is not available offline", nil)];
+                    [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
+                                              block:^{
+                                                  
+                                              }];
+                    [alert show];
+                }
+            });
+            
+        }];
+    }
     // Download episode
     //[[SVDownloadManager sharedInstance] downloadEntry:episode];
     

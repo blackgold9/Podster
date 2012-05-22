@@ -23,7 +23,7 @@
 
 // The percentage after which a podcast is marked as played
 #define PLAYED_PERCENTAGE 0.95
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_WARN;
 // Prototype for following callbakc function
 void audioRouteChangeListenerCallback (
                                        void                      *inUserData,
@@ -238,8 +238,6 @@ void audioRouteChangeListenerCallback (
         [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
 
         [(SVAppDelegate *)[[UIApplication sharedApplication] delegate] startListening];
-     
-//        [self startPositionMonitoring];
     }
     
     LOG_PLAYBACK(2, @"Loading media at URL:%@", url);
@@ -266,18 +264,28 @@ void audioRouteChangeListenerCallback (
                             [NSNumber numberWithInteger:episode.positionInSecondsValue],MPNowPlayingInfoPropertyElapsedPlaybackTime, nil];
     
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:params];
-    AFImageRequestOperation *imageOp = 
-    [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[currentPodcast logoURL]]] 
-                                                                                         success:^(UIImage *image) {
-                                                                                             NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
-                                                                                             MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
-                                                                                             [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
-                                                                                             [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:imageParams];
 
-        
-    }];
-  
-    [imageOp start];
+    if (currentPodcast.fullIsizeImageData == nil) {
+        AFImageRequestOperation *imageOp =
+                [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[currentPodcast logoURL]]]
+                        success:^(UIImage *image) {
+                            NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
+                            MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+                            [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
+                            [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:imageParams];
+
+
+                        }];
+
+        [imageOp start];
+    } else {
+        UIImage *image = [[UIImage alloc] initWithData:currentPodcast.fullIsizeImageData];
+        NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
+        MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+        [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:imageParams];
+    }
+
     // Check if there was a previous position
     BOOL hasSavedPlaybackPosition = episode.positionInSecondsValue > 0;
     BOOL prettyMuchAtTheEnd = episode.positionInSecondsValue > episode.durationValue - 120;

@@ -17,7 +17,7 @@
 #import "NSString+URLEncoding.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "SVPodcastModalView.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_WARN;
 @implementation SVPodcatcherClient
 + (id)sharedInstance
 {

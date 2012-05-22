@@ -18,7 +18,7 @@
 #import "PodsterIAPHelper.h"
 #import "BlockAlertView.h"
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_WARN;
 static NSString *const kIsBusyKey = @"isBusy";
 
 @interface HomeController ()
@@ -107,6 +107,7 @@ static NSString *const kIsBusyKey = @"isBusy";
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [loadingView addSubview:spinner];
     [spinner setHidesWhenStopped:NO];
+    [spinner startAnimating];
     [spinner setTag:1906];
     
     UILabel *loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
@@ -122,26 +123,26 @@ static NSString *const kIsBusyKey = @"isBusy";
     loadingView.frame = CGRectMake(0, 0, CGRectGetMaxX(loadingLabel.frame), spinner.frame.size.height);
     loadingView.alpha = 0;
     
-        [self configureToolbar:NO];
-
-
+    [self configureToolbar:NO];
+    
+    
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{
-
+        
         [self configureTabView];
         self.scrollView.contentOffset = CGPointMake(0, 0);
-    
+        
         UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
-    
-    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    
-    [self.view addGestureRecognizer:leftSwipe];
-    
-    [self configureViewControllerForScreenType:[[SVSettings sharedInstance] homeScreen]];
+        
+        leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+        
+        [self.view addGestureRecognizer:leftSwipe];
+        
+        [self configureViewControllerForScreenType:[[SVSettings sharedInstance] homeScreen]];
         UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];    
-    [self.view addGestureRecognizer:rightSwipe];
-
-
-                                //   [placeHolder removeFromSuperview];
+        [self.view addGestureRecognizer:rightSwipe];
+        
+        
+        //   [placeHolder removeFromSuperview];
 
                         
      }];
@@ -250,6 +251,7 @@ static NSString *const kIsBusyKey = @"isBusy";
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    DDLogInfo(@"HomeController:ViewDidDisappear");
     [[SVSubscriptionManager sharedInstance] removeObserver:self
                                                 forKeyPath:kIsBusyKey];
 
@@ -257,10 +259,11 @@ static NSString *const kIsBusyKey = @"isBusy";
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    DDLogInfo(@"HomeController:ViewDidAppear");
     [super viewDidAppear:animated];
     [[SVSubscriptionManager sharedInstance] addObserver:self
                                              forKeyPath:kIsBusyKey
-                                                options:NSKeyValueObservingOptionNew 
+                                                options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                                                 context:NULL];
 }
 
@@ -332,10 +335,7 @@ static NSString *const kIsBusyKey = @"isBusy";
                                  animations:^{
                                      loadingView.alpha = targetAlpha;
                                  } completion:^(BOOL finished) {
-                                     if(!updating) {
-                                         [spinner stopAnimating];
-                                     }
-                                 }];
+                                                                     }];
             }           
         }
     });

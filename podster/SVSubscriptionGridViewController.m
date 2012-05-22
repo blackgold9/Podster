@@ -18,7 +18,7 @@
 #import "UIColor+Hex.h"
 #import "PodsterManagedDocument.h"
 #import "PodcastGridCellView.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_WARN;
 @interface SVSubscriptionGridViewController()
 
 @end

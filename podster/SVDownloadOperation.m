@@ -48,8 +48,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [localContext performBlock: ^{
 
             localDownload.stateValue = SVDownloadStateDownloading;
-            localDownload.progressValue = (float) progress;
-            localDownload.entry.podcast.downloadPercentageValue = percentage;
+                localDownload.entry.podcast.downloadPercentageValue = percentage;
             if (!localDownload.entry.podcast.isDownloadingValue) {
                 localDownload.entry.podcast.isDownloadingValue = YES;
             } 

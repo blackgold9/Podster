@@ -31,8 +31,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSInteger maxConcurrentDownloads;
     NSOperationQueue *queue;
     BOOL cancelling;
-    __block NSMutableArray *currentDownloads;
     dispatch_group_t completionGroup;
+    BOOL downloading;
+    UIBackgroundTaskIdentifier background_task; 
 }
 + (id)sharedInstance
 {
@@ -50,16 +51,18 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self = [super init];
     if (self) {
         [self ensureDownloadsDirectory];
+        background_task = UIBackgroundTaskInvalid;
+        downloading = NO;
         completionGroup = dispatch_group_create();
         currentProgressPercentage = 0;
         operationLookup = [NSMutableDictionary dictionary];
         maxConcurrentDownloads = 2;
-        currentDownloads = [NSMutableArray array];
         queue = [NSOperationQueue new];
         [queue setMaxConcurrentOperationCount:maxConcurrentDownloads];
         queue.name = @"com.vantertech.podster.downloads";
         NSString *lostWifi = NSLocalizedString(@"Downloads have been paused because you lost WI-FI connectivity", @"Downloads have been paused because you lost WI-FI connectivity");
-       
+           
+        
         [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingReachabilityDidChangeNotification
                                                           object:nil
                                                            queue:nil
@@ -103,8 +106,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogVerbose(@"Querying pending downloads");
         NSArray *downloads = [SVDownload MR_findAllSortedBy:@"position" ascending:YES inContext:localContext];
         for (SVDownload *download in downloads) {
-            // HACK: This should re-trigger the download
-            [self downloadEntry:download.entry manualDownload:NO];
+            [self startDownload:download];
         }
 
     }];
@@ -112,7 +114,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)cancelDownloads
 {
     cancelling = YES;
-    LOG_DOWNLOADS(1, @"Cancelling downloads");
+    DDLogInfo(@"Cancelling downloads");
 
     [queue cancelAllOperations];
 
@@ -124,6 +126,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSParameterAssert(entry);
     NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
     NSAssert(entry.download == nil, @"There was already a download scheduled");
+
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     SVDownload *lastDownload = [SVDownload MR_findFirstWithPredicate:nil
                                                             sortedBy:@"position"
@@ -132,104 +135,26 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     if (lastDownload) {
         position = lastDownload.positionValue + 1;
     }
+    
     // Create the download database object
     __block SVDownload *download = nil;
 
     [localContext performBlock:^{
-        NSString *title = entry.podcast.title.length > 100 ? [[entry.podcast.title substringToIndex:97] stringByAppendingString:@"..."] : entry.podcast.title;
-
-        BOOL hasTitle  = NO;
-        for (NSString *currentTitle in currentDownloads) {
-            if ([currentTitle isEqualToString:title]) {
-                hasTitle = YES;
-                DDLogWarn(@"WARNING: Attempting to add a title to the download list that was already downloading");
-                break;
-            }
-        }
-
-        if (!hasTitle) {
-            [currentDownloads addObject:title];
-        }
-
+       
         SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
         download = localEntry.download;
-        localEntry.download.positionValue = position;
         if (!download) {
-
             download = [SVDownload MR_createInContext:localContext];
             download.manuallyTriggeredValue = isManualDownload;
             localEntry.download = download;
             download.filePath = [localEntry downloadFilePathForBasePath:[self downloadsPath]];
             download.stateValue = SVDownloadStatePending;
+            localEntry.download.positionValue = position;
+            [self startDownload:download];
         } else if ([[NSFileManager defaultManager] fileExistsAtPath:download.filePath] && download.entry.downloadCompleteValue){
-            //Download already existed, file exists, and entry is marked as download.
-            // Nothing to see here
-            DDLogWarn(@"Attempting to download a file that was already downloaded");
-            //  NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
-
-            return;
-        }
-
-
-        // perform the operation if needed
-        if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi ||
-                [[SVSettings sharedInstance] downloadOn3g]) {
-
-            SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
-                                                                                   filePath:[entry downloadFilePathForBasePath:[self downloadsPath]]];
-
-            __block UIBackgroundTaskIdentifier background_task; //Create a task object
-
-            background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
-                [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
-                background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
-                UILocalNotification *notDone = [[UILocalNotification alloc] init];
-                notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
-                notDone.soundName = @"alert.aiff";
-                [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
-
-            }];
-
-            op.completionBlock = ^void() {
-                dispatch_group_leave(completionGroup);
-                dispatch_async(dispatch_get_main_queue(), ^void() {
-                    [[UIApplication sharedApplication] endBackgroundTask: background_task];
-                                    background_task = UIBackgroundTaskInvalid;
-                });
-
-            };
-
-
-            if (queue.operationCount ==0) {
-                dispatch_group_notify(completionGroup, dispatch_get_main_queue(), ^{
-                          DDLogVerbose(@"Empty queue block triggered");
-                          if(!cancelling && currentDownloads.count > 0) {
-//                              UILocalNotification *downloadedNotification = [[UILocalNotification alloc] init];
-//                              if (currentDownloads.count > 1) {
-//
-//                                      DDLogVerbose(@"Downloaded: %@", [currentDownloads componentsJoinedByString:@", "]);
-//
-//                                  downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" and %d other podcasts have finished downloading", @"%@ and %d other podcasts finished downloading"), [currentDownloads objectAtIndex:0], currentDownloads.count];
-//                              } else {
-//                                  downloadedNotification.alertBody = [NSString stringWithFormat: NSLocalizedString(@"\"%@\" has finished downloading",@"\"%@\" has finished downloading"), [currentDownloads objectAtIndex:0]];
-//                              }
-//                              downloadedNotification.soundName = @"alert.aiff";
-//                              [[UIApplication sharedApplication] presentLocalNotificationNow:downloadedNotification];
-                              [currentDownloads removeAllObjects];
-
-                          }  else {
-                              cancelling = NO;
-                          }
-
-                      });
-
-                [queue addOperation:op];
-                            dispatch_group_enter(completionGroup);
-
-            }
-        } else {
-            LOG_DOWNLOADS(2, @"Queued download but did not start it since we're not on wifi");
-        }
+           
+           NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
+        }   
     }];
 
 }
@@ -260,6 +185,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)disableBackupForPath:(NSString *)path
 {
+    DDLogInfo(@"Setting do-not-backup for %@", path);
     const char* attrName = "com.apple.MobileBackup";
     u_int8_t attrValue = 1;
     
@@ -278,6 +204,65 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                    attributes:nil
                                                         error:nil];
         [self disableBackupForPath:downloadsPath];
+    }
+}
+
+- (void)startDownload:(SVDownload *)download
+{
+    if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi ||
+        [[SVSettings sharedInstance] downloadOn3g]) {
+        
+        SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
+                                                                               filePath:[download.entry downloadFilePathForBasePath:[self downloadsPath]]];
+        @synchronized(self){
+            // we're not currently downloading, and we will be, so....
+            if (!downloading) {
+                downloading = YES;
+                background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
+                    [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
+                    background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
+                    UILocalNotification *notDone = [[UILocalNotification alloc] init];
+                    notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
+                    notDone.soundName = @"alert.aiff";
+                    [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
+                    
+                }];
+            }
+        }
+        
+        SVPodcastEntry *entry = download.entry;
+        op.completionBlock = ^void() {
+            dispatch_group_leave(completionGroup);
+            dispatch_async(dispatch_get_main_queue(), ^void() {
+                [[UIApplication sharedApplication] endBackgroundTask: background_task];
+                background_task = UIBackgroundTaskInvalid;
+                [self downloadCompleted:entry];
+            });
+            
+        };
+                       
+        [queue addOperation:op];
+        dispatch_group_enter(completionGroup);
+        
+    }
+}
+
+- (void)downloadCompleted:(SVPodcastEntry *)entry
+{
+    NSInteger pendingDownloads = queue.operationCount;
+    [entry.managedObjectContext performBlock:^{
+        
+        DDLogInfo(@"Download completed for podcast: %@ - Entry: %@. Remaining in queue: %d", entry.podcast.title, entry.title, pendingDownloads);
+        
+        
+    }];
+    
+    if (pendingDownloads == 0) {
+        DDLogVerbose(@"It was the last download");
+        @synchronized(self) {
+            downloading = NO;
+            cancelling = NO;
+        }
     }
 }
 @end

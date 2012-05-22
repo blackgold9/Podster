@@ -88,6 +88,7 @@
 	[super viewWillDisappear:animated];
     [localManager removeObserver:self forKeyPath:@"currentEpisode"];
     [localManager removeObserver:self forKeyPath:@"playbackState"];
+    
 
 }
 

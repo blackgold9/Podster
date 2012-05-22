@@ -11,7 +11,7 @@
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
 #import "PodsterManagedDocument.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 static char const kRefreshInterval = -3;
 
 @implementation SVSubscriptionManager {
@@ -93,9 +93,6 @@ static char const kRefreshInterval = -3;
     [self updateFromFirstVersionIfNeccesary:^{
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            
-            
             NSMutableArray *array = [[self subscribedPodcasts] mutableCopy];
             dispatch_group_t group = dispatch_group_create();
             DDLogInfo(@"Refreshing subscriptions");

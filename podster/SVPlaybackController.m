@@ -48,19 +48,20 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
 -(void)viewDidAppear:(BOOL)animated
 {
-
     [FlurryAnalytics logEvent:@"PlaybackPageView" timed:YES];
-    NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
-    [self.artworkImage setImageWithURL:imageURL placeholderImage:nil];
-   // [self.foregroundAlbumArt setImageWithURL:[NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.thumbLogoURL]];
 
+    NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
+    SVPodcastEntry *episode = [SVPlaybackManager sharedInstance].currentEpisode;
+    if (episode.podcast.fullIsizeImageData != nil) {
+        self.artworkImage.image = [UIImage imageWithData:episode.podcast.fullIsizeImageData];
+    } else {
+        [self.artworkImage setImageWithURL:imageURL placeholderImage:nil];
+    }
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -255,8 +256,6 @@
     // Called when the tweet dialog has been closed
     tweet.completionHandler = ^(TWTweetComposeViewControllerResult result) 
     {
-        
-        
         // Dismiss the controller
         [self dismissModalViewControllerAnimated:YES];
     };

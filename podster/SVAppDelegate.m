@@ -188,10 +188,11 @@ NSString *uuid();
  
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
     
-    //[[SVDownloadManager sharedInstance] resumeDownloads];
+
     [self configureTheming];
     
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{            
+    [[PodsterManagedDocument sharedInstance] performWhenReady:^{  
+            [[SVDownloadManager sharedInstance] resumeDownloads];
         // Actually register
 #ifndef CONFIGURATION_Debug
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
@@ -232,18 +233,13 @@ NSString *uuid();
     [[SVPodcatcherClient sharedInstance] registerWithDeviceId:deviceId
                                             notificationToken:tokenAsString
                                                  onCompletion:^(id response ){
-//                                                     NSArray *subscriptions = response;
-                                                     [self registeredWithService];
-                                                     
-                                                     // TODO: Handle subscriptions from server
-                                                     
-                                                     
+                                                     [self registeredWithService];                                                                                                                                                               
                                                  } onError:^(NSError *error) {
                                                      [FlurryAnalytics logError:@"RegistrationFailed"
                                                                        message:[error localizedDescription]
                                                                          error:error];
                                                      LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
-                                                 }]; // custom method
+                                                 }];
 }
 
 - (void)registeredWithService
@@ -271,9 +267,9 @@ NSString *uuid();
         
         
         if (application.applicationState != UIApplicationStateActive) {
-            NSString *hash= [userInfo valueForKey:@"hash"];
-            LOG_GENERAL(2, @"launched for podcast with URL Hash: %@", hash);
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.urlHash, hash];
+            NSString *feedId= [userInfo valueForKey:@"feedId"];
+            LOG_GENERAL(2, @"launched for podcast with podstore id: %@", feedId);
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
             SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:predicate 
                                                             inContext:[PodsterManagedDocument defaultContext]];
             if (podcast) {
@@ -338,6 +334,7 @@ NSString *uuid();
             NSArray *subscriptions= [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"isSubscribed == YES"]
                                                              inContext:[PodsterManagedDocument defaultContext] ];
             NSMutableArray *subscriptionData = [NSMutableArray arrayWithCapacity:subscriptions.count];
+            
             for(SVPodcast *podcast in subscriptions) {
                 id data = [NSDictionary dictionaryWithObjectsAndKeys:podcast.podstoreId,@"podstoreId",podcast.shouldNotify, @"shouldNotify",  nil];
                 [subscriptionData addObject:data];
