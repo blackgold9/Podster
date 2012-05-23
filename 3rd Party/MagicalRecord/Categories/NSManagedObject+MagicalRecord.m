@@ -628,7 +628,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	NSPredicate *searchTerm = [NSPredicate predicateWithFormat:@"%K = %@", attribute, searchValue];
 	NSFetchRequest *request = [self MR_requestAllSortedBy:sortTerm ascending:ascending withPredicate:searchTerm inContext:context];
 	
-	return [self MR_executeFetchRequest:request];
+	return [self MR_executeFetchRequest:request inContext:context];
 }
 
 + (NSArray *) MR_findByAttribute:(NSString *)attribute withValue:(id)searchValue andOrderBy:(NSString *)sortTerm ascending:(BOOL)ascending

@@ -182,7 +182,7 @@ NSString *uuid();
 #endif
     
     isFirstRun = [[SVSettings sharedInstance] firstRun];
-    SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*50 diskPath:[SDURLCache defaultCachePath]];
+    SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
     [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
     [NSURLCache setSharedURLCache:URLCache];
  
@@ -192,7 +192,7 @@ NSString *uuid();
     [self configureTheming];
     
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{  
-            [[SVDownloadManager sharedInstance] resumeDownloads];
+            [[SVDownloadManager sharedInstance] downloadPendingEntries];
         // Actually register
 #ifndef CONFIGURATION_Debug
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
@@ -233,7 +233,18 @@ NSString *uuid();
     [[SVPodcatcherClient sharedInstance] registerWithDeviceId:deviceId
                                             notificationToken:tokenAsString
                                                  onCompletion:^(id response ){
-                                                     [self registeredWithService];                                                                                                                                                               
+                                                     if (isFirstRun) {
+                                                         // Restore pre-existing subscriptions if they exist
+                                                         NSArray *subscriptions = (NSArray *)response;                                                         
+                                                         for (NSDictionary *sub in subscriptions) {
+                                                             NSDictionary *subData = [sub objectForKey:@"subscription"];                                                             
+                                                             [SVPodcast fetchAndSubscribeToPodcastWithId:[subData objectForKey:@"feed_id"]
+                                                                                            shouldNotify:[[subData objectForKey:@"notify"] boolValue]];
+                                                         }  
+                                                     } else {
+                                                         // Reconcile subs
+                                                     }
+                                                     
                                                  } onError:^(NSError *error) {
                                                      [FlurryAnalytics logError:@"RegistrationFailed"
                                                                        message:[error localizedDescription]
@@ -242,24 +253,7 @@ NSString *uuid();
                                                  }];
 }
 
-- (void)registeredWithService
-{
-    NSUInteger existingCount = [SVPodcast MR_countOfEntitiesWithContext:[PodsterManagedDocument defaultContext]];
-    if (isFirstRun && existingCount == 0) {
-        NSArray *subscriptions = [Lockbox arrayForKey:@"subscriptions"];
-        if (subscriptions && subscriptions.count > 0)  {
-            for (NSDictionary *sub in subscriptions) {
-                NSNumber *notifySetting = [sub objectForKey:@"shouldNotify"];
-                
-                [SVPodcast fetchAndSubscribeToPodcastWithId:(NSNumber *)[sub objectForKey:@"podstoreId"]
-                                       shouldNotify:[notifySetting boolValue]];
-            }            
-        }
-        
-    } else {
-        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-    }
-}
+
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {

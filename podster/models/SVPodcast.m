@@ -75,7 +75,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 - (void)downloadImageDataWithURLString:(NSString *)imageURL forKeyPath:(NSString *)keyPath
 {
-    if ([self valueForKey:keyPath] != nil) {
+    if ([self valueForKey:keyPath] == nil) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imageURL]];
         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -207,6 +207,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             // Cleanup all but the last download
             DDLogVerbose(@"Cleaning up played podcasts");
             NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"%K == %@ AND downloadComplete == YES", SVPodcastEntryRelationships.podcast, self];
+
             DDLogVerbose(@"Looking for items that need deleting");
             NSArray *needDeleting = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
                                                              ascending:NO
@@ -222,8 +223,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 }
                 [[SVDownloadManager sharedInstance] deleteFileForEntry:toDelete];
                 toDelete.downloadCompleteValue = NO;
-            }
-
+            }                        
         } else {
             DDLogInfo(@"Not subscribed");
         }

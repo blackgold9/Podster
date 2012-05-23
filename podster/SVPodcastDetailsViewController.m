@@ -31,6 +31,7 @@
 #import "_SVPodcastEntry.h"
 #import "_SVPodcast.h"
 #import <Twitter/Twitter.h>
+#import "MBProgressHUD.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVPodcastDetailsViewController ()
 
@@ -437,8 +438,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
     self.titleLabel.text = self.podcast.title;
-    
-    [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
+    [MBProgressHUD showHUDAddedTo:self.imageView animated:YES];
+
     isLoading = YES;
     
     localContext = [PodsterManagedDocument defaultContext];
@@ -458,7 +459,27 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             if (!localPodcast) {
                 LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
                 localPodcast = [SVPodcast MR_createInContext:localContext];                
+
+                dispatch_async(dispatch_get_main_queue(), ^{                    
+                    // We didn't have a local copy, so load from url
+                    [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
+                    [MBProgressHUD hideHUDForView:self.imageView animated:YES];
+                });
             } else {
+                // We had a local copy, so check for local image
+                if (localPodcast.gridSizeImageData != nil) {
+                    dispatch_async(dispatch_get_main_queue(), ^{                                                
+                        UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
+                        self.imageView.image = image;
+                        [MBProgressHUD hideHUDForView:self.imageView animated:YES];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{                    
+                        // We didn't have a local copy, so load from url
+                        [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
+                        [MBProgressHUD hideHUDForView:self.imageView animated:YES];
+                    }); 
+                }
                 LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
             }
             [localPodcast populateWithPodcast:self.podcast];
@@ -508,7 +529,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                               
                                                           }];
                                 [alert show];
-                                [localPodcast updateNextItemDateAndDownloadIfNecessary:YES];
+                                //[localPodcast updateNextItemDateAndDownloadIfNecessary:YES];
                             }
                         }
                         else {
@@ -606,7 +627,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewWillDisappear:animated];
     NSAssert(localPodcast != nil, @"Local podcast should not be nil");
-    [localPodcast updateNextItemDateAndDownloadIfNecessary:YES];
+  //  [localPodcast updateNextItemDateAndDownloadIfNecessary:YES];
 
 }
 

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class SVPodcast;
 @class SVPodcastEntry;
+@class SVDownload;
 @interface SVDownloadManager : NSObject
 + (id)sharedInstance;
 
@@ -17,4 +18,7 @@
 - (void)deleteFileForEntry:(SVPodcastEntry *)entry;
 
 - (void)resumeDownloads;
+- (void)cancelDownload:(SVDownload *)download;
+
+- (void)downloadPendingEntries;
 @end
