@@ -148,6 +148,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
         self.progressBackground.alpha = 0;
         self.progressBar.alpha = 0;
+        self.progressBar.progress = 0.0f;
         coreDataPodcast = nil;
     }
     [imageLoadOp cancel];

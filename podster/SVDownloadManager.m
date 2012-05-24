@@ -191,6 +191,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSString *computedPath = [entry downloadFilePathForBasePath:[self downloadsPath]];
     if (![computedPath isEqualToString:pathToDelete]) {
         NSAssert(false, @"should match");
+        return;
     }
     
     DDLogInfo(@"Deleting File: %@", pathToDelete);
@@ -317,7 +318,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (NSArray *)entriesToBeDownloadedForPodcast:(SVPodcast *)podcast inContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"downloadComplete == NO && podcast == %@", podcast];
+    NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"%K == 0 && podcast == %@",SVPodcastEntryAttributes.played, podcast];
     NSArray *entries = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
                                                 ascending:NO
                                             withPredicate:isInPodcast
@@ -335,18 +336,20 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)deleteDownloadsForEntriesNotInSet:(NSSet *)entries inContext:(NSManagedObjectContext *)context
 {
     DDLogVerbose(@"Determinign what needs to be cancelled/deleted");
-    NSPredicate *hasDownloadCompleteOrInProgress = [NSPredicate predicateWithFormat:@"(%K != nil || %K == YES)", SVPodcastEntryRelationships.download, SVPodcastEntryAttributes.downloadComplete]; 
+    NSPredicate *hasDownloadCompleteOrInProgress = [NSPredicate predicateWithFormat:@"(%K != nil || %K == 1)", SVPodcastEntryRelationships.download, SVPodcastEntryAttributes.downloadComplete]; 
     NSPredicate *notInSet = [NSPredicate predicateWithFormat:@"NOT (self IN %@)", entries];
     NSPredicate *compound = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:notInSet, hasDownloadCompleteOrInProgress, nil]];
     
     NSArray *entriesNeedingDeletion = [SVPodcastEntry MR_findAllWithPredicate:compound
                                                                     inContext:context];
     
-    DDLogVerbose(@"Found %d entries needing deletion", entriesNeedingDeletion.count);
+    DDLogInfo(@"Found %d entries needing deletion", entriesNeedingDeletion.count);
     for (SVPodcastEntry *entry in entriesNeedingDeletion) {
+        DDLogVerbose(@"Deleting %@", entry);
         [self deleteFileForEntry:entry];
         entry.downloadCompleteValue = NO;
         entry.localFilePath = nil;
+        entry.podcast.isDownloadingValue = NO;
         if (entry.download) {
             [context deleteObject:entry.download];                    
         }
@@ -371,19 +374,36 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogVerbose(@"Cancelling all current download operations");
     }
     NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-    NSSet *toDownload = [self entriesNeedingDownload];
-    [self deleteDownloadsForEntriesNotInSet:toDownload
+    NSSet *shouldBePresent = [self entriesNeedingDownload];
+    [self deleteDownloadsForEntriesNotInSet:shouldBePresent
                                   inContext:context];
+    
+    NSSet *toDownload = [shouldBePresent filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        SVPodcastEntry *entry = evaluatedObject;
+        return !entry.downloadCompleteValue;
+        
+    }]];
     
     DDLogInfo(@"Queuing %d downloads", toDownload.count);
     for(SVPodcastEntry *entry in toDownload) {
+        DDLogVerbose(@"Queuing: %@", entry);
         if (entry.download) {
+
             [self startDownload:entry.download];
         } else {
             [self downloadEntry:entry manualDownload:NO];
         }
     }
     
+    if (toDownload.count == 0) {
+        // No items to download, end here
+        @synchronized(self){
+            if (downloading) {
+                downloading = NO;
+            } 
+        }
+
+    }
     DDLogInfo(@"Done queing entries for download");
 }
 

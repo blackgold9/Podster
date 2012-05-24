@@ -192,7 +192,7 @@ NSString *uuid();
     [self configureTheming];
     
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{  
-            [[SVDownloadManager sharedInstance] downloadPendingEntries];
+          //  [[SVDownloadManager sharedInstance] downloadPendingEntries];
         // Actually register
 #ifndef CONFIGURATION_Debug
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|

@@ -20,6 +20,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     SVDownload  *download;
     AFHTTPRequestOperation *networkOp;
     NSInteger currentProgressPercentage;
+    UIBackgroundTaskIdentifier task;
     NSString *filePath;
 }
 @synthesize downloadObjectID;
@@ -74,10 +75,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     _isFinished  = YES;
     [self didChangeValueForKey:@"isFinished"];
     [self didChangeValueForKey:@"isExecuting"];
+    
+    [[UIApplication sharedApplication] endBackgroundTask: task]; //Tell the system that we are done with the tasks
+    task = UIBackgroundTaskInvalid; //Set the task to be invalid
 }
 
 -(void)start
 {
+    task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
+        [[UIApplication sharedApplication] endBackgroundTask: task]; //Tell the system that we are done with the tasks
+        task = UIBackgroundTaskInvalid; //Set the task to be invalid
+        UILocalNotification *notDone = [[UILocalNotification alloc] init];
+        notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
+        notDone.soundName = @"alert.aiff";
+        [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
+        
+    }];
+
   //  dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     [localContext performBlockAndWait:^{
@@ -113,7 +127,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             [localContext performBlockAndWait:^{
-                DDLogInfo(@"Downloading file %@ complete", localDownload.filePath);
+                DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", localDownload.filePath);
                 SVPodcastEntry *entry = localDownload.entry;
                 entry.downloadCompleteValue = YES;                
                 entry.localFilePath = filePath;
