@@ -3199,8 +3199,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ABDA9B9B-25EB-470F-A8A3-D3BA2C41A142";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ABDA9B9B-25EB-470F-A8A3-D3BA2C41A142";
+				PROVISIONING_PROFILE = "070B47BF-31A1-4186-A427-8094CC5DF76A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "070B47BF-31A1-4186-A427-8094CC5DF76A";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -3335,8 +3335,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3364,8 +3364,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "C2FFC97B-D8F6-43F5-B4A8-D07C52701072";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C2FFC97B-D8F6-43F5-B4A8-D07C52701072";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

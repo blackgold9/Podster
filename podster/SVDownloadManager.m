@@ -33,7 +33,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     BOOL cancelling;
     dispatch_group_t completionGroup;
     BOOL downloading;
-    UIBackgroundTaskIdentifier background_task; 
+//    UIBackgroundTaskIdentifier background_task; 
 }
 + (id)sharedInstance
 {
@@ -51,7 +51,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self = [super init];
     if (self) {
         [self ensureDownloadsDirectory];
-        background_task = UIBackgroundTaskInvalid;
+//        background_task = UIBackgroundTaskInvalid;
         downloading = NO;
         completionGroup = dispatch_group_create();
         currentProgressPercentage = 0;
@@ -205,7 +205,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 -(NSString *)downloadsPath
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
     return [basePath stringByAppendingPathComponent:kDownloadsDirectory];
 
@@ -243,15 +243,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
                                                                                filePath:[download.entry downloadFilePathForBasePath:[self downloadsPath]]];
         
-        background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
-            [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
-            background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
-            UILocalNotification *notDone = [[UILocalNotification alloc] init];
-            notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
-            notDone.soundName = @"alert.aiff";
-            [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
-            
-        }];
+//        background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
+//            [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
+//            background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
+//            UILocalNotification *notDone = [[UILocalNotification alloc] init];
+//            notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
+//            notDone.soundName = @"alert.aiff";
+//            [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
+//            
+//        }];
     
     
         
@@ -259,8 +259,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         op.completionBlock = ^void() {
             dispatch_group_leave(completionGroup);
             dispatch_async(dispatch_get_main_queue(), ^void() {
-                [[UIApplication sharedApplication] endBackgroundTask: background_task];
-                background_task = UIBackgroundTaskInvalid;
+//                [[UIApplication sharedApplication] endBackgroundTask: background_task];
+//                background_task = UIBackgroundTaskInvalid;
                 [self downloadCompleted:entry];
             });
             
@@ -312,6 +312,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [needingDownload addObjectsFromArray:[self entriesToBeDownloadedForPodcast:podcast
                                                                          inContext:context]];
     }  
+       
     
     return needingDownload;
 }

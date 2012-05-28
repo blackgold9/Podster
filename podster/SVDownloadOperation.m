@@ -75,7 +75,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     _isFinished  = YES;
     [self didChangeValueForKey:@"isFinished"];
     [self didChangeValueForKey:@"isExecuting"];
-    
+    DDLogInfo(@"Download Operation Complete. Ending background task");
     [[UIApplication sharedApplication] endBackgroundTask: task]; //Tell the system that we are done with the tasks
     task = UIBackgroundTaskInvalid; //Set the task to be invalid
 }
