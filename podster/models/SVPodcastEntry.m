@@ -28,7 +28,11 @@
     }
     
     self.datePublished = [[data objectForKey:@"published_date"] dateFromRailsDate];
-    self.guid = [data objectForKey:@"guid"];
+    id theGuid = [data objectForKey:@"guid"];
+    if (theGuid != [NSNull null]) {
+        self.guid = theGuid;
+    }
+    
     self.podstoreId = [data objectForKey:@"id"];
 }
 

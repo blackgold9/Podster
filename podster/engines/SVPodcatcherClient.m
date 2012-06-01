@@ -265,6 +265,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     NSParameterAssert(completion);
     NSParameterAssert(errorHandler);
 
+    if (!feedId) {
+        [self returnMissingParameterErrorWithName:@"feedId" errorHandler:errorHandler];
+        return;
+    }
+    
     NSString *queryPath = [NSString stringWithFormat:@"feeds.json?cc=%@&feedId=%@", [self countryCode], feedId];
     [self getPath:queryPath parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -295,7 +300,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     NSParameterAssert(feedId);
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:feedId, @"feedId",  deviceId, @"deviceId", nil];
-
+    
     [self postPath:@"subscriptions"
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -316,6 +321,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                           onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedId);
+    if (feedId != nil) {
+        [self returnMissingParameterErrorWithName:@"feedId" errorHandler:onError];
+        return;
+    }
+    
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     [self postPath:@"subscriptions/update.json"
         parameters:[NSDictionary dictionaryWithObjectsAndKeys:deviceId, @"deviceId", feedId, @"feedId", shouldNotify ? @"true" : @"false",@"should_notify", nil]
@@ -347,6 +357,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                               onError:(SVErrorBlock)onError
 {
     NSParameterAssert(podstoreId);
+    if (podstoreId == nil) {
+        [self returnMissingParameterErrorWithName:@"podstoreId" errorHandler:onError];
+        return;
+    }
     NSString *deviceId = [[SVSettings sharedInstance] deviceId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:podstoreId, @"feedId",  deviceId, @"deviceId", nil];
     
@@ -367,6 +381,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                          onError:(SVErrorBlock)onError
 {
     NSParameterAssert(podstoreId);
+    if (podstoreId == nil) {
+        [self returnMissingParameterErrorWithName:@"podstoreId" errorHandler:onError];
+        return;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
 
     DDLogVerbose(@"Getting newitems for %@ withlast modifided: %@", podstoreId, lastSycned);
@@ -387,4 +405,18 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 }
 
+#pragma mark - private
+
+- (void)returnMissingParameterErrorWithName:(NSString *)name
+                               errorHandler:(SVErrorBlock)errorBlock
+{
+    if (name == nil || errorBlock == nil) {
+        return;
+    } 
+    
+NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:@"A required paramter was missing", NSLocalizedDescriptionKey,
+                      name, @"Paramter", nil];
+errorBlock([NSError errorWithDomain:@"Podster" code:400 userInfo:info]);
+    
+}
 @end

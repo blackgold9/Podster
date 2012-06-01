@@ -298,10 +298,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     return 1;
 }
 
-- (NSSet *)entriesNeedingDownload
+- (NSSet *)entriesNeedingDownloadInContext:(NSManagedObjectContext *)context
 {
     NSMutableSet *needingDownload = [NSMutableSet set];
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
     NSArray *subscribedPodcasts = [SVPodcast MR_findByAttribute:SVPodcastAttributes.isSubscribed
                                                         withValue:[NSNumber numberWithBool:YES]
                                                        andOrderBy:SVPodcastAttributes.title
@@ -319,7 +318,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (NSArray *)entriesToBeDownloadedForPodcast:(SVPodcast *)podcast inContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"%K == 0 && podcast == %@",SVPodcastEntryAttributes.played, podcast];
+    NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"%K == NO && podcast == %@",SVPodcastEntryAttributes.played, podcast];
     NSArray *entries = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
                                                 ascending:NO
                                             withPredicate:isInPodcast
@@ -333,16 +332,23 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         return entries;
     }
 }
+- (NSSet *)entriesNotInSet:(NSSet *)set inContext:(NSManagedObjectContext *)context
+{
+    DDLogVerbose(@"Determinign what needs to be cancelled/deleted");
+    NSPredicate *hasDownloadCompleteOrInProgress = [NSPredicate predicateWithFormat:@"(%K != nil || %K == YES)", SVPodcastEntryRelationships.download, SVPodcastEntryAttributes.downloadComplete]; 
+    NSPredicate *notInSet = [NSPredicate predicateWithFormat:@"NOT (self IN %@)", set];
+    NSPredicate *compound = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:notInSet, hasDownloadCompleteOrInProgress, nil]];
+    
+    NSArray *entriesNotInSet = [SVPodcastEntry MR_findAllWithPredicate:compound
+                                                             inContext:context];
+    return [NSSet setWithArray:entriesNotInSet];
+}
 
 - (void)deleteDownloadsForEntriesNotInSet:(NSSet *)entries inContext:(NSManagedObjectContext *)context
 {
-    DDLogVerbose(@"Determinign what needs to be cancelled/deleted");
-    NSPredicate *hasDownloadCompleteOrInProgress = [NSPredicate predicateWithFormat:@"(%K != nil || %K == 1)", SVPodcastEntryRelationships.download, SVPodcastEntryAttributes.downloadComplete]; 
-    NSPredicate *notInSet = [NSPredicate predicateWithFormat:@"NOT (self IN %@)", entries];
-    NSPredicate *compound = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:notInSet, hasDownloadCompleteOrInProgress, nil]];
-    
-    NSArray *entriesNeedingDeletion = [SVPodcastEntry MR_findAllWithPredicate:compound
-                                                                    inContext:context];
+    DDLogVerbose(@"Determining what needs to be cancelled/deleted");    
+    NSSet *entriesNeedingDeletion = [self entriesNotInSet:entries inContext:context];
+    NSAssert(![entriesNeedingDeletion intersectsSet:entries], @"The entries needing deletion should not intersect the entries we expect to download");
     
     DDLogInfo(@"Found %d entries needing deletion", entriesNeedingDeletion.count);
     for (SVPodcastEntry *entry in entriesNeedingDeletion) {

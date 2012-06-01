@@ -91,6 +91,8 @@ static char const kRefreshInterval = -3;
         
     }
     self.isBusy = YES;
+  
+    // First update from the first version if necessary, then go do the actual refresh
     [self updateFromFirstVersionIfNeccesary:^{
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

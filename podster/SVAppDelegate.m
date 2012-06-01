@@ -158,7 +158,7 @@ NSString *uuid();
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [DDLog addLogger:[DDNSLoggerLogger sharedInstance]];
     fileLogger = [[DDFileLogger alloc] init];
-    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+    fileLogger.rollingFrequency = 60 * 60 * 1; // 24 hour rolling
     fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
     
     [DDLog addLogger:fileLogger];
@@ -167,7 +167,9 @@ NSString *uuid();
     [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
+    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
 #endif
+
 #if defined (CONFIGURATION_Ad_Hoc)
     DDLogVerbose(@"Running in Ad_Hoc mode");
     [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
@@ -176,10 +178,11 @@ NSString *uuid();
     [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
-
+    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
-    
+    [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
 #endif
+
     
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
@@ -423,6 +426,18 @@ NSString *uuid();
                 break;
         }
     }
+}
+
+-(NSString *)crashReportDescription
+{
+    NSString *output;
+    if ([[fileLogger logFileManager] sortedLogFilePaths].count > 0) {
+        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:0] 
+                                           encoding:NSUTF8StringEncoding
+                                              error:nil];
+    }
+    
+    return output;
 }
 
 @end

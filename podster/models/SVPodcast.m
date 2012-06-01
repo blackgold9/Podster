@@ -295,9 +295,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                              // Completely new item, create it,add it, be happy
                                                                              localEntry = [SVPodcastEntry MR_createInContext:self.managedObjectContext];
                                                                              
-                                                                             [localEntry populateWithDictionary:episode];
-                                                                             
-                                                                             
+                                                                             [localEntry populateWithDictionary:episode];                                                                                                                                                          
                                                                              [self addItemsObject:localEntry];
                                                                          }
                                                                          
