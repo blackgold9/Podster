@@ -5,13 +5,13 @@
 
 
 extern const struct SVPodcastEntryAttributes {
+	__unsafe_unretained NSString *contentLength;
 	__unsafe_unretained NSString *datePublished;
 	__unsafe_unretained NSString *downloadComplete;
 	__unsafe_unretained NSString *duration;
 	__unsafe_unretained NSString *guid;
 	__unsafe_unretained NSString *imageURL;
 	__unsafe_unretained NSString *isVideo;
-	__unsafe_unretained NSString *localFilePath;
 	__unsafe_unretained NSString *markedForDownload;
 	__unsafe_unretained NSString *mediaURL;
 	__unsafe_unretained NSString *played;
@@ -61,6 +61,18 @@ extern const struct SVPodcastEntryFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (SVPodcastEntryID*)objectID;
+
+
+
+
+@property (nonatomic, strong) NSNumber *contentLength;
+
+
+@property int contentLengthValue;
+- (int)contentLengthValue;
+- (void)setContentLengthValue:(int)value_;
+
+//- (BOOL)validateContentLength:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -121,14 +133,6 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (void)setIsVideoValue:(BOOL)value_;
 
 //- (BOOL)validateIsVideo:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, strong) NSString *localFilePath;
-
-
-//- (BOOL)validateLocalFilePath:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -257,6 +261,15 @@ extern const struct SVPodcastEntryFetchedProperties {
 @interface _SVPodcastEntry (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSNumber*)primitiveContentLength;
+- (void)setPrimitiveContentLength:(NSNumber*)value;
+
+- (int)primitiveContentLengthValue;
+- (void)setPrimitiveContentLengthValue:(int)value_;
+
+
+
+
 - (NSDate*)primitiveDatePublished;
 - (void)setPrimitiveDatePublished:(NSDate*)value;
 
@@ -298,12 +311,6 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 - (BOOL)primitiveIsVideoValue;
 - (void)setPrimitiveIsVideoValue:(BOOL)value_;
-
-
-
-
-- (NSString*)primitiveLocalFilePath;
-- (void)setPrimitiveLocalFilePath:(NSString*)value;
 
 
 

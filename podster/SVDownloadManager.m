@@ -169,15 +169,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
         
         download = localEntry.download;
-        if (!download) {
+        if (!download && !localEntry.downloadCompleteValue) {
             download = [SVDownload MR_createInContext:localContext];
             download.manuallyTriggeredValue = isManualDownload;
-            localEntry.download = download;
-            download.filePath = [localEntry downloadFilePathForBasePath:[self downloadsPath]];
+            localEntry.download = download;           
             download.stateValue = SVDownloadStatePending;
             localEntry.download.positionValue = position;
             [self startDownload:download];
-        } else if ([[NSFileManager defaultManager] fileExistsAtPath:download.filePath] && download.entry.downloadCompleteValue){
+        } else if ([[NSFileManager defaultManager] fileExistsAtPath:[download.entry localFilePath]] && download.entry.downloadCompleteValue){
            
            NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
         }   
@@ -187,13 +186,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)deleteFileForEntry:(SVPodcastEntry *)entry
 {
-    NSString *pathToDelete = entry.download ? entry.download.filePath : entry.localFilePath;
-    NSString *computedPath = [entry downloadFilePathForBasePath:[self downloadsPath]];
-    if (![computedPath isEqualToString:pathToDelete]) {
-        NSAssert(false, @"should match");
-        return;
-    }
-    
+    NSString *pathToDelete = [entry localFilePath];    
     DDLogInfo(@"Deleting File: %@", pathToDelete);
 
     NSError *error;
@@ -241,7 +234,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [[SVSettings sharedInstance] downloadOn3g]) {
         
         SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
-                                                                               filePath:[download.entry downloadFilePathForBasePath:[self downloadsPath]]];
+                                                                               filePath:[download.entry  localFilePath]];
         
 //        background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
 //            [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
@@ -278,7 +271,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [entry.managedObjectContext performBlock:^{
         
         DDLogInfo(@"Download completed for podcast: %@ - Entry: %@. Remaining in queue: %d", entry.podcast.title, entry.title, pendingDownloads);
-        
         
     }];
     
@@ -335,8 +327,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (NSSet *)entriesNotInSet:(NSSet *)set inContext:(NSManagedObjectContext *)context
 {
     DDLogVerbose(@"Determinign what needs to be cancelled/deleted");
+    NSArray *ids = [set valueForKey:@"podstoreId"];
     NSPredicate *hasDownloadCompleteOrInProgress = [NSPredicate predicateWithFormat:@"(%K != nil || %K == YES)", SVPodcastEntryRelationships.download, SVPodcastEntryAttributes.downloadComplete]; 
-    NSPredicate *notInSet = [NSPredicate predicateWithFormat:@"NOT (self IN %@)", set];
+    NSPredicate *notInSet = [NSPredicate predicateWithFormat:@"NOT (podstoreId IN %@)", ids];
     NSPredicate *compound = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:notInSet, hasDownloadCompleteOrInProgress, nil]];
     
     NSArray *entriesNotInSet = [SVPodcastEntry MR_findAllWithPredicate:compound
@@ -355,7 +348,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogVerbose(@"Deleting %@", entry);
         [self deleteFileForEntry:entry];
         entry.downloadCompleteValue = NO;
-        entry.localFilePath = nil;
         entry.podcast.isDownloadingValue = NO;
         if (entry.download) {
             [context deleteObject:entry.download];                    
@@ -381,7 +373,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogVerbose(@"Cancelling all current download operations");
     }
     NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-    NSSet *shouldBePresent = [self entriesNeedingDownload];
+    NSSet *shouldBePresent = [self entriesNeedingDownloadInContext:context];
     [self deleteDownloadsForEntriesNotInSet:shouldBePresent
                                   inContext:context];
     

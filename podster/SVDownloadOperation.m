@@ -96,7 +96,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     [localContext performBlockAndWait:^{
         download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
-        DDLogInfo(@"Downloading %@ - %@  at URL: %@", download.entry.podcast.title, download.entry.title, download.filePath);
+        DDLogInfo(@"Downloading %@ - %@  at URL: %@", download.entry.podcast.title, download.entry.title, download.entry.mediaURL);
         NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
                
         [self willChangeValueForKey:@"isExecuting"];
@@ -104,7 +104,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self didChangeValueForKey:@"isExecuting"];
         
         SVDownload *localDownload = [download MR_inContext:localContext];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:download.filePath] && download.entry.downloadCompleteValue){
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[download.entry localFilePath]] && download.entry.downloadCompleteValue){
             //Download already existed, file exists, and entry is marked as download.
             // Nothing to see here
             NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
@@ -127,11 +127,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             [localContext performBlockAndWait:^{
-                DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", localDownload.filePath);
+                DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [localDownload.entry localFilePath]);
                 SVPodcastEntry *entry = localDownload.entry;
                 entry.downloadCompleteValue = YES;                
-                entry.localFilePath = filePath;
-                [self disableBackupForPath:filePath];
                 entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
                 DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
                 if (localDownload) {

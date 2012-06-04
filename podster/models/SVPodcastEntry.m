@@ -1,3 +1,4 @@
+#define kDownloadsDirectory @"PodcatcherDownloads"
 #import "SVPodcastEntry.h"
 #import "SVPodcast.h"
 #import "NSString+MD5Addition.h"
@@ -36,11 +37,18 @@
     self.podstoreId = [data objectForKey:@"id"];
 }
 
-
-- (NSString *)downloadFilePathForBasePath:(NSString *)basePath
+-(NSString *)downloadsPath
 {
-    NSAssert(basePath != nil, @"Must have base path");
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return [basePath stringByAppendingPathComponent:kDownloadsDirectory];
+    
+}
 
+- (NSString *)localFilePath
+{
+    NSString *basePath = [self downloadsPath];
+    
     NSString *filePath = [basePath stringByAppendingPathComponent:[[self podstoreId] stringValue]];
     return [filePath stringByAppendingPathExtension:[[[[self mediaURL] pathExtension] componentsSeparatedByString:@"?"] objectAtIndex:0]];
 }

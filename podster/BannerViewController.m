@@ -55,6 +55,7 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
         AdWhirlView *_bannerView;
     UIViewController *_contentController;
+    BOOL shouldHideAd;
 }
 
 - (UIViewController *)viewControllerForPresentingModalView {
@@ -69,6 +70,7 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
             _bannerView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
             _bannerView.delegate = self;
             _contentController = contentController;
+            shouldHideAd = NO;
 
         }
         
@@ -117,8 +119,11 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
 -(void)becameActive
 {        
+    // Hide the ad when coming back from the background. It's probably blank at this point. 
+    // After this next layout, it will reset shouldHideAd to NO
+    shouldHideAd = YES;
     [self.view setNeedsLayout];
-    [self.view layoutIfNeeded];    
+//    [self.view layoutIfNeeded];    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -138,10 +143,11 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 }
    
 - (void)viewDidLayoutSubviews
-{    
+{        
     CGRect contentFrame = self.view.bounds;
     CGRect bannerFrame = _bannerView.frame;
-    if ([_bannerView adExists] && ![_bannerView isIgnoringNewAdRequests]) {
+    if (!shouldHideAd && 
+        ([_bannerView adExists] && ![_bannerView isIgnoringNewAdRequests])) {
         
         bannerFrame.size = [_bannerView actualAdSize];
         contentFrame.size.height -= _bannerView.frame.size.height;
@@ -149,8 +155,10 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     } else {
         bannerFrame.origin.y = contentFrame.size.height;
     }
+    
     _contentController.view.frame = contentFrame;
     _bannerView.frame = bannerFrame;
+    shouldHideAd = NO;
 }
 -(void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
 {

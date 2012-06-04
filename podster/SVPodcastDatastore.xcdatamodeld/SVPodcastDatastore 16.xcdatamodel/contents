@@ -2,7 +2,6 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Download" representedClassName="SVDownload" syncable="YES">
         <attribute name="downloadedBytes" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="manuallyTriggered" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="progress" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -45,13 +44,13 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PodcastEntry" inverseName="podcast" inverseEntity="PodcastEntry" syncable="YES"/>
     </entity>
     <entity name="PodcastEntry" representedClassName="SVPodcastEntry" syncable="YES">
+        <attribute name="contentLength" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="datePublished" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="downloadComplete" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="guid" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isVideo" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="localFilePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="markedForDownload" optional="YES" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="mediaURL" attributeType="String" syncable="YES"/>
         <attribute name="played" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>

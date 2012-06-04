@@ -313,32 +313,42 @@ static NSString *const kIsBusyKey = @"isBusy";
 
 }
 
+- (void)configureLoadingView:(BOOL)updating {
+    UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[loadingView viewWithTag:1906];
+    
+    if(updating) {
+        DDLogVerbose(@"showing updating message");
+        [spinner startAnimating];
+    } else {
+        DDLogVerbose(@"hiding updating message");                
+    }
+    
+    CGFloat targetAlpha = updating ? 1.0 :0.0;
+    if (targetAlpha != loadingView.alpha) {
+        for(UIView *subView in loadingView.subviews){
+            [UIView animateWithDuration:0.33
+                                  delay:0
+                                options:UIViewAnimationOptionBeginFromCurrentState
+                             animations:^{
+                                 subView.alpha = targetAlpha;
+                             } completion:^(BOOL finished) {
+                             }];
+        }
+     
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 
     BOOL updating = [[SVSubscriptionManager sharedInstance] isBusy];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if ([keyPath isEqualToString:kIsBusyKey]){
-            UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[loadingView viewWithTag:1906];
-
-            if(updating) {
-                DDLogVerbose(@"showing updating message");
-                [spinner startAnimating];
-            } else {
-                DDLogVerbose(@"hiding updating message");                
-            }
-            
-            CGFloat targetAlpha = updating ? 1.0 :0.0;
-            if (targetAlpha != loadingView.alpha) {
-                [UIView animateWithDuration:0.33
-                                      delay:0
-                                    options:UIViewAnimationOptionBeginFromCurrentState
-                                 animations:^{
-                                     loadingView.alpha = targetAlpha;
-                                 } completion:^(BOOL finished) {
-                                                                     }];
-            }           
-        }
-    });
+  
+    if ([keyPath isEqualToString:kIsBusyKey]){
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self configureLoadingView:updating];   
+        });
+    }
+ 
     
     [super observeValueForKeyPath:keyPath
                          ofObject:object

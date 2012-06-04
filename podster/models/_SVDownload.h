@@ -6,7 +6,6 @@
 
 extern const struct SVDownloadAttributes {
 	__unsafe_unretained NSString *downloadedBytes;
-	__unsafe_unretained NSString *filePath;
 	__unsafe_unretained NSString *manuallyTriggered;
 	__unsafe_unretained NSString *position;
 	__unsafe_unretained NSString *progress;
@@ -22,7 +21,6 @@ extern const struct SVDownloadFetchedProperties {
 } SVDownloadFetchedProperties;
 
 @class SVPodcastEntry;
-
 
 
 
@@ -51,14 +49,6 @@ extern const struct SVDownloadFetchedProperties {
 - (void)setDownloadedBytesValue:(int)value_;
 
 //- (BOOL)validateDownloadedBytes:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, strong) NSString *filePath;
-
-
-//- (BOOL)validateFilePath:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -145,12 +135,6 @@ extern const struct SVDownloadFetchedProperties {
 
 - (int)primitiveDownloadedBytesValue;
 - (void)setPrimitiveDownloadedBytesValue:(int)value_;
-
-
-
-
-- (NSString*)primitiveFilePath;
-- (void)setPrimitiveFilePath:(NSString*)value;
 
 
 

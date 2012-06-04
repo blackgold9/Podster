@@ -615,6 +615,8 @@
 		4BE71E6D14FDA044008CECE5 /* standard-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE71E6914FDA03C008CECE5 /* standard-big@2x.png */; };
 		4BE723CB1554A0C30007F740 /* Lockbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE723CA1554A0C30007F740 /* Lockbox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BE723CC1554A0C30007F740 /* Lockbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE723CA1554A0C30007F740 /* Lockbox.m */; };
+		4BE7A73E157BFF18007900F8 /* ToolbarStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE7A73D157BFF18007900F8 /* ToolbarStatusView.m */; };
+		4BE7A73F157BFF18007900F8 /* ToolbarStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE7A73D157BFF18007900F8 /* ToolbarStatusView.m */; };
 		4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEDB18814C004E200264CCC /* ImageIO.framework */; };
 		4BFE0B6015041551005F9E81 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B5F15041551005F9E81 /* Icon.png */; };
 		4BFE0B6215041561005F9E81 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B6115041561005F9E81 /* Icon@2x.png */; };
@@ -1231,6 +1233,9 @@
 		4BE71E6914FDA03C008CECE5 /* standard-big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standard-big@2x.png"; sourceTree = "<group>"; };
 		4BE723C91554A0C30007F740 /* Lockbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lockbox.h; sourceTree = "<group>"; };
 		4BE723CA1554A0C30007F740 /* Lockbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lockbox.m; sourceTree = "<group>"; };
+		4BE7A73C157BFF18007900F8 /* ToolbarStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarStatusView.h; sourceTree = "<group>"; };
+		4BE7A73D157BFF18007900F8 /* ToolbarStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarStatusView.m; sourceTree = "<group>"; };
+		4BE7A740157C80B9007900F8 /* SVPodcastDatastore 16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 16.xcdatamodel"; sourceTree = "<group>"; };
 		4BEDB18814C004E200264CCC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4BFE0B5F15041551005F9E81 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		4BFE0B6115041561005F9E81 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -2349,6 +2354,8 @@
 				4B11EDA615316695004B9091 /* PodcastGridCellView.m */,
 				4BC8D1F21546F6A9009C113C /* GridCellCountOverlay.h */,
 				4BC8D1F31546F6A9009C113C /* GridCellCountOverlay.m */,
+				4BE7A73C157BFF18007900F8 /* ToolbarStatusView.h */,
+				4BE7A73D157BFF18007900F8 /* ToolbarStatusView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -2937,6 +2944,7 @@
 				4B10717715524A060044B013 /* DDNSLoggerLogger.m in Sources */,
 				4B1071791552FC240044B013 /* NSData+Base64.m in Sources */,
 				4BE723CB1554A0C30007F740 /* Lockbox.m in Sources */,
+				4BE7A73E157BFF18007900F8 /* ToolbarStatusView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3092,6 +3100,7 @@
 				4BC8D1F51546F6A9009C113C /* GridCellCountOverlay.m in Sources */,
 				4B10717D1552FC7D0044B013 /* NSAttributedString+HTML.m in Sources */,
 				4BE723CC1554A0C30007F740 /* Lockbox.m in Sources */,
+				4BE7A73F157BFF18007900F8 /* ToolbarStatusView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3565,6 +3574,7 @@
 			isa = XCVersionGroup;
 			children = (
 				4B55DFD5155751C00030CB51 /* SVPodcastDatastore 15.xcdatamodel */,
+				4BE7A740157C80B9007900F8 /* SVPodcastDatastore 16.xcdatamodel */,
 				4B91FEB9153C8CB900CE3B6A /* SVPodcastDatastore 14.xcdatamodel */,
 				4B610C6715218ED000D8F5CE /* SVPodcastDatastore 13.xcdatamodel */,
 				4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */,
@@ -3579,7 +3589,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4B55DFD5155751C00030CB51 /* SVPodcastDatastore 15.xcdatamodel */;
+			currentVersion = 4BE7A740157C80B9007900F8 /* SVPodcastDatastore 16.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

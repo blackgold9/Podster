@@ -4,13 +4,13 @@
 #import "_SVPodcastEntry.h"
 
 const struct SVPodcastEntryAttributes SVPodcastEntryAttributes = {
+	.contentLength = @"contentLength",
 	.datePublished = @"datePublished",
 	.downloadComplete = @"downloadComplete",
 	.duration = @"duration",
 	.guid = @"guid",
 	.imageURL = @"imageURL",
 	.isVideo = @"isVideo",
-	.localFilePath = @"localFilePath",
 	.markedForDownload = @"markedForDownload",
 	.mediaURL = @"mediaURL",
 	.played = @"played",
@@ -57,6 +57,10 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"contentLengthValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"contentLength"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 	if ([key isEqualToString:@"downloadCompleteValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"downloadComplete"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -92,6 +96,32 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 	return keyPaths;
 }
+
+
+
+
+@dynamic contentLength;
+
+
+
+- (int)contentLengthValue {
+	NSNumber *result = [self contentLength];
+	return [result intValue];
+}
+
+- (void)setContentLengthValue:(int)value_ {
+	[self setContentLength:[NSNumber numberWithInt:value_]];
+}
+
+- (int)primitiveContentLengthValue {
+	NSNumber *result = [self primitiveContentLength];
+	return [result intValue];
+}
+
+- (void)setPrimitiveContentLengthValue:(int)value_ {
+	[self setPrimitiveContentLength:[NSNumber numberWithInt:value_]];
+}
+
 
 
 
@@ -190,13 +220,6 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 - (void)setPrimitiveIsVideoValue:(BOOL)value_ {
 	[self setPrimitiveIsVideo:[NSNumber numberWithBool:value_]];
 }
-
-
-
-
-
-@dynamic localFilePath;
-
 
 
 

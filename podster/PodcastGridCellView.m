@@ -65,7 +65,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     if ([podcast class] == [SVPodcast class]) {
         SVPodcast *coreCast = (SVPodcast *)podcast;
-        if (coreCast.gridSizeImageData) {
+        if (coreCast.gridSizeImageData && coreCast.objectID) {
             NSCache *cache = [self cache];
             UIImage *image = [cache objectForKey:coreCast.objectID];
             if (image == nil) {

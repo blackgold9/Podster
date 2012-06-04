@@ -5,7 +5,6 @@
 
 const struct SVDownloadAttributes SVDownloadAttributes = {
 	.downloadedBytes = @"downloadedBytes",
-	.filePath = @"filePath",
 	.manuallyTriggered = @"manuallyTriggered",
 	.position = @"position",
 	.progress = @"progress",
@@ -98,13 +97,6 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 - (void)setPrimitiveDownloadedBytesValue:(int)value_ {
 	[self setPrimitiveDownloadedBytes:[NSNumber numberWithInt:value_]];
 }
-
-
-
-
-
-@dynamic filePath;
-
 
 
 
