@@ -1,8 +1,10 @@
 #define kDownloadsDirectory @"PodcatcherDownloads"
 #import "SVPodcastEntry.h"
 #import "SVPodcast.h"
-#import "NSString+MD5Addition.h"
 #import "NSString+MW_HTML.h"
+#import "SVDownloadManager.h"
+
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation SVPodcastEntry
 
 - (void)populateWithDictionary:(NSDictionary *)dict
@@ -57,4 +59,6 @@
 {
     return [NSString stringWithFormat:@"%@ - %@:%@", self.podcast.title, self.title, self.podstoreId];
 }
+
+
 @end

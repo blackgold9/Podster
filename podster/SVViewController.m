@@ -58,8 +58,12 @@
 
 -(void)showNowPLayingIcon
 {
+
+
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-                                                                                             target:self action:@selector(showNowPlayingController)] animated:NO];
+                                                                                             target:self
+                                                                                             action:@selector(showNowPlayingController)]
+                                      animated:NO];
 }
 - (void)viewWillAppear:(BOOL)animated
 {

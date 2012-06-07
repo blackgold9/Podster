@@ -26,9 +26,19 @@
         _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         [self setAnimating:animating];
         [self setShowing:showing];
+        _titleLabel.text = [title copy];
+        _subTitleLabel.text = [subTitle copy];
     }
-    
+
     return self;
+}
+
+- (void)setTitle:(NSString *)title
+     andSubTitle:(NSString *)subTitle
+{
+    _titleLabel.text = title;
+    _subTitleLabel.text = subTitle;
+    [self setNeedsLayout];
 }
 
 -(void)setShowing:(BOOL)showing

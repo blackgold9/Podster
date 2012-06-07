@@ -67,8 +67,14 @@ static char const kRefreshInterval = -3;
         // We had old (pre changeover) version podcasts in here. Subscribe to the new server with them,and update the items with feed_ids
         for (SVPodcast *podcast in oldPodcasts) {
             dispatch_group_enter(group);
-            [podcast updateFromV1:^{
+            [podcast updateFromV1:^(BOOL success){
                 LOG_GENERAL(2, @"Updating from v1 complete");
+                if (!success) {
+                    DDLogError(@"Failed to update podcast. Deleting it");
+                    [podcast.managedObjectContext performBlock:^{
+                        [podcast MR_deleteInContext:podcast.managedObjectContext];
+                    }];
+                }
                 dispatch_group_leave(group);
             }];
         } 
@@ -93,8 +99,7 @@ static char const kRefreshInterval = -3;
     self.isBusy = YES;
   
     // First update from the first version if necessary, then go do the actual refresh
-    [self updateFromFirstVersionIfNeccesary:^{
-        
+    [self updateFromFirstVersionIfNeccesary:^{        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSMutableArray *array = [[self subscribedPodcasts] mutableCopy];
             dispatch_group_t group = dispatch_group_create();

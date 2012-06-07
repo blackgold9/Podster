@@ -170,66 +170,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }];
 }
 
-- (void)updateNextItemDateAndDownloadIfNecessary:(BOOL)shouldDownload
-{
-    DDLogInfo(@"Calculating next item for %@", self.title);
-    [self.managedObjectContext performBlock:^{
-
-        NSAssert(self.isSubscribed, @"IsSubscribed should have a value");
-        NSNumber *subscribedNumber= [self isSubscribed];
-        BOOL subscribed = [subscribedNumber boolValue];
-        DDLogInfo(@"Block began");
-        if (subscribed) {
-            DDLogVerbose(@"Podcast is Subscribed");
-            SVPodcastEntry *entry = nil;
-
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@ AND played == NO", SVPodcastEntryRelationships.podcast, self];
-            DDLogVerbose(@"querying the next unplayed item");
-            entry = [SVPodcastEntry MR_findFirstWithPredicate:predicate
-                                                     sortedBy:SVPodcastEntryAttributes.datePublished
-                                                    ascending:NO
-                                                    inContext:self.managedObjectContext];
-            if(entry) {
-                DDLogVerbose(@"Had a qualified entry. Date: %@", entry.datePublished);
-                self.nextItemDate = entry.datePublished;
-                // If item hasn't been listened to
-                if (!entry.playedValue && entry.download == nil && !entry.downloadCompleteValue && shouldDownload) {
-                    DDLogInfo(@"Queing entry for download");
-                    // If the entry hasn't been played yet and it hasn't been downloaded, queue it for download
-                    [[SVDownloadManager sharedInstance] downloadEntry:entry manualDownload:NO];
-                }
-            } else {
-                DDLogVerbose(@"No qualified entry. Setting date to the distant past");
-                self.nextItemDate = [NSDate distantPast];
-            }
-
-
-            // Cleanup all but the last download
-            DDLogVerbose(@"Cleaning up played podcasts");
-            NSPredicate *needsDeletingPredicate = [NSPredicate predicateWithFormat:@"%K == %@ AND downloadComplete == YES", SVPodcastEntryRelationships.podcast, self];
-
-            DDLogVerbose(@"Looking for items that need deleting");
-            NSArray *needDeleting = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                                             ascending:NO
-                                                         withPredicate:needsDeletingPredicate
-                                                             inContext:self.managedObjectContext];
-            
-            BOOL isFirst = YES;
-            for (SVPodcastEntry *toDelete in needDeleting) {
-                if (isFirst) {
-                    // Skip deleting the most recent thing
-                    isFirst = NO;
-                    continue;
-                }
-                [[SVDownloadManager sharedInstance] deleteFileForEntry:toDelete];
-                toDelete.downloadCompleteValue = NO;
-            }                        
-        } else {
-            DDLogInfo(@"Not subscribed");
-        }
-    }];
-}
-
 - (void)getNewEpisodes:(void (^)(BOOL))complete
 {
     DDLogWarn(@"Getting new episodes");
@@ -312,12 +252,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                              } onError:^void(NSError *error) {
                                                                  self.updatingValue = NO;
                                                                  complete(NO);
-                                                             }];
-        
+                                                             }];        
     }];
 }
 
-- (void)updateFromV1:(void (^)(void))complete
+- (void)updateFromV1:(void (^)(BOOL success))complete
 {
     isUpdatingFromV1 = YES;
     NSManagedObjectContext *context = self.managedObjectContext;
@@ -330,19 +269,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                        [context performBlock:^void() {
                                                            self.podstoreIdValue = [feedId intValue];
                                                            [self getNewEpisodes:^(BOOL succes) {
-                                                               complete();
+                                                               complete(YES);
                                                                isUpdatingFromV1 = NO;
                                                            }];
                                                            
-                                                       }];
-                                                       
-                                                       
+                                                       }];                                                                                                              
                                                    } onError:^void(NSError *error) {
-                                                       complete();
+                                                       complete(NO);
                                                        isUpdatingFromV1 = NO;
-                                                   }];     
-    
-    
+                                                   }];         
 }
 
 @end

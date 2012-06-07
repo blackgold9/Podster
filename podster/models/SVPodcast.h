@@ -7,9 +7,6 @@
 
 - (void)populateWithPodcast:(id <ActsAsPodcast>)podcast;
 
-
-- (void)updateNextItemDateAndDownloadIfNecessary:(BOOL)shouldDownload;
-
 - (void)getNewEpisodes:(void (^)(BOOL))complete;
 
 // Used when installing the app fresh and restoring old subscriptions
@@ -21,5 +18,5 @@
 - (void)unsubscribe;
 
 // Hack for getting off the v1 servers
-- (void)updateFromV1:(void (^)(void))complete;
+- (void)updateFromV1:(void (^)(BOOL success))complete;
 @end

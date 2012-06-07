@@ -12,13 +12,14 @@
 #import "JMTabView.h"
 #import "FeaturedController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import "GCDiscreetNotificationView.h"
 #import "SVSubscriptionManager.h"
 #import "PodsterManagedDocument.h"
 #import "PodsterIAPHelper.h"
 #import "BlockAlertView.h"
 
-static const int ddLogLevel = LOG_LEVEL_WARN;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 static NSString *const kIsBusyKey = @"isBusy";
 
 @interface HomeController ()
@@ -37,7 +38,6 @@ static NSString *const kIsBusyKey = @"isBusy";
 
 @implementation HomeController {
     GCDiscreetNotificationView *notificationView;
-    UIView *loadingView;
 }
 
 @synthesize scrollView = _scrollView;
@@ -83,10 +83,8 @@ static NSString *const kIsBusyKey = @"isBusy";
                                                      action:@selector(settingsTapped:)]];
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    [items addObject:spacer];        
-    [items addObject:[[UIBarButtonItem alloc] initWithCustomView:loadingView]];
     [items addObject:spacer];
-    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"] 
+    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"]
                                                       style:UIBarButtonItemStylePlain
                                                      target:self
                                                      action:@selector(directoryButtonTapped:)]];
@@ -101,31 +99,11 @@ static NSString *const kIsBusyKey = @"isBusy";
 //    placeHolder.frame = self.view.bounds;
 //    [self.view addSubview:placeHolder];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
-    
-    loadingView = [[UIView alloc] initWithFrame:CGRectZero];    
-    loadingView.backgroundColor = [UIColor clearColor];
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [loadingView addSubview:spinner];
-    [spinner setHidesWhenStopped:NO];
-    [spinner startAnimating];
-    [spinner setTag:1906];
-    
-    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
-    loadingLabel.text = NSLocalizedString(@"Updating...", @"Updating Podcasts");
-    [loadingLabel sizeToFit];
-    loadingLabel.backgroundColor = [UIColor clearColor];
-    loadingLabel.textColor = [UIColor whiteColor];
 
-    CGRect newFrame = loadingLabel.frame;
-    newFrame.origin = CGPointMake(spinner.frame.size.width + 5, (spinner.frame.size.height - loadingLabel.frame.size.height) / 2);
-    loadingLabel.frame = newFrame;
-    [loadingView addSubview:loadingLabel];
-    loadingView.frame = CGRectMake(0, 0, CGRectGetMaxX(loadingLabel.frame), spinner.frame.size.height);
-    loadingView.alpha = 0;
-    
+
     [self configureToolbar:NO];
-    
-    
+
+
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{
         
         [self configureTabView];
@@ -140,14 +118,17 @@ static NSString *const kIsBusyKey = @"isBusy";
         [self configureViewControllerForScreenType:[[SVSettings sharedInstance] homeScreen]];
         UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];    
         [self.view addGestureRecognizer:rightSwipe];
-        
-        
+
+
         //   [placeHolder removeFromSuperview];
 
-                        
+
      }];
 
-    //[[PodsterIAPHelper sharedInstance] r]
+    notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Updating Podcasts", @"Updating Podcasts")
+                                                           showActivity:YES
+                                                     inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
+                                                                 inView:self.view];
 }
 
 - (void)directoryButtonTapped:(id)sender
@@ -182,7 +163,6 @@ static NSString *const kIsBusyKey = @"isBusy";
             [self configureViewControllerForScreenType:HomePageFeaturedScreen];
         }
     }
-
 }
 
 - (UIViewController *)controllerForScreenType:(HomePageScreenType)screenType
@@ -277,7 +257,7 @@ static NSString *const kIsBusyKey = @"isBusy";
 {
     [self setScrollView:nil];
     [super viewDidUnload];
-    loadingView = nil;
+    notificationView = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -313,30 +293,6 @@ static NSString *const kIsBusyKey = @"isBusy";
 
 }
 
-- (void)configureLoadingView:(BOOL)updating {
-    UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[loadingView viewWithTag:1906];
-    
-    if(updating) {
-        DDLogVerbose(@"showing updating message");
-        [spinner startAnimating];
-    } else {
-        DDLogVerbose(@"hiding updating message");                
-    }
-    
-    CGFloat targetAlpha = updating ? 1.0 :0.0;
-    if (targetAlpha != loadingView.alpha) {
-        for(UIView *subView in loadingView.subviews){
-            [UIView animateWithDuration:0.33
-                                  delay:0
-                                options:UIViewAnimationOptionBeginFromCurrentState
-                             animations:^{
-                                 subView.alpha = targetAlpha;
-                             } completion:^(BOOL finished) {
-                             }];
-        }
-     
-    }
-}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 
@@ -345,7 +301,14 @@ static NSString *const kIsBusyKey = @"isBusy";
     if ([keyPath isEqualToString:kIsBusyKey]){
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self configureLoadingView:updating];   
+           if (updating) {
+               DDLogVerbose(@"Showing loading message");
+               [self.view bringSubviewToFront:notificationView];
+               [notificationView show:YES];
+           } else if([notificationView isShowing]) {
+               DDLogVerbose(@"Hiding loading message");
+               [notificationView hideAnimatedAfter:1.0];
+           }
         });
     }
  

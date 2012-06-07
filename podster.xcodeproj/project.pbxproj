@@ -628,6 +628,10 @@
 		D622850714E50C48003084BB /* dark-noise.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850414E50C48003084BB /* dark-noise.png */; };
 		D622850814E50C48003084BB /* dark-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850514E50C48003084BB /* dark-noise@2x.png */; };
 		D622850914E50C48003084BB /* dark-noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850514E50C48003084BB /* dark-noise@2x.png */; };
+		D622850914E50C48003084BD /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084BC /* search.png */; };
+		D622850914E50C48003084BF /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084BE /* search@2x.png */; };
+		D622850914E50C48003084C1 /* search2.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084C0 /* search2.png */; };
+		D622850914E50C48003084C3 /* search2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084C2 /* search2@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1245,6 +1249,10 @@
 		D608C9C0150EDF0B009BA9BD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D622850414E50C48003084BB /* dark-noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise.png"; sourceTree = "<group>"; };
 		D622850514E50C48003084BB /* dark-noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark-noise@2x.png"; sourceTree = "<group>"; };
+		D622850914E50C48003084BC /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		D622850914E50C48003084BE /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
+		D622850914E50C48003084C0 /* search2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search2.png; sourceTree = "<group>"; };
+		D622850914E50C48003084C2 /* search2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search2@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1672,6 +1680,10 @@
 		4B20DEC814BE75B30042DC9D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D622850914E50C48003084C2 /* search2@2x.png */,
+				D622850914E50C48003084C0 /* search2.png */,
+				D622850914E50C48003084BE /* search@2x.png */,
+				D622850914E50C48003084BC /* search.png */,
 				4B107171155200A20044B013 /* cancel.png */,
 				4B107172155200A20044B013 /* cancel@2x.png */,
 				4B10716D155200180044B013 /* trash-can.png */,
@@ -2660,6 +2672,10 @@
 				4B107170155200180044B013 /* trash-can@2x.png in Resources */,
 				4B107173155200A20044B013 /* cancel.png in Resources */,
 				4B107174155200A20044B013 /* cancel@2x.png in Resources */,
+				D622850914E50C48003084BD /* search.png in Resources */,
+				D622850914E50C48003084BF /* search@2x.png in Resources */,
+				D622850914E50C48003084C1 /* search2.png in Resources */,
+				D622850914E50C48003084C3 /* search2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

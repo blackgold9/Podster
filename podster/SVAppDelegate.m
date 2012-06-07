@@ -182,7 +182,6 @@ NSString *uuid();
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
     [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
 #endif
-
     
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
@@ -438,6 +437,6 @@ NSString *uuid();
     }
     
     return output;
-}
+}   
 
 @end

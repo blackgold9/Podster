@@ -21,4 +21,6 @@
 - (void)cancelDownload:(SVDownload *)download;
 
 - (void)downloadPendingEntries;
+- (void)deleteFilesForPodcast:(SVPodcast *)podcast
+                    inContext:(NSManagedObjectContext *)context;
 @end
