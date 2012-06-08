@@ -137,10 +137,6 @@
 		4B0E654214DF86CE008913B2 /* grid-count-overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E654014DF86CE008913B2 /* grid-count-overlay@2x.png */; };
 		4B0E654514DF9DE9008913B2 /* unplayed-flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E654314DF9DE9008913B2 /* unplayed-flag.png */; };
 		4B0E654614DF9DE9008913B2 /* unplayed-flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E654414DF9DE9008913B2 /* unplayed-flag@2x.png */; };
-		4B1070EF1551EFD80044B013 /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1070581551EFD70044B013 /* BWQuincyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B1070F01551EFD80044B013 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1070591551EFD70044B013 /* CrashReporter.framework */; };
-		4B1070F11551EFD80044B013 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4B10705A1551EFD70044B013 /* LICENSE.txt */; };
-		4B1070F21551EFD80044B013 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B10705B1551EFD70044B013 /* Quincy.bundle */; };
 		4B1071671551FE270044B013 /* partialplay-toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1071611551FE270044B013 /* partialplay-toolbar.png */; };
 		4B1071681551FE270044B013 /* partialplay-toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1071621551FE270044B013 /* partialplay-toolbar@2x.png */; };
 		4B1071691551FE270044B013 /* played-toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B1071631551FE270044B013 /* played-toolbar.png */; };
@@ -635,13 +631,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4B10715E1551EFD80044B013 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4B10705D1551EFD70044B013 /* QuincyLib.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 36892BEC145EC96A0036932D;
-			remoteInfo = QuincyLib;
-		};
 		4B71F7B114A5B08C00D26F4C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4B71F78214A5B08C00D26F4C /* Project object */;
@@ -785,12 +774,6 @@
 		4B0E654014DF86CE008913B2 /* grid-count-overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grid-count-overlay@2x.png"; sourceTree = "<group>"; };
 		4B0E654314DF9DE9008913B2 /* unplayed-flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unplayed-flag.png"; sourceTree = "<group>"; };
 		4B0E654414DF9DE9008913B2 /* unplayed-flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unplayed-flag@2x.png"; sourceTree = "<group>"; };
-		4B1070571551EFD70044B013 /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
-		4B1070581551EFD70044B013 /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
-		4B1070591551EFD70044B013 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		4B10705A1551EFD70044B013 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		4B10705B1551EFD70044B013 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
-		4B10705D1551EFD70044B013 /* QuincyLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = QuincyLib.xcodeproj; sourceTree = "<group>"; };
 		4B1071611551FE270044B013 /* partialplay-toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "partialplay-toolbar.png"; sourceTree = "<group>"; };
 		4B1071621551FE270044B013 /* partialplay-toolbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "partialplay-toolbar@2x.png"; sourceTree = "<group>"; };
 		4B1071631551FE270044B013 /* played-toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "played-toolbar.png"; sourceTree = "<group>"; };
@@ -1285,7 +1268,6 @@
 				4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */,
 				4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4B05C028153639E10078DF13 /* libInMobi_iOS.a in Frameworks */,
-				4B1070F01551EFD80044B013 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1486,46 +1468,8 @@
 		4B1070531551EFD70044B013 /* QuincyKit */ = {
 			isa = PBXGroup;
 			children = (
-				4B1070551551EFD70044B013 /* client */,
 			);
 			path = QuincyKit;
-			sourceTree = "<group>";
-		};
-		4B1070551551EFD70044B013 /* client */ = {
-			isa = PBXGroup;
-			children = (
-				4B1070561551EFD70044B013 /* iOS */,
-			);
-			path = client;
-			sourceTree = "<group>";
-		};
-		4B1070561551EFD70044B013 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				4B1070571551EFD70044B013 /* BWQuincyManager.h */,
-				4B1070581551EFD70044B013 /* BWQuincyManager.m */,
-				4B1070591551EFD70044B013 /* CrashReporter.framework */,
-				4B10705A1551EFD70044B013 /* LICENSE.txt */,
-				4B10705B1551EFD70044B013 /* Quincy.bundle */,
-				4B10705C1551EFD70044B013 /* QuincyLib */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		4B10705C1551EFD70044B013 /* QuincyLib */ = {
-			isa = PBXGroup;
-			children = (
-				4B10705D1551EFD70044B013 /* QuincyLib.xcodeproj */,
-			);
-			path = QuincyLib;
-			sourceTree = "<group>";
-		};
-		4B10705E1551EFD70044B013 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4B10715F1551EFD80044B013 /* libQuincyLib.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4B1071601551FE270044B013 /* played-state */ = {
@@ -2460,12 +2404,6 @@
 			mainGroup = 4B71F78014A5B08C00D26F4C;
 			productRefGroup = 4B71F78C14A5B08C00D26F4C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 4B10705E1551EFD70044B013 /* Products */;
-					ProjectRef = 4B10705D1551EFD70044B013 /* QuincyLib.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				4B71F78A14A5B08C00D26F4C /* Podster */,
@@ -2473,16 +2411,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		4B10715F1551EFD80044B013 /* libQuincyLib.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libQuincyLib.a;
-			remoteRef = 4B10715E1551EFD80044B013 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4B71F78914A5B08C00D26F4C /* Resources */ = {
@@ -2660,8 +2588,6 @@
 				4BC1EE7B155178DF00FF5D9C /* download@2x.png in Resources */,
 				4BC1EE7E1551790200FF5D9C /* delete.png in Resources */,
 				4BC1EE7F1551790200FF5D9C /* delete@2x.png in Resources */,
-				4B1070F11551EFD80044B013 /* LICENSE.txt in Resources */,
-				4B1070F21551EFD80044B013 /* Quincy.bundle in Resources */,
 				4B1071671551FE270044B013 /* partialplay-toolbar.png in Resources */,
 				4B1071681551FE270044B013 /* partialplay-toolbar@2x.png in Resources */,
 				4B1071691551FE270044B013 /* played-toolbar.png in Resources */,
@@ -2956,7 +2882,6 @@
 				4B05C0391536449B0078DF13 /* Reachability.m in Sources */,
 				4BC8D1E41545E20E009C113C /* ISO8601DateFormatter.m in Sources */,
 				4BC8D1F41546F6A9009C113C /* GridCellCountOverlay.m in Sources */,
-				4B1070EF1551EFD80044B013 /* BWQuincyManager.m in Sources */,
 				4B10717715524A060044B013 /* DDNSLoggerLogger.m in Sources */,
 				4B1071791552FC240044B013 /* NSData+Base64.m in Sources */,
 				4BE723CB1554A0C30007F740 /* Lockbox.m in Sources */,
