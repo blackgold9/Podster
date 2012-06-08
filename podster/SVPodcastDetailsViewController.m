@@ -438,8 +438,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
     self.titleLabel.text = self.podcast.title;
-    [MBProgressHUD showHUDAddedTo:self.imageView animated:YES];
-
+//    
+//    UIActivityIndicatorView *imageSpinner = [[UIActivityIndicatorView alloc] initWithFrame:self.imageView.frame];
+//    [imageSpinner setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
+//    [self.imageView addSubview:imageSpinner];
+//    [imageSpinner startAnimating];
+//    [imageSpinner setHidesWhenStopped:YES];
+        
     isLoading = YES;
     
     localContext = [PodsterManagedDocument defaultContext];
@@ -463,7 +468,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 dispatch_async(dispatch_get_main_queue(), ^{                    
                     // We didn't have a local copy, so load from url
                     [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
-                    [MBProgressHUD hideHUDForView:self.imageView animated:YES];
+             //       [imageSpinner stopAnimating];
                 });
             } else {
                 // We had a local copy, so check for local image
@@ -471,13 +476,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                     dispatch_async(dispatch_get_main_queue(), ^{                                                
                         UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
                         self.imageView.image = image;
-                        [MBProgressHUD hideHUDForView:self.imageView animated:YES];
+                      //  [imageSpinner stopAnimating];
                     });
                 } else {
                     dispatch_async(dispatch_get_main_queue(), ^{                    
                         // We didn't have a local copy, so load from url
                         [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
-                        [MBProgressHUD hideHUDForView:self.imageView animated:YES];
+                      //  [imageSpinner stopAnimating];
                     }); 
                 }
                 LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
