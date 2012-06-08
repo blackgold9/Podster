@@ -181,6 +181,7 @@ NSString *uuid();
     [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
     [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
+    [[BWHockeyManager sharedHockeyManager] setDelegate:self];
 #endif
     
     isFirstRun = [[SVSettings sharedInstance] firstRun];
@@ -438,5 +439,16 @@ NSString *uuid();
     
     return output;
 }   
+
+-(NSString *)customDeviceIdentifier
+{
+#if defined (CONFIGURATION_Ad_Hoc)
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)])
+        return [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];
+    else 
+        return [[SVSettings sharedInstance] deviceId];;
+#endif
+    return [[SVSettings sharedInstance] deviceId];
+}
 
 @end

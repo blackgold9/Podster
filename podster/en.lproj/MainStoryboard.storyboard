@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -374,7 +373,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2153" y="-20"/>
+            <point key="canvasLocation" x="2329" y="-764"/>
         </scene>
         <!--Episode Details View Controller - Episode Details-->
         <scene sceneID="Rqu-WU-irX">
@@ -414,7 +413,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2668" y="61"/>
+            <point key="canvasLocation" x="2844" y="-1115"/>
         </scene>
         <!--Playback Controller - Now Playing-->
         <scene sceneID="iM8-22-u5p">

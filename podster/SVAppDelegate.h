@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BWQuincyManager.h"
-@interface SVAppDelegate : UIResponder <UIApplicationDelegate, BWQuincyManagerDelegate>
+#import "BWHockeyManager.h"
+@interface SVAppDelegate : UIResponder <UIApplicationDelegate, BWQuincyManagerDelegate, BWHockeyManagerDelegate>
 @property (strong, nonatomic) UIWindow *window;
 - (void)startListening;
 - (void)stopListening;
