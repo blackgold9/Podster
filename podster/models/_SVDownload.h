@@ -41,19 +41,19 @@ extern const struct SVDownloadFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *downloadedBytes;
+@property (nonatomic, strong) NSNumber* downloadedBytes;
 
 
-@property int downloadedBytesValue;
-- (int)downloadedBytesValue;
-- (void)setDownloadedBytesValue:(int)value_;
+@property int32_t downloadedBytesValue;
+- (int32_t)downloadedBytesValue;
+- (void)setDownloadedBytesValue:(int32_t)value_;
 
 //- (BOOL)validateDownloadedBytes:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *manuallyTriggered;
+@property (nonatomic, strong) NSNumber* manuallyTriggered;
 
 
 @property BOOL manuallyTriggeredValue;
@@ -65,19 +65,19 @@ extern const struct SVDownloadFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *position;
+@property (nonatomic, strong) NSNumber* position;
 
 
-@property int positionValue;
-- (int)positionValue;
-- (void)setPositionValue:(int)value_;
+@property int32_t positionValue;
+- (int32_t)positionValue;
+- (void)setPositionValue:(int32_t)value_;
 
 //- (BOOL)validatePosition:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *progress;
+@property (nonatomic, strong) NSNumber* progress;
 
 
 @property float progressValue;
@@ -89,24 +89,24 @@ extern const struct SVDownloadFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *state;
+@property (nonatomic, strong) NSNumber* state;
 
 
-@property short stateValue;
-- (short)stateValue;
-- (void)setStateValue:(short)value_;
+@property int16_t stateValue;
+- (int16_t)stateValue;
+- (void)setStateValue:(int16_t)value_;
 
 //- (BOOL)validateState:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *totalBytes;
+@property (nonatomic, strong) NSNumber* totalBytes;
 
 
-@property int totalBytesValue;
-- (int)totalBytesValue;
-- (void)setTotalBytesValue:(int)value_;
+@property int32_t totalBytesValue;
+- (int32_t)totalBytesValue;
+- (void)setTotalBytesValue:(int32_t)value_;
 
 //- (BOOL)validateTotalBytes:(id*)value_ error:(NSError**)error_;
 
@@ -117,6 +117,7 @@ extern const struct SVDownloadFetchedProperties {
 @property (nonatomic, strong) SVPodcastEntry* entry;
 
 //- (BOOL)validateEntry:(id*)value_ error:(NSError**)error_;
+
 
 
 
@@ -133,8 +134,8 @@ extern const struct SVDownloadFetchedProperties {
 - (NSNumber*)primitiveDownloadedBytes;
 - (void)setPrimitiveDownloadedBytes:(NSNumber*)value;
 
-- (int)primitiveDownloadedBytesValue;
-- (void)setPrimitiveDownloadedBytesValue:(int)value_;
+- (int32_t)primitiveDownloadedBytesValue;
+- (void)setPrimitiveDownloadedBytesValue:(int32_t)value_;
 
 
 
@@ -151,8 +152,8 @@ extern const struct SVDownloadFetchedProperties {
 - (NSNumber*)primitivePosition;
 - (void)setPrimitivePosition:(NSNumber*)value;
 
-- (int)primitivePositionValue;
-- (void)setPrimitivePositionValue:(int)value_;
+- (int32_t)primitivePositionValue;
+- (void)setPrimitivePositionValue:(int32_t)value_;
 
 
 
@@ -169,8 +170,8 @@ extern const struct SVDownloadFetchedProperties {
 - (NSNumber*)primitiveState;
 - (void)setPrimitiveState:(NSNumber*)value;
 
-- (short)primitiveStateValue;
-- (void)setPrimitiveStateValue:(short)value_;
+- (int16_t)primitiveStateValue;
+- (void)setPrimitiveStateValue:(int16_t)value_;
 
 
 
@@ -178,8 +179,8 @@ extern const struct SVDownloadFetchedProperties {
 - (NSNumber*)primitiveTotalBytes;
 - (void)setPrimitiveTotalBytes:(NSNumber*)value;
 
-- (int)primitiveTotalBytesValue;
-- (void)setPrimitiveTotalBytesValue:(int)value_;
+- (int32_t)primitiveTotalBytesValue;
+- (void)setPrimitiveTotalBytesValue:(int32_t)value_;
 
 
 

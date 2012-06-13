@@ -56,7 +56,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         completionGroup = dispatch_group_create();
         currentProgressPercentage = 0;
         operationLookup = [NSMutableDictionary dictionary];
-        maxConcurrentDownloads = 2;
+        maxConcurrentDownloads = 1;
         queue = [NSOperationQueue new];
         [queue setMaxConcurrentOperationCount:maxConcurrentDownloads];
         queue.name = @"com.vantertech.podster.downloads";
@@ -292,7 +292,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 // REDUX Attempt
 - (NSUInteger)numberOfItemsToDownloadAutomaticallyForPodcast:(SVPodcast *)podcast
 {
-    return 1;
+    return podcast.downloadsToKeepValue;
 }
 
 - (NSSet *)entriesNeedingDownloadInContext:(NSManagedObjectContext *)context

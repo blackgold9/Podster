@@ -321,7 +321,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                           onError:(SVErrorBlock)onError
 {
     NSParameterAssert(feedId);
-    if (feedId != nil) {
+    if (!feedId) {
         [self returnMissingParameterErrorWithName:@"feedId" errorHandler:onError];
         return;
     }
@@ -337,16 +337,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                }
            }
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//               DDLogError(@"Request: %@ failed with error %@", [[operation request] URL], error);
                if (onError) {
-                   dispatch_async(dispatch_get_main_queue(), ^{
-                       if ([[operation response] statusCode] == 402) {
-                           // This is the special case needs purchase. For some reason the code is not reflected in the error , so make a new one
-                           NSError *newError = [NSError errorWithDomain:@"Podster" code:402 userInfo:nil];
-                           onError(newError);
-                       } else {
-                           onError(error);
-                       }
-                   });
+                   onError(error);
                }
            }];
 }

@@ -17,16 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIView *metadataView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 - (IBAction)infoTapped:(id)sender;
-@property (weak, nonatomic) IBOutlet UISwitch *hidePlayedSwitch;
-- (IBAction)hidePlayedSwitchedByUser:(id)sender;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *sortSegmentedControl;
-- (IBAction)sortControlTapped:(id)sender;
-@property (weak, nonatomic) IBOutlet UISwitch *notifySwitch;
-- (IBAction)notifySwitchChanged:(id)sender;
-@property (strong, nonatomic) IBOutlet UILabel *notifyOnUpdateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *notifyDescriptionLabel;
-@property (strong, nonatomic) IBOutlet UILabel *hidePlayedItemsLabel;
-
 - (IBAction)subscribeTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *subscribeButton;
 @property (weak) id<ActsAsPodcast> podcast;

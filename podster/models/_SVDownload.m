@@ -80,21 +80,21 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 
 
 
-- (int)downloadedBytesValue {
+- (int32_t)downloadedBytesValue {
 	NSNumber *result = [self downloadedBytes];
 	return [result intValue];
 }
 
-- (void)setDownloadedBytesValue:(int)value_ {
+- (void)setDownloadedBytesValue:(int32_t)value_ {
 	[self setDownloadedBytes:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveDownloadedBytesValue {
+- (int32_t)primitiveDownloadedBytesValue {
 	NSNumber *result = [self primitiveDownloadedBytes];
 	return [result intValue];
 }
 
-- (void)setPrimitiveDownloadedBytesValue:(int)value_ {
+- (void)setPrimitiveDownloadedBytesValue:(int32_t)value_ {
 	[self setPrimitiveDownloadedBytes:[NSNumber numberWithInt:value_]];
 }
 
@@ -132,21 +132,21 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 
 
 
-- (int)positionValue {
+- (int32_t)positionValue {
 	NSNumber *result = [self position];
 	return [result intValue];
 }
 
-- (void)setPositionValue:(int)value_ {
+- (void)setPositionValue:(int32_t)value_ {
 	[self setPosition:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitivePositionValue {
+- (int32_t)primitivePositionValue {
 	NSNumber *result = [self primitivePosition];
 	return [result intValue];
 }
 
-- (void)setPrimitivePositionValue:(int)value_ {
+- (void)setPrimitivePositionValue:(int32_t)value_ {
 	[self setPrimitivePosition:[NSNumber numberWithInt:value_]];
 }
 
@@ -184,21 +184,21 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 
 
 
-- (short)stateValue {
+- (int16_t)stateValue {
 	NSNumber *result = [self state];
 	return [result shortValue];
 }
 
-- (void)setStateValue:(short)value_ {
+- (void)setStateValue:(int16_t)value_ {
 	[self setState:[NSNumber numberWithShort:value_]];
 }
 
-- (short)primitiveStateValue {
+- (int16_t)primitiveStateValue {
 	NSNumber *result = [self primitiveState];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveStateValue:(short)value_ {
+- (void)setPrimitiveStateValue:(int16_t)value_ {
 	[self setPrimitiveState:[NSNumber numberWithShort:value_]];
 }
 
@@ -210,21 +210,21 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 
 
 
-- (int)totalBytesValue {
+- (int32_t)totalBytesValue {
 	NSNumber *result = [self totalBytes];
 	return [result intValue];
 }
 
-- (void)setTotalBytesValue:(int)value_ {
+- (void)setTotalBytesValue:(int32_t)value_ {
 	[self setTotalBytes:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveTotalBytesValue {
+- (int32_t)primitiveTotalBytesValue {
 	NSNumber *result = [self primitiveTotalBytes];
 	return [result intValue];
 }
 
-- (void)setPrimitiveTotalBytesValue:(int)value_ {
+- (void)setPrimitiveTotalBytesValue:(int32_t)value_ {
 	[self setPrimitiveTotalBytes:[NSNumber numberWithInt:value_]];
 }
 
@@ -235,6 +235,7 @@ const struct SVDownloadFetchedProperties SVDownloadFetchedProperties = {
 @dynamic entry;
 
 	
+
 
 
 

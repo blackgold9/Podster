@@ -84,7 +84,7 @@ static NSString *const kIsBusyKey = @"isBusy";
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [items addObject:spacer];
-    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plus.png"]
+    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search2.png"]
                                                       style:UIBarButtonItemStylePlain
                                                      target:self
                                                      action:@selector(directoryButtonTapped:)]];

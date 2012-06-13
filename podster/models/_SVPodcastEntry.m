@@ -104,21 +104,21 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 
 
-- (int)contentLengthValue {
+- (int32_t)contentLengthValue {
 	NSNumber *result = [self contentLength];
 	return [result intValue];
 }
 
-- (void)setContentLengthValue:(int)value_ {
+- (void)setContentLengthValue:(int32_t)value_ {
 	[self setContentLength:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveContentLengthValue {
+- (int32_t)primitiveContentLengthValue {
 	NSNumber *result = [self primitiveContentLength];
 	return [result intValue];
 }
 
-- (void)setPrimitiveContentLengthValue:(int)value_ {
+- (void)setPrimitiveContentLengthValue:(int32_t)value_ {
 	[self setPrimitiveContentLength:[NSNumber numberWithInt:value_]];
 }
 
@@ -163,21 +163,21 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 
 
-- (int)durationValue {
+- (int32_t)durationValue {
 	NSNumber *result = [self duration];
 	return [result intValue];
 }
 
-- (void)setDurationValue:(int)value_ {
+- (void)setDurationValue:(int32_t)value_ {
 	[self setDuration:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveDurationValue {
+- (int32_t)primitiveDurationValue {
 	NSNumber *result = [self primitiveDuration];
 	return [result intValue];
 }
 
-- (void)setPrimitiveDurationValue:(int)value_ {
+- (void)setPrimitiveDurationValue:(int32_t)value_ {
 	[self setPrimitiveDuration:[NSNumber numberWithInt:value_]];
 }
 
@@ -288,21 +288,21 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 
 
-- (int)podstoreIdValue {
+- (int32_t)podstoreIdValue {
 	NSNumber *result = [self podstoreId];
 	return [result intValue];
 }
 
-- (void)setPodstoreIdValue:(int)value_ {
+- (void)setPodstoreIdValue:(int32_t)value_ {
 	[self setPodstoreId:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitivePodstoreIdValue {
+- (int32_t)primitivePodstoreIdValue {
 	NSNumber *result = [self primitivePodstoreId];
 	return [result intValue];
 }
 
-- (void)setPrimitivePodstoreIdValue:(int)value_ {
+- (void)setPrimitivePodstoreIdValue:(int32_t)value_ {
 	[self setPrimitivePodstoreId:[NSNumber numberWithInt:value_]];
 }
 
@@ -314,21 +314,21 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 
 
-- (int)positionInSecondsValue {
+- (int32_t)positionInSecondsValue {
 	NSNumber *result = [self positionInSeconds];
 	return [result intValue];
 }
 
-- (void)setPositionInSecondsValue:(int)value_ {
+- (void)setPositionInSecondsValue:(int32_t)value_ {
 	[self setPositionInSeconds:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitivePositionInSecondsValue {
+- (int32_t)primitivePositionInSecondsValue {
 	NSNumber *result = [self primitivePositionInSeconds];
 	return [result intValue];
 }
 
-- (void)setPrimitivePositionInSecondsValue:(int)value_ {
+- (void)setPrimitivePositionInSecondsValue:(int32_t)value_ {
 	[self setPrimitivePositionInSeconds:[NSNumber numberWithInt:value_]];
 }
 
@@ -361,21 +361,21 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 
 
 
-- (int)totalBytesValue {
+- (int32_t)totalBytesValue {
 	NSNumber *result = [self totalBytes];
 	return [result intValue];
 }
 
-- (void)setTotalBytesValue:(int)value_ {
+- (void)setTotalBytesValue:(int32_t)value_ {
 	[self setTotalBytes:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveTotalBytesValue {
+- (int32_t)primitiveTotalBytesValue {
 	NSNumber *result = [self primitiveTotalBytes];
 	return [result intValue];
 }
 
-- (void)setPrimitiveTotalBytesValue:(int)value_ {
+- (void)setPrimitiveTotalBytesValue:(int32_t)value_ {
 	[self setPrimitiveTotalBytes:[NSNumber numberWithInt:value_]];
 }
 
@@ -397,6 +397,7 @@ const struct SVPodcastEntryFetchedProperties SVPodcastEntryFetchedProperties = {
 @dynamic podcast;
 
 	
+
 
 
 

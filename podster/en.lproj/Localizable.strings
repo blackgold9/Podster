@@ -111,3 +111,12 @@
 "NOTIFICAITONS_SUBSCRIBE_FAILED" = "Podster was unable to reach the server to set up notifications for this podcast. Please try again later from this podcast's settings area.";
 "\"%@\" has finished downloading" = "\"%@\" has finished downloading";
 "\"%@\" and %d other podcasts have finished downloading" = "\"%@\" and %d other podcasts have finished downloading";
+"Don't Keep Any" = "Don't Keep Any";
+"Next Episode" = "Next Episode";
+"Next 3 Episodes" = "Next 3 Episodes";
+"Sort" = "Sort";
+"Episodes To Keep" = "Episodes To Keep";
+"Notify me" = "Notify me";
+"Podster can store episodes on your device for access offline" = "Podster can store episodes on your device for access offline";
+"Get notified when new episodes are available" = "Get notified when new episodes are available";
+"Settings" = "Settings";

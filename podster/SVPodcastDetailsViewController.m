@@ -32,8 +32,9 @@
 #import "_SVPodcast.h"
 #import <Twitter/Twitter.h>
 #import "MBProgressHUD.h"
+#import "PodcastSettingsViewController.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
-@interface SVPodcastDetailsViewController ()
+@interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
 
 
 - (void)reloadData;
@@ -51,12 +52,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSTimer *gracePeriodTimer;
 }
 @synthesize shareButton;
-@synthesize notifyOnUpdateLabel;
-@synthesize notifyDescriptionLabel;
-@synthesize hidePlayedItemsLabel;
-@synthesize notifySwitch;
-@synthesize sortSegmentedControl;
-@synthesize hidePlayedSwitch;
 @synthesize titleLabel;
 @synthesize descriptionLabel;
 @synthesize tableView = _tableView;
@@ -83,21 +78,25 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)infoTapped:(id)sender {
-    SVPodcastModalView *modal = [[SVPodcastModalView alloc] initWithFrame:self.view.bounds ];
-    modal.podcast = localPodcast;
-    [self.view addSubview:modal];
-    [modal showFromPoint:((UIView *)sender).center];
-}
+- (void)optionsTapped:(id)sender {
+//    SVPodcastModalView *modal = [[SVPodcastModalView alloc] initWithFrame:self.view.bounds ];
+//    modal.podcast = localPodcast;
+//    [self.view addSubview:modal];
+//    [modal showFromPoint:((UIView *)sender).center];
+    UIStoryboard *board = [UIStoryboard storyboardWithName:@"PodcastStoryboard" bundle:nil];
 
-- (IBAction)hidePlayedSwitchedByUser:(id)sender {
-    localPodcast.hidePlayedEpisodesValue = self.hidePlayedSwitch.on;
-    [self reloadData];
-}
+    PodcastSettingsViewController *controller = [board instantiateViewControllerWithIdentifier:@"PodcastSettings"];
+    [localContext performBlockAndWait:^{
+        controller.shouldNotify = localPodcast.shouldNotifyValue;
+        controller.sortAscending = !localPodcast.sortNewestFirstValue;
+        controller.downloadsToKeep = (NSUInteger) localPodcast.downloadsToKeepValue;
+    }];
 
-- (IBAction)sortControlTapped:(id)sender {
-    localPodcast.sortNewestFirstValue = self.sortSegmentedControl.selectedSegmentIndex == 0;
-    [self reloadData];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+    controller.delegate = self;
+    [self.navigationController presentViewController:nav
+                                            animated:YES
+                                          completion:NULL];
 }
 
 - (BOOL)hasHitNotificationLimit {
@@ -124,62 +123,62 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [FlurryAnalytics logEvent:@"LimitUpsellDeclined"];
     }];
     [signupAlert show];
-    [self.notifySwitch setOn:NO animated:YES];
-    
 }
 
--(void)doNotificationChange
-{
-    if (self.notifySwitch.on && [self hasHitNotificationLimit])  {
-        [self showNotificationsUpsell];
-    } else {        
-        [[SVPodcatcherClient sharedInstance] changeNotificationSetting:self.notifySwitch.on
-                                                        forFeedWithId:localPodcast.podstoreId
-                                                          onCompletion:^{
-                                                              [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
-                                                                         withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:self.notifySwitch.on] forKey:@"ON"]];
-                                                              LOG_GENERAL(2, @"Notifications setting changed successfully");
-                                                              localPodcast.shouldNotifyValue = self.notifySwitch.on;
-                                                              
-                                                          }
-                                                               onError:^(NSError *error) {                                                                   
-                                                                       [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
-                                                                   DDLogError(@"Error when chanigng notification settings: %@", error);
-                                                                       BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
-                                                                       
-                                                                       [alertView setCancelButtonWithTitle:@"OK" block:^{
-                                                                           
-                                                                       }];
-                                                                       [self.notifySwitch setOn:!self.notifySwitch.on animated:YES];
-                                                                       [alertView show];
-                                                               }];
+- (void)updateNotificationSetting:(BOOL)shouldNotify {
+    if (![[SVSettings sharedInstance] notificationsEnabled]) {
+        return;
     }
+
+    if (shouldNotify && [self hasHitNotificationLimit])  {
+        [self showNotificationsUpsell];
+        return;
+    }
+
+    // Check if it's not subscribed, if not, subscribe them, then try again
+    if (shouldNotify && !localPodcast.isSubscribedValue) {
+        DDLogInfo(@"Podcast was not subscribed to");
+        // User wants notifications and is not subscribed, subscribe them
+        [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
+            DDLogInfo(@"Subscribing succeded with status: %@", success ? @"Success" : @"Failure");
+            if (success) {
+                [self updateNotificationSetting:shouldNotify];
+            }
+        }];
+        return;
+    }
+
+    // Actually do the notification update
+    [[SVPodcatcherClient sharedInstance] changeNotificationSetting:shouldNotify
+                                                     forFeedWithId:localPodcast.podstoreId
+                                                      onCompletion:^{
+                                                          [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
+                                                                     withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:shouldNotify] forKey:@"ON"]];
+                                                          LOG_GENERAL(2, @"Notifications setting changed successfully");
+                                                          [localContext performBlock:^{
+                                                              localPodcast.shouldNotifyValue = shouldNotify;
+                                                          }];
+                                                      }
+            onError:^(NSError *error) {
+                [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
+                DDLogError(@"Error when chanigng notification settings: %@", error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+
+
+                    BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
+
+                    [alertView setCancelButtonWithTitle:@"OK" block:^{
+
+                    }];
+
+                    [alertView show];
+                });
+            }];
+
 }
 
 - (IBAction)notifySwitchChanged:(id)sender {
-    if([[SVSettings sharedInstance] notificationsEnabled]){               
-        if (self.notifySwitch.on && !localPodcast.isSubscribedValue) {
-            // User wants notifications and is not subscribed, subscribe them
-            [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
-                if (success) {
-                    [self doNotificationChange];
-                }
-            }];
-        } else {
-          [self doNotificationChange];
-        }
-    } 
-    else 
-    {
-        // Notifications not enabled
-        BlockAlertView *alertView = [BlockAlertView alertWithTitle:NSLocalizedString(@"NOTIFICATIONS_ARE_DISABLED", @"Notifications are disabled")
-                                                           message:NSLocalizedString(@"NOTIFICATIONS_DISABLED_BODY", @"Please enable notifications in settings if you would like to recieve updates when new episodes are posted.")];
-        [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK",nil) block:^{
-            
-        }];
-        [self.notifySwitch setOn:NO animated:YES];
-        [alertView show];
-    }
+
 }
 
 - (void)showFeedNotificationSubscriptionError
@@ -209,7 +208,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                       onCompletion:^{
                                                                           LOG_GENERAL(2, @"Succeed creating notification subscription");
                                                                           localPodcast.shouldNotifyValue = YES;
-                                                                          [self.notifySwitch setOn:YES animated:YES];
                                                                       }
                                                                            onError:^(NSError *error) {
                                                                                LOG_GENERAL(2, @"Failed creating notification subscription");
@@ -289,8 +287,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)unsubscribeFromPodcast
 {
     [FlurryAnalytics logEvent:@"UnsubscribedFromPodcast"];
-   
-    [self.notifySwitch setOn:NO animated:YES];
+
     [localContext performBlock:^void() {
         [localPodcast unsubscribe];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -314,40 +311,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 }
 
-- (IBAction)optionsButtonTapped:(id)sender {
-    [self toggleOptionsPanel:!optionsOpen
-                    animated:YES];
-}
-
-- (void)toggleOptionsPanel:(BOOL)open animated:(BOOL)animated
-{
-    optionsOpen = open;
-    if (!open) {
-        [UIView animateWithDuration:animated ? 0.33 : 0.0
-                         animations:^{
-                             self.metadataView.frame = CGRectMake(0, 0, 320, 88);
-                             self.optionsButton.transform = CGAffineTransformIdentity;
-                             self.tableView.frame = CGRectMake(0, 88, 320, self.view.frame.size.height - 88);
-                         }];
-    } else {
-        [UIView animateWithDuration:animated ? 0.33 : 0.0
-                         animations:^{
-                             
-                             self.metadataView.frame = CGRectMake(0, 0, 320, 220);
-                             
-                             self.tableView.frame = CGRectMake(0, 220, 320, self.view.frame.size.height - 220);
-                         }];
-    }
-    
-    [UIView animateWithDuration:0.15 animations:^{
-        self.optionsButton.transform = open ? CGAffineTransformMakeRotation((CGFloat) M_PI) : CGAffineTransformIdentity;
-    }];
-    
-}
 - (void)configureToolbar
 {
     NSMutableArray *barItems = [NSMutableArray array];
-    if (localPodcast.isSubscribedValue) {
+    BOOL isSubscribed = localPodcast.isSubscribedValue;
+    if (isSubscribed) {
 
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star.png"]
                                                    landscapeImagePhone:nil
@@ -370,7 +338,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                           target:self
                                                                           action:@selector(shareTapped:)]];
     }
-        
+
+    [barItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
+    if(isSubscribed) {
+        [barItems addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sliders.png"]
+                                    landscapeImagePhone:nil
+                                                  style:UIBarButtonItemStylePlain
+                                                 target:self action:@selector(optionsTapped:)]];
+    }
+
     [self setToolbarItems:barItems animated:YES];
 }
 #pragma mark - View lifecycle
@@ -429,11 +405,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     isInitialLoad = YES;
     
     self.navigationItem.title = NSLocalizedString(@"Details", @"Details");
-    self.notifyDescriptionLabel.text = NSLocalizedString(@"Poster will send you an alert when new episodes of this podcast are available", @"Poster will send you an alert when new episodes of this podcast are available");
-    self.notifyOnUpdateLabel.text =  NSLocalizedString(@"Notify Me On Update", @"Notify Me On Update");
-    self.hidePlayedItemsLabel.text = NSLocalizedString(@"Hide Played Items", @"Hide Played Items");
-    [self.sortSegmentedControl setTitle:NSLocalizedString(@"Newest First", @"Newest First") forSegmentAtIndex:0];
-    [self.sortSegmentedControl setTitle:NSLocalizedString(@"Oldest First", @"Oldest First") forSegmentAtIndex:1];
+
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0];
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
@@ -493,7 +465,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.descriptionLabel.text = localPodcast.summary;    
                 isSubscribed = blockHasSubscription;
-                self.notifySwitch.on = localPodcast.shouldNotifyValue;
                 self.subscribeButton.enabled = NO;
                 
                 [self setupSubscribeButton];
@@ -547,7 +518,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 }];
                 
                 [self reloadData];
-                [self toggleOptionsPanel:NO animated:NO]; 
+
             });
         }
         @catch (NSException *exception) {
@@ -570,8 +541,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     
     LOG_GENERAL(2, @"Reload Data begun");
-    self.hidePlayedSwitch.on = localPodcast.hidePlayedEpisodesValue;
-    self.sortSegmentedControl.selectedSegmentIndex = localPodcast.sortNewestFirstValue ? 0 : 1;
 
     [localContext performBlock:^void() {
         @try {
@@ -603,14 +572,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self setMetadataView:nil];
     [self setImageView:nil];
     [self setSubscribeButton:nil];
-    [self setHidePlayedSwitch:nil];
-    [self setSortSegmentedControl:nil];
-    [self setNotifySwitch:nil];
+
     [self setOptionsButton:nil];
     [self setOptionsButton:nil];
-    [self setNotifyOnUpdateLabel:nil];
-    [self setNotifyDescriptionLabel:nil];
-    [self setHidePlayedItemsLabel:nil];
+
     [self setShareButton:nil];
     [super viewDidUnload];
 }
@@ -759,4 +724,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self dismissModalViewControllerAnimated:YES];
     };
 }
+
+
+#pragma mark - podcast settings delegate
+- (void)podcastSettingsViewControllerShouldClose:(PodcastSettingsViewController *)controller {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [localContext performBlock:^void() {
+        localPodcast.sortNewestFirstValue = !controller.sortAscending;
+        if (localPodcast.shouldNotifyValue != controller.shouldNotify) {
+            [self updateNotificationSetting:controller.shouldNotify];
+        }
+
+        localPodcast.downloadsToKeepValue = controller.downloadsToKeep;
+    }];
+}
+
 @end

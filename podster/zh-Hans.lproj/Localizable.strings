@@ -118,3 +118,12 @@
 "Updating Podcasts" = "Updating Podcasts";
 "\"%@\" has finished downloading" = "\"%@\" has finished downloading";
 "\"%@\" and %d other podcasts have finished downloading" = "\"%@\" and %d other podcasts have finished downloading";
+"Don't Keep Any" = "Don't Keep Any";
+"Next Episode" = "Next Episode";
+"Next 3 Episodes" = "Next 3 Episodes";
+"Sort" = "Sort";
+"Episodes To Keep" = "Episodes To Keep";
+"Notify me" = "Notify me";
+"Podster can store episodes on your device for access offline" = "Podster can store episodes on your device for access offline";
+"Get notified when new episodes are available" = "Get notified when new episodes are available";
+"Settings" = "Settings";

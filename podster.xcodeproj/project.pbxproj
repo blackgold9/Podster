@@ -626,6 +626,16 @@
 		D622850914E50C48003084BF /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084BE /* search@2x.png */; };
 		D622850914E50C48003084C1 /* search2.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084C0 /* search2.png */; };
 		D622850914E50C48003084C3 /* search2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084C2 /* search2@2x.png */; };
+		D622850914E50C48003084C5 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D622850914E50C48003084C6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D6A8789015894C34009DD522 /* sliders.png in Resources */ = {isa = PBXBuildFile; fileRef = D6A8788E15894C34009DD522 /* sliders.png */; };
+		D6A8789115894C34009DD522 /* sliders@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6A8788F15894C34009DD522 /* sliders@2x.png */; };
+		D6EE8ADF1587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6EE8ADE1587E3A600F33740 /* PodcastStoryboard.storyboard */; };
+		D6EE8AE01587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6EE8ADE1587E3A600F33740 /* PodcastStoryboard.storyboard */; };
+		D6EE8AE31587E65500F33740 /* PodcastSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */; };
+		D6EE8AE41587E65500F33740 /* PodcastSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */; };
+		D6EE8AE41587E65500F33742 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D6EE8AE41587E65500F33745 /* SVInsetLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE41587E65500F33744 /* SVInsetLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1232,6 +1242,14 @@
 		D622850914E50C48003084BE /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
 		D622850914E50C48003084C0 /* search2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search2.png; sourceTree = "<group>"; };
 		D622850914E50C48003084C2 /* search2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search2@2x.png"; sourceTree = "<group>"; };
+		D6A8788C158943A0009DD522 /* SVPodcastDatastore 17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 17.xcdatamodel"; sourceTree = "<group>"; };
+		D6A8788E15894C34009DD522 /* sliders.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliders.png; sourceTree = "<group>"; };
+		D6A8788F15894C34009DD522 /* sliders@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliders@2x.png"; sourceTree = "<group>"; };
+		D6EE8ADE1587E3A600F33740 /* PodcastStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PodcastStoryboard.storyboard; sourceTree = "<group>"; };
+		D6EE8AE11587E65500F33740 /* PodcastSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastSettingsViewController.h; sourceTree = "<group>"; };
+		D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastSettingsViewController.m; sourceTree = "<group>"; };
+		D6EE8AE41587E65500F33744 /* SVInsetLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVInsetLabel.m; sourceTree = "<group>"; };
+		D6EE8AE41587E65500F33746 /* SVInsetLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVInsetLabel.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1514,6 +1532,8 @@
 				4B8F6F4014EA425700D328DE /* FeaturedController.m */,
 				4B0A7B251506992700BADEBB /* SettingsViewController.h */,
 				4B0A7B261506992700BADEBB /* SettingsViewController.m */,
+				D6EE8AE11587E65500F33740 /* PodcastSettingsViewController.h */,
+				D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */,
 			);
 			name = "View controllers";
 			sourceTree = "<group>";
@@ -1535,6 +1555,8 @@
 		4B10D01814BF9A3E00DF4DBD /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D6EE8AE41587E65500F33746 /* SVInsetLabel.h */,
+				D6EE8AE41587E65500F33744 /* SVInsetLabel.m */,
 				4B10D01914BF9A5F00DF4DBD /* NSString+SVHelpers.h */,
 				4B10D01A14BF9A5F00DF4DBD /* NSString+SVHelpers.m */,
 				4B10D02714BFB07600DF4DBD /* UILabel+VerticalAlign.h */,
@@ -1612,6 +1634,8 @@
 		4B20DEC814BE75B30042DC9D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D6A8788E15894C34009DD522 /* sliders.png */,
+				D6A8788F15894C34009DD522 /* sliders@2x.png */,
 				D622850914E50C48003084C2 /* search2@2x.png */,
 				D622850914E50C48003084C0 /* search2.png */,
 				D622850914E50C48003084BE /* search@2x.png */,
@@ -2025,6 +2049,7 @@
 				4B8D1D8C150DD04F00E6D770 /* PrivacyPolicy.txt */,
 				4BD123C3150FFF8100A108DA /* CloudHelper.h */,
 				4BD123C4150FFF8100A108DA /* CloudHelper.m */,
+				D6EE8ADE1587E3A600F33740 /* PodcastStoryboard.storyboard */,
 			);
 			path = podster;
 			sourceTree = "<group>";
@@ -2589,6 +2614,9 @@
 				4B859207158250E9002452DF /* Quincy.bundle in Resources */,
 				4B85921D15825196002452DF /* close.png in Resources */,
 				4B85921F15825196002452DF /* close@2x.png in Resources */,
+				D6EE8ADF1587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */,
+				D6A8789015894C34009DD522 /* sliders.png in Resources */,
+				D6A8789115894C34009DD522 /* sliders@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2678,6 +2706,7 @@
 				4BC8D1F11546F5ED009C113C /* flag2@2x.png in Resources */,
 				4B85921E15825196002452DF /* close.png in Resources */,
 				4B85922015825196002452DF /* close@2x.png in Resources */,
+				D6EE8AE01587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2873,6 +2902,10 @@
 				4B85922515825196002452DF /* UAGradientBackground.m in Sources */,
 				4B85922715825196002452DF /* UANoisyGradientBackground.m in Sources */,
 				4B85922915825196002452DF /* UARoundedRectView.m in Sources */,
+				D622850914E50C48003084C5 /* (null) in Sources */,
+				D6EE8AE31587E65500F33740 /* PodcastSettingsViewController.m in Sources */,
+				D6EE8AE41587E65500F33742 /* (null) in Sources */,
+				D6EE8AE41587E65500F33745 /* SVInsetLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3029,6 +3062,8 @@
 				4B85922615825196002452DF /* UAGradientBackground.m in Sources */,
 				4B85922815825196002452DF /* UANoisyGradientBackground.m in Sources */,
 				4B85922A15825196002452DF /* UARoundedRectView.m in Sources */,
+				D622850914E50C48003084C6 /* (null) in Sources */,
+				D6EE8AE41587E65500F33740 /* PodcastSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3137,8 +3172,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "070B47BF-31A1-4186-A427-8094CC5DF76A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "070B47BF-31A1-4186-A427-8094CC5DF76A";
+				PROVISIONING_PROFILE = "11F161B2-FFFB-47DE-8086-36920AAF460C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "11F161B2-FFFB-47DE-8086-36920AAF460C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -3505,6 +3540,7 @@
 		4B2E51D914B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D6A8788C158943A0009DD522 /* SVPodcastDatastore 17.xcdatamodel */,
 				4B55DFD5155751C00030CB51 /* SVPodcastDatastore 15.xcdatamodel */,
 				4BE7A740157C80B9007900F8 /* SVPodcastDatastore 16.xcdatamodel */,
 				4B91FEB9153C8CB900CE3B6A /* SVPodcastDatastore 14.xcdatamodel */,
@@ -3521,7 +3557,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4BE7A740157C80B9007900F8 /* SVPodcastDatastore 16.xcdatamodel */;
+			currentVersion = D6A8788C158943A0009DD522 /* SVPodcastDatastore 17.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

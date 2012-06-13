@@ -123,7 +123,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.listSizeImageData = nil;
 }
 
--(NSString *)description
+-(NSString *)debugDescription	
 {
     return [NSString stringWithFormat:@"%@: %@", [super description], self.title];
 }

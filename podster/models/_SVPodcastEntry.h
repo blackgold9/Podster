@@ -65,19 +65,19 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *contentLength;
+@property (nonatomic, strong) NSNumber* contentLength;
 
 
-@property int contentLengthValue;
-- (int)contentLengthValue;
-- (void)setContentLengthValue:(int)value_;
+@property int32_t contentLengthValue;
+- (int32_t)contentLengthValue;
+- (void)setContentLengthValue:(int32_t)value_;
 
 //- (BOOL)validateContentLength:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSDate *datePublished;
+@property (nonatomic, strong) NSDate* datePublished;
 
 
 //- (BOOL)validateDatePublished:(id*)value_ error:(NSError**)error_;
@@ -85,7 +85,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *downloadComplete;
+@property (nonatomic, strong) NSNumber* downloadComplete;
 
 
 @property BOOL downloadCompleteValue;
@@ -97,19 +97,19 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *duration;
+@property (nonatomic, strong) NSNumber* duration;
 
 
-@property int durationValue;
-- (int)durationValue;
-- (void)setDurationValue:(int)value_;
+@property int32_t durationValue;
+- (int32_t)durationValue;
+- (void)setDurationValue:(int32_t)value_;
 
 //- (BOOL)validateDuration:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSString *guid;
+@property (nonatomic, strong) NSString* guid;
 
 
 //- (BOOL)validateGuid:(id*)value_ error:(NSError**)error_;
@@ -117,7 +117,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString *imageURL;
+@property (nonatomic, strong) NSString* imageURL;
 
 
 //- (BOOL)validateImageURL:(id*)value_ error:(NSError**)error_;
@@ -125,7 +125,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *isVideo;
+@property (nonatomic, strong) NSNumber* isVideo;
 
 
 @property BOOL isVideoValue;
@@ -137,7 +137,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *markedForDownload;
+@property (nonatomic, strong) NSNumber* markedForDownload;
 
 
 @property BOOL markedForDownloadValue;
@@ -149,7 +149,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString *mediaURL;
+@property (nonatomic, strong) NSString* mediaURL;
 
 
 //- (BOOL)validateMediaURL:(id*)value_ error:(NSError**)error_;
@@ -157,7 +157,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *played;
+@property (nonatomic, strong) NSNumber* played;
 
 
 @property BOOL playedValue;
@@ -169,31 +169,31 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *podstoreId;
+@property (nonatomic, strong) NSNumber* podstoreId;
 
 
-@property int podstoreIdValue;
-- (int)podstoreIdValue;
-- (void)setPodstoreIdValue:(int)value_;
+@property int32_t podstoreIdValue;
+- (int32_t)podstoreIdValue;
+- (void)setPodstoreIdValue:(int32_t)value_;
 
 //- (BOOL)validatePodstoreId:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSNumber *positionInSeconds;
+@property (nonatomic, strong) NSNumber* positionInSeconds;
 
 
-@property int positionInSecondsValue;
-- (int)positionInSecondsValue;
-- (void)setPositionInSecondsValue:(int)value_;
+@property int32_t positionInSecondsValue;
+- (int32_t)positionInSecondsValue;
+- (void)setPositionInSecondsValue:(int32_t)value_;
 
 //- (BOOL)validatePositionInSeconds:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSString *rawSummary;
+@property (nonatomic, strong) NSString* rawSummary;
 
 
 //- (BOOL)validateRawSummary:(id*)value_ error:(NSError**)error_;
@@ -201,7 +201,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString *summary;
+@property (nonatomic, strong) NSString* summary;
 
 
 //- (BOOL)validateSummary:(id*)value_ error:(NSError**)error_;
@@ -209,7 +209,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString* title;
 
 
 //- (BOOL)validateTitle:(id*)value_ error:(NSError**)error_;
@@ -217,19 +217,19 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber *totalBytes;
+@property (nonatomic, strong) NSNumber* totalBytes;
 
 
-@property int totalBytesValue;
-- (int)totalBytesValue;
-- (void)setTotalBytesValue:(int)value_;
+@property int32_t totalBytesValue;
+- (int32_t)totalBytesValue;
+- (void)setTotalBytesValue:(int32_t)value_;
 
 //- (BOOL)validateTotalBytes:(id*)value_ error:(NSError**)error_;
 
 
 
 
-@property (nonatomic, strong) NSString *webURL;
+@property (nonatomic, strong) NSString* webURL;
 
 
 //- (BOOL)validateWebURL:(id*)value_ error:(NSError**)error_;
@@ -252,6 +252,7 @@ extern const struct SVPodcastEntryFetchedProperties {
 
 
 
+
 @end
 
 @interface _SVPodcastEntry (CoreDataGeneratedAccessors)
@@ -264,8 +265,8 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (NSNumber*)primitiveContentLength;
 - (void)setPrimitiveContentLength:(NSNumber*)value;
 
-- (int)primitiveContentLengthValue;
-- (void)setPrimitiveContentLengthValue:(int)value_;
+- (int32_t)primitiveContentLengthValue;
+- (void)setPrimitiveContentLengthValue:(int32_t)value_;
 
 
 
@@ -288,8 +289,8 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (NSNumber*)primitiveDuration;
 - (void)setPrimitiveDuration:(NSNumber*)value;
 
-- (int)primitiveDurationValue;
-- (void)setPrimitiveDurationValue:(int)value_;
+- (int32_t)primitiveDurationValue;
+- (void)setPrimitiveDurationValue:(int32_t)value_;
 
 
 
@@ -342,8 +343,8 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (NSNumber*)primitivePodstoreId;
 - (void)setPrimitivePodstoreId:(NSNumber*)value;
 
-- (int)primitivePodstoreIdValue;
-- (void)setPrimitivePodstoreIdValue:(int)value_;
+- (int32_t)primitivePodstoreIdValue;
+- (void)setPrimitivePodstoreIdValue:(int32_t)value_;
 
 
 
@@ -351,8 +352,8 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (NSNumber*)primitivePositionInSeconds;
 - (void)setPrimitivePositionInSeconds:(NSNumber*)value;
 
-- (int)primitivePositionInSecondsValue;
-- (void)setPrimitivePositionInSecondsValue:(int)value_;
+- (int32_t)primitivePositionInSecondsValue;
+- (void)setPrimitivePositionInSecondsValue:(int32_t)value_;
 
 
 
@@ -378,8 +379,8 @@ extern const struct SVPodcastEntryFetchedProperties {
 - (NSNumber*)primitiveTotalBytes;
 - (void)setPrimitiveTotalBytes:(NSNumber*)value;
 
-- (int)primitiveTotalBytesValue;
-- (void)setPrimitiveTotalBytesValue:(int)value_;
+- (int32_t)primitiveTotalBytesValue;
+- (void)setPrimitiveTotalBytesValue:(int32_t)value_;
 
 
 

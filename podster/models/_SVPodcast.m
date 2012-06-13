@@ -8,6 +8,7 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.cachingLastModified = @"cachingLastModified",
 	.downloadCount = @"downloadCount",
 	.downloadPercentage = @"downloadPercentage",
+	.downloadsToKeep = @"downloadsToKeep",
 	.etag = @"etag",
 	.feedURL = @"feedURL",
 	.fullIsizeImageData = @"fullIsizeImageData",
@@ -78,6 +79,10 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 		NSSet *affectingKey = [NSSet setWithObject:@"downloadPercentage"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 	}
+	if ([key isEqualToString:@"downloadsToKeepValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"downloadsToKeep"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 	if ([key isEqualToString:@"hidePlayedEpisodesValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"hidePlayedEpisodes"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -139,21 +144,21 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
-- (int)downloadCountValue {
+- (int32_t)downloadCountValue {
 	NSNumber *result = [self downloadCount];
 	return [result intValue];
 }
 
-- (void)setDownloadCountValue:(int)value_ {
+- (void)setDownloadCountValue:(int32_t)value_ {
 	[self setDownloadCount:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveDownloadCountValue {
+- (int32_t)primitiveDownloadCountValue {
 	NSNumber *result = [self primitiveDownloadCount];
 	return [result intValue];
 }
 
-- (void)setPrimitiveDownloadCountValue:(int)value_ {
+- (void)setPrimitiveDownloadCountValue:(int32_t)value_ {
 	[self setPrimitiveDownloadCount:[NSNumber numberWithInt:value_]];
 }
 
@@ -181,6 +186,32 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 - (void)setPrimitiveDownloadPercentageValue:(float)value_ {
 	[self setPrimitiveDownloadPercentage:[NSNumber numberWithFloat:value_]];
+}
+
+
+
+
+
+@dynamic downloadsToKeep;
+
+
+
+- (int32_t)downloadsToKeepValue {
+	NSNumber *result = [self downloadsToKeep];
+	return [result intValue];
+}
+
+- (void)setDownloadsToKeepValue:(int32_t)value_ {
+	[self setDownloadsToKeep:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveDownloadsToKeepValue {
+	NSNumber *result = [self primitiveDownloadsToKeep];
+	return [result intValue];
+}
+
+- (void)setPrimitiveDownloadsToKeepValue:(int32_t)value_ {
+	[self setPrimitiveDownloadsToKeep:[NSNumber numberWithInt:value_]];
 }
 
 
@@ -358,21 +389,21 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
-- (int)podstoreIdValue {
+- (int32_t)podstoreIdValue {
 	NSNumber *result = [self podstoreId];
 	return [result intValue];
 }
 
-- (void)setPodstoreIdValue:(int)value_ {
+- (void)setPodstoreIdValue:(int32_t)value_ {
 	[self setPodstoreId:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitivePodstoreIdValue {
+- (int32_t)primitivePodstoreIdValue {
 	NSNumber *result = [self primitivePodstoreId];
 	return [result intValue];
 }
 
-- (void)setPrimitivePodstoreIdValue:(int)value_ {
+- (void)setPrimitivePodstoreIdValue:(int32_t)value_ {
 	[self setPrimitivePodstoreId:[NSNumber numberWithInt:value_]];
 }
 
@@ -485,21 +516,21 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
-- (int)unlistenedSinceSubscribedCountValue {
+- (int32_t)unlistenedSinceSubscribedCountValue {
 	NSNumber *result = [self unlistenedSinceSubscribedCount];
 	return [result intValue];
 }
 
-- (void)setUnlistenedSinceSubscribedCountValue:(int)value_ {
+- (void)setUnlistenedSinceSubscribedCountValue:(int32_t)value_ {
 	[self setUnlistenedSinceSubscribedCount:[NSNumber numberWithInt:value_]];
 }
 
-- (int)primitiveUnlistenedSinceSubscribedCountValue {
+- (int32_t)primitiveUnlistenedSinceSubscribedCountValue {
 	NSNumber *result = [self primitiveUnlistenedSinceSubscribedCount];
 	return [result intValue];
 }
 
-- (void)setPrimitiveUnlistenedSinceSubscribedCountValue:(int)value_ {
+- (void)setPrimitiveUnlistenedSinceSubscribedCountValue:(int32_t)value_ {
 	[self setPrimitiveUnlistenedSinceSubscribedCount:[NSNumber numberWithInt:value_]];
 }
 
@@ -559,6 +590,7 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	return result;
 }
 	
+
 
 
 
