@@ -83,11 +83,7 @@
     
     CGRect webFrame = CGRectMake(0, CGRectGetMaxY(self.imageBackground.frame), 320, self.view.frame.size.height - CGRectGetMaxY(self.imageBackground.frame));
     self.webView.frame = webFrame;
-//    NSString *bodyText = theEpisode.content ? theEpisode.content : theEpisode.summary;
-//    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"1.4",NSTextSizeMultiplierDocumentOption,@"Helvetica Neue Light", DTDefaultFontFamily,[UIColor whiteColor], DTDefaultTextColor,[UIColor colorWithRed:0.7 green:0.8 blue:1.0 alpha:1.0], DTDefaultLinkColor, nil];
-//    self.summaryView.textDelegate = self;
-//    NSAttributedString *string = [NSAttributedString attributedStringWithHTML:stringData options:dictionary];
-//    [self.summaryView setAttributedString:string];
+//
     NSString *myDescriptionHTML = [NSString stringWithFormat:@"<html> \n"
                                    "<head> \n"
                                    "<meta name = \"viewport\" content = \"width = 320,"

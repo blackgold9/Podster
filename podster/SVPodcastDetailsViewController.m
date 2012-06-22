@@ -314,8 +314,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)configureToolbar
 {
     NSMutableArray *barItems = [NSMutableArray array];
-    BOOL isSubscribed = localPodcast.isSubscribedValue;
-    if (isSubscribed) {
+    BOOL subscribed = localPodcast.isSubscribedValue;
+    if (subscribed) {
 
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star.png"]
                                                    landscapeImagePhone:nil
@@ -340,8 +340,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 
     [barItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
-    if(isSubscribed) {
-        [barItems addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sliders.png"]
+    if(subscribed) {
+        [barItems addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"]
                                     landscapeImagePhone:nil
                                                   style:UIBarButtonItemStylePlain
                                                  target:self action:@selector(optionsTapped:)]];

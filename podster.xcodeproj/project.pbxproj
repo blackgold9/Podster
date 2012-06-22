@@ -3215,7 +3215,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3234,6 +3235,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -3245,7 +3248,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -3254,6 +3258,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VALIDATE_PRODUCT = YES;
@@ -3309,8 +3315,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stephen Vanterpool (6XM6QL4N8E)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3339,8 +3345,8 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C2FFC97B-D8F6-43F5-B4A8-D07C52701072";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C2FFC97B-D8F6-43F5-B4A8-D07C52701072";
+				PROVISIONING_PROFILE = "22691ABC-77AD-4598-A053-395CA8D7D7F0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "22691ABC-77AD-4598-A053-395CA8D7D7F0";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
