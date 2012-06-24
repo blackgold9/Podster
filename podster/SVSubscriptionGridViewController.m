@@ -183,8 +183,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
             [[self gridView] reloadData];
             self.noContentLabel.hidden = items.count > 0;
             
-        });
-        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        });    
     }];
      
 }

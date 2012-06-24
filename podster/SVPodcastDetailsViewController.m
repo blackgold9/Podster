@@ -460,9 +460,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
             }
             [localPodcast populateWithPodcast:self.podcast];
+            NSAssert(localPodcast.title != nil, @"There should be a title here");
             blockHasSubscription = localPodcast.isSubscribedValue;
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                NSAssert(localPodcast.title != nil, @"The podcast should be populated");
                 self.descriptionLabel.text = localPodcast.summary;    
                 isSubscribed = blockHasSubscription;
                 self.subscribeButton.enabled = NO;

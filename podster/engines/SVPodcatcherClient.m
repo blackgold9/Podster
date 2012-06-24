@@ -374,6 +374,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                          onError:(SVErrorBlock)onError
 {
     NSParameterAssert(podstoreId);
+    NSParameterAssert([podstoreId integerValue] != 0);
     if (podstoreId == nil) {
         [self returnMissingParameterErrorWithName:@"podstoreId" errorHandler:onError];
         return;

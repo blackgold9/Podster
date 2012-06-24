@@ -22,7 +22,7 @@
 
 #import "AFHTTPRequestOperation.h"
 #import <objc/runtime.h>
-
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 NSString * const kAFNetworkingIncompleteDownloadDirectoryName = @"Incomplete";
 
 NSSet * AFContentTypesFromHTTPHeader(NSString *string) {

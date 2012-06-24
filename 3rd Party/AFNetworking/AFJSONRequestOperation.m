@@ -22,7 +22,7 @@
 
 #import "AFJSONRequestOperation.h"
 #import "AFJSONUtilities.h"
-
+static int ddLogLevel = LOG_LEVEL_VERBOSE;
 static dispatch_queue_t af_json_request_operation_processing_queue;
 static dispatch_queue_t json_request_operation_processing_queue() {
     if (af_json_request_operation_processing_queue == NULL) {
@@ -106,7 +106,8 @@ static dispatch_queue_t json_request_operation_processing_queue() {
         if ([self isCancelled]) {
             return;
         }
-        
+        DDLogVerbose(@"NEtwork request %@ complete with status code %d and headers %@:\n Response length %d:", self.request, self.response.statusCode,self.response.allHeaderFields,  self.responseData.length);
+
         if (self.error) {
             if (failure) {
                 dispatch_async(self.failureCallbackQueue ? self.failureCallbackQueue : dispatch_get_main_queue(), ^{

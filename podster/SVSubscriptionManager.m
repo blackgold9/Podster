@@ -12,7 +12,7 @@
 #import "SVPodcastEntry.h"
 #import "PodsterManagedDocument.h"
 #import "SVDownloadManager.h"
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 static char const kRefreshInterval = -3;
 
 @implementation SVSubscriptionManager {
@@ -107,25 +107,31 @@ static char const kRefreshInterval = -3;
             BOOL hadAny = NO;
             for(SVPodcast *podcast in array) {
                 hadAny = YES;
+                DDLogVerbose(@"Starting update for podcast");
                 dispatch_group_enter(group);
                 [podcast getNewEpisodes:^(BOOL success) {                    
                     //[podcast updateNextItemDateAndDownloadIfNecessary:YES];
+                    DDLogVerbose(@"Ended update for podcast");
                     dispatch_group_leave(group); 
                 }];
             }
 
-            if (!hadAny) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                self.isBusy = NO;                    
-                });
-            } else {                
-                dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-                    self.isBusy = NO;
-                    DDLogInfo(@"Refreshing Subscriptions is complete");
-                    [[SVDownloadManager sharedInstance] downloadPendingEntries];
-                    dispatch_release(group);                    
-                });
+            double delayInSeconds = 10.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            
+            // Wait til we're done getting new epsiodes or until the timeout is hit
+            long result = dispatch_group_wait(group, popTime);
+            if (result != 0) {
+                DDLogWarn(@"Refreshing subscriptions timed out");
             }
+            if (hadAny) {
+                [[SVDownloadManager sharedInstance] downloadPendingEntries];
+            }
+            
+            self.isBusy = NO;  
+            DDLogInfo(@"Refreshing Subscriptions is complete");
+            
+            dispatch_release(group);  
         });
     }];
    

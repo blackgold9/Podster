@@ -4,7 +4,7 @@
 #import "NSString+MD5Addition.h"
 #import "SVDownloadManager.h"
 #import "_SVPodcastEntry.h"
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation SVPodcast {
     BOOL isUpdatingFromV1;
@@ -171,6 +171,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)getNewEpisodes:(void (^)(BOOL))complete
 {
     DDLogWarn(@"Getting new episodes");
+    NSAssert(self.title != nil, @"The podcast should have a title by now");
     NSDate *syncDate = [NSDate date];
     [self.managedObjectContext performBlock:^{
         if (self.updatingValue) {
@@ -203,6 +204,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
         
         DDLogInfo(@"Getting new items %@", isUpdatingFromV1 ? @"updatingfromv1" : @"normally");
+        __weak SVPodcast *weakSelf = self;
+        NSAssert([self.podstoreId integerValue] != 0, @"The id should not be 0");
         [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podstoreId
                                                      withLastSyncDate:entry == nil || isUpdatingFromV1 ? [NSDate distantPast] : entry.datePublished
                                                              complete:^void(id response) {
@@ -251,10 +254,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                      }                            
                                                                      
                                                                      [localPodcast updateNewEpisodeCount];
-                                                                     localPodcast.updatingValue = NO;
+                                                                                                                                         
                                                                      NSError *error;
                                                                      [childContext save:&error];
+
                                                                      NSAssert(error == nil, @"There should be no error. Got %@", error);
+                                                                    
+                                                                    [weakSelf.managedObjectContext performBlock:^{
+                                                                        weakSelf.updatingValue = NO;
+                                                                    }];
                                                                      if (error) {
                                                                          DDLogError(@"There was a problem updating this podcast %@ - %@", localPodcast, error);
                                                                          complete(NO); 
@@ -263,11 +271,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                              complete(YES);                                                                         
                                                                          });
                                                                      }
-                                                                
                                                                      
+                                                                    
                                                                  }];
                                                              } onError:^void(NSError *error) {
-                                                                 self.updatingValue = NO;
+                                                                 weakSelf.updatingValue = NO;
+                                                                 [[weakSelf managedObjectContext] refreshObject:weakSelf mergeChanges:NO];
                                                                  complete(NO);
                                                              }];        
     }];

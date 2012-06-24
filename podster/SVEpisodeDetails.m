@@ -96,6 +96,8 @@
                                    "</head> \n"
                                    "<body>%@</body> \n"
                                    "</html>", @"HelveticaNeue", [NSNumber numberWithInt:15], [theEpisode.rawSummary stringWithNewLinesAsBRs]];
+    myDescriptionHTML = [myDescriptionHTML stringByReplacingOccurrencesOfString:@"\"white\"" withString:@"\"black\""];
+    
     [self.webView loadHTMLString:myDescriptionHTML
                          baseURL:nil];
     self.webView.delegate = self;

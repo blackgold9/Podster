@@ -141,6 +141,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [self startDownload:entry.download];
         return;
     }
+    
+
 
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
     SVDownload *lastDownload = [SVDownload MR_findFirstWithPredicate:nil
@@ -411,7 +413,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         return !entry.downloadCompleteValue;
         
     }]];
-    
+    [context obtainPermanentIDsForObjects:[toDownload allObjects] error:NULL];
     DDLogInfo(@"Queuing %d downloads", toDownload.count);
     for(SVPodcastEntry *entry in toDownload) {
         DDLogVerbose(@"Queuing: %@", entry);
