@@ -287,7 +287,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     PodcastGridCellView *podcastCell =(PodcastGridCellView *) cell.contentView ;
     [podcastCell bind:currentPodcast];
-    
+    cell.clipsToBounds = YES;
     return cell;
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

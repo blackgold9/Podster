@@ -117,15 +117,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([podcast class] == [SVPodcast class]) {
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
-        if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
-            [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
-            [self.countOverlay sizeToFit];
-            CGRect newFrame = self.countOverlay.frame;
-            newFrame.origin.x = self.frame.size.width - newFrame.size.width;
-            self.countOverlay.frame = newFrame;
-            self.countOverlay.hidden = NO;
-        }
-        
+                
         if (coreDataPodcast.isDownloadingValue) {         
             self.progressBackground.alpha = 0.5;
             self.progressBar.alpha = 1.0;
@@ -133,7 +125,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
         [coreDataPodcast addObserver:self forKeyPath:@"downloadPercentage" options:NSKeyValueObservingOptionNew context:nil];
         [coreDataPodcast addObserver:self forKeyPath:@"isDownloading" options:NSKeyValueObservingOptionNew context:nil];
-        [coreDataPodcast addObserver:self forKeyPath:@"unlistenedSinceSubscribedCount" options:NSKeyValueObservingOptionNew context:nil];
+        [coreDataPodcast addObserver:self forKeyPath:@"unlistenedSinceSubscribedCount" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
         
     }
 }
@@ -173,10 +165,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             [self setDownloadProgressHidden:!coreDataPodcast.isDownloadingValue animated:YES];
             
         } else if ([keyPath isEqualToString:SVPodcastAttributes.unlistenedSinceSubscribedCount]) {
-            [UIView transitionWithView:self.countOverlay
-                              duration:0.33
-                               options:UIViewAnimationOptionTransitionCrossDissolve
-                            animations:^{                                                                
+                                                                    
                                 if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
                                     [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
                                     [self.countOverlay sizeToFit];
@@ -186,8 +175,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                     self.countOverlay.hidden = NO;
                                 } else {
                                     self.countOverlay.hidden = YES;
-                                }
-                            } completion:nil];
+                                }                            
         }
     }    
 }

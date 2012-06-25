@@ -22,6 +22,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSInteger currentProgressPercentage;
     UIBackgroundTaskIdentifier task;
     NSString *filePath;
+    long long initialSize;
 }
 @synthesize downloadObjectID;
 -(id)initWithDownloadObjectID:(NSManagedObjectID *)objectId
@@ -103,24 +104,29 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self willChangeValueForKey:@"isExecuting"];
         _isExecuting = YES;
         [self didChangeValueForKey:@"isExecuting"];
-               
-
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[download.entry localFilePath]] && download.entry.downloadCompleteValue){
-            //Download already existed, file exists, and entry is marked as download.
-            // Nothing to see here
-            NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
-            return;
-        }
-        
         download.stateValue = SVDownloadStateDownloading;
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:download.entry.mediaURL]];
-        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+               
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[download.entry localFilePath]] ){
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSDictionary *attributes = [fileManager attributesOfItemAtPath:filePath error:NULL];
+            NSNumber *size = [attributes objectForKey:NSFileSize];
+            initialSize = [size longLongValue];
+            [request setValue:[NSString stringWithFormat:@"bytes=%lld-", initialSize] forHTTPHeaderField:@"Range"];
+            DDLogInfo(@"Resuming download at %lld bytes", initialSize);
+        } else {
+            initialSize = 0;
+        }
+        
+
+         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
         [op setOutputStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
         [op setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
             return nil;
         }];
         [op setDownloadProgressBlock:^(NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-            double progress = [[NSNumber numberWithDouble:totalBytesRead] doubleValue] / [[NSNumber numberWithDouble:totalBytesExpectedToRead] doubleValue];
+            double progress =  [[NSNumber numberWithDouble:initialSize + totalBytesRead] doubleValue] / [[NSNumber numberWithDouble:totalBytesExpectedToRead] doubleValue];
             [self downloadProgressChanged:progress
                               forDownload:download 
                                 inContext:localContext];

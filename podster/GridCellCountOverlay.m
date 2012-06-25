@@ -26,7 +26,9 @@
         shapeLayer.backgroundColor = [[UIColor colorWithWhite:0.0 alpha:0.8] CGColor];
         [shapeLayer setOpacity:0.7];
         shapeLayer.borderWidth = 1.0;
-        shapeLayer.borderColor = [[UIColor colorWithWhite:0.7 alpha:0.8] CGColor];
+        shapeLayer.masksToBounds = NO;
+        shapeLayer.borderColor = [[UIColor colorWithWhite:0.7 alpha:1] CGColor];
+
 [self.layer addSublayer:shapeLayer];
         margins = UIEdgeInsetsMake(5, 5, 5, 5);
         flagImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flag2.png"]]; 
