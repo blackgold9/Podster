@@ -548,11 +548,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         @try {
 
             DDLogVerbose(@"Reload block started");
-            items = [localPodcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue]]];
+            NSArray *newItems;
+            newItems = [localPodcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue]]];
             if (localPodcast.hidePlayedEpisodesValue) {
-                items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
+                newItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                items = newItems;
                 [[self tableView] reloadData];
                 DDLogVerbose(@"REload Data complete");
             });

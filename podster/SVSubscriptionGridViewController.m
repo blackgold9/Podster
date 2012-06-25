@@ -176,10 +176,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         [request setIncludesPendingChanges:YES];
 
         NSError *error;
-        items = [context executeFetchRequest:request error:&error];
+        NSArray *newItems = [context executeFetchRequest:request error:&error];
         NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
         
         dispatch_async(dispatch_get_main_queue(), ^{                        
+            items = newItems;
             [[self gridView] reloadData];
             self.noContentLabel.hidden = items.count > 0;
             
