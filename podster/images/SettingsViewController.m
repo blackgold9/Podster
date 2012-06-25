@@ -141,18 +141,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         } else if (indexPath.row == 2) {
             [self performSegueWithIdentifier:@"showLegal" sender:self];
         } else if(indexPath.row == 3) {
-            if ([[SVSettings sharedInstance] premiumModeUnlocked]) {
-                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"net.vanterpool.podster.notifications"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [tableView reloadData];
-            } else {
                 [[PodsterIAPHelper sharedInstance] restoreTransactions];
                 [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                
-                
-            }
         } else if (indexPath.row == 4) {
-           // [TestFlight openFeedbackView];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"net.vanterpool.podster.notifications"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [tableView reloadData];
         }
     } else if (indexPath.section == 0) {
         if(![[SVSettings sharedInstance] premiumModeUnlocked]) {
@@ -160,10 +154,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     }
-//    else {
-//        [self performSegueWithIdentifier:@"showDownloadSettings" sender:self];
-//    }
-		
 }
 
 
@@ -186,7 +176,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 #if DEBUG
             cellCount = 5;
 #else
-            cellCount = [[SVSettings sharedInstance] premiumModeUnlocked] ? 3 : 4;
+            cellCount = 4; //[[SVSettings sharedInstance] premiumModeUnlocked] ? 3 : 4;
 #endif
             break;
         default:

@@ -24,4 +24,5 @@
 - (IBAction)optionsButtonTapped:(id)sender;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 - (IBAction)shareTapped:(id)sender;
+- (IBAction)showDescriptionGestureRecognizerTapped:(id)sender;
 @end

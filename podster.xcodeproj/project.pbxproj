@@ -618,6 +618,8 @@
 		7DB672D01598158400FA932D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7DB672C91598158300FA932D /* LICENSE.txt */; };
 		7DB672D11598158400FA932D /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DB672CA1598158300FA932D /* Quincy.bundle */; };
 		7DB672D21598158400FA932D /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DB672CA1598158300FA932D /* Quincy.bundle */; };
+		7DB672E115981F9E00FA932D /* SVHtmlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB672E015981F9E00FA932D /* SVHtmlViewController.m */; };
+		7DB672E215981F9E00FA932D /* SVHtmlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB672E015981F9E00FA932D /* SVHtmlViewController.m */; };
 		D608C9AE150D6BA2009BA9BD /* honeycomb.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AC150D6BA2009BA9BD /* honeycomb.png */; };
 		D608C9AF150D6BA2009BA9BD /* honeycomb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */; };
 		D608C9BF150EDEFD009BA9BD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9BE150EDEFD009BA9BD /* Default.png */; };
@@ -640,6 +642,8 @@
 		D6EE8AE41587E65500F33740 /* PodcastSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */; };
 		D6EE8AE41587E65500F33742 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D6EE8AE41587E65500F33745 /* SVInsetLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE41587E65500F33744 /* SVInsetLabel.m */; };
+		D6EE8AE41587E65500F33748 /* SVHtmlViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE41587E65500F33747 /* SVHtmlViewer.m */; };
+		D6EE8AE41587E65500F33749 /* SVHtmlViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE41587E65500F33747 /* SVHtmlViewer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1236,6 +1240,8 @@
 		7DB672C81598158300FA932D /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		7DB672C91598158300FA932D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		7DB672CA1598158300FA932D /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
+		7DB672DF15981F9E00FA932D /* SVHtmlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVHtmlViewController.h; sourceTree = "<group>"; };
+		7DB672E015981F9E00FA932D /* SVHtmlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVHtmlViewController.m; sourceTree = "<group>"; };
 		D608C9AC150D6BA2009BA9BD /* honeycomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = honeycomb.png; sourceTree = "<group>"; };
 		D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "honeycomb@2x.png"; sourceTree = "<group>"; };
 		D608C9BE150EDEFD009BA9BD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -1254,6 +1260,8 @@
 		D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastSettingsViewController.m; sourceTree = "<group>"; };
 		D6EE8AE41587E65500F33744 /* SVInsetLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVInsetLabel.m; sourceTree = "<group>"; };
 		D6EE8AE41587E65500F33746 /* SVInsetLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVInsetLabel.h; sourceTree = "<group>"; };
+		D6EE8AE41587E65500F33747 /* SVHtmlViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVHtmlViewer.m; sourceTree = "<group>"; };
+		D6EE8AE41587E65500F3374A /* SVHtmlViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVHtmlViewer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1527,6 +1535,8 @@
 				4B0A7B261506992700BADEBB /* SettingsViewController.m */,
 				D6EE8AE11587E65500F33740 /* PodcastSettingsViewController.h */,
 				D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */,
+				7DB672DF15981F9E00FA932D /* SVHtmlViewController.h */,
+				7DB672E015981F9E00FA932D /* SVHtmlViewController.m */,
 			);
 			name = "View controllers";
 			sourceTree = "<group>";
@@ -2310,6 +2320,8 @@
 		4BB2058214D0F41B0038EB7D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				D6EE8AE41587E65500F3374A /* SVHtmlViewer.h */,
+				D6EE8AE41587E65500F33747 /* SVHtmlViewer.m */,
 				4BB2058B14D0F8C70038EB7D /* SVPodcastModalView.h */,
 				4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */,
 				4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */,
@@ -2914,6 +2926,8 @@
 				D6EE8AE41587E65500F33742 /* (null) in Sources */,
 				D6EE8AE41587E65500F33745 /* SVInsetLabel.m in Sources */,
 				7DB672CB1598158300FA932D /* BWQuincyManager.m in Sources */,
+				D6EE8AE41587E65500F33748 /* SVHtmlViewer.m in Sources */,
+				7DB672E115981F9E00FA932D /* SVHtmlViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3073,6 +3087,8 @@
 				D622850914E50C48003084C6 /* (null) in Sources */,
 				D6EE8AE41587E65500F33740 /* PodcastSettingsViewController.m in Sources */,
 				7DB672CC1598158300FA932D /* BWQuincyManager.m in Sources */,
+				D6EE8AE41587E65500F33749 /* SVHtmlViewer.m in Sources */,
+				7DB672E215981F9E00FA932D /* SVHtmlViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
