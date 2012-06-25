@@ -4,13 +4,7 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="Renamed tag controllers to appropriate names">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/podster.iml" afterPath="$PROJECT_DIR$/.idea/podster.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/j-stevan@interactive.msnbc.com.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/j-stevan@interactive.msnbc.com.xcuserdatad/UserInterfaceState.xcuserstate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/j-stevan@interactive.msnbc.com.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/j-stevan@interactive.msnbc.com.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcast.m" afterPath="$PROJECT_DIR$/podster/models/SVPodcast.m" />
-    </list>
+    <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="Renamed tag controllers to appropriate names" />
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -110,7 +104,7 @@
       <file leaf-file-name="SVPodcastDetailsViewController.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="740" column="29" selection-start="31867" selection-end="31867" vertical-scroll-proportion="0.53300124">
+            <state line="724" column="38" selection-start="31318" selection-end="31318" vertical-scroll-proportion="0.23412204">
               <folding>
                 <element signature="e#1490#1514#0" expanded="true" />
               </folding>
@@ -636,7 +630,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="740" column="29" selection-start="31867" selection-end="31867" vertical-scroll-proportion="0.53300124">
+        <state line="724" column="38" selection-start="31318" selection-end="31318" vertical-scroll-proportion="0.23412204">
           <folding>
             <element signature="e#1490#1514#0" expanded="true" />
           </folding>

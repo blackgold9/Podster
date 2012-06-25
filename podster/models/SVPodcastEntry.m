@@ -55,10 +55,5 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     return [filePath stringByAppendingPathExtension:[[[[self mediaURL] pathExtension] componentsSeparatedByString:@"?"] objectAtIndex:0]];
 }
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"%@ - %@:%@", self.podcast.title, self.title, self.podstoreId];
-}
-
 
 @end
