@@ -461,10 +461,6 @@
 		4B7A7C8014F59CEB00AD88F9 /* alert-window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7A7C6A14F59CEB00AD88F9 /* alert-window@2x.png */; };
 		4B842BDE150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */; };
 		4B842BDF150FDC5D003F4BF5 /* PodsterManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */; };
-		4B859204158250E9002452DF /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B859200158250E9002452DF /* BWQuincyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4B859205158250E9002452DF /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B859201158250E9002452DF /* CrashReporter.framework */; };
-		4B859206158250E9002452DF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4B859202158250E9002452DF /* LICENSE.txt */; };
-		4B859207158250E9002452DF /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4B859203158250E9002452DF /* Quincy.bundle */; };
 		4B85921B15825196002452DF /* UIView+JMNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B85920B15825196002452DF /* UIView+JMNoise.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B85921C15825196002452DF /* UIView+JMNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B85920B15825196002452DF /* UIView+JMNoise.m */; };
 		4B85921D15825196002452DF /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B85920D15825196002452DF /* close.png */; };
@@ -614,6 +610,14 @@
 		4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEDB18814C004E200264CCC /* ImageIO.framework */; };
 		4BFE0B6015041551005F9E81 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B5F15041551005F9E81 /* Icon.png */; };
 		4BFE0B6215041561005F9E81 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B6115041561005F9E81 /* Icon@2x.png */; };
+		7DB672CB1598158300FA932D /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB672C71598158300FA932D /* BWQuincyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7DB672CC1598158300FA932D /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB672C71598158300FA932D /* BWQuincyManager.m */; };
+		7DB672CD1598158300FA932D /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB672C81598158300FA932D /* CrashReporter.framework */; };
+		7DB672CE1598158300FA932D /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB672C81598158300FA932D /* CrashReporter.framework */; };
+		7DB672CF1598158400FA932D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7DB672C91598158300FA932D /* LICENSE.txt */; };
+		7DB672D01598158400FA932D /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7DB672C91598158300FA932D /* LICENSE.txt */; };
+		7DB672D11598158400FA932D /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DB672CA1598158300FA932D /* Quincy.bundle */; };
+		7DB672D21598158400FA932D /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DB672CA1598158300FA932D /* Quincy.bundle */; };
 		D608C9AE150D6BA2009BA9BD /* honeycomb.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AC150D6BA2009BA9BD /* honeycomb.png */; };
 		D608C9AF150D6BA2009BA9BD /* honeycomb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */; };
 		D608C9BF150EDEFD009BA9BD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9BE150EDEFD009BA9BD /* Default.png */; };
@@ -1096,11 +1100,6 @@
 		4B7A7CC414F6CFA700AD88F9 /* SVPodcastDatastore 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 10.xcdatamodel"; sourceTree = "<group>"; };
 		4B842BDC150FDC5D003F4BF5 /* PodsterManagedDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodsterManagedDocument.h; sourceTree = "<group>"; };
 		4B842BDD150FDC5D003F4BF5 /* PodsterManagedDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodsterManagedDocument.m; sourceTree = "<group>"; };
-		4B8591FF158250E9002452DF /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BWQuincyManager.h; path = ../../Podster/QuincyKit/BWQuincyManager.h; sourceTree = "<group>"; };
-		4B859200158250E9002452DF /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BWQuincyManager.m; path = ../../Podster/QuincyKit/BWQuincyManager.m; sourceTree = "<group>"; };
-		4B859201158250E9002452DF /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CrashReporter.framework; path = ../../Podster/QuincyKit/CrashReporter.framework; sourceTree = "<group>"; };
-		4B859202158250E9002452DF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../../Podster/QuincyKit/LICENSE.txt; sourceTree = "<group>"; };
-		4B859203158250E9002452DF /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Quincy.bundle; path = ../../Podster/QuincyKit/Quincy.bundle; sourceTree = "<group>"; };
 		4B85920A15825196002452DF /* UIView+JMNoise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JMNoise.h"; sourceTree = "<group>"; };
 		4B85920B15825196002452DF /* UIView+JMNoise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JMNoise.m"; sourceTree = "<group>"; };
 		4B85920D15825196002452DF /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
@@ -1232,6 +1231,11 @@
 		4BEDB18814C004E200264CCC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4BFE0B5F15041551005F9E81 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		4BFE0B6115041561005F9E81 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		7DB672C61598158300FA932D /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
+		7DB672C71598158300FA932D /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
+		7DB672C81598158300FA932D /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
+		7DB672C91598158300FA932D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		7DB672CA1598158300FA932D /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
 		D608C9AC150D6BA2009BA9BD /* honeycomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = honeycomb.png; sourceTree = "<group>"; };
 		D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "honeycomb@2x.png"; sourceTree = "<group>"; };
 		D608C9BE150EDEFD009BA9BD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -1282,7 +1286,7 @@
 				4B71F79414A5B08C00D26F4C /* CoreGraphics.framework in Frameworks */,
 				4B2023FA14D920FE00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4B05C028153639E10078DF13 /* libInMobi_iOS.a in Frameworks */,
-				4B859205158250E9002452DF /* CrashReporter.framework in Frameworks */,
+				7DB672CD1598158300FA932D /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1301,6 +1305,7 @@
 				4B71F7B014A5B08C00D26F4C /* Foundation.framework in Frameworks */,
 				4B2023FB14D920FF00820391 /* libFlurryAnalytics.a in Frameworks */,
 				4B05C029153639E10078DF13 /* libInMobi_iOS.a in Frameworks */,
+				7DB672CE1598158300FA932D /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1478,18 +1483,6 @@
 				4B05C027153639E10078DF13 /* libInMobi_iOS.a */,
 			);
 			path = "InMobi iOS SDK Bundle";
-			sourceTree = "<group>";
-		};
-		4B1070531551EFD70044B013 /* QuincyKit */ = {
-			isa = PBXGroup;
-			children = (
-				4B8591FF158250E9002452DF /* BWQuincyManager.h */,
-				4B859200158250E9002452DF /* BWQuincyManager.m */,
-				4B859201158250E9002452DF /* CrashReporter.framework */,
-				4B859202158250E9002452DF /* LICENSE.txt */,
-				4B859203158250E9002452DF /* Quincy.bundle */,
-			);
-			path = QuincyKit;
 			sourceTree = "<group>";
 		};
 		4B1071601551FE270044B013 /* played-state */ = {
@@ -2087,6 +2080,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				7DB672C51598158300FA932D /* QuincyKit */,
 				4B85920815825184002452DF /* UAModalPanel */,
 				4BE723C91554A0C30007F740 /* Lockbox.h */,
 				4BE723CA1554A0C30007F740 /* Lockbox.m */,
@@ -2094,7 +2088,6 @@
 				4B10717C1552FC7D0044B013 /* NSAttributedString+HTML.m */,
 				4B10717A1552FC2F0044B013 /* NSData+Base64.h */,
 				4B1071781552FC240044B013 /* NSData+Base64.m */,
-				4B1070531551EFD70044B013 /* QuincyKit */,
 				4BC8D1E21545E20D009C113C /* ISO8601DateFormatter.h */,
 				4BC8D1E31545E20D009C113C /* ISO8601DateFormatter.m */,
 				4B05C0371536449B0078DF13 /* Reachability.m */,
@@ -2357,6 +2350,19 @@
 			name = icon;
 			sourceTree = "<group>";
 		};
+		7DB672C51598158300FA932D /* QuincyKit */ = {
+			isa = PBXGroup;
+			children = (
+				7DB672C61598158300FA932D /* BWQuincyManager.h */,
+				7DB672C71598158300FA932D /* BWQuincyManager.m */,
+				7DB672C81598158300FA932D /* CrashReporter.framework */,
+				7DB672C91598158300FA932D /* LICENSE.txt */,
+				7DB672CA1598158300FA932D /* Quincy.bundle */,
+			);
+			name = QuincyKit;
+			path = "3rd Party/QuincyKit";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2610,13 +2616,13 @@
 				D622850914E50C48003084BF /* search@2x.png in Resources */,
 				D622850914E50C48003084C1 /* search2.png in Resources */,
 				D622850914E50C48003084C3 /* search2@2x.png in Resources */,
-				4B859206158250E9002452DF /* LICENSE.txt in Resources */,
-				4B859207158250E9002452DF /* Quincy.bundle in Resources */,
 				4B85921D15825196002452DF /* close.png in Resources */,
 				4B85921F15825196002452DF /* close@2x.png in Resources */,
 				D6EE8ADF1587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */,
 				D6A8789015894C34009DD522 /* sliders.png in Resources */,
 				D6A8789115894C34009DD522 /* sliders@2x.png in Resources */,
+				7DB672CF1598158400FA932D /* LICENSE.txt in Resources */,
+				7DB672D11598158400FA932D /* Quincy.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2707,6 +2713,8 @@
 				4B85921E15825196002452DF /* close.png in Resources */,
 				4B85922015825196002452DF /* close@2x.png in Resources */,
 				D6EE8AE01587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */,
+				7DB672D01598158400FA932D /* LICENSE.txt in Resources */,
+				7DB672D21598158400FA932D /* Quincy.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2895,7 +2903,6 @@
 				4B1071791552FC240044B013 /* NSData+Base64.m in Sources */,
 				4BE723CB1554A0C30007F740 /* Lockbox.m in Sources */,
 				4BE7A73E157BFF18007900F8 /* ToolbarStatusView.m in Sources */,
-				4B859204158250E9002452DF /* BWQuincyManager.m in Sources */,
 				4B85921B15825196002452DF /* UIView+JMNoise.m in Sources */,
 				4B85922115825196002452DF /* UAModalPanel.m in Sources */,
 				4B85922315825196002452DF /* UATitledModalPanel.m in Sources */,
@@ -2906,6 +2913,7 @@
 				D6EE8AE31587E65500F33740 /* PodcastSettingsViewController.m in Sources */,
 				D6EE8AE41587E65500F33742 /* (null) in Sources */,
 				D6EE8AE41587E65500F33745 /* SVInsetLabel.m in Sources */,
+				7DB672CB1598158300FA932D /* BWQuincyManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3064,6 +3072,7 @@
 				4B85922A15825196002452DF /* UARoundedRectView.m in Sources */,
 				D622850914E50C48003084C6 /* (null) in Sources */,
 				D6EE8AE41587E65500F33740 /* PodcastSettingsViewController.m in Sources */,
+				7DB672CC1598158300FA932D /* BWQuincyManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3150,6 +3159,7 @@
 					"\"$(SRCROOT)/3rd Party\"",
 					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 					"\"$(SRCROOT)/../Podster/QuincyKit\"",
+					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -3189,6 +3199,7 @@
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/3rd Party\"",
+					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -3278,6 +3289,7 @@
 					"\"$(SRCROOT)/3rd Party\"",
 					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 					"\"$(SRCROOT)/../Podster/QuincyKit\"",
+					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -3323,6 +3335,7 @@
 					"\"$(SRCROOT)/3rd Party\"",
 					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 					"\"$(SRCROOT)/../Podster/QuincyKit\"",
+					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -3362,6 +3375,7 @@
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/3rd Party\"",
+					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -3391,6 +3405,7 @@
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/3rd Party\"",
+					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -3445,6 +3460,7 @@
 					"\"$(SRCROOT)/3rd Party\"",
 					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 					"\"$(SRCROOT)/../Podster/QuincyKit\"",
+					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -3484,6 +3500,7 @@
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/3rd Party\"",
+					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
