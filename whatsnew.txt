@@ -1,0 +1,3 @@
+* Customize how many episodes are downloaded per-podcast
+* Podster is now available in Simplified Chineese 
+* LOTS of bug fixes

@@ -44,16 +44,14 @@
 /*  */
 
 #import "BannerViewController.h"
-#import "SVSettings.h"
-#import "SVPodcatcherClient.h"
+#import "GADBannerView.h"
 
-NSString * const BannerViewActionWillBegin = @"BannerViewActionWillBegin";
-NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
+NSString *const BannerViewActionWillBegin = @"BannerViewActionWillBegin";
+NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
-@implementation BannerViewController
-{
+@implementation BannerViewController {
 
-        AdWhirlView *_bannerView;
+    GADBannerView *_bannerView;
     UIViewController *_contentController;
     BOOL shouldHideAd;
 }
@@ -61,152 +59,138 @@ NSString * const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 - (UIViewController *)viewControllerForPresentingModalView {
     return self;
 }
-- (id)initWithContentViewController:(UIViewController *)contentController
-{
+
+- (id)initWithContentViewController:(UIViewController *)contentController {
     self = [super init];
     if (self != nil) {
         if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
-            
-            _bannerView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
+
+            _bannerView = [[GADBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(GAD_SIZE_320x50)];
+            [_bannerView setAdUnitID:@"c4ab1f3b218f441f"];
             _bannerView.delegate = self;
+            _bannerView.rootViewController = self;
+            // Initiate a generic request to load it with an ad.
+            GADRequest *request = [GADRequest request];
+#if DEBUG
+            request.testing = YES;
+#endif
+            [_bannerView loadRequest:request];
             _contentController = contentController;
             shouldHideAd = NO;
 
         }
-        
+
         _contentController = contentController;
     }
     return self;
 }
 
-- (UIViewController *)contentController
-{
+- (UIViewController *)contentController {
     return _contentController;
 }
 
-- (NSString *)adWhirlApplicationKey
-{
-    return @"91e9936604204bdb96316e8ebbf225ed";
 
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     UIView *contentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.view addSubview:contentView];
     if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
-        [contentView addSubview:_bannerView];   
+        [contentView addSubview:_bannerView];
     }
     [self addChildViewController:_contentController];
     [contentView addSubview:_contentController.view];
     [_contentController didMoveToParentViewController:self];
-        [[NSNotificationCenter defaultCenter] addObserver:self
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(becameActive)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
-   [[NSNotificationCenter defaultCenter] addObserverForName:@"PremiumPurchased" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"PremiumPurchased" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
 
-       if([[SVSettings sharedInstance] premiumModeUnlocked]) {
-           [_bannerView ignoreNewAdRequests];
-       } else {
-           [_bannerView doNotIgnoreNewAdRequests];
-       }
+        if ([[SVSettings sharedInstance] premiumModeUnlocked]) {
+            [_bannerView removeFromSuperview];
+            _bannerView.delegate = nil;
+            _bannerView = nil;
+        }
 
-       [self.view setNeedsLayout];
-       [self.view layoutIfNeeded];
-   }];
+        [self.view setNeedsLayout];
+        [self.view layoutIfNeeded];
+    }];
 }
 
 
--(void)becameActive
-{        
+- (void)becameActive {
     // Hide the ad when coming back from the background. It's probably blank at this point. 
     // After this next layout, it will reset shouldHideAd to NO
     shouldHideAd = YES;
     [self.view setNeedsLayout];
 //    [self.view layoutIfNeeded];    
 }
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];    
- 
-}
-- (void)viewWillAppear:(BOOL)animated
-{
+
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-   
+
     [self viewDidLayoutSubviews];
 }
-- (void)viewDidUnload
-{
+
+- (void)viewDidDisappear:(BOOL)animated {
     _bannerView.delegate = nil;
-    [super viewDidUnload];
+    [super viewDidDisappear:animated];
 }
-   
-- (void)viewDidLayoutSubviews
-{        
+
+// Sent when an ad request loaded an ad.  This is a good opportunity to add this
+// view to the hierarchy if it has not yet been added.  If the ad was received
+// as a part of the server-side auto refreshing, you can examine the
+// hasAutoRefreshed property of the view.
+- (void)adViewDidReceiveAd:(GADBannerView *)view {
+    id adWebView = [[view subviews] objectAtIndex:0];
+
+    if ([adWebView isKindOfClass:[UIWebView class]]) {
+        UIWebView *webView = adWebView;
+        webView.scrollView.scrollsToTop = NO;
+    }
+
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view setNeedsLayout];
+        [self.view layoutIfNeeded];
+    }];
+
+}
+
+// Sent when an ad request failed.  Normally this is because no network
+// connection was available or no ads were available (i.e. no fill).  If the
+// error was received as a part of the server-side auto refreshing, you can
+// examine the hasAutoRefreshed property of the view.
+- (void)             adView:(GADBannerView *)view
+didFailToReceiveAdWithError:(GADRequestError *)error {
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view setNeedsLayout];
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)viewDidLayoutSubviews {
     CGRect contentFrame = self.view.bounds;
     CGRect bannerFrame = _bannerView.frame;
-    if (!shouldHideAd && 
-        ([_bannerView adExists] && ![_bannerView isIgnoringNewAdRequests])) {
-        
-        bannerFrame.size = [_bannerView actualAdSize];
+    if (_bannerView && !shouldHideAd &&
+            [_bannerView mediatedAdView]) {
+
+        bannerFrame.size = _bannerView.mediatedAdView.frame.size;
         contentFrame.size.height -= _bannerView.frame.size.height;
         bannerFrame.origin.y = contentFrame.size.height;
     } else {
         bannerFrame.origin.y = contentFrame.size.height;
     }
-    
+
     _contentController.view.frame = contentFrame;
     _bannerView.frame = bannerFrame;
     shouldHideAd = NO;
 }
--(void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
-{
-    
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        [self.view setNeedsLayout];
-        [self.view layoutIfNeeded];
-    }];
-}
 
--(void)adWhirlDidFailToReceiveAd:(AdWhirlView *)adWhirlView usingBackup:(BOOL)yesOrNo
-{
-    
-    if (!yesOrNo) {
-        [UIView animateWithDuration:0.25 animations:^{
-            [self.view setNeedsLayout];
-            [self.view layoutIfNeeded];
-        }];
-    } else {
-        LOG_GENERAL(2, @"Ad Controller failed to receive ad. Going to try fallback: %@", adWhirlView.lastError);
-    }
-}
--(void)adWhirlDidAnimateToNewAdIn:(AdWhirlView *)adWhirlView
-{
-    [UIView animateWithDuration:0.25 animations:^{
-        [self.view setNeedsLayout];
-        [self.view layoutIfNeeded];
-    }];
-}
-
--(BOOL)adWhirlTestMode
-{
-#ifdef CONFIGURATION_Release
-    return NO;
-#else
-    return YES;
-#endif
-}
--(void)adWhirlWillPresentFullScreenModal
-{
+- (void)adViewWillPresentScreen:(GADBannerView *)adView {
     [FlurryAnalytics logEvent:@"AdsFullscreenShown"];
     //Pause playback?
     [[NSNotificationCenter defaultCenter] postNotificationName:BannerViewActionWillBegin object:self];
 }
 
--(void)adWhirlDidDismissFullScreenModal
-{
+- (void)adViewDidDismissScreen:(GADBannerView *)adView {
     // Resume playback?
     [[NSNotificationCenter defaultCenter] postNotificationName:BannerViewActionDidFinish object:self];
 }

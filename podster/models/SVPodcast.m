@@ -121,12 +121,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self.listSizeImageData = nil;
 }
 
--(NSString *)debugDescription	
-{
-    return [NSString stringWithFormat:@"%@: %@", [super description], self.title];
-}
-
-
 + (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId shouldNotify:(BOOL)shouldNotify
 {
     // First, we grab the data

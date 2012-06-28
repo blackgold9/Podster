@@ -1,19 +1,14 @@
 Podster is the simplest, most beautiful way to get your podcasts on the go.
 
+* RapidUpdate technology syncs new episodes faster than traditional podcast apps
+* Intelligent server-side monitoring (We let you know as soon as new episodes are available)
+* Airplay support
 ★ Browse our extensive catalog to find great content
 ★ Discovering new content to listen to is easy!
-★ Get notifications the instant a new episode is available
 ★ Stream new episodes on the go, no download required!
-★ Automatically download the next episode of your podcasts when on WI-FI
+★ Automatically download podcast episodes for listening offline
+* Downloads continue in the background
 ★ Enjoy our minimalist UI that lets the content shine
+* Double speed playback option for efficient listening
 ★ Supports audio and video podcasts
-★ Remote control via headphones
-
-
-Keywords:
-podcast, download, client, notifications, stream, simple, video, talk, radio
-
-What's New:
-★Downloads!
-★Podster is now available in Chineese and Japanese
-★Bug fixes!
+★ Control playback using your headphones 

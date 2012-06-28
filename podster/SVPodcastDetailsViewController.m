@@ -33,6 +33,7 @@
 #import <Twitter/Twitter.h>
 #import "MBProgressHUD.h"
 #import "PodcastSettingsViewController.h"
+#import "SVHtmlViewController.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
 
@@ -727,6 +728,20 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         // Dismiss the controller
         [self dismissModalViewControllerAnimated:YES];
     };
+}
+
+- (IBAction)showDescriptionGestureRecognizerTapped:(id)sender {
+    SVHtmlViewController *controller = [[SVHtmlViewController alloc] initWithNibName:nil bundle:nil];
+    __block NSString *html;
+    __block NSString *title;
+    [localContext performBlockAndWait:^{
+        html = localPodcast.summary;
+        title = localPodcast.title;
+    }];
+    controller.html = html;
+    controller.hidesBottomBarWhenPushed = YES;
+    controller.title = title;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 

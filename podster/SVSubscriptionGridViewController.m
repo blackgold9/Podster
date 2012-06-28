@@ -58,7 +58,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    LOG_GENERAL(2, @"ViewDidAppear");
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{                    
         [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
     }];

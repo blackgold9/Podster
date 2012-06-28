@@ -6,9 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "SVSettings.h"
-#import "HomeController.h"
-#import "BlockAlertView.h"
 #import "Lockbox.h"
 
 @implementation SVSettings {
@@ -18,52 +15,45 @@ NSString *kShouldAlwaysSubscribeToNotifications = @"shouldAlwaysSubscribeToNotif
 NSString *kNeverAutoSubscribeToNotifications = @"neverAutoSubscribeToNotifications";
 NSString *kNotificationsEnabled = @"notificationsEnabled";
 
-NSString *uuid(){
+NSString *uuid() {
     CFUUIDRef theUUID = CFUUIDCreate(NULL);
-    NSString *uuidString = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, theUUID);
+    NSString *uuidString = (__bridge_transfer NSString *) CFUUIDCreateString(NULL, theUUID);
     CFRelease(theUUID);
     return uuidString;
 }
 
-- (BOOL)shouldAlwaysSubscribeToNotifications
-{
+- (BOOL)shouldAlwaysSubscribeToNotifications {
     return [defaults boolForKey:kShouldAlwaysSubscribeToNotifications];
 }
 
-- (void)setShouldAlwaysSubscribeToNotifications:(BOOL)autoSubscribe
-{
-   [defaults setBool:autoSubscribe
-              forKey:kShouldAlwaysSubscribeToNotifications];
+- (void)setShouldAlwaysSubscribeToNotifications:(BOOL)autoSubscribe {
+    [defaults setBool:autoSubscribe
+               forKey:kShouldAlwaysSubscribeToNotifications];
 
 
 }
 
-- (BOOL)neverAutoSubscribeToNotifications
-{
+- (BOOL)neverAutoSubscribeToNotifications {
     return [defaults boolForKey:kNeverAutoSubscribeToNotifications];
 }
 
-- (void)setNeverAutoSubscribeToNotifications:(BOOL)neverSubscribe
-{
+- (void)setNeverAutoSubscribeToNotifications:(BOOL)neverSubscribe {
     [defaults setBool:neverSubscribe
                forKey:kNeverAutoSubscribeToNotifications];
 
 
 }
 
-- (BOOL)notificationsEnabled
-{
+- (BOOL)notificationsEnabled {
     return [defaults boolForKey:kNotificationsEnabled];
 }
 
-- (void)setNotificationsEnabled:(BOOL)enabled
-{
+- (void)setNotificationsEnabled:(BOOL)enabled {
     [defaults setBool:enabled
                forKey:kNotificationsEnabled];
 }
 
-- (NSString *)deviceId
-{
+- (NSString *)deviceId {
     NSString *deviceId = [Lockbox stringForKey:@"deviceId"];
     if (deviceId == nil) {
         // If device id is nil, read it from the user defaults (affects v1 users)
@@ -77,12 +67,12 @@ NSString *uuid(){
 
     return deviceId;
 }
-- (void)save
-{
+
+- (void)save {
     [defaults synchronize];
 }
-- (id)init
-{
+
+- (id)init {
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(save) name:UIApplicationWillTerminateNotification object:nil];
@@ -90,65 +80,63 @@ NSString *uuid(){
     return self;
 }
 
-+ (SVSettings *)sharedInstance
-{
++ (SVSettings *)sharedInstance {
     static SVSettings *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[SVSettings alloc] init];
         instance->defaults = [NSUserDefaults standardUserDefaults];
-        
+
     });
-    
+
     return instance;
 }
 
-- (HomePageScreenType)homeScreen
-{
+- (HomePageScreenType)homeScreen {
     NSInteger num = [defaults integerForKey:@"HomeScreenType"];
-    HomePageScreenType screenType = (HomePageScreenType)num;
+    HomePageScreenType screenType = (HomePageScreenType) num;
     return screenType;
 }
 
-- (void)setHomeScreen:(HomePageScreenType)screenType
-{
+- (void)setHomeScreen:(HomePageScreenType)screenType {
     [defaults setInteger:screenType forKey:@"HomeScreenType"];
-     
+
 }
 
-- (BOOL)premiumModeUnlocked
-{
+- (BOOL)premiumModeUnlocked {
     return [defaults boolForKey:@"net.vanterpool.podster.notifications"];
 }
 
-- (NSInteger)maxFreeNotifications
-{
-    return MAX(3, [defaults integerForKey:@"MaxFreeNotifications"]);
+- (BOOL)allowCellularDownloads {
+    return [defaults boolForKey:@"AllowCellularDownloads"];
 }
 
-- (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications
-{
+- (void)setMaxNonPremiumNotifications:(NSInteger)maxNotifications {
     [defaults setInteger:maxNotifications forKey:@"MaxFreeNotifications"];
 }
 
-- (BOOL)firstRun
-{
+- (BOOL)firstRun {
     return ![defaults boolForKey:@"SVHasRun"];
 }
 
-- (void)setFirstRun:(BOOL)firstRun
-{
+- (void)setFirstRun:(BOOL)firstRun {
     [defaults setBool:!firstRun forKey:@"SVHasRun"];
 }
 
-- (BOOL)downloadOn3g
-{
+- (BOOL)downloadOn3g {
     return [defaults boolForKey:@"SVDownloadOn3g"];
 }
 
-- (void)setDownloadOn3g:(BOOL )shouldDownload
-{
+- (void)setDownloadOn3g:(BOOL)shouldDownload {
     [defaults setBool:shouldDownload forKey:@"SVDownloadOn3g"];
+}
+
+- (BOOL)smartSyncEnabled {
+    return [defaults boolForKey:@"smartSync"];
+}
+
+- (void)setSmartSyncEnabled:(BOOL)shouldDownload {
+    [defaults setBool:shouldDownload forKey:@"smartSync"];
 }
 
 @end
