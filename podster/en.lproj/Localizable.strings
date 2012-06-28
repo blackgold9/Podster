@@ -120,4 +120,25 @@
 "Podster can store episodes on your device for access offline" = "Podster can store episodes on your device for access offline";
 "Get notified when new episodes are available" = "Get notified when new episodes are available";
 "Settings" = "Settings";
-"We use your location to enable smart sync to function when you change locations." = "We use your location to enable smart sync to function when you change locations.";
+// Describe what location is used for
+"We use your location to enable SmartSync to function when you change locations." = "We use your location to enable SmartSync to function when you change locations.";
+// Describe the 3g download feature, noting it's a premium feature
+"Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)" = "Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)";
+// Describe SmartSync , noting it's a premium feature
+"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)" = "SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)";
+"Downloads" = "Downloads";
+// The name of the feature, used as a title
+"SmartSync" = "SmartSync";
+// A short sentence used as a switch label
+"Allow On 3g" = "Allow on 3g";
+// Set up SmartSync (It's already enabled at this point)
+"Configure SmartSync" = "Configure SmartSync";
+// Turn on smart sync (it's off right now)
+"Enable SmartSync" = "Enable SmartSync";
+// Describe smart sync. Warn about excessive data use if 3g downloads are enabled
+"You will automatically download new episodes when you arrive at or leave these locations. This can be use a LOT of data if 3g downloads are enabled." = "You will automatically download new episodes when you arrive at or leave these locations. This can be use a LOT of data if 3g downloads are enabled.";
+"Enable SmartSync to download new episodes whenever you arrive at or leave locations you define" = "Enable SmartSync to download new episodes whenever you leave or arrive at locations you define";
+"We are unable to access your location" = "We are unable to access your location";
+"It appears that location services have been disabled for this application. Please enable it in your device's settings menu" = "It appears that location services have been disabled for this application. Please enable it in your device's settings menu";
+"Now Playing" = "Now Playing";
+"Add a Location" = "Add a Location";

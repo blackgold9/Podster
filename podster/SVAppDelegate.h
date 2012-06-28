@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BWQuincyManager.h"
 #import "BWHockeyManager.h"
-@interface SVAppDelegate : UIResponder <UIApplicationDelegate, BWQuincyManagerDelegate, BWHockeyManagerDelegate>
+#import <CoreLocation/CoreLocation.h>
+@interface SVAppDelegate : UIResponder <UIApplicationDelegate, BWQuincyManagerDelegate, BWHockeyManagerDelegate,CLLocationManagerDelegate>
 @property (strong, nonatomic) UIWindow *window;
 - (void)startListening;
 - (void)stopListening;

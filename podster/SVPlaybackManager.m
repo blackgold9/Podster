@@ -195,8 +195,10 @@ void audioRouteChangeListenerCallback (
 
     NSParameterAssert(episode);
     NSParameterAssert(podcast);
-    self.currentEpisode = episode;
-    self.currentPodcast = podcast;
+    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    
+    self.currentEpisode = [episode MR_inContext:context];
+    self.currentPodcast = [podcast MR_inContext:context];;
     NSAssert(episode.mediaURL != nil, @"The podcast must have a mediaURL");
     playbackRate = 1.0; // Reset playback rate
     NSError *error;

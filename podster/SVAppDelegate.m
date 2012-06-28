@@ -35,77 +35,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     DDFileLogger *fileLogger;
     BOOL isFirstRun;
+    CLLocationManager *locationManager;
 }
 
 NSString *uuid();
 @synthesize window = _window;
-//- (void)processLinkInPasteboard
-//{
-//    NSString *regexToReplaceRawLinks = @"(\\b(https?):\\/\\/[-A-Z0-9+&@#\\/%?=~_|!:,.;]*[-A-Z0-9+&@#\\/%=~_|])";   
-//    
-//    NSError *error = NULL;
-//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexToReplaceRawLinks
-//                                                                           options:NSRegularExpressionCaseInsensitive
-//                                                                             error:&error];
-//    NSString *lastURLAskedAbout = [[NSUserDefaults standardUserDefaults] valueForKey:@"lastPastebordImportURL"];
-//    NSString *sourceString = [UIPasteboard generalPasteboard].string;
-//    if ([sourceString isEqualToString:lastURLAskedAbout]) {
-//        // We already asked the user about this url.
-//        return;
-//    } else {
-//        // Save it so we don't ask them again
-//        [[NSUserDefaults standardUserDefaults] setValue:sourceString forKey:@"lastPastebordImportURL"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        
-//    }
-//    if (sourceString) {
-//        NSRange range = [regex rangeOfFirstMatchInString:sourceString
-//                                                 options:NSRegularExpressionCaseInsensitive
-//                                                   range:NSMakeRange(0, [sourceString length])];
-//        if (range.location != NSNotFound){
-//            NSString *url = [sourceString substringWithRange:range];
-//            url = [url lowercaseString];
-//            UIAlertView *testView = [UIAlertView alertViewWithTitle:@"Add this feed?" message:[NSString stringWithFormat:@"We noticed you have the url: \"%@\" in your pasteboard. Would you like to subscribe to it?", url]];
-//            [testView addButtonWithTitle:@"Yes" handler:^{
-//                [[SVPodcatcherClient sharedInstance] findFeedFromLink:url
-//                                                         onCompletion:^(NSString *feedURL) {
-//                                                             if (feedURL){
-//                                                             [[SVPodcatcherClient sharedInstance] downloadAndPopulatePodcastWithFeedURL:feedURL
-//                                                                                                                      withLowerPriority:NO
-//                                                                                                                              inContext:[PodsterManagedDocument defaultContext]
-//                                                                                                                           onCompletion:^{
-//                                                                                                                               [self subscribeToFeedWithURL:feedURL];
-//                                                                                                                           } onError:^(NSError *error) {
-//                                                                                                                               
-//                                                                                                                               // The feed could not be parsed
-//                                                                                                                               [UIAlertView showAlertViewWithTitle:@"Whoops!"
-//                                                                                                                                                           message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
-//                                                                                                                                                               
-//                                                                                                                                                           }];
-//                                                                                                                               
-//                                                                                                                           }];
-//                                                             } else {
-//                                                                 // The feed could not be parsed
-//                                                                 [UIAlertView showAlertViewWithTitle:@"Whoops!"
-//                                                                                             message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
-//                                                                                                 
-//                                                                                             }];
-//                                                             }
-//                                                         } onError:^(NSError *error) {
-//                                                             // The feed could not be parsed
-//                                                             [UIAlertView showAlertViewWithTitle:@"Whoops!"
-//                                                                                         message:@"The url you supplied doesn't seem to be a podcast feed. Try another url if you have one." cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *view, NSInteger index) {
-//                                                                                             
-//                                                                                         }];
-//
-//                                                         }];
-//            }];
-//            [testView addButtonWithTitle:@"No" handler:^{ LOG_GENERAL(2, @"Improting a feed failed"); }];
-//            [testView show];
-//        }
-//    }
-//    
-//}
+
 -(void)handleCoreDataError:(NSError *)error
 {
     LOG_GENERAL(0, @"Core data error: %@", error);
@@ -160,7 +95,7 @@ NSString *uuid();
     fileLogger = [[DDFileLogger alloc] init];
     fileLogger.rollingFrequency = 60 * 60 * 1; // 24 hour rolling
     fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
-    
+
     [DDLog addLogger:fileLogger];
 #if defined (CONFIGURATION_AppStore)
     DDLogVerbose(@"Running in Appstore mode");
@@ -183,19 +118,16 @@ NSString *uuid();
     [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
     [[BWHockeyManager sharedHockeyManager] setDelegate:self];
 #endif
-    
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
     [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
     [NSURLCache setSharedURLCache:URLCache];
- 
+    
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
     
-
     [self configureTheming];
     
     [[PodsterManagedDocument sharedInstance] performWhenReady:^{  
-          //  [[SVDownloadManager sharedInstance] downloadPendingEntries];
         // Actually register
 #ifndef CONFIGURATION_Debug
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
@@ -204,13 +136,24 @@ NSString *uuid();
 #else
         [self application:[UIApplication sharedApplication] didFailToRegisterForRemoteNotificationsWithError:nil];
 #endif
-        //   #endif
     }];
     
     BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
     self.window.rootViewController = controller;
-    [Appirater appLaunched:YES];
+
     [[SVSettings sharedInstance] setFirstRun:NO];
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]){
+        DDLogInfo(@"Launched due to region monitoring. Syncing");
+        [[PodsterManagedDocument sharedInstance] performWhenReady:^{  
+            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        }];
+    } else {
+        [Appirater appLaunched:YES];
+    }
+    
+
+    locationManager = [CLLocationManager new];
+    locationManager.delegate = self;
     return YES;    
 }
 
@@ -289,6 +232,7 @@ NSString *uuid();
                         BannerViewController *bc = (BannerViewController *) weakDelegate.window.rootViewController;
                         nav = (UINavigationController *)[bc contentController];
                     }
+                    [nav popToRootViewControllerAnimated:NO];
                     [nav pushViewController:controller animated:YES];
                     
                 });
@@ -449,6 +393,25 @@ NSString *uuid();
         return [[SVSettings sharedInstance] deviceId];;
 #endif
     return [[SVSettings sharedInstance] deviceId];
+}
+
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
+{
+DDLogWarn(@"Failed to monitor region %@ with error %@", region, error);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+DDLogInfo(@"Refreshing subscriptions becasue we entered a region");
+    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+DDLogInfo(@"Refreshing subscriptions becasue we left a region");
+if ([[SVSettings sharedInstance] downloadOn3g]) {
+    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+}
 }
 
 @end

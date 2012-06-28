@@ -11,6 +11,7 @@
 #define SharedFileName   @"PodsterData"
 #define PrivateName     @"net.vanterpool.podster.data"
 #import "CloudHelper.h"
+static int ddLogLevel = LOG_LEVEL_INFO;
 @implementation PodsterManagedDocument
 {
     NSMutableArray *readyCallbacks;
@@ -63,7 +64,7 @@
 }
 - (void)executeReadyCallbacks
 {
-    LOG_GENERAL(2, @"Document Ready. Executing Callback");
+    DDLogInfo(@"Document Ready. Executing Callback");
     dispatch_async(dispatch_get_main_queue(), ^{
         [readyCallbacks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ContextBlock callback = obj;

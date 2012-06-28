@@ -41,7 +41,7 @@
     self.mapView.delegate = self;
     self.nameTextField.returnKeyType = UIReturnKeyDone;
     self.nameTextField.delegate = self;
-    self.navigationItem.title = @"Add a Location";
+    self.navigationItem.title = NSLocalizedString(@"Add a Location", @"Add a Location");
     // Do any additional setup after loading the view.
 }
 
@@ -78,7 +78,7 @@
 
 - (IBAction)addButtonTapped:(id)sender {
 
-    [locationManager startMonitoringForRegion:[[CLRegion alloc] initCircularRegionWithCenter:self.mapView.userLocation.coordinate radius:500 identifier:self.nameTextField.text]];
+    [locationManager startMonitoringForRegion:[[CLRegion alloc] initCircularRegionWithCenter:self.mapView.userLocation.coordinate radius:500 identifier:self.nameTextField.text] desiredAccuracy:kCLLocationAccuracyKilometer];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -95,7 +95,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     hasLocation |= self.mapView.userLocationVisible;
     if (self.nameTextField.text.length > 1 && hasLocation) {
-        [locationManager startMonitoringForRegion:[[CLRegion alloc] initCircularRegionWithCenter:self.mapView.userLocation.coordinate radius:500 identifier:self.nameTextField.text]];
+    [locationManager startMonitoringForRegion:[[CLRegion alloc] initCircularRegionWithCenter:self.mapView.userLocation.coordinate radius:500 identifier:self.nameTextField.text] desiredAccuracy:kCLLocationAccuracyKilometer];
         [self dismissModalViewControllerAnimated:YES];
         return YES;
     } else {

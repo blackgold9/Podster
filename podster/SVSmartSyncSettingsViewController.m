@@ -8,7 +8,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import "SVSmartSyncSettingsViewController.h"
-
+#import "BlockAlertView.h"
 @interface SVSmartSyncSettingsViewController ()
 
 @end
@@ -39,6 +39,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [FlurryAnalytics logEvent:@"SmartSyncSettingsPageView"];
     [super viewWillAppear:animated];
     locations = [locationManager.monitoredRegions sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
     [self.tableView reloadData];
@@ -63,10 +64,10 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 1) {
-        return @"You will automatically download new episodes when you arrive at or leave these locations. This can be use a LOT of data if 3g downloads are enabled.";
+        return NSLocalizedString(@"You will automatically download new episodes when you arrive at or leave these locations. This can be use a LOT of data if 3g downloads are enabled.", @"You will automatically download new episodes when you arrive at or leave these locations. This can be use a LOT of data if 3g downloads are enabled.");
     }
 
-    return @"Enable SmartSync to download new episodes whenever you arrive at or leave locations you define";
+    return NSLocalizedString(@"Enable SmartSync to download new episodes whenever you arrive at or leave locations you define", @"Enable SmartSync to download new episodes whenever you arrive at or leave locations you define");
 }
 
 #pragma mark - Table view data source
@@ -152,7 +153,14 @@
 }
 
 #pragma mark - Table view delegate
-
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1 && indexPath.row < locations.count) {
+        return nil;
+    }
+    
+    return indexPath;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     /*
@@ -166,17 +174,20 @@
 
 - (IBAction)switchValueChanged:(id)sender {
     UISwitch *theSwitch = sender;
-    BOOL smartSyncOn = [[SVSettings sharedInstance] smartSyncEnabled] && [CLLocationManager regionMonitoringEnabled];
+//    BOOL smartSyncOn = [[SVSettings sharedInstance] smartSyncEnabled] && [CLLocationManager regionMonitoringEnabled];
     if (theSwitch.on) {
-        if (![CLLocationManager regionMonitoringAvailable]) {
-            // TODO: Show location disabled error
+        if (![CLLocationManager regionMonitoringAvailable] || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied ) {
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"We are unable to access your location", @"We are unable to access your location")
+                                   message:NSLocalizedString(@"It appears that location services have been disabled for this application. Please enable it in your device's settings menu", @"It appears that location services have been disabled for this application. Please enable it in your device's settings menu")];
+            [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", @"OK") block:^{
+                
+            }];
+            
+            [alert show];
+            
+
             theSwitch.on = NO;
             return;
-        }
-
-        if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
-            // TODO: Show premium mode upsell
-            theSwitch.on = NO;
         }
 
         [[SVSettings sharedInstance] setSmartSyncEnabled:YES];

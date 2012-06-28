@@ -1,6 +1,7 @@
 Podster is the simplest, most beautiful way to get your podcasts on the go.
 
-* RapidUpdate technology syncs new episodes faster than traditional podcast apps
+* (NEW) SmartSync: Episodes automatically download whenever you arrive or leave at places you specify
+* (NEW) RapidUpdate technology syncs new episodes faster than traditional podcast apps
 * Intelligent server-side monitoring (We let you know as soon as new episodes are available)
 * Airplay support
 ★ Browse our extensive catalog to find great content

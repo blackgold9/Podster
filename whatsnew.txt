@@ -1,3 +1,4 @@
+* SmartSync: Episodes automatically download whenever you arrive or leave at places you specify
+* Downloads are now possible on a cellular connection (user configurable)
 * Customize how many episodes are downloaded per-podcast
-* Podster is now available in Simplified Chineese 
 * LOTS of bug fixes

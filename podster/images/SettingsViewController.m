@@ -170,11 +170,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
             } else if (indexPath.row == SVMiscRowsRestore) {
                 [[PodsterIAPHelper sharedInstance] restoreTransactions];
                 [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            } else if (indexPath.row == SVMiscRowsReset) {
+            }
+#if DEBUG
+             else if (indexPath.row == SVMiscRowsReset) {
                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"net.vanterpool.podster.notifications"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [tableView reloadData];
             }
+#endif
             break;
         case SettingsSectionsPremiumSection:
             if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
@@ -233,10 +236,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *output;
     switch (section) {
         case SettingsSectionsDownloadsSection:
-            output = @"Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)";
+            output = NSLocalizedString(@"Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)", @"Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)");
             break;
         case SettingsSectionsSmartSyncSection:
-            output = @"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)";
+            output = NSLocalizedString(@"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)", @"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)");
             break;
         default:
             break;
@@ -252,10 +255,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
             output = NSLocalizedString(@"PREMIUM_MODE", @"Premium Mode");
             break;
         case SettingsSectionsDownloadsSection:
-            output = @"Downloads";
+            output = NSLocalizedString(@"Downloads", @"Downloads");
             break;
         case SettingsSectionsSmartSyncSection:
-            output = @"SmartSync";
+            output = NSLocalizedString(@"SmartSync", @"SmartSync");
             break;
         default:
             break;
@@ -300,7 +303,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                 UISwitch *cellularSwitch = (UISwitch *) [cell.contentView viewWithTag:57];
                 cellularSwitch.on = [[SVSettings sharedInstance] downloadOn3g];
                 cellularDownloadLabel = (UILabel *) [cell.contentView viewWithTag:56];
-                cellularDownloadLabel.text = @"Allow On 3g";
+                cellularDownloadLabel.text = NSLocalizedString(@"Allow On 3g", @"Allow On 3g");
                 break;
             }
             default:
@@ -354,7 +357,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:@"SmartSync"];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.textLabel.text = [[SVSettings sharedInstance] smartSyncEnabled] ? @"Configure SmartSync" : @"Enable SmartSync";
+        cell.textLabel.text = [[SVSettings sharedInstance] smartSyncEnabled] ? NSLocalizedString(@"Configure SmartSync", @"Configure SmartSync") : NSLocalizedString(@"Enable SmartSync", @"Enable SmartSync");
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 
@@ -486,7 +489,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)smartSyncTapped {
     if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
         [FlurryAnalytics logEvent:@"HitSmartSyncUpsell"];
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE", @"Unlock Premium Mode") message:@"SmartSync is a Premium Feature. Upgrade now to unlock it!"];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE", @"Unlock Premium Mode") message:@"SmartSync is a Premium Feature. Unlock it now!"];
         [alert addButtonWithTitle:@"Unlock" block:^{
             [self showPurchaseOptions];
         }];

@@ -128,3 +128,16 @@
 "Get notified when new episodes are available" = "Get notified when new episodes are available";
 "Settings" = "Settings";
 "We use your location to enable smart sync to function when you change locations." = "We use your location to enable smart sync to function when you change locations.";
+"Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)" = "Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)";
+"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)" = "SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)";
+"Downloads" = "Downloads";
+"SmartSync" = "SmartSync";
+"Allow On 3g" = "Allow On 3g";
+"Configure SmartSync" = "Configure SmartSync";
+"Enable SmartSync" = "Enable SmartSync";
+"You will automatically download new episodes when you arrive at or leave these locations. This can be use a LOT of data if 3g downloads are enabled." = "You will automatically download new episodes when you arrive at or leave these locations. This can be use a LOT of data if 3g downloads are enabled.";
+"Enable SmartSync to download new episodes whenever you arrive at or leave locations you define" = "Enable SmartSync to download new episodes whenever you arrive at or leave locations you define";
+"We are unable to access your location" = "We are unable to access your location";
+"It appears that location services have been disabled for this application. Please enable it in your device's settings menu" = "It appears that location services have been disabled for this application. Please enable it in your device's settings menu";
+"Now Playing" = "Now Playing";
+"Add a Location" = "Add a Location";

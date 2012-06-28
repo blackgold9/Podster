@@ -54,14 +54,19 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [FlurryAnalytics logEvent:@"PlaybackPageView" timed:YES];
+   
+        NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
+        SVPodcastEntry *episode = [SVPlaybackManager sharedInstance].currentEpisode;
+        
+        
+        NSData *imageData = episode.podcast.fullIsizeImageData;
 
-    NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
-    SVPodcastEntry *episode = [SVPlaybackManager sharedInstance].currentEpisode;
-    if (episode.podcast.fullIsizeImageData != nil) {
-        self.artworkImage.image = [UIImage imageWithData:episode.podcast.fullIsizeImageData];
-    } else {
-        [self.artworkImage setImageWithURL:imageURL placeholderImage:nil];
-    }
+            if (imageData) {
+                self.artworkImage.image = [UIImage imageWithData:episode.podcast.fullIsizeImageData];            
+            } else {
+                
+                [self.artworkImage setImageWithURL:imageURL placeholderImage:nil];
+            }
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -114,8 +119,10 @@
     } else {
         self.playButton.selected = YES;
     }
+
+    
     self.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:[SVPlaybackManager sharedInstance].currentEpisode.durationValue];
-    self.navigationItem.title = @"Now Playing";
+    self.navigationItem.title = NSLocalizedString(@"Now Playing", @"Now Playing");
     self.titleLabel.text = [SVPlaybackManager sharedInstance].currentEpisode.title;
     [self registerObservers];
     [self.navigationController setToolbarHidden:YES animated:NO];
