@@ -78,7 +78,7 @@
 
 - (IBAction)addButtonTapped:(id)sender {
 
-    [locationManager startMonitoringForRegion:[[CLRegion alloc] initCircularRegionWithCenter:self.mapView.userLocation.coordinate radius:500 identifier:self.nameTextField.text] desiredAccuracy:kCLLocationAccuracyKilometer];
+    [locationManager startMonitoringForRegion:[[CLRegion alloc] initCircularRegionWithCenter:self.mapView.userLocation.coordinate radius:30 identifier:self.nameTextField.text] desiredAccuracy:kCLLocationAccuracyNearestTenMeters];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -95,7 +95,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     hasLocation |= self.mapView.userLocationVisible;
     if (self.nameTextField.text.length > 1 && hasLocation) {
-    [locationManager startMonitoringForRegion:[[CLRegion alloc] initCircularRegionWithCenter:self.mapView.userLocation.coordinate radius:500 identifier:self.nameTextField.text] desiredAccuracy:kCLLocationAccuracyKilometer];
+    [locationManager startMonitoringForRegion:[[CLRegion alloc] initCircularRegionWithCenter:self.mapView.userLocation.coordinate radius:30 identifier:self.nameTextField.text] desiredAccuracy:kCLLocationAccuracyNearestTenMeters];
         [self dismissModalViewControllerAnimated:YES];
         return YES;
     } else {

@@ -402,13 +402,17 @@ DDLogWarn(@"Failed to monitor region %@ with error %@", region, error);
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
-DDLogInfo(@"Refreshing subscriptions becasue we entered a region");
+        BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
+    DDLogInfo(@"Refreshing subscriptions becasue we entered a region");
+        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
     [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
+    BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
 DDLogInfo(@"Refreshing subscriptions becasue we left a region");
+    [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
 if ([[SVSettings sharedInstance] downloadOn3g]) {
     [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
 }
