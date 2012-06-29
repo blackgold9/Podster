@@ -143,10 +143,14 @@ NSString *uuid();
 
     [[SVSettings sharedInstance] setFirstRun:NO];
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]){
-        DDLogInfo(@"Launched due to region monitoring. Syncing");
-        [[PodsterManagedDocument sharedInstance] performWhenReady:^{  
-            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
+            BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
+            [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
+            DDLogInfo(@"Launched due to region monitoring. Syncing");
+            [[PodsterManagedDocument sharedInstance] performWhenReady:^{
+                [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+            }];
+        });
     } else {
         [Appirater appLaunched:YES];
     }
@@ -402,20 +406,29 @@ DDLogWarn(@"Failed to monitor region %@ with error %@", region, error);
 
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
+
         BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-    DDLogInfo(@"Refreshing subscriptions becasue we entered a region");
+        DDLogInfo(@"Refreshing subscriptions becasue we entered a region");
         [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
-    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        if ([[SVSettings sharedInstance] downloadOn3g]) {
+            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        }
+    });
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
-    BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-DDLogInfo(@"Refreshing subscriptions becasue we left a region");
-    [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
-if ([[SVSettings sharedInstance] downloadOn3g]) {
-    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-}
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
+
+
+        BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
+        DDLogInfo(@"Refreshing subscriptions becasue we left a region");
+        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
+        if ([[SVSettings sharedInstance] downloadOn3g]) {
+            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        }
+    });
 }
 
 @end

@@ -70,7 +70,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             } else {
                 DDLogInfo(@"Lost WIFI signal");
                 BOOL wasDownloading = queue.operationCount > 0;
-                if (wasDownloading) {
+                if (wasDownloading && ![[SVSettings sharedInstance] downloadOn3g]) {
                     UILocalNotification *notDone = [[UILocalNotification alloc] init];
                     notDone.alertBody = lostWifi;
                     notDone.soundName = @"alert.aiff";
@@ -236,18 +236,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
         SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
                                                                                filePath:[download.entry localFilePath]];
-
-//        background_task = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler: ^ {
-//            [[UIApplication sharedApplication] endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
-//            background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
-//            UILocalNotification *notDone = [[UILocalNotification alloc] init];
-//            notDone.alertBody = NSLocalizedString(@"Podster can only download for 10 minutes in the background. Please re-open it to continue.", @"Podster can only download for 10 minutes in the background. Please re-open it to continue.");
-//            notDone.soundName = @"alert.aiff";
-//            [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
-//            
-//        }];
-
-
 
         SVPodcastEntry *entry = download.entry;
         op.completionBlock = ^void() {

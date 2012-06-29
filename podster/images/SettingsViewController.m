@@ -11,7 +11,7 @@
 #import "PodsterIAPHelper.h"
 #import "MBProgressHUD.h"
 #import "BlockAlertView.h"
-
+static int ddLogLevel = LOG_LEVEL_INFO;
 enum SettingsSections {
     SettingsSectionsPremiumSection = 0,
     SettingsSectionsDownloadsSection,
@@ -365,14 +365,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSAssert(cell != nil, @"cell should not be nil");
     return cell;
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -515,6 +507,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         [alert show];
         [theSwitch setOn:NO animated:YES];
     } else {
+
+        DDLogInfo(@"User Set Allow downloads on 3g to ", theSwitch.on ? @"ON" : "OFF");
         [[SVSettings sharedInstance] setDownloadOn3g:theSwitch.on];
         if (theSwitch.on) {
             [FlurryAnalytics logEvent:@"AllowDownloadsOnCellular"];
