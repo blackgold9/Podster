@@ -102,7 +102,8 @@ NSString *uuid();
     [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
-    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
+    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+ //   [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
 #endif
 
 #if defined (CONFIGURATION_Ad_Hoc)
