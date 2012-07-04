@@ -5,11 +5,9 @@
 
 const struct SVPodcastAttributes SVPodcastAttributes = {
 	.author = @"author",
-	.cachingLastModified = @"cachingLastModified",
 	.downloadCount = @"downloadCount",
 	.downloadPercentage = @"downloadPercentage",
 	.downloadsToKeep = @"downloadsToKeep",
-	.etag = @"etag",
 	.feedURL = @"feedURL",
 	.fullIsizeImageData = @"fullIsizeImageData",
 	.gridSizeImageData = @"gridSizeImageData",
@@ -21,7 +19,6 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.lastUpdated = @"lastUpdated",
 	.listSizeImageData = @"listSizeImageData",
 	.logoURL = @"logoURL",
-	.nextItemDate = @"nextItemDate",
 	.podstoreId = @"podstoreId",
 	.shouldNotify = @"shouldNotify",
 	.smallLogoURL = @"smallLogoURL",
@@ -34,7 +31,6 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.title = @"title",
 	.unlistenedSinceSubscribedCount = @"unlistenedSinceSubscribedCount",
 	.updating = @"updating",
-	.urlHash = @"urlHash",
 	.websiteURL = @"websiteURL",
 };
 
@@ -133,13 +129,6 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
-@dynamic cachingLastModified;
-
-
-
-
-
-
 @dynamic downloadCount;
 
 
@@ -213,13 +202,6 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 - (void)setPrimitiveDownloadsToKeepValue:(int32_t)value_ {
 	[self setPrimitiveDownloadsToKeep:[NSNumber numberWithInt:value_]];
 }
-
-
-
-
-
-@dynamic etag;
-
 
 
 
@@ -372,13 +354,6 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 @dynamic logoURL;
-
-
-
-
-
-
-@dynamic nextItemDate;
 
 
 
@@ -559,13 +534,6 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 - (void)setPrimitiveUpdatingValue:(BOOL)value_ {
 	[self setPrimitiveUpdating:[NSNumber numberWithBool:value_]];
 }
-
-
-
-
-
-@dynamic urlHash;
-
 
 
 

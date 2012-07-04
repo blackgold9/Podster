@@ -107,17 +107,38 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         download.stateValue = SVDownloadStateDownloading;
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:download.entry.mediaURL]];
                
+        __block BOOL alreadyDownloaded = NO;
         if ([[NSFileManager defaultManager] fileExistsAtPath:[download.entry localFilePath]] ){
             NSFileManager *fileManager = [NSFileManager defaultManager];
             NSDictionary *attributes = [fileManager attributesOfItemAtPath:filePath error:NULL];
             NSNumber *size = [attributes objectForKey:NSFileSize];
-            initialSize = [size longLongValue];
-            [request setValue:[NSString stringWithFormat:@"bytes=%lld-", initialSize] forHTTPHeaderField:@"Range"];
-            DDLogInfo(@"Resuming download at %lld bytes", initialSize);
+            if (download.entry.contentLengthValue <= [size integerValue]) {
+                // We're done here.
+                alreadyDownloaded = YES;
+                [localContext performBlockAndWait:^{
+                    DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [download.entry localFilePath]);
+                    SVPodcastEntry *entry = download.entry;
+                    entry.downloadCompleteValue = YES;                
+                    entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
+                    DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
+                    if (download) {
+                        [download MR_deleteInContext:localContext];
+                    }
+                    [self done];
+                    
+                }];
+                DDLogInfo(@"Podcast was already downloaded. Completing");
+            } else {
+                initialSize = [size longLongValue];
+                [request setValue:[NSString stringWithFormat:@"bytes=%lld-", initialSize] forHTTPHeaderField:@"Range"];
+                DDLogInfo(@"Resuming download at %lld bytes", initialSize);
+            }
         } else {
             initialSize = 0;
         }
-        
+        if (alreadyDownloaded) {
+            return;
+        }
 
          AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 

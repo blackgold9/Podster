@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="Renamed tag controllers to appropriate names">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadManager.m" afterPath="$PROJECT_DIR$/podster/SVDownloadManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/images/SettingsViewController.m" afterPath="$PROJECT_DIR$/podster/images/SettingsViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/blackgold9.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/blackgold9.xcuserdatad/UserInterfaceState.xcuserstate" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,7 +34,7 @@
       <file leaf-file-name="SVSettings.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/SVSettings.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="48" selection-start="3380" selection-end="3380" vertical-scroll-proportion="0.0">
+            <state line="126" column="48" selection-start="3352" selection-end="3352" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -55,10 +52,8 @@
       <file leaf-file-name="AFURLConnectionOperation.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFURLConnectionOperation.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="508" column="25" selection-start="19039" selection-end="19064" vertical-scroll-proportion="-4.1923075">
-              <folding>
-                <element signature="e#5570#5597#0" expanded="true" />
-              </folding>
+            <state line="508" column="25" selection-start="19039" selection-end="19064" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,7 +79,7 @@
       <file leaf-file-name="SVDownloadOperation.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podster/SVDownloadOperation.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="123" selection-start="5572" selection-end="5572" vertical-scroll-proportion="3.2437923">
+            <state line="127" column="123" selection-start="5572" selection-end="5572" vertical-scroll-proportion="0.018932875">
               <folding />
             </state>
           </provider>
@@ -103,9 +98,7 @@
         <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
           <provider selected="true" editor-type-id="text-editor">
             <state line="236" column="52" selection-start="8826" selection-end="8826" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#1653#1804#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,11 +115,8 @@
       <file leaf-file-name="SettingsViewController.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/images/SettingsViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="39" selection-start="346" selection-end="346" vertical-scroll-proportion="-5.1923075">
-              <folding>
-                <element signature="e#14794#14859#0" expanded="true" />
-                <element signature="e#14862#14921#0" expanded="true" />
-              </folding>
+            <state line="13" column="39" selection-start="346" selection-end="346" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -166,8 +156,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="1440" />
-    <option name="height" value="801" />
+    <option name="width" value="2560" />
+    <option name="height" value="1283" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -368,17 +358,17 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="181" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="683" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="681" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="683" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="180" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="177" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="FullScreen" value="false" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.49760765" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Application.podster">
     <configuration default="true" type="OCUnitRunConfiguration" factoryName="OCUnit" PROJECT_NAME="podster" TARGET_NAME="podsterTests" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.1_1" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
@@ -395,13 +385,13 @@
         <option name="com.jetbrains.cidr.execution.StopCurrentSessionBeforeRunTaskProvider$StopCurrentSessionBeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="false" name="Podster" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="Podster" PROJECT_NAME="podster" TARGET_NAME="Podster" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.1_1" RUN_TARGET_PROJECT_NAME="podster" RUN_TARGET_NAME="Podster" DEBUGGER="LLDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+    <configuration default="false" name="Podster - Ad-Hoc" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="Podster - Ad-Hoc" PROJECT_NAME="podster" TARGET_NAME="Podster" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.1_1" RUN_TARGET_PROJECT_NAME="podster" RUN_TARGET_NAME="Podster" DEBUGGER="LLDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
       <envs />
       <method />
     </configuration>
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Application.podster" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Podster" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Podster - Ad-Hoc" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -454,14 +444,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="801" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="22" width="2560" height="1283" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38048092" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31683168" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293556" sideWeight="0.21005917" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1601976" sideWeight="0.6831683" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16003153" sideWeight="0.6831683" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3548387" sideWeight="0.0" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1805887" sideWeight="0.17845659" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -471,6 +460,7 @@
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31683168" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31276298" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -573,9 +563,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
@@ -605,6 +593,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/podster/images/SettingsViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="39" selection-start="346" selection-end="346" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Appirater.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="12" selection-start="3197" selection-end="3197" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="236" column="52" selection-start="8826" selection-end="8826" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/SVDownloadOperation.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="11" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFHTTPRequestOperation.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="43" selection-start="1745" selection-end="1745" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFURLConnectionOperation.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="11" selection-start="4510" selection-end="4510" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFURLConnectionOperation.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="508" column="25" selection-start="19039" selection-end="19064" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="413" column="48" selection-start="19274" selection-end="19410" vertical-scroll-proportion="0.0">
@@ -614,70 +643,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVSettings.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="48" selection-start="3380" selection-end="3380" vertical-scroll-proportion="0.0">
+        <state line="126" column="48" selection-start="3352" selection-end="3352" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Appirater.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="12" selection-start="3197" selection-end="3197" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFHTTPRequestOperation.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="43" selection-start="1745" selection-end="1745" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFURLConnectionOperation.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="11" selection-start="4510" selection-end="4510" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/AFNetworking/AFURLConnectionOperation.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="508" column="25" selection-start="19039" selection-end="19064" vertical-scroll-proportion="-4.1923075">
-          <folding>
-            <element signature="e#5570#5597#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVDownloadOperation.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="11" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/images/SettingsViewController.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="39" selection-start="346" selection-end="346" vertical-scroll-proportion="-5.1923075">
-          <folding>
-            <element signature="e#14794#14859#0" expanded="true" />
-            <element signature="e#14862#14921#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="52" selection-start="8826" selection-end="8826" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#1653#1804#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVDownloadOperation.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="123" selection-start="5572" selection-end="5572" vertical-scroll-proportion="3.2437923">
+        <state line="127" column="123" selection-start="5572" selection-end="5572" vertical-scroll-proportion="0.018932875">
           <folding />
         </state>
       </provider>

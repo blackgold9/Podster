@@ -164,7 +164,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 
 
-    // NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.nextItemDate ascending:NO withPredicate:predicate inContext:[PodsterManagedDocument defaultContext]];
     NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
     [context performBlock:^{
         NSFetchRequest *request =   [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title 

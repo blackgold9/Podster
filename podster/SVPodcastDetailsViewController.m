@@ -508,7 +508,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                               
                                                           }];
                                 [alert show];
-                                //[localPodcast updateNextItemDateAndDownloadIfNecessary:YES];
                             }
                         }
                         else {
@@ -602,7 +601,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewWillDisappear:animated];
     NSAssert(localPodcast != nil, @"Local podcast should not be nil");
-  //  [localPodcast updateNextItemDateAndDownloadIfNecessary:YES];
 
 }
 
