@@ -380,7 +380,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [queue cancelAllOperations];
         DDLogVerbose(@"Cancelling all current download operations");
     }
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    NSManagedObjectContext *parentContext = [PodsterManagedDocument defaultContext];
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.parentContext = parentContext;
     NSSet *shouldBePresent = [self entriesNeedingDownloadInContext:context];
     [self deleteDownloadsForEntriesNotInSet:shouldBePresent
                                   inContext:context];
@@ -410,6 +412,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         }
 
     }
+    [context save:nil];
+    [parentContext save:nil];
     DDLogInfo(@"Done queing entries for download");
 }
 

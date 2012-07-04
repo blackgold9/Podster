@@ -238,7 +238,9 @@ NSString *uuid();
                         nav = (UINavigationController *)[bc contentController];
                     }
                     [nav popToRootViewControllerAnimated:NO];
-                    [nav pushViewController:controller animated:YES];
+                    dispatch_async(dispatch_get_main_queue(), ^{                                                
+                        [nav pushViewController:controller animated:YES];
+                    });
                     
                 });
             }

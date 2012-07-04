@@ -401,8 +401,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     LOG_GENERAL(2, @"%s", sel_getName(_cmd));
     [super viewDidLoad];
-    
-    //    GCDiscreetNotificationView *notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Loading new episodes", @"Loading new episodes") showActivity:YES inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom inView:self.view];
     isInitialLoad = YES;
     
     self.navigationItem.title = NSLocalizedString(@"Details", @"Details");
@@ -411,12 +409,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
     self.titleLabel.text = self.podcast.title;
-//    
-//    UIActivityIndicatorView *imageSpinner = [[UIActivityIndicatorView alloc] initWithFrame:self.imageView.frame];
-//    [imageSpinner setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
-//    [self.imageView addSubview:imageSpinner];
-//    [imageSpinner startAnimating];
-//    [imageSpinner setHidesWhenStopped:YES];
         
     isLoading = YES;
     

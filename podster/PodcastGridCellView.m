@@ -67,15 +67,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         SVPodcast *coreCast = (SVPodcast *)podcast;
         if (coreCast.gridSizeImageData && coreCast.objectID) {
             NSCache *cache = [self cache];
-            UIImage *image = [cache objectForKey:coreCast.objectID];
-            if (image == nil) {
-                DDLogVerbose( @"Loaded local image");
-                image = [UIImage imageWithData:coreCast.gridSizeImageData];
-                [cache setObject:image forKey:coreCast.objectID];
-            } else {
-                DDLogVerbose(@"Loaded cached Image");
-            }
-            self.podcastArtImageView.image = image;
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                                
+                UIImage *image = [cache objectForKey:coreCast.objectID];
+                if (image == nil) {
+                    DDLogVerbose( @"Loaded local image");
+                    image = [UIImage imageWithData:coreCast.gridSizeImageData];
+                    [cache setObject:image forKey:coreCast.objectID];
+                } else {
+                    DDLogVerbose(@"Loaded cached Image");
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.podcastArtImageView.image = nil;
+                    [UIView animateWithDuration:0.33 animations:^{
+                        self.podcastArtImageView.image = image;                        
+                    }];
+                    
+                });
+            });
         } else {
             [self loadWebImageWithURL:[podcast smallLogoURL]];
             DDLogWarn(@"Didnt have expected image data stored locally. Redownloading");

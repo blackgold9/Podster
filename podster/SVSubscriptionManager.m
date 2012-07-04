@@ -113,10 +113,12 @@ static char const kRefreshInterval = -3;
             }
                      
             // Wait til we're done getting new epsiodes or until the timeout is hit
-            dispatch_group_notify(group, dispatch_get_main_queue(), ^{               
+            dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{               
                 [[SVDownloadManager sharedInstance] downloadPendingEntries];
-                self.isBusy = NO;  
-                DDLogInfo(@"Refreshing Subscriptions is complete");
+                dispatch_async(dispatch_get_main_queue(), ^{                                        
+                    self.isBusy = NO;  
+                    DDLogInfo(@"Refreshing Subscriptions is complete");
+                });
             });                                                        
         });
 

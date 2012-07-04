@@ -180,96 +180,107 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
         }
         
-        // Find the last entry that belongs to this podcast, if it exists
-        SVPodcastEntry *entry;
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"podcast == %@",  self];
-        NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                                              ascending:NO
-                                                          withPredicate:predicate
-                                                              inContext:self.managedObjectContext];        
-        [request setIncludesPendingChanges:YES];
-        [request setReturnsObjectsAsFaults:NO];
-        [request setFetchLimit:1];
-        NSArray *fetched = [self.managedObjectContext executeFetchRequest:request error:nil];
-        NSAssert(fetched.count < 2, @"There should be at most 1 item in there");
-        entry = [fetched lastObject];
-        if(!entry) {
-            DDLogWarn(@"Did NOT find previous entry");
-        }
-        
-        DDLogInfo(@"Getting new items %@", isUpdatingFromV1 ? @"updatingfromv1" : @"normally");
-        __weak SVPodcast *weakSelf = self;
-        NSAssert([self.podstoreId integerValue] != 0, @"The id should not be 0");
-        [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podstoreId
-                                                     withLastSyncDate:entry == nil || isUpdatingFromV1 ? [NSDate distantPast] : entry.datePublished
-                                                             complete:^void(id response) {
-                                                                 NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-                                                                 childContext.parentContext = self.managedObjectContext;
-                                                                 [childContext performBlock:^void() {
-                                                                     // TODO: simplyify this confusing mess
-                                                                     SVPodcast *localPodcast = [self MR_inContext:childContext];
-                                                                     localPodcast.lastSynced = syncDate;
-                                                                     NSArray *episodes = response;
-                                                                     if (episodes) {
-                                                                         DDLogInfo( @"Added %d episodes to %@", episodes.count, localPodcast.title);
-                                                                     }
-                                                                     
-                                                                     NSMutableDictionary *upgradeLookupByGUID;
-                                                                     if(isUpdatingFromV1) {
-                                                                         upgradeLookupByGUID = [NSMutableDictionary dictionary];
-                                                                         for(SVPodcastEntry *item in localPodcast.items) {
-                                                                             [upgradeLookupByGUID setObject:item forKey:item.guid];
-                                                                         }
-                                                                     }
-                                                                     
-                                                                     for (NSDictionary *episode in episodes) {
-                                                                         NSDictionary *data = [episode objectForKey:@"feed_item"];
-                                                                         NSString *guid = [data objectForKey:@"guid"];
-                                                                         SVPodcastEntry *localEntry;
-                                                                         
-                                                                         if (isUpdatingFromV1 && [upgradeLookupByGUID objectForKey:guid]!= nil) {
-                                                                             // If we're updating from v1, and this is an existing episode, update the podstoreid
-                                                                             localEntry = [upgradeLookupByGUID objectForKey:guid];
-                                                                             NSNumber *entryId= [data objectForKey:@"id"];
-                                                                             localEntry.podstoreIdValue = [entryId intValue];
-                                                                         } else {
-                                                                             // Completely new item, create it,add it, be happy
-                                                                             localEntry = [SVPodcastEntry MR_createInContext:childContext];
-                                                                             
-                                                                             [localEntry populateWithDictionary:episode];                                                                                                                                                          
-                                                                             [localPodcast addItemsObject:localEntry];
-                                                                         }
-                                                                         
-                                                                         
-                                                                  }                            
-                                                                     
-                                                                     [localPodcast updateNewEpisodeCount];
-                                                                                                                                         
-                                                                     NSError *error;
-                                                                     [childContext save:&error];
+        NSNumber *podstoreId = self.podstoreId;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+            context.parentContext = self.managedObjectContext;
+            
+            // Find the last entry that belongs to this podcast, if it exists
+            SVPodcastEntry *entry;
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"podcast == %@",  self];
+            NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                                                  ascending:NO
+                                                              withPredicate:predicate
+                                                                  inContext:context];        
+            [request setIncludesPendingChanges:YES];
+            [request setReturnsObjectsAsFaults:NO];
+            [request setFetchLimit:1];
+            
+            NSArray *fetched = [context executeFetchRequest:request error:nil];
 
-                                                                     NSAssert(error == nil, @"There should be no error. Got %@", error);
-                                                                    
-                                                                    [weakSelf.managedObjectContext performBlock:^{
-                                                                        weakSelf.updatingValue = NO;
-                                                                    }];
-                                                                     if (error) {
-                                                                         DDLogError(@"There was a problem updating this podcast %@ - %@", localPodcast, error);
-                                                                         complete(NO); 
-                                                                     } else {
-                                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                                             complete(YES);                                                                         
-                                                                         });
-                                                                     }
-                                                                     
-                                                                    
-                                                                 }];
-                                                             } onError:^void(NSError *error) {
-                                                                 weakSelf.updatingValue = NO;
-                                                                 [[weakSelf managedObjectContext] refreshObject:weakSelf mergeChanges:NO];
-                                                                 complete(NO);
-                                                             }];        
+            NSAssert(fetched.count < 2, @"There should be at most 1 item in there");
+            entry = [fetched lastObject];
+            if(!entry) {
+                DDLogWarn(@"Did NOT find previous entry");
+            }
+            
+            DDLogInfo(@"Getting new items %@", isUpdatingFromV1 ? @"updatingfromv1" : @"normally");
+            __weak SVPodcast *weakSelf = self;
+            NSAssert([self.podstoreId integerValue] != 0, @"The id should not be 0");
+            [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:podstoreId
+                                                         withLastSyncDate:entry == nil || isUpdatingFromV1 ? [NSDate distantPast] : entry.datePublished
+                                                                 complete:^void(id response) {
+                                                                     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                                                                     childContext.parentContext = self.managedObjectContext;
+                                                                     [childContext performBlock:^void() {
+                                                                         // TODO: simplyify this confusing mess
+                                                                         SVPodcast *localPodcast = [self MR_inContext:childContext];
+                                                                         localPodcast.lastSynced = syncDate;
+                                                                         NSArray *episodes = response;
+                                                                         if (episodes) {
+                                                                             DDLogInfo( @"Added %d episodes to %@", episodes.count, localPodcast.title);
+                                                                         }
+                                                                         
+                                                                         NSMutableDictionary *upgradeLookupByGUID;
+                                                                         if(isUpdatingFromV1) {
+                                                                             upgradeLookupByGUID = [NSMutableDictionary dictionary];
+                                                                             for(SVPodcastEntry *item in localPodcast.items) {
+                                                                                 [upgradeLookupByGUID setObject:item forKey:item.guid];
+                                                                             }
+                                                                         }
+                                                                         
+                                                                         for (NSDictionary *episode in episodes) {
+                                                                             NSDictionary *data = [episode objectForKey:@"feed_item"];
+                                                                             NSString *guid = [data objectForKey:@"guid"];
+                                                                             SVPodcastEntry *localEntry;
+                                                                             
+                                                                             if (isUpdatingFromV1 && [upgradeLookupByGUID objectForKey:guid]!= nil) {
+                                                                                 // If we're updating from v1, and this is an existing episode, update the podstoreid
+                                                                                 localEntry = [upgradeLookupByGUID objectForKey:guid];
+                                                                                 NSNumber *entryId= [data objectForKey:@"id"];
+                                                                                 localEntry.podstoreIdValue = [entryId intValue];
+                                                                             } else {
+                                                                                 // Completely new item, create it,add it, be happy
+                                                                                 localEntry = [SVPodcastEntry MR_createInContext:childContext];
+                                                                                 
+                                                                                 [localEntry populateWithDictionary:episode];                                                                                                                                                          
+                                                                                 [localPodcast addItemsObject:localEntry];
+                                                                             }
+                                                                             
+                                                                             
+                                                                         }                            
+                                                                         
+                                                                         [localPodcast updateNewEpisodeCount];
+                                                                         
+                                                                         NSError *error;
+                                                                         [childContext save:&error];
+                                                                         
+                                                                         NSAssert(error == nil, @"There should be no error. Got %@", error);
+                                                                         
+                                                                         [weakSelf.managedObjectContext performBlock:^{
+                                                                             weakSelf.updatingValue = NO;
+                                                                         }];
+                                                                         if (error) {
+                                                                             DDLogError(@"There was a problem updating this podcast %@ - %@", localPodcast, error);
+                                                                             complete(NO); 
+                                                                         } else {
+                                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                 complete(YES);                                                                         
+                                                                             });
+                                                                         }
+                                                                         
+                                                                         
+                                                                     }];
+                                                                 } onError:^void(NSError *error) {
+                                                                     weakSelf.updatingValue = NO;
+                                                                     [[weakSelf managedObjectContext] refreshObject:weakSelf mergeChanges:NO];
+                                                                     complete(NO);
+                                                                 }];    
+            
+        });
     }];
+    
 }
 
 - (void)updateFromV1:(void (^)(BOOL success))complete
