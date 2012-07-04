@@ -479,10 +479,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                         if ([gracePeriodTimer isValid]) {
                             [gracePeriodTimer invalidate];
                         }
-
-                        blockSelf->isLoading = NO;
+                        __strong SVPodcastDetailsViewController *strongSelf = blockSelf;
+                        
+                        strongSelf->isLoading = NO;
                         LOG_GENERAL(2, @"Done loading entries");                    
-                        [blockSelf loadFeedImage];
+                        [strongSelf loadFeedImage];
                     
                         [self reloadData];
                     }

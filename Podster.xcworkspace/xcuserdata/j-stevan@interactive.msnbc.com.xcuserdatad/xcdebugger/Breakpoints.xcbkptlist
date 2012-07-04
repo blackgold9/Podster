@@ -117,8 +117,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "732"
          endingLineNumber = "732"
-         landmarkName = "-showDescriptionGestureRecognizerTapped:"
-         landmarkType = "5">
+         landmarkName = "@implementation SVPodcastDetailsViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -195,7 +195,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "499"
          endingLineNumber = "499"
-         landmarkName = "-purchaseTapped:"
+         landmarkName = "-cellularSwitchChanged:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

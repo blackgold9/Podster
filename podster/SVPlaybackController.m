@@ -83,19 +83,20 @@
     [player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     __weak SVPlaybackController  *weakSelf = self;
     playerObserver = [player addPeriodicTimeObserverForInterval:CMTimeMake(1, 2) queue:NULL usingBlock:^(CMTime time) {
-        if (weakSelf == nil) {
+        __strong SVPlaybackController *strongSelf = weakSelf;
+        if (strongSelf == nil) {
             return;
         }
         
         
-        CMTime duration = weakSelf->player.currentItem.duration;
+        CMTime duration = strongSelf->player.currentItem.duration;
         CMTimeValue currentTimeInSeconds = time.value / time.timescale;
         NSInteger remaining = (duration.value / duration.timescale) - (currentTimeInSeconds);
-        weakSelf.timeElapsedLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:(currentTimeInSeconds)];
-        weakSelf.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:remaining];
+        strongSelf.timeElapsedLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:(currentTimeInSeconds)];
+        strongSelf.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:remaining];
         if (player.rate != 0 && remaining != 0) {
-            if(!weakSelf.progressSlider.isTracking) {
-                weakSelf.progressSlider.value = (float) (currentTimeInSeconds) / (duration.value / duration.timescale);
+            if(!strongSelf.progressSlider.isTracking) {
+                strongSelf.progressSlider.value = (float) (currentTimeInSeconds) / (duration.value / duration.timescale);
             }
         }
     }];

@@ -508,7 +508,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         [theSwitch setOn:NO animated:YES];
     } else {
 
-        DDLogInfo(@"User Set Allow downloads on 3g to ", theSwitch.on ? @"ON" : "OFF");
+        DDLogInfo(@"User Set Allow downloads on 3g to  %@", theSwitch.on ? @"ON" : @"OFF");
         [[SVSettings sharedInstance] setDownloadOn3g:theSwitch.on];
         if (theSwitch.on) {
             [FlurryAnalytics logEvent:@"AllowDownloadsOnCellular"];
