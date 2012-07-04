@@ -102,7 +102,8 @@ NSString *uuid();
     [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
-    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
+    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+ //   [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
 #endif
 
 #if defined (CONFIGURATION_Ad_Hoc)
@@ -409,8 +410,10 @@ DDLogWarn(@"Failed to monitor region %@ with error %@", region, error);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
 
         BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-        DDLogInfo(@"Refreshing subscriptions becasue we entered a region");
-        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"RegionExit", @"Type", nil];
+        DDLogInfo(@"Refreshing subscriptions becasue we entered a region. Parameters: %@", parameters);
+
+        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
         if ([[SVSettings sharedInstance] downloadOn3g]) {
             [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
         }
@@ -423,8 +426,9 @@ DDLogWarn(@"Failed to monitor region %@ with error %@", region, error);
 
 
         BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-        DDLogInfo(@"Refreshing subscriptions becasue we left a region");
-        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"RegionExit", @"Type", nil];
+        DDLogInfo(@"Refreshing subscriptions becasue we entered a region. Parameters: %@", parameters);
+        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
         if ([[SVSettings sharedInstance] downloadOn3g]) {
             [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
         }

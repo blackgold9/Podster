@@ -115,6 +115,11 @@ NSString *uuid() {
     [defaults setInteger:maxNotifications forKey:@"MaxFreeNotifications"];
 }
 
+- (NSInteger)maxFreeNotifications
+{
+    return [defaults integerForKey:@"MaxFreeNotifications"];
+}
+
 - (BOOL)firstRun {
     return ![defaults boolForKey:@"SVHasRun"];
 }

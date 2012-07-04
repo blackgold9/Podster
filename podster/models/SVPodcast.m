@@ -222,7 +222,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                          }
                                                                      }
                                                                      
-                                                                     BOOL isFirst = YES;
                                                                      for (NSDictionary *episode in episodes) {
                                                                          NSDictionary *data = [episode objectForKey:@"feed_item"];
                                                                          NSString *guid = [data objectForKey:@"guid"];
@@ -241,11 +240,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                              [localPodcast addItemsObject:localEntry];
                                                                          }
                                                                          
-                                                                         if (isFirst) {
-                                                                             localPodcast.nextItemDate = localEntry.datePublished;
-                                                                             isFirst = NO;
-                                                                         }
-                                                                     }                            
+                                                                         
+                                                                  }                            
                                                                      
                                                                      [localPodcast updateNewEpisodeCount];
                                                                                                                                          

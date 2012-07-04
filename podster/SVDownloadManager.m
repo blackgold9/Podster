@@ -255,6 +255,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 - (void)downloadCompleted:(SVPodcastEntry *)entry {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+
     NSInteger pendingDownloads = queue.operationCount;
     [entry.managedObjectContext performBlock:^{
 
@@ -269,6 +272,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             cancelling = NO;
         }
     }
+            });
 }
 
 

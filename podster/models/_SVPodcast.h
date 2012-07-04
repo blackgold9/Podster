@@ -6,11 +6,9 @@
 
 extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *author;
-	__unsafe_unretained NSString *cachingLastModified;
 	__unsafe_unretained NSString *downloadCount;
 	__unsafe_unretained NSString *downloadPercentage;
 	__unsafe_unretained NSString *downloadsToKeep;
-	__unsafe_unretained NSString *etag;
 	__unsafe_unretained NSString *feedURL;
 	__unsafe_unretained NSString *fullIsizeImageData;
 	__unsafe_unretained NSString *gridSizeImageData;
@@ -22,7 +20,6 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *lastUpdated;
 	__unsafe_unretained NSString *listSizeImageData;
 	__unsafe_unretained NSString *logoURL;
-	__unsafe_unretained NSString *nextItemDate;
 	__unsafe_unretained NSString *podstoreId;
 	__unsafe_unretained NSString *shouldNotify;
 	__unsafe_unretained NSString *smallLogoURL;
@@ -35,7 +32,6 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *unlistenedSinceSubscribedCount;
 	__unsafe_unretained NSString *updating;
-	__unsafe_unretained NSString *urlHash;
 	__unsafe_unretained NSString *websiteURL;
 } SVPodcastAttributes;
 
@@ -47,10 +43,6 @@ extern const struct SVPodcastFetchedProperties {
 } SVPodcastFetchedProperties;
 
 @class SVPodcastEntry;
-
-
-
-
 
 
 
@@ -101,14 +93,6 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* cachingLastModified;
-
-
-//- (BOOL)validateCachingLastModified:(id*)value_ error:(NSError**)error_;
-
-
-
-
 @property (nonatomic, strong) NSNumber* downloadCount;
 
 
@@ -141,14 +125,6 @@ extern const struct SVPodcastFetchedProperties {
 - (void)setDownloadsToKeepValue:(int32_t)value_;
 
 //- (BOOL)validateDownloadsToKeep:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, strong) NSString* etag;
-
-
-//- (BOOL)validateEtag:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -253,14 +229,6 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateLogoURL:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, strong) NSDate* nextItemDate;
-
-
-//- (BOOL)validateNextItemDate:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -381,14 +349,6 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* urlHash;
-
-
-//- (BOOL)validateUrlHash:(id*)value_ error:(NSError**)error_;
-
-
-
-
 @property (nonatomic, strong) NSString* websiteURL;
 
 
@@ -426,12 +386,6 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-- (NSString*)primitiveCachingLastModified;
-- (void)setPrimitiveCachingLastModified:(NSString*)value;
-
-
-
-
 - (NSNumber*)primitiveDownloadCount;
 - (void)setPrimitiveDownloadCount:(NSNumber*)value;
 
@@ -455,12 +409,6 @@ extern const struct SVPodcastFetchedProperties {
 
 - (int32_t)primitiveDownloadsToKeepValue;
 - (void)setPrimitiveDownloadsToKeepValue:(int32_t)value_;
-
-
-
-
-- (NSString*)primitiveEtag;
-- (void)setPrimitiveEtag:(NSString*)value;
 
 
 
@@ -539,12 +487,6 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSString*)primitiveLogoURL;
 - (void)setPrimitiveLogoURL:(NSString*)value;
-
-
-
-
-- (NSDate*)primitiveNextItemDate;
-- (void)setPrimitiveNextItemDate:(NSDate*)value;
 
 
 
@@ -632,12 +574,6 @@ extern const struct SVPodcastFetchedProperties {
 
 - (BOOL)primitiveUpdatingValue;
 - (void)setPrimitiveUpdatingValue:(BOOL)value_;
-
-
-
-
-- (NSString*)primitiveUrlHash;
-- (void)setPrimitiveUrlHash:(NSString*)value;
 
 
 

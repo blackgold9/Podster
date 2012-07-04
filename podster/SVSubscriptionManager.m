@@ -107,7 +107,6 @@ static char const kRefreshInterval = -3;
                 DDLogVerbose(@"Starting update for podcast");
                 dispatch_group_enter(group);
                 [podcast getNewEpisodes:^(BOOL success) {                    
-                    //[podcast updateNextItemDateAndDownloadIfNecessary:YES];
                     DDLogVerbose(@"Ended update for podcast");
                     dispatch_group_leave(group); 
                 }];
