@@ -146,7 +146,8 @@ NSString *uuid();
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
             BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-            [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:onWifi] forKey:@"OnWifi"]];
+            NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"Startup", @"Type", nil];
+            [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
             DDLogInfo(@"Launched due to region monitoring. Syncing");
             [[PodsterManagedDocument sharedInstance] performWhenReady:^{
                 [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
@@ -412,7 +413,7 @@ DDLogWarn(@"Failed to monitor region %@ with error %@", region, error);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
 
         BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"RegionExit", @"Type", nil];
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"RegionEnter", @"Type", nil];
         DDLogInfo(@"Refreshing subscriptions becasue we entered a region. Parameters: %@", parameters);
 
         [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];

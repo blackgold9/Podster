@@ -34,6 +34,7 @@
 #import "MBProgressHUD.h"
 #import "PodcastSettingsViewController.h"
 #import "SVHtmlViewController.h"
+#import "PodcastUpdateOperation.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
 
@@ -51,6 +52,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSArray *items;
     NSManagedObjectContext *context;
     NSTimer *gracePeriodTimer;
+    NSOperationQueue *updateOperationQueue;
 }
 @synthesize shareButton;
 @synthesize titleLabel;
@@ -68,10 +70,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (self) {
         // Custom initialization
         items = [NSArray array];
-        
+        updateOperationQueue = [[NSOperationQueue alloc] init];
+
     }
     return self;
 }
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        // Custom initialization
+        items = [NSArray array];
+        updateOperationQueue = [[NSOperationQueue alloc] init];
+
+    }
+
+    return self;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -164,10 +180,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
                 DDLogError(@"Error when chanigng notification settings: %@", error);
                 dispatch_async(dispatch_get_main_queue(), ^{
-
-
                     BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
-
                     [alertView setCancelButtonWithTitle:@"OK" block:^{
 
                     }];
@@ -487,29 +500,31 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                   userInfo:nil
                                                                    repeats:NO];
                 [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
-                
-                [localContext performBlock:^{
-                    if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] != AFNetworkReachabilityStatusNotReachable) {
-                    [localPodcast getNewEpisodes:^(BOOL success) {
-                        if (!success) {
-                            if (blockSelf) {
 
+                [localContext performBlock:^{
+                    NSNumber *podstoreId = localPodcast.podstoreId;
+                    [localContext processPendingChanges];
+                    PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcastId:podstoreId
+                                                                                                     andContext:localContext];
+                    updateOperation.onUpdateComplete = ^void(PodcastUpdateOperation *operation) {
+                        dispatch_async(dispatch_get_main_queue(),^{
+                            if ([operation completedSuccessfully]) {
+                                loadCompleteHandler();
+                            } else if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
+                                // TODO: Handle offline case better
+                                loadCompleteHandler();
+                            } else {
                                 BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
                                                                                message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
-                                [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
-                                                          block:^{
-                                                              
-                                                          }];
+                                [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+
+                                }];
                                 [alert show];
                             }
-                        }
-                        else {
-                            loadCompleteHandler();
-                        }
-                    }];
-                    } else {
-                        loadCompleteHandler();
-                    }
+                        });
+                    };
+
+                    [updateOperationQueue addOperation:updateOperation];
                 }];
                 
                 [self reloadData];

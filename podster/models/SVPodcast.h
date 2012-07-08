@@ -17,6 +17,4 @@
 - (void)subscribe;
 - (void)unsubscribe;
 
-// Hack for getting off the v1 servers
-- (void)updateFromV1:(void (^)(BOOL success))complete;
 @end

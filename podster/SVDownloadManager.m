@@ -124,12 +124,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             break;
         }
     }
-
 }
 
 - (void)downloadEntry:(SVPodcastEntry *)entry manualDownload:(BOOL)isManualDownload {
-    LOG_DOWNLOADS(2, @"Downloading entry %@", entry);
-    NSParameterAssert(entry);
+    DDLogVerbose( @"Downloading entry %@", entry);
+    NSParameterAssert(entry != nil);
     NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
     if (entry.download) {
         [self startDownload:entry.download];
@@ -138,31 +137,21 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
     NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
-    SVDownload *lastDownload = [SVDownload MR_findFirstWithPredicate:nil sortedBy:@"position"
-                                                           ascending:YES inContext:localContext];
+    SVDownload *lastDownload = [SVDownload MR_findFirstWithPredicate:nil 
+                                                            sortedBy:@"position"
+                                                           ascending:YES
+                                                           inContext:localContext];
     NSInteger position = 0;
     if (lastDownload) {
         position = lastDownload.positionValue + 1;
     }
 
-    // Create the download database object
-    __block SVDownload *download = nil;
+    DDLogVerbose(@"Download queue position for this download is %d", position);
 
     [localContext performBlock:^{
-        // Cancel any other downloads for this current podcast
-        NSPredicate *entriesWithCurrentDownloadsPredicate = [NSPredicate predicateWithFormat:@"download != nil && podcast == %@", entry.podcast];
-        NSArray *entriesWithCurrentDownloads = [SVPodcastEntry MR_findAllWithPredicate:entriesWithCurrentDownloadsPredicate
-                                                                             inContext:localContext];
-        for (SVPodcastEntry *currentEntry in entriesWithCurrentDownloads) {
-            if ([currentEntry.objectID isEqual:entry.objectID]) {
-                // Don't cancel the current item 
-                continue;
-            }
-        }
-
         SVPodcastEntry *localEntry = [entry MR_inContext:localContext];
-
-        download = localEntry.download;
+        NSAssert(localEntry != nil, @"There should be an entry here");
+        SVDownload *download = localEntry.download;
         if (!download && !localEntry.downloadCompleteValue) {
             download = [SVDownload MR_createInContext:localContext];
             download.manuallyTriggeredValue = isManualDownload;
@@ -171,7 +160,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             localEntry.download.positionValue = position;
             [self startDownload:download];
         } else if ([[NSFileManager defaultManager] fileExistsAtPath:[download.entry localFilePath]] && download.entry.downloadCompleteValue) {
-
             NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
         }
     }];
@@ -380,7 +368,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [queue cancelAllOperations];
         DDLogVerbose(@"Cancelling all current download operations");
     }
+
     NSManagedObjectContext *parentContext = [PodsterManagedDocument defaultContext];
+    [parentContext processPendingChanges];
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     context.parentContext = parentContext;
     NSSet *shouldBePresent = [self entriesNeedingDownloadInContext:context];
@@ -390,8 +380,24 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSSet *toDownload = [shouldBePresent filteredSetUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         SVPodcastEntry *entry = evaluatedObject;
         return !entry.downloadCompleteValue;
-
     }]];
+
+    // Get all the files on disk
+    NSMutableSet *filesToDelete = [NSMutableSet setWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self downloadsPath] error:nil]];
+
+    if (toDownload.count > 0) {
+        // Figure out which ones we want to keep
+        NSSet *filesWeWant = [toDownload valueForKey:@"localFilePath"];
+        
+        // Remove the files we want from the files to delete
+        [filesToDelete minusSet:filesWeWant];     
+    }
+
+    DDLogInfo(@"Deleting %lu files", filesToDelete.count);
+    for(NSString *file in filesToDelete) {        
+        [[NSFileManager defaultManager] removeItemAtPath:file error:nil];
+    }
+    
     [context obtainPermanentIDsForObjects:[toDownload allObjects] error:NULL];
     DDLogInfo(@"Queuing %d downloads", toDownload.count);
     for (SVPodcastEntry *entry in toDownload) {
@@ -412,8 +418,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         }
 
     }
+
     [context save:nil];
-    [parentContext save:nil];
     DDLogInfo(@"Done queing entries for download");
 }
 

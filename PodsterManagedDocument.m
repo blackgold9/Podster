@@ -15,6 +15,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
 @implementation PodsterManagedDocument
 {
     NSMutableArray *readyCallbacks;
+    NSManagedObjectContext *backgroundContext;
 }
 + (BOOL) isICloudEnabled;
 {
@@ -41,10 +42,19 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     return doc;
     
 }
-+(NSManagedObjectContext *)defaultContext
-{
++(NSManagedObjectContext *)defaultContext {
     NSAssert([self sharedInstance].documentState == UIDocumentStateNormal, @"This should only be called after the document is opened");
     return [self sharedInstance].managedObjectContext;
+}
+
++ (NSManagedObjectContext *)backgroundContext {
+    NSAssert([self sharedInstance].documentState == UIDocumentStateNormal, @"This should only be called after the document is opened");
+    if ([self sharedInstance]->backgroundContext) {
+        [self sharedInstance]->backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [self sharedInstance]->backgroundContext.parentContext = [self defaultContext];
+    }
+
+    return [self sharedInstance]->backgroundContext;
 }
 
 + (NSURL *)applicationDocumentsDirectory
@@ -76,8 +86,8 @@ static int ddLogLevel = LOG_LEVEL_INFO;
 //                                            selector:@selector(documentContentsDidUpdate:)
 //                                                name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
 //                                              object:nil];
-//    
-    
+//
+
 }
 //- (void) documentContentsDidUpdate: (NSNotification *) notification
 //{

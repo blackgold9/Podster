@@ -435,8 +435,8 @@
 		4B85922815825196002452DF /* UANoisyGradientBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B85921815825196002452DF /* UANoisyGradientBackground.m */; };
 		4B85922915825196002452DF /* UARoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B85921A15825196002452DF /* UARoundedRectView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B85922A15825196002452DF /* UARoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B85921A15825196002452DF /* UARoundedRectView.m */; };
-		4B86242D14B576A900A4B320 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		4B86242E14B576A900A4B320 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		4B86242D14B576A900A4B320 /* PBXBuildFile */ = {isa = PBXBuildFile; };
+		4B86242E14B576A900A4B320 /* PBXBuildFile */ = {isa = PBXBuildFile; };
 		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
 		4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
 		4B8D1D89150DC9C600E6D770 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8D1D88150DC9C500E6D770 /* TextViewController.m */; };
@@ -568,6 +568,7 @@
 		4BEDB18914C004E200264CCC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BEDB18814C004E200264CCC /* ImageIO.framework */; };
 		4BFE0B6015041551005F9E81 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B5F15041551005F9E81 /* Icon.png */; };
 		4BFE0B6215041561005F9E81 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B6115041561005F9E81 /* Icon@2x.png */; };
+		7CD8CFFF779EF8F1C4AFC1DF /* PodcastUpdateOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD8CEADBEEB6FBD9B09FC73 /* PodcastUpdateOperation.m */; };
 		7D182D1C159B93190023C469 /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D182D17159B93190023C469 /* libAdapterIAd.a */; };
 		7D182D1D159B93190023C469 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D182D18159B93190023C469 /* README.txt */; };
 		7D182D1E159B93190023C469 /* libAdapterInMobi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D182D1A159B93190023C469 /* libAdapterInMobi.a */; };
@@ -600,15 +601,15 @@
 		D622850914E50C48003084BF /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084BE /* search@2x.png */; };
 		D622850914E50C48003084C1 /* search2.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084C0 /* search2.png */; };
 		D622850914E50C48003084C3 /* search2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D622850914E50C48003084C2 /* search2@2x.png */; };
-		D622850914E50C48003084C5 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		D622850914E50C48003084C6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D622850914E50C48003084C5 /* PBXBuildFile */ = {isa = PBXBuildFile; };
+		D622850914E50C48003084C6 /* PBXBuildFile */ = {isa = PBXBuildFile; };
 		D6A8789015894C34009DD522 /* sliders.png in Resources */ = {isa = PBXBuildFile; fileRef = D6A8788E15894C34009DD522 /* sliders.png */; };
 		D6A8789115894C34009DD522 /* sliders@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6A8788F15894C34009DD522 /* sliders@2x.png */; };
 		D6EE8ADF1587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6EE8ADE1587E3A600F33740 /* PodcastStoryboard.storyboard */; };
 		D6EE8AE01587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6EE8ADE1587E3A600F33740 /* PodcastStoryboard.storyboard */; };
 		D6EE8AE31587E65500F33740 /* PodcastSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */; };
 		D6EE8AE41587E65500F33740 /* PodcastSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE21587E65500F33740 /* PodcastSettingsViewController.m */; };
-		D6EE8AE41587E65500F33742 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		D6EE8AE41587E65500F33742 /* PBXBuildFile */ = {isa = PBXBuildFile; };
 		D6EE8AE41587E65500F33745 /* SVInsetLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE41587E65500F33744 /* SVInsetLabel.m */; };
 		D6EE8AE41587E65500F33748 /* SVHtmlViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE41587E65500F33747 /* SVHtmlViewer.m */; };
 		D6EE8AE41587E65500F33749 /* SVHtmlViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EE8AE41587E65500F33747 /* SVHtmlViewer.m */; };
@@ -1158,6 +1159,8 @@
 		4BEDB18814C004E200264CCC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4BFE0B5F15041551005F9E81 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		4BFE0B6115041561005F9E81 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		7CD8CDDF3FBE75841F8D1EF3 /* PodcastUpdateOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastUpdateOperation.h; sourceTree = "<group>"; };
+		7CD8CEADBEEB6FBD9B09FC73 /* PodcastUpdateOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastUpdateOperation.m; sourceTree = "<group>"; };
 		7D182D17159B93190023C469 /* libAdapterIAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterIAd.a; sourceTree = "<group>"; };
 		7D182D18159B93190023C469 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		7D182D1A159B93190023C469 /* libAdapterInMobi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterInMobi.a; sourceTree = "<group>"; };
@@ -1884,6 +1887,8 @@
 		4B71F79514A5B08C00D26F4C /* podster */ = {
 			isa = PBXGroup;
 			children = (
+				7CD8CDDF3FBE75841F8D1EF3 /* PodcastUpdateOperation.h */,
+				7CD8CEADBEEB6FBD9B09FC73 /* PodcastUpdateOperation.m */,
 				4BFE0B51150414FC005F9E81 /* icon */,
 				4B688A2914F95570007C6AD7 /* podster.entitlements */,
 				4BB2058214D0F41B0038EB7D /* views */,
@@ -2729,7 +2734,7 @@
 				4B2E523D14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E523F14B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
 				4B08537314B4315300847BAA /* SVDownload.m in Sources */,
-				4B86242D14B576A900A4B320 /* (null) in Sources */,
+				4B86242D14B576A900A4B320 /* PBXBuildFile */,
 				4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 				4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */,
 				4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
@@ -2842,9 +2847,9 @@
 				4B85922515825196002452DF /* UAGradientBackground.m in Sources */,
 				4B85922715825196002452DF /* UANoisyGradientBackground.m in Sources */,
 				4B85922915825196002452DF /* UARoundedRectView.m in Sources */,
-				D622850914E50C48003084C5 /* (null) in Sources */,
+				D622850914E50C48003084C5 /* PBXBuildFile */,
 				D6EE8AE31587E65500F33740 /* PodcastSettingsViewController.m in Sources */,
-				D6EE8AE41587E65500F33742 /* (null) in Sources */,
+				D6EE8AE41587E65500F33742 /* PBXBuildFile */,
 				D6EE8AE41587E65500F33745 /* SVInsetLabel.m in Sources */,
 				7DB672CB1598158300FA932D /* BWQuincyManager.m in Sources */,
 				D6EE8AE41587E65500F33748 /* SVHtmlViewer.m in Sources */,
@@ -2852,6 +2857,7 @@
 				7DB6731B159B5A1000FA932D /* SVSyncLocation.m in Sources */,
 				7D182D26159B9C8E0023C469 /* SVSmartSyncSettingsViewController.m in Sources */,
 				7D182DA7159BD6A40023C469 /* AddLocationViewController.m in Sources */,
+				7CD8CFFF779EF8F1C4AFC1DF /* PodcastUpdateOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2892,7 +2898,7 @@
 				4B2E523E14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E524014B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
 				4B08537414B4315300847BAA /* SVDownload.m in Sources */,
-				4B86242E14B576A900A4B320 /* (null) in Sources */,
+				4B86242E14B576A900A4B320 /* PBXBuildFile */,
 				4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 				4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */,
 				4BD1C22414B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
@@ -2988,7 +2994,7 @@
 				4B85922615825196002452DF /* UAGradientBackground.m in Sources */,
 				4B85922815825196002452DF /* UANoisyGradientBackground.m in Sources */,
 				4B85922A15825196002452DF /* UARoundedRectView.m in Sources */,
-				D622850914E50C48003084C6 /* (null) in Sources */,
+				D622850914E50C48003084C6 /* PBXBuildFile */,
 				D6EE8AE41587E65500F33740 /* PodcastSettingsViewController.m in Sources */,
 				7DB672CC1598158300FA932D /* BWQuincyManager.m in Sources */,
 				D6EE8AE41587E65500F33749 /* SVHtmlViewer.m in Sources */,

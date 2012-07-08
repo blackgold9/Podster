@@ -282,29 +282,4 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     }];
     
 }
-
-- (void)updateFromV1:(void (^)(BOOL success))complete
-{
-    isUpdatingFromV1 = YES;
-    NSManagedObjectContext *context = self.managedObjectContext;
-    [[SVPodcatcherClient sharedInstance] subscribeToFeedWithURL:self.feedURL
-                                                   shouldNotify:NO
-                                                   onCompletion:^void(id innerResponse) {
-                                                       NSDictionary *dict = innerResponse;
-                                                       NSDictionary *subDict = [dict objectForKey:@"subscription"];
-                                                       NSNumber *feedId = [subDict objectForKey:@"feed_id"];
-                                                       [context performBlock:^void() {
-                                                           self.podstoreIdValue = [feedId intValue];
-                                                           [self getNewEpisodes:^(BOOL succes) {
-                                                               complete(YES);
-                                                               isUpdatingFromV1 = NO;
-                                                           }];
-                                                           
-                                                       }];                                                                                                              
-                                                   } onError:^void(NSError *error) {
-                                                       complete(NO);
-                                                       isUpdatingFromV1 = NO;
-                                                   }];         
-}
-
 @end

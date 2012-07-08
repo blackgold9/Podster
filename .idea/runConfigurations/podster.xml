@@ -1,6 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="podster" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="podster" PROJECT_NAME="podster" TARGET_NAME="Podster" CONFIG_NAME="Debug" DESTINATION_ID="iphonesimulator_5.1_1" RUN_TARGET_PROJECT_NAME="podster" RUN_TARGET_NAME="Podster" DEBUGGER="LLDB" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+  <configuration default="false" name="podster" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="podster" PROJECT_NAME="podster" TARGET_NAME="Podster" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="podster" RUN_TARGET_NAME="Podster" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
     <envs />
+    <RunnerSettings RunnerId="AppRunner" />
+    <ConfigurationWrapper RunnerId="AppRunner" />
     <method />
   </configuration>
 </component>
