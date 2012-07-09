@@ -152,10 +152,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         
         NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
         
-        NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title
-                                                         ascending:YES
-                                                     withPredicate:predicate
-                                                         inContext:context];
+        NSFetchRequest *request = [SVPodcast MR_requestAllWithPredicate:predicate inContext:context];
         [request setReturnsObjectsAsFaults:NO];
         [request setIncludesSubentities:NO];
         [request setIncludesPendingChanges:YES];
@@ -168,7 +165,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         self.noContentLabel.numberOfLines = 0;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            items = newItems;
+            items = [newItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]]];
             DDLogVerbose(@"Displayed Items: ");
             for (SVPodcast *podcast in items) {
                 DDLogVerbose(@"%@", podcast.title);

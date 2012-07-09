@@ -366,19 +366,25 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     }]];
     
     // Get all the files on disk
-    NSMutableSet *filesToDelete = [NSMutableSet setWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self downloadsPath] error:nil]];
-    
-    if (toDownload.count > 0) {
-        // Figure out which ones we want to keep
-        NSSet *filesWeWant = [toDownload valueForKey:@"localFilePath"];
-        
-        // Remove the files we want from the files to delete
-        [filesToDelete minusSet:filesWeWant];     
+    NSMutableSet *fileNamesToDelete = [NSMutableSet setWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self downloadsPath] error:nil]];
+    NSMutableSet *pathsToDelete = [NSMutableSet set];
+    NSString *downloadPath = [self downloadsPath];
+    for(NSString *string in fileNamesToDelete) {
+        [pathsToDelete addObject:[downloadPath stringByAppendingPathComponent:string]];
     }
     
-    DDLogInfo(@"Deleting %lu files", filesToDelete.count);
-    for(NSString *file in filesToDelete) {        
-        [[NSFileManager defaultManager] removeItemAtPath:file error:nil];
+    if (shouldBePresent.count > 0) {
+        // Figure out which ones we want to keep
+        NSSet *filesWeWant = [shouldBePresent valueForKey:@"localFilePath"];
+        
+        // Remove the files we want from the files to delete
+        [pathsToDelete minusSet:filesWeWant];     
+    }
+    
+    DDLogInfo(@"Deleting %lu files", pathsToDelete.count);
+    for(NSString *path in pathsToDelete) {      
+        DDLogVerbose(@"Deleting %@", path);
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     }
     
     // Push changesup
