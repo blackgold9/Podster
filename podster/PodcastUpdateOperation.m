@@ -8,6 +8,7 @@
 #import "PodcastUpdateOperation.h"
 #import "SVPodcastEntry.h"
 #import "SVPodcast.h"
+#import "_SVPodcastEntry.h"
 
 static int ddLogLevel = LOG_LEVEL_VERBOSE;
 
@@ -42,7 +43,6 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     return success;
 }
 
-
 - (void)main {
     DDLogVerbose(@"Starting sync for Podcast with Id: %@", self.podcastId);
     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
@@ -50,25 +50,16 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
 
     __block NSDate *lastEntryDate = [NSDate distantPast];
     __block BOOL podcastExists;
+    __block NSString *title;
     [childContext performBlockAndWait:^void() {
+        [childContext processPendingChanges];
         SVPodcast *podcast = [SVPodcast MR_findFirstByAttribute:@"podstoreId" withValue:self.podcastId inContext:childContext];
         if (podcast) {
             podcastExists = YES;
 
-            // Get the last entry to figure out when it was added
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"podcast == %@", podcast];
-            NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                                                  ascending:NO withPredicate:predicate
-                                                                  inContext:childContext];
-            [request setIncludesPendingChanges:YES];
-            [request setReturnsObjectsAsFaults:NO];
-            [request setFetchLimit:1];
-
-            NSArray *fetched = [childContext executeFetchRequest:request error:nil];
-
-            NSAssert(fetched.count < 2, @"There should be at most 1 item in there");
-            SVPodcastEntry *lastEntry = [fetched lastObject];
+            SVPodcastEntry *lastEntry = [[podcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:SVPodcastEntryAttributes.datePublished ascending:YES]]] lastObject];
             lastEntryDate = lastEntry.datePublished;
+            title = lastEntry.title;
         } else {
             podcastExists = NO;
         }
@@ -77,7 +68,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     if (podcastExists) {
         DDLogVerbose(@"Podcast with id %@ was found in the database", self.podcastId);
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-
+        DDLogVerbose(@"Fetchinng new episodes for %@ after %@", title, lastEntryDate);
         __weak PodcastUpdateOperation *weakSelf = self;
         [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podcastId
                                                      withLastSyncDate:lastEntryDate
@@ -100,6 +91,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     }
 
     NSError *saveError;
+    DDLogVerbose(@"Saving Child Context");
     [childContext save:&saveError];
     NSAssert(saveError == nil, @"There should be no error when saving", saveError);
     DDLogVerbose(@"Podcast update operation complete for id: %@", self.podcastId);
@@ -117,13 +109,24 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
             DDLogInfo( @"Added %d episodes to %@", episodes.count, localPodcast.title);
         }
 
+        BOOL isFirst = YES;
+        NSDate *lastDate = nil;
         for (NSDictionary *episode in episodes) {
+
             // Completely new item, create it,add it, be happy
             SVPodcastEntry *localEntry = [SVPodcastEntry MR_createInContext:context];
 
             [localEntry populateWithDictionary:episode];
+            if (isFirst) {
+                DDLogVerbose(@"Latest received item date %@", localEntry.datePublished);
+                isFirst = NO;
+            }
+
+            lastDate = localEntry.datePublished;
             [localPodcast addItemsObject:localEntry];
         }
+
+        DDLogVerbose(@"Oldest recieved item date %@", lastDate);
 
         [self updateNewEpisodeCountForPodcast:localPodcast];
 
@@ -135,7 +138,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         if (error) {
             DDLogError(@"There was a problem updating this podcast %@ - %@", localPodcast, error);
             [FlurryAnalytics logError:@"SavingPodcastFailed" message:[error localizedDescription] error:error];
-        } else{
+        } else {
             DDLogVerbose(@"Updating podcast with id %@ succeeded", self.podcastId);
         }
 

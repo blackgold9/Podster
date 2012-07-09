@@ -100,15 +100,15 @@ static char const kRefreshInterval = -3;
                                     NSAssert(NO, @"This should not fail");
                                 }
                             }];
-
+                            
                             [[SVDownloadManager sharedInstance] downloadPendingEntries];
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 self.isBusy = NO;
                                 DDLogInfo(@"Refreshing Subscriptions is complete");
                             });
                         }
-            onQueue:dispatch_get_main_queue()];
-
+                         onQueue:dispatch_get_main_queue()];
+    
 }
 
 - (void)refreshPodcastsWithIds:(NSArray *)podsterIDs complete:(void (^)())complete onQueue:(dispatch_queue_t)queue

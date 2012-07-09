@@ -18,7 +18,7 @@
 #import "UIColor+Hex.h"
 #import "PodsterManagedDocument.h"
 #import "PodcastGridCellView.h"
-static const int ddLogLevel = LOG_LEVEL_WARN;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVSubscriptionGridViewController()
 
 @end
@@ -27,6 +27,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     NSUInteger tappedIndex;
     BOOL needsReload;
     NSArray *items;
+    
 }
 @synthesize noContentLabel;
 @synthesize gridView = _gridView;
@@ -68,23 +69,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 
 
-    dispatch_async(dispatch_get_main_queue(), ^{
         [[SVPodcatcherClient sharedInstance] addObserver:self forKeyPath:@"networkReachabilityStatus"
                                                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
-        NSError *error= nil;
+   
         
-        NSAssert(error == nil, @"Error!");
-        DDLogVerbose(@"Listing fetched items");
-        for (SVPodcast *podcast in items) {
-            DDLogVerbose(@"%@", podcast.title);
-        }
-        [self.gridView reloadData];
-        self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
-        self.noContentLabel.numberOfLines = 0;
-        
-        self.noContentLabel.hidden = items.count > 0;
-        
-    });
 
     DDLogVerbose(@"Registering for context change notification");
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -99,18 +87,18 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     NSSet *deleted = [[notification userInfo] valueForKey:NSDeletedObjectsKey];
     NSSet *combined = [inserted setByAddingObjectsFromSet:deleted];
     if (inserted.count > 0) {
-        BOOL hasNewSubscriptions = NO;
-        for (NSManagedObject * o in combined    ) {
-
+        BOOL subscriptionsChanged = NO;
+        for (NSManagedObject * o in combined) {
             if ([o isKindOfClass:[SVPodcast class]]) {
                 SVPodcast *podcast = (SVPodcast *) o;
                 if (podcast.isSubscribedValue) {
-                    hasNewSubscriptions = YES;
+                    subscriptionsChanged = YES;
                     break;
                 }
             }
         }
-        if (hasNewSubscriptions) {
+
+        if (subscriptionsChanged) {
             [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         }
     }
@@ -133,7 +121,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     self.gridView.backgroundColor = [UIColor clearColor];
     self.gridView.centerGrid = NO;
     self.gridView.alwaysBounceVertical = YES;
-    
 }
 
 - (void)viewDidUnload
@@ -154,37 +141,42 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 - (void)reloadData
 {
-    NSPredicate *predicate;
-    if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
-        predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES && downloadCount > 0"];
-    }  else {
-        predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
-    }
-
-
-
-
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-    [context performBlock:^{
-        NSFetchRequest *request =   [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title 
-                                    ascending:YES withPredicate:predicate
-                                    inContext:context];
+    dispatch_async(dispatch_get_main_queue(), ^void() {
+        NSPredicate *predicate;
+        if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
+            predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES && downloadCount > 0"];
+        }  else {
+            predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
+        }
+                    
+        
+        NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+        
+        NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title
+                                                         ascending:YES
+                                                     withPredicate:predicate
+                                                         inContext:context];
         [request setReturnsObjectsAsFaults:NO];
         [request setIncludesSubentities:NO];
         [request setIncludesPendingChanges:YES];
-
+        
         NSError *error;
         NSArray *newItems = [context executeFetchRequest:request error:&error];
         NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
+        DDLogVerbose(@"Retrieved %lu items for display", newItems.count);
+        self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
+        self.noContentLabel.numberOfLines = 0;
         
-        dispatch_async(dispatch_get_main_queue(), ^{                        
+        dispatch_async(dispatch_get_main_queue(), ^{
             items = newItems;
+            DDLogVerbose(@"Displayed Items: ");
+            for (SVPodcast *podcast in items) {
+                DDLogVerbose(@"%@", podcast.title);
+            }
             [[self gridView] reloadData];
             self.noContentLabel.hidden = items.count > 0;
-            
-        });    
-    }];
-     
+        });
+    });
 }
 
 -(void)viewWillDisappear:(BOOL)animated

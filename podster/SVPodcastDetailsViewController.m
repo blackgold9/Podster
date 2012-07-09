@@ -427,115 +427,119 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     localContext = [PodsterManagedDocument defaultContext];
     __block BOOL blockHasSubscription = NO;
-    
+
     [localContext performBlock:^{
         @try {
-            
-            NSNumber *feedId= self.podcast.podstoreId;
+
+            NSNumber *feedId = self.podcast.podstoreId;
             NSAssert(feedId, @"Feed id should be present");
             LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
             localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
                                                       inContext:localContext];
             DDLogVerbose(@"Lookup complete");
-            
+
             if (!localPodcast) {
                 LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
-                localPodcast = [SVPodcast MR_createInContext:localContext];                
-
-                dispatch_async(dispatch_get_main_queue(), ^{                    
-                    // We didn't have a local copy, so load from url
-                    [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
-             //       [imageSpinner stopAnimating];
-                });
-            } else {
-                // We had a local copy, so check for local image
-                if (localPodcast.gridSizeImageData != nil) {
-                    dispatch_async(dispatch_get_main_queue(), ^{                                                
-                        UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
-                        self.imageView.image = image;
-                      //  [imageSpinner stopAnimating];
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{                    
-                        // We didn't have a local copy, so load from url
-                        [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
-                      //  [imageSpinner stopAnimating];
-                    }); 
-                }
-                LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
+                localPodcast = [SVPodcast MR_createInContext:localContext];
             }
+
             [localPodcast populateWithPodcast:self.podcast];
             NSAssert(localPodcast.title != nil, @"There should be a title here");
             blockHasSubscription = localPodcast.isSubscribedValue;
-            
+
+            // We had a local copy, so check for local image
+            if (localPodcast.gridSizeImageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
+                    self.imageView.image = image;
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // We didn't have a local copy, so load from url
+                    [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
+                });
+            }
+
+            //LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
+
+
+
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSAssert(localPodcast.title != nil, @"The podcast should be populated");
-                self.descriptionLabel.text = localPodcast.summary;    
-                isSubscribed = blockHasSubscription;
-                self.subscribeButton.enabled = NO;
-                
-                [self setupSubscribeButton];
-                
-                __weak SVPodcastDetailsViewController *blockSelf = self;
-                
-                void (^loadCompleteHandler)() = ^{
-                    if(blockSelf) {
-                        if ([gracePeriodTimer isValid]) {
-                            [gracePeriodTimer invalidate];
-                        }
-                        __strong SVPodcastDetailsViewController *strongSelf = blockSelf;
-                        
-                        strongSelf->isLoading = NO;
-                        LOG_GENERAL(2, @"Done loading entries");                    
-                        [strongSelf loadFeedImage];
-                    
-                        [self reloadData];
-                    }
-                    
-                };                
-             
-                gracePeriodTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 
-                                                                    target:self selector:@selector(gracePeriodTimerFired:) 
-                                                                  userInfo:nil
-                                                                   repeats:NO];
-                [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
-
-                [localContext performBlock:^{
-                    NSNumber *podstoreId = localPodcast.podstoreId;
-                    [localContext processPendingChanges];
-                    PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcastId:podstoreId
-                                                                                                     andContext:localContext];
-                    updateOperation.onUpdateComplete = ^void(PodcastUpdateOperation *operation) {
-                        dispatch_async(dispatch_get_main_queue(),^{
-                            if ([operation completedSuccessfully]) {
-                                loadCompleteHandler();
-                            } else if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
-                                // TODO: Handle offline case better
-                                loadCompleteHandler();
-                            } else {
-                                BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                               message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
-                                [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
-
-                                }];
-                                [alert show];
-                            }
-                        });
-                    };
-
-                    [updateOperationQueue addOperation:updateOperation];
-                }];
-                
-                [self reloadData];
-
+                [self configureUIForSubscriptionStatus:blockHasSubscription];
+                [self displayEpisodesAndRefreshData];
             });
         }
         @catch (NSException *exception) {
-            NSLog(@"%@", exception);
-        }        
+            DDLogError(@"%@", exception);
+        }
     }];    
 }
+
+- (void)displayEpisodesAndRefreshData {
+    NSAssert(localPodcast.title != nil, @"The podcast should be populated");
+    self.descriptionLabel.text = localPodcast.summary;
+
+    __weak SVPodcastDetailsViewController *blockSelf = self;
+
+    void (^loadCompleteHandler)() = ^{
+        if (blockSelf) {
+            if ([gracePeriodTimer isValid]) {
+                [gracePeriodTimer invalidate];
+            }
+            __strong SVPodcastDetailsViewController *strongSelf = blockSelf;
+
+            strongSelf->isLoading = NO;
+            LOG_GENERAL(2, @"Done loading entries");
+            [strongSelf loadFeedImage];
+
+            [self reloadData];
+        }
+
+    };
+
+    gracePeriodTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                        target:self selector:@selector(gracePeriodTimerFired:)
+                                                      userInfo:nil repeats:NO];
+    [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
+
+    [localContext performBlock:^{
+        NSNumber *podstoreId = localPodcast.podstoreId;
+        [localContext processPendingChanges];
+        PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcastId:podstoreId
+                                                                                         andContext:localContext];
+        updateOperation.onUpdateComplete = ^void(PodcastUpdateOperation *operation) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([operation completedSuccessfully]) {
+                    loadCompleteHandler();
+                } else if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
+                    // TODO: Handle offline case better
+                    loadCompleteHandler();
+                } else {
+                    BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
+                                                                   message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
+                    [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
+
+                    }];
+                    [alert show];
+                }
+            });
+        };
+
+        [updateOperationQueue addOperation:updateOperation];
+    }];
+
+    // Do the initial data load
+    [self reloadData];
+}
+
+- (void)configureUIForSubscriptionStatus:(BOOL)isSubscribed {
+    isSubscribed = isSubscribed;
+    self.subscribeButton.enabled = NO;
+
+    [self setupSubscribeButton];
+}
+
 - (void)gracePeriodTimerFired:(NSTimer *)timer
 {
  
@@ -544,35 +548,35 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 -(void)reloadData
 {
-    if (![NSThread isMainThread]) {
-        LOG_GENERAL(2, @"Bouncing back to main thread");
-        [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-        return;
-    }
-    
-    LOG_GENERAL(2, @"Reload Data begun");
+
+       LOG_GENERAL(2, @"Reload Data begun");
 
     [localContext performBlock:^void() {
-        @try {
+        [localContext processPendingChanges];
 
+
+        if (localPodcast.items.count == 0) {
+            DDLogWarn(@"Podcast had no episodes when trying to load data");
+        }
+
+        @try {
             DDLogVerbose(@"Reload block started");
-            NSArray *newItems;
-            newItems = [localPodcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue]]];
+            NSArray *newItems = [SVPodcastEntry MR_findByAttribute:@"podcast" withValue:localPodcast andOrderBy:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue inContext:localContext];
             if (localPodcast.hidePlayedEpisodesValue) {
                 newItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
             }
+
             dispatch_async(dispatch_get_main_queue(), ^{
-                items = newItems;
+                items = [newItems copy];
                 [[self tableView] reloadData];
                 DDLogVerbose(@"REload Data complete");
             });
         }
         @catch (NSException *exception) {
             DDLogError(@"Error occured while reloading data: %@", exception);
+            NSAssert(NO, @"There was an exception thrown when loading data");
         }
-        @finally {
 
-        }
     }];
 }
 
