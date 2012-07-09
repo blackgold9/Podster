@@ -15,7 +15,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
 enum SettingsSections {
     SettingsSectionsPremiumSection = 0,
     SettingsSectionsDownloadsSection,
-    SettingsSectionsSmartSyncSection,
+  //  SettingsSectionsSmartSyncSection,
     SettingsSectionsMiscSection,
     SettingsSectionsCount
 };
@@ -185,9 +185,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                 [tableView deselectRowAtIndexPath:indexPath animated:YES];
             }
             break;
-        case SettingsSectionsSmartSyncSection:
-            [self smartSyncTapped];
-            break;
+//        case SettingsSectionsSmartSyncSection:
+//            [self smartSyncTapped];
+//            break;
         default:
             break;
 
@@ -238,9 +238,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         case SettingsSectionsDownloadsSection:
             output = NSLocalizedString(@"Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)", @"Download podcasts over your 3g connection for maximum flexibility.\n(Premium Feature)");
             break;
-        case SettingsSectionsSmartSyncSection:
-            output = NSLocalizedString(@"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)", @"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)");
-            break;
+//        case SettingsSectionsSmartSyncSection:
+//            output = NSLocalizedString(@"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)", @"SmartSync will automatically download new episodes when you arrive at or leave locations you specify.\n(Premium Feature)");
+//            break;
         default:
             break;
     }
@@ -257,9 +257,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         case SettingsSectionsDownloadsSection:
             output = NSLocalizedString(@"Downloads", @"Downloads");
             break;
-        case SettingsSectionsSmartSyncSection:
-            output = NSLocalizedString(@"SmartSync", @"SmartSync");
-            break;
+//        case SettingsSectionsSmartSyncSection:
+//            output = NSLocalizedString(@"SmartSync", @"SmartSync");
+//            break;
         default:
             break;
     }
@@ -352,16 +352,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                 break;
 
         }
-
-    } else if (indexPath.section == SettingsSectionsSmartSyncSection) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:@"SmartSync"];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.textLabel.text = [[SVSettings sharedInstance] smartSyncEnabled] ? NSLocalizedString(@"Configure SmartSync", @"Configure SmartSync") : NSLocalizedString(@"Enable SmartSync", @"Enable SmartSync");
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-
     }
+//    } else if (indexPath.section == SettingsSectionsSmartSyncSection) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+//                                      reuseIdentifier:@"SmartSync"];
+//        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+//        cell.textLabel.text = [[SVSettings sharedInstance] smartSyncEnabled] ? NSLocalizedString(@"Configure SmartSync", @"Configure SmartSync") : NSLocalizedString(@"Enable SmartSync", @"Enable SmartSync");
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//
+//
+//    }
     NSAssert(cell != nil, @"cell should not be nil");
     return cell;
 }

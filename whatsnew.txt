@@ -1,4 +1,3 @@
-* SmartSync: Episodes automatically download whenever you arrive or leave at places you specify
 * Downloads are now possible on a cellular connection (user configurable)
 * Customize how many episodes are downloaded per-podcast
 * LOTS of bug fixes
