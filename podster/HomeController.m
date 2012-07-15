@@ -172,6 +172,8 @@ static NSString *const kIsBusyKey = @"isBusy";
         if (!self.subscriptionsController) {
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
             self.subscriptionsController = (SVSubscriptionGridViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"subscriptionGridController"];
+            // Configure the first context
+            self.subscriptionsController.context = [PodsterManagedDocument defaultContext];
         }
 
         output = self.subscriptionsController;

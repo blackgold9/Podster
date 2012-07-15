@@ -22,6 +22,16 @@
     
 }
 @synthesize navigationBarPanGestureRecognizer;
+@synthesize context = _context;
+
+- (NSManagedObjectContext *)context {
+    if (!_context) {
+        _context = [PodsterManagedDocument defaultContext];
+    }
+
+    return _context;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

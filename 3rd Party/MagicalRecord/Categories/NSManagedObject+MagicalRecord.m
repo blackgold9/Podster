@@ -765,16 +765,13 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     return [self MR_aggregateOperation:function 
                         onAttribute:attributeName 
                       withPredicate:predicate
-                          inContext:[NSManagedObjectContext MR_defaultContext]];    
+                          inContext:[NSManagedObjectContext MR_defaultContext]];
 }
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
     NSError *error = nil;
-    if (otherContext.parentContext != self.managedObjectContext) {
-        NSAssert(![self.objectID isTemporaryID], @"You can not load an object in another context with a temporary id, when it is not the parent context");
-    }
-
+   
     NSManagedObject *inContext = [otherContext existingObjectWithID:[self objectID] error:&error];
     [MagicalRecordHelpers handleErrors:error];
     

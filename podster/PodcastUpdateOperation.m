@@ -16,12 +16,12 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSManagedObjectContext *parentContext;
     BOOL success;
 }
-@synthesize podcastId = _podcastId;
+@synthesize podcast = _podcast;
 @synthesize onUpdateComplete = _onUpdateComplete;
 
 
-- (id)initWithPodcastId:(NSNumber *)podcastId andContext:(NSManagedObjectContext *)theContext {
-    if (!podcastId) {
+- (id)initWithPodcast:(SVPodcast *)podcast andContext:(NSManagedObjectContext *)theContext {
+    if (!podcast) {
         [NSException raise:NSInvalidArgumentException format:@"The argument \"podcastId\" can not be nil"];
     }
 
@@ -29,9 +29,10 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         [NSException raise:NSInvalidArgumentException format:@"The argument \"theContext\" can not be nil"];
     }
 
+    NSAssert(podcast.managedObjectContext == theContext, @"The contexts should be the same");
     self = [super init];
     if (self) {
-        self.podcastId = podcastId;
+        self.podcast = podcast;
         parentContext = theContext;
         success = NO;
     }
@@ -43,17 +44,24 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     return success;
 }
 
+- (void)cancel {
+    [super cancel];
+
+}
+
 - (void)main {
-    DDLogVerbose(@"Starting sync for Podcast with Id: %@", self.podcastId);
     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     childContext.parentContext = parentContext;
+
 
     __block NSDate *lastEntryDate = [NSDate distantPast];
     __block BOOL podcastExists;
     __block NSString *title;
+    __block NSNumber *podcastId;
     [childContext performBlockAndWait:^void() {
-        [childContext processPendingChanges];
-        SVPodcast *podcast = [SVPodcast MR_findFirstByAttribute:@"podstoreId" withValue:self.podcastId inContext:childContext];
+        SVPodcast *podcast = [self.podcast MR_inContext:childContext];
+        podcastId = podcast.podstoreId;
+        DDLogVerbose(@"Starting sync for Podcast with Id: %@", podcast.podstoreId);
         if (podcast) {
             podcastExists = YES;
 
@@ -66,18 +74,28 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     }];
 
     if (podcastExists) {
-        DDLogVerbose(@"Podcast with id %@ was found in the database", self.podcastId);
+        DDLogVerbose(@"Podcast was found in the database");
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         DDLogVerbose(@"Fetchinng new episodes for %@ after %@", title, lastEntryDate);
         __weak PodcastUpdateOperation *weakSelf = self;
-        [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podcastId
+        [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:podcastId
                                                      withLastSyncDate:lastEntryDate
                                                              complete:^void(id response) {
-                                                                 weakSelf->success = YES;
-                                                                 [self processResponse:response inContext:childContext signallingSemaphore:semaphore];
+                                                                 __strong PodcastUpdateOperation *operation = weakSelf;
+                                                                 if (operation.isCancelled) {
+                                                                    return;
+                                                                 }
+
+                                                                 if (operation) {
+                                                                     operation->success = YES;
+                                                                 }
+
+                                                                 [self processResponse:response
+                                                                             inContext:childContext
+                                                                   signallingSemaphore:semaphore];
                                                              }
                                                               onError:^void(NSError *error) {
-                                                                  DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", self.podcastId);
+                                                                  DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", podcastId);
                                                                   [FlurryAnalytics logError:@"PodcastUpdateFailed" message:[error localizedDescription] error:error];
                                                                   dispatch_semaphore_signal(semaphore);
                                                               }];
@@ -87,14 +105,14 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
             DDLogWarn(@"A timeout occured while trying to update podcast");
         }
     } else {
-        DDLogWarn(@"Podcast with id: %@ did not exist", self.podcastId);
+        DDLogWarn(@"Podcast with id: %@ did not exist", podcastId);
     }
 
     NSError *saveError;
     DDLogVerbose(@"Saving Child Context");
     [childContext save:&saveError];
-    NSAssert(saveError == nil, @"There should be no error when saving", saveError);
-    DDLogVerbose(@"Podcast update operation complete for id: %@", self.podcastId);
+    NSAssert(saveError == nil, @"There should be no error when saving: %@", saveError);
+    DDLogVerbose(@"Podcast update operation complete for id: %@", podcastId);
     if (self.onUpdateComplete) {
         self.onUpdateComplete(self);
     }
@@ -102,7 +120,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)processResponse:(id)response inContext:(NSManagedObjectContext *)context signallingSemaphore:(dispatch_semaphore_t)semaphore {
     [context performBlock:^void() {
-        SVPodcast *localPodcast = [SVPodcast MR_findFirstByAttribute:@"podstoreId" withValue:self.podcastId inContext:context];
+        SVPodcast *localPodcast = [self.podcast MR_inContext:context];
         localPodcast.lastSynced = [NSDate date];
         NSArray *episodes = response;
         if (episodes) {
@@ -139,7 +157,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
             DDLogError(@"There was a problem updating this podcast %@ - %@", localPodcast, error);
             [FlurryAnalytics logError:@"SavingPodcastFailed" message:[error localizedDescription] error:error];
         } else {
-            DDLogVerbose(@"Updating podcast with id %@ succeeded", self.podcastId);
+            DDLogVerbose(@"Updating podcast succeeded");
         }
 
         dispatch_semaphore_signal(semaphore);

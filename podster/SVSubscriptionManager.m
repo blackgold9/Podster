@@ -77,59 +77,59 @@ static char const kRefreshInterval = -3;
     self.isBusy = YES;
 
     NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-    __block NSMutableArray *subscribedPodsterIds = [NSMutableArray array];
+    __block NSMutableArray *subscribedPodcasts = [NSMutableArray array];
 
-    // Get the subscribed podcast podster ids
+    // Get the subscribed podcasts
     [context performBlockAndWait:^void() {
         NSArray *subscribed = [self subscribedPodcastsInContext:context];
         for (SVPodcast *podcast in subscribed) {
-            [subscribedPodsterIds addObject:podcast.podstoreId];
+            [subscribedPodcasts addObject:podcast];
         }
     }];
 
     // Actually do the update
-    [self refreshPodcastsWithIds:subscribedPodsterIds
-                        complete:^void() {
-                            // Save context
-                            [context performBlockAndWait:^void() {
-                                NSError *error;
-                                [context save:&error];
-                                if (error) {
-                                    DDLogError(@"An error occured saving after refreshing podcasts. Error:%@", error);
-                                    [FlurryAnalytics logError:@"SubscriptionRefreshError" message:[error localizedDescription] error:error];
-                                    NSAssert(NO, @"This should not fail");
-                                }
-                            }];
-                            
-                            [[SVDownloadManager sharedInstance] downloadPendingEntries];
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                self.isBusy = NO;
-                                DDLogInfo(@"Refreshing Subscriptions is complete");
-                            });
-                        }
-                         onQueue:dispatch_get_main_queue()];
+    [self refreshPodcasts:subscribedPodcasts
+                 complete:^void() {
+                     // Save context
+                     [context performBlockAndWait:^void() {
+                         NSError *error;
+                         [context save:&error];
+                         if (error) {
+                             DDLogError(@"An error occured saving after refreshing podcasts. Error:%@", error);
+                             [FlurryAnalytics logError:@"SubscriptionRefreshError" message:[error localizedDescription] error:error];
+                             NSAssert(NO, @"This should not fail");
+                         }
+                     }];
+
+                     [[SVDownloadManager sharedInstance] downloadPendingEntries];
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         self.isBusy = NO;
+                         DDLogInfo(@"Refreshing Subscriptions is complete");
+                     });
+                 }
+                  onQueue:dispatch_get_main_queue()];
     
 }
 
-- (void)refreshPodcastsWithIds:(NSArray *)podsterIDs complete:(void (^)())complete onQueue:(dispatch_queue_t)queue
+- (void)refreshPodcasts:(NSArray *)podcasts complete:(void (^)())complete onQueue:(dispatch_queue_t)queue
 {
     dispatch_retain(queue);
     dispatch_group_t group = dispatch_group_create();
-    NSArray *currentIds= [syncQueue.operations valueForKey:@"podcastId"];
+    NSArray *currentIds= [syncQueue.operations valueForKey:@"podcast"];
     NSSet *currentOperationLookup = [NSSet setWithArray:currentIds];
     NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-    for (NSNumber *podsterId in podsterIDs) {
-        if (![currentOperationLookup containsObject:podsterId]) {
+    for (SVPodcast *podcast in podcasts) {
+        if (![currentOperationLookup containsObject:podcast]) {
             dispatch_group_enter(group);
-            PodcastUpdateOperation *operation = [[PodcastUpdateOperation alloc] initWithPodcastId:podsterId
-                                                                                       andContext:context];
+            PodcastUpdateOperation *operation = [[PodcastUpdateOperation alloc] initWithPodcast:podcast
+                                                                                     andContext:context];
             [operation setCompletionBlock:^void() {
                 dispatch_group_leave(group);
             }];
             [syncQueue addOperation:operation];
 
         } else {
-            DDLogWarn(@"Skipping updating podcast with id %@ since it was already in the queue", podsterId);
+            DDLogWarn(@"Skipping updating podcast since it was already in the queue");
         }
     }
 

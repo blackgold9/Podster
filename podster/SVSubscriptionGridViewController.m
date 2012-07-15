@@ -31,6 +31,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 @synthesize noContentLabel;
 @synthesize gridView = _gridView;
+@synthesize context = _context;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -47,6 +49,16 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     // Release any cached data, images, etc that aren't in use.
 }
+
+#pragma mark - core data context
+- (NSManagedObjectContext *)context {
+    if (!_context) {
+        _context = [PodsterManagedDocument defaultContext];
+    }
+
+    return _context;
+}
+
 
 #pragma mark - View lifecycle
 
@@ -149,16 +161,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
         }
                     
+
         
-        NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
-        
-        NSFetchRequest *request = [SVPodcast MR_requestAllWithPredicate:predicate inContext:context];
+        NSFetchRequest *request = [SVPodcast MR_requestAllWithPredicate:predicate inContext:self.context];
         [request setReturnsObjectsAsFaults:NO];
         [request setIncludesSubentities:NO];
         [request setIncludesPendingChanges:YES];
         
         NSError *error;
-        NSArray *newItems = [context executeFetchRequest:request error:&error];
+        NSArray *newItems = [self.context executeFetchRequest:request error:&error];
         NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
         DDLogVerbose(@"Retrieved %lu items for display", newItems.count);
         self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
@@ -229,6 +240,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     SVPodcast *podcast =  [items objectAtIndex:position];
     
     SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
+    controller.context = self.context;
     controller.podcast = podcast;
     [self.navigationController pushViewController:controller animated:YES];
     

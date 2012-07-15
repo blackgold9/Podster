@@ -320,21 +320,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     }
 }
 
-- (void)deleteFilesForPodcast:(SVPodcast *)podcast
-                    inContext:(NSManagedObjectContext *)context {
-    [context performBlock:^{
-        NSPredicate *hasDownloadCompleteOrInProgress = [NSPredicate predicateWithFormat:@"(%K != nil || %K == YES)", SVPodcastEntryRelationships.download, SVPodcastEntryAttributes.downloadComplete];
-        NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"podcast == %@", podcast];
-        NSPredicate *needsDeltingPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:isInPodcast, hasDownloadCompleteOrInProgress, nil]];
-        
-        NSArray *needsDeliting = [SVPodcastEntry MR_findAllWithPredicate:needsDeltingPredicate
-                                                               inContext:context];
-        [self deleteFilesForEntries:needsDeliting
-                          inContext:context];
-        
-    }];
-}
-
 - (void)downloadPendingEntries {
     @synchronized (self) {
         // we're not currently downloading, and we will be, so....
@@ -350,11 +335,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [queue cancelAllOperations];
         DDLogVerbose(@"Cancelling all current download operations");
     }
-    
+
     NSManagedObjectContext *parentContext = [PodsterManagedDocument defaultContext];
     [parentContext processPendingChanges];
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     context.parentContext = parentContext;
+    [context performBlock:^void() {
+
+
     NSSet *shouldBePresent = [self entriesNeedingDownloadInContext:context];
     
     [self deleteDownloadsForEntriesNotInSet:shouldBePresent
@@ -422,6 +410,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         NSAssert(NO, @"There was an error saving: %@", error);
     }
     DDLogInfo(@"Done queing entries for download");
+    }];
 }
 
 @end

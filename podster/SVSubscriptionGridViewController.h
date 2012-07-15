@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GMGridView.h"
 #import "SVViewController.h"
-@interface SVSubscriptionGridViewController : UIViewController<GMGridViewDataSource, GMGridViewActionDelegate, NSFetchedResultsControllerDelegate>
+#import "CoreDataController.h"
+@interface SVSubscriptionGridViewController : UIViewController<CoreDataController, GMGridViewDataSource, GMGridViewActionDelegate, NSFetchedResultsControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *noContentLabel;
 @property (nonatomic, weak) IBOutlet GMGridView *gridView;
+
 @end

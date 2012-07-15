@@ -185,6 +185,8 @@
 }
 */
 
+
+
 -(void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
     LOG_GENERAL(2, @"User tapped search");

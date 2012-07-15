@@ -393,8 +393,15 @@ void audioRouteChangeListenerCallback (
                                       message:[currentItem.error localizedDescription] 
                                         error:currentItem.error];
                     DDLogError(@"Playback Error:  %@", currentItem.error);
+                    NSString *errorMessage;
+                    if ([[currentItem.error domain] isEqualToString:@"NSURLErrorDomain"] && currentItem.error.code == -1102) {
+                        errorMessage = @"This episode is no longer avaialble from the publisher. Please select another episode";
+                    } else {
+                        errorMessage = NSLocalizedString(@"There was a problem playing this podcast. Please try again later.", @"There was a problem playing this podcast. Please try again later.");
+                    }
                     BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                                              message:NSLocalizedString(@"There was a problem playing this podcast. Please try again later.", @"There was a problem playing this podcast. Please try again later.")];
+                                                                              message:errorMessage];
+                    
                     [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", @"OK") block:^{
                         UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
                         UINavigationController *nav = nil;

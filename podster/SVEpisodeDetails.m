@@ -17,7 +17,7 @@
 #import "SVDownloadManager.h"
 #import <Twitter/Twitter.h>
 @implementation SVEpisodeDetailsViewController {
-    NSManagedObjectContext *context;
+
     SVPodcastEntry *episode;
 }
 @synthesize imageBackground;
@@ -102,7 +102,6 @@
                          baseURL:nil];
     self.webView.delegate = self;
 
-    context = theEpisode.managedObjectContext;
     episode = theEpisode;
         [self configureToolbar];
 }
@@ -228,7 +227,7 @@
 }
 
 - (IBAction)markAsPlayedTapped:(id)sender {
-    [context performBlock:^{
+    [self.context performBlock:^{
         episode.playedValue = !episode.playedValue;  
         if (!episode.playedValue) {
             // If we are now unplayed, reset playback location

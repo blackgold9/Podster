@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreDataController.h"
 
-@interface SVViewController : UIViewController
+@interface SVViewController : UIViewController<CoreDataController>
 
 @end

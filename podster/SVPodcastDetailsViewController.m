@@ -35,7 +35,7 @@
 #import "PodcastSettingsViewController.h"
 #import "SVHtmlViewController.h"
 #import "PodcastUpdateOperation.h"
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
 
 
@@ -43,14 +43,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @end
 @implementation SVPodcastDetailsViewController {
     BOOL isLoading;
-    NSMutableArray *feedItems;
-    NSManagedObjectContext *localContext;
+    NSMutableArray *feedItems;   
     SVPodcast *localPodcast;
     BOOL optionsOpen;
     BOOL isInitialLoad;
     BOOL isSubscribed;
-    NSArray *items;
-    NSManagedObjectContext *context;
+    NSArray *items;    
     NSTimer *gracePeriodTimer;
     NSOperationQueue *updateOperationQueue;
 }
@@ -63,6 +61,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize subscribeButton;
 @synthesize podcast = _podcast;
 @synthesize optionsButton;
+@synthesize context = _context;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -94,6 +94,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
 }
+#pragma mark - core data context
+- (NSManagedObjectContext *)context {
+    if (!_context) {
+        _context = [PodsterManagedDocument defaultContext];
+    }
+
+    return _context;
+}
 
 - (void)optionsTapped:(id)sender {
 //    SVPodcastModalView *modal = [[SVPodcastModalView alloc] initWithFrame:self.view.bounds ];
@@ -103,7 +111,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     UIStoryboard *board = [UIStoryboard storyboardWithName:@"PodcastStoryboard" bundle:nil];
 
     PodcastSettingsViewController *controller = [board instantiateViewControllerWithIdentifier:@"PodcastSettings"];
-    [localContext performBlockAndWait:^{
+    [self.context performBlockAndWait:^{
         controller.shouldNotify = localPodcast.shouldNotifyValue;
         controller.sortAscending = !localPodcast.sortNewestFirstValue;
         controller.downloadsToKeep = (NSUInteger) localPodcast.downloadsToKeepValue;
@@ -118,7 +126,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (BOOL)hasHitNotificationLimit {
     
-    NSInteger currentCount = (NSInteger )[SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"shouldNotify == YES AND isSubscribed == YES"] inContext:[PodsterManagedDocument defaultContext]];
+    NSInteger currentCount = (NSInteger ) [SVPodcast MR_countOfEntitiesWithPredicate:[NSPredicate predicateWithFormat:@"shouldNotify == YES AND isSubscribed == YES"]
+                                                                           inContext:self.context];
     BOOL premium = [[SVSettings sharedInstance] premiumModeUnlocked];
     return !premium && currentCount >= [[SVSettings sharedInstance] maxFreeNotifications];
 }
@@ -172,7 +181,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                           [FlurryAnalytics logEvent:@"ChangedNotificationSettingForFeed"
                                                                      withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:shouldNotify] forKey:@"ON"]];
                                                           LOG_GENERAL(2, @"Notifications setting changed successfully");
-                                                          [localContext performBlock:^{
+                                                          [self.context performBlock:^{
                                                               localPodcast.shouldNotifyValue = shouldNotify;
                                                           }];
                                                       }
@@ -252,7 +261,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(void)subscribeToPodcast
 {
-    [localContext performBlock:^void() {
+    [self.context performBlock:^void() {
         // Trigger the object itself to say it is subscribed
         [localPodcast subscribe];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -302,7 +311,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [FlurryAnalytics logEvent:@"UnsubscribedFromPodcast"];
 
-    [localContext performBlock:^void() {
+    [self.context performBlock:^void() {
         [localPodcast unsubscribe];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self configureToolbar];            
@@ -397,7 +406,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)setupSubscribeButton
 {
-    [localContext performBlock:^{
+    [self.context performBlock:^{
         BOOL subscribed = localPodcast.isSubscribedValue;
         dispatch_async(dispatch_get_main_queue(), ^{
             if(subscribed) {
@@ -424,11 +433,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.titleLabel.text = self.podcast.title;
         
     isLoading = YES;
-    
-    localContext = [PodsterManagedDocument defaultContext];
+        
     __block BOOL blockHasSubscription = NO;
 
-    [localContext performBlock:^{
+    [self.context performBlock:^{
         @try {
 
             NSNumber *feedId = self.podcast.podstoreId;
@@ -436,30 +444,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
             localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
-                                                      inContext:localContext];
+                                                      inContext:self.context];
             DDLogVerbose(@"Lookup complete");
 
             if (!localPodcast) {
                 LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
-                localPodcast = [SVPodcast MR_createInContext:localContext];
+                __block SVPodcast *newPodcast;
+                [self.context performBlockAndWait:^void() {
+                    newPodcast = [SVPodcast MR_createInContext:self.context];
+                    [self.context obtainPermanentIDsForObjects:[NSArray arrayWithObject:newPodcast] error:nil];
+                }];
+                localPodcast = newPodcast;
             }
 
             [localPodcast populateWithPodcast:self.podcast];
             NSAssert(localPodcast.title != nil, @"There should be a title here");
             blockHasSubscription = localPodcast.isSubscribedValue;
-
-            // We had a local copy, so check for local image
-            if (localPodcast.gridSizeImageData != nil) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
-                    self.imageView.image = image;
-                });
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // We didn't have a local copy, so load from url
-                    [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
-                });
-            }
+            [self displayImageForPodcast];
 
             //LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
 
@@ -474,6 +475,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             DDLogError(@"%@", exception);
         }
     }];    
+}
+
+- (void)displayImageForPodcast {
+// We had a local copy, so check for local image
+    if (localPodcast.gridSizeImageData != nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
+                    self.imageView.image = image;
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // We didn't have a local copy, so load from url
+                    [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
+                });
+            }
 }
 
 - (void)displayEpisodesAndRefreshData {
@@ -499,15 +515,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     };
 
     gracePeriodTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                        target:self selector:@selector(gracePeriodTimerFired:)
-                                                      userInfo:nil repeats:NO];
+                                                        target:self
+                                                      selector:@selector(gracePeriodTimerFired:)
+                                                      userInfo:nil
+                                                       repeats:NO];
     [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
 
-    [localContext performBlock:^{
-        NSNumber *podstoreId = localPodcast.podstoreId;
-        [localContext processPendingChanges];
-        PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcastId:podstoreId
-                                                                                         andContext:localContext];
+    [self.context performBlock:^{
+        [self.context processPendingChanges];
+        PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcast:localPodcast
+                                                                                       andContext:self.context];
         updateOperation.onUpdateComplete = ^void(PodcastUpdateOperation *operation) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([operation completedSuccessfully]) {
@@ -533,8 +550,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self reloadData];
 }
 
-- (void)configureUIForSubscriptionStatus:(BOOL)isSubscribed {
-    isSubscribed = isSubscribed;
+- (void)configureUIForSubscriptionStatus:(BOOL)isSubscribedValue {
+    isSubscribed = isSubscribedValue;
     self.subscribeButton.enabled = NO;
 
     [self setupSubscribeButton];
@@ -550,9 +567,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
 
        LOG_GENERAL(2, @"Reload Data begun");
-
-    [localContext performBlock:^void() {
-        [localContext processPendingChanges];
+    NSAssert(self.context != nil, @"localcontext should not be nil");
+    [self.context performBlock:^void() {
+        [self.context processPendingChanges];
 
 
         if (localPodcast.items.count == 0) {
@@ -561,11 +578,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
         @try {
             DDLogVerbose(@"Reload block started");
-            NSArray *newItems = [SVPodcastEntry MR_findByAttribute:@"podcast" withValue:localPodcast andOrderBy:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue inContext:localContext];
+            NSArray *newItems = [SVPodcastEntry MR_findByAttribute:@"podcast.podstoreId" withValue:localPodcast.podstoreId andOrderBy:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue inContext:self.context];
             if (localPodcast.hidePlayedEpisodesValue) {
                 newItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
             }
 
+            DDLogVerbose(@"Fetched %lu items to display", newItems.count);
             dispatch_async(dispatch_get_main_queue(), ^{
                 items = [newItems copy];
                 [[self tableView] reloadData];
@@ -612,6 +630,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [updateOperationQueue cancelAllOperations];
     NSAssert(localPodcast != nil, @"Local podcast should not be nil");
 
 }
@@ -635,7 +654,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [[self navigationController] pushViewController:controller animated:YES];
     } else {
         
-        [localContext performBlock:^{
+        [self.context performBlock:^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (episode.downloadCompleteValue || ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] != AFNetworkReachabilityStatusNotReachable)) {
                     // If it's downloaded or we're online, play it
@@ -682,7 +701,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
-    SVEpisodeDetailsViewController *details = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"episodeDetails"];    
+    SVEpisodeDetailsViewController *details = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"episodeDetails"];
+    details.context = self.context;
     details.episode =[items objectAtIndex:(NSUInteger) indexPath.row];
     [[self navigationController] pushViewController:details
                                            animated:YES];
@@ -744,7 +764,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     SVHtmlViewController *controller = [[SVHtmlViewController alloc] initWithNibName:nil bundle:nil];
     __block NSString *html;
     __block NSString *title;
-    [localContext performBlockAndWait:^{
+    [self.context performBlockAndWait:^{
         html = localPodcast.summary;
         title = localPodcast.title;
     }];
@@ -758,7 +778,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #pragma mark - podcast settings delegate
 - (void)podcastSettingsViewControllerShouldClose:(PodcastSettingsViewController *)controller {
     [self dismissViewControllerAnimated:YES completion:NULL];
-    [localContext performBlock:^void() {
+    [self.context performBlock:^void() {
         localPodcast.sortNewestFirstValue = !controller.sortAscending;
         if (localPodcast.shouldNotifyValue != controller.shouldNotify) {
             [self updateNotificationSetting:controller.shouldNotify];

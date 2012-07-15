@@ -32,6 +32,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     return client;
 }
+
 - (NSString *)countryCode
 {
     NSLocale *current = [NSLocale currentLocale];
@@ -387,6 +388,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     if (lastSycned) {
         [parameters setObject:lastSycned forKey:@"after"];
     }
+
 
     [self getPath:@"feed_items"
        parameters:parameters

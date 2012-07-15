@@ -6,14 +6,15 @@
 
 
 #import <Foundation/Foundation.h>
+@class SVPodcast;
 @class PodcastUpdateOperation;
 typedef void (^UpdateCompleteBlock)(PodcastUpdateOperation *);
 
 @interface PodcastUpdateOperation : NSOperation
-@property (nonatomic, strong) NSNumber *podcastId;
+@property (nonatomic, strong) SVPodcast *podcast;
 @property (nonatomic, copy) UpdateCompleteBlock onUpdateComplete;
 
 
-- (id)initWithPodcastId:(NSNumber *)podcastId andContext:(NSManagedObjectContext *)theContext;
+- (id)initWithPodcast:(SVPodcast *)podcast andContext:(NSManagedObjectContext *)theContext;
 - (BOOL)completedSuccessfully;
 @end

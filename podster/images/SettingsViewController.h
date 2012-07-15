@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "SVCustomGroupedTableViewController.h"
 
-@interface SettingsViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface SettingsViewController : SVCustomGroupedTableViewController <MFMailComposeViewControllerDelegate>
 @property(strong, nonatomic) IBOutlet UISwitch *premiumSwitch;
 
 - (IBAction)premiumSwitchToggled:(id)sender;
