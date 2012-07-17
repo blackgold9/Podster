@@ -90,7 +90,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                           selector:@selector(contextChanged:)
                                           name:NSManagedObjectContextDidSaveNotification
-                                          object:[PodsterManagedDocument defaultContext]];
+                                          object:self.context];
 }
 
 - (void)contextChanged:(NSNotification *)notification
@@ -199,7 +199,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSManagedObjectContextDidSaveNotification
-                                                  object:[PodsterManagedDocument defaultContext]];
+                                                  object:self.context];
     
 }
 

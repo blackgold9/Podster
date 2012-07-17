@@ -33,7 +33,9 @@ unichar ISO8601DefaultTimeSeparatorCharacter = DEFAULT_TIME_SEPARATOR;
 
 static NSMutableDictionary *timeZonesByOffset;
 
-@implementation ISO8601DateFormatter
+@implementation ISO8601DateFormatter {
+    dispatch_queue_t syncQueue;
+}
 
 + (void) initialize {
 	if (!timeZonesByOffset) {
@@ -60,6 +62,8 @@ static NSMutableDictionary *timeZonesByOffset;
 		unparsingCalendar = [[self makeCalendarWithDesiredConfiguration] retain];
 
 		format = ISO8601DateFormatCalendar;
+        syncQueue = dispatch_queue_create("com.podster.dateparsing.sync", DISPATCH_QUEUE_SERIAL);
+        dispatch_set_target_queue(syncQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
 		timeSeparator = ISO8601DefaultTimeSeparatorCharacter;
 		includeTime = NO;
 		parsesStrictly = NO;
@@ -68,7 +72,7 @@ static NSMutableDictionary *timeZonesByOffset;
 }
 - (void) dealloc {
 	[defaultTimeZone release];
-
+    dispatch_release(syncQueue);
 	[unparsingFormatter release];
 	[lastUsedFormatString release];
 	[parsingCalendar release];
@@ -612,7 +616,12 @@ static BOOL is_leap_year(NSUInteger year);
 }
 
 - (NSDate *) dateFromString:(NSString *)string {
-	return [self dateFromString:string timeZone:NULL];
+    //Todo: add sync call
+    __block NSDate *date = nil;
+    dispatch_sync(syncQueue, ^{
+        date = [self dateFromString:string timeZone:NULL];
+    });
+	return date;
 }
 - (NSDate *) dateFromString:(NSString *)string timeZone:(out NSTimeZone **)outTimeZone {
 	return [self dateFromString:string timeZone:outTimeZone range:NULL];

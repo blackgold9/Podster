@@ -9,48 +9,31 @@
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
-#import "SVPodcatcherClient.h"
-#import "SVPodcastEntry.h"
 #import "SVPlaybackManager.h"
-#import <QuartzCore/QuartzCore.h>
-#import "SVDownloadManager.h"
-#import "SVPodcastSearchResult.h"
-#import "ActsAsPodcast.h"
 #import "MessageGenerator.h"
-
 #import "SVEpisodeListCell.h"
-#import "GTMNSString+HTML.h"
 #import "SVEpisodeDetails.h"
-#import "SVPlaybackManager.h"
-#import "SVPlaybackController.h"
-#import "SVPodcastModalView.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "BlockAlertView.h"
-#import "GCDiscreetNotificationView.h"
-#import "SVSubscriptionManager.h"
-#import "_SVPodcastEntry.h"
-#import "_SVPodcast.h"
 #import <Twitter/Twitter.h>
-#import "MBProgressHUD.h"
 #import "PodcastSettingsViewController.h"
 #import "SVHtmlViewController.h"
 #import "PodcastUpdateOperation.h"
+
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
 
 
-- (void)reloadData;
 @end
 @implementation SVPodcastDetailsViewController {
     BOOL isLoading;
-    NSMutableArray *feedItems;   
     SVPodcast *localPodcast;
     BOOL optionsOpen;
     BOOL isInitialLoad;
-    BOOL isSubscribed;
-    NSArray *items;    
+    BOOL isSubscribed;   
     NSTimer *gracePeriodTimer;
     NSOperationQueue *updateOperationQueue;
+    NSFetchedResultsController *fetcher;
 }
 @synthesize shareButton;
 @synthesize titleLabel;
@@ -69,7 +52,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        items = [NSArray array];
+
         updateOperationQueue = [[NSOperationQueue alloc] init];
 
     }
@@ -80,7 +63,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self = [super initWithCoder:aDecoder];
     if (self) {
         // Custom initialization
-        items = [NSArray array];
+
         updateOperationQueue = [[NSOperationQueue alloc] init];
 
     }
@@ -104,10 +87,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 - (void)optionsTapped:(id)sender {
-//    SVPodcastModalView *modal = [[SVPodcastModalView alloc] initWithFrame:self.view.bounds ];
-//    modal.podcast = localPodcast;
-//    [self.view addSubview:modal];
-//    [modal showFromPoint:((UIView *)sender).center];
     UIStoryboard *board = [UIStoryboard storyboardWithName:@"PodcastStoryboard" bundle:nil];
 
     PodcastSettingsViewController *controller = [board instantiateViewControllerWithIdentifier:@"PodcastSettings"];
@@ -200,9 +179,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 }
 
-- (IBAction)notifySwitchChanged:(id)sender {
-
-}
 
 - (void)showFeedNotificationSubscriptionError
 {
@@ -419,6 +395,38 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     }];
 }
 
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    switch(type) {
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case NSFetchedResultsChangeMove:
+            [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        default:
+            break;
+    }
+
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
+
 - (void)viewDidLoad
 {
     LOG_GENERAL(2, @"%s", sel_getName(_cmd));
@@ -457,12 +465,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 localPodcast = newPodcast;
             }
 
+            NSAssert(localPodcast != nil, @"Local podcast should not be nil");
             [localPodcast populateWithPodcast:self.podcast];
             NSAssert(localPodcast.title != nil, @"There should be a title here");
             blockHasSubscription = localPodcast.isSubscribedValue;
             [self displayImageForPodcast];
-
-            //LOG_GENERAL(2, @"Retrived: %@ - %@", localPodcast.title, localPodcast.objectID);
 
 
 
@@ -509,7 +516,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             LOG_GENERAL(2, @"Done loading entries");
             [strongSelf loadFeedImage];
 
-            [self reloadData];
+
         }
 
     };
@@ -523,6 +530,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
     [self.context performBlock:^{
         [self.context processPendingChanges];
+        NSAssert(localPodcast != nil, @"PLocal Podcast should not be nil");
         PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcast:localPodcast
                                                                                        andContext:self.context];
         updateOperation.onUpdateComplete = ^void(PodcastUpdateOperation *operation) {
@@ -546,8 +554,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [updateOperationQueue addOperation:updateOperation];
     }];
 
-    // Do the initial data load
-    [self reloadData];
+
 }
 
 - (void)configureUIForSubscriptionStatus:(BOOL)isSubscribedValue {
@@ -562,40 +569,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
  
     
 
-}
--(void)reloadData
-{
-
-       LOG_GENERAL(2, @"Reload Data begun");
-    NSAssert(self.context != nil, @"localcontext should not be nil");
-    [self.context performBlock:^void() {
-        [self.context processPendingChanges];
-
-
-        if (localPodcast.items.count == 0) {
-            DDLogWarn(@"Podcast had no episodes when trying to load data");
-        }
-
-        @try {
-            DDLogVerbose(@"Reload block started");
-            NSArray *newItems = [SVPodcastEntry MR_findByAttribute:@"podcast.podstoreId" withValue:localPodcast.podstoreId andOrderBy:SVPodcastEntryAttributes.datePublished ascending:!localPodcast.sortNewestFirstValue inContext:self.context];
-            if (localPodcast.hidePlayedEpisodesValue) {
-                newItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played]];
-            }
-
-            DDLogVerbose(@"Fetched %lu items to display", newItems.count);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                items = [newItems copy];
-                [[self tableView] reloadData];
-                DDLogVerbose(@"REload Data complete");
-            });
-        }
-        @catch (NSException *exception) {
-            DDLogError(@"Error occured while reloading data: %@", exception);
-            NSAssert(NO, @"There was an exception thrown when loading data");
-        }
-
-    }];
 }
 
 - (void)viewDidUnload
@@ -622,13 +595,42 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self reloadData];
-     [self configureToolbar];
+    dispatch_async(dispatch_get_main_queue(), ^{
+    NSPredicate *itemsInPodcastPredicate = [NSPredicate predicateWithFormat:@"podcast = %@", localPodcast];
+    NSPredicate *predicate;
+
+    if (localPodcast.hidePlayedEpisodesValue) {
+        NSPredicate *notPlayedPredicate = [NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played];
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];
+
+    } else {
+        predicate = itemsInPodcastPredicate;
+    }
+
+    NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                                          ascending:!localPodcast.sortNewestFirstValue
+                                                      withPredicate:predicate
+                                                          inContext:self.context];
+        NSAssert(self.context == [PodsterManagedDocument defaultContext], @"Contexts should match");
+        [request setIncludesSubentities:NO];
+        [request setIncludesPendingChanges:YES];
+        
+        
+        fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"EpisodeListForId%@", localPodcast.podstoreId]];
+        [fetcher performFetch:nil];
+
+    fetcher.delegate = self;
+    [self.tableView reloadData];
+});
+
+    [self configureToolbar];
 }
 
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    fetcher.delegate = nil;
+    fetcher = nil;
     [super viewWillDisappear:animated];
     [updateOperationQueue cancelAllOperations];
     NSAssert(localPodcast != nil, @"Local podcast should not be nil");
@@ -644,7 +646,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SVPodcastEntry *episode = [items objectAtIndex:(NSUInteger) indexPath.row];
+    SVPodcastEntry *episode = [fetcher objectAtIndexPath:indexPath];
     if (episode == [[SVPlaybackManager sharedInstance] currentEpisode]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
@@ -654,48 +656,41 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [[self navigationController] pushViewController:controller animated:YES];
     } else {
         
-        [self.context performBlock:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (episode.downloadCompleteValue || ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] != AFNetworkReachabilityStatusNotReachable)) {
-                    // If it's downloaded or we're online, play it
-                    BOOL isVideo = NO;
-                    isVideo |=  [episode.mediaURL rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
-                    isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
-                    isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
-                    if (isVideo) {
-                        NSURL *contentUrl = episode.downloadCompleteValue ? [NSURL fileURLWithPath: episode.localFilePath] :  [NSURL URLWithString:episode.mediaURL];
-                        MPMoviePlayerViewController *player =
-                        [[MPMoviePlayerViewController alloc] initWithContentURL: contentUrl];
-                        [self presentMoviePlayerViewControllerAnimated:player];
-                    }else {                    
-                        DDLogInfo(@"Triggering playback");
-                        [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
-                        DDLogInfo(@"Playback triggered");
-                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-                        UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
-                        NSParameterAssert(controller);
-                        
-                        DDLogInfo(@"Navigating to player");
-                        [[self navigationController] pushViewController:controller animated:YES];
-                        
-                    }
-                } else {
-                    BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"Offline", @"offline")
-                                                                   message:NSLocalizedString(@"This episode is not available offline", nil)];
-                    [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
-                                              block:^{
-                                                  
-                                              }];
-                    [alert show];
-                }
-            });
-            
-        }];
+        
+        if (episode.downloadCompleteValue || ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] != AFNetworkReachabilityStatusNotReachable)) {
+            // If it's downloaded or we're online, play it
+            BOOL isVideo = NO;
+            isVideo |=  [episode.mediaURL rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
+            isVideo |=  [episode.mediaURL rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
+            isVideo |=  [episode.mediaURL rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
+            if (isVideo) {
+                NSURL *contentUrl = episode.downloadCompleteValue ? [NSURL fileURLWithPath: episode.localFilePath] :  [NSURL URLWithString:episode.mediaURL];
+                MPMoviePlayerViewController *player =
+                [[MPMoviePlayerViewController alloc] initWithContentURL: contentUrl];
+                [self presentMoviePlayerViewControllerAnimated:player];
+            }else {
+                DDLogInfo(@"Triggering playback");
+                [[SVPlaybackManager sharedInstance] playEpisode:episode ofPodcast:episode.podcast];
+                DDLogInfo(@"Playback triggered");
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+                UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
+                NSParameterAssert(controller);
+                
+                DDLogInfo(@"Navigating to player");
+                [[self navigationController] pushViewController:controller animated:YES];
+                
+            }
+        } else {
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"Offline", @"offline")
+                                                           message:NSLocalizedString(@"This episode is not available offline", nil)];
+            [alert setCancelButtonWithTitle:NSLocalizedString(@"OK",nil)
+                                      block:^{
+                                          
+                                      }];
+            [alert show];
+        }
+        
     }
-    // Download episode
-    //[[SVDownloadManager sharedInstance] downloadEntry:episode];
-    
-    
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
@@ -703,7 +698,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
     SVEpisodeDetailsViewController *details = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"episodeDetails"];
     details.context = self.context;
-    details.episode =[items objectAtIndex:(NSUInteger) indexPath.row];
+    details.episode =[fetcher objectAtIndexPath:indexPath];
     [[self navigationController] pushViewController:details
                                            animated:YES];
     
@@ -725,7 +720,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                      dequeueReusableCellWithIdentifier:@"episodeCell"];
     //cell.backgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"CarbonListBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsZero]];
     //cell.backgroundView.backgroundColor = ;
-    SVPodcastEntry *episode= [items objectAtIndex:(NSUInteger) indexPath.row];
+    SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
     
     [cell bind:episode];    
     
@@ -734,14 +729,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 #pragma mark - datasource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return items.count;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[fetcher sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (IBAction)shareTapped:(id)sender {

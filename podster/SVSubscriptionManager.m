@@ -91,15 +91,15 @@ static char const kRefreshInterval = -3;
     [self refreshPodcasts:subscribedPodcasts
                  complete:^void() {
                      // Save context
-                     [context performBlockAndWait:^void() {
-                         NSError *error;
-                         [context save:&error];
-                         if (error) {
-                             DDLogError(@"An error occured saving after refreshing podcasts. Error:%@", error);
-                             [FlurryAnalytics logError:@"SubscriptionRefreshError" message:[error localizedDescription] error:error];
-                             NSAssert(NO, @"This should not fail");
-                         }
-                     }];
+//                     [context performBlockAndWait:^void() {
+//                         NSError *error;
+//                         [context save:&error];
+//                         if (error) {
+//                             DDLogError(@"An error occured saving after refreshing podcasts. Error:%@", error);
+//                             [FlurryAnalytics logError:@"SubscriptionRefreshError" message:[error localizedDescription] error:error];
+//                             NSAssert(NO, @"This should not fail");
+//                         }
+//                     }];
 
                      [[SVDownloadManager sharedInstance] downloadPendingEntries];
                      dispatch_async(dispatch_get_main_queue(), ^{

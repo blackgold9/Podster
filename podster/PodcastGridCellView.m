@@ -152,6 +152,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         self.progressBar.progress = 0.0f;
         coreDataPodcast = nil;
     }
+            self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
     [imageLoadOp cancel];
 }
 -(void)dealloc

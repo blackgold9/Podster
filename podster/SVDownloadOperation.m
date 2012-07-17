@@ -123,6 +123,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                     DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
                     if (download) {
                         [download MR_deleteInContext:localContext];
+                        entry.download = nil;
                     }
                     [self done];
                     
@@ -161,6 +162,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
                 DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
                 if (download) {
+                    entry.download = nil;
                     [download MR_deleteInContext:localContext];
                 }
                 [self done];
@@ -172,6 +174,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
              performBlock:^{
                  DDLogError(@"Failed to download episode: %@ with error %@", download.entry.title, error);
                  download.stateValue = SVDownloadStateFailed;
+                 download.entry = nil;
+                 [download MR_deleteInContext:localContext];
                  [self done];
              }];
             

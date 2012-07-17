@@ -1127,6 +1127,7 @@
 		4BD0BAC2151124B2005E6232 /* placeholder-thumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder-thumb@2x.png"; sourceTree = "<group>"; };
 		4BD123C3150FFF8100A108DA /* CloudHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudHelper.h; sourceTree = "<group>"; };
 		4BD123C4150FFF8100A108DA /* CloudHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudHelper.m; sourceTree = "<group>"; };
+		4BD1A3FB15B3D43B00D2EEF1 /* SVPodcastDatastore 19.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SVPodcastDatastore 19.xcdatamodel"; sourceTree = "<group>"; };
 		4BD1C21D14B7D05E00E8C942 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		4BD1C21E14B7D05E00E8C942 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeGetters.h"; sourceTree = "<group>"; };
@@ -3505,6 +3506,7 @@
 			isa = XCVersionGroup;
 			children = (
 				D68F8EE015A33B1C0070E17E /* SVPodcastDatastore 18.xcdatamodel */,
+				4BD1A3FB15B3D43B00D2EEF1 /* SVPodcastDatastore 19.xcdatamodel */,
 				D6A8788C158943A0009DD522 /* SVPodcastDatastore 17.xcdatamodel */,
 				4B55DFD5155751C00030CB51 /* SVPodcastDatastore 15.xcdatamodel */,
 				4BE7A740157C80B9007900F8 /* SVPodcastDatastore 16.xcdatamodel */,
@@ -3522,7 +3524,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = D68F8EE015A33B1C0070E17E /* SVPodcastDatastore 18.xcdatamodel */;
+			currentVersion = 4BD1A3FB15B3D43B00D2EEF1 /* SVPodcastDatastore 19.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
