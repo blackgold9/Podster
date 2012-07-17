@@ -175,10 +175,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         
         self.updatingValue = YES;
 
-        //// Force permanent ids to be obtained. This is so that we're not dealing with temp ids later and screwing up relationships
-        if([[self objectID] isTemporaryID]) {  
-            [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
-        }
+//        //// Force permanent ids to be obtained. This is so that we're not dealing with temp ids later and screwing up relationships
+//        if([[self objectID] isTemporaryID]) {  
+//            [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
+//        }
         
         NSNumber *podstoreId = self.podstoreId;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -211,10 +211,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:podstoreId
                                                          withLastSyncDate:entry == nil || isUpdatingFromV1 ? [NSDate distantPast] : entry.datePublished
                                                                  complete:^void(id response) {
-                                                                     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-                                                                     childContext.parentContext = self.managedObjectContext;
-                                                                     [childContext performBlock:^void() {
-                                                                         // TODO: simplyify this confusing mess
+                                                                    
+                                                                     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *childContext) {
+
+                                                                     // TODO: simplyify this confusing mess
                                                                          SVPodcast *localPodcast = [self MR_inContext:childContext];
                                                                          localPodcast.lastSynced = syncDate;
                                                                          NSArray *episodes = response;
@@ -234,21 +234,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                              NSDictionary *data = [episode objectForKey:@"feed_item"];
                                                                              NSString *guid = [data objectForKey:@"guid"];
                                                                              SVPodcastEntry *localEntry;
-                                                                             
-                                                                             if (isUpdatingFromV1 && [upgradeLookupByGUID objectForKey:guid]!= nil) {
-                                                                                 // If we're updating from v1, and this is an existing episode, update the podstoreid
-                                                                                 localEntry = [upgradeLookupByGUID objectForKey:guid];
-                                                                                 NSNumber *entryId= [data objectForKey:@"id"];
-                                                                                 localEntry.podstoreIdValue = [entryId intValue];
-                                                                             } else {
-                                                                                 // Completely new item, create it,add it, be happy
-                                                                                 localEntry = [SVPodcastEntry MR_createInContext:childContext];
-                                                                                 
-                                                                                 [localEntry populateWithDictionary:episode];                                                                                                                                                          
-                                                                                 [localPodcast addItemsObject:localEntry];
-                                                                             }
-                                                                             
-                                                                             
+                                                                             localEntry = [SVPodcastEntry MR_createInContext:childContext];
+                                                                             [localEntry populateWithDictionary:episode];
+                                                                             [localPodcast addItemsObject:localEntry];
                                                                          }                            
                                                                          
                                                                          [localPodcast updateNewEpisodeCount];

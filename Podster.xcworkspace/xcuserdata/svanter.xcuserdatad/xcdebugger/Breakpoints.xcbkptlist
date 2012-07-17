@@ -4,15 +4,15 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "364147317.688683"
+         timestampString = "364248579.931805"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "193"
-         endingLineNumber = "193"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
          landmarkName = "-processResponse:inContext:signallingSemaphore:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -22,11 +22,11 @@
          condition = "podcast == nil"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "364140161.911787"
+         timestampString = "364236305.271652"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
          landmarkName = "-main"
          landmarkType = "5">
       </FileBreakpoint>
@@ -113,7 +113,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "364178982.699789"
+         timestampString = "364236305.271652"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "62"
@@ -126,11 +126,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "364179325.016498"
+         timestampString = "364236305.271652"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
          landmarkName = "-main"
          landmarkType = "5">
       </FileBreakpoint>
@@ -139,7 +139,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVAppDelegate.m"
-         timestampString = "364233669.970834"
+         timestampString = "364234609.870849"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
+         landmarkName = "-application:didFinishLaunchingWithOptions:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVAppDelegate.m"
+         timestampString = "364234609.870849"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "126"
@@ -148,16 +161,42 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/PodcastUpdateOperation.m"
+         timestampString = "364248579.931805"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "161"
+         endingLineNumber = "161"
+         landmarkName = "-processResponse:inContext:signallingSemaphore:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/PodcastUpdateOperation.m"
+         timestampString = "364248579.931805"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "145"
+         endingLineNumber = "145"
+         landmarkName = "-processResponse:inContext:signallingSemaphore:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "podster/SVAppDelegate.m"
-         timestampString = "364233669.970834"
+         filePath = "podster/models/SVPodcast.m"
+         timestampString = "364237427.269045"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "128"
-         endingLineNumber = "128"
-         landmarkName = "-application:didFinishLaunchingWithOptions:"
+         startingLineNumber = "167"
+         endingLineNumber = "167"
+         landmarkName = "-getNewEpisodes:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -59,7 +59,10 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     __block NSString *title;
     __block NSNumber *podcastId;
     [childContext performBlockAndWait:^void() {
-        SVPodcast *podcast = [self.podcast MR_inContext:childContext];
+        NSFetchRequest *request = [SVPodcast MR_requestFirstWithPredicate:[NSPredicate predicateWithFormat:@"self == %@", self.podcast]];
+        request.relationshipKeyPathsForPrefetching = [NSArray arrayWithObject:SVPodcastRelationships.items];
+        SVPodcast *podcast = [[childContext executeFetchRequest:request error:nil] lastObject];
+        
         podcastId = podcast.podstoreId;
         DDLogVerbose(@"Starting sync for Podcast with Id: %@", podcast.podstoreId);
         if (podcast) {
@@ -76,6 +79,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     if (podcastExists) {
         DDLogVerbose(@"Podcast was found in the database");
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        dispatch_retain(semaphore);
         DDLogVerbose(@"Fetchinng new episodes for %@ after %@", title, lastEntryDate);
         __weak PodcastUpdateOperation *weakSelf = self;
         [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:podcastId
@@ -89,10 +93,12 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                  if (operation) {
                                                                      operation->success = YES;
                                                                  }
-                                                                 
-                                                                 [self processResponse:response
-                                                                             inContext:childContext
-                                                                   signallingSemaphore:semaphore];
+                                                                 [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+                                                                     [self processResponse:response
+                                                                                 inContext:childContext
+                                                                       signallingSemaphore:semaphore];
+                                                                     
+                                                                 }];
                                                              }
                                                               onError:^void(NSError *error) {
                                                                   DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", podcastId);
@@ -130,12 +136,13 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)processResponse:(id)response
               inContext:(NSManagedObjectContext *)context
     signallingSemaphore:(dispatch_semaphore_t)semaphore {
-    dispatch_retain(semaphore);
-    NSInteger batchSize = 50;
+    DDLogVerbose(@"Procesing response");
+
+
     [context performBlock:^void() {
         @try {
-            
-            
+
+            NSAssert([NSThread currentThread] != [NSThread mainThread], @"should not be on the main thread here");
             SVPodcast *localPodcast = [self.podcast MR_inContext:context];
             NSAssert(localPodcast!= nil, @"Should not be nil");
             localPodcast.lastSynced = [NSDate date];
@@ -160,20 +167,11 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                 }
                 
                 lastDate = localEntry.datePublished;
-                [localPodcast addItemsObject:localEntry];
-           
-                if (current % batchSize == 0) {
-
-                    [context save:&error];
-                    if (error) {
-                        break;
-                    }                  
-                }
-                
+                [localPodcast addItemsObject:localEntry];                        
                 current ++;
             }
             
-            [context save:&error];            
+              
             NSAssert(error == nil, @"There should be no error. Got %@", error);
             
             if (error) {

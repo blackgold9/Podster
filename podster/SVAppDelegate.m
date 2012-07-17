@@ -118,14 +118,12 @@ NSString *uuid();
     [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
     [[BWHockeyManager sharedHockeyManager] setDelegate:self];
 #endif
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    NSString *storePath = [basePath stringByAppendingPathComponent:@"PodsterData/StoreContent/persistentStore"];
-    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:@"SVPodcastDataStore.momd"];
-    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
-    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:storePath];
-    
-    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:storePath];
+
+//    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:@"SVPodcastDatastore.momd"];
+//    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+
+
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"PodsterData/StoreContent/persistentStore"];
     
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
