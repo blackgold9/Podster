@@ -10,7 +10,6 @@
 #import "SVDownload.h"
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
-#import "PodsterManagedDocument.h"
 #import "SVPodcatcherClient.h"
 #import <sys/xattr.h>
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -94,7 +93,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }];
 
   //  dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
-    NSManagedObjectContext *localContext = [PodsterManagedDocument defaultContext];
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext];
 
     [localContext performBlockAndWait:^{
         download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];

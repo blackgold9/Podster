@@ -80,7 +80,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #pragma mark - core data context
 - (NSManagedObjectContext *)context {
     if (!_context) {
-        _context = [PodsterManagedDocument defaultContext];
+        _context = [NSManagedObjectContext MR_defaultContext];
     }
 
     return _context;
@@ -611,7 +611,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                           ascending:!localPodcast.sortNewestFirstValue
                                                       withPredicate:predicate
                                                           inContext:self.context];
-        NSAssert(self.context == [PodsterManagedDocument defaultContext], @"Contexts should match");
+        NSAssert(self.context == [NSManagedObjectContext MR_defaultContext], @"Contexts should match");
         [request setIncludesSubentities:NO];
         [request setIncludesPendingChanges:YES];
         

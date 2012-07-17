@@ -10,7 +10,6 @@
 
 #import "SVPodcast.h"
 #import "SVPodcastEntry.h"
-#import "PodsterManagedDocument.h"
 #import "SVDownloadManager.h"
 #import "PodcastUpdateOperation.h"
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -76,7 +75,7 @@ static char const kRefreshInterval = -3;
     }
     self.isBusy = YES;
 
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     __block NSMutableArray *subscribedPodcasts = [NSMutableArray array];
 
     // Get the subscribed podcasts
@@ -117,7 +116,7 @@ static char const kRefreshInterval = -3;
     dispatch_group_t group = dispatch_group_create();
     NSArray *currentIds= [syncQueue.operations valueForKey:@"podcast"];
     NSSet *currentOperationLookup = [NSSet setWithArray:currentIds];
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     for (SVPodcast *podcast in podcasts) {
         if (![currentOperationLookup containsObject:podcast]) {
             dispatch_group_enter(group);

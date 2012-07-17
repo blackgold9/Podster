@@ -16,7 +16,6 @@
 #import "UILabel+VerticalAlign.h"
 
 #import "UIColor+Hex.h"
-#import "PodsterManagedDocument.h"
 #import "PodcastGridCellView.h"
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVSubscriptionGridViewController()
@@ -53,7 +52,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #pragma mark - core data context
 - (NSManagedObjectContext *)context {
     if (!_context) {
-        _context = [PodsterManagedDocument defaultContext];
+        _context = [NSManagedObjectContext MR_defaultContext];
     }
 
     return _context;
@@ -71,9 +70,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{                    
         [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-    }];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadNotificationRecieved:)
                                                  name:@"SVReloadData" 

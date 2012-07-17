@@ -24,7 +24,6 @@
 #import "AFNetworking.h"
 #import "SVPodcatcherClient.h"
 #import "FlurryAnalytics.h"
-#import "PodsterManagedDocument.h"
 #import "DDLog.h"
 
 #endif

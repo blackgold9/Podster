@@ -15,7 +15,6 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "GCDiscreetNotificationView.h"
 #import "SVSubscriptionManager.h"
-#import "PodsterManagedDocument.h"
 #import "PodsterIAPHelper.h"
 #import "BlockAlertView.h"
 
@@ -104,7 +103,6 @@ static NSString *const kIsBusyKey = @"isBusy";
     [self configureToolbar:NO];
 
 
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
         
         [self configureTabView];
         self.scrollView.contentOffset = CGPointMake(0, 0);
@@ -122,8 +120,6 @@ static NSString *const kIsBusyKey = @"isBusy";
 
         //   [placeHolder removeFromSuperview];
 
-
-     }];
 
     notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Updating Podcasts", @"Updating Podcasts")
                                                            showActivity:YES
@@ -173,7 +169,7 @@ static NSString *const kIsBusyKey = @"isBusy";
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
             self.subscriptionsController = (SVSubscriptionGridViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"subscriptionGridController"];
             // Configure the first context
-            self.subscriptionsController.context = [PodsterManagedDocument defaultContext];
+            self.subscriptionsController.context = [NSManagedObjectContext MR_defaultContext];
         }
 
         output = self.subscriptionsController;

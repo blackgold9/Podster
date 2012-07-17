@@ -224,7 +224,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)downloadCompletedWithObjectId:(NSManagedObjectID *)entryId {
     
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     
     NSInteger pendingDownloads = queue.operationCount;
     [context performBlock:^{
@@ -338,7 +338,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogVerbose(@"Cancelling all current download operations");
     }
     
-    NSManagedObjectContext *parentContext = [PodsterManagedDocument defaultContext];
+    NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
     [parentContext processPendingChanges];
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     context.parentContext = parentContext;

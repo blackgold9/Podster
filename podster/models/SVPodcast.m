@@ -128,7 +128,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                onCompletion:^void(NSArray *podcasts) {
                                                    NSAssert(podcasts.count == 1, @"There should be 1 podcast returned");
                                                    if (podcasts.count > 0) {
-                                                       NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+                                                       NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
                                                        [context performBlock:^{
                                                            // Then we make a new podcast in the data store
                                                            SVPodcast *localPodcast = [SVPodcast MR_createInContext:context];

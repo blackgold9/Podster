@@ -168,7 +168,7 @@ void audioRouteChangeListenerCallback (
 {
     __block __typeof(self) blockSelf = self;
     monitorId = [_player addPeriodicTimeObserverForInterval:CMTimeMake(5, 1) queue:monitorQueue usingBlock:^(CMTime time) {
-        [[PodsterManagedDocument defaultContext] performBlock:^{
+        [[NSManagedObjectContext MR_defaultContext] performBlock:^{
             NSInteger duration = blockSelf->_player.currentItem.duration.value / blockSelf->_player.currentItem.duration.timescale;
             if( blockSelf.currentEpisode.durationValue != duration) {
                 blockSelf.currentEpisode.durationValue = duration;
@@ -195,7 +195,7 @@ void audioRouteChangeListenerCallback (
 
     NSParameterAssert(episode);
     NSParameterAssert(podcast);
-    NSManagedObjectContext *context = [PodsterManagedDocument defaultContext];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     
     self.currentEpisode = [episode MR_inContext:context];
     self.currentPodcast = [podcast MR_inContext:context];;
@@ -302,7 +302,7 @@ void audioRouteChangeListenerCallback (
 }
 - (void)itemReachedEnd
 {
-    [[PodsterManagedDocument defaultContext] performBlock:^{
+    [[NSManagedObjectContext MR_defaultContext] performBlock:^{
         self.currentEpisode.playedValue = YES;
         self.currentEpisode.positionInSecondsValue = 0;   
 

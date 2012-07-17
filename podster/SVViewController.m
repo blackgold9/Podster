@@ -26,7 +26,7 @@
 
 - (NSManagedObjectContext *)context {
     if (!_context) {
-        _context = [PodsterManagedDocument defaultContext];
+        _context = [NSManagedObjectContext MR_defaultContext];
     }
 
     return _context;

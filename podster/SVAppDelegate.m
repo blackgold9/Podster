@@ -20,7 +20,6 @@
 #import "PodsterIAPHelper.h"
 #import <CoreText/CoreText.h>
 #import "BannerViewController.h"
-#import "PodsterManagedDocument.h"
 #import "MBProgressHUD.h"
 #import "SVSettings.h"
 #import "BWHockeyManager.h"
@@ -119,6 +118,15 @@ NSString *uuid();
     [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
     [[BWHockeyManager sharedHockeyManager] setDelegate:self];
 #endif
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    NSString *storePath = [basePath stringByAppendingPathComponent:@"PodsterData/StoreContent/persistentStore"];
+    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:@"SVPodcastDataStore.momd"];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
+    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:storePath];
+    
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:storePath];
+    
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
     [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
@@ -128,7 +136,7 @@ NSString *uuid();
     
     [self configureTheming];
     
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{  
+   
         // Actually register
 #ifndef CONFIGURATION_Debug
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
@@ -137,7 +145,7 @@ NSString *uuid();
 #else
         [self application:[UIApplication sharedApplication] didFailToRegisterForRemoteNotificationsWithError:nil];
 #endif
-    }];
+
     
     BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
     self.window.rootViewController = controller;
@@ -149,9 +157,8 @@ NSString *uuid();
             NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"Startup", @"Type", nil];
             [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
             DDLogInfo(@"Launched due to region monitoring. Syncing");
-            [[PodsterManagedDocument sharedInstance] performWhenReady:^{
+
                 [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-            }];
         });
     } else {
         [Appirater appLaunched:YES];
@@ -209,7 +216,6 @@ NSString *uuid();
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [[PodsterManagedDocument sharedInstance] performWhenReady:^{
         
         
         if (application.applicationState != UIApplicationStateActive) {
@@ -217,7 +223,7 @@ NSString *uuid();
             LOG_GENERAL(2, @"launched for podcast with podstore id: %@", feedId);
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
             SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:predicate 
-                                                            inContext:[PodsterManagedDocument defaultContext]];
+                                                            inContext:[NSManagedObjectContext MR_defaultContext]];
             if (podcast) {
                 NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
                                                                    forKey:@"Title"];
@@ -246,7 +252,6 @@ NSString *uuid();
                 });
             }
         }
-    }];
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     [FlurryAnalytics logEvent:@"LaunchedWithNotificationsDisabled"];
@@ -279,9 +284,9 @@ NSString *uuid();
     dispatch_async(dispatch_get_main_queue(), ^{
 
 
-        [[PodsterManagedDocument defaultContext] performBlockAndWait:^void() {
+        [[NSManagedObjectContext MR_defaultContext] performBlockAndWait:^void() {
             NSArray *subscriptions= [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"isSubscribed == YES"]
-                                                             inContext:[PodsterManagedDocument defaultContext] ];
+                                                             inContext:[NSManagedObjectContext MR_defaultContext] ];
             NSMutableArray *subscriptionData = [NSMutableArray arrayWithCapacity:subscriptions.count];
             
             for(SVPodcast *podcast in subscriptions) {
@@ -292,16 +297,11 @@ NSString *uuid();
 
         }];
 
-        [[PodsterManagedDocument sharedInstance] save:^(BOOL success) {
-            DDLogInfo(@"Done Saving on entering background");
-            if (!success) {
-                DDLogError(@"Saving failed" );
-            }
-            [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
+        [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
+        [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
             [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
             background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
 
-        }];
     });
 }
 
