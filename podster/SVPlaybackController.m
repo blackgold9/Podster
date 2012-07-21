@@ -16,7 +16,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <Twitter/Twitter.h>
-
+#import "PodcastImage.h"
 @implementation SVPlaybackController {
     AVPlayer *player;
     id playerObserver;
@@ -59,10 +59,11 @@
         SVPodcastEntry *episode = [SVPlaybackManager sharedInstance].currentEpisode;
         
         
-        NSData *imageData = episode.podcast.fullIsizeImageData;
+    NSData *imageData = episode.podcast.fullImage.imageData;
+    
 
             if (imageData) {
-                self.artworkImage.image = [UIImage imageWithData:episode.podcast.fullIsizeImageData];            
+                self.artworkImage.image = [UIImage imageWithData:imageData];
             } else {
                 
                 [self.artworkImage setImageWithURL:imageURL placeholderImage:nil];

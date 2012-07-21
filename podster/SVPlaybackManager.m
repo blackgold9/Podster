@@ -19,6 +19,7 @@
 #import "BannerViewController.h"
 #import "_SVDownload.h"
 #import "SVDownload.h"
+#import "PodcastImage.h"
 #import "BannerViewController.h"
 
 // The percentage after which a podcast is marked as played
@@ -267,7 +268,7 @@ void audioRouteChangeListenerCallback (
     
     [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:params];
 
-    if (currentPodcast.fullIsizeImageData == nil) {
+    if (currentPodcast.fullImage == nil) {
         AFImageRequestOperation *imageOp =
                 [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[currentPodcast logoURL]]]
                         success:^(UIImage *image) {
@@ -281,7 +282,7 @@ void audioRouteChangeListenerCallback (
 
         [imageOp start];
     } else {
-        UIImage *image = [[UIImage alloc] initWithData:currentPodcast.fullIsizeImageData];
+        UIImage *image = [[UIImage alloc] initWithData:currentPodcast.fullImage.imageData];
         NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
         MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
         [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
@@ -373,7 +374,10 @@ void audioRouteChangeListenerCallback (
                     self.playbackState = kPlaybackStatePaused;
                     
                     
-                    [_player removeTimeObserver:monitorId];
+                    if (monitorId) {
+                        [_player removeTimeObserver:monitorId];
+                        monitorId = nil;
+                    }
                 } else {
                     if (self.playbackState !=kPlaybackStatePlaying) {
                         LOG_PLAYBACK(3, @"Starting playback");

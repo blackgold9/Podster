@@ -11,6 +11,7 @@
 #import "SVPodcast.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GridCellCountOverlay.h"
+#import "PodcastImage.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation PodcastGridCellView {
     AFImageRequestOperation *imageLoadOp;
@@ -65,14 +66,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     if ([podcast class] == [SVPodcast class]) {
         SVPodcast *coreCast = (SVPodcast *)podcast;
-        if (coreCast.gridSizeImageData && coreCast.objectID) {
+        if (coreCast.gridImage && coreCast.objectID) {
             NSCache *cache = [self cache];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                                
                 UIImage *image = [cache objectForKey:coreCast.objectID];
                 if (image == nil) {
                     DDLogVerbose( @"Loaded local image");
-                    image = [UIImage imageWithData:coreCast.gridSizeImageData];
+                    image = [UIImage imageWithData:coreCast.gridImage.imageData];
                     [cache setObject:image forKey:coreCast.objectID];
                 } else {
                     DDLogVerbose(@"Loaded cached Image");
@@ -110,7 +111,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)bind:(id<ActsAsPodcast>)podcast
 {
-    
+ self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];   
     [imageLoadOp cancel];
     [self loadImageWithPodcast:podcast];
     self.titleLabel.text = podcast.title;
@@ -152,7 +153,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         self.progressBar.progress = 0.0f;
         coreDataPodcast = nil;
     }
-            self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
+            
     [imageLoadOp cancel];
 }
 -(void)dealloc

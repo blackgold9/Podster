@@ -10,15 +10,12 @@ extern const struct SVPodcastAttributes {
 	__unsafe_unretained NSString *downloadPercentage;
 	__unsafe_unretained NSString *downloadsToKeep;
 	__unsafe_unretained NSString *feedURL;
-	__unsafe_unretained NSString *fullIsizeImageData;
-	__unsafe_unretained NSString *gridSizeImageData;
 	__unsafe_unretained NSString *hidePlayedEpisodes;
 	__unsafe_unretained NSString *isDownloading;
 	__unsafe_unretained NSString *isSubscribed;
 	__unsafe_unretained NSString *isVideo;
 	__unsafe_unretained NSString *lastSynced;
 	__unsafe_unretained NSString *lastUpdated;
-	__unsafe_unretained NSString *listSizeImageData;
 	__unsafe_unretained NSString *logoURL;
 	__unsafe_unretained NSString *podstoreId;
 	__unsafe_unretained NSString *shouldNotify;
@@ -36,16 +33,19 @@ extern const struct SVPodcastAttributes {
 } SVPodcastAttributes;
 
 extern const struct SVPodcastRelationships {
+	__unsafe_unretained NSString *fullImage;
+	__unsafe_unretained NSString *gridImage;
 	__unsafe_unretained NSString *items;
+	__unsafe_unretained NSString *listImage;
 } SVPodcastRelationships;
 
 extern const struct SVPodcastFetchedProperties {
 } SVPodcastFetchedProperties;
 
+@class PodcastImage;
+@class PodcastImage;
 @class SVPodcastEntry;
-
-
-
+@class PodcastImage;
 
 
 
@@ -137,22 +137,6 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSData* fullIsizeImageData;
-
-
-//- (BOOL)validateFullIsizeImageData:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, strong) NSData* gridSizeImageData;
-
-
-//- (BOOL)validateGridSizeImageData:(id*)value_ error:(NSError**)error_;
-
-
-
-
 @property (nonatomic, strong) NSNumber* hidePlayedEpisodes;
 
 
@@ -213,14 +197,6 @@ extern const struct SVPodcastFetchedProperties {
 
 
 //- (BOOL)validateLastUpdated:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, strong) NSData* listSizeImageData;
-
-
-//- (BOOL)validateListSizeImageData:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -358,9 +334,30 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+@property (nonatomic, strong) PodcastImage* fullImage;
+
+//- (BOOL)validateFullImage:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) PodcastImage* gridImage;
+
+//- (BOOL)validateGridImage:(id*)value_ error:(NSError**)error_;
+
+
+
+
 @property (nonatomic, strong) NSSet* items;
 
 - (NSMutableSet*)itemsSet;
+
+
+
+
+@property (nonatomic, strong) PodcastImage* listImage;
+
+//- (BOOL)validateListImage:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -419,18 +416,6 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
-- (NSData*)primitiveFullIsizeImageData;
-- (void)setPrimitiveFullIsizeImageData:(NSData*)value;
-
-
-
-
-- (NSData*)primitiveGridSizeImageData;
-- (void)setPrimitiveGridSizeImageData:(NSData*)value;
-
-
-
-
 - (NSNumber*)primitiveHidePlayedEpisodes;
 - (void)setPrimitiveHidePlayedEpisodes:(NSNumber*)value;
 
@@ -475,12 +460,6 @@ extern const struct SVPodcastFetchedProperties {
 
 - (NSDate*)primitiveLastUpdated;
 - (void)setPrimitiveLastUpdated:(NSDate*)value;
-
-
-
-
-- (NSData*)primitiveListSizeImageData;
-- (void)setPrimitiveListSizeImageData:(NSData*)value;
 
 
 
@@ -585,8 +564,23 @@ extern const struct SVPodcastFetchedProperties {
 
 
 
+- (PodcastImage*)primitiveFullImage;
+- (void)setPrimitiveFullImage:(PodcastImage*)value;
+
+
+
+- (PodcastImage*)primitiveGridImage;
+- (void)setPrimitiveGridImage:(PodcastImage*)value;
+
+
+
 - (NSMutableSet*)primitiveItems;
 - (void)setPrimitiveItems:(NSMutableSet*)value;
+
+
+
+- (PodcastImage*)primitiveListImage;
+- (void)setPrimitiveListImage:(PodcastImage*)value;
 
 
 @end

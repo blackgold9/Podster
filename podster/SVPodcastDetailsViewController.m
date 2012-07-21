@@ -16,6 +16,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "BlockAlertView.h"
 #import <Twitter/Twitter.h>
+#import "PodcastImage.h"
 #import "PodcastSettingsViewController.h"
 #import "SVHtmlViewController.h"
 #import "PodcastUpdateOperation.h"
@@ -361,8 +362,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     if ([localPodcast isKindOfClass:[SVPodcast class]]) {
         SVPodcast *coredataPodcast = (SVPodcast *)localPodcast;
-        if (coredataPodcast.listSizeImageData) {
-            UIImage *img = [UIImage imageWithData:coredataPodcast.listSizeImageData];
+        if (coredataPodcast.listImage) {
+            UIImage *img = [UIImage imageWithData:coredataPodcast.listImage.imageData];
             self.imageView.image = img;
         } else {
             [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image];
@@ -487,9 +488,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)displayImageForPodcast {
     // We had a local copy, so check for local image
-    if (localPodcast.gridSizeImageData != nil) {
+    if (localPodcast.gridImage != nil) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
+            UIImage *image = [UIImage imageWithData:localPodcast.gridImage.imageData];
             self.imageView.image = image;
         });
     } else {

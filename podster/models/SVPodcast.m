@@ -4,6 +4,7 @@
 #import "NSString+MD5Addition.h"
 #import "SVDownloadManager.h"
 #import "_SVPodcastEntry.h"
+#import "PodcastImage.h"
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation SVPodcast {
@@ -46,8 +47,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)updateNewEpisodeCount
 {
     
-    @try {
-        SVPodcast *podcast = self;
+    
+    [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+        SVPodcast *podcast = [self MR_inContext:localContext];
         NSUInteger newCount = 0;
         NSAssert(self.isSubscribed, @"IsSubscribed should have a value");
         NSNumber *subscribedNumber= [self isSubscribed];
@@ -62,14 +64,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         if (self.unlistenedSinceSubscribedCountValue != newCount) {
             self.unlistenedSinceSubscribedCountValue = newCount;
         }
-    }
-    @catch (NSException *exception) {
-        DDLogError(@"EXCEPTION: %@", exception);
-    }
-    @finally {
         
-    }
-    
+    }];
 }
 - (void)downloadImageDataWithURLString:(NSString *)imageURL forKeyPath:(NSString *)keyPath
 {
@@ -78,8 +74,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             [self.managedObjectContext performBlock:^{
-                
-                [self setValue:responseObject forKey:keyPath];
+                PodcastImage *theImage = [self valueForKey:keyPath];
+                if ([self valueForKey:keyPath] == nil) {
+                    theImage = [PodcastImage MR_createInContext:self.managedObjectContext];
+                    [self setValue:theImage forKey:keyPath];
+                }
+                theImage.imageData = responseObject;
                 DDLogVerbose(@"Downloaded %@ offline data", keyPath);
             }];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -92,11 +92,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)downloadOfflineImageData
 {
     [self downloadImageDataWithURLString:self.smallLogoURL
-                              forKeyPath:@"gridSizeImageData"];
+                              forKeyPath:@"gridImage"];
     [self downloadImageDataWithURLString:self.thumbLogoURL
-                              forKeyPath:@"listSizeImageData"];
+                              forKeyPath:@"listImage"];
     [self downloadImageDataWithURLString:self.logoURL
-                              forKeyPath:@"fullIsizeImageData"];
+                              forKeyPath:@"fullImage"];
 }
 
 - (void)subscribe
@@ -116,9 +116,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)deleteOfflineImageData
 {
-    self.gridSizeImageData = nil;
-    self.fullIsizeImageData = nil;
-    self.listSizeImageData = nil;
+    [self.gridImage MR_deleteInContext:self.managedObjectContext];
+    [self.fullImage MR_deleteInContext:self.managedObjectContext];
+    [self.listImage MR_deleteInContext:self.managedObjectContext];
 }
 
 + (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId shouldNotify:(BOOL)shouldNotify

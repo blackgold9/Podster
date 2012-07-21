@@ -13,7 +13,7 @@
 @interface SVDownloadManager : NSObject
 + (id)sharedInstance;
 
-- (void)downloadEntry:(NSManagedObjectID *)entryId manualDownload:(BOOL)isManualDownload inContext:(NSManagedObjectContext *)context;
+- (void)downloadEntry:(SVPodcastEntry *)entry manualDownload:(BOOL)isManualDownload inContext:(NSManagedObjectContext *)context;
 
 - (void)deleteFileForEntry:(SVPodcastEntry *)entry;
 

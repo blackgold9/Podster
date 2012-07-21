@@ -51,7 +51,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)main {
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_defaultContext];
-            
+    
     if ([self.podcast.objectID isTemporaryID]) {
         [self.podcast.managedObjectContext performBlockAndWait:^{
             [self.podcast.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self.podcast] error:nil];
@@ -71,27 +71,29 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         if (podcast) {
             podcastExists = YES;
             title = podcast.title;
-//            NSFetchRequest *request = [SVPodcastEntry MR_requestAllWithPredicate:[NSPredicate predicateWithFormat:@"podcast.podstoreId == %@", podcast.podstoreId] inContext:childContext];
-//            [request setResultType:NSDictionaryResultType];
-//            NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:SVPodcastEntryAttributes.datePublished];
-//            NSExpression *minExpression = [NSExpression expressionForFunction:@"max:" arguments:  [NSArray arrayWithObject:keyPathExpression]];
-//            NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
-//            [expressionDescription setName:@"maxDatePublished"];
-//            [expressionDescription setExpression:minExpression];
-//            [expressionDescription setExpressionResultType:NSDateAttributeType];
-//            [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
-//            [request setIncludesPendingChanges:YES];
-//            NSDictionary *results = [[childContext executeFetchRequest:request error:nil] lastObject];
-//            if (results != nil) {
-//                lastEntryDate = [results valueForKey:@"maxDatePublished"];
             lastEntryDate = podcast.lastUpdated;
-//            }
+            if (lastEntryDate == nil) {
+                NSFetchRequest *request = [SVPodcastEntry MR_requestAllWithPredicate:[NSPredicate predicateWithFormat:@"podcast.podstoreId == %@", podcast.podstoreId] inContext:childContext];
+                [request setResultType:NSDictionaryResultType];
+                NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:SVPodcastEntryAttributes.datePublished];
+                NSExpression *minExpression = [NSExpression expressionForFunction:@"max:" arguments:  [NSArray arrayWithObject:keyPathExpression]];
+                NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+                [expressionDescription setName:@"maxDatePublished"];
+                [expressionDescription setExpression:minExpression];
+                [expressionDescription setExpressionResultType:NSDateAttributeType];
+                [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+                [request setIncludesPendingChanges:YES];
+                NSDictionary *results = [[childContext executeFetchRequest:request error:nil] lastObject];
+                if (results != nil) {
+                    lastEntryDate = [results valueForKey:@"maxDatePublished"];
+                }
+            }
         } else {
             podcastExists = NO;
         }
     }];
-        
-        
+    
+    
     
     if (podcastExists) {
         DDLogVerbose(@"Podcast was found in the database");
@@ -132,10 +134,11 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogWarn(@"Podcast with id: %@ did not exist", podcastId);
     }
     
-        
+    
     [childContext performBlockAndWait:^{
         DDLogVerbose(@"Saving Child Context");
-        [childContext MR_saveNestedContexts];
+      //  [childContext MR_saveNestedContexts];
+        [childContext MR_save];
         if (self.onUpdateComplete) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -143,7 +146,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                 self.onUpdateComplete(self);
             });
         }
-    }];    
+    }];
 }
 
 - (void)processResponse:(id)response
@@ -153,7 +156,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     
     [context performBlock:^void() {
-        @try {                        
+        @try {
             SVPodcast *localPodcast = [self.podcast MR_inContext:context];
             NSAssert(localPodcast!= nil, @"Should not be nil");
             localPodcast.lastSynced = [NSDate date];

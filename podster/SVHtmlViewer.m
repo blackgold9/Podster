@@ -7,10 +7,11 @@
 
 #import "SVHtmlViewer.h"
 #import "NSString+MW_HTML.h"
+#import "NativeWebView.h"
 
 
 @implementation SVHtmlViewer {
-    UIWebView *webView;
+    NativeWebView *webView;
 }
 @synthesize html = _html;
 
@@ -20,7 +21,7 @@
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background-gradient.jpg"]];
         [self addSubview:imageView];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        webView = [[UIWebView alloc] initWithFrame:self.bounds];
+        webView = [[NativeWebView alloc] initWithFrame:self.bounds];
         webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         webView.backgroundColor = [UIColor clearColor];
         webView.delegate = self;

@@ -102,14 +102,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     }
 }
 
-- (void)downloadEntry:(NSManagedObjectID *)entryId
+- (void)downloadEntry:(SVPodcastEntry *)entry
        manualDownload:(BOOL)isManualDownload
             inContext:(NSManagedObjectContext *)localContext {
-    [localContext performBlockAndWait:^{
-        SVPodcastEntry *entry = (SVPodcastEntry *)[localContext existingObjectWithID:entryId error:nil];
+        NSAssert(entry != nil, @"There should be an entry here");
         DDLogVerbose( @"Downloading entry %@", entry);
-        NSAssert(entry.managedObjectContext, @"The entry should be propertly realized");
-        NSParameterAssert(entry != nil);
         NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
         if (entry.download) {
             [self startDownload:entry.download];
@@ -133,7 +130,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         if (!download && !entry.downloadCompleteValue) {
             download = [SVDownload MR_createInContext:localContext];
             download.manuallyTriggeredValue = isManualDownload;
-            [entry setDownload:download];
+            entry.download = download;
+            download.entry = entry;
+
             NSAssert(entry != nil, @"Entry should not be nil");
                         NSAssert(download != nil, @"Download should not be nil");
             NSAssert(entry.download != nil, @"Entry should have download");
@@ -144,7 +143,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         } else if ([[NSFileManager defaultManager] fileExistsAtPath:[download.entry localFilePath]] && download.entry.downloadCompleteValue) {
             NSAssert(false, @"Should not have been able to start downloading a file that is already downloaded");
         }
-    }];
+
     
 }
 
@@ -268,7 +267,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 - (NSArray *)entriesToBeDownloadedForPodcast:(SVPodcast *)podcast inContext:(NSManagedObjectContext *)context {
-    NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"%K == NO && podcast == %@ && downloadComplete == NO", SVPodcastEntryAttributes.played, podcast];
+    NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"podcast == %@ && %K == NO && downloadComplete == NO", podcast, SVPodcastEntryAttributes.played];
     NSArray *entries = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
                                                 ascending:NO
                                             withPredicate:isInPodcast
@@ -338,11 +337,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogVerbose(@"Cancelling all current download operations");
     }
     
-    NSManagedObjectContext *parentContext = [NSManagedObjectContext MR_defaultContext];
-    [parentContext processPendingChanges];
-    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    context.parentContext = parentContext;
-    [context performBlock:^void() {
+    [queue setSuspended:YES];
+    [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *context) {
+        
+    
         
         DDLogVerbose(@"Figuring out what entries should be present");
         NSSet *shouldBePresent = [self entriesNeedingDownloadInContext:context];
@@ -387,11 +385,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         
         DDLogInfo(@"Queuing %d downloads", shouldBePresent.count);
         for (SVPodcastEntry *entry in shouldBePresent) {
+            NSAssert(entry != nil, @"Entry should exist");
             DDLogVerbose(@"Queuing: %@", entry);
             if (entry.download) {
                 [self startDownload:entry.download];
             } else {
-                [self downloadEntry:entry.objectID manualDownload:NO inContext:context];
+                [self downloadEntry:entry manualDownload:NO inContext:context];
             }
         }
         
@@ -406,11 +405,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         }
         
         [context save:&error];
+        [queue setSuspended:NO];
         if (error) {
             DDLogError(@"Error saving: %@", error);
             NSAssert(NO, @"There was an error saving: %@", error);
         }
         DDLogInfo(@"Done queing entries for download");
+    } completion:^{
+        [queue setSuspended:NO];
     }];
 }
 

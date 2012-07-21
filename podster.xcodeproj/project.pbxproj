@@ -258,6 +258,8 @@
 		4B28C97E14E7873800E1453E /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28C97714E7873800E1453E /* GMGridViewLayoutStrategies.m */; };
 		4B28C97F14E7873800E1453E /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28C97914E7873800E1453E /* UIGestureRecognizer+GMGridViewAdditions.m */; };
 		4B28C98014E7873800E1453E /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B28C97B14E7873800E1453E /* UIView+GMGridViewAdditions.m */; };
+		4B29327915BA8A0800F446E8 /* _PodcastImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B29327615BA8A0800F446E8 /* _PodcastImage.m */; };
+		4B29327A15BA8A0800F446E8 /* PodcastImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B29327815BA8A0800F446E8 /* PodcastImage.m */; };
 		4B2C6D0715049710009DFE1F /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2C6D0515049710009DFE1F /* placeholder@2x.png */; };
 		4B2C6D0815049710009DFE1F /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2C6D0615049710009DFE1F /* placeholder.png */; };
 		4B2C6D0A15049C9C009DFE1F /* alert.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 4B2C6D0915049C9C009DFE1F /* alert.aiff */; };
@@ -584,6 +586,7 @@
 		7DD61F0E159B92BD006181AE /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD61F05159B92BD006181AE /* libGoogleAdMobAds.a */; };
 		7DD61F0F159B92BD006181AE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7DD61F0D159B92BD006181AE /* README.txt */; };
 		92532BEE7ADBE298F25BBD59 /* SVCustomGroupedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */; };
+		92532D82DA333A407478B30F /* NativeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9253297D753C12BC5154E5E7 /* NativeWebView.m */; };
 		D608C9AE150D6BA2009BA9BD /* honeycomb.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AC150D6BA2009BA9BD /* honeycomb.png */; };
 		D608C9AF150D6BA2009BA9BD /* honeycomb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */; };
 		D608C9BF150EDEFD009BA9BD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9BE150EDEFD009BA9BD /* Default.png */; };
@@ -891,6 +894,11 @@
 		4B28C97914E7873800E1453E /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
 		4B28C97A14E7873800E1453E /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
 		4B28C97B14E7873800E1453E /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		4B29327315BA86F000F446E8 /* SVPodcastDatastore 20.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SVPodcastDatastore 20.xcdatamodel"; sourceTree = "<group>"; };
+		4B29327515BA8A0800F446E8 /* _PodcastImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _PodcastImage.h; path = models/_PodcastImage.h; sourceTree = "<group>"; };
+		4B29327615BA8A0800F446E8 /* _PodcastImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _PodcastImage.m; path = models/_PodcastImage.m; sourceTree = "<group>"; };
+		4B29327715BA8A0800F446E8 /* PodcastImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PodcastImage.h; path = models/PodcastImage.h; sourceTree = "<group>"; };
+		4B29327815BA8A0800F446E8 /* PodcastImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PodcastImage.m; path = models/PodcastImage.m; sourceTree = "<group>"; };
 		4B2C6D0515049710009DFE1F /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		4B2C6D0615049710009DFE1F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		4B2C6D0915049C9C009DFE1F /* alert.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alert.aiff; sourceTree = "<group>"; };
@@ -1216,7 +1224,9 @@
 		7DD61F0D159B92BD006181AE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomGroupedTableViewController.m; sourceTree = "<group>"; };
 		9253277E9ED9AC7A796DE69A /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
+		925327A34FE940080957C560 /* NativeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeWebView.h; sourceTree = "<group>"; };
 		925327FB93FD7D934F91CA4A /* SVCustomGroupedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomGroupedTableViewController.h; sourceTree = "<group>"; };
+		9253297D753C12BC5154E5E7 /* NativeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeWebView.m; sourceTree = "<group>"; };
 		D608C9AC150D6BA2009BA9BD /* honeycomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = honeycomb.png; sourceTree = "<group>"; };
 		D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "honeycomb@2x.png"; sourceTree = "<group>"; };
 		D608C9BE150EDEFD009BA9BD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -1777,6 +1787,10 @@
 		4B2E51D814B3A43C0030B7C1 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				4B29327515BA8A0800F446E8 /* _PodcastImage.h */,
+				4B29327615BA8A0800F446E8 /* _PodcastImage.m */,
+				4B29327715BA8A0800F446E8 /* PodcastImage.h */,
+				4B29327815BA8A0800F446E8 /* PodcastImage.m */,
 				4BD1C22E14B8EFDB00E8C946 /* SVCategory.h */,
 				4BD1C22E14B8EFDB00E8C943 /* SVCategory.m */,
 				4B2E524214B3BBBF0030B7C1 /* generated */,
@@ -2282,6 +2296,8 @@
 		4BB2058214D0F41B0038EB7D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				9253297D753C12BC5154E5E7 /* NativeWebView.m */,
+				925327A34FE940080957C560 /* NativeWebView.h */,
 				D6EE8AE41587E65500F3374A /* SVHtmlViewer.h */,
 				D6EE8AE41587E65500F33747 /* SVHtmlViewer.m */,
 				4BB2058B14D0F8C70038EB7D /* SVPodcastModalView.h */,
@@ -2937,6 +2953,9 @@
 				4B0338B815B5BC6700AF76EC /* MagicalRecord+Setup.m in Sources */,
 				4B0338B915B5BC6700AF76EC /* MagicalRecord+ShorthandSupport.m in Sources */,
 				4B0338BA15B5BC6700AF76EC /* MagicalRecord.m in Sources */,
+				92532D82DA333A407478B30F /* NativeWebView.m in Sources */,
+				4B29327915BA8A0800F446E8 /* _PodcastImage.m in Sources */,
+				4B29327A15BA8A0800F446E8 /* PodcastImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3568,6 +3587,7 @@
 			children = (
 				D68F8EE015A33B1C0070E17E /* SVPodcastDatastore 18.xcdatamodel */,
 				4BD1A3FB15B3D43B00D2EEF1 /* SVPodcastDatastore 19.xcdatamodel */,
+				4B29327315BA86F000F446E8 /* SVPodcastDatastore 20.xcdatamodel */,
 				D6A8788C158943A0009DD522 /* SVPodcastDatastore 17.xcdatamodel */,
 				4B55DFD5155751C00030CB51 /* SVPodcastDatastore 15.xcdatamodel */,
 				4BE7A740157C80B9007900F8 /* SVPodcastDatastore 16.xcdatamodel */,
@@ -3585,7 +3605,7 @@
 				4B4B5F8614BC7B8E00C40A95 /* SVPodcastDatastore 2.xcdatamodel */,
 				4B2E51DA14B3A4970030B7C1 /* SVPodcastDatastore.xcdatamodel */,
 			);
-			currentVersion = 4BD1A3FB15B3D43B00D2EEF1 /* SVPodcastDatastore 19.xcdatamodel */;
+			currentVersion = 4B29327315BA86F000F446E8 /* SVPodcastDatastore 20.xcdatamodel */;
 			path = SVPodcastDatastore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

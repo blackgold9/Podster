@@ -100,7 +100,7 @@ static char const kRefreshInterval = -3;
 //                         }
 //                     }];
 
-                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                          [[SVDownloadManager sharedInstance] downloadPendingEntries];
                      });
 

@@ -9,15 +9,12 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 	.downloadPercentage = @"downloadPercentage",
 	.downloadsToKeep = @"downloadsToKeep",
 	.feedURL = @"feedURL",
-	.fullIsizeImageData = @"fullIsizeImageData",
-	.gridSizeImageData = @"gridSizeImageData",
 	.hidePlayedEpisodes = @"hidePlayedEpisodes",
 	.isDownloading = @"isDownloading",
 	.isSubscribed = @"isSubscribed",
 	.isVideo = @"isVideo",
 	.lastSynced = @"lastSynced",
 	.lastUpdated = @"lastUpdated",
-	.listSizeImageData = @"listSizeImageData",
 	.logoURL = @"logoURL",
 	.podstoreId = @"podstoreId",
 	.shouldNotify = @"shouldNotify",
@@ -35,7 +32,10 @@ const struct SVPodcastAttributes SVPodcastAttributes = {
 };
 
 const struct SVPodcastRelationships SVPodcastRelationships = {
+	.fullImage = @"fullImage",
+	.gridImage = @"gridImage",
 	.items = @"items",
+	.listImage = @"listImage",
 };
 
 const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
@@ -214,20 +214,6 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
-@dynamic fullIsizeImageData;
-
-
-
-
-
-
-@dynamic gridSizeImageData;
-
-
-
-
-
-
 @dynamic hidePlayedEpisodes;
 
 
@@ -340,13 +326,6 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 @dynamic lastUpdated;
-
-
-
-
-
-
-@dynamic listSizeImageData;
 
 
 
@@ -546,6 +525,14 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 
 
 
+@dynamic fullImage;
+
+	
+
+@dynamic gridImage;
+
+	
+
 @dynamic items;
 
 	
@@ -557,6 +544,10 @@ const struct SVPodcastFetchedProperties SVPodcastFetchedProperties = {
 	[self didAccessValueForKey:@"items"];
 	return result;
 }
+	
+
+@dynamic listImage;
+
 	
 
 

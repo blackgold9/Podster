@@ -159,7 +159,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         NSFetchRequest *request = [SVPodcast MR_requestAllWithPredicate:predicate inContext:self.context];
         [request setReturnsObjectsAsFaults:NO];
         [request setIncludesSubentities:NO];
+        [request setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObject:SVPodcastRelationships.gridImage]];
         [request setIncludesPendingChanges:YES];
+        [request setReturnsObjectsAsFaults:NO];
         
         NSError *error;
         NSArray *newItems = [self.context executeFetchRequest:request error:&error];
