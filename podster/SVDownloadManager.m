@@ -228,7 +228,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSInteger pendingDownloads = queue.operationCount;
     [context performBlock:^{
         SVPodcastEntry *entry = (SVPodcastEntry *)[context existingObjectWithID:entryId error:nil];
-        NSAssert(entry, @"Entry should not be nil");
+        NSAssert(entry != nil, @"Entry should not be nil");
         DDLogInfo(@"Download completed for podcast: %@ - Entry: %@. Remaining in queue: %d", entry.podcast.title, entry.title, pendingDownloads);
         
         

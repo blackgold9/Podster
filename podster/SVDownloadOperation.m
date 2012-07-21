@@ -156,6 +156,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             [localContext performBlockAndWait:^{
+                NSAssert(theDownload.entry != nil, @"download should have an etnry");
                 DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [theDownload.entry localFilePath]);
                 SVPodcastEntry *entry = theDownload.entry;
                 entry.downloadCompleteValue = YES;                
@@ -165,6 +166,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                     entry.download = nil;
                     [theDownload MR_deleteInContext:localContext];
                 }
+                [localContext MR_saveNestedContexts];
                 [self done];
                 
             }];
