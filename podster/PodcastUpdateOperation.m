@@ -50,31 +50,48 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 - (void)main {
-    NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    childContext.parentContext = parentContext;
-    
+    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_defaultContext];
+            
+    if ([self.podcast.objectID isTemporaryID]) {
+        [self.podcast.managedObjectContext performBlockAndWait:^{
+            [self.podcast.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self.podcast] error:nil];
+            [self.podcast.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self.podcast] error:nil];
+            
+        }];
+    }
     
     __block NSDate *lastEntryDate = [NSDate distantPast];
     __block BOOL podcastExists;
     __block NSString *title;
     __block NSNumber *podcastId;
-    [childContext performBlockAndWait:^void() {
-        NSFetchRequest *request = [SVPodcast MR_requestFirstWithPredicate:[NSPredicate predicateWithFormat:@"self == %@", self.podcast]];
-        request.relationshipKeyPathsForPrefetching = [NSArray arrayWithObject:SVPodcastRelationships.items];
-        SVPodcast *podcast = [[childContext executeFetchRequest:request error:nil] lastObject];
-        
+    [childContext performBlockAndWait: ^{
+        SVPodcast *podcast = [self.podcast MR_inContext:childContext];
         podcastId = podcast.podstoreId;
         DDLogVerbose(@"Starting sync for Podcast with Id: %@", podcast.podstoreId);
         if (podcast) {
             podcastExists = YES;
             title = podcast.title;
-            SVPodcastEntry *lastEntry = [[podcast.items sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:SVPodcastEntryAttributes.datePublished ascending:YES]]] lastObject];
-            lastEntryDate = lastEntry.datePublished;           
+//            NSFetchRequest *request = [SVPodcastEntry MR_requestAllWithPredicate:[NSPredicate predicateWithFormat:@"podcast.podstoreId == %@", podcast.podstoreId] inContext:childContext];
+//            [request setResultType:NSDictionaryResultType];
+//            NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:SVPodcastEntryAttributes.datePublished];
+//            NSExpression *minExpression = [NSExpression expressionForFunction:@"max:" arguments:  [NSArray arrayWithObject:keyPathExpression]];
+//            NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+//            [expressionDescription setName:@"maxDatePublished"];
+//            [expressionDescription setExpression:minExpression];
+//            [expressionDescription setExpressionResultType:NSDateAttributeType];
+//            [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+//            [request setIncludesPendingChanges:YES];
+//            NSDictionary *results = [[childContext executeFetchRequest:request error:nil] lastObject];
+//            if (results != nil) {
+//                lastEntryDate = [results valueForKey:@"maxDatePublished"];
+            lastEntryDate = podcast.lastUpdated;
+//            }
         } else {
             podcastExists = NO;
         }
     }];
-    
+        
+        
     
     if (podcastExists) {
         DDLogVerbose(@"Podcast was found in the database");
@@ -115,14 +132,10 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogWarn(@"Podcast with id: %@ did not exist", podcastId);
     }
     
-    [childContext performBlock:^{
         
-        
-        NSError *saveError;
+    [childContext performBlockAndWait:^{
         DDLogVerbose(@"Saving Child Context");
-        [childContext save:&saveError];
-        NSAssert(saveError == nil, @"There should be no error when saving: %@", saveError);
-        DDLogVerbose(@"Podcast update operation complete for id: %@", podcastId);
+        [childContext MR_saveNestedContexts];
         if (self.onUpdateComplete) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -130,19 +143,17 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                 self.onUpdateComplete(self);
             });
         }
-    }];
+    }];    
 }
 
 - (void)processResponse:(id)response
               inContext:(NSManagedObjectContext *)context
     signallingSemaphore:(dispatch_semaphore_t)semaphore {
     DDLogVerbose(@"Procesing response");
-
-
+    
+    
     [context performBlock:^void() {
-        @try {
-
-            NSAssert([NSThread currentThread] != [NSThread mainThread], @"should not be on the main thread here");
+        @try {                        
             SVPodcast *localPodcast = [self.podcast MR_inContext:context];
             NSAssert(localPodcast!= nil, @"Should not be nil");
             localPodcast.lastSynced = [NSDate date];
@@ -156,7 +167,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
             NSInteger current = 0;
             NSError *error;
             for (NSDictionary *episode in episodes) {
-
+                
                 // Completely new item, create it,add it, be happy
                 SVPodcastEntry *localEntry = [SVPodcastEntry MR_createInContext:context];
                 
@@ -164,14 +175,15 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                 if (isFirst) {
                     DDLogVerbose(@"Latest received item date %@", localEntry.datePublished);
                     isFirst = NO;
+                    localPodcast.lastUpdated = localEntry.datePublished;
                 }
                 
                 lastDate = localEntry.datePublished;
-                [localPodcast addItemsObject:localEntry];                        
+                [localPodcast addItemsObject:localEntry];
                 current ++;
             }
             
-              
+            
             NSAssert(error == nil, @"There should be no error. Got %@", error);
             
             if (error) {
@@ -181,12 +193,12 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                 DDLogVerbose(@"Updating podcast succeeded");
             }
             
-
+            
             DDLogVerbose(@"Oldest recieved item date %@", lastDate);
             
             [self updateNewEpisodeCountForPodcast:localPodcast];
             
-                   }
+        }
         @catch (NSException *exception) {
             DDLogError(@"Exception occured during podcast udpate operation: %@", exception);
         }

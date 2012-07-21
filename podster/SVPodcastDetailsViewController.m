@@ -30,7 +30,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     SVPodcast *localPodcast;
     BOOL optionsOpen;
     BOOL isInitialLoad;
-    BOOL isSubscribed;   
+    BOOL isSubscribed;
     NSTimer *gracePeriodTimer;
     NSOperationQueue *updateOperationQueue;
     NSFetchedResultsController *fetcher;
@@ -52,9 +52,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-
+        
         updateOperationQueue = [[NSOperationQueue alloc] init];
-
+        
     }
     return self;
 }
@@ -63,11 +63,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     self = [super initWithCoder:aDecoder];
     if (self) {
         // Custom initialization
-
+        
         updateOperationQueue = [[NSOperationQueue alloc] init];
-
+        
     }
-
+    
     return self;
 }
 
@@ -82,20 +82,20 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     if (!_context) {
         _context = [NSManagedObjectContext MR_defaultContext];
     }
-
+    
     return _context;
 }
 
 - (void)optionsTapped:(id)sender {
     UIStoryboard *board = [UIStoryboard storyboardWithName:@"PodcastStoryboard" bundle:nil];
-
+    
     PodcastSettingsViewController *controller = [board instantiateViewControllerWithIdentifier:@"PodcastSettings"];
     [self.context performBlockAndWait:^{
         controller.shouldNotify = localPodcast.shouldNotifyValue;
         controller.sortAscending = !localPodcast.sortNewestFirstValue;
         controller.downloadsToKeep = (NSUInteger) localPodcast.downloadsToKeepValue;
     }];
-
+    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
     controller.delegate = self;
     [self.navigationController presentViewController:nav
@@ -121,7 +121,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [signupAlert addButtonWithTitle:NSLocalizedString(@"LEARN_MORE", @"Find out more about a given option") block:^{
         [FlurryAnalytics logEvent:@"LimitUpsellLearnMoreTapped"];
         UIViewController *controller = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
-        [self presentModalViewController:controller animated:YES];                
+        [self presentModalViewController:controller animated:YES];
     }];
     
     [signupAlert setCancelButtonWithTitle:NSLocalizedString(@"No, Thanks", @"No, Thanks") block:^{
@@ -134,12 +134,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     if (![[SVSettings sharedInstance] notificationsEnabled]) {
         return;
     }
-
+    
     if (shouldNotify && [self hasHitNotificationLimit])  {
         [self showNotificationsUpsell];
         return;
     }
-
+    
     // Check if it's not subscribed, if not, subscribe them, then try again
     if (shouldNotify && !localPodcast.isSubscribedValue) {
         DDLogInfo(@"Podcast was not subscribed to");
@@ -152,7 +152,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         }];
         return;
     }
-
+    
     // Actually do the notification update
     [[SVPodcatcherClient sharedInstance] changeNotificationSetting:shouldNotify
                                                      forFeedWithId:localPodcast.podstoreId
@@ -164,19 +164,19 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                               localPodcast.shouldNotifyValue = shouldNotify;
                                                           }];
                                                       }
-            onError:^(NSError *error) {
-                [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
-                DDLogError(@"Error when chanigng notification settings: %@", error);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
-                    [alertView setCancelButtonWithTitle:@"OK" block:^{
-
-                    }];
-
-                    [alertView show];
-                });
-            }];
-
+                                                           onError:^(NSError *error) {
+                                                               [FlurryAnalytics logError:@"ChangedNotificationSettingForFeed" message:[error localizedDescription] error:error ];
+                                                               DDLogError(@"Error when chanigng notification settings: %@", error);
+                                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                                   BlockAlertView *alertView= [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle] message:@"There was a problem communicating with the Podster servers. Please try again later."];
+                                                                   [alertView setCancelButtonWithTitle:@"OK" block:^{
+                                                                       
+                                                                   }];
+                                                                   
+                                                                   [alertView show];
+                                                               });
+                                                           }];
+    
 }
 
 
@@ -203,7 +203,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 } else {
                     LOG_GENERAL(2, @"Creating notification subscription");
                     [[SVPodcatcherClient sharedInstance] changeNotificationSetting:YES
-                                                                    forFeedWithId:localPodcast.podstoreId
+                                                                     forFeedWithId:localPodcast.podstoreId
                                                                       onCompletion:^{
                                                                           LOG_GENERAL(2, @"Succeed creating notification subscription");
                                                                           localPodcast.shouldNotifyValue = YES;
@@ -212,17 +212,17 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                                LOG_GENERAL(2, @"Failed creating notification subscription");
                                                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                                                    [self showFeedNotificationSubscriptionError];
-                                                                                
+                                                                                   
                                                                                });
                                                                                
                                                                            }];
                 }
-            };            
+            };
             
             BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
                                                            message:NSLocalizedString(@"Would you like to be notified when new episodes become available?", @"Would you like to be notified when new episodes become available?")];
             [alert setCancelButtonWithTitle:@"No" block:^{
-
+                
             }];
             [alert addButtonWithTitle:@"Yes"
                                 block:^{
@@ -241,10 +241,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         // Trigger the object itself to say it is subscribed
         [localPodcast subscribe];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self configureToolbar];            
+            [self configureToolbar];
         });
     }];
-
+    
     // Tell the server
     [self subscribeToPodcastWithSuccessBlock:^(BOOL success) {
         if(success) {
@@ -259,13 +259,13 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     dispatch_async(dispatch_get_main_queue(), ^void() {
         LOG_GENERAL(2, @"Creating a subscription for this podcast");
     });
-
+    
     [FlurryAnalytics logEvent:@"SubscribedToFeed"];
-        
+    
     void (^succeeded)() = ^{
         if (complete) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                complete(YES);                
+                complete(YES);
             });
             
         }
@@ -275,29 +275,29 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:localPodcast.podstoreId
                                                   onCompletion:succeeded
                                                        onError:^(NSError *error) {
-        if (complete) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                complete(NO);
-            });
-        }
-    }];
+                                                           if (complete) {
+                                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                                   complete(NO);
+                                                               });
+                                                           }
+                                                       }];
 }
 
 - (void)unsubscribeFromPodcast
 {
     [FlurryAnalytics logEvent:@"UnsubscribedFromPodcast"];
-
+    
     [self.context performBlock:^void() {
         [localPodcast unsubscribe];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self configureToolbar];            
-        });        
+            [self configureToolbar];
+        });
     }];
     
     [[SVPodcatcherClient sharedInstance] unsubscribeFromFeedWithId:localPodcast.podstoreId
-                                                           onCompletion:^{
-                                                           } onError:^(NSError *error) {
-                                                           }];
+                                                      onCompletion:^{
+                                                      } onError:^(NSError *error) {
+                                                      }];
 }
 
 - (IBAction)subscribeTapped:(id)sender {
@@ -305,9 +305,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     if(!localPodcast.isSubscribedValue) {
         [self subscribeToPodcast];
     } else {
-        [self unsubscribeFromPodcast];             
-    } 
-
+        [self unsubscribeFromPodcast];
+    }
+    
 }
 
 - (void)configureToolbar
@@ -315,7 +315,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSMutableArray *barItems = [NSMutableArray array];
     BOOL subscribed = localPodcast.isSubscribedValue;
     if (subscribed) {
-
+        
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"star.png"]
                                                    landscapeImagePhone:nil
                                                                  style:UIBarButtonItemStylePlain
@@ -337,15 +337,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                           target:self
                                                                           action:@selector(shareTapped:)]];
     }
-
+    
     [barItems addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
     if(subscribed) {
         [barItems addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"]
-                                    landscapeImagePhone:nil
-                                                  style:UIBarButtonItemStylePlain
-                                                 target:self action:@selector(optionsTapped:)]];
+                                               landscapeImagePhone:nil
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self action:@selector(optionsTapped:)]];
     }
-
+    
     [self setToolbarItems:barItems animated:YES];
 }
 #pragma mark - View lifecycle
@@ -370,7 +370,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     } else {
         [imageView setImageWithURL:[NSURL URLWithString:localPodcast.thumbLogoURL] placeholderImage:imageView.image];
     }
-
+    
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -416,7 +416,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         default:
             break;
     }
-
+    
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -434,19 +434,19 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     isInitialLoad = YES;
     
     self.navigationItem.title = NSLocalizedString(@"Details", @"Details");
-
+    
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0];
     self.metadataView.layer.shadowOffset = CGSizeMake(0, 3);
     self.metadataView.layer.shadowOpacity = 0.5;
     self.titleLabel.text = self.podcast.title;
-        
+    
     isLoading = YES;
-        
+    
     __block BOOL blockHasSubscription = NO;
-
+    
     [self.context performBlock:^{
         @try {
-
+            
             NSNumber *feedId = self.podcast.podstoreId;
             NSAssert(feedId, @"Feed id should be present");
             LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
@@ -454,25 +454,26 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
                                                       inContext:self.context];
             DDLogVerbose(@"Lookup complete");
-
+            
             if (!localPodcast) {
                 LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
                 __block SVPodcast *newPodcast;
                 [self.context performBlockAndWait:^void() {
                     newPodcast = [SVPodcast MR_createInContext:self.context];
-                    [self.context obtainPermanentIDsForObjects:[NSArray arrayWithObject:newPodcast] error:nil];
+                    [self.context MR_saveNestedContexts];
                 }];
+
                 localPodcast = newPodcast;
             }
-
+            
             NSAssert(localPodcast != nil, @"Local podcast should not be nil");
             [localPodcast populateWithPodcast:self.podcast];
             NSAssert(localPodcast.title != nil, @"There should be a title here");
             blockHasSubscription = localPodcast.isSubscribedValue;
             [self displayImageForPodcast];
-
-
-
+            
+            
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self configureUIForSubscriptionStatus:blockHasSubscription];
                 [self displayEpisodesAndRefreshData];
@@ -481,53 +482,53 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         @catch (NSException *exception) {
             DDLogError(@"%@", exception);
         }
-    }];    
+    }];
 }
 
 - (void)displayImageForPodcast {
-// We had a local copy, so check for local image
+    // We had a local copy, so check for local image
     if (localPodcast.gridSizeImageData != nil) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
-                    self.imageView.image = image;
-                });
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // We didn't have a local copy, so load from url
-                    [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
-                });
-            }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithData:localPodcast.gridSizeImageData];
+            self.imageView.image = image;
+        });
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // We didn't have a local copy, so load from url
+            [self.imageView setImageWithURL:[NSURL URLWithString:[self.podcast thumbLogoURL]]];
+        });
+    }
 }
 
 - (void)displayEpisodesAndRefreshData {
     NSAssert(localPodcast.title != nil, @"The podcast should be populated");
     self.descriptionLabel.text = localPodcast.summary;
-
+    
     __weak SVPodcastDetailsViewController *blockSelf = self;
-
+    
     void (^loadCompleteHandler)() = ^{
         if (blockSelf) {
             if ([gracePeriodTimer isValid]) {
                 [gracePeriodTimer invalidate];
             }
             __strong SVPodcastDetailsViewController *strongSelf = blockSelf;
-
+            
             strongSelf->isLoading = NO;
             LOG_GENERAL(2, @"Done loading entries");
             [strongSelf loadFeedImage];
-
-
+            
+            
         }
-
+        
     };
-
+    
     gracePeriodTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                         target:self
                                                       selector:@selector(gracePeriodTimerFired:)
                                                       userInfo:nil
                                                        repeats:NO];
     [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
-
+    
     [self.context performBlock:^{
         [self.context processPendingChanges];
         NSAssert(localPodcast != nil, @"PLocal Podcast should not be nil");
@@ -544,31 +545,31 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                     BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
                                                                    message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
                     [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
-
+                        
                     }];
                     [alert show];
                 }
             });
         };
-
+        
         [updateOperationQueue addOperation:updateOperation];
     }];
-
-
+    
+    
 }
 
 - (void)configureUIForSubscriptionStatus:(BOOL)isSubscribedValue {
     isSubscribed = isSubscribedValue;
     self.subscribeButton.enabled = NO;
-
+    
     [self setupSubscribeButton];
 }
 
 - (void)gracePeriodTimerFired:(NSTimer *)timer
 {
- 
     
-
+    
+    
 }
 
 - (void)viewDidUnload
@@ -579,10 +580,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [self setMetadataView:nil];
     [self setImageView:nil];
     [self setSubscribeButton:nil];
-
+    
     [self setOptionsButton:nil];
     [self setOptionsButton:nil];
-
+    
     [self setShareButton:nil];
     [super viewDidUnload];
 }
@@ -596,21 +597,22 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     [super viewDidAppear:animated];
     dispatch_async(dispatch_get_main_queue(), ^{
-    NSPredicate *itemsInPodcastPredicate = [NSPredicate predicateWithFormat:@"podcast = %@", localPodcast];
-    NSPredicate *predicate;
-
-    if (localPodcast.hidePlayedEpisodesValue) {
-        NSPredicate *notPlayedPredicate = [NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played];
-        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];
-
-    } else {
-        predicate = itemsInPodcastPredicate;
-    }
-
-    NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                                          ascending:!localPodcast.sortNewestFirstValue
-                                                      withPredicate:predicate
-                                                          inContext:self.context];
+        NSPredicate *itemsInPodcastPredicate = [NSPredicate predicateWithFormat:@"podcast = %@", localPodcast];
+        NSPredicate *predicate;
+        
+        if (localPodcast.hidePlayedEpisodesValue) {
+            NSPredicate *notPlayedPredicate = [NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played];
+            predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];
+            
+        } else {
+            predicate = itemsInPodcastPredicate;
+        }
+        
+        NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                                              ascending:!localPodcast.sortNewestFirstValue
+                                                          withPredicate:predicate
+                                                              inContext:self.context];
+        [request setIncludesPendingChanges:YES];
         NSAssert(self.context == [NSManagedObjectContext MR_defaultContext], @"Contexts should match");
         [request setIncludesSubentities:NO];
         [request setIncludesPendingChanges:YES];
@@ -618,11 +620,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         
         fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"EpisodeListForId%@", localPodcast.podstoreId]];
         [fetcher performFetch:nil];
-
-    fetcher.delegate = self;
-    [self.tableView reloadData];
-});
-
+        
+        fetcher.delegate = self;
+        [self.tableView reloadData];
+    });
+    
     [self configureToolbar];
 }
 
@@ -634,14 +636,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [super viewWillDisappear:animated];
     [updateOperationQueue cancelAllOperations];
     NSAssert(localPodcast != nil, @"Local podcast should not be nil");
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden:NO animated:NO];
-    [FlurryAnalytics logEvent:@"PodcastDetailsPageView" timed:YES];       
+    [FlurryAnalytics logEvent:@"PodcastDetailsPageView" timed:YES];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -716,13 +718,13 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView 
+    SVEpisodeListCell  *cell = (SVEpisodeListCell *)[tableView
                                                      dequeueReusableCellWithIdentifier:@"episodeCell"];
     //cell.backgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"CarbonListBackground.png"] resizableImageWithCapInsets:UIEdgeInsetsZero]];
     //cell.backgroundView.backgroundColor = ;
     SVPodcastEntry *episode= [fetcher objectAtIndexPath:indexPath];
     
-    [cell bind:episode];    
+    [cell bind:episode];
     
     return cell;
     
@@ -748,7 +750,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [self presentModalViewController:tweet animated:YES];
     
     // Called when the tweet dialog has been closed
-    tweet.completionHandler = ^(TWTweetComposeViewControllerResult result) 
+    tweet.completionHandler = ^(TWTweetComposeViewControllerResult result)
     {
         // Dismiss the controller
         [self dismissModalViewControllerAnimated:YES];
@@ -778,7 +780,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         if (localPodcast.shouldNotifyValue != controller.shouldNotify) {
             [self updateNotificationSetting:controller.shouldNotify];
         }
-
+        
         localPodcast.downloadsToKeepValue = controller.downloadsToKeep;
     }];
 }

@@ -39,7 +39,7 @@ static char const kRefreshInterval = -3;
     self = [super init];
     if (self) {
         syncQueue = [[NSOperationQueue alloc] init];
-        syncQueue.maxConcurrentOperationCount = 8;
+        syncQueue.maxConcurrentOperationCount = 2;
         syncQueue.name = @"net.vanterpool.podster.podcastUpdate";
     }
 
@@ -100,7 +100,10 @@ static char const kRefreshInterval = -3;
 //                         }
 //                     }];
 
-                     [[SVDownloadManager sharedInstance] downloadPendingEntries];
+                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                         [[SVDownloadManager sharedInstance] downloadPendingEntries];
+                     });
+
                      dispatch_async(dispatch_get_main_queue(), ^{
                          self.isBusy = NO;
                          DDLogInfo(@"Refreshing Subscriptions is complete");

@@ -70,24 +70,20 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadNotificationRecieved:)
-                                                 name:@"SVReloadData" 
+                                                 name:@"SVReloadData"
                                                object:nil];
 
-
-
-        [[SVPodcatcherClient sharedInstance] addObserver:self forKeyPath:@"networkReachabilityStatus"
-                                                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
-   
-        
-
+    [[SVPodcatcherClient sharedInstance] addObserver:self forKeyPath:@"networkReachabilityStatus"
+                                             options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
+    
     DDLogVerbose(@"Registering for context change notification");
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                          selector:@selector(contextChanged:)
-                                          name:NSManagedObjectContextDidSaveNotification
-                                          object:self.context];
+                                             selector:@selector(contextChanged:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:self.context];
 }
 
 - (void)contextChanged:(NSNotification *)notification

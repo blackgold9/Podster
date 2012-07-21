@@ -35,6 +35,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDFileLogger *fileLogger;
     BOOL isFirstRun;
     CLLocationManager *locationManager;
+    NSTimer *saveTimer;
 }
 
 NSString *uuid();
@@ -149,23 +150,16 @@ NSString *uuid();
     self.window.rootViewController = controller;
 
     [[SVSettings sharedInstance] setFirstRun:NO];
-    if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]){
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
-            BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-            NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"Startup", @"Type", nil];
-            [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
-            DDLogInfo(@"Launched due to region monitoring. Syncing");
 
-                [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        });
-    } else {
-        [Appirater appLaunched:YES];
-    }
-    
+    saveTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
+    return YES;
 
-    locationManager = [CLLocationManager new];
-    locationManager.delegate = self;
-    return YES;    
+}
+
+- (void)saveData
+{
+    DDLogInfo(@"Saving datastore to disk.");
+    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {

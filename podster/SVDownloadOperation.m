@@ -95,8 +95,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
   //  dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext];
 
+    __block SVDownload *theDownload;
     [localContext performBlockAndWait:^{
-        download = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
+        theDownload = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
         DDLogInfo(@"Downloading %@ - %@  at URL: %@", download.entry.podcast.title, download.entry.title, download.entry.mediaURL);
         NSAssert(!download.entry.downloadCompleteValue, @"This entry is already downloaded");
                
