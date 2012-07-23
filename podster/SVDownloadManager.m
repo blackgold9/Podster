@@ -249,7 +249,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     return podcast.downloadsToKeepValue;
 }
 
-- (NSSet *)entriesNeedingDownloadInContext:(NSManagedObjectContext *)context {
+- (NSSet *)entriesThatShouldBeDownloadedInContext:(NSManagedObjectContext *)context {
     NSMutableSet *needingDownload = [NSMutableSet set];
     
     NSArray *subscribedPodcasts = [SVPodcast MR_findByAttribute:SVPodcastAttributes.isSubscribed
@@ -267,7 +267,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 - (NSArray *)entriesToBeDownloadedForPodcast:(SVPodcast *)podcast inContext:(NSManagedObjectContext *)context {
-    NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"podcast == %@ && %K == NO && downloadComplete == NO", podcast, SVPodcastEntryAttributes.played];
+    NSPredicate *isInPodcast = [NSPredicate predicateWithFormat:@"podcast == %@ && %K == NO", podcast, SVPodcastEntryAttributes.played];
     NSArray *entries = [SVPodcastEntry MR_findAllSortedBy:SVPodcastEntryAttributes.datePublished
                                                 ascending:NO
                                             withPredicate:isInPodcast
@@ -343,7 +343,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
         
         DDLogVerbose(@"Figuring out what entries should be present");
-        NSSet *shouldBePresent = [self entriesNeedingDownloadInContext:context];
+        NSSet *shouldBePresent = [self entriesThatShouldBeDownloadedInContext:context];
         DDLogVerbose(@"Done");
         DDLogVerbose(@"Deleting the downloads managed objects for all other items");
         [self deleteDownloadsForEntriesNotInSet:shouldBePresent
