@@ -17,46 +17,46 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVDownloadManager.m"
+         timestampString = "364713014.931514"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
+         landmarkName = "-downloadEntry:manualDownload:inContext:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVDownloadManager.m"
+         timestampString = "364713014.931514"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "155"
+         endingLineNumber = "155"
+         landmarkName = "-downloadEntry:manualDownload:inContext:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVDownloadManager.m"
+         timestampString = "364713014.931514"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
+         landmarkName = "-downloadEntry:manualDownload:inContext:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
          shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVDownloadManager.m"
-         timestampString = "364581138.037933"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
-         landmarkName = "-downloadEntry:manualDownload:inContext:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVDownloadManager.m"
-         timestampString = "364581187.292654"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "131"
-         endingLineNumber = "131"
-         landmarkName = "-downloadEntry:manualDownload:inContext:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVDownloadManager.m"
-         timestampString = "364581339.230452"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "-downloadEntry:manualDownload:inContext:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadOperation.m"
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadManager.m"
-         timestampString = "364581910.702628"
+         timestampString = "364713819.582098"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "416"
-         endingLineNumber = "416"
+         startingLineNumber = "447"
+         endingLineNumber = "447"
          landmarkName = "-downloadPendingEntries"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadManager.m"
-         timestampString = "364581775.99389"
+         timestampString = "364713014.931514"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "207"
-         endingLineNumber = "207"
+         startingLineNumber = "231"
+         endingLineNumber = "231"
          landmarkName = "-startDownload:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadManager.m"
-         timestampString = "364581910.702628"
+         timestampString = "364713819.582098"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "415"
-         endingLineNumber = "415"
+         startingLineNumber = "446"
+         endingLineNumber = "446"
          landmarkName = "-downloadPendingEntries"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVDownloadManager.m"
-         timestampString = "364581830.575033"
+         timestampString = "364713014.931514"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "212"
-         endingLineNumber = "212"
+         startingLineNumber = "236"
+         endingLineNumber = "236"
          landmarkName = "-startDownload:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -157,6 +157,45 @@
          startingLineNumber = "109"
          endingLineNumber = "109"
          landmarkName = "-start"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVDownloadManager.m"
+         timestampString = "364713819.582098"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "439"
+         endingLineNumber = "439"
+         landmarkName = "-downloadPendingEntries"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVDownloadManager.m"
+         timestampString = "364713245.760451"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "413"
+         endingLineNumber = "413"
+         landmarkName = "-downloadPendingEntries"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVDownloadManager.m"
+         timestampString = "364713782.057823"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "415"
+         endingLineNumber = "415"
+         landmarkName = "-downloadPendingEntries"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

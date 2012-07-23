@@ -32,6 +32,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     BOOL cancelling;
     dispatch_group_t completionGroup;
     BOOL downloading;
+    NSDate *downloadStartedDate;
     //    UIBackgroundTaskIdentifier background_task;
 }
 + (id)sharedInstance {
@@ -54,10 +55,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         completionGroup = dispatch_group_create();
         currentProgressPercentage = 0;
         operationLookup = [NSMutableDictionary dictionary];
-        maxConcurrentDownloads = 1;
+        maxConcurrentDownloads = 2;
         queue = [NSOperationQueue new];
         [queue setMaxConcurrentOperationCount:maxConcurrentDownloads];
         queue.name = @"com.vantertech.podster.downloads";
+        [queue addObserver:self forKeyPath:@"operations" options:0 context:NULL];
         NSString *lostWifi = NSLocalizedString(@"Downloads have been paused because you lost WI-FI connectivity", @"Downloads have been paused because you lost WI-FI connectivity");
         
         
@@ -83,6 +85,26 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     return self;
 }
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                         change:(NSDictionary *)change context:(void *)context
+{
+    if (object == queue && [keyPath isEqualToString:@"operations"]) {
+        if ([queue.operations count] == 0) {
+            // Do something here when your queue has completed
+            DDLogVerbose(@"The last download has completed");
+            @synchronized (self) {
+                downloading = NO;
+                cancelling = NO;
+                downloadStartedDate = nil;
+            }
+            
+        }
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object
+                               change:change context:context];
+    }
+}
 
 - (void)cancelDownloads {
     cancelling = YES;
@@ -105,9 +127,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)downloadEntry:(SVPodcastEntry *)entry
        manualDownload:(BOOL)isManualDownload
             inContext:(NSManagedObjectContext *)localContext {
+
         NSAssert(entry != nil, @"There should be an entry here");
+
         DDLogVerbose( @"Downloading entry %@", entry);
-        NSAssert(!entry.downloadCompleteValue, @"This entry is already downloaded");
+
         if (entry.download) {
             [self startDownload:entry.download];
             return;
@@ -230,15 +254,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         SVPodcastEntry *entry = (SVPodcastEntry *)[context existingObjectWithID:entryId error:nil];
         NSAssert(entry != nil, @"Entry should not be nil");
         DDLogInfo(@"Download completed for podcast: %@ - Entry: %@. Remaining in queue: %d", entry.podcast.title, entry.title, pendingDownloads);
-        
-        
-        if (pendingDownloads == 0) {
-            DDLogVerbose(@"It was the last download");
-            @synchronized (self) {
-                downloading = NO;
-                cancelling = NO;
-            }
-        }
     }];
     
 }
@@ -315,7 +330,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             [self cancelDownload:entry.download];
             [context deleteObject:entry.download];
         }
-        
+        entry.downloadCompleteValue = NO;
         [self deleteFileForEntry:entry];
         
     }
@@ -323,9 +338,20 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)downloadPendingEntries {
     @synchronized (self) {
-        // we're not currently downloading, and we will be, so....
-        if (!downloading) {
+        NSTimeInterval elapsedTimeSinceLastDownload = 0;
+        if (downloadStartedDate != nil) {
+            elapsedTimeSinceLastDownload = [[NSDate date] timeIntervalSinceDate:downloadStartedDate];
+        }
+
+        NSTimeInterval oneHour = 60 * 60;
+        if (!downloading || elapsedTimeSinceLastDownload > oneHour) {
+            if (elapsedTimeSinceLastDownload > oneHour) {
+                DDLogInfo(@"Timing out previous download operation");
+            }
+            
             downloading = YES;
+            downloadStartedDate = [NSDate date];
+            
         } else {
             DDLogVerbose(@"Donwload manager was busy. Cancelling");
             return;
@@ -383,18 +409,23 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             NSAssert(NO, @"There was an error saving: %@", error);
         }
         
-        DDLogInfo(@"Queuing %d downloads", shouldBePresent.count);
+        DDLogInfo(@"Going through %d items that we want stored", shouldBePresent.count);
         for (SVPodcastEntry *entry in shouldBePresent) {
             NSAssert(entry != nil, @"Entry should exist");
-            DDLogVerbose(@"Queuing: %@", entry);
-            if (entry.download) {
-                [self startDownload:entry.download];
+
+            if (!entry.downloadCompleteValue) {
+                DDLogVerbose(@"Queuing: %@", entry);
+                if (entry.download) {
+                    [self startDownload:entry.download];
+                } else {
+                    [self downloadEntry:entry manualDownload:NO inContext:context];
+                }
             } else {
-                [self downloadEntry:entry manualDownload:NO inContext:context];
+                DDLogVerbose(@"Skipping entry that was already on downloaded/on disk");
             }
         }
         
-        if (shouldBePresent.count == 0) {
+        if (queue.operationCount == 0) {
             // No items to download, end here
             @synchronized (self) {
                 if (downloading) {
