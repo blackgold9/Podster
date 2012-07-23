@@ -91,10 +91,12 @@ NSString *uuid();
 {
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
+#ifndef CONFIGURATION_AppStore
     [DDLog addLogger:[DDNSLoggerLogger sharedInstance]];
+#endif
     fileLogger = [[DDFileLogger alloc] init];
-    fileLogger.rollingFrequency = 60 * 60 * 1; // 24 hour rolling
-    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    fileLogger.rollingFrequency = 60 * 60 * 1; // 1 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 1;
 
     [DDLog addLogger:fileLogger];
 #if defined (CONFIGURATION_AppStore)
@@ -103,6 +105,8 @@ NSString *uuid();
     [FlurryAnalytics setSecureTransportEnabled:YES];
     [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
     [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
+    [[BWQuincyManager sharedQuincyManager] setDelegate:self];
  //   [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
 #endif
 
