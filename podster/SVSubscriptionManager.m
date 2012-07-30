@@ -12,7 +12,7 @@
 #import "SVPodcastEntry.h"
 #import "SVDownloadManager.h"
 #import "PodcastUpdateOperation.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 static char const kRefreshInterval = -3;
 
 @implementation SVSubscriptionManager {
@@ -46,25 +46,6 @@ static char const kRefreshInterval = -3;
     return self;
 }
 
-- (NSArray *)subscribedPodcastsInContext:(NSManagedObjectContext *)context
-{
-    NSFetchRequest *request = [SVPodcast MR_requestAllSortedBy:SVPodcastAttributes.title
-                                                     ascending:YES
-                                                 withPredicate:[NSPredicate predicateWithFormat:@"%K == YES", SVPodcastAttributes.isSubscribed]
-                                                     inContext:context];
-    [request setReturnsObjectsAsFaults:NO];
-    [request setIncludesSubentities:NO];
-    __block NSArray *array;
-    [context performBlockAndWait:^{
-        NSError *error;
-        array = [context executeFetchRequest:request error:&error];
-        if (error) {
-            DDLogError(@"Error fetching podcasts to refresh: %@", error);
-        }
-    }];
-    return array;
-}
-
 -(void)refreshAllSubscriptions
 {
     shouldCancel = NO;
@@ -75,31 +56,14 @@ static char const kRefreshInterval = -3;
     }
     self.isBusy = YES;
 
-    NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
-    __block NSMutableArray *subscribedPodcasts = [NSMutableArray array];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
+    NSArray *podcasts = [SVPodcast MR_findByAttribute:SVPodcastAttributes.isSubscribed withValue:[NSNumber numberWithBool:YES]];
 
-    // Get the subscribed podcasts
-    [context performBlockAndWait:^void() {
-        NSArray *subscribed = [self subscribedPodcastsInContext:context];
-        for (SVPodcast *podcast in subscribed) {
-            [subscribedPodcasts addObject:podcast];
-        }
-    }];
 
     // Actually do the update
-    [self refreshPodcasts:subscribedPodcasts
+    [self refreshPodcasts:podcasts
                  complete:^void() {
-                     // Save context
-//                     [context performBlockAndWait:^void() {
-//                         NSError *error;
-//                         [context save:&error];
-//                         if (error) {
-//                             DDLogError(@"An error occured saving after refreshing podcasts. Error:%@", error);
-//                             [FlurryAnalytics logError:@"SubscriptionRefreshError" message:[error localizedDescription] error:error];
-//                             NSAssert(NO, @"This should not fail");
-//                         }
-//                     }];
-
+                     [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                          [[SVDownloadManager sharedInstance] downloadPendingEntries];
                      });

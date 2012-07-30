@@ -6,9 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="Renamed tag controllers to appropriate names">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/podster.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/podster.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.h" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecordShorthand.h" afterPath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecordShorthand.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" afterPath="$PROJECT_DIR$/podster.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/podster.xcscheme" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/PodcastUpdateOperation.m" afterPath="$PROJECT_DIR$/podster/PodcastUpdateOperation.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadManager.m" afterPath="$PROJECT_DIR$/podster/SVDownloadManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVEpisodeDetails.m" afterPath="$PROJECT_DIR$/podster/SVEpisodeDetails.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadOperation.m" afterPath="$PROJECT_DIR$/podster/SVDownloadOperation.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 20.xcdatamodel/contents" afterPath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 20.xcdatamodel/contents" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVPodcastEntry.m" afterPath="$PROJECT_DIR$/podster/models/SVPodcastEntry.m" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,17 +48,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SVHtmlViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVHtmlViewController.m">
+      <file leaf-file-name="MagicalRecord+Actions.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Actions.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="34" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0">
+            <state line="14" column="133" selection-start="382" selection-end="451" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NativeWebView.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/NativeWebView.m">
+      <file leaf-file-name="NSPredicate.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file:///Applications/Xcode45-DP3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSPredicate.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="39" selection-start="1547" selection-end="1547" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MagicalRecord+Actions.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="36" selection-start="146" selection-end="146" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NSManagedObjectContext+MagicalSaves.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.h">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -53,64 +84,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NSPredicate.h" pinned="false" current="true" current-in-tab="true">
-        <entry file="file:///Applications/Xcode45-DP3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSPredicate.h">
+      <file leaf-file-name="NSManagedObjectContext+MagicalSaves.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="17" selection-start="563" selection-end="563" vertical-scroll-proportion="0.33333334">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SVDownloadManager.m" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="semaphore.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file:///Applications/Xcode45-DP3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/usr/include/dispatch/semaphore.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="61" column="0" selection-start="1815" selection-end="1815" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SVDownloadManager.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="269" column="54" selection-start="11337" selection-end="11337" vertical-scroll-proportion="0.0">
+            <state line="284" column="54" selection-start="11859" selection-end="11859" vertical-scroll-proportion="0.023291925">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SVPodcastsSearchResultsViewController.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SVPodcastsSearchResultsViewController.m">
+      <file leaf-file-name="SVDownloadManager.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="211" column="62" selection-start="7639" selection-end="7646" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SVDownloadOperation.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVDownloadOperation.m">
+      <file leaf-file-name="SVPodcastDetailsViewController.m" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="173" column="88" selection-start="8525" selection-end="8525" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVHtmlViewer.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVHtmlViewer.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="87" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SVHtmlViewer.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/SVHtmlViewer.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="11" selection-start="185" selection-end="185" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NativeWebView.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/podster/NativeWebView.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="40" selection-start="148" selection-end="148" vertical-scroll-proportion="0.0">
+            <state line="461" column="0" selection-start="19768" selection-end="19768" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -119,7 +132,7 @@
       <file leaf-file-name="PodcastUpdateOperation.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/PodcastUpdateOperation.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="69" selection-start="3668" selection-end="3668" vertical-scroll-proportion="0.0">
+            <state line="147" column="32" selection-start="7163" selection-end="7163" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -141,26 +154,26 @@
         <option value="$PROJECT_DIR$/podster/PodcastUpdateOperation.h" />
         <option value="$PROJECT_DIR$/podster/SVEpisodeDetails.m" />
         <option value="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject+MagicalRecord.m" />
-        <option value="$PROJECT_DIR$/podster/PodcastUpdateOperation.m" />
         <option value="$PROJECT_DIR$/podster/SVCustomGroupedTableViewController.h" />
         <option value="$PROJECT_DIR$/podster/PodcastSettingsViewController.h" />
         <option value="$PROJECT_DIR$/podster/PodcastSettingsViewController.m" />
         <option value="$PROJECT_DIR$/podster/SVCategoryListViewController.m" />
         <option value="$PROJECT_DIR$/podster/SVCustomGroupedTableViewController.m" />
         <option value="$PROJECT_DIR$/podster/images/SettingsViewController.h" />
-        <option value="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
         <option value="$PROJECT_DIR$/podster/SVAppDelegate.m" />
         <option value="$PROJECT_DIR$/podster/SVSubscriptionManager.m" />
         <option value="$PROJECT_DIR$/podster/SVHtmlViewer.m" />
         <option value="$PROJECT_DIR$/podster/SVDownloadOperation.m" />
         <option value="$PROJECT_DIR$/podster/SVDownloadManager.m" />
+        <option value="$PROJECT_DIR$/podster/PodcastUpdateOperation.m" />
+        <option value="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
     <option name="width" value="1440" />
-    <option name="height" value="804" />
+    <option name="height" value="778" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -207,16 +220,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="DirectoryView.Xcode">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Podster" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -310,10 +313,6 @@
               <option name="myItemId" value="Foundation.framework" />
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Headers" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeFrameworkHeadersNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -369,6 +368,64 @@
               <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="3rd Party" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MagicalRecord" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Categories" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeRootNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="3rd Party" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MagicalRecord" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Categories" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NSManagedObjectContext" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodePBXReferenceNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="DirectoryView.Xcode">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Podster" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.XcodeDirectoryView$1$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -377,14 +434,14 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="172" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="178" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="176" />
+    <property name="recentsLimit" value="5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../iOS-FX-Analytics/Analytics static library/Analytics.xcodeproj" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="181" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="683" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="681" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="683" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="180" />
     <property name="GoToClass.includeJavaFiles" value="true" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="177" />
@@ -397,6 +454,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="options.lastSelected" value="project.propVCSSupport.VCSs.Git" />
+    <property name="restartRequiresConfirmation" value="true" />
     <property name="OBJC.PRESERVED_TARGET_SELECTION" value="" />
     <property name="options.searchVisible" value="true" />
   </component>
@@ -477,17 +535,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="804" extended-state="0" />
+    <frame x="0" y="22" width="1440" height="778" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38048092" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26323217" sideWeight="0.7877095" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31474948" sideWeight="0.69014084" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3197183" sideWeight="0.32815808" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31474948" sideWeight="0.6815643" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31843576" sideWeight="0.5222301" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1805887" sideWeight="0.17845659" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30985916" sideWeight="0.50388145" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6081461" sideWeight="0.91954833" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31843576" sideWeight="0.4728299" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4273743" sideWeight="0.9146083" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279743" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988167" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -561,6 +619,14 @@
           <url>file://$PROJECT_DIR$/podster/SVDownloadManager.h</url>
           <line>16</line>
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m</url>
+          <line>458</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m</url>
+          <line>459</line>
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -585,70 +651,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="615" column="49" selection-start="25030" selection-end="25030" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStore+MagicalRecord.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="128" selection-start="1909" selection-end="1909" vertical-scroll-proportion="1.0570176" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="38" selection-start="2629" selection-end="2629" vertical-scroll-proportion="0.6704289" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Setup.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1145" selection-end="1145" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="2" selection-start="6665" selection-end="6665" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVSubscriptionManager.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="24" selection-start="3517" selection-end="3517" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/PodcastUpdateOperation.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="69" selection-start="3668" selection-end="3668" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/NativeWebView.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVHtmlViewController.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="34" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVHtmlViewer.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="11" selection-start="185" selection-end="185" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVHtmlViewer.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="87" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
@@ -677,16 +679,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
+    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="269" column="54" selection-start="11337" selection-end="11337" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="36" selection-start="146" selection-end="146" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Applications/Xcode45-DP3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/usr/include/dispatch/semaphore.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="0" selection-start="1815" selection-end="1815" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/PodcastUpdateOperation.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="32" selection-start="7163" selection-end="7163" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file:///Applications/Xcode45-DP3.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSPredicate.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="17" selection-start="563" selection-end="563" vertical-scroll-proportion="0.33333334">
+        <state line="36" column="39" selection-start="1547" selection-end="1547" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Actions.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="133" selection-start="382" selection-end="451" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="461" column="0" selection-start="19768" selection-end="19768" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="284" column="54" selection-start="11859" selection-end="11859" vertical-scroll-proportion="0.023291925">
           <folding />
         </state>
       </provider>

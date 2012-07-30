@@ -5,7 +5,7 @@
 #import "SVDownloadManager.h"
 #import "_SVPodcastEntry.h"
 #import "PodcastImage.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @implementation SVPodcast {
     BOOL isUpdatingFromV1;
@@ -126,14 +126,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     // First, we grab the data
     [[SVPodcatcherClient sharedInstance] fetchPodcastWithId:podcastId
                                                onCompletion:^void(NSArray *podcasts) {
-                                                   NSAssert(podcasts.count == 1, @"There should be 1 podcast returned");
+
                                                    if (podcasts.count > 0) {
                                                        NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
                                                        [context performBlock:^{
                                                            // Then we make a new podcast in the data store
                                                            SVPodcast *localPodcast = [SVPodcast MR_createInContext:context];
                                                            [localPodcast populateWithPodcast:[podcasts objectAtIndex:0]];
-                                                           
+                                                           [context MR_saveNestedContexts];
                                                            // Now that we have the podcast populated. Subscribe on the
                                                            [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:podcastId
                                                                                                          onCompletion:^void() {
@@ -156,6 +156,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                                                              DDLogError(@"Failed to subscribe to podcast %@", localPodcast);
                                                                                                          }];
                                                        }];
+                                                   } else {
+                                                       DDLogWarn(@"There was no podcast returned for ID: %@", podcastId);
                                                    }
                                                } onError:^void(NSError *error) {
                                                    DDLogError(@"Failed to fetch podcast with id %@", podcastId);

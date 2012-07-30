@@ -35,7 +35,7 @@
         <attribute name="unlistenedSinceSubscribedCount" optional="YES" transient="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updating" optional="YES" transient="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="websiteURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="fullImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" syncable="YES"/>
+        <relationship name="fullImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" storedInTruthFile="YES" syncable="YES"/>
         <relationship name="gridImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PodcastEntry" inverseName="podcast" inverseEntity="PodcastEntry" syncable="YES"/>
         <relationship name="listImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" syncable="YES"/>

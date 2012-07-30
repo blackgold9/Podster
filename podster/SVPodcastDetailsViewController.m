@@ -21,7 +21,7 @@
 #import "SVHtmlViewController.h"
 #import "PodcastUpdateOperation.h"
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
 
 
@@ -35,6 +35,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSTimer *gracePeriodTimer;
     NSOperationQueue *updateOperationQueue;
     NSFetchedResultsController *fetcher;
+    BOOL podcastLoaded;
 }
 @synthesize shareButton;
 @synthesize titleLabel;
@@ -55,7 +56,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         // Custom initialization
         
         updateOperationQueue = [[NSOperationQueue alloc] init];
-        
+        podcastLoaded = NO;
     }
     return self;
 }
@@ -66,7 +67,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         // Custom initialization
         
         updateOperationQueue = [[NSOperationQueue alloc] init];
-        
+        podcastLoaded = NO;
     }
     
     return self;
@@ -446,43 +447,37 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     __block BOOL blockHasSubscription = NO;
     
     [self.context performBlock:^{
-        @try {
+        NSNumber *feedId = self.podcast.podstoreId;
+        NSAssert(feedId, @"Feed id should be present");
+        LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
+        localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
+                                                  inContext:self.context];
+        DDLogVerbose(@"Lookup complete");
+        
+        if (!localPodcast) {
+            LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
             
-            NSNumber *feedId = self.podcast.podstoreId;
-            NSAssert(feedId, @"Feed id should be present");
-            LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
-            localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
-                                                      inContext:self.context];
-            DDLogVerbose(@"Lookup complete");
             
-            if (!localPodcast) {
-                LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
-                __block SVPodcast *newPodcast;
-                [self.context performBlockAndWait:^void() {
-                    newPodcast = [SVPodcast MR_createInContext:self.context];
-                    [self.context MR_saveNestedContexts];
-                }];
-
-                localPodcast = newPodcast;
-            }
-            
-            NSAssert(localPodcast != nil, @"Local podcast should not be nil");
+            localPodcast = [SVPodcast MR_createInContext:self.context];
             [localPodcast populateWithPodcast:self.podcast];
-            NSAssert(localPodcast.title != nil, @"There should be a title here");
-            blockHasSubscription = localPodcast.isSubscribedValue;
-            [self displayImageForPodcast];
+
             
-            
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self configureUIForSubscriptionStatus:blockHasSubscription];
-                [self displayEpisodesAndRefreshData];
-            });
         }
-        @catch (NSException *exception) {
-            DDLogError(@"%@", exception);
-        }
+        
+        NSAssert(localPodcast != nil, @"Local podcast should not be nil");
+        [localPodcast populateWithPodcast:self.podcast];
+        NSAssert(localPodcast.title != nil, @"There should be a title here");
+        blockHasSubscription = localPodcast.isSubscribedValue;
+        [self displayImageForPodcast];
+        podcastLoaded = YES;
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self configureUIForSubscriptionStatus:blockHasSubscription];
+            [self displayEpisodesAndRefreshData];
+        });
+        
     }];
 }
 
@@ -594,36 +589,41 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     // Return YES for supported orientations
 	return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
+- (void)reloadFetchedResultsController
+{
+    NSPredicate *itemsInPodcastPredicate = [NSPredicate predicateWithFormat:@"podcast = %@", localPodcast];
+    NSPredicate *predicate;
+    
+    if (localPodcast.hidePlayedEpisodesValue) {
+        NSPredicate *notPlayedPredicate = [NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played];
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];
+        
+    } else {
+        predicate = itemsInPodcastPredicate;
+    }
+    
+    NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
+                                                          ascending:!localPodcast.sortNewestFirstValue
+                                                      withPredicate:predicate
+                                                          inContext:self.context];
+    [request setIncludesPendingChanges:YES];
+    NSAssert(self.context == [NSManagedObjectContext MR_defaultContext], @"Contexts should match");
+    [request setIncludesSubentities:NO];
+    [request setIncludesPendingChanges:YES];
+    
+    
+    fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"EpisodeListForId%@", localPodcast.podstoreId]];
+    [fetcher performFetch:nil];
+    
+    fetcher.delegate = self;
+    [self.tableView reloadData];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSPredicate *itemsInPodcastPredicate = [NSPredicate predicateWithFormat:@"podcast = %@", localPodcast];
-        NSPredicate *predicate;
-        
-        if (localPodcast.hidePlayedEpisodesValue) {
-            NSPredicate *notPlayedPredicate = [NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played];
-            predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];
-            
-        } else {
-            predicate = itemsInPodcastPredicate;
-        }
-        
-        NSFetchRequest *request = [SVPodcastEntry MR_requestAllSortedBy:SVPodcastEntryAttributes.datePublished
-                                                              ascending:!localPodcast.sortNewestFirstValue
-                                                          withPredicate:predicate
-                                                              inContext:self.context];
-        [request setIncludesPendingChanges:YES];
-        NSAssert(self.context == [NSManagedObjectContext MR_defaultContext], @"Contexts should match");
-        [request setIncludesSubentities:NO];
-        [request setIncludesPendingChanges:YES];
-        
-        
-        fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"EpisodeListForId%@", localPodcast.podstoreId]];
-        [fetcher performFetch:nil];
-        
-        fetcher.delegate = self;
-        [self.tableView reloadData];
+        [self reloadFetchedResultsController];
     });
     
     [self configureToolbar];
@@ -776,14 +776,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #pragma mark - podcast settings delegate
 - (void)podcastSettingsViewControllerShouldClose:(PodcastSettingsViewController *)controller {
     [self dismissViewControllerAnimated:YES completion:NULL];
-    [self.context performBlock:^void() {
+
         localPodcast.sortNewestFirstValue = !controller.sortAscending;
         if (localPodcast.shouldNotifyValue != controller.shouldNotify) {
             [self updateNotificationSetting:controller.shouldNotify];
         }
         
         localPodcast.downloadsToKeepValue = controller.downloadsToKeep;
-    }];
+    [self reloadFetchedResultsController];
+    
 }
 
 @end

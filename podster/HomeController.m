@@ -18,7 +18,7 @@
 #import "PodsterIAPHelper.h"
 #import "BlockAlertView.h"
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 static NSString *const kIsBusyKey = @"isBusy";
 
 @interface HomeController ()

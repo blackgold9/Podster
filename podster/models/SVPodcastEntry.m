@@ -4,7 +4,7 @@
 #import "NSString+MW_HTML.h"
 #import "SVDownloadManager.h"
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation SVPodcastEntry
 
 - (void)populateWithDictionary:(NSDictionary *)dict
@@ -43,15 +43,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    return [basePath stringByAppendingPathComponent:kDownloadsDirectory];
-    
+    return [basePath stringByAppendingPathComponent:kDownloadsDirectory];    
 }
 
 - (NSString *)localFilePath
 {
     NSString *basePath = [self downloadsPath];
-    
-    NSString *filePath = [basePath stringByAppendingPathComponent:[[self podstoreId] stringValue]];
+    NSInteger podstoreId = [self podstoreIdValue];
+    NSString *podstoreString = [NSString stringWithFormat:@"%d", podstoreId];
+    NSString *filePath = [basePath stringByAppendingPathComponent:podstoreString];
     return [filePath stringByAppendingPathExtension:[[[[self mediaURL] pathExtension] componentsSeparatedByString:@"?"] objectAtIndex:0]];
 }
 

@@ -221,7 +221,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [download.managedObjectContext performBlockAndWait:^{
         mediaURLString = download.entry.mediaURL;
         filePath = [download.entry localFilePath];
-    }];
+           }];
     BOOL isVideo = NO;
     isVideo |= [mediaURLString rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
     isVideo |= [mediaURLString rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
@@ -365,9 +365,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     [queue setSuspended:YES];
     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *context) {
-        
-    
-        
         DDLogVerbose(@"Figuring out what entries should be present");
         NSSet *shouldBePresent = [self entriesThatShouldBeDownloadedInContext:context];
         DDLogVerbose(@"Done");
@@ -376,45 +373,43 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                       inContext:context];
         DDLogVerbose(@"Done");
         
-        // Get all the files on disk
-        DDLogVerbose(@"Getting list of downloaded files");
-        NSMutableSet *fileNamesToDelete = [NSMutableSet setWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self downloadsPath] error:nil]];
-        DDLogVerbose(@"done");
-        NSMutableSet *pathsToDelete = [NSMutableSet set];
-        NSString *downloadPath = [self downloadsPath];
-        for(NSString *string in fileNamesToDelete) {
-            [pathsToDelete addObject:[downloadPath stringByAppendingPathComponent:string]];
-        }
-        
-        if (shouldBePresent.count > 0) {
-            // Figure out which ones we want to keep
-            NSSet *filesWeWant = [shouldBePresent valueForKey:@"localFilePath"];
-            
-            // Remove the files we want from the files to delete
-            [pathsToDelete minusSet:filesWeWant];
-        }
-        
-        DDLogInfo(@"Deleting %lu files", pathsToDelete.count);
-        for(NSString *path in pathsToDelete) {
-            DDLogVerbose(@"Deleting %@", path);
-            [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
-        }
-        
+//        // Get all the files on disk
+//        DDLogVerbose(@"Getting list of downloaded files");
+//        NSMutableSet *fileNamesToDelete = [NSMutableSet setWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self downloadsPath] error:nil]];
+//        DDLogVerbose(@"done");
+//        NSMutableSet *pathsToDelete = [NSMutableSet set];
+//        NSString *downloadPath = [self downloadsPath];
+//        for(NSString *string in fileNamesToDelete) {
+//            [pathsToDelete addObject:[downloadPath stringByAppendingPathComponent:string]];
+//        }
+//        
+//        if (shouldBePresent.count > 0) {
+//            // Figure out which ones we want to keep
+//            NSSet *filesWeWant = [shouldBePresent valueForKey:@"localFilePath"];
+//            
+//            // Remove the files we want from the files to delete
+//            [pathsToDelete minusSet:filesWeWant];
+//        }
+//        
+//        DDLogInfo(@"Deleting %lu files", pathsToDelete.count);
+//        for(NSString *path in pathsToDelete) {
+//            DDLogVerbose(@"Deleting %@", path);
+//            [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+//        }
+//        
         // Push changesup
-        
+
+        NSArray *toDownload = [shouldBePresent allObjects];
         NSError *error;
-        [context save:&error];
+        [context obtainPermanentIDsForObjects:toDownload error:&error];
         if (error) {
-            DDLogError(@"Error saving: %@", error);
-            NSAssert(NO, @"There was an error saving: %@", error);
+            DDLogError(@"Error obtaining permanent IDs: %@", error);
         }
-        
         DDLogInfo(@"Going through %d items that we want stored", shouldBePresent.count);
         for (SVPodcastEntry *entry in shouldBePresent) {
             NSAssert(entry != nil, @"Entry should exist");
 
             if (!entry.downloadCompleteValue) {
-                DDLogVerbose(@"Queuing: %@", entry);
                 if (entry.download) {
                     [self startDownload:entry.download];
                 } else {
@@ -424,26 +419,23 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 DDLogVerbose(@"Skipping entry that was already on downloaded/on disk");
             }
         }
+             
         
+    } completion:^{
         if (queue.operationCount == 0) {
             // No items to download, end here
             @synchronized (self) {
+                
                 if (downloading) {
                     downloading = NO;
                 }
             }
             
         }
+     
+        [queue setSuspended:NO];
         
-        [context save:&error];
-        [queue setSuspended:NO];
-        if (error) {
-            DDLogError(@"Error saving: %@", error);
-            NSAssert(NO, @"There was an error saving: %@", error);
-        }
-        DDLogInfo(@"Done queing entries for download");
-    } completion:^{
-        [queue setSuspended:NO];
+        
     }];
 }
 

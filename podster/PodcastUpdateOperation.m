@@ -10,7 +10,7 @@
 #import "SVPodcast.h"
 #import "_SVPodcastEntry.h"
 
-static int ddLogLevel = LOG_LEVEL_VERBOSE;
+static int ddLogLevel = LOG_LEVEL_INFO;
 
 @implementation PodcastUpdateOperation {
     NSManagedObjectContext *parentContext;
@@ -55,8 +55,6 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     if ([self.podcast.objectID isTemporaryID]) {
         [self.podcast.managedObjectContext performBlockAndWait:^{
             [self.podcast.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self.podcast] error:nil];
-            [self.podcast.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self.podcast] error:nil];
-            
         }];
     }
     
@@ -64,7 +62,8 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     __block BOOL podcastExists;
     __block NSString *title;
     __block NSNumber *podcastId;
-    [childContext performBlockAndWait: ^{
+    
+    [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *childContext) {
         SVPodcast *podcast = [self.podcast MR_inContext:childContext];
         podcastId = podcast.podstoreId;
         DDLogVerbose(@"Starting sync for Podcast with Id: %@", podcast.podstoreId);
@@ -91,125 +90,106 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         } else {
             podcastExists = NO;
         }
-    }];
-    
-    
-    
-    if (podcastExists) {
-        DDLogVerbose(@"Podcast was found in the database");
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        dispatch_retain(semaphore);
-        DDLogVerbose(@"Fetchinng new episodes for %@ after %@", title, lastEntryDate);
-        __weak PodcastUpdateOperation *weakSelf = self;
-        [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:podcastId
-                                                     withLastSyncDate:lastEntryDate
-                                                             complete:^void(id response) {
-                                                                 __strong PodcastUpdateOperation *operation = weakSelf;
-                                                                 if (operation.isCancelled) {
-                                                                     return;
-                                                                 }
-                                                                 
-                                                                 if (operation) {
-                                                                     operation->success = YES;
-                                                                 }
-                                                                 [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
-                                                                     [self processResponse:response
-                                                                                 inContext:childContext
-                                                                       signallingSemaphore:semaphore];
+    } completion:^{
+        if (podcastExists) {
+            DDLogVerbose(@"Podcast was found in the database");
+            dispatch_group_t group = dispatch_group_create();
+            dispatch_retain(group);
+            DDLogVerbose(@"Fetchinng new episodes for %@ after %@", title, lastEntryDate);
+            __weak PodcastUpdateOperation *weakSelf = self;
+            dispatch_group_enter(group);
+            [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:podcastId
+                                                         withLastSyncDate:lastEntryDate
+                                                                 complete:^void(id response) {
+                                                                     __strong PodcastUpdateOperation *operation = weakSelf;
+                                                                     if (operation.isCancelled) {
+                                                                         return;
+                                                                     }
                                                                      
-                                                                 }];
-                                                             }
-                                                              onError:^void(NSError *error) {
-                                                                  DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", podcastId);
-                                                                  [FlurryAnalytics logError:@"PodcastUpdateFailed" message:[error localizedDescription] error:error];
-                                                                  dispatch_semaphore_signal(semaphore);
-                                                              }];
-        
-        long result = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC));
-        dispatch_release(semaphore);
-        if (result > 0) {
-            DDLogWarn(@"A timeout occured while trying to update podcast");
-        }
-    } else {
-        DDLogWarn(@"Podcast with id: %@ did not exist", podcastId);
-    }
-    
-    
-    [childContext performBlockAndWait:^{
-        DDLogVerbose(@"Saving Child Context");
-      //  [childContext MR_saveNestedContexts];
-        [childContext MR_save];
-        if (self.onUpdateComplete) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                     if (operation) {
+                                                                         operation->success = YES;
+                                                                     }
+                                                                     
+                                                                     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+                                                                         [self processResponse:response
+                                                                                     inContext:childContext];
+                                                                         dispatch_group_leave(group);
+                                                                         
+                                                                     }];
+                                                                 }
+                                                                  onError:^void(NSError *error) {
+                                                                      DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", podcastId);
+                                                                      [FlurryAnalytics logError:@"PodcastUpdateFailed" message:[error localizedDescription] error:error];
+                                                                      dispatch_group_leave(group);
+                                                                  }];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                long result = dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC));
+                dispatch_release(group);
+                if (result > 0) {
+                    DDLogWarn(@"A timeout occured while trying to update podcast");
+                }
                 
+                if (self.onUpdateComplete) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.onUpdateComplete(self);
+                    });
+                }
                 
-                self.onUpdateComplete(self);
             });
+        } else {
+            DDLogWarn(@"Podcast with id: %@ did not exist", podcastId);
         }
     }];
 }
 
 - (void)processResponse:(id)response
-              inContext:(NSManagedObjectContext *)context
-    signallingSemaphore:(dispatch_semaphore_t)semaphore {
+              inContext:(NSManagedObjectContext *)context {
     DDLogVerbose(@"Procesing response");
-    
-    
-    [context performBlock:^void() {
-        @try {
-            SVPodcast *localPodcast = [self.podcast MR_inContext:context];
-            NSAssert(localPodcast!= nil, @"Should not be nil");
-            localPodcast.lastSynced = [NSDate date];
-            NSArray *episodes = response;
-            if (episodes) {
-                DDLogInfo( @"Added %d episodes to %@", episodes.count, localPodcast.title);
-            }
-            
-            BOOL isFirst = YES;
-            NSDate *lastDate = nil;
-            NSInteger current = 0;
-            NSError *error;
-            for (NSDictionary *episode in episodes) {
-                
-                // Completely new item, create it,add it, be happy
-                SVPodcastEntry *localEntry = [SVPodcastEntry MR_createInContext:context];
-                
-                [localEntry populateWithDictionary:episode];
-                if (isFirst) {
-                    DDLogVerbose(@"Latest received item date %@", localEntry.datePublished);
-                    isFirst = NO;
-                    localPodcast.lastUpdated = localEntry.datePublished;
-                }
-                
-                lastDate = localEntry.datePublished;
-                [localPodcast addItemsObject:localEntry];
-                current ++;
-            }
-            
-            
-            NSAssert(error == nil, @"There should be no error. Got %@", error);
-            
-            if (error) {
-                DDLogError(@"There was a problem updating this podcast %@ - %@", localPodcast, error);
-                [FlurryAnalytics logError:@"SavingPodcastFailed" message:[error localizedDescription] error:error];
-            } else {
-                DDLogVerbose(@"Updating podcast succeeded");
-            }
-            
-            
-            DDLogVerbose(@"Oldest recieved item date %@", lastDate);
-            
-            [self updateNewEpisodeCountForPodcast:localPodcast];
-            
-        }
-        @catch (NSException *exception) {
-            DDLogError(@"Exception occured during podcast udpate operation: %@", exception);
-        }
-        @finally {
-            dispatch_semaphore_signal(semaphore);
-            dispatch_release(semaphore);
+    [context performBlockAndWait:^void() {
+        SVPodcast *localPodcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podcast.podstoreId inContext:context];
+        NSAssert(localPodcast!= nil, @"Should not be nil");
+        localPodcast.lastSynced = [NSDate date];
+        NSArray *episodes = response;
+        if (episodes) {
+            DDLogInfo( @"Added %d episodes to %@", episodes.count, localPodcast.title);
         }
         
+        BOOL isFirst = YES;
+        NSDate *lastDate = nil;
+        NSInteger current = 0;
+        NSError *error;
+        for (NSDictionary *episode in episodes) {
+            
+            // Completely new item, create it,add it, be happy
+            SVPodcastEntry *localEntry = [SVPodcastEntry MR_createInContext:context];
+            
+            [localEntry populateWithDictionary:episode];
+            if (isFirst) {
+                DDLogVerbose(@"Latest received item date %@", localEntry.datePublished);
+                isFirst = NO;
+                localPodcast.lastUpdated = localEntry.datePublished;
+            }
+            
+            lastDate = localEntry.datePublished;
+            [localPodcast addItemsObject:localEntry];
+            current ++;
+        }
+        
+        
+        NSAssert(error == nil, @"There should be no error. Got %@", error);
+        
+        if (error) {
+            DDLogError(@"There was a problem updating this podcast %@ - %@", localPodcast, error);
+            [FlurryAnalytics logError:@"SavingPodcastFailed" message:[error localizedDescription] error:error];
+        } else {
+            DDLogVerbose(@"Updating podcast succeeded");
+        }
+        
+        
+        DDLogVerbose(@"Oldest recieved item date %@", lastDate);
+        
+        [self updateNewEpisodeCountForPodcast:localPodcast];
     }];
 }
 

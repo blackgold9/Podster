@@ -21,6 +21,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     UIBackgroundTaskIdentifier task;
     NSString *filePath;
     long long initialSize;
+    SVDownload *download;
 }
 @synthesize downloadObjectID;
 -(id)initWithDownloadObjectID:(NSManagedObjectID *)objectId
@@ -37,7 +38,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     return self;
 }
-- (void)downloadProgressChanged:(double)progress forDownload:(SVDownload *)localDownload inContext:(NSManagedObjectContext *)localContext
+- (void)downloadProgressChanged:(double)progress forDownload:(SVDownload *)localDownload
 {
     NSInteger percentage = MIN(100,(NSInteger)(progress * 100));
     if (currentProgressPercentage != percentage) {
@@ -45,7 +46,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         DDLogVerbose(@"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
         NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry podstoreId], @"podstoreId", [NSNumber numberWithDouble:progress], @"progress",  nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
-        [localContext performBlock: ^{
+        [[NSManagedObjectContext MR_defaultContext] performBlock: ^{
 
             localDownload.stateValue = SVDownloadStateDownloading;
                 localDownload.entry.podcast.downloadPercentageValue = percentage;
@@ -97,6 +98,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     __block SVDownload *theDownload;
     [localContext performBlockAndWait:^{
         theDownload = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
+        [localContext obtainPermanentIDsForObjects:@[theDownload] error:nil];
         NSAssert(theDownload.entry != nil, @"the download should have an entry");
         DDLogInfo(@"Downloading %@ - %@  at URL: %@", theDownload.entry.podcast.title, theDownload.entry.title, theDownload.entry.mediaURL);
         NSAssert(!theDownload.entry.downloadCompleteValue, @"This entry is already downloaded");
@@ -150,48 +152,66 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [op setDownloadProgressBlock:^(NSInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
             double progress =  [[NSNumber numberWithDouble:initialSize + totalBytesRead] doubleValue] / [[NSNumber numberWithDouble:totalBytesExpectedToRead] doubleValue];
             [self downloadProgressChanged:progress
-                              forDownload:theDownload
-                                inContext:localContext];
+                              forDownload:theDownload];
         }];      
         
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [localContext performBlockAndWait:^{
-                NSAssert(theDownload.entry != nil, @"download should have an etnry");
-                DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [theDownload.entry localFilePath]);
-                SVPodcastEntry *entry = theDownload.entry;
-                entry.downloadCompleteValue = YES;                
-                entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
-                DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
-                if (theDownload) {
-                    entry.download = nil;
-                    [theDownload MR_deleteInContext:localContext];
-                }
-                [localContext MR_saveNestedContexts];
-                [self done];
-                
-            }];
+            [self downloadComplete];
                         
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [localContext
-             performBlock:^{
-                 DDLogError(@"Failed to download episode: %@ with error %@", theDownload.entry.title, error);
-                 theDownload.stateValue = SVDownloadStateFailed;
-                 theDownload.entry = nil;
-                 [theDownload MR_deleteInContext:localContext];
-                 [self done];
-             }];
+            [self downloadFailed:error];
             
         }];
         networkOp = op;
         [op start];
+       
+    }];
+    
+    download = theDownload;
+}
+
+- (void)downloadComplete
+{
+    [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+       
+            SVDownload *localDownload = (SVDownload *)[localContext objectRegisteredForID:self.downloadObjectID];
+            NSAssert(localDownload.entry != nil, @"download should have an etnry");
+            SVPodcastEntry *entry = localDownload.entry;
+            NSAssert(entry != nil, @"There should be an entry");
+            DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [entry localFilePath]);
+            
+            entry.downloadCompleteValue = YES;
+            entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
+            DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
+            if (localDownload) {
+                entry.download = nil;
+                [localDownload MR_deleteInContext:localContext];
+            }
+          } completion:^{
+        [self done];
+    }];
+
+}
+
+- (void)downloadFailed:(NSError *)error
+{
+    [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+        [localContext performBlockAndWait:^{
+        SVDownload *localDownload = [download MR_inContext:localContext];
+       // DDLogError(@"Failed to download episode: %@ with error %@", localDownload.entry.title, error);
+        localDownload.stateValue = SVDownloadStateFailed;
+        [localDownload MR_deleteInContext:localContext];
+        }];
+    } completion:^{
+        [self done];
     }];
 }
 
--(BOOL)isConcurrent 
+-(BOOL)isConcurrent
 {
     return YES;
 }
--(BOOL)isExecuting 
+-(BOOL)isExecuting
 {
     return _isExecuting;
 }
