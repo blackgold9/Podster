@@ -11,14 +11,18 @@
 #import "_SVPodcastEntry.h"
 
 static int ddLogLevel = LOG_LEVEL_INFO;
+@interface PodcastUpdateOperation ()
+@property NSNumber *podstoreId;
+@end
 
 @implementation PodcastUpdateOperation {
     NSManagedObjectContext *parentContext;
     BOOL success;
+    
 }
-@synthesize podcast = _podcast;
-@synthesize onUpdateComplete = _onUpdateComplete;
 
+@synthesize onUpdateComplete = _onUpdateComplete;
+@synthesize podstoreId;
 
 - (id)initWithPodcast:(SVPodcast *)podcast andContext:(NSManagedObjectContext *)theContext {
     if (!podcast) {
@@ -32,7 +36,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     NSAssert(podcast.managedObjectContext == theContext, @"The contexts should be the same");
     self = [super init];
     if (self) {
-        self.podcast = podcast;
+        self.podstoreId =  podcast.podstoreId;
         parentContext = theContext;
         success = NO;
     }
@@ -52,20 +56,12 @@ static int ddLogLevel = LOG_LEVEL_INFO;
 - (void)main {
     NSManagedObjectContext *childContext = [NSManagedObjectContext MR_defaultContext];
     
-    if ([self.podcast.objectID isTemporaryID]) {
-        [self.podcast.managedObjectContext performBlockAndWait:^{
-            [self.podcast.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self.podcast] error:nil];
-        }];
-    }
     
     __block NSDate *lastEntryDate = [NSDate distantPast];
     __block BOOL podcastExists;
-    __block NSString *title;
-    __block NSNumber *podcastId;
-    
+    __block NSString *title;    
     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *childContext) {
-        SVPodcast *podcast = [self.podcast MR_inContext:childContext];
-        podcastId = podcast.podstoreId;
+        SVPodcast *podcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podstoreId];
         DDLogVerbose(@"Starting sync for Podcast with Id: %@", podcast.podstoreId);
         if (podcast) {
             podcastExists = YES;
@@ -98,7 +94,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
             DDLogVerbose(@"Fetchinng new episodes for %@ after %@", title, lastEntryDate);
             __weak PodcastUpdateOperation *weakSelf = self;
             dispatch_group_enter(group);
-            [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:podcastId
+            [[SVPodcatcherClient sharedInstance] getNewItemsForFeedWithId:self.podstoreId
                                                          withLastSyncDate:lastEntryDate
                                                                  complete:^void(id response) {
                                                                      __strong PodcastUpdateOperation *operation = weakSelf;
@@ -118,7 +114,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
                                                                      }];
                                                                  }
                                                                   onError:^void(NSError *error) {
-                                                                      DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", podcastId);
+                                                                      DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", self.podstoreId);
                                                                       [FlurryAnalytics logError:@"PodcastUpdateFailed" message:[error localizedDescription] error:error];
                                                                       dispatch_group_leave(group);
                                                                   }];
@@ -138,7 +134,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
                 
             });
         } else {
-            DDLogWarn(@"Podcast with id: %@ did not exist", podcastId);
+            DDLogWarn(@"Podcast with id: %@ did not exist", self.podstoreId);
         }
     }];
 }
@@ -147,7 +143,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
               inContext:(NSManagedObjectContext *)context {
     DDLogVerbose(@"Procesing response");
     [context performBlockAndWait:^void() {
-        SVPodcast *localPodcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podcast.podstoreId inContext:context];
+        SVPodcast *localPodcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podstoreId inContext:context];
         NSAssert(localPodcast!= nil, @"Should not be nil");
         localPodcast.lastSynced = [NSDate date];
         NSArray *episodes = response;

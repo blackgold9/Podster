@@ -35,7 +35,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDFileLogger *fileLogger;
     BOOL isFirstRun;
     CLLocationManager *locationManager;
-   // NSTimer *saveTimer;
+    NSTimer *saveTimer;
 }
 
 NSString *uuid();
@@ -155,16 +155,16 @@ NSString *uuid();
 
     [[SVSettings sharedInstance] setFirstRun:NO];
 
-  //  saveTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
+   saveTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
     return YES;
 
 }
 
-//- (void)saveData
-//{
-//    DDLogInfo(@"Saving datastore to disk.");
-// //   [[NSManagedObjectContext MR_defaultContext] MR_save];
-//}
+- (void)saveData
+{
+    DDLogInfo(@"Saving datastore to disk.");
+ //   [[NSManagedObjectContext MR_defaultContext] MR_save];
+}
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
 
@@ -292,7 +292,6 @@ NSString *uuid();
             [Lockbox setArray:subscriptionData forKey:@"subscriptions"];
 
         }];
-
         [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
         [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
             [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform

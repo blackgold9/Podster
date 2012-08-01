@@ -56,14 +56,13 @@ static char const kRefreshInterval = -3;
     }
     self.isBusy = YES;
 
-    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
+    
     NSArray *podcasts = [SVPodcast MR_findByAttribute:SVPodcastAttributes.isSubscribed withValue:[NSNumber numberWithBool:YES]];
 
 
     // Actually do the update
     [self refreshPodcasts:podcasts
                  complete:^void() {
-                     [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                          [[SVDownloadManager sharedInstance] downloadPendingEntries];
                      });

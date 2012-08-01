@@ -133,7 +133,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                            // Then we make a new podcast in the data store
                                                            SVPodcast *localPodcast = [SVPodcast MR_createInContext:context];
                                                            [localPodcast populateWithPodcast:[podcasts objectAtIndex:0]];
-                                                           [context MR_saveNestedContexts];
                                                            // Now that we have the podcast populated. Subscribe on the
                                                            [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:podcastId
                                                                                                          onCompletion:^void() {

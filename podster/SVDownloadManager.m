@@ -401,7 +401,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
         NSArray *toDownload = [shouldBePresent allObjects];
         NSError *error;
-        [context obtainPermanentIDsForObjects:toDownload error:&error];
         if (error) {
             DDLogError(@"Error obtaining permanent IDs: %@", error);
         }

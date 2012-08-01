@@ -98,7 +98,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     __block SVDownload *theDownload;
     [localContext performBlockAndWait:^{
         theDownload = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
-        [localContext obtainPermanentIDsForObjects:@[theDownload] error:nil];
         NSAssert(theDownload.entry != nil, @"the download should have an entry");
         DDLogInfo(@"Downloading %@ - %@  at URL: %@", theDownload.entry.podcast.title, theDownload.entry.title, theDownload.entry.mediaURL);
         NSAssert(!theDownload.entry.downloadCompleteValue, @"This entry is already downloaded");

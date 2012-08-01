@@ -11,7 +11,6 @@
 typedef void (^UpdateCompleteBlock)(PodcastUpdateOperation *);
 
 @interface PodcastUpdateOperation : NSOperation
-@property (nonatomic, strong) SVPodcast *podcast;
 @property (nonatomic, copy) UpdateCompleteBlock onUpdateComplete;
 
 

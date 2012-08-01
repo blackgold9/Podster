@@ -47,7 +47,17 @@ void reset_action_queue(void)
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
     
-    [self saveInBackgroundUsingContext:localContext block:block completion:completion errorHandler:errorHandler];
+    [localContext performBlock:^{
+        block(localContext);
+        NSError *error;
+        [localContext save:&error];
+        if (error) {
+            @throw [NSException exceptionWithName:@"CoreDataSaveError" reason:[error localizedDescription] userInfo:nil];
+        }
+        if (completion) {
+            dispatch_sync(dispatch_get_main_queue(), completion);
+        }
+    }];
 }
 
 + (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
