@@ -11,6 +11,6 @@
 @interface SVDownloadOperation : NSOperation;
 
 @property (copy) NSManagedObjectID *downloadObjectID;
--(id)initWithDownloadObjectID:(NSManagedObjectID *)objectId
-             filePath:(NSString *)path;
+-(id)initWithEntryId:(NSNumber *)entryId
+            filePath:(NSString *)path;
 @end

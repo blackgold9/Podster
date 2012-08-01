@@ -228,7 +228,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     isVideo |= [mediaURLString rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
     if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi ||
         ([[SVSettings sharedInstance] downloadOn3g] && !isVideo)) {
-        SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithDownloadObjectID:download.objectID
+        SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithEntryId:download.entry.podstoreId
                                                                                filePath:filePath];
         
         SVPodcastEntry *entry = download.entry;

@@ -13,6 +13,10 @@
 #import "SVPodcatcherClient.h"
 #import <sys/xattr.h>
 static const int ddLogLevel = LOG_LEVEL_INFO;
+@interface SVDownloadOperation ()
+@property (nonatomic, strong) NSNumber *entryId;
+
+@end
 @implementation SVDownloadOperation {
     BOOL _isExecuting;
     BOOL _isFinished;
@@ -24,15 +28,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     SVDownload *download;
 }
 @synthesize downloadObjectID;
--(id)initWithDownloadObjectID:(NSManagedObjectID *)objectId
+@synthesize entryId = _entryId;
+-(id)initWithEntryId:(NSNumber *)entryId
              filePath:(NSString *)path
 {
     self = [super init];
     if (self) {
-        NSParameterAssert(objectId);
-        NSParameterAssert(path);
-
-        self.downloadObjectID = objectId;
+        NSParameterAssert(entryId);
+        self.entryId = entryId;
+        
         filePath = [path copy];
         
     }
@@ -97,8 +101,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
     __block SVDownload *theDownload;
     [localContext performBlockAndWait:^{
-        theDownload = (SVDownload *)[localContext objectWithID:self.downloadObjectID];
-        NSAssert(theDownload.entry != nil, @"the download should have an entry");
+        SVPodcastEntry *entry = [SVPodcastEntry MR_findFirstByAttribute:SVPodcastEntryAttributes.podstoreId withValue:self.entryId inContext:localContext];
+                NSAssert(entry != nil, @"the entry should already exist");
+        theDownload = entry.download;
+        NSAssert(theDownload != nil, @"the download should already exist");
         DDLogInfo(@"Downloading %@ - %@  at URL: %@", theDownload.entry.podcast.title, theDownload.entry.title, theDownload.entry.mediaURL);
         NSAssert(!theDownload.entry.downloadCompleteValue, @"This entry is already downloaded");
                
@@ -173,10 +179,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
        
-            SVDownload *localDownload = (SVDownload *)[localContext objectRegisteredForID:self.downloadObjectID];
-            NSAssert(localDownload.entry != nil, @"download should have an etnry");
-            SVPodcastEntry *entry = localDownload.entry;
-            NSAssert(entry != nil, @"There should be an entry");
+        SVPodcastEntry *entry = [SVPodcastEntry MR_findFirstByAttribute:SVPodcastEntryAttributes.podstoreId withValue:self.entryId inContext:localContext];
+        NSAssert(entry != nil, @"the entry should already exist");
+        SVDownload *localDownload = entry.download;
+        NSAssert(localDownload != nil, @"the download should already exist");
+
             DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [entry localFilePath]);
             
             entry.downloadCompleteValue = YES;
@@ -196,7 +203,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
         [localContext performBlockAndWait:^{
-        SVDownload *localDownload = [download MR_inContext:localContext];
+            SVPodcastEntry *entry = [SVPodcastEntry MR_findFirstByAttribute:SVPodcastEntryAttributes.podstoreId withValue:self.entryId inContext:localContext];
+            NSAssert(entry != nil, @"the entry should already exist");
+            SVDownload *localDownload = entry.download;
+            NSAssert(localDownload != nil, @"the download should already exist");
+
+
        // DDLogError(@"Failed to download episode: %@ with error %@", localDownload.entry.title, error);
         localDownload.stateValue = SVDownloadStateFailed;
         [localDownload MR_deleteInContext:localContext];
