@@ -93,7 +93,6 @@
 		4B05C0391536449B0078DF13 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B05C0371536449B0078DF13 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B05C03A1536449B0078DF13 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B05C0371536449B0078DF13 /* Reachability.m */; };
 		4B08537314B4315300847BAA /* SVDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B08537214B4315300847BAA /* SVDownload.m */; };
-		4B08537414B4315300847BAA /* SVDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B08537214B4315300847BAA /* SVDownload.m */; };
 		4B0A7A791506728200BADEBB /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0A7A781506728200BADEBB /* AddressBook.framework */; };
 		4B0A7A7C1506729800BADEBB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0A7A7B1506729800BADEBB /* CoreLocation.framework */; };
 		4B0A7A7E150672A300BADEBB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0A7A7D150672A300BADEBB /* libsqlite3.dylib */; };
@@ -2445,7 +2444,7 @@
 		4B71F78214A5B08C00D26F4C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 4B71F78514A5B08C00D26F4C /* Build configuration list for PBXProject "podster" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2973,7 +2972,6 @@
 				4B2E523A14B3BBB80030B7C1 /* _SVPodcastEntry.m in Sources */,
 				4B2E523E14B3BBB80030B7C1 /* SVPodcast.m in Sources */,
 				4B2E524014B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
-				4B08537414B4315300847BAA /* SVDownload.m in Sources */,
 				4B86243214B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 				4BD1C22014B7D05E00E8C942 /* JSONKit.m in Sources */,
 				4BD1C22414B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
@@ -3151,6 +3149,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = podster/podster.entitlements;
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = podster/podster.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3497,8 +3496,6 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C2FFC97B-D8F6-43F5-B4A8-D07C52701072";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C2FFC97B-D8F6-43F5-B4A8-D07C52701072";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

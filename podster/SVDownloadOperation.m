@@ -193,6 +193,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 entry.download = nil;
                 [localDownload MR_deleteInContext:localContext];
             }
+        [localContext MR_saveNestedContexts];
           } completion:^{
         [self done];
     }];
