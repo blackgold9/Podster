@@ -75,14 +75,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 image = [UIImage imageWithData:coreCast.gridImage.imageData];
                 [cache setObject:image forKey:coreCast.objectID];
                       dispatch_async(dispatch_get_main_queue(), ^{
-                          self.podcastArtImageView.image = image;
-//                          CATransition *transition = [CATransition animation];
-//                          transition.duration = 0.25f;
-//                          transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//                          transition.type = kCATransitionFade;
-//                          
-//                          [self.podcastArtImageView.layer addAnimation:transition forKey:nil];
-                          
+                          [UIView animateWithDuration:0.33
+                                                delay:0
+                                              options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionTransitionCrossDissolve
+                                           animations:^{
+                                               self.podcastArtImageView.image = image;
+                                           } completion:^(BOOL finished) {
+                                               
+                                           }];
+
+                                                    
                       });
                       // Load image
                   });
