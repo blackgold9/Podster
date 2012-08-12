@@ -16,7 +16,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation PodcastGridCellView {
     AFImageRequestOperation *imageLoadOp;
     SVPodcast *coreDataPodcast;
-   
+    
 }
 @synthesize progressBackground;
 @synthesize progressBar;
@@ -36,7 +36,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 - (NSCache *)cache
 {
-     static NSCache *thumbCache;
+    static NSCache *thumbCache;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         thumbCache = [[NSCache alloc] init];
@@ -57,7 +57,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                  } failure:^(NSURLRequest *req, NSHTTPURLResponse *response, NSError *error) {
                                                      
                                                  }];
-    } else {            
+    } else {
         self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
     }
     
@@ -70,34 +70,34 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             NSCache *cache = [self cache];
             __block UIImage *image = [cache objectForKey:coreCast.objectID];
             if (image == nil) {
-                  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                DDLogVerbose( @"Loaded local image");
-                image = [UIImage imageWithData:coreCast.gridImage.imageData];
-                [cache setObject:image forKey:coreCast.objectID];
-                      dispatch_async(dispatch_get_main_queue(), ^{
-                          [UIView animateWithDuration:0.33
-                                                delay:0
-                                              options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionTransitionCrossDissolve
-                                           animations:^{
-                                               self.podcastArtImageView.image = image;
-                                           } completion:^(BOOL finished) {
-                                               
-                                           }];
-
-                                                    
-                      });
-                      // Load image
-                  });
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    DDLogVerbose( @"Loaded local image");
+                    image = [UIImage imageWithData:coreCast.gridImage.imageData];
+                    [cache setObject:image forKey:coreCast.objectID];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [UIView animateWithDuration:0.33
+                                              delay:0
+                                            options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionTransitionCrossDissolve
+                                         animations:^{
+                                             self.podcastArtImageView.image = image;
+                                         } completion:^(BOOL finished) {
+                                             
+                                         }];
+                        
+                        
+                    });
+                    // Load image
+                });
             } else {
                 DDLogVerbose(@"Loaded cached Image");
                 self.podcastArtImageView.image = image;
-               
+                
             }
-
-          
-                
-                
-               
+            
+            
+            
+            
+            
         } else {
             [self loadWebImageWithURL:[podcast smallLogoURL]];
             DDLogWarn(@"Didnt have expected image data stored locally. Redownloading");
@@ -123,11 +123,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)bind:(id<ActsAsPodcast>)podcast
 {
- self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];   
+    self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
     [imageLoadOp cancel];
     [self loadImageWithPodcast:podcast];
     self.titleLabel.text = podcast.title;
-
+    
     self.podcastArtImageView.layer.borderColor = [[UIColor colorWithWhite:0.7 alpha:1.0] CGColor];
     self.podcastArtImageView.layer.borderWidth = 2.0;
     self.unseenCountFlagImage.alpha = 0.0;
@@ -139,12 +139,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if ([podcast class] == [SVPodcast class]) {
         // It's a core data podcast, do download monitoring
         coreDataPodcast = (SVPodcast *)podcast;
-                
-        if (coreDataPodcast.isDownloadingValue) {         
+        
+        if (coreDataPodcast.isDownloadingValue) {
             self.progressBackground.alpha = 0.5;
             self.progressBar.alpha = 1.0;
-        } 
-
+        }
+        
         [coreDataPodcast addObserver:self forKeyPath:@"downloadPercentage" options:NSKeyValueObservingOptionNew context:nil];
         [coreDataPodcast addObserver:self forKeyPath:@"isDownloading" options:NSKeyValueObservingOptionNew context:nil];
         [coreDataPodcast addObserver:self forKeyPath:@"unlistenedSinceSubscribedCount" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
@@ -157,7 +157,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (coreDataPodcast) {
         self.countOverlay.hidden = YES;
         [coreDataPodcast removeObserver:self forKeyPath:@"downloadPercentage"];
-        [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];        
+        [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];
         [coreDataPodcast removeObserver:self forKeyPath:@"unlistenedSinceSubscribedCount"];
         
         self.progressBackground.alpha = 0;
@@ -165,21 +165,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         self.progressBar.progress = 0.0f;
         coreDataPodcast = nil;
     }
-            
+    
     [imageLoadOp cancel];
 }
 -(void)dealloc
 {
     if (coreDataPodcast) {
         [coreDataPodcast removeObserver:self forKeyPath:@"downloadPercentage"];
-        [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];        
+        [coreDataPodcast removeObserver:self forKeyPath:@"isDownloading"];
         [coreDataPodcast removeObserver:self forKeyPath:@"unlistenedSinceSubscribedCount"];
     }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if(object == coreDataPodcast) { 
+    if(object == coreDataPodcast) {
         if ([keyPath isEqualToString:@"downloadPercentage"]) {
             DDLogVerbose(@"%@ - download percentage: %f", coreDataPodcast.title, coreDataPodcast.downloadPercentageValue);
             self.progressBar.progress = coreDataPodcast.downloadPercentageValue / 100.0f;
@@ -188,19 +188,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             [self setDownloadProgressHidden:!coreDataPodcast.isDownloadingValue animated:YES];
             
         } else if ([keyPath isEqualToString:SVPodcastAttributes.unlistenedSinceSubscribedCount]) {
-                                                                    
-                                if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
-                                    [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
-                                    [self.countOverlay sizeToFit];
-                                    CGRect newFrame = self.countOverlay.frame;
-                                    newFrame.origin.x = self.frame.size.width - newFrame.size.width;
-                                    self.countOverlay.frame = newFrame;
-                                    self.countOverlay.hidden = NO;
-                                } else {
-                                    self.countOverlay.hidden = YES;
-                                }                            
+            
+            if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
+                [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
+                [self.countOverlay sizeToFit];
+                CGRect newFrame = self.countOverlay.frame;
+                newFrame.origin.x = self.frame.size.width - newFrame.size.width;
+                self.countOverlay.frame = newFrame;
+                self.countOverlay.hidden = NO;
+            } else {
+                self.countOverlay.hidden = YES;
+            }
         }
-    }    
+    }
 }
 
 
