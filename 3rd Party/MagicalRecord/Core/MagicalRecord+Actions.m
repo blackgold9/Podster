@@ -44,7 +44,7 @@ void reset_action_queue(void)
 
 + (void) saveInBackgroundWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
 {
-    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
     
     [localContext performBlock:^{
@@ -54,6 +54,16 @@ void reset_action_queue(void)
         if (error) {
             @throw [NSException exceptionWithName:@"CoreDataSaveError" reason:[error localizedDescription] userInfo:nil];
         }
+        __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+                                                                                object:mainContext
+                                                                                 queue:nil
+                                                                            usingBlock:^(NSNotification *note) {
+                                                                                [[NSManagedObjectContext MR_defaultContext] performBlock:^{
+                                                                                     [[NSManagedObjectContext MR_defaultContext] mergeChangesFromContextDidSaveNotification:note];
+                                                                                }];
+                                                                                [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                                                                            }];
+        [mainContext MR_save];
         if (completion) {
             dispatch_sync(dispatch_get_main_queue(), completion);
         }

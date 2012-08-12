@@ -21,7 +21,7 @@
 #import "SVHtmlViewController.h"
 #import "PodcastUpdateOperation.h"
 
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
 
 
@@ -36,6 +36,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSOperationQueue *updateOperationQueue;
     NSFetchedResultsController *fetcher;
     BOOL podcastLoaded;
+    id observer;
 }
 @synthesize shareButton;
 @synthesize titleLabel;
@@ -461,6 +462,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             
             localPodcast = [SVPodcast MR_createInContext:self.context];
             [localPodcast populateWithPodcast:self.podcast];
+            [self.context obtainPermanentIDsForObjects:@ [localPodcast] error:nil];
+            [self.context MR_saveNestedContexts];
+            [[NSManagedObjectContext MR_rootSavingContext] MR_save];
 
             
         }
@@ -591,7 +595,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 - (void)reloadFetchedResultsController
 {
+    NSAssert([NSThread isMainThread], @"Should be on the main thread");
+    [self.context refreshObject:localPodcast mergeChanges:NO];
     NSPredicate *itemsInPodcastPredicate = [NSPredicate predicateWithFormat:@"podcast = %@", localPodcast];
+    DDLogVerbose(@"Reloading podcasts for podcast with core data identifier: %@", localPodcast.objectID);
     NSPredicate *predicate;
     
     if (localPodcast.hidePlayedEpisodesValue) {
@@ -612,9 +619,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [request setIncludesPendingChanges:YES];
     
     
-    fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"EpisodeListForId%@", localPodcast.podstoreId]];
-    [fetcher performFetch:nil];
-    
+    fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:nil];
+    NSError *error;
+    [fetcher performFetch:&error];
+    NSAssert(!error, @"There should be no error: %@" ,error);
     fetcher.delegate = self;
     [self.tableView reloadData];
 }
@@ -622,6 +630,20 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    DDLogVerbose(@"Adding podcast update observer");
+    observer = [[NSNotificationCenter defaultCenter] addObserverForName:@"SVPodcastUpdated"
+                                                                 object:nil
+                                                                  queue:[NSOperationQueue mainQueue]
+                                                             usingBlock:^(NSNotification *note) {
+                                                                 
+                                                                 NSNumber *updatedId = [note.userInfo objectForKey:@"identifier"];
+                                                                 NSNumber *thisId = [self.podcast podstoreId];
+                                                                 DDLogVerbose(@"Podcast has processed new items, refreshing. This podstoreId: %@, Updated id: %@", thisId, updatedId);
+                                                                 if ([updatedId isEqualToNumber: thisId]) {
+                                                                     DDLogVerbose(@"Refreshing in response to update");
+                                                                     [self reloadFetchedResultsController];
+                                                                 }
+                                                             }];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self reloadFetchedResultsController];
     });
@@ -632,6 +654,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    if(observer) {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+        observer = nil;
+    }
     fetcher.delegate = nil;
     fetcher = nil;
     [super viewWillDisappear:animated];

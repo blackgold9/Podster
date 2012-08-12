@@ -57,6 +57,13 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
         [defaultManagedObjectContext_ MR_stopObservingiCloudChangesInCoordinator:coordinator];
     }
 
+    NSManagedObjectContext *rootContext = [self MR_rootSavingContext];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+                                                      object:rootContext
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      
+                                                  }];
     defaultManagedObjectContext_ = moc;
     
     if ([MagicalRecord isICloudEnabled]) 

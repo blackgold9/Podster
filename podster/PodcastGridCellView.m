@@ -68,24 +68,34 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         SVPodcast *coreCast = (SVPodcast *)podcast;
         if (coreCast.gridImage && coreCast.objectID) {
             NSCache *cache = [self cache];
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                                
-                UIImage *image = [cache objectForKey:coreCast.objectID];
-                if (image == nil) {
-                    DDLogVerbose( @"Loaded local image");
-                    image = [UIImage imageWithData:coreCast.gridImage.imageData];
-                    [cache setObject:image forKey:coreCast.objectID];
-                } else {
-                    DDLogVerbose(@"Loaded cached Image");
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.podcastArtImageView.image = nil;
-                    [UIView animateWithDuration:0.33 animations:^{
-                        self.podcastArtImageView.image = image;                        
-                    }];
-                    
-                });
-            });
+            __block UIImage *image = [cache objectForKey:coreCast.objectID];
+            if (image == nil) {
+                  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                DDLogVerbose( @"Loaded local image");
+                image = [UIImage imageWithData:coreCast.gridImage.imageData];
+                [cache setObject:image forKey:coreCast.objectID];
+                      dispatch_async(dispatch_get_main_queue(), ^{
+                          self.podcastArtImageView.image = image;
+//                          CATransition *transition = [CATransition animation];
+//                          transition.duration = 0.25f;
+//                          transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//                          transition.type = kCATransitionFade;
+//                          
+//                          [self.podcastArtImageView.layer addAnimation:transition forKey:nil];
+                          
+                      });
+                      // Load image
+                  });
+            } else {
+                DDLogVerbose(@"Loaded cached Image");
+                self.podcastArtImageView.image = image;
+               
+            }
+
+          
+                
+                
+               
         } else {
             [self loadWebImageWithURL:[podcast smallLogoURL]];
             DDLogWarn(@"Didnt have expected image data stored locally. Redownloading");

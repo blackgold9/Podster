@@ -10,7 +10,7 @@
 #import "SVPodcast.h"
 #import "_SVPodcastEntry.h"
 
-static int ddLogLevel = LOG_LEVEL_INFO;
+static int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface PodcastUpdateOperation ()
 @property NSNumber *podstoreId;
 @end
@@ -53,9 +53,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
-- (void)main {
-    NSManagedObjectContext *childContext = [NSManagedObjectContext MR_defaultContext];
-    
+- (void)main {    
     
     __block NSDate *lastEntryDate = [NSDate distantPast];
     __block BOOL podcastExists;
@@ -105,13 +103,19 @@ static int ddLogLevel = LOG_LEVEL_INFO;
                                                                      if (operation) {
                                                                          operation->success = YES;
                                                                      }
-                                                                     
-                                                                     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
+                                                                     NSManagedObjectContext *rootContext = [NSManagedObjectContext MR_rootSavingContext];
+                                                                     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+                                                                     childContext.parentContext = rootContext;
+                                                                     [childContext performBlock:^{
                                                                          [self processResponse:response
-                                                                                     inContext:childContext];
+                                                                                     inContext:rootContext];
+                                                                         [childContext MR_save];
+                                                                         [parentContext MR_save];
+                                                                         [childContext reset];
                                                                          dispatch_group_leave(group);
-                                                                         
+
                                                                      }];
+                                                                     
                                                                  }
                                                                   onError:^void(NSError *error) {
                                                                       DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", self.podstoreId);
@@ -125,6 +129,8 @@ static int ddLogLevel = LOG_LEVEL_INFO;
                 if (result > 0) {
                     DDLogWarn(@"A timeout occured while trying to update podcast");
                 }
+                DDLogVerbose(@"Sending podcast updated notification");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPodcastUpdated" object:self userInfo:@{@"identifier": podstoreId}];
                 
                 if (self.onUpdateComplete) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -144,6 +150,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"Procesing response");
     [context performBlockAndWait:^void() {
         SVPodcast *localPodcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podstoreId inContext:context];
+        DDLogVerbose(@"PRocessing new episodes for podcast with core data identifier: %@", localPodcast.objectID);
         NSAssert(localPodcast!= nil, @"Should not be nil");
         localPodcast.lastSynced = [NSDate date];
         NSArray *episodes = response;
@@ -186,6 +193,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
         DDLogVerbose(@"Oldest recieved item date %@", lastDate);
         
         [self updateNewEpisodeCountForPodcast:localPodcast];
+        
     }];
 }
 

@@ -153,6 +153,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         SVDownload *download = entry.download;
         if (!download && !entry.downloadCompleteValue) {
             download = [SVDownload MR_createInContext:localContext];
+            [localContext obtainPermanentIDsForObjects:@[download] error:nil];
             download.manuallyTriggeredValue = isManualDownload;
             entry.download = download;
             download.entry = entry;
@@ -399,7 +400,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 //        
         // Push changesup
 
-        NSArray *toDownload = [shouldBePresent allObjects];
         NSError *error;
         if (error) {
             DDLogError(@"Error obtaining permanent IDs: %@", error);

@@ -36,6 +36,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         self.guid = theGuid;
     }
     
+    if (!self.guid) {
+        self.guid = self.mediaURL;
+    }
     self.podstoreId = [data objectForKey:@"id"];
 }
 
