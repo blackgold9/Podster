@@ -54,6 +54,7 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     GADBannerView *_bannerView;
     UIViewController *_contentController;
     BOOL shouldHideAd;
+    CFAbsoluteTime start;
 }
 
 - (UIViewController *)viewControllerForPresentingModalView {
@@ -61,36 +62,10 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 }
 
 - (id)initWithContentViewController:(UIViewController *)contentController {
+    start = CFAbsoluteTimeGetCurrent();
     self = [super init];
     if (self != nil) {
-        if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
-
-            _bannerView = [[GADBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(GAD_SIZE_320x50)];
-            [_bannerView setAdUnitID:@"c4ab1f3b218f441f"];
-            _bannerView.delegate = self;
-            _bannerView.rootViewController = self;
-            // Initiate a generic request to load it with an ad.
-            GADRequest *request = [GADRequest request];
-
-            if ([CLLocationManager locationServicesEnabled]) {
-                            CLLocationManager *locationManager = [[CLLocationManager alloc] init];
-                [request setLocationWithLatitude:locationManager.location.coordinate.latitude
-                                       longitude:locationManager.location.coordinate.longitude
-                                        accuracy:locationManager.location.horizontalAccuracy];
-            }
-            
-            [request.keywords addObject:@"Podcast"];
-            [request.keywords addObject:@"Podcasts"];
-            [request.keywords addObject:@"Radio"];
-#if DEBUG
-            request.testing = YES;
-#endif
-            [_bannerView loadRequest:request];
-            _contentController = contentController;
-            shouldHideAd = NO;
-
-        }
-
+        
         _contentController = contentController;
     }
     return self;
@@ -102,6 +77,36 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
 
 - (void)viewDidLoad {
+    
+    if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
+        
+        _bannerView = [[GADBannerView alloc] initWithAdSize:GADAdSizeFromCGSize(GAD_SIZE_320x50)];
+        [_bannerView setAdUnitID:@"c4ab1f3b218f441f"];
+        _bannerView.delegate = self;
+        _bannerView.rootViewController = self;
+        // Initiate a generic request to load it with an ad.
+        GADRequest *request = [GADRequest request];
+        
+        if ([CLLocationManager locationServicesEnabled]) {
+            CLLocationManager *locationManager = [[CLLocationManager alloc] init];
+            [request setLocationWithLatitude:locationManager.location.coordinate.latitude
+                                   longitude:locationManager.location.coordinate.longitude
+                                    accuracy:locationManager.location.horizontalAccuracy];
+        }
+        
+        [request.keywords addObject:@"Podcast"];
+        [request.keywords addObject:@"Podcasts"];
+        [request.keywords addObject:@"Radio"];
+        [request.keywords addObject:@"Talk"];
+        [request.keywords addObject:@"News"];
+#if DEBUG
+        request.testing = YES;
+#endif
+        [_bannerView loadRequest:request];
+        shouldHideAd = NO;
+        
+    }
+
     UIView *contentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.view addSubview:contentView];
     if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
@@ -130,7 +135,8 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 - (void)becameActive {
     // Hide the ad when coming back from the background. It's probably blank at this point. 
     // After this next layout, it will reset shouldHideAd to NO
-    shouldHideAd = YES;
+//    shouldHideAd = _bannerView;
+    shouldHideAd = NO;
     [self.view setNeedsLayout];
 //    [self.view layoutIfNeeded];    
 }

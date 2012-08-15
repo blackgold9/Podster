@@ -397,13 +397,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 //            DDLogVerbose(@"Deleting %@", path);
 //            [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 //        }
-//        
-        // Push changesup
+//
 
-        NSError *error;
-        if (error) {
-            DDLogError(@"Error obtaining permanent IDs: %@", error);
-        }
         DDLogInfo(@"Going through %d items that we want stored", shouldBePresent.count);
         for (SVPodcastEntry *entry in shouldBePresent) {
             NSAssert(entry != nil, @"Entry should exist");
@@ -418,8 +413,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 DDLogVerbose(@"Skipping entry that was already on downloaded/on disk");
             }
         }
-             
-        
     } completion:^{
         if (queue.operationCount == 0) {
             // No items to download, end here
@@ -428,13 +421,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 if (downloading) {
                     downloading = NO;
                 }
-            }
-            
+            }            
         }
      
         [queue setSuspended:NO];
-        
-        
     }];
 }
 

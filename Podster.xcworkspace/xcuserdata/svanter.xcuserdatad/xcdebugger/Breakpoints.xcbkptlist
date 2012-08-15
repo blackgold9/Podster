@@ -88,18 +88,20 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "113"
-         endingLineNumber = "113">
+         endingLineNumber = "113"
+         landmarkName = "@implementation SVSubscriptionManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "366479253.896809"
+         timestampString = "366529187.391223"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
          landmarkName = "-main"
          landmarkType = "5">
       </FileBreakpoint>
@@ -108,11 +110,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "366479253.896809"
+         timestampString = "366529187.391223"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "-main"
          landmarkType = "5">
       </FileBreakpoint>
@@ -121,11 +123,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "366479253.896809"
+         timestampString = "366529187.391223"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "88"
-         endingLineNumber = "88"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
          landmarkName = "-main"
          landmarkType = "5">
       </FileBreakpoint>
@@ -134,11 +136,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "366479253.896809"
+         timestampString = "366529187.391223"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
+         startingLineNumber = "134"
+         endingLineNumber = "134"
          landmarkName = "-main"
          landmarkType = "5">
       </FileBreakpoint>
@@ -249,11 +251,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "366479253.896809"
+         timestampString = "366529187.391223"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "62"
-         endingLineNumber = "62"
+         startingLineNumber = "60"
+         endingLineNumber = "60"
          landmarkName = "-main"
          landmarkType = "5">
       </FileBreakpoint>
@@ -301,11 +303,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "366479253.896809"
+         timestampString = "366529187.391223"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
          landmarkName = "-main"
          landmarkType = "5">
       </FileBreakpoint>

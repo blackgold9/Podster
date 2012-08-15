@@ -512,6 +512,8 @@
 		4B91BFC414C7FF7600B33776 /* list-item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC114C7FF7600B33776 /* list-item@2x.png */; };
 		4B91BFC514C7FF7600B33776 /* list-item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC114C7FF7600B33776 /* list-item@2x.png */; };
 		4BA02C6614E25AEF00582306 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA02C6514E25AEF00582306 /* MessageUI.framework */; };
+		4BAE0F6815DB6C8500CB6F36 /* libSSToolkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BAE0F5F15DB6C5300CB6F36 /* libSSToolkit.a */; };
+		4BAE0F6915DB6CBB00CB6F36 /* SSToolkitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4BAE0F6315DB6C5300CB6F36 /* SSToolkitResources.bundle */; };
 		4BB2058D14D0F8C70038EB7D /* SVPodcastModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */; };
 		4BB2058E14D0F8C70038EB7D /* SVPodcastModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */; };
 		4BB2059114D101500038EB7D /* SVPodcastDetailsModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */; };
@@ -565,9 +567,7 @@
 		4BFE0B6215041561005F9E81 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B6115041561005F9E81 /* Icon@2x.png */; };
 		7CD8CFFF779EF8F1C4AFC1DF /* PodcastUpdateOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD8CEADBEEB6FBD9B09FC73 /* PodcastUpdateOperation.m */; };
 		7D182D1C159B93190023C469 /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D182D17159B93190023C469 /* libAdapterIAd.a */; };
-		7D182D1D159B93190023C469 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D182D18159B93190023C469 /* README.txt */; };
 		7D182D1E159B93190023C469 /* libAdapterInMobi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D182D1A159B93190023C469 /* libAdapterInMobi.a */; };
-		7D182D1F159B93190023C469 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D182D1B159B93190023C469 /* README.txt */; };
 		7D182D26159B9C8E0023C469 /* SVSmartSyncSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D182D25159B9C8E0023C469 /* SVSmartSyncSettingsViewController.m */; };
 		7D182DA7159BD6A40023C469 /* AddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D182DA6159BD6A40023C469 /* AddLocationViewController.m */; };
 		7DB672CB1598158300FA932D /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB672C71598158300FA932D /* BWQuincyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -581,7 +581,7 @@
 		7DB6731B159B5A1000FA932D /* SVSyncLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB6731A159B5A1000FA932D /* SVSyncLocation.m */; };
 		7DB6731C159B5A1000FA932D /* SVSyncLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB6731A159B5A1000FA932D /* SVSyncLocation.m */; };
 		7DD61F0E159B92BD006181AE /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD61F05159B92BD006181AE /* libGoogleAdMobAds.a */; };
-		7DD61F0F159B92BD006181AE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7DD61F0D159B92BD006181AE /* README.txt */; };
+		925323126DAB7291C747BDC3 /* SVAsyncOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 925324931A50DB9837A9BFD6 /* SVAsyncOperation.m */; };
 		92532BEE7ADBE298F25BBD59 /* SVCustomGroupedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */; };
 		92532D82DA333A407478B30F /* NativeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9253297D753C12BC5154E5E7 /* NativeWebView.m */; };
 		D608C9AE150D6BA2009BA9BD /* honeycomb.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AC150D6BA2009BA9BD /* honeycomb.png */; };
@@ -614,6 +614,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4B71F78A14A5B08C00D26F4C;
 			remoteInfo = podster;
+		};
+		4BAE0F5E15DB6C5300CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		4BAE0F6015DB6C5300CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B239101D1357DC3E00ADE21B;
+			remoteInfo = SSToolkitTests;
+		};
+		4BAE0F6215DB6C5300CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2C507EA151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
+		4BAE0F6415DB6C6F00CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		4BAE0F6615DB6C6F00CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B2C507E9151BA64400E94614;
+			remoteInfo = SSToolkitResources;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1128,6 +1163,7 @@
 		4BA02C6514E25AEF00582306 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 11.xcdatamodel"; sourceTree = "<group>"; };
 		4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 4.xcdatamodel"; sourceTree = "<group>"; };
+		4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SSToolkit.xcodeproj; path = "3rd Party/SSToolkit/SSToolkit.xcodeproj"; sourceTree = "<group>"; };
 		4BB2058B14D0F8C70038EB7D /* SVPodcastModalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastModalView.h; sourceTree = "<group>"; };
 		4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastModalView.m; sourceTree = "<group>"; };
 		4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SVPodcastDetailsModalView.xib; sourceTree = "<group>"; };
@@ -1216,10 +1252,12 @@
 		7DD61F0B159B92BD006181AE /* GADCustomEventInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventInterstitialDelegate.h; sourceTree = "<group>"; };
 		7DD61F0C159B92BD006181AE /* GADCustomEventRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventRequest.h; sourceTree = "<group>"; };
 		7DD61F0D159B92BD006181AE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		925324931A50DB9837A9BFD6 /* SVAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVAsyncOperation.m; sourceTree = "<group>"; };
 		925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomGroupedTableViewController.m; sourceTree = "<group>"; };
 		9253277E9ED9AC7A796DE69A /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		925327A34FE940080957C560 /* NativeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeWebView.h; sourceTree = "<group>"; };
 		925327FB93FD7D934F91CA4A /* SVCustomGroupedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomGroupedTableViewController.h; sourceTree = "<group>"; };
+		925327FD0F01CB051DE2E9E0 /* SVAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVAsyncOperation.h; sourceTree = "<group>"; };
 		9253297D753C12BC5154E5E7 /* NativeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeWebView.m; sourceTree = "<group>"; };
 		D608C9AC150D6BA2009BA9BD /* honeycomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = honeycomb.png; sourceTree = "<group>"; };
 		D608C9AD150D6BA2009BA9BD /* honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "honeycomb@2x.png"; sourceTree = "<group>"; };
@@ -1249,6 +1287,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BAE0F6815DB6C8500CB6F36 /* libSSToolkit.a in Frameworks */,
 				4B0A7A81150672AD00BADEBB /* MapKit.framework in Frameworks */,
 				4B0A7A7C1506729800BADEBB /* CoreLocation.framework in Frameworks */,
 				4B01E0D51547E02A00EECA01 /* Twitter.framework in Frameworks */,
@@ -1962,6 +2001,8 @@
 		4B71F79514A5B08C00D26F4C /* podster */ = {
 			isa = PBXGroup;
 			children = (
+				925327FD0F01CB051DE2E9E0 /* SVAsyncOperation.h */,
+				925324931A50DB9837A9BFD6 /* SVAsyncOperation.m */,
 				925327FB93FD7D934F91CA4A /* SVCustomGroupedTableViewController.h */,
 				925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */,
 				9253277E9ED9AC7A796DE69A /* CoreDataController.h */,
@@ -2060,6 +2101,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */,
 				7DD61EFB159B92BD006181AE /* GoogleAdMobAdsSDK */,
 				7DB672C51598158300FA932D /* QuincyKit */,
 				4B85920815825184002452DF /* UAModalPanel */,
@@ -2287,6 +2329,16 @@
 			path = Layers;
 			sourceTree = "<group>";
 		};
+		4BAE0F5515DB6C5300CB6F36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4BAE0F5F15DB6C5300CB6F36 /* libSSToolkit.a */,
+				4BAE0F6115DB6C5300CB6F36 /* SSToolkitTests.app */,
+				4BAE0F6315DB6C5300CB6F36 /* SSToolkitResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4BB2058214D0F41B0038EB7D /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -2413,6 +2465,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				4BAE0F6515DB6C6F00CB6F36 /* PBXTargetDependency */,
+				4BAE0F6715DB6C6F00CB6F36 /* PBXTargetDependency */,
 			);
 			name = Podster;
 			productName = podster;
@@ -2461,6 +2515,12 @@
 			mainGroup = 4B71F78014A5B08C00D26F4C;
 			productRefGroup = 4B71F78C14A5B08C00D26F4C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4BAE0F5515DB6C5300CB6F36 /* Products */;
+					ProjectRef = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4B71F78A14A5B08C00D26F4C /* Podster */,
@@ -2468,6 +2528,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4BAE0F5F15DB6C5300CB6F36 /* libSSToolkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSSToolkit.a;
+			remoteRef = 4BAE0F5E15DB6C5300CB6F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BAE0F6115DB6C5300CB6F36 /* SSToolkitTests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SSToolkitTests.app;
+			remoteRef = 4BAE0F6015DB6C5300CB6F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BAE0F6315DB6C5300CB6F36 /* SSToolkitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SSToolkitResources.bundle;
+			remoteRef = 4BAE0F6215DB6C5300CB6F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4B71F78914A5B08C00D26F4C /* Resources */ = {
@@ -2657,9 +2741,7 @@
 				D6A8789015894C34009DD522 /* sliders.png in Resources */,
 				D6A8789115894C34009DD522 /* sliders@2x.png in Resources */,
 				7DB672D11598158400FA932D /* Quincy.bundle in Resources */,
-				7DD61F0F159B92BD006181AE /* README.txt in Resources */,
-				7D182D1D159B93190023C469 /* README.txt in Resources */,
-				7D182D1F159B93190023C469 /* README.txt in Resources */,
+				4BAE0F6915DB6CBB00CB6F36 /* SSToolkitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2947,6 +3029,7 @@
 				92532D82DA333A407478B30F /* NativeWebView.m in Sources */,
 				4B29327915BA8A0800F446E8 /* _PodcastImage.m in Sources */,
 				4B29327A15BA8A0800F446E8 /* PodcastImage.m in Sources */,
+				925323126DAB7291C747BDC3 /* SVAsyncOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3082,6 +3165,16 @@
 			target = 4B71F78A14A5B08C00D26F4C /* Podster */;
 			targetProxy = 4B71F7B114A5B08C00D26F4C /* PBXContainerItemProxy */;
 		};
+		4BAE0F6515DB6C6F00CB6F36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkit;
+			targetProxy = 4BAE0F6415DB6C6F00CB6F36 /* PBXContainerItemProxy */;
+		};
+		4BAE0F6715DB6C6F00CB6F36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkitResources;
+			targetProxy = 4BAE0F6615DB6C6F00CB6F36 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -3164,7 +3257,10 @@
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"3rd\\ Party/SSToolkit",
+				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -3300,7 +3396,10 @@
 					"CONFIGURATION_$(CONFIGURATION)",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"3rd\\ Party/SSToolkit",
+				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -3346,7 +3445,10 @@
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"3rd\\ Party/SSToolkit",
+				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -3476,7 +3578,10 @@
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"3rd\\ Party/SSToolkit",
+				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0.1;
 				LIBRARY_SEARCH_PATHS = (

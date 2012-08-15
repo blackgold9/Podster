@@ -10,13 +10,13 @@
 #import "SVPodcast.h"
 #import "_SVPodcastEntry.h"
 
+
 static int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface PodcastUpdateOperation ()
 @property NSNumber *podstoreId;
 @end
 
 @implementation PodcastUpdateOperation {
-    NSManagedObjectContext *parentContext;
     BOOL success;
     
 }
@@ -37,7 +37,6 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     self = [super init];
     if (self) {
         self.podstoreId =  podcast.podstoreId;
-        parentContext = theContext;
         success = NO;
     }
     
@@ -57,7 +56,8 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     __block NSDate *lastEntryDate = [NSDate distantPast];
     __block BOOL podcastExists;
-    __block NSString *title;    
+    __block NSString *title;
+    __block BOOL hadChanges = NO;
     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *childContext) {
         SVPodcast *podcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podstoreId];
         DDLogVerbose(@"Starting sync for Podcast with Id: %@", podcast.podstoreId);
@@ -109,8 +109,12 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                      [childContext performBlock:^{
                                                                          [self processResponse:response
                                                                                      inContext:rootContext];
+                                                                         if ([childContext insertedObjects].count > 0) {
+                                                                             // New episodes, set flag
+                                                                             hadChanges = YES;
+                                                                         }
                                                                          [childContext MR_save];
-                                                                         [parentContext MR_save];
+                                                                         [rootContext MR_save];
                                                                          [childContext reset];
                                                                          dispatch_group_leave(group);
 
@@ -129,9 +133,12 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                 if (result > 0) {
                     DDLogWarn(@"A timeout occured while trying to update podcast");
                 }
-                DDLogVerbose(@"Sending podcast updated notification");
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPodcastUpdated" object:self userInfo:@{@"identifier": podstoreId}];
-                
+
+                if (hadChanges) {
+                    DDLogVerbose(@"Sending podcast updated notification");
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPodcastUpdated" object:self userInfo:@{@"identifier": podstoreId}];
+                }
+
                 if (self.onUpdateComplete) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         self.onUpdateComplete(self);

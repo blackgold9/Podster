@@ -20,6 +20,7 @@
     #import "LoggerClient.h"
     #import "CoreData+MagicalRecord.h"
     #import "NSString+SVHelpers.h"
+#import <SSToolkit/SSCategories.h>
 #import "SVSettings.h"
 #import "AFNetworking.h"
 #import "SVPodcatcherClient.h"

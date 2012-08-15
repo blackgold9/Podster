@@ -3,7 +3,8 @@ typedef enum {
     SVDownloadStatePending = 0,
     SVDownloadStateDownloading = 1,
     SVDownloadStatePaused = 2,
-    SVDownloadStateFailed = 3
+    SVDownloadStateFailed = 3,
+    SVDownloadStateCompleted = 4
 } SVDownloadState;
 @interface SVDownload : _SVDownload {}
 // Custom logic goes here.

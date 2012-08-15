@@ -62,29 +62,29 @@ NSString *uuid();
     [[UISegmentedControl appearance] setTintColor:colorOne];
     [[UIToolbar appearance] setTintColor:colorOne];
     [[UISearchBar appearance] setBarStyle:UIBarStyleBlack];
-    
-    
+
+
     UIImage *barButton = [[UIImage imageNamed:@"nav-bar-btn.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-    
-    [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal 
+
+    [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal
                                           barMetrics:UIBarMetricsDefault];
-    
+
     UIImage *backButton = [UIImage imageNamed:@"back-btn-big.png"];
-    
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal 
+
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal
                                                     barMetrics:UIBarMetricsDefault];
-  
+
     UIImage *minImage = [UIImage imageNamed:@"slider-fill.png"];
     //UIImage *maxImage = [UIImage imageNamed:@"slider-bg.png"];
     UIImage *thumbImage = [UIImage imageNamed:@"slider-cap.png"];
-    
-    
-    [[UISlider appearance] setMinimumTrackImage:minImage 
+
+
+    [[UISlider appearance] setMinimumTrackImage:minImage
                                        forState:UIControlStateNormal];
-    [[UISlider appearance] setThumbImage:thumbImage 
+    [[UISlider appearance] setThumbImage:thumbImage
                                 forState:UIControlStateNormal];
     [[UISlider appearance] setMaximumTrackTintColor:colorOne];
-  //  [[UIProgressView appearance] setMaximumTrackTintColor:colorOne];
+    //  [[UIProgressView appearance] setMaximumTrackTintColor:colorOne];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -124,38 +124,34 @@ NSString *uuid();
     [[BWHockeyManager sharedHockeyManager] setDelegate:self];
 #endif
 
-//    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:@"SVPodcastDatastore.momd"];
-//    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
-
 
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"PodsterData/StoreContent/persistentStore"];
-    
+
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
     [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
     [NSURLCache setSharedURLCache:URLCache];
-    
+
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
-    
+
     [self configureTheming];
-    
-   
-        // Actually register
+
+
+    // Actually register
 #ifndef CONFIGURATION_Debug
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
-                                                                               UIRemoteNotificationTypeBadge|
-                                                                               UIRemoteNotificationTypeSound)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
+            UIRemoteNotificationTypeBadge|
+            UIRemoteNotificationTypeSound)];
 #else
         [self application:[UIApplication sharedApplication] didFailToRegisterForRemoteNotificationsWithError:nil];
 #endif
 
-    
     BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
     self.window.rootViewController = controller;
 
     [[SVSettings sharedInstance] setFirstRun:NO];
 
-   saveTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
+    saveTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
     return YES;
 
 }
@@ -163,7 +159,7 @@ NSString *uuid();
 - (void)saveData
 {
     DDLogInfo(@"Saving datastore to disk.");
- //   [[NSManagedObjectContext MR_defaultContext] MR_save];
+    //   [[NSManagedObjectContext MR_defaultContext] MR_save];
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
@@ -190,71 +186,73 @@ NSString *uuid();
                                                  onCompletion:^(id response ){
                                                      if (isFirstRun) {
                                                          // Restore pre-existing subscriptions if they exist
-                                                         NSArray *subscriptions = (NSArray *)response;                                                         
+                                                         NSArray *subscriptions = (NSArray *)response;
                                                          for (NSDictionary *sub in subscriptions) {
-                                                             NSDictionary *subData = [sub objectForKey:@"subscription"];                                                             
+                                                             NSDictionary *subData = [sub objectForKey:@"subscription"];
                                                              [SVPodcast fetchAndSubscribeToPodcastWithId:[subData objectForKey:@"feed_id"]
                                                                                             shouldNotify:[[subData objectForKey:@"notify"] boolValue]];
-                                                         }  
+                                                         }
                                                      } else {
-                                                         // Reconcile subs
+                                                         [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
                                                      }
-                                                     
-                                                 } onError:^(NSError *error) {
-                                                     [FlurryAnalytics logError:@"RegistrationFailed"
-                                                                       message:[error localizedDescription]
-                                                                         error:error];
-                                                     LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
-                                                 }];
+
+                                                 }
+                                                      onError:^(NSError *error) {
+        [FlurryAnalytics logError:@"RegistrationFailed"
+                          message:[error localizedDescription]
+                            error:error];
+        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+        LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
+    }];
 }
 
 
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-        
-        
-        if (application.applicationState != UIApplicationStateActive) {
-            NSString *feedId= [userInfo valueForKey:@"feedId"];
-            LOG_GENERAL(2, @"launched for podcast with podstore id: %@", feedId);
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
-            SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:predicate 
-                                                            inContext:[NSManagedObjectContext MR_defaultContext]];
-            if (podcast) {
-                NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
-                                                                   forKey:@"Title"];
-                [FlurryAnalytics logEvent:@"LaunchedFromNotification"
-                           withParameters:params];
-                
-                SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
-                controller.podcast = podcast;
-                __weak SVAppDelegate *weakDelegate = self;
-                double delayInSeconds = 1.0;
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    UINavigationController *nav = nil;
-                    if ([self.window.rootViewController class] == [UINavigationController class]) {
-                        nav = (UINavigationController *)weakDelegate.window.rootViewController;
-                    } else {
-                        //If the root isnt a nav controller, it's a banner controller;
-                        BannerViewController *bc = (BannerViewController *) weakDelegate.window.rootViewController;
-                        nav = (UINavigationController *)[bc contentController];
-                    }
-                    [nav popToRootViewControllerAnimated:NO];
-                    dispatch_async(dispatch_get_main_queue(), ^{                                                
-                        [nav pushViewController:controller animated:YES];
-                    });
-                    
+
+
+    if (application.applicationState != UIApplicationStateActive) {
+        NSString *feedId= [userInfo valueForKey:@"feedId"];
+        LOG_GENERAL(2, @"launched for podcast with podstore id: %@", feedId);
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
+        SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:predicate
+                                                        inContext:[NSManagedObjectContext MR_defaultContext]];
+        if (podcast) {
+            NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
+                                                               forKey:@"Title"];
+            [FlurryAnalytics logEvent:@"LaunchedFromNotification"
+                       withParameters:params];
+
+            SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
+            controller.podcast = podcast;
+            __weak SVAppDelegate *weakDelegate = self;
+            double delayInSeconds = 1.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                UINavigationController *nav = nil;
+                if ([self.window.rootViewController class] == [UINavigationController class]) {
+                    nav = (UINavigationController *)weakDelegate.window.rootViewController;
+                } else {
+                    //If the root isnt a nav controller, it's a banner controller;
+                    BannerViewController *bc = (BannerViewController *) weakDelegate.window.rootViewController;
+                    nav = (UINavigationController *)[bc contentController];
+                }
+                [nav popToRootViewControllerAnimated:NO];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [nav pushViewController:controller animated:YES];
                 });
-            }
+
+            });
         }
+    }
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     [FlurryAnalytics logEvent:@"LaunchedWithNotificationsDisabled"];
     [[SVSettings sharedInstance] setNotificationsEnabled:NO];
     [self registerWithOptionalNotificationToken:nil];
 }
-	
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*
@@ -284,7 +282,7 @@ NSString *uuid();
             NSArray *subscriptions= [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"isSubscribed == YES"]
                                                              inContext:[NSManagedObjectContext MR_defaultContext] ];
             NSMutableArray *subscriptionData = [NSMutableArray arrayWithCapacity:subscriptions.count];
-            
+
             for(SVPodcast *podcast in subscriptions) {
                 id data = [NSDictionary dictionaryWithObjectsAndKeys:podcast.podstoreId,@"podstoreId",podcast.shouldNotify, @"shouldNotify",  nil];
                 [subscriptionData addObject:data];
@@ -294,8 +292,8 @@ NSString *uuid();
         }];
         [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
         [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
-            [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
-            background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
+        [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
+        background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
 
     });
 }
@@ -307,7 +305,7 @@ NSString *uuid();
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SVReloadData" object:nil];
+    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -341,26 +339,26 @@ NSString *uuid();
 - (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
     AVPlayer *_player = [[SVPlaybackManager sharedInstance] player];
     if (receivedEvent.type == UIEventTypeRemoteControl) {
-        
+
         switch (receivedEvent.subtype) {
             case UIEventSubtypeRemoteControlStop:
             case UIEventSubtypeRemoteControlPause:
-                
+
                 [[SVPlaybackManager sharedInstance] pause];
-                
+
                 break;
             case UIEventSubtypeRemoteControlPlay:
-                
+
                 [[SVPlaybackManager sharedInstance] play];
-                
+
                 break;
             case UIEventSubtypeRemoteControlTogglePlayPause:
-                
+
                 if ( _player.rate != 0) {
                     [[SVPlaybackManager sharedInstance] pause];
                 } else {
                     [[SVPlaybackManager sharedInstance] play];
-                }            
+                }
                 break;
             case UIEventSubtypeRemoteControlNextTrack:
                 [[SVPlaybackManager sharedInstance] skipForward];
@@ -368,7 +366,7 @@ NSString *uuid();
             case UIEventSubtypeRemoteControlPreviousTrack:
                 [[SVPlaybackManager sharedInstance] skipBack];
                 break;
-                
+
             default:
                 break;
         }
@@ -379,13 +377,13 @@ NSString *uuid();
 {
     NSString *output;
     if ([[fileLogger logFileManager] sortedLogFilePaths].count > 0) {
-        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:0] 
+        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:0]
                                            encoding:NSUTF8StringEncoding
                                               error:nil];
     }
-    
+
     return output;
-}   
+}
 
 -(NSString *)customDeviceIdentifier
 {
@@ -396,41 +394,6 @@ NSString *uuid();
         return [[SVSettings sharedInstance] deviceId];;
 #endif
     return [[SVSettings sharedInstance] deviceId];
-}
-
-- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
-{
-DDLogWarn(@"Failed to monitor region %@ with error %@", region, error);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
-
-        BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"RegionEnter", @"Type", nil];
-        DDLogInfo(@"Refreshing subscriptions becasue we entered a region. Parameters: %@", parameters);
-
-        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
-        if ([[SVSettings sharedInstance] downloadOn3g]) {
-            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        }
-    });
-}
-
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
-
-
-        BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"RegionExit", @"Type", nil];
-        DDLogInfo(@"Refreshing subscriptions becasue we entered a region. Parameters: %@", parameters);
-        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
-        if ([[SVSettings sharedInstance] downloadOn3g]) {
-            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        }
-    });
 }
 
 @end

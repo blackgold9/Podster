@@ -12,6 +12,7 @@
 #import "SVPodcastEntry.h"
 #import "SVDownloadManager.h"
 #import "PodcastUpdateOperation.h"
+#import <SSToolkit/SSRateLimit.h>
 static const int ddLogLevel = LOG_LEVEL_INFO;
 static char const kRefreshInterval = -3;
 
@@ -28,9 +29,9 @@ static char const kRefreshInterval = -3;
     static id sharedInstance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[self alloc] init];
+    sharedInstance = [[self alloc] init];
 
-    });
+});
 
     return sharedInstance;
 }
@@ -48,32 +49,33 @@ static char const kRefreshInterval = -3;
 
 -(void)refreshAllSubscriptions
 {
-    shouldCancel = NO;
-    if (self.isBusy) {
-        DDLogWarn(@"Subscription Manager busy. Refresh cancelled");
-        return;
+    [SSRateLimit executeBlock:^{
+        shouldCancel = NO;
+        if (self.isBusy) {
+            DDLogWarn(@"Subscription Manager busy. Refresh cancelled");
+            return;
 
-    }
-    self.isBusy = YES;
-
-    
-    NSArray *podcasts = [SVPodcast MR_findByAttribute:SVPodcastAttributes.isSubscribed withValue:[NSNumber numberWithBool:YES]];
+        }
+        self.isBusy = YES;
 
 
-    // Actually do the update
-    [self refreshPodcasts:podcasts
-                 complete:^void() {
-                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                         [[SVDownloadManager sharedInstance] downloadPendingEntries];
-                     });
+        NSArray *podcasts = [SVPodcast MR_findByAttribute:SVPodcastAttributes.isSubscribed withValue:[NSNumber numberWithBool:YES]];
 
-                     dispatch_async(dispatch_get_main_queue(), ^{
-                         self.isBusy = NO;
-                         DDLogInfo(@"Refreshing Subscriptions is complete");
-                     });
-                 }
-                  onQueue:dispatch_get_main_queue()];
-    
+
+        // Actually do the update
+        [self refreshPodcasts:podcasts
+                     complete:^void() {
+                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                             [[SVDownloadManager sharedInstance] downloadPendingEntries];
+                         });
+
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             self.isBusy = NO;
+                             DDLogInfo(@"Refreshing Subscriptions is complete");
+                         });
+                     }
+                      onQueue:dispatch_get_main_queue()];
+    } name:@"RefreshPodcasts" limit:120];
 }
 
 - (void)refreshPodcasts:(NSArray *)podcasts complete:(void (^)())complete onQueue:(dispatch_queue_t)queue
@@ -104,7 +106,7 @@ static char const kRefreshInterval = -3;
             dispatch_release(group);
             dispatch_release(queue);
         });
-    } 
+    }
 
 }
 
