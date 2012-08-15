@@ -5,127 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="Renamed tag controllers to appropriate names">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSArray+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSArray+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSBundle+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSBundle+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSData+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSData+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSDate+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSDate+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSDictionary+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSDictionary+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSNumber+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSNumber+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSString+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSString+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSURL+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/NSURL+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSAddressBarTextField.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSAddressBarTextField.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSAddressBarTextFieldBackgroundView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSAddressBarTextFieldBackgroundView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSAddressBarTextFieldBackgroundViewInnerView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSAddressBarTextFieldBackgroundViewInnerView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSAnimatedImageView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSAnimatedImageView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSBadgeTableViewCell.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSBadgeTableViewCell.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSBadgeView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSBadgeView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSBorderedView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSBorderedView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSButton.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSButton.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCategories.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewController.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewController.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewExtremityTableViewCell.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewExtremityTableViewCell.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewInternal.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewItem.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewItem.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewItemInternal.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewItemTableViewCell.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewItemTableViewCell.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewTableView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSCollectionViewTableView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSConcurrentOperation.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSConcurrentOperation.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSDrawingUtilities.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSDrawingUtilities.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSGradientView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSGradientView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSHUDView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSHUDView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSHUDWindow.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSHUDWindow.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSLabel.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSLabel.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSLineView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSLineView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSLoadingView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSLoadingView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSPickerViewController.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSPickerViewController.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSPieProgressView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSPieProgressView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSRateLimit.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSRateLimit.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSRatingPicker.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSRatingPicker.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSRatingPickerScrollView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSRatingPickerScrollView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSRatingPickerViewController.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSRatingPickerViewController.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSTextField.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSTextField.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSTextView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSTextView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSToolkit.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSToolkitDefines.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSToolkitDefines.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSWebView.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/SSWebView.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIApplication+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIApplication+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIColor+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIColor+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIControl+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIControl+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIDevice+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIDevice+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIImage+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIImage+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIScreen+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIScreen+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIScrollView+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIScrollView+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIView+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIView+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIViewController+SSToolkitAdditions.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/3rd Party/SSToolkit/UIViewController+SSToolkitAdditions.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVAsyncOperation.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVAsyncOperation.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/svanter.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/svanter.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/BannerViewController.m" afterPath="$PROJECT_DIR$/podster/BannerViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/CoreDataController.h" afterPath="$PROJECT_DIR$/podster/CoreDataController.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/PodcastGridCellView.m" afterPath="$PROJECT_DIR$/podster/PodcastGridCellView.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/PodcastUpdateOperation.m" afterPath="$PROJECT_DIR$/podster/PodcastUpdateOperation.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadManager.m" afterPath="$PROJECT_DIR$/podster/SVDownloadManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadOperation.h" afterPath="$PROJECT_DIR$/podster/SVDownloadOperation.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadOperation.m" afterPath="$PROJECT_DIR$/podster/SVDownloadOperation.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionManager.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/models/SVDownload.h" afterPath="$PROJECT_DIR$/podster/models/SVDownload.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Prefix.pch" afterPath="$PROJECT_DIR$/podster/podster-Prefix.pch" />
     </list>
     <ignored path="podster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -155,7 +37,7 @@
       <file leaf-file-name="SVSubscriptionManager.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podster/SVSubscriptionManager.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="41" selection-start="2226" selection-end="2226" vertical-scroll-proportion="0.725">
+            <state line="77" column="41" selection-start="2236" selection-end="2236" vertical-scroll-proportion="0.11029412">
               <folding />
             </state>
           </provider>
@@ -164,10 +46,8 @@
       <file leaf-file-name="SVAppDelegate.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="307" column="62" selection-start="14682" selection-end="14682" vertical-scroll-proportion="-44.0">
-              <folding>
-                <element signature="e#152#173#0" expanded="true" />
-              </folding>
+            <state line="307" column="62" selection-start="14682" selection-end="14682" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -175,23 +55,8 @@
       <file leaf-file-name="SVPodcastDetailsViewController.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="643" column="89" selection-start="26890" selection-end="26890" vertical-scroll-proportion="-17.307692">
-              <folding>
-                <element signature="e#170#212#0" expanded="true" />
-                <element signature="e#1074#1098#0" expanded="true" />
-                <element signature="e#3656#3781#0" expanded="true" />
-                <element signature="e#3804#3958#0" expanded="true" />
-                <element signature="e#4141#4212#0" expanded="true" />
-                <element signature="e#4538#4585#0" expanded="true" />
-                <element signature="e#7869#8064#0" expanded="true" />
-                <element signature="e#8103#8134#0" expanded="true" />
-                <element signature="e#10225#10278#0" expanded="true" />
-                <element signature="e#10346#10503#0" expanded="true" />
-                <element signature="e#18192#18233#0" expanded="true" />
-                <element signature="e#22810#22971#0" expanded="true" />
-                <element signature="e#23026#23055#0" expanded="true" />
-                <element signature="e#30539#30567#0" expanded="true" />
-              </folding>
+            <state line="643" column="89" selection-start="26890" selection-end="26890" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -207,42 +72,6 @@
       </file>
       <file leaf-file-name="SVDownloadOperation.h" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/SVDownloadOperation.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NSArray+SSToolkitAdditions.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/NSArray+SSToolkitAdditions.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="37" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NSArray+SSToolkitAdditions.m" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/NSArray+SSToolkitAdditions.m">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SSGradientView.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSGradientView.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SSCategories.h" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSCategories.h">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -284,7 +113,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="2560" />
+    <option name="width" value="1440" />
     <option name="height" value="801" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -426,14 +255,14 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="168" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="175" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="219" />
-    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="219" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Podster.xcworkspace" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="177" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="724" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="867" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="724" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="224" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="220" />
@@ -467,10 +296,25 @@
       <envs />
       <method />
     </configuration>
-    <list size="3">
+    <configuration default="false" name="SSToolkit" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="SSToolkit" PROJECT_NAME="SSToolkit" TARGET_NAME="SSToolkit" CONFIG_NAME="Debug" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="SSToolkitResources" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="SSToolkitResources" PROJECT_NAME="SSToolkit" TARGET_NAME="SSToolkitResources" CONFIG_NAME="Debug" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="SSToolkitTests" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="SSToolkitTests" PROJECT_NAME="SSToolkit" TARGET_NAME="SSToolkitTests" CONFIG_NAME="Debug" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" RUN_TARGET_PROJECT_NAME="SSToolkit" RUN_TARGET_NAME="SSToolkitTests" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+      <envs />
+      <method />
+    </configuration>
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.podster" />
       <item index="1" class="java.lang.String" itemvalue="Application.beta" />
       <item index="2" class="java.lang.String" itemvalue="Application.podster-release" />
+      <item index="3" class="java.lang.String" itemvalue="Application.SSToolkit" />
+      <item index="4" class="java.lang.String" itemvalue="Application.SSToolkitResources" />
+      <item index="5" class="java.lang.String" itemvalue="Application.SSToolkitTests" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -523,7 +367,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="2560" height="801" extended-state="0" />
+    <frame x="0" y="22" width="1440" height="801" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38048092" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -614,7 +458,7 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="380" />
+      <option name="time" value="383" />
     </breakpoint-manager>
   </component>
   <component name="XcodeMetaData" SELECTED_TARGET="iphonesimulator_5.1_1" />
@@ -638,72 +482,37 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSAnimatedImageView.h">
+    <entry file="file://$PROJECT_DIR$/podster/SVDownloadOperation.h">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSBadgeTableViewCell.m">
+    <entry file="file://$PROJECT_DIR$/podster/SVDownloadManager.m">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSBadgeTableViewCell.h">
+    <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="643" column="89" selection-start="26890" selection-end="26890" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSBadgeView.h">
+    <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="307" column="62" selection-start="14682" selection-end="14682" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSBorderedView.h">
+    <entry file="file://$PROJECT_DIR$/podster/SVSubscriptionManager.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSButton.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSCategories.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSGradientView.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/NSArray+SSToolkitAdditions.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/NSArray+SSToolkitAdditions.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="37" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
+        <state line="77" column="41" selection-start="2236" selection-end="2236" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -724,45 +533,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="643" column="89" selection-start="26890" selection-end="26890" vertical-scroll-proportion="-17.307692">
-          <folding>
-            <element signature="e#170#212#0" expanded="true" />
-            <element signature="e#1074#1098#0" expanded="true" />
-            <element signature="e#3656#3781#0" expanded="true" />
-            <element signature="e#3804#3958#0" expanded="true" />
-            <element signature="e#4141#4212#0" expanded="true" />
-            <element signature="e#4538#4585#0" expanded="true" />
-            <element signature="e#7869#8064#0" expanded="true" />
-            <element signature="e#8103#8134#0" expanded="true" />
-            <element signature="e#10225#10278#0" expanded="true" />
-            <element signature="e#10346#10503#0" expanded="true" />
-            <element signature="e#18192#18233#0" expanded="true" />
-            <element signature="e#22810#22971#0" expanded="true" />
-            <element signature="e#23026#23055#0" expanded="true" />
-            <element signature="e#30539#30567#0" expanded="true" />
-          </folding>
+        <state line="643" column="89" selection-start="26890" selection-end="26890" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="307" column="62" selection-start="14682" selection-end="14682" vertical-scroll-proportion="-44.0">
-          <folding>
-            <element signature="e#152#173#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3rd Party/SSToolkit/SSRateLimit.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="11" selection-start="210" selection-end="210" vertical-scroll-proportion="0.24264705">
+        <state line="307" column="62" selection-start="14682" selection-end="14682" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVSubscriptionManager.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="41" selection-start="2226" selection-end="2226" vertical-scroll-proportion="0.725">
+        <state line="77" column="41" selection-start="2236" selection-end="2236" vertical-scroll-proportion="0.11029412">
           <folding />
         </state>
       </provider>
