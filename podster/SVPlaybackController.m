@@ -104,9 +104,11 @@
     
     [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
                                                       object:nil
-                                                       queue:nil
+                                                       queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
-                                                      [self.navigationController popViewControllerAnimated:YES];
+                                                      if ([self.navigationController.topViewController class] == [SVPlaybackController class]) {
+                                                          [self.navigationController popViewControllerAnimated:YES];
+                                                      }
                                                   }];
 
 }
