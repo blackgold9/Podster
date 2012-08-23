@@ -1,7 +1,6 @@
 #import "SVPodcast.h"
 #import "NSDictionary+safeGetters.h"
 #import "SVPodcastEntry.h"
-#import "NSString+MD5Addition.h"
 #import "SVDownloadManager.h"
 #import "_SVPodcastEntry.h"
 #import "PodcastImage.h"

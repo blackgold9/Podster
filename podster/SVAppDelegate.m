@@ -22,14 +22,15 @@
 #import "BannerViewController.h"
 #import "MBProgressHUD.h"
 #import "SVSettings.h"
-#import "BWHockeyManager.h"
-#import "BWQuincyManager.h"
 #import "DDFileLogger.h"
 #import "DDTTYLogger.h"
 #import "DDASLLogger.h"
 #import "DDNSLoggerLogger.h"
 #import "Lockbox.h"
+#import <HockeySDK/HockeySDK.h>
 static const int ddLogLevel = LOG_LEVEL_INFO;
+@interface SVAppDelegate() <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate> {}
+@end
 @implementation SVAppDelegate
 {
     DDFileLogger *fileLogger;
@@ -99,29 +100,35 @@ NSString *uuid();
     fileLogger.logFileManager.maximumNumberOfLogFiles = 1;
 
     [DDLog addLogger:fileLogger];
+    
+    [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"
+                                                         liveIdentifier:@"f36888480951c50f12bb465ab891cf24"
+                                                               delegate:self];
+    
+    [[BITHockeyManager sharedHockeyManager] startManager];
 #if defined (CONFIGURATION_AppStore)
     DDLogVerbose(@"Running in Appstore mode");
     [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
-    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
-    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
-    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
-    [[BWQuincyManager sharedQuincyManager] setDelegate:self];
+//    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
+//    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+//    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
+//    [[BWQuincyManager sharedQuincyManager] setDelegate:self];
  //   [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
 #endif
 
 #if defined (CONFIGURATION_Ad_Hoc)
     DDLogVerbose(@"Running in Ad_Hoc mode");
-    [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
-    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+//    [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
+//    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
+//    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
+//    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
-    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
+    //[[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
-    [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
-    [[BWHockeyManager sharedHockeyManager] setDelegate:self];
+//    [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
+//    [[BWHockeyManager sharedHockeyManager] setDelegate:self];
 #endif
 
 //    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:@"SVPodcastDatastore.momd"];
@@ -375,62 +382,28 @@ NSString *uuid();
     }
 }
 
--(NSString *)crashReportDescription
+-(NSString *)applicationLogForCrashManager:(BITCrashManager *)crashManager
 {
     NSString *output;
     if ([[fileLogger logFileManager] sortedLogFilePaths].count > 0) {
-        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:0] 
+        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:0]
                                            encoding:NSUTF8StringEncoding
                                               error:nil];
     }
-    
+    if ([output length] > 5000) {
+        output = (NSMutableString *)[output substringWithRange:NSMakeRange([output length]-5000-1, 5000)];
+    }
     return output;
-}   
+}
 
--(NSString *)customDeviceIdentifier
-{
-#if defined (CONFIGURATION_Ad_Hoc)
+- (NSString *)customDeviceIdentifierForUpdateManager:(BITUpdateManager *)updateManager {
+#ifndef CONFIGURATION_AppStore
     if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)])
         return [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];
-    else 
-        return [[SVSettings sharedInstance] deviceId];;
 #endif
-    return [[SVSettings sharedInstance] deviceId];
+    return nil;
 }
 
-- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
-{
-DDLogWarn(@"Failed to monitor region %@ with error %@", region, error);
-}
 
-- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
-
-        BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"RegionEnter", @"Type", nil];
-        DDLogInfo(@"Refreshing subscriptions becasue we entered a region. Parameters: %@", parameters);
-
-        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
-        if ([[SVSettings sharedInstance] downloadOn3g]) {
-            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        }
-    });
-}
-
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC), dispatch_get_main_queue(), ^void() {
-
-
-        BOOL onWifi = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi;
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:onWifi], @"OnWifi", @"RegionExit", @"Type", nil];
-        DDLogInfo(@"Refreshing subscriptions becasue we entered a region. Parameters: %@", parameters);
-        [FlurryAnalytics logEvent:@"SmartSyncTriggered" withParameters:parameters];
-        if ([[SVSettings sharedInstance] downloadOn3g]) {
-            [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        }
-    });
-}
 
 @end
