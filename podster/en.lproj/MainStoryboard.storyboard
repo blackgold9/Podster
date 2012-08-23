@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2818" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2829" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1900"/>
+        <development version="4500" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1914"/>
     </dependencies>
     <scenes>
         <!--Podcast Directory View Controller - Popular Tags-->
@@ -568,17 +569,23 @@
                 <viewController storyboardIdentifier="subscriptionGridController" title="Subscripton Grid View" id="1nk-N3-2Nt" customClass="SVSubscriptionGridViewController" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="lkc-WF-bF9">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="82k-9o-qR8" customClass="GMGridView">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="e2W-iL-wIh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="yCE-Bj-NEK">
+                                    <size key="itemSize" width="150" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
                                 <connections>
-                                    <outlet property="actionDelegate" destination="1nk-N3-2Nt" id="SfT-XE-vD7"/>
-                                    <outlet property="dataSource" destination="1nk-N3-2Nt" id="WHT-C6-3Yy"/>
+                                    <outlet property="dataSource" destination="1nk-N3-2Nt" id="EWs-cS-F19"/>
+                                    <outlet property="delegate" destination="1nk-N3-2Nt" id="stQ-MN-Sf7"/>
                                 </connections>
-                            </view>
+                            </collectionView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" text="No Content Label" textAlignment="center" autoshrinkMode="minimumFontSize" id="ee3-SO-eaf">
                                 <rect key="frame" x="23" y="166" width="274" height="129"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -593,14 +600,13 @@
                         <barButtonItem key="backBarButtonItem" title="Home" id="T3w-6t-Znd"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="gridView" destination="82k-9o-qR8" id="3TK-Bz-G11"/>
+                        <outlet property="gridView" destination="e2W-iL-wIh" id="901-qp-vOp"/>
                         <outlet property="noContentLabel" destination="ee3-SO-eaf" id="Vwe-4c-zv1"/>
-                        <outlet property="view" destination="lkc-WF-bF9" id="bHK-7b-akA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Twn-P0-pDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="152" y="1018"/>
+            <point key="canvasLocation" x="148" y="974"/>
         </scene>
         <!--Featured Controller - Featured-->
         <scene sceneID="hF1-eS-QHN">

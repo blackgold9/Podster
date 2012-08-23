@@ -371,7 +371,6 @@
 		4B8F6FA914ED9DAB00D328DE /* UIImage+ForceDecompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B8F6FA814ED9DAB00D328DE /* UIImage+ForceDecompress.m */; };
 		4B90FC8814E490130082C155 /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B90FC8714E490120082C155 /* Debug.storyboard */; };
 		4B90FC8B14E4907C0082C155 /* DebugHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B90FC8A14E4907C0082C155 /* DebugHomeViewController.m */; };
-		4B91BF6514C77B6600B33776 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF5114C77B6600B33776 /* UIColor+Hex.m */; };
 		4B91BF6714C77B6600B33776 /* UIView+InnerShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF5314C77B6600B33776 /* UIView+InnerShadow.m */; };
 		4B91BF6914C77B6600B33776 /* UIView+Positioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF5514C77B6600B33776 /* UIView+Positioning.m */; };
 		4B91BF6B14C77B6600B33776 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B91BF5714C77B6600B33776 /* UIView+Size.m */; };
@@ -1003,8 +1002,6 @@
 		4B90FC8714E490120082C155 /* Debug.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Debug.storyboard; sourceTree = "<group>"; };
 		4B90FC8914E4907C0082C155 /* DebugHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugHomeViewController.h; sourceTree = "<group>"; };
 		4B90FC8A14E4907C0082C155 /* DebugHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugHomeViewController.m; sourceTree = "<group>"; };
-		4B91BF5014C77B6600B33776 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
-		4B91BF5114C77B6600B33776 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		4B91BF5214C77B6600B33776 /* UIView+InnerShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+InnerShadow.h"; sourceTree = "<group>"; };
 		4B91BF5314C77B6600B33776 /* UIView+InnerShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+InnerShadow.m"; sourceTree = "<group>"; };
 		4B91BF5414C77B6600B33776 /* UIView+Positioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Positioning.h"; sourceTree = "<group>"; };
@@ -2173,8 +2170,6 @@
 		4B91BF4F14C77B6600B33776 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				4B91BF5014C77B6600B33776 /* UIColor+Hex.h */,
-				4B91BF5114C77B6600B33776 /* UIColor+Hex.m */,
 				4B91BF5214C77B6600B33776 /* UIView+InnerShadow.h */,
 				4B91BF5314C77B6600B33776 /* UIView+InnerShadow.m */,
 				4B91BF5414C77B6600B33776 /* UIView+Positioning.h */,
@@ -2382,7 +2377,7 @@
 		4B71F78214A5B08C00D26F4C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 4B71F78514A5B08C00D26F4C /* Build configuration list for PBXProject "podster" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2778,7 +2773,6 @@
 				4B10D02514BFA6A800DF4DBD /* SVEpisodeDetails.m in Sources */,
 				4B10D02914BFB07600DF4DBD /* UILabel+VerticalAlign.m in Sources */,
 				4BD733CE14C535E800B8EF52 /* NSString+MD5Addition.m in Sources */,
-				4B91BF6514C77B6600B33776 /* UIColor+Hex.m in Sources */,
 				4B91BF6714C77B6600B33776 /* UIView+InnerShadow.m in Sources */,
 				4B91BF6914C77B6600B33776 /* UIView+Positioning.m in Sources */,
 				4B91BF6B14C77B6600B33776 /* UIView+Size.m in Sources */,
@@ -2996,7 +2990,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "98FE7B52-E69D-437A-B675-E6CBA7E81554";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98FE7B52-E69D-437A-B675-E6CBA7E81554";
@@ -3111,7 +3105,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PROVISIONING_PROFILE = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
 				SDKROOT = iphoneos;
@@ -3133,7 +3127,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
@@ -3318,7 +3312,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "56D57A8E-C98A-458A-976F-BECCCE170247";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56D57A8E-C98A-458A-976F-BECCCE170247";

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class GridCellCountOverlay;
 @protocol ActsAsPodcast;
-@interface PodcastGridCellView : UIView
+@interface PodcastGridCellView : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet UIView *progressBackground;
 @property (strong, nonatomic) IBOutlet UIProgressView *progressBar;
 

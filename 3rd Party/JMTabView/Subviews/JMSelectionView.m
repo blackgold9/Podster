@@ -29,7 +29,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [self drawInnerShadowInRect:rect fillColor:[UIColor colorWithHex:0x252525]];
+    [self drawInnerShadowInRect:rect fillColor:[UIColor colorWithHex:@"0x252525"]];
 }
 
 - (void)dealloc

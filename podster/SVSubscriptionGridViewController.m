@@ -28,8 +28,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSArray *items;
     
 }
-@synthesize noContentLabel;
-@synthesize gridView = _gridView;
+
 @synthesize context = _context;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -121,11 +120,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [super viewDidLoad];
     LOG_GENERAL(2, @"Initializing");
     UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background-gradient.jpg"]];
-    [self.view addSubview:image];
-    [self.view sendSubviewToBack:image];
-    self.gridView.backgroundColor = [UIColor clearColor];
-    self.gridView.centerGrid = NO;
-    self.gridView.alwaysBounceVertical = YES;
+    self.gridView.backgroundView = image;
+    [self.gridView registerNib:[UINib nibWithNibName:@"PodcastGridCellView" bundle:nil] forCellWithReuseIdentifier:@"PodcastCell"];
 }
 
 - (void)viewDidUnload
@@ -228,60 +224,37 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
--(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    tappedIndex = position;
+    NSInteger position = indexPath.row;
     SVPodcast *podcast =  [items objectAtIndex:position];
     
     SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
     controller.context = self.context;
     controller.podcast = podcast;
     [self.navigationController pushViewController:controller animated:YES];
-    
-    
-    
-}
 
+}
 #pragma mark - grid data
--(NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    LOG_GENERAL(2, @"Displaying %d podcats",  items.count);
-    return [items count];
+  return [items count];  
 }
 
--(CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return DEFAULT_GRID_CELL_SIZE;
+    return 1;
 }
 
--(GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static UINib *podcastNib = nil;
-    if (podcastNib == nil) {
-        podcastNib = [UINib nibWithNibName:@"PodcastGridCellView" bundle:nil];   
-    }
-    SVPodcast *currentPodcast = (SVPodcast *)[items objectAtIndex:index];
-    CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
+    PodcastGridCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PodcastCell"
+                                                                          forIndexPath:indexPath];
     
-    GMGridViewCell *cell = (GMGridViewCell *)[gridView dequeueReusableCellWithIdentifier:@"MySubscriptionsGridCell"];
+    SVPodcast *currentPodcast = (SVPodcast *)[items objectAtIndex:indexPath.row];
     
-    if (!cell) 
-    {
-        cell = [[GMGridViewCell alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        cell.reuseIdentifier = @"MySubscriptionsGridCell";
-        PodcastGridCellView *newCell = [[podcastNib instantiateWithOwner:nil options:nil] objectAtIndex:0]; 
-        
-        cell.contentView = newCell;
-        
-        
-    } else {
-        PodcastGridCellView *podcastCell =(PodcastGridCellView *) cell.contentView ;
-        [podcastCell prepareForReuse];
-    }
-    
-    PodcastGridCellView *podcastCell =(PodcastGridCellView *) cell.contentView ;
-    [podcastCell bind:currentPodcast];
+
+    [cell bind:currentPodcast];
     cell.clipsToBounds = YES;
     return cell;
 }

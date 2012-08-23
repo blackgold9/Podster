@@ -179,7 +179,6 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 didFailToReceiveAdWithError:(GADRequestError *)error {
     [UIView animateWithDuration:0.25 animations:^{
         [self.view setNeedsLayout];
-        [self.view layoutIfNeeded];
     }];
 }
 

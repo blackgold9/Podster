@@ -100,7 +100,7 @@
 - (NSInteger)gridView:(NRGridView*)gridView numberOfItemsInSection:(NSInteger)section
 {
     NSArray *podcasts = [[featured objectAtIndex:section] objectForKey:@"feeds"];
-    return podcasts.count;
+    return 0;
 }
 
 -(UIView *)gridView:(NRGridView *)grid viewForHeaderInSection:(NSInteger)section

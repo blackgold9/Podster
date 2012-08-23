@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+   LastUpgradeVersion = "0450"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -56,8 +57,7 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      enableOpenGLFrameCaptureMode = "0"
-      allowLocationSimulation = "YES"
+      allowLocationSimulation = "NO"
       simulatorDisplayScale = "2.000000">
       <BuildableProductRunnable>
          <BuildableReference
@@ -75,10 +75,12 @@
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
+         <AdditionalOption
+            key = "NSZombieEnabled"
+            value = "YES"
+            isEnabled = "YES">
+         </AdditionalOption>
       </AdditionalOptions>
-      <DeviceAppData
-         resolvedPath = "../../../Documents/net.vanterpool.podster 2012-07-18 20.14.11.614.xcappdata">
-      </DeviceAppData>
       <LocationScenarioReference
          identifier = "San Francisco, CA, USA"
          referenceType = "1">
