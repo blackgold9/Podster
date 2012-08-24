@@ -7,7 +7,6 @@
 //
 
 #import "SVPodcastImageCache.h"
-#import "NSString+MD5Addition.h"
 @implementation SVPodcastImageCache {
     dispatch_queue_t workQueue;
     CGSize size;

@@ -18,11 +18,55 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation PodcastUpdateOperation {
     BOOL success;
-    
+    BOOL executing;
+    BOOL _isExecuting;
+    BOOL _isFinished;
 }
 
 @synthesize onUpdateComplete = _onUpdateComplete;
 @synthesize podstoreId;
+
+#pragma mark - NSObject
+
+- (id)init {
+    if ((self = [super init])) {
+          }
+    return self;
+}
+
+
+#pragma mark - NSOperation
+
+- (BOOL)isConcurrent {
+    return YES;
+}
+
+
+- (BOOL)isExecuting {
+    return _isExecuting;
+}
+
+
+- (BOOL)isFinished {
+    return _isFinished;
+}
+
+
+
+- (void)finish {
+    [self willChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:@"isFinished"];
+    
+    _isExecuting = NO;
+    _isFinished = YES;
+    
+    [self didChangeValueForKey:@"isExecuting"];
+    [self didChangeValueForKey:@"isFinished"];
+}
+
+
+
+
 
 - (id)initWithPodcast:(SVPodcast *)podcast andContext:(NSManagedObjectContext *)theContext {
     if (!podcast) {
@@ -36,6 +80,9 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSAssert(podcast.managedObjectContext == theContext, @"The contexts should be the same");
     self = [super init];
     if (self) {
+        _isExecuting = NO;
+        _isFinished = NO;
+
         self.podstoreId =  podcast.podstoreId;
         success = NO;
     }
@@ -52,12 +99,14 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     
 }
 
-- (void)main {    
-    
+- (void)start
+{
+    [self willChangeValueForKey:@"isExecuting"];
+    _isExecuting = YES;
+    [self didChangeValueForKey:@"isExecuting"];
     __block NSDate *lastEntryDate = [NSDate distantPast];
     __block BOOL podcastExists;
     __block NSString *title;
-    __block BOOL hadChanges = NO;
     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *childContext) {
         SVPodcast *podcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podstoreId];
         DDLogVerbose(@"Starting sync for Podcast with Id: %@", podcast.podstoreId);
@@ -75,7 +124,6 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                 [expressionDescription setExpression:minExpression];
                 [expressionDescription setExpressionResultType:NSDateAttributeType];
                 [request setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
-                [request setIncludesPendingChanges:YES];
                 NSDictionary *results = [[childContext executeFetchRequest:request error:nil] lastObject];
                 if (results != nil) {
                     lastEntryDate = [results valueForKey:@"maxDatePublished"];
@@ -84,7 +132,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         } else {
             podcastExists = NO;
         }
-    } completion:^{
+        
         if (podcastExists) {
             DDLogVerbose(@"Podcast was found in the database");
             dispatch_group_t group = dispatch_group_create();
@@ -109,15 +157,10 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                      [childContext performBlock:^{
                                                                          [self processResponse:response
                                                                                      inContext:rootContext];
-                                                                         if ([childContext insertedObjects].count > 0) {
-                                                                             // New episodes, set flag
-                                                                             hadChanges = YES;
-                                                                         }
                                                                          [childContext MR_save];
                                                                          [rootContext MR_save];
                                                                          [childContext reset];
                                                                          dispatch_group_leave(group);
-
                                                                      }];
                                                                      
                                                                  }
@@ -126,31 +169,25 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                       [FlurryAnalytics logError:@"PodcastUpdateFailed" message:[error localizedDescription] error:error];
                                                                       dispatch_group_leave(group);
                                                                   }];
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                long result = dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC));
+            dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 dispatch_release(group);
-                if (result > 0) {
-                    DDLogWarn(@"A timeout occured while trying to update podcast");
-                }
-
-                if (hadChanges) {
-                    DDLogVerbose(@"Sending podcast updated notification");
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPodcastUpdated" object:self userInfo:@{@"identifier": podstoreId}];
-                }
-
+                [self finish];
+                
                 if (self.onUpdateComplete) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         self.onUpdateComplete(self);
                     });
-                }
-                
+                } 
             });
         } else {
             DDLogWarn(@"Podcast with id: %@ did not exist", self.podstoreId);
+            [self finish];
         }
+        
     }];
 }
+
 
 - (void)processResponse:(id)response
               inContext:(NSManagedObjectContext *)context {

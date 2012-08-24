@@ -22,14 +22,16 @@
 #import "BannerViewController.h"
 #import "MBProgressHUD.h"
 #import "SVSettings.h"
-#import "BWHockeyManager.h"
-#import "BWQuincyManager.h"
 #import "DDFileLogger.h"
 #import "DDTTYLogger.h"
 #import "DDASLLogger.h"
 #import "DDNSLoggerLogger.h"
 #import "Lockbox.h"
+#import <HockeySDK/HockeySDK.h>
+#import <Crashlytics/Crashlytics.h>
 static const int ddLogLevel = LOG_LEVEL_INFO;
+@interface SVAppDelegate() <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate> {}
+@end
 @implementation SVAppDelegate
 {
     DDFileLogger *fileLogger;
@@ -61,20 +63,17 @@ NSString *uuid();
 
 
     UIImage *barButton = [[UIImage imageNamed:@"nav-bar-btn.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-
     [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal
                                           barMetrics:UIBarMetricsDefault];
 
     UIImage *backButton = [UIImage imageNamed:@"back-btn-big.png"];
-
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal
                                                     barMetrics:UIBarMetricsDefault];
-
+    
     UIImage *minImage = [UIImage imageNamed:@"slider-fill.png"];
     //UIImage *maxImage = [UIImage imageNamed:@"slider-bg.png"];
     UIImage *thumbImage = [UIImage imageNamed:@"slider-cap.png"];
-
-
+    
     [[UISlider appearance] setMinimumTrackImage:minImage
                                        forState:UIControlStateNormal];
     [[UISlider appearance] setThumbImage:thumbImage
@@ -93,34 +92,43 @@ NSString *uuid();
     fileLogger = [[DDFileLogger alloc] init];
     fileLogger.rollingFrequency = 60 * 60 * 1; // 1 hour rolling
     fileLogger.logFileManager.maximumNumberOfLogFiles = 1;
-
+    
     [DDLog addLogger:fileLogger];
+    
+    [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"
+                                                         liveIdentifier:@"f36888480951c50f12bb465ab891cf24"
+                                                               delegate:self];
+    
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [Crashlytics startWithAPIKey:@"4e93a2864dd07e4d0cfb43cdaf00c92559cd7756"];
+    
 #if defined (CONFIGURATION_AppStore)
     DDLogVerbose(@"Running in Appstore mode");
     [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
-    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
-    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
-    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
-    [[BWQuincyManager sharedQuincyManager] setDelegate:self];
- //   [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
 #endif
-
+    
 #if defined (CONFIGURATION_Ad_Hoc)
     DDLogVerbose(@"Running in Ad_Hoc mode");
-    [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
-    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
-    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
-    [[BWQuincyManager sharedQuincyManager] setDelegate:self];    
-    [[BWHockeyManager sharedHockeyManager] setDelegate:self];
 #endif
 
 
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        NSString *feedId= [userInfo valueForKey:@"feedId"];
+        DDLogInfo(@"launched for podcast with podstore id: %@. Waiting 5 seconds to show it", feedId);
+        int64_t delayInSeconds = 5.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            DDLogInfo(@"Showing podcast indicated from notification");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RecievedPodcastNotification" object:self userInfo:userInfo];
+        });       
+    }
+    
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"PodsterData/StoreContent/persistentStore"];
 
     isFirstRun = [[SVSettings sharedInstance] firstRun];
@@ -132,24 +140,26 @@ NSString *uuid();
 
     [self configureTheming];
 
-
     // Actually register
 #ifndef CONFIGURATION_Debug
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
-            UIRemoteNotificationTypeBadge|
-            UIRemoteNotificationTypeSound)];
+                                                                           UIRemoteNotificationTypeBadge|
+                                                                           UIRemoteNotificationTypeSound)];
 #else
-        [self application:[UIApplication sharedApplication] didFailToRegisterForRemoteNotificationsWithError:nil];
+    [self application:[UIApplication sharedApplication] didFailToRegisterForRemoteNotificationsWithError:nil];
 #endif
 
+    
+    
     BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
     self.window.rootViewController = controller;
-
+    
     [[SVSettings sharedInstance] setFirstRun:NO];
 
+    
     saveTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
     return YES;
-
+    
 }
 
 - (void)saveData
@@ -159,11 +169,11 @@ NSString *uuid();
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
-
+    
     DDLogInfo(@"Successuflly got a notification token from apple");
     NSString * tokenAsString = [[[devToken description]
-            stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
-            stringByReplacingOccurrencesOfString:@" " withString:@""];
+                                 stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+                                stringByReplacingOccurrencesOfString:@" " withString:@""];
 #ifndef CONFIGURATION_AppStore
     DDLogInfo(@"Notification Token: %@", tokenAsString);
 #endif
@@ -206,41 +216,10 @@ NSString *uuid();
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-
-
     if (application.applicationState != UIApplicationStateActive) {
         NSString *feedId= [userInfo valueForKey:@"feedId"];
-        LOG_GENERAL(2, @"launched for podcast with podstore id: %@", feedId);
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
-        SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:predicate
-                                                        inContext:[NSManagedObjectContext MR_defaultContext]];
-        if (podcast) {
-            NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
-                                                               forKey:@"Title"];
-            [FlurryAnalytics logEvent:@"LaunchedFromNotification"
-                       withParameters:params];
-
-            SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
-            controller.podcast = podcast;
-            __weak SVAppDelegate *weakDelegate = self;
-            double delayInSeconds = 1.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                UINavigationController *nav = nil;
-                if ([self.window.rootViewController class] == [UINavigationController class]) {
-                    nav = (UINavigationController *)weakDelegate.window.rootViewController;
-                } else {
-                    //If the root isnt a nav controller, it's a banner controller;
-                    BannerViewController *bc = (BannerViewController *) weakDelegate.window.rootViewController;
-                    nav = (UINavigationController *)[bc contentController];
-                }
-                [nav popToRootViewControllerAnimated:NO];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [nav pushViewController:controller animated:YES];
-                });
-
-            });
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RecievedPodcastNotification" object:self userInfo:userInfo];
+        DDLogInfo(@"launched for podcast with podstore id: %@", feedId);
     }
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -259,21 +238,19 @@ NSString *uuid();
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-
-
     __block UIBackgroundTaskIdentifier background_task; //Create a task object
-
+    
     background_task = [application beginBackgroundTaskWithExpirationHandler: ^ {
         [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
         background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
-
+        
         //System will be shutting down the app at any point in time now
     }];
     [FlurryAnalytics logEvent:@"SavingOnEnteringBackground" timed:YES];
     //Background tasks require you to use asynchronous tasks
     dispatch_async(dispatch_get_main_queue(), ^{
-
-
+        
+        
         [[NSManagedObjectContext MR_defaultContext] performBlockAndWait:^void() {
             NSArray *subscriptions= [SVPodcast MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"isSubscribed == YES"]
                                                              inContext:[NSManagedObjectContext MR_defaultContext] ];
@@ -284,13 +261,12 @@ NSString *uuid();
                 [subscriptionData addObject:data];
             }
             [Lockbox setArray:subscriptionData forKey:@"subscriptions"];
-
+            
         }];
         [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
         [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
         [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
         background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
-
     });
 }
 
@@ -369,7 +345,7 @@ NSString *uuid();
     }
 }
 
--(NSString *)crashReportDescription
+-(NSString *)applicationLogForCrashManager:(BITCrashManager *)crashManager
 {
     NSString *output;
     if ([[fileLogger logFileManager] sortedLogFilePaths].count > 0) {
@@ -378,18 +354,18 @@ NSString *uuid();
                                               error:nil];
     }
 
+    if ([output length] > 5000) {
+        output = (NSMutableString *)[output substringWithRange:NSMakeRange([output length]-5000-1, 5000)];
+    }
     return output;
 }
 
--(NSString *)customDeviceIdentifier
-{
-#if defined (CONFIGURATION_Ad_Hoc)
+- (NSString *)customDeviceIdentifierForUpdateManager:(BITUpdateManager *)updateManager {
+#ifndef CONFIGURATION_AppStore
     if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)])
         return [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];
-    else 
-        return [[SVSettings sharedInstance] deviceId];;
 #endif
-    return [[SVSettings sharedInstance] deviceId];
+    return nil;
 }
 
 @end

@@ -15,8 +15,10 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "GCDiscreetNotificationView.h"
 #import "SVSubscriptionManager.h"
+#import "SVPodcast.h"
 #import "PodsterIAPHelper.h"
 #import "BlockAlertView.h"
+#import "SVPodcastDetailsViewController.h"
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
 static NSString *const kIsBusyKey = @"isBusy";
@@ -93,6 +95,33 @@ static NSString *const kIsBusyKey = @"isBusy";
 }
 - (void)viewDidLoad
 {
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"RecievedPodcastNotification"
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      NSNumber *feedId = [[note userInfo] objectForKey:@"feedId"];
+                                                      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
+                                                      SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:predicate
+                                                                                                      inContext:[NSManagedObjectContext MR_defaultContext]];
+                                                      if (podcast) {
+                                                          NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
+                                                                                                             forKey:@"Title"];
+                                                          [FlurryAnalytics logEvent:@"LaunchedFromNotification"
+                                                                     withParameters:params];
+                                                          
+                                                          SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
+                                                          NSAssert(controller, @"Controller should not be nil");
+                                                          NSAssert([controller class] == [SVPodcastDetailsViewController class], @"Controller shouldbe the correct class");
+                                                          controller.podcast = podcast;
+                                                          controller.context = [NSManagedObjectContext MR_defaultContext];
+                                                          //            __weak SVAppDelegate *weakDelegate = self;
+                                                          //            double delayInSeconds = 2.0;
+                                                          //            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                                                          //            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                                                          [self.navigationController pushViewController:controller animated:YES];
+                                                      }
+
+                                                  }];
     [super viewDidLoad];
 //    UIImageView *placeHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background-gradient.jpg"]];
 //    placeHolder.frame = self.view.bounds;

@@ -536,8 +536,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcast:localPodcast
                                                                                        andContext:self.context];
         updateOperation.onUpdateComplete = ^void(PodcastUpdateOperation *operation) {
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([operation completedSuccessfully]) {
+                    [self reloadFetchedResultsController];
                     loadCompleteHandler();
                 } else if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
                     // TODO: Handle offline case better
@@ -662,7 +664,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     fetcher.delegate = nil;
     fetcher = nil;
     [super viewWillDisappear:animated];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
+    [[NSManagedObjectContext MR_defaultContext] save:nil];
     [updateOperationQueue cancelAllOperations];
     NSAssert(localPodcast != nil, @"Local podcast should not be nil");
 

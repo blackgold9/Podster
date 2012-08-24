@@ -363,6 +363,11 @@ void audioRouteChangeListenerCallback (
                 } else if (_player.status == AVPlayerItemStatusFailed) {
                     LOG_PLAYBACK(1,@"Playback failed with error: %@", _player.error);
                     [FlurryAnalytics logError:@"PlaybackFailed" message:[_player.error localizedDescription] error:_player.error];
+                    if (monitorId) {
+                        [_player removeTimeObserver:monitorId];
+                        monitorId = nil;
+                    }
+                    
                     _player = nil;           
                     self.currentEpisode = nil;
                     self.currentPodcast = nil;
