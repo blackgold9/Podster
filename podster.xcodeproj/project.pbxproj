@@ -492,6 +492,7 @@
 		4B91BFC314C7FF7600B33776 /* list-item.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC014C7FF7600B33776 /* list-item.png */; };
 		4B91BFC414C7FF7600B33776 /* list-item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC114C7FF7600B33776 /* list-item@2x.png */; };
 		4B91BFC514C7FF7600B33776 /* list-item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B91BFC114C7FF7600B33776 /* list-item@2x.png */; };
+		4B97B27515E73A4A001347F2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B97B27415E73A4A001347F2 /* Crashlytics.framework */; };
 		4BA02C6614E25AEF00582306 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA02C6514E25AEF00582306 /* MessageUI.framework */; };
 		4BB2058D14D0F8C70038EB7D /* SVPodcastModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */; };
 		4BB2058E14D0F8C70038EB7D /* SVPodcastModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2058C14D0F8C70038EB7D /* SVPodcastModalView.m */; };
@@ -1081,6 +1082,7 @@
 		4B91BFC014C7FF7600B33776 /* list-item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-item.png"; sourceTree = "<group>"; };
 		4B91BFC114C7FF7600B33776 /* list-item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-item@2x.png"; sourceTree = "<group>"; };
 		4B91FEB9153C8CB900CE3B6A /* SVPodcastDatastore 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 14.xcdatamodel"; sourceTree = "<group>"; };
+		4B97B27415E73A4A001347F2 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		4BA02C6514E25AEF00582306 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4BA07EAD150B1F8100DD096C /* SVPodcastDatastore 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 11.xcdatamodel"; sourceTree = "<group>"; };
 		4BA116DA14CFF070006EEE46 /* SVPodcastDatastore 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -1229,6 +1231,7 @@
 				7D182D1E159B93190023C469 /* libAdapterInMobi.a in Frameworks */,
 				4B75CEA815E5EF70006C92E6 /* CrashReporter.framework in Frameworks */,
 				4B75CEA915E5EF71006C92E6 /* HockeySDK.framework in Frameworks */,
+				4B97B27515E73A4A001347F2 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1981,6 +1984,7 @@
 		4B71F7C514A5B09B00D26F4C /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				4B97B27415E73A4A001347F2 /* Crashlytics.framework */,
 				4B75CEA215E5EF70006C92E6 /* HockeySDK-iOS */,
 				7DD61EFB159B92BD006181AE /* GoogleAdMobAdsSDK */,
 				4B85920815825184002452DF /* UAModalPanel */,
@@ -2328,6 +2332,7 @@
 				4B71F78714A5B08C00D26F4C /* Sources */,
 				4B71F78814A5B08C00D26F4C /* Frameworks */,
 				4B71F78914A5B08C00D26F4C /* Resources */,
+				4B97B27215E73A33001347F2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2684,6 +2689,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		4B97B27215E73A33001347F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 4e93a2864dd07e4d0cfb43cdaf00c92559cd7756";
 		};
 /* End PBXShellScriptBuildPhase section */
 

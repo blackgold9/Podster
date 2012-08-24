@@ -28,6 +28,7 @@
 #import "DDNSLoggerLogger.h"
 #import "Lockbox.h"
 #import <HockeySDK/HockeySDK.h>
+#import <Crashlytics/Crashlytics.h>
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVAppDelegate() <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate> {}
 @end
@@ -106,34 +107,33 @@ NSString *uuid();
                                                                delegate:self];
     
     [[BITHockeyManager sharedHockeyManager] startManager];
+    [Crashlytics startWithAPIKey:@"4e93a2864dd07e4d0cfb43cdaf00c92559cd7756"];
+    
 #if defined (CONFIGURATION_AppStore)
     DDLogVerbose(@"Running in Appstore mode");
     [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
-    //    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"f36888480951c50f12bb465ab891cf24"];
-    //    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
-    //    [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
-    //    [[BWQuincyManager sharedQuincyManager] setDelegate:self];
-    //   [[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
 #endif
     
 #if defined (CONFIGURATION_Ad_Hoc)
     DDLogVerbose(@"Running in Ad_Hoc mode");
-    //    [[BWHockeyManager sharedHockeyManager] setAlwaysShowUpdateReminder:YES];
-    //    [[BWHockeyManager sharedHockeyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-    //    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"];
-    //    [[BWQuincyManager sharedQuincyManager] setAutoSubmitCrashReport:YES];
+
     [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
     [FlurryAnalytics setSecureTransportEnabled:YES];
-    //[[BWQuincyManager sharedQuincyManager] setFeedbackActivated:YES];
     [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
-    //    [[BWQuincyManager sharedQuincyManager] setDelegate:self];
-    //    [[BWHockeyManager sharedHockeyManager] setDelegate:self];
 #endif
-    
-    //    NSManagedObjectModel *model = [NSManagedObjectModel MR_managedObjectModelNamed:@"SVPodcastDatastore.momd"];
-    //    [NSManagedObjectModel MR_setDefaultManagedObjectModel:model];
-    
+
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        NSString *feedId= [userInfo valueForKey:@"feedId"];
+        DDLogInfo(@"launched for podcast with podstore id: %@. Waiting 5 seconds to show it", feedId);
+        int64_t delayInSeconds = 5.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            DDLogInfo(@"Showing podcast indicated from notification");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RecievedPodcastNotification" object:self userInfo:userInfo];
+        });       
+    }
     
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"PodsterData/StoreContent/persistentStore"];
     

@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 #import "BlockAlertView.h"
 #import "BlockActionSheet.h"
+#import <Crashlytics/Crashlytics.h>
 static int ddLogLevel = LOG_LEVEL_INFO;
 enum SettingsSections {
     SettingsSectionsPremiumSection = 0,
