@@ -144,6 +144,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         } else {
             initialSize = 0;
         }
+        
         if (alreadyDownloaded) {
             return;
         }

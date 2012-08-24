@@ -61,8 +61,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         queue.name = @"com.vantertech.podster.downloads";
         [queue addObserver:self forKeyPath:@"operations" options:0 context:NULL];
         NSString *lostWifi = NSLocalizedString(@"Downloads have been paused because you lost WI-FI connectivity", @"Downloads have been paused because you lost WI-FI connectivity");
-        
-        
+                
         [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingReachabilityDidChangeNotification
                                                           object:nil queue:nil usingBlock:^void(NSNotification *note) {
                                                               AFNetworkReachabilityStatus status = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus];
@@ -80,11 +79,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                   }
                                                               }
                                                           }];
-        
     }
     
     return self;
 }
+
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                          change:(NSDictionary *)change context:(void *)context
 {
