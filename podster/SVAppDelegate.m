@@ -223,33 +223,9 @@ NSString *uuid();
     
     if (application.applicationState != UIApplicationStateActive) {
         NSString *feedId= [userInfo valueForKey:@"feedId"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RecievedPodcastNotification" object:self userInfo:userInfo];
         DDLogInfo(@"launched for podcast with podstore id: %@", feedId);
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
-        SVPodcast *podcast = [SVPodcast MR_findFirstWithPredicate:predicate
-                                                        inContext:[NSManagedObjectContext MR_defaultContext]];
-        if (podcast) {
-            NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
-                                                               forKey:@"Title"];
-            [FlurryAnalytics logEvent:@"LaunchedFromNotification"
-                       withParameters:params];
-            
-            SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
-            controller.podcast = podcast;
-            __weak SVAppDelegate *weakDelegate = self;
-            double delayInSeconds = 1.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                UINavigationController *nav = nil;
-                //If the root isnt a nav controller, it's a banner controller;
-                BannerViewController *bc = (BannerViewController *) weakDelegate.window.rootViewController;
-                nav = (UINavigationController *)[bc contentController];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [nav popToRootViewControllerAnimated:NO];
-                    [nav pushViewController:controller animated:YES];
-                });
-                
-            });
-        }
+      
     }
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {

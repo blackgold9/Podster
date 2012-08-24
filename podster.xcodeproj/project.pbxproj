@@ -1738,6 +1738,13 @@
 			name = generated;
 			sourceTree = "<group>";
 		};
+		4B3A846B15E71B5100FFE56F /* operations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = operations;
+			sourceTree = "<group>";
+		};
 		4B3E5EC7150C43DD00010833 /* MBHud */ = {
 			isa = PBXGroup;
 			children = (
@@ -1875,6 +1882,7 @@
 		4B71F79514A5B08C00D26F4C /* podster */ = {
 			isa = PBXGroup;
 			children = (
+				4B3A846B15E71B5100FFE56F /* operations */,
 				925327FB93FD7D934F91CA4A /* SVCustomGroupedTableViewController.h */,
 				925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */,
 				9253277E9ED9AC7A796DE69A /* CoreDataController.h */,
