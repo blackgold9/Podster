@@ -466,7 +466,6 @@
 	if (rollingTimer)
 	{
 		dispatch_source_cancel(rollingTimer);
-		dispatch_release(rollingTimer);
 		rollingTimer = NULL;
 	}
 }
@@ -602,7 +601,6 @@
 	if (rollingTimer)
 	{
 		dispatch_source_cancel(rollingTimer);
-		dispatch_release(rollingTimer);
 		rollingTimer = NULL;
 	}
 	
@@ -690,7 +688,6 @@
 	if (rollingTimer)
 	{
 		dispatch_source_cancel(rollingTimer);
-		dispatch_release(rollingTimer);
 		rollingTimer = NULL;
 	}
 }

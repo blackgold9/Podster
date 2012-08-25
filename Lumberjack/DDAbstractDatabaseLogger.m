@@ -115,7 +115,6 @@
 	if (saveTimer)
 	{
 		dispatch_source_cancel(saveTimer);
-		dispatch_release(saveTimer);
 		saveTimer = NULL;
 	}
 }
@@ -158,7 +157,6 @@
 	if (deleteTimer)
 	{
 		dispatch_source_cancel(deleteTimer);
-		dispatch_release(deleteTimer);
 		deleteTimer = NULL;
 	}
 }

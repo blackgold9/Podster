@@ -80,7 +80,6 @@ static char const kRefreshInterval = -3;
 
 - (void)refreshPodcasts:(NSArray *)podcasts complete:(void (^)())complete onQueue:(dispatch_queue_t)queue
 {
-    dispatch_retain(queue);
     dispatch_group_t group = dispatch_group_create();
     NSArray *currentIds= [syncQueue.operations valueForKey:@"podcast"];
     NSSet *currentOperationLookup = [NSSet setWithArray:currentIds];
@@ -103,8 +102,6 @@ static char const kRefreshInterval = -3;
     if (queue && complete) {
         dispatch_group_notify(group, queue, ^void() {
             complete();
-            dispatch_release(group);
-            dispatch_release(queue);
         });
     }
 

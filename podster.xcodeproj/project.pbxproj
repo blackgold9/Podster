@@ -425,7 +425,6 @@
 		4BD0BAC3151124B2005E6232 /* placeholder-thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD0BAC1151124B2005E6232 /* placeholder-thumb.png */; };
 		4BD0BAC4151124B2005E6232 /* placeholder-thumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD0BAC2151124B2005E6232 /* placeholder-thumb@2x.png */; };
 		4BD123C5150FFF8100A108DA /* CloudHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD123C4150FFF8100A108DA /* CloudHelper.m */; };
-		4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C21E14B7D05E00E8C942 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */; };
 		4BD1C22914B8BDEF00E8C942 /* LoggerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22714B8BDEF00E8C942 /* LoggerClient.m */; };
 		4BD1C22D14B8EFDB00E8C942 /* SVPodcatcherClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22C14B8EFDB00E8C942 /* SVPodcatcherClient.m */; };
@@ -1036,8 +1035,6 @@
 		4BD123C3150FFF8100A108DA /* CloudHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudHelper.h; sourceTree = "<group>"; };
 		4BD123C4150FFF8100A108DA /* CloudHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudHelper.m; sourceTree = "<group>"; };
 		4BD1A3FB15B3D43B00D2EEF1 /* SVPodcastDatastore 19.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 19.xcdatamodel"; sourceTree = "<group>"; };
-		4BD1C21D14B7D05E00E8C942 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		4BD1C21E14B7D05E00E8C942 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeGetters.h"; sourceTree = "<group>"; };
 		4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safeGetters.m"; sourceTree = "<group>"; };
 		4BD1C22614B8BDEF00E8C942 /* LoggerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerClient.h; sourceTree = "<group>"; };
@@ -1951,7 +1948,6 @@
 				4B91BF4E14C77B5800B33776 /* JMTabView */,
 				4B6D492614BE460C00E7B11F /* GMGridView */,
 				4BD1C22514B8BDE100E8C942 /* NSLogger */,
-				4BD1C21B14B7D03000E8C942 /* JSONKit */,
 				4B2E51DD14B3B5270030B7C1 /* MagicalRecord */,
 				4B5CE8FD14B0E0ED00E17299 /* OBSlider */,
 				4B71F80114A6D7F500D26F4C /* MWFeedParser */,
@@ -2185,15 +2181,6 @@
 				4BE7A73D157BFF18007900F8 /* ToolbarStatusView.m */,
 			);
 			name = views;
-			sourceTree = "<group>";
-		};
-		4BD1C21B14B7D03000E8C942 /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				4BD1C21D14B7D05E00E8C942 /* JSONKit.h */,
-				4BD1C21E14B7D05E00E8C942 /* JSONKit.m */,
-			);
-			name = JSONKit;
 			sourceTree = "<group>";
 		};
 		4BD1C22514B8BDE100E8C942 /* NSLogger */ = {
@@ -2706,7 +2693,6 @@
 				4B2E523F14B3BBB80030B7C1 /* SVPodcastEntry.m in Sources */,
 				4B08537314B4315300847BAA /* SVDownload.m in Sources */,
 				4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */,
-				4BD1C21F14B7D05E00E8C942 /* JSONKit.m in Sources */,
 				4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
 				4BD1C22914B8BDEF00E8C942 /* LoggerClient.m in Sources */,
 				4BD1C22D14B8EFDB00E8C942 /* SVPodcatcherClient.m in Sources */,
@@ -2961,7 +2947,7 @@
 					"3rd\\ Party/SSToolkit",
 				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3101,7 +3087,7 @@
 					"3rd\\ Party/SSToolkit",
 				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3151,7 +3137,7 @@
 					"3rd\\ Party/SSToolkit",
 				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3285,7 +3271,7 @@
 					"3rd\\ Party/SSToolkit",
 				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

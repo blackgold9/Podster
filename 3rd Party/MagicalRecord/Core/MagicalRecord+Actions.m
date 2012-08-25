@@ -26,7 +26,6 @@ void reset_action_queue(void)
 {
     if (background_action_queue != NULL)
     {
-        dispatch_release(background_action_queue);
         background_action_queue = NULL;
     }
 }

@@ -29,8 +29,8 @@ static NSString *const kIsBusyKey = @"isBusy";
 @property(nonatomic, strong) JMTabView *titleTabView;
 @property(nonatomic, weak) UIView *currentView;
 @property(nonatomic, weak) UIViewController *currentController;
+@property (nonatomic, strong) UIPageViewController *pageView;
 
-- (void)configureViewControllerForScreenType:(HomePageScreenType)screenType;
 
 - (void)configureTabView;
 
@@ -114,18 +114,11 @@ static NSString *const kIsBusyKey = @"isBusy";
                                                           NSAssert([controller class] == [SVPodcastDetailsViewController class], @"Controller shouldbe the correct class");
                                                           controller.podcast = podcast;
                                                           controller.context = [NSManagedObjectContext MR_defaultContext];
-                                                          //            __weak SVAppDelegate *weakDelegate = self;
-                                                          //            double delayInSeconds = 2.0;
-                                                          //            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                                                          //            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                                                           [self.navigationController pushViewController:controller animated:YES];
                                                       }
 
                                                   }];
     [super viewDidLoad];
-//    UIImageView *placeHolder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background-gradient.jpg"]];
-//    placeHolder.frame = self.view.bounds;
-//    [self.view addSubview:placeHolder];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
 
 
@@ -135,25 +128,82 @@ static NSString *const kIsBusyKey = @"isBusy";
         
         [self configureTabView];
         self.scrollView.contentOffset = CGPointMake(0, 0);
-        
-        UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
-        
-        leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-        
-        [self.view addGestureRecognizer:leftSwipe];
-        
-        [self configureViewControllerForScreenType:[[SVSettings sharedInstance] homeScreen]];
-        UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];    
-        [self.view addGestureRecognizer:rightSwipe];
 
-
-        //   [placeHolder removeFromSuperview];
+    [self.titleTabView setSelectedIndex:0];
 
 
     notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Updating Podcasts", @"Updating Podcasts")
                                                            showActivity:YES
                                                      inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
                                                                  inView:self.view];
+    self.pageView = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                                  options:nil];
+    [self.pageView setViewControllers:@[[self featuredController]] direction:UIPageViewControllerNavigationDirectionForward animated:YES
+                           completion:^(BOOL finished) {
+    
+                           }];
+    [self addChildViewController:self.pageView];
+    self.pageView.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.pageView.view.frame = self.view.bounds;
+    self.pageView.delegate = self;
+    [self.view addSubview:self.pageView.view];
+    self.pageView.dataSource = self;
+}
+
+- (SVSubscriptionGridViewController *)subscriptionsController
+{
+    
+    if (!_subscriptionsController) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        self.subscriptionsController = (SVSubscriptionGridViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"subscriptionGridController"];
+        // Configure the first context
+        self.subscriptionsController.context = [NSManagedObjectContext MR_defaultContext];
+    }
+    
+    return _subscriptionsController;
+
+}
+- (FeaturedController *)featuredController
+{
+    if (!_featuredController) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+        self.featuredController = [storyBoard instantiateViewControllerWithIdentifier:@"featuredController"];
+    }
+    
+    return _featuredController;
+
+}
+-(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    if ([viewController class] == [FeaturedController class]) {
+        return [self subscriptionsController];
+           } else {
+        return nil;
+    }
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    if ([viewController class] == [FeaturedController class]) {
+        return nil;
+    } else {
+        return [self featuredController];
+           }
+}
+
+-(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    if (completed) {
+        
+        [self.titleTabView setSelectedIndex:[pageViewController.viewControllers[0] class] == [FeaturedController class] ? 0 : 1];
+    }
+}
+
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
+{
+    
+    
 }
 
 - (void)directoryButtonTapped:(id)sender
@@ -170,87 +220,6 @@ static NSString *const kIsBusyKey = @"isBusy";
     [self presentViewController:controller 
                        animated:YES
                      completion:NULL];
-}
-- (void)swipeLeft:(UIGestureRecognizer *)rec
-{
-    if (rec.state == UIGestureRecognizerStateRecognized) {
-        if (self.currentScreen == HomePageFeaturedScreen) {
-            [self configureViewControllerForScreenType:HomePageSubscriptionsScreen];
-        }
-    }
-
-}
-
-- (void)swipeRight:(UIGestureRecognizer *)rec
-{
-    if (rec.state == UIGestureRecognizerStateRecognized) {
-        if (self.currentScreen == HomePageSubscriptionsScreen) {
-            [self configureViewControllerForScreenType:HomePageFeaturedScreen];
-        }
-    }
-}
-
-- (UIViewController *)controllerForScreenType:(HomePageScreenType)screenType
-{
-    UIViewController *output = nil;
-    if (screenType == HomePageSubscriptionsScreen) {
-        if (!self.subscriptionsController) {
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-            self.subscriptionsController = (SVSubscriptionGridViewController *) [storyBoard instantiateViewControllerWithIdentifier:@"subscriptionGridController"];
-            // Configure the first context
-            self.subscriptionsController.context = [NSManagedObjectContext MR_defaultContext];
-        }
-
-        output = self.subscriptionsController;
-    } else if (screenType == HomePageFeaturedScreen) {
-        if (!self.featuredController) {
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-            self.featuredController = [storyBoard instantiateViewControllerWithIdentifier:@"featuredController"];
-        }
-
-        output = self.featuredController;
-    }
-
-    NSAssert(output, @"There should be a view controller returned");
-    return output;
-}
-
-- (void)configureViewControllerForScreenType:(HomePageScreenType)screenType
-{
-    UIViewController *controller = [self controllerForScreenType:screenType];
-    if (self.currentView == controller.view) {
-        // Nothing to do here
-        return;
-    } else if (self.currentView == nil) {
-        [self addChildViewController:controller];
-        controller.view.frame = self.view.bounds;
-        [self.view addSubview:controller.view];
-        [controller didMoveToParentViewController:self];        
-        self.currentController = controller;
-        self.currentView = controller.view;
-    } else {
-        [self addChildViewController:controller];
-        controller.view.frame = self.view.bounds;
-        [self transitionFromViewController:self.currentController
-                          toViewController:controller
-                                  duration:0.33
-                                   options: screenType == HomePageFeaturedScreen ?  UIViewAnimationOptionTransitionFlipFromLeft : UIViewAnimationOptionTransitionFlipFromRight
-                                animations:^{}
-                                completion:^(BOOL complete) {
-                                    self.currentView = controller.view;
-                                    [[self currentController] removeFromParentViewController];
-                                    [controller didMoveToParentViewController:self];
-                                    self.currentController = controller;
-        }];
-    }
-    
-    controller.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    
-    [self.titleTabView setSelectedIndex:screenType == HomePageFeaturedScreen ? 0 : 1];
-    self.currentScreen = screenType;
-    
-    
-    [[SVSettings sharedInstance] setHomeScreen:screenType];
 }
 
 #pragma mark - View lifecycle
@@ -301,18 +270,18 @@ static NSString *const kIsBusyKey = @"isBusy";
     self.navigationItem.titleView = self.titleTabView;
     self.titleTabView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
     
-    __weak HomeController *weakSelf = self;
     NSString *whatsHot = NSLocalizedString(@"WHATS_HOT", @"What's Hot");
     [self.titleTabView addTabItemWithTitle:whatsHot
                                       icon:nil executeBlock:^{
-        [weakSelf configureViewControllerForScreenType:HomePageFeaturedScreen];
+                                          
     }];
 
     NSString *favorites = NSLocalizedString(@"FAVORITES", @"Favorites");
     [self.titleTabView addTabItemWithTitle:favorites
                                       icon:nil executeBlock:^{
-        [weakSelf configureViewControllerForScreenType:HomePageSubscriptionsScreen];
+
     }];
+    self.titleTabView.delegate = self;
     [self.titleTabView setBackgroundLayer:nil];
     [self.titleTabView setItemSpacing:10];
 
@@ -337,18 +306,29 @@ static NSString *const kIsBusyKey = @"isBusy";
                [notificationView hideAnimatedAfter:1.0];
            }
         });
+    } else {
+        
+        
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
     }
- 
-    
-    [super observeValueForKeyPath:keyPath
-                         ofObject:object
-                           change:change
-                          context:context];
 }
 
 - (void)tabView:(JMTabView *)tabView didSelectTabAtIndex:(NSUInteger)itemIndex
 {
+    if (itemIndex == 0 && [self.pageView.viewControllers[0] class] != [FeaturedController class]) {
+        [self.pageView setViewControllers:@[[self featuredController]] direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:^(BOOL finished) {
+            
+        }];
+    }
     
+    if (itemIndex == 1 && [self.pageView.viewControllers[0] class] != [SVSubscriptionGridViewController class]) {
+        [self.pageView setViewControllers:@[[self subscriptionsController]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 @end

@@ -740,7 +740,6 @@ NSString *DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy)
 		
 		if (aLoggerQueue) {
 			loggerQueue = aLoggerQueue;
-			dispatch_retain(loggerQueue);
 		}
 	}
 	return self;
@@ -749,13 +748,6 @@ NSString *DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy)
 + (DDLoggerNode *)nodeWithLogger:(id <DDLogger>)logger loggerQueue:(dispatch_queue_t)loggerQueue
 {
 	return [[DDLoggerNode alloc] initWithLogger:logger loggerQueue:loggerQueue];
-}
-
-- (void)dealloc
-{
-	if (loggerQueue) {
-		dispatch_release(loggerQueue);
-	}
 }
 
 @end
@@ -862,11 +854,6 @@ NSString *DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy)
 		loggerQueue = dispatch_queue_create(loggerQueueName, NULL);
 	}
 	return self;
-}
-
-- (void)dealloc
-{
-	if (loggerQueue) dispatch_release(loggerQueue);
 }
 
 - (void)logMessage:(DDLogMessage *)logMessage

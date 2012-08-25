@@ -136,7 +136,6 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         if (podcastExists) {
             DDLogVerbose(@"Podcast was found in the database");
             dispatch_group_t group = dispatch_group_create();
-            dispatch_retain(group);
             DDLogVerbose(@"Fetchinng new episodes for %@ after %@", title, lastEntryDate);
             __weak PodcastUpdateOperation *weakSelf = self;
             dispatch_group_enter(group);
@@ -170,7 +169,6 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                       dispatch_group_leave(group);
                                                                   }];
             dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                dispatch_release(group);
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"SVPodcastUpdated" object:self userInfo:@{@"identifier": podstoreId}];
                 [self finish];
                 

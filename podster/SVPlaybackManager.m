@@ -233,10 +233,9 @@ void audioRouteChangeListenerCallback (
         LOG_GENERAL(4, @"Initializing player");
         _player = [AVPlayer playerWithURL:url];
         LOG_GENERAL(4, @"Player Initialized");
-        if (monitorQueue) {
-            dispatch_release(monitorQueue);
-        }
+      
         monitorQueue = dispatch_queue_create("com.vantertech.podster.playbackmonitor", DISPATCH_QUEUE_SERIAL);
+        dispatch_set_target_queue(monitorQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
         [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
         [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
 

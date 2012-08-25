@@ -14,7 +14,8 @@ typedef enum {
     HomePageSubscriptionsScreen
     
 } HomePageScreenType;
-@interface HomeController : SVViewController<UIScrollViewDelegate, JMTabViewDelegate>
+@interface HomeController : UIViewController<UIScrollViewDelegate, JMTabViewDelegate, UIPageViewControllerDelegate, UIPageViewControllerDataSource>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *containedController;
 @property (assign) HomePageScreenType currentScreen;
 @end
