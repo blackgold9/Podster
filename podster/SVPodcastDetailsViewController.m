@@ -21,7 +21,7 @@
 #import "SVHtmlViewController.h"
 #import "PodcastUpdateOperation.h"
 
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
 
 
@@ -446,23 +446,29 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     __block BOOL blockHasSubscription = NO;
     
-    [self.context performBlock:^{
+    [self.context performBlockAndWait:^{
         NSNumber *feedId = self.podcast.podstoreId;
         NSAssert(feedId, @"Feed id should be present");
         LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
-        localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
-                                                  inContext:self.context];
+        NSFetchRequest *request = [SVPodcast MR_requestFirstWithPredicate:predicate];
+        [request setIncludesSubentities:YES];
+        [request setRelationshipKeyPathsForPrefetching:@[SVPodcastRelationships.listImage]];
+        localPodcast = [[self.context executeFetchRequest:request error:nil] lastObject];
         DDLogVerbose(@"Lookup complete");
         
         if (!localPodcast) {
-            LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
-            
-            
-            localPodcast = [SVPodcast MR_createInContext:self.context];
-            [localPodcast populateWithPodcast:self.podcast];
+            DDLogInfo( @"Podcast with id %@ didn't exist, creating it", feedId);
+            __block SVPodcast *newPodcast;
+            [[NSManagedObjectContext MR_rootSavingContext] performBlockAndWait:^{
+                newPodcast = [SVPodcast MR_createInContext:[NSManagedObjectContext MR_rootSavingContext]];
+                [newPodcast populateWithPodcast:self.podcast];
 
-            
+                [[NSManagedObjectContext MR_rootSavingContext] save:nil];
+                DDLogVerbose(@"Saved newly created podcast into root context");
+            }];
+            localPodcast = [newPodcast MR_inContext:self.context];
+            DDLogVerbose(@"Fetched podcast in ui context. Object Id: %@", localPodcast.objectID);
         }
         
         NSAssert(localPodcast != nil, @"Local podcast should not be nil");
@@ -526,7 +532,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
     
     [self.context performBlock:^{
-        [self.context processPendingChanges];
         NSAssert(localPodcast != nil, @"PLocal Podcast should not be nil");
         PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcast:localPodcast
                                                                                        andContext:self.context];
@@ -598,8 +603,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     if (localPodcast.hidePlayedEpisodesValue) {
         NSPredicate *notPlayedPredicate = [NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played];
-        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];
-        
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];        
     } else {
         predicate = itemsInPodcastPredicate;
     }
@@ -615,9 +619,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     
     fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"EpisodeListForId%@", localPodcast.podstoreId]];
-    [fetcher performFetch:nil];
-    
+
+
     fetcher.delegate = self;
+    
+  //  NSArray *array = [self.context executeFetchRequest:fetcher.fetchRequest error:nil];
+    [fetcher performFetch:nil];
     [self.tableView reloadData];
 }
 

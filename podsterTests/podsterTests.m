@@ -1,50 +1,80 @@
 //
-//  podsterTests.m
-//  podsterTests
+//  PodsterTests.m
+//  PodsterTests
 //
-//  Created by Vanterpool, Stephen on 12/23/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Stephen J Vanterpool on 8/25/12.
+//
 //
 
-#import "podsterTests.h"
-#import "SVPlaybackController.h"
-@implementation podsterTests
-- (NSInteger)secondsFromHours:(NSInteger)hours minutes:(NSInteger)minutes andSeconds:(NSInteger)seconds
+#import "PodsterTests.h"
+#import "MagicalRecord.h"
+#import "SVPodcast.h"
+#import "podster-Prefix.pch"
+@implementation PodsterTests
+- (void) setUpClass
 {
-    NSInteger total = 0;
-total += hours * 60 * 60;
-total += minutes * 60;
-total += seconds;
-return total;
+    NSBundle * bundle = [NSBundle bundleForClass:[self class]];
+    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:bundle]];
+   // [NSManagedObjectModel MR_setDefaultManagedObjectModel:[NSManagedObjectModel MR_managedObjectModelNamed:@"SVPodcastDatastore.momd"]];
+    [NSManagedObjectModel MR_setDefaultManagedObjectModel:managedObjectModel];
 }
-- (void)setUp
+
+- (void) setUp
 {
-    [super setUp];
+    [MagicalRecord setupCoreDataStackWithInMemoryStore];
+}
+
+- (void) tearDown
+{
+    [MagicalRecord cleanUp];
+}
+
+-(BOOL)shouldRunOnMainThread
+{
+    return YES;
+}
+
+- (void)testNestedProblem
+{
+    __block SVPodcast *podcast;
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    NSManagedObjectContext *mainContext = [NSManagedObjectContext MR_rootSavingContext];
+    NSManagedObjectContext *otherContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
     
-    // Set-up code here.
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextWillSaveNotification
+                                                      object:otherContext
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [otherContext obtainPermanentIDsForObjects:[[otherContext insertedObjects] allObjects] error:nil];
+                                                  }];
+
+    [otherContext performBlock:^{
+        podcast = [SVPodcast MR_createInContext:otherContext];
+        podcast.feedURL = @"";
+        podcast.title = @"";
+        podcast.podstoreIdValue = 12;
+        [otherContext save:nil];
+        
+        [mainContext performBlock:^{
+            SVPodcast *localPodcast = [podcast MR_inContext:mainContext];
+            STAssertFalse([localPodcast.objectID isTemporaryID],nil);
+
+            mainContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
+            otherContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
+         
+            [mainContext save:nil];
+            STAssertFalse([localPodcast.objectID isTemporaryID],nil);
+            [otherContext performBlock:^{
+                [otherContext refreshObject:podcast mergeChanges:NO];
+                STAssertFalse([podcast.objectID isTemporaryID], nil);
+                dispatch_group_leave(group);
+                
+            }];
+        }];
+        
+    }];
+ 
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
 }
-
-- (void)tearDown
-{
-    // Tear-down code here.
-    
-    [super tearDown];
-}
-
-
--(void)testCorrectlyFormatsSecondsAsString
-{
-    // Check 1 second
-    NSInteger numberOfSeconds = [self secondsFromHours:0 minutes:0 andSeconds:1];
-    NSString *stringEquivalent = [SVPlaybackController formattedStringRepresentationOfSeconds:numberOfSeconds];
-    STAssertTrue([stringEquivalent isEqualToString:@"00:01"], @"Expected \"00:01\", Got: \"%@\"", stringEquivalent);
-    numberOfSeconds = [self secondsFromHours:0 minutes:12 andSeconds:13];
-    stringEquivalent = [SVPlaybackController formattedStringRepresentationOfSeconds:numberOfSeconds];
-    STAssertTrue([stringEquivalent isEqualToString:@"12:13"], @"Expected \"12:13\", Got: \"%@\"", stringEquivalent);
-    
-    numberOfSeconds = [self secondsFromHours:1 minutes:12 andSeconds:13];
-    stringEquivalent = [SVPlaybackController formattedStringRepresentationOfSeconds:numberOfSeconds];
-    STAssertTrue([stringEquivalent isEqualToString:@"1:12:13"], @"Expected \"1:12:13\", Got: \"%@\"", stringEquivalent);
-}
-
 @end

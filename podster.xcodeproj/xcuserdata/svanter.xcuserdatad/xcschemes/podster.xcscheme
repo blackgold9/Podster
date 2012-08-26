@@ -31,9 +31,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4B71F7AB14A5B08C00D26F4C"
-               BuildableName = "podsterTests.octest"
-               BlueprintName = "podsterTests"
+               BlueprintIdentifier = "4B29C4F315EA00D100B87868"
+               BuildableName = "PodsterTests.octest"
+               BlueprintName = "PodsterTests"
                ReferencedContainer = "container:podster.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,7 +56,6 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      enableOpenGLFrameCaptureMode = "0"
       allowLocationSimulation = "YES"
       simulatorDisplayScale = "2.000000">
       <BuildableProductRunnable>

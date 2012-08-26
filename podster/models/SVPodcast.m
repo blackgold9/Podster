@@ -127,11 +127,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                onCompletion:^void(NSArray *podcasts) {
 
                                                    if (podcasts.count > 0) {
-                                                       NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
+                                                       NSManagedObjectContext *context = [NSManagedObjectContext MR_rootSavingContext];
                                                        [context performBlock:^{
                                                            // Then we make a new podcast in the data store
                                                            SVPodcast *localPodcast = [SVPodcast MR_createInContext:context];
                                                            [localPodcast populateWithPodcast:[podcasts objectAtIndex:0]];
+                                                            
                                                            // Now that we have the podcast populated. Subscribe on the
                                                            [[SVPodcatcherClient sharedInstance] subscribeToFeedWithId:podcastId
                                                                                                          onCompletion:^void() {

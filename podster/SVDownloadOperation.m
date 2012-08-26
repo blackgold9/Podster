@@ -97,7 +97,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }];
 
   //  dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext];
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_rootSavingContext];
 
     __block SVDownload *theDownload;
     [localContext performBlockAndWait:^{

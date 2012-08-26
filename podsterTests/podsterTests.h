@@ -1,13 +1,13 @@
 //
-//  podsterTests.h
-//  podsterTests
+//  PodsterTests.h
+//  PodsterTests
 //
-//  Created by Vanterpool, Stephen on 12/23/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Stephen J Vanterpool on 8/25/12.
+//
 //
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface podsterTests : SenTestCase
+@interface PodsterTests : SenTestCase
 
 @end
