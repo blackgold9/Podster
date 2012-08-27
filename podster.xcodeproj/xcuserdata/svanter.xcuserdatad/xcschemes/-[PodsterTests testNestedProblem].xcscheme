@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES"
+            buildForTesting = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4B29C4F315EA00D100B87868"
+               BuildableName = "PodsterTests.octest"
+               BlueprintName = "PodsterTests"
+               ReferencedContainer = "container:podster.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug">
+      <Testables>
+         <TestableReference>
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4B29C4F315EA00D100B87868"
+               BuildableName = "PodsterTests.octest"
+               BlueprintName = "PodsterTests"
+               ReferencedContainer = "container:podster.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO">
+   </LaunchAction>
+</Scheme>

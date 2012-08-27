@@ -95,10 +95,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
         
     }];
-    
-    //  dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
-    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_defaultContext];
-    
+  //  dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
+    NSManagedObjectContext *localContext = [NSManagedObjectContext MR_rootSavingContext];
+
     __block SVDownload *theDownload;
     [localContext performBlockAndWait:^{
         SVPodcastEntry *entry = [SVPodcastEntry MR_findFirstByAttribute:SVPodcastEntryAttributes.podstoreId withValue:self.entryId inContext:localContext];

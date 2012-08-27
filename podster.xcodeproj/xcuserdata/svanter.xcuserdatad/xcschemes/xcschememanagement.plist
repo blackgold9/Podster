@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>PodsterTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>beta.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -27,6 +32,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>4B29C4F315EA00D100B87868</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4B71F78A14A5B08C00D26F4C</key>
 		<dict>
 			<key>primary</key>

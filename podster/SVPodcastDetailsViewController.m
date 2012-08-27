@@ -447,27 +447,30 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     isLoading = YES;
 
     __block BOOL blockHasSubscription = NO;
-
-    [self.context performBlock:^{
+    
+    [self.context performBlockAndWait:^{
         NSNumber *feedId = self.podcast.podstoreId;
         NSAssert(feedId, @"Feed id should be present");
         LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
-        localPodcast = [SVPodcast MR_findFirstWithPredicate:predicate
-                                                  inContext:self.context];
+        NSFetchRequest *request = [SVPodcast MR_requestFirstWithPredicate:predicate];
+        [request setIncludesSubentities:YES];
+        [request setRelationshipKeyPathsForPrefetching:@[SVPodcastRelationships.listImage]];
+        localPodcast = [[self.context executeFetchRequest:request error:nil] lastObject];
         DDLogVerbose(@"Lookup complete");
 
         if (!localPodcast) {
-            LOG_GENERAL(2, @"Podcast with id %@ didn't exist, creating it", feedId);
+            DDLogInfo( @"Podcast with id %@ didn't exist, creating it", feedId);
+            __block SVPodcast *newPodcast;
+            [[NSManagedObjectContext MR_rootSavingContext] performBlockAndWait:^{
+                newPodcast = [SVPodcast MR_createInContext:[NSManagedObjectContext MR_rootSavingContext]];
+                [newPodcast populateWithPodcast:self.podcast];
 
-
-            localPodcast = [SVPodcast MR_createInContext:self.context];
-            [localPodcast populateWithPodcast:self.podcast];
-            [self.context obtainPermanentIDsForObjects:@ [localPodcast] error:nil];
-            [self.context MR_saveNestedContexts];
-            [[NSManagedObjectContext MR_rootSavingContext] MR_save];
-
-
+                [[NSManagedObjectContext MR_rootSavingContext] save:nil];
+                DDLogVerbose(@"Saved newly created podcast into root context");
+            }];
+            localPodcast = [newPodcast MR_inContext:self.context];
+            DDLogVerbose(@"Fetched podcast in ui context. Object Id: %@", localPodcast.objectID);
         }
 
         NSAssert(localPodcast != nil, @"Local podcast should not be nil");
@@ -531,7 +534,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [[NSRunLoop mainRunLoop] addTimer:gracePeriodTimer forMode:NSDefaultRunLoopMode];
 
     [self.context performBlock:^{
-        [self.context processPendingChanges];
         NSAssert(localPodcast != nil, @"PLocal Podcast should not be nil");
         PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcast:localPodcast
                                                                                        andContext:self.context];
@@ -606,7 +608,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
     if (localPodcast.hidePlayedEpisodesValue) {
         NSPredicate *notPlayedPredicate = [NSPredicate predicateWithFormat:@"%K = NO", SVPodcastEntryAttributes.played];
-        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:itemsInPodcastPredicate, notPlayedPredicate,nil]];        
 
     } else {
         predicate = itemsInPodcastPredicate;
@@ -620,13 +622,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSAssert(self.context == [NSManagedObjectContext MR_defaultContext], @"Contexts should match");
     [request setIncludesSubentities:NO];
     [request setIncludesPendingChanges:YES];
+    
+    
+    fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"EpisodeListForId%@", localPodcast.podstoreId]];
 
 
-    fetcher = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:nil];
-    NSError *error;
-    [fetcher performFetch:&error];
-    NSAssert(!error, @"There should be no error: %@" ,error);
     fetcher.delegate = self;
+    
+  //  NSArray *array = [self.context executeFetchRequest:fetcher.fetchRequest error:nil];
+    [fetcher performFetch:nil];
     [self.tableView reloadData];
 }
 

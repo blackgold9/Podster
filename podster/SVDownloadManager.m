@@ -30,7 +30,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     NSInteger maxConcurrentDownloads;
     NSOperationQueue *queue;
     BOOL cancelling;
-    dispatch_group_t completionGroup;
     BOOL downloading;
     NSDate *downloadStartedDate;
     //    UIBackgroundTaskIdentifier background_task;
@@ -52,7 +51,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         [self ensureDownloadsDirectory];
         //        background_task = UIBackgroundTaskInvalid;
         downloading = NO;
-        completionGroup = dispatch_group_create();
         currentProgressPercentage = 0;
         operationLookup = [NSMutableDictionary dictionary];
         maxConcurrentDownloads = 2;
@@ -233,15 +231,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         
         SVPodcastEntry *entry = download.entry;
         op.completionBlock = ^void() {
-            dispatch_group_leave(completionGroup);
             dispatch_async(dispatch_get_main_queue(), ^void() {
                 [self downloadCompletedWithObjectId:entry.objectID];
             });
         };
         
         [queue addOperation:op];
-        dispatch_group_enter(completionGroup);
-        
     }
 }
 

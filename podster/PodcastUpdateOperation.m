@@ -10,13 +10,13 @@
 #import "SVPodcast.h"
 #import "_SVPodcastEntry.h"
 
-
 static int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface PodcastUpdateOperation ()
 @property NSNumber *podstoreId;
 @end
 
 @implementation PodcastUpdateOperation {
+
     BOOL success;
     BOOL executing;
     BOOL _isExecuting;
@@ -108,8 +108,8 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     __block BOOL podcastExists;
     __block NSString *title;
     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *childContext) {
-        SVPodcast *podcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podstoreId];
-        DDLogVerbose(@"Starting sync for Podcast with Id: %@", podcast.podstoreId);
+        SVPodcast *podcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podstoreId inContext:childContext];
+        DDLogVerbose(@"Starting sync for Podcast with Id: %@ - %@", podcast.podstoreId, podcast.objectID);
         if (podcast) {
             podcastExists = YES;
             title = podcast.title;
@@ -179,7 +179,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                 } 
             });
         } else {
-            DDLogWarn(@"Podcast with id: %@ did not exist", self.podstoreId);
+            DDLogWarn(@"Podcast with id: %@ did not exist, aborting", self.podstoreId);
             [self finish];
         }
         
@@ -190,14 +190,13 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)processResponse:(id)response
               inContext:(NSManagedObjectContext *)context {
     DDLogVerbose(@"Procesing response");
-    [context performBlockAndWait:^void() {
         SVPodcast *localPodcast = [SVPodcast MR_findFirstByAttribute:SVPodcastAttributes.podstoreId withValue:self.podstoreId inContext:context];
         DDLogVerbose(@"PRocessing new episodes for podcast with core data identifier: %@", localPodcast.objectID);
         NSAssert(localPodcast!= nil, @"Should not be nil");
         localPodcast.lastSynced = [NSDate date];
         NSArray *episodes = response;
         if (episodes) {
-            DDLogInfo( @"Added %d episodes to %@", episodes.count, localPodcast.title);
+            DDLogInfo( @"Adding %d episodes to %@ - %@", episodes.count, localPodcast.title, localPodcast.objectID);
         }
         
         BOOL isFirst = YES;
@@ -235,8 +234,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         DDLogVerbose(@"Oldest recieved item date %@", lastDate);
         
         [self updateNewEpisodeCountForPodcast:localPodcast];
-        
-    }];
+
 }
 
 

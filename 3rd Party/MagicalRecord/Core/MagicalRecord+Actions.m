@@ -45,24 +45,38 @@ void reset_action_queue(void)
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
+   __block id observerToken;
+   observerToken = [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+                                                     object:mainContext
+                                                      queue:nil
+                                                 usingBlock:^(NSNotification *note) {
+                                                         
+                                                         
+                                                         [[NSManagedObjectContext MR_defaultContext] performBlock:^{
+                                                             [[NSManagedObjectContext MR_defaultContext] mergeChangesFromContextDidSaveNotification:note];
+                                                         }];
+                                                         [[NSNotificationCenter defaultCenter] removeObserver:observerToken];
+                                                         observerToken = nil;
+
+                                                 }];
+ mainContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
+    localContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
     
     [localContext performBlock:^{
         block(localContext);
         NSError *error;
-        [localContext save:&error];
-        if (error) {
+        NSArray *insertedObjects = [[localContext insertedObjects] allObjects];
+        if(![localContext obtainPermanentIDsForObjects:insertedObjects error:&error]) {
+            [MagicalRecord handleErrors:error];
+            error = nil;
+        }
+        if (![localContext save:&error]) {
             @throw [NSException exceptionWithName:@"CoreDataSaveError" reason:[error localizedDescription] userInfo:nil];
         }
-        __block id observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
-                                                                                object:mainContext
-                                                                                 queue:nil
-                                                                            usingBlock:^(NSNotification *note) {
-                                                                                [[NSManagedObjectContext MR_defaultContext] performBlock:^{
-                                                                                     [[NSManagedObjectContext MR_defaultContext] mergeChangesFromContextDidSaveNotification:note];
-                                                                                }];
-                                                                                [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                                            }];
-        [mainContext MR_save];
+      
+        [mainContext performBlock:^{
+            [mainContext save:nil];
+        }];
         if (completion) {
             dispatch_sync(dispatch_get_main_queue(), completion);
         }
