@@ -88,7 +88,6 @@
 		4B107170155200180044B013 /* trash-can@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10716E155200180044B013 /* trash-can@2x.png */; };
 		4B107173155200A20044B013 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B107171155200A20044B013 /* cancel.png */; };
 		4B107174155200A20044B013 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B107172155200A20044B013 /* cancel@2x.png */; };
-		4B10717715524A060044B013 /* DDNSLoggerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B10717615524A060044B013 /* DDNSLoggerLogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B1071791552FC240044B013 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B1071781552FC240044B013 /* NSData+Base64.m */; };
 		4B10CFA414BE7A5300DF4DBD /* reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFA214BE7A5300DF4DBD /* reload.png */; };
 		4B10CFA614BE7A5300DF4DBD /* reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B10CFA314BE7A5300DF4DBD /* reload@2x.png */; };
@@ -123,14 +122,6 @@
 		4B11EDA715316695004B9091 /* PodcastGridCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDA615316695004B9091 /* PodcastGridCellView.m */; };
 		4B11EDB81532974D004B9091 /* download-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDB61532974D004B9091 /* download-white.png */; };
 		4B11EDB91532974D004B9091 /* download-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDB71532974D004B9091 /* download-white@2x.png */; };
-		4B11EDCB1532B214004B9091 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDBC1532B214004B9091 /* DDAbstractDatabaseLogger.m */; };
-		4B11EDCC1532B214004B9091 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDBE1532B214004B9091 /* DDASLLogger.m */; };
-		4B11EDCD1532B214004B9091 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC01532B214004B9091 /* DDFileLogger.m */; };
-		4B11EDCE1532B214004B9091 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC21532B214004B9091 /* DDLog.m */; };
-		4B11EDCF1532B214004B9091 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC41532B214004B9091 /* DDTTYLogger.m */; };
-		4B11EDD01532B214004B9091 /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC71532B214004B9091 /* ContextFilterLogFormatter.m */; };
-		4B11EDD11532B214004B9091 /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B11EDC91532B214004B9091 /* DispatchQueueLogFormatter.m */; };
-		4B11EDD21532B214004B9091 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4B11EDCA1532B214004B9091 /* README.txt */; };
 		4B141FBA14CB220200028CE4 /* SVCustomApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FB914CB220100028CE4 /* SVCustomApplication.m */; };
 		4B141FBD14CB44CB00028CE4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B141FBC14CB44CA00028CE4 /* MediaPlayer.framework */; };
 		4B141FC014CCCAB500028CE4 /* SVGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B141FBF14CCCAB500028CE4 /* SVGridCell.m */; };
@@ -342,7 +333,6 @@
 		4BD0BAC4151124B2005E6232 /* placeholder-thumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD0BAC2151124B2005E6232 /* placeholder-thumb@2x.png */; };
 		4BD123C5150FFF8100A108DA /* CloudHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD123C4150FFF8100A108DA /* CloudHelper.m */; };
 		4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */; };
-		4BD1C22914B8BDEF00E8C942 /* LoggerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22714B8BDEF00E8C942 /* LoggerClient.m */; };
 		4BD1C22D14B8EFDB00E8C942 /* SVPodcatcherClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22C14B8EFDB00E8C942 /* SVPodcatcherClient.m */; };
 		4BD1C22E14B8EFDB00E8C944 /* SVCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD1C22E14B8EFDB00E8C943 /* SVCategory.m */; };
 		4BD8FB2014EF93CD00C0F3AD /* heart-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BD8FB1C14EF93CD00C0F3AD /* heart-highlighted.png */; };
@@ -565,8 +555,6 @@
 		4B10716E155200180044B013 /* trash-can@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash-can@2x.png"; sourceTree = "<group>"; };
 		4B107171155200A20044B013 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		4B107172155200A20044B013 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
-		4B10717515524A060044B013 /* DDNSLoggerLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNSLoggerLogger.h; sourceTree = "<group>"; };
-		4B10717615524A060044B013 /* DDNSLoggerLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNSLoggerLogger.m; sourceTree = "<group>"; };
 		4B1071781552FC240044B013 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		4B10717A1552FC2F0044B013 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		4B10717B1552FC7D0044B013 /* NSAttributedString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+HTML.h"; sourceTree = "<group>"; };
@@ -611,21 +599,6 @@
 		4B11EDA615316695004B9091 /* PodcastGridCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastGridCellView.m; sourceTree = "<group>"; };
 		4B11EDB61532974D004B9091 /* download-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download-white.png"; sourceTree = "<group>"; };
 		4B11EDB71532974D004B9091 /* download-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download-white@2x.png"; sourceTree = "<group>"; };
-		4B11EDBB1532B214004B9091 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		4B11EDBC1532B214004B9091 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
-		4B11EDBD1532B214004B9091 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
-		4B11EDBE1532B214004B9091 /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
-		4B11EDBF1532B214004B9091 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
-		4B11EDC01532B214004B9091 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
-		4B11EDC11532B214004B9091 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
-		4B11EDC21532B214004B9091 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
-		4B11EDC31532B214004B9091 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
-		4B11EDC41532B214004B9091 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
-		4B11EDC61532B214004B9091 /* ContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		4B11EDC71532B214004B9091 /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContextFilterLogFormatter.m; sourceTree = "<group>"; };
-		4B11EDC81532B214004B9091 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchQueueLogFormatter.h; sourceTree = "<group>"; };
-		4B11EDC91532B214004B9091 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		4B11EDCA1532B214004B9091 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		4B141FB314CA9AFD00028CE4 /* SVPodcastDatastore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 3.xcdatamodel"; sourceTree = "<group>"; };
 		4B141FB814CB220000028CE4 /* SVCustomApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomApplication.h; sourceTree = "<group>"; };
 		4B141FB914CB220100028CE4 /* SVCustomApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomApplication.m; sourceTree = "<group>"; };
@@ -951,9 +924,6 @@
 		4BD1A3FB15B3D43B00D2EEF1 /* SVPodcastDatastore 19.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "SVPodcastDatastore 19.xcdatamodel"; sourceTree = "<group>"; };
 		4BD1C22114B7D1D200E8C942 /* NSDictionary+safeGetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeGetters.h"; sourceTree = "<group>"; };
 		4BD1C22214B7D1D200E8C942 /* NSDictionary+safeGetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safeGetters.m"; sourceTree = "<group>"; };
-		4BD1C22614B8BDEF00E8C942 /* LoggerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerClient.h; sourceTree = "<group>"; };
-		4BD1C22714B8BDEF00E8C942 /* LoggerClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerClient.m; sourceTree = "<group>"; };
-		4BD1C22814B8BDEF00E8C942 /* LoggerCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerCommon.h; sourceTree = "<group>"; };
 		4BD1C22B14B8EFDA00E8C942 /* SVPodcatcherClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcatcherClient.h; path = engines/SVPodcatcherClient.h; sourceTree = "<group>"; };
 		4BD1C22C14B8EFDB00E8C942 /* SVPodcatcherClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVPodcatcherClient.m; path = engines/SVPodcatcherClient.m; sourceTree = "<group>"; };
 		4BD1C22E14B8EFDB00E8C943 /* SVCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVCategory.m; path = data/SVCategory.m; sourceTree = "<group>"; };
@@ -1324,38 +1294,6 @@
 				4B8F6FA814ED9DAB00D328DE /* UIImage+ForceDecompress.m */,
 			);
 			name = helpers;
-			sourceTree = "<group>";
-		};
-		4B11EDBA1532B214004B9091 /* Lumberjack */ = {
-			isa = PBXGroup;
-			children = (
-				4B10717515524A060044B013 /* DDNSLoggerLogger.h */,
-				4B10717615524A060044B013 /* DDNSLoggerLogger.m */,
-				4B11EDBB1532B214004B9091 /* DDAbstractDatabaseLogger.h */,
-				4B11EDBC1532B214004B9091 /* DDAbstractDatabaseLogger.m */,
-				4B11EDBD1532B214004B9091 /* DDASLLogger.h */,
-				4B11EDBE1532B214004B9091 /* DDASLLogger.m */,
-				4B11EDBF1532B214004B9091 /* DDFileLogger.h */,
-				4B11EDC01532B214004B9091 /* DDFileLogger.m */,
-				4B11EDC11532B214004B9091 /* DDLog.h */,
-				4B11EDC21532B214004B9091 /* DDLog.m */,
-				4B11EDC31532B214004B9091 /* DDTTYLogger.h */,
-				4B11EDC41532B214004B9091 /* DDTTYLogger.m */,
-				4B11EDC51532B214004B9091 /* Extensions */,
-			);
-			path = Lumberjack;
-			sourceTree = "<group>";
-		};
-		4B11EDC51532B214004B9091 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				4B11EDC61532B214004B9091 /* ContextFilterLogFormatter.h */,
-				4B11EDC71532B214004B9091 /* ContextFilterLogFormatter.m */,
-				4B11EDC81532B214004B9091 /* DispatchQueueLogFormatter.h */,
-				4B11EDC91532B214004B9091 /* DispatchQueueLogFormatter.m */,
-				4B11EDCA1532B214004B9091 /* README.txt */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		4B1BC92D15034EA000F5F799 /* NRGridView */ = {
@@ -1841,7 +1779,6 @@
 				4B05C0381536449B0078DF13 /* Reachability.h */,
 				4B05C01F153639E00078DF13 /* InMobi iOS SDK Bundle */,
 				4B05BFB21536368B0078DF13 /* TouchJSON */,
-				4B11EDBA1532B214004B9091 /* Lumberjack */,
 				4B35BC95151AA4D300325DEF /* Appirater.h */,
 				4B35BC96151AA4D300325DEF /* Appirater.m */,
 				4B3E5EC7150C43DD00010833 /* MBHud */,
@@ -1855,7 +1792,6 @@
 				4B434B9C14D4E31A004A5E89 /* AFNetworking */,
 				4B91BF4E14C77B5800B33776 /* JMTabView */,
 				4B6D492614BE460C00E7B11F /* GMGridView */,
-				4BD1C22514B8BDE100E8C942 /* NSLogger */,
 				4B2E51DD14B3B5270030B7C1 /* MagicalRecord */,
 				4B5CE8FD14B0E0ED00E17299 /* OBSlider */,
 				4B71F80114A6D7F500D26F4C /* MWFeedParser */,
@@ -2089,16 +2025,6 @@
 				4BE7A73D157BFF18007900F8 /* ToolbarStatusView.m */,
 			);
 			name = views;
-			sourceTree = "<group>";
-		};
-		4BD1C22514B8BDE100E8C942 /* NSLogger */ = {
-			isa = PBXGroup;
-			children = (
-				4BD1C22614B8BDEF00E8C942 /* LoggerClient.h */,
-				4BD1C22714B8BDEF00E8C942 /* LoggerClient.m */,
-				4BD1C22814B8BDEF00E8C942 /* LoggerCommon.h */,
-			);
-			name = NSLogger;
 			sourceTree = "<group>";
 		};
 		4BFE0B51150414FC005F9E81 /* icon */ = {
@@ -2423,7 +2349,6 @@
 				4B11EDA4153162AE004B9091 /* Downloaded-Overlay@2x.png in Resources */,
 				4B11EDB81532974D004B9091 /* download-white.png in Resources */,
 				4B11EDB91532974D004B9091 /* download-white@2x.png in Resources */,
-				4B11EDD21532B214004B9091 /* README.txt in Resources */,
 				4B05BF5715355E2F0078DF13 /* background-gradient.jpg in Resources */,
 				4B05BF5915355E2F0078DF13 /* background-gradient@2x.jpg in Resources */,
 				4BC8D1EE1546F5ED009C113C /* flag2.png in Resources */,
@@ -2531,7 +2456,6 @@
 				4B08537314B4315300847BAA /* SVDownload.m in Sources */,
 				4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */,
 				4BD1C22314B7D1D300E8C942 /* NSDictionary+safeGetters.m in Sources */,
-				4BD1C22914B8BDEF00E8C942 /* LoggerClient.m in Sources */,
 				4BD1C22D14B8EFDB00E8C942 /* SVPodcatcherClient.m in Sources */,
 				4BD1C22E14B8EFDB00E8C944 /* SVCategory.m in Sources */,
 				4B4B5F4114BB9FBF00C40A95 /* NSString+URLEncoding.m in Sources */,
@@ -2597,13 +2521,6 @@
 				4BD123C5150FFF8100A108DA /* CloudHelper.m in Sources */,
 				4B35BC97151AA4D300325DEF /* Appirater.m in Sources */,
 				4B11EDA715316695004B9091 /* PodcastGridCellView.m in Sources */,
-				4B11EDCB1532B214004B9091 /* DDAbstractDatabaseLogger.m in Sources */,
-				4B11EDCC1532B214004B9091 /* DDASLLogger.m in Sources */,
-				4B11EDCD1532B214004B9091 /* DDFileLogger.m in Sources */,
-				4B11EDCE1532B214004B9091 /* DDLog.m in Sources */,
-				4B11EDCF1532B214004B9091 /* DDTTYLogger.m in Sources */,
-				4B11EDD01532B214004B9091 /* ContextFilterLogFormatter.m in Sources */,
-				4B11EDD11532B214004B9091 /* DispatchQueueLogFormatter.m in Sources */,
 				4B05C00B1536368C0078DF13 /* CDataScanner.m in Sources */,
 				4B05C00D1536368C0078DF13 /* CDataScanner_Extensions.m in Sources */,
 				4B05C00F1536368C0078DF13 /* NSCharacterSet_Extensions.m in Sources */,
@@ -2617,7 +2534,6 @@
 				4B05C0391536449B0078DF13 /* Reachability.m in Sources */,
 				4BC8D1E41545E20E009C113C /* ISO8601DateFormatter.m in Sources */,
 				4BC8D1F41546F6A9009C113C /* GridCellCountOverlay.m in Sources */,
-				4B10717715524A060044B013 /* DDNSLoggerLogger.m in Sources */,
 				4B1071791552FC240044B013 /* NSData+Base64.m in Sources */,
 				4BE723CB1554A0C30007F740 /* Lockbox.m in Sources */,
 				4BE7A73E157BFF18007900F8 /* ToolbarStatusView.m in Sources */,
