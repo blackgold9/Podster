@@ -6,5 +6,5 @@
 
 #import <UIKit/UIKit.h>
 @protocol CoreDataController <NSObject>
-@property NSManagedObjectContext *context;
+@property (nonatomic, retain) NSManagedObjectContext *context;
 @end

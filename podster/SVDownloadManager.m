@@ -394,7 +394,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 //        
         // Push changesup
 
-        NSArray *toDownload = [shouldBePresent allObjects];
+//        NSArray *toDownload = [shouldBePresent allObjects];
         NSError *error;
         if (error) {
             DDLogError(@"Error obtaining permanent IDs: %@", error);

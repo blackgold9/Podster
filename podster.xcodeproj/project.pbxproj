@@ -203,7 +203,6 @@
 		4B71F7A614A5B08C00D26F4C /* SVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7A514A5B08C00D26F4C /* SVViewController.m */; };
 		4B71F7F314A5BBBD00D26F4C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F214A5BBBD00D26F4C /* Security.framework */; };
 		4B71F7F714A5BBFB00D26F4C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */; };
-		4B71F7FE14A6BAAE00D26F4C /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F7FD14A6BAAE00D26F4C /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4B71F82114A6E95B00D26F4C /* SVPodcastDirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82014A6E95B00D26F4C /* SVPodcastDirectoryViewController.m */; };
 		4B71F82514A7060B00D26F4C /* SVPodcastsSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71F82414A7060A00D26F4C /* SVPodcastsSearchResultsViewController.m */; };
 		4B86243114B57C7500A4B320 /* SVDownloadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B86243014B57C7500A4B320 /* SVDownloadCell.m */; };
@@ -254,7 +253,6 @@
 		4BA9DA4B15EDE14C00393775 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BA9DA4615EDE14C00393775 /* HockeySDK.framework */; };
 		4BA9DA4C15EDE14C00393775 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4BA9DA4715EDE14C00393775 /* HockeySDKResources.bundle */; };
 		4BA9DA4D15EDE14C00393775 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4BA9DA4815EDE14C00393775 /* LICENSE.txt */; };
-		4BA9DA4E15EDE14C00393775 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4BA9DA4915EDE14C00393775 /* README.md */; };
 		4BB2059114D101500038EB7D /* SVPodcastDetailsModalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BB2059014D101500038EB7D /* SVPodcastDetailsModalView.xib */; };
 		4BC1EE7A155178DF00FF5D9C /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC1EE78155178DF00FF5D9C /* download.png */; };
 		4BC1EE7B155178DF00FF5D9C /* download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC1EE79155178DF00FF5D9C /* download@2x.png */; };
@@ -285,13 +283,10 @@
 		4BFE0B6215041561005F9E81 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFE0B6115041561005F9E81 /* Icon@2x.png */; };
 		7CD8CFFF779EF8F1C4AFC1DF /* PodcastUpdateOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD8CEADBEEB6FBD9B09FC73 /* PodcastUpdateOperation.m */; };
 		7D182D1C159B93190023C469 /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D182D17159B93190023C469 /* libAdapterIAd.a */; };
-		7D182D1D159B93190023C469 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D182D18159B93190023C469 /* README.txt */; };
 		7D182D1E159B93190023C469 /* libAdapterInMobi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D182D1A159B93190023C469 /* libAdapterInMobi.a */; };
-		7D182D1F159B93190023C469 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7D182D1B159B93190023C469 /* README.txt */; };
 		7DB672E115981F9E00FA932D /* SVHtmlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB672E015981F9E00FA932D /* SVHtmlViewController.m */; };
 		7DB6731B159B5A1000FA932D /* SVSyncLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB6731A159B5A1000FA932D /* SVSyncLocation.m */; };
 		7DD61F0E159B92BD006181AE /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DD61F05159B92BD006181AE /* libGoogleAdMobAds.a */; };
-		7DD61F0F159B92BD006181AE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7DD61F0D159B92BD006181AE /* README.txt */; };
 		92532BEE7ADBE298F25BBD59 /* SVCustomGroupedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */; };
 		92532D82DA333A407478B30F /* NativeWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9253297D753C12BC5154E5E7 /* NativeWebView.m */; };
 		D608C9AE150D6BA2009BA9BD /* honeycomb.png in Resources */ = {isa = PBXBuildFile; fileRef = D608C9AC150D6BA2009BA9BD /* honeycomb.png */; };
@@ -621,8 +616,6 @@
 		4B71F7F214A5BBBD00D26F4C /* Security.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4B71F7F414A5BBD200D26F4C /* CFNetwork.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4B71F7F614A5BBFB00D26F4C /* SystemConfiguration.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		4B71F7FC14A6BAAD00D26F4C /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		4B71F7FD14A6BAAE00D26F4C /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		4B71F81F14A6E95A00D26F4C /* SVPodcastDirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPodcastDirectoryViewController.h; sourceTree = "<group>"; };
 		4B71F82014A6E95B00D26F4C /* SVPodcastDirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPodcastDirectoryViewController.m; sourceTree = "<group>"; };
 		4B71F82314A7060A00D26F4C /* SVPodcastsSearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPodcastsSearchResultsViewController.h; path = ../SVPodcastsSearchResultsViewController.h; sourceTree = "<group>"; };
@@ -1441,18 +1434,8 @@
 				4B1BC92D15034EA000F5F799 /* NRGridView */,
 				4B434B9C14D4E31A004A5E89 /* AFNetworking */,
 				4B91BF4E14C77B5800B33776 /* JMTabView */,
-				4B71F80014A6D7E300D26F4C /* GDataXMLNode */,
 			);
 			name = "3rd Party";
-			sourceTree = "<group>";
-		};
-		4B71F80014A6D7E300D26F4C /* GDataXMLNode */ = {
-			isa = PBXGroup;
-			children = (
-				4B71F7FC14A6BAAD00D26F4C /* GDataXMLNode.h */,
-				4B71F7FD14A6BAAE00D26F4C /* GDataXMLNode.m */,
-			);
-			name = GDataXMLNode;
 			sourceTree = "<group>";
 		};
 		4B91BF4E14C77B5800B33776 /* JMTabView */ = {
@@ -1839,12 +1822,8 @@
 				D6EE8ADF1587E3A600F33740 /* PodcastStoryboard.storyboard in Resources */,
 				D6A8789015894C34009DD522 /* sliders.png in Resources */,
 				D6A8789115894C34009DD522 /* sliders@2x.png in Resources */,
-				7DD61F0F159B92BD006181AE /* README.txt in Resources */,
-				7D182D1D159B93190023C469 /* README.txt in Resources */,
-				7D182D1F159B93190023C469 /* README.txt in Resources */,
 				4BA9DA4C15EDE14C00393775 /* HockeySDKResources.bundle in Resources */,
 				4BA9DA4D15EDE14C00393775 /* LICENSE.txt in Resources */,
-				4BA9DA4E15EDE14C00393775 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1909,7 +1888,6 @@
 				4B71F79C14A5B08C00D26F4C /* main.m in Sources */,
 				4B71F7A014A5B08C00D26F4C /* SVAppDelegate.m in Sources */,
 				4B71F7A614A5B08C00D26F4C /* SVViewController.m in Sources */,
-				4B71F7FE14A6BAAE00D26F4C /* GDataXMLNode.m in Sources */,
 				4B71F82114A6E95B00D26F4C /* SVPodcastDirectoryViewController.m in Sources */,
 				4B71F82514A7060B00D26F4C /* SVPodcastsSearchResultsViewController.m in Sources */,
 				4B189B3314A7D771001E378A /* SVPodcastDetailsViewController.m in Sources */,
@@ -2101,10 +2079,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/3rd Party\"",
-					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 					"\"$(SRCROOT)/../Podster/QuincyKit\"",
 					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 					"\"$(SRCROOT)/3rd Party/HockeySDK-iOS\"",
+					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -2119,13 +2097,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
-					"\"$(SRCROOT)/3rd Party/AdMob\"",
-					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
-					"\"$(SRCROOT)/3rd Party/ADMob\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK/iAd Adapter\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK/inMobi Adapter\"",
+					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -2306,10 +2281,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/3rd Party\"",
-					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 					"\"$(SRCROOT)/../Podster/QuincyKit\"",
 					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 					"\"$(SRCROOT)/3rd Party/HockeySDK-iOS\"",
+					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -2327,13 +2302,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
-					"\"$(SRCROOT)/3rd Party/AdMob\"",
-					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
-					"\"$(SRCROOT)/3rd Party/ADMob\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK/iAd Adapter\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK/inMobi Adapter\"",
+					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -2361,10 +2333,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/3rd Party\"",
-					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 					"\"$(SRCROOT)/../Podster/QuincyKit\"",
 					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 					"\"$(SRCROOT)/3rd Party/HockeySDK-iOS\"",
+					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -2379,13 +2351,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
-					"\"$(SRCROOT)/3rd Party/AdMob\"",
-					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
-					"\"$(SRCROOT)/3rd Party/ADMob\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK/iAd Adapter\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK/inMobi Adapter\"",
+					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -2437,10 +2406,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/3rd Party\"",
-					"\"$(SRCROOT)/QuincyKit/client/iOS\"",
 					"\"$(SRCROOT)/../Podster/QuincyKit\"",
 					"\"$(SRCROOT)/3rd Party/QuincyKit\"",
 					"\"$(SRCROOT)/3rd Party/HockeySDK-iOS\"",
+					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "podster/podster-Prefix.pch";
@@ -2455,13 +2424,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\"",
-					"\"$(SRCROOT)/3rd Party/AdMob\"",
-					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
-					"\"$(SRCROOT)/3rd Party/ADMob\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK/iAd Adapter\"",
 					"\"$(SRCROOT)/3rd Party/GoogleAdMobAdsSDK/inMobi Adapter\"",
+					"\"$(SRCROOT)/InMobi iOS SDK Bundle\"",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",

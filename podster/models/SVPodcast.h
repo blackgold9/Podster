@@ -7,7 +7,6 @@
 
 - (void)populateWithPodcast:(id <ActsAsPodcast>)podcast;
 
-- (void)getNewEpisodes:(void (^)(BOOL))complete;
 
 // Used when installing the app fresh and restoring old subscriptions
 + (void)fetchAndSubscribeToPodcastWithId:(NSNumber *)podcastId shouldNotify:(BOOL)shouldNotify;

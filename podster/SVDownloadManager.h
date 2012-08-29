@@ -17,7 +17,7 @@
 
 - (void)deleteFileForEntry:(SVPodcastEntry *)entry;
 
-- (void)resumeDownloads;
+//- (void)resumeDownloads;
 - (void)cancelDownload:(SVDownload *)download;
 
 - (void)downloadPendingEntries;

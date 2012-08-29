@@ -14,8 +14,7 @@
 NSString *kShouldAlwaysSubscribeToNotifications = @"shouldAlwaysSubscribeToNotifications";
 NSString *kNeverAutoSubscribeToNotifications = @"neverAutoSubscribeToNotifications";
 NSString *kNotificationsEnabled = @"notificationsEnabled";
-
-NSString *uuid() {
+static NSString *uuid() {
     CFUUIDRef theUUID = CFUUIDCreate(NULL);
     NSString *uuidString = (__bridge_transfer NSString *) CFUUIDCreateString(NULL, theUUID);
     CFRelease(theUUID);

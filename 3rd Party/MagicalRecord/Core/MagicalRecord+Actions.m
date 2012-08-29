@@ -46,23 +46,23 @@ void reset_action_queue(void)
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_rootSavingContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
-   __block id observerToken;
-   observerToken = [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
-                                                     object:mainContext
-                                                      queue:nil
-                                                 usingBlock:^(NSNotification *note) {
-                                                         
-                                                         
-                                                         [[NSManagedObjectContext MR_defaultContext] performBlock:^{
-                                                             [[NSManagedObjectContext MR_defaultContext] mergeChangesFromContextDidSaveNotification:note];
-                                                         }];
-                                                         [[NSNotificationCenter defaultCenter] removeObserver:observerToken];
-                                                         observerToken = nil;
-
-                                                 }];
- mainContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
+    __block id observerToken;
+    observerToken = [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+                                                                      object:mainContext
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification *note) {
+                                                                      
+                                                                      
+                                                                      [[NSManagedObjectContext MR_defaultContext] performBlock:^{
+                                                                          [[NSManagedObjectContext MR_defaultContext] mergeChangesFromContextDidSaveNotification:note];
+                                                                      }];
+                                                                      [[NSNotificationCenter defaultCenter] removeObserver:observerToken];
+                                                                      observerToken = nil;
+                                                                      
+                                                                  }];
+    mainContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
     localContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
-    
+        
     [localContext performBlock:^{
         block(localContext);
         NSError *error;
@@ -74,7 +74,7 @@ void reset_action_queue(void)
         
         MRLog(@"Saving child work context");
         if (![localContext save:&error]) {
-
+            
             @throw [NSException exceptionWithName:@"CoreDataSaveError" reason:[error localizedDescription] userInfo:nil];
         }
         
@@ -86,9 +86,9 @@ void reset_action_queue(void)
             if (completion) {
                 dispatch_async(dispatch_get_main_queue(), completion);
             }
-
+            
         }];
-           }];
+    }];
 }
 
 + (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
@@ -97,15 +97,15 @@ void reset_action_queue(void)
     
     [self saveInBackgroundUsingContext:localContext block:block completion:completion errorHandler:errorHandler];
 }
-                                    
+
 + (void) saveWithBlock:(void (^)(NSManagedObjectContext *localContext))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
 {
     NSManagedObjectContext *mainContext  = [NSManagedObjectContext MR_defaultContext];
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_contextWithParent:mainContext];
-
+    
     block(localContext);
     
-    if ([localContext hasChanges]) 
+    if ([localContext hasChanges])
     {
         [localContext MR_saveNestedContextsErrorHandler:errorHandler];
     }
@@ -117,7 +117,7 @@ void reset_action_queue(void)
 }
 
 + (void) saveWithBlock:(void(^)(NSManagedObjectContext *localContext))block
-{   
+{
     [self saveWithBlock:block completion:nil errorHandler:nil];
 }
 

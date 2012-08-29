@@ -225,8 +225,8 @@ static CGFloat const _kNRGridViewDefaultHeaderWidth = 30.; // layout style = hor
 - (UIView*)__headerForSection:(NSInteger)section; // returns a visible header that has already been created, or creates a new one if applicable.
 
 
-- (CGRect)__rectForFooterInSection:(NSInteger)section
-                  usingLayoutStyle:(NRGridViewLayoutStyle)layoutStyle;
+//- (CGRect)__rectForFooterInSection:(NSInteger)section
+//                  usingLayoutStyle:(NRGridViewLayoutStyle)layoutStyle;
 - (UIView*)__footerForSection:(NSInteger)section;
 
 - (CGRect)__rectForCellAtIndexPath:(NSIndexPath*)indexPath 
