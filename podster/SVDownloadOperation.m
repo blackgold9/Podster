@@ -51,15 +51,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry podstoreId], @"podstoreId", [NSNumber numberWithDouble:progress], @"progress",  nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
         [[NSManagedObjectContext MR_defaultContext] performBlock: ^{
-
-            localDownload.stateValue = SVDownloadStateDownloading;
-                localDownload.entry.podcast.downloadPercentageValue = percentage;
-            if (!localDownload.entry.podcast.isDownloadingValue) {
-                localDownload.entry.podcast.isDownloadingValue = YES;
+            SVDownload *mainThreadDownload = [localDownload MR_inContext:[NSManagedObjectContext MR_defaultContext]];
+            mainThreadDownload.stateValue = SVDownloadStateDownloading;
+                mainThreadDownload.entry.podcast.downloadPercentageValue = percentage;
+            if (!mainThreadDownload.entry.podcast.isDownloadingValue) {
+                mainThreadDownload.entry.podcast.isDownloadingValue = YES;
             } 
          
          if (currentProgressPercentage == 100) {
-              localDownload.entry.podcast.isDownloadingValue = NO;
+              mainThreadDownload.entry.podcast.isDownloadingValue = NO;
          }
 
         }];
@@ -251,6 +251,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     DDLogVerbose(@"Disabling backup for %@", path);
     int result = setxattr([path fileSystemRepresentation], attrName, &attrValue, sizeof(attrValue), 0, 0);       
     NSAssert(result == 0, @"Did not set no-backup attribute correctly");
+    if (result != 0) {
+        DDLogWarn(@"Do-not backup attribute was not set properly");
+    }
     
 }
 @end

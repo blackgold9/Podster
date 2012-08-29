@@ -12,6 +12,6 @@ pod 'SDURLCache'
 pod 'BlockAlertsAnd-ActionSheets'
 pod 'GCDiscreetNotificationView'
 pod 'MBProgressHUD'
-pod 'Appirater'
+pod 'Appirater', :head
 pod 'NSLogger'
 pod 'NSLogger-CocoaLumberjack-connector', :git => 'git://github.com/steipete/NSLogger-CocoaLumberjack-connector.git', :commit=> '444fa49e9f'

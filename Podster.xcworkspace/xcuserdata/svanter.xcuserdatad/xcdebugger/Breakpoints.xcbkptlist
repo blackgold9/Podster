@@ -348,6 +348,19 @@
          landmarkName = "-reloadFetchedResultsController"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "podster/SVDownloadOperation.m"
+         timestampString = "367947520.200818"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-downloadProgressChanged:forDownload:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint

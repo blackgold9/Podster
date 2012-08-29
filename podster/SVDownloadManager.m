@@ -200,6 +200,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     int result = setxattr([path fileSystemRepresentation], attrName, &attrValue, sizeof(attrValue), 0, 0);
     NSAssert(result == 0, @"Did not set no-backup attribute correctly");
+    if (result != 0) {
+        DDLogWarn(@"Do-not backup attribute was not set properly");
+    }
     
 }
 

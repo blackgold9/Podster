@@ -1,766 +1,2829 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		00CD2E1099DA4DB9B4E6B944 /* BlockAlertView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37735993D5A84CAC87DDBCE9 /* BlockAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		04F05B6DD5A84F8091BC32DC /* DispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38082074BD934797A5A63A97 /* DispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		05D029E33F75493DABAAFC15 /* GMGridView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F546A30CE15E4A96B43443E2 /* GMGridView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0785F6B1FDE1426BAC833E11 /* PodsDummy_Pods.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB2979B28724B5CBF019387 /* PodsDummy_Pods.m */; };
-		07959C2324C44B08BB638A56 /* LoggerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A0A850F57A542DC93671A30 /* LoggerClient.m */; };
-		0CFFA6D5DEDA4628A7D9AF27 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BD1AA6D2134DBBAA359F24 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		0EE96C8B9F69482BB3A367AD /* ContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2804857CA838460FBF4A4536 /* ContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		111A2C07A03F4B239C2D8957 /* DDTTYLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA8D33B06D9E4C8F97DD92E6 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		11CA1919A0304B449DA8806F /* BlockActionSheet.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2E793452A3664E38BD5B84AC /* BlockActionSheet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1589FFF3B5114CCC9CA61954 /* GMGridViewCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2185EB1F9E0E4241B54076D8 /* GMGridViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1AED5EF9E7DB46AC8C4439EB /* GMGridViewLayoutStrategies.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FAF14936C2AD44C794C4A12C /* GMGridViewLayoutStrategies.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1B80781046CC4B589F558E81 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = BA130AB64F584B2E9F0CFE9D /* NSDate+InternetDateTime.m */; settings = {COMPILER_FLAGS = "-Wno-format -Wno-format-extra-args"; }; };
-		1D4C921F80324A2A8D5D3027 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 475215EB275B4A038A6298D2 /* Appirater.m */; };
-		2172999366FD44688A800617 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E387B7DC9B4195B46C977A /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-Wno-format -Wno-format-extra-args"; }; };
-		249F6C3DFD36419D8E083655 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D87B0C8606D4BDA8EBE63BF /* Foundation.framework */; };
-		265D4B14C5B34C53803B40BA /* LoggerClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1DD9874CBD0548799FFE8B57 /* LoggerClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26B4ECF00F174D00BF5D182B /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AAC278F1B56476288185A5D /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		27710A9EDDA3451E80A836FF /* NSDate+InternetDateTime.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E268643940B431197C61070 /* NSDate+InternetDateTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3466B6FF9F654209B32DE2A3 /* PSDDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7D2DBA585D41FFA67BEE21 /* PSDDFormatter.m */; };
-		3C1ABB33107A48878A69CE3F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1654895894B4163A05F69E0 /* UIGestureRecognizer+GMGridViewAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		4097B4DEDA3840C3B67ACECC /* MWFeedItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5F9CB0408E04743A541C0CE /* MWFeedItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4114FCD85DC0409099B92190 /* JSONKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC609A590F2407CB9234E3F /* JSONKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		450E56DEDFEE474EBEE1877D /* SDURLCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 52D713BB1F6243019461DD1A /* SDURLCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4BEB2284983B4568843CA77A /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 146D81D14F9E4898888A28B2 /* SDURLCache.m */; };
-		4D74D74B7D804A8E8615F0BC /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1119BA7C1B43470EA5977343 /* BlockActionSheet.m */; };
-		509096976DE04A23A3278507 /* DDNSLoggerLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 21A9203BE10744A297F435B6 /* DDNSLoggerLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5BE3AA83A68940239E73B4F1 /* MBProgressHUD.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F570685190F142FBB32A60DC /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5E1E2200E5F246A79293FCF3 /* UIView+GMGridViewAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3B0024A70FC141318A6D670E /* UIView+GMGridViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5E950C136C3F4111842D5AB1 /* NSData+Base64.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301C0CE5280D4D6299EA8683 /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		64016E7F51F247DB8F5BC6E8 /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B30276CCA124CCCA922FB6B /* GMGridViewLayoutStrategies.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		641FFB2F449D478782184395 /* DDAbstractDatabaseLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 292650641FDE4CF4AA4C5433 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		65866D98AF6945ECA0776A67 /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91AA47F90F4F98A98DC4A0 /* MWFeedParser.m */; settings = {COMPILER_FLAGS = "-Wno-format -Wno-format-extra-args"; }; };
-		65C1B98E102041078D9C088E /* UIGestureRecognizer+GMGridViewAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 567A6490CAA34EB68ECDE6CF /* UIGestureRecognizer+GMGridViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6601764EDE954FC0BD3C23E4 /* DispatchQueueLogFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 267D27E664904CB7A04FF326 /* DispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6B0DAA0FEB25405B895B35D3 /* NSString+HTML.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85DC87FF708640919B25A883 /* NSString+HTML.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		72956A1B168F4C1C9ECA068F /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = BA5FA8B0BBDE4F71A0F3EEDB /* DDLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		7683BD8E2AD1425FAEB17253 /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CABC9F34E74608AC4AC0BA /* GMGridView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		79580C7B749E4056A6B17BDD /* Flurry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 776BBEFD1238497C9C324E95 /* Flurry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AC821479DA34710B669DEC1 /* Lockbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 482B3EA5621B4CE98312E7A9 /* Lockbox.m */; };
-		8ABB32BA374E43548BDA019B /* GMGridView-Constants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EDBCB7C04C6F4903B56E8C7F /* GMGridView-Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8C6C31862FD34D2ABBF065C4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6FB8C6DF694CA0B80A3C52 /* MBProgressHUD.m */; };
-		8CF693460C2B4B8FA528F7C5 /* MWFeedParser_Private.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23E03751EDB24B2CBE9D3D12 /* MWFeedParser_Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8F4EC536B6A84197B06D7719 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FC3CE258E2406A80037B44 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		949E45BE8F7E4735BF8CF71B /* Lockbox.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1BFE99D4D60746B6B65DF0B9 /* Lockbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		95F06DEBB0D540AB8302B506 /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E698D149F46E472595A47348 /* GMGridViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		9925E992A5524E1C874E7921 /* DDFileLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 839FEFEA851F4F05A603A4BB /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9EC6697E6B3343F780B7BA7D /* OBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B18690D55E124A66A0CB45E7 /* OBSlider.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		A1B0E5C5F73742CD8878B1F8 /* BlockTextPromptAlertView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 242177CB03344FABB84B93AA /* BlockTextPromptAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2F9D2D54B7843B19DFD94FD /* BlockTextPromptAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6FC292E5924FCF9CB59FB4 /* BlockTextPromptAlertView.m */; };
-		A68281B1EE684530BD91242E /* ContextFilterLogFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 49FBE61D3CFB467694E81A19 /* ContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AC3AC52ACABA48D28E611211 /* LoggerCommon.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2BD0EEA8D4DA48149FCAE216 /* LoggerCommon.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B023862770394CDA9CF3E964 /* MWFeedParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23CED44D2EEE4622A1A33DB8 /* MWFeedParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B144D5B7414C4F19951FF321 /* DDLog.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C677B2B951CF438B8AF6E3ED /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B4B192044EF142208B177C21 /* DDASLLogger.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EE7A163D08C34787B31E562C /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B990A9760044410086DD992E /* OBSlider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CCB58541009143A090C85F37 /* OBSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BA9827BC769848D8AEC5C451 /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AE9CC1CAEF4668A525B97B /* BlockAlertView.m */; };
-		BDA93BB4522F47A5B469C1ED /* Appirater.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 127384F396E84E7AB7BD84EB /* Appirater.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF1B795AC1B6463F92976DEC /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0E17C0A0D49EB8FAE712A /* JSONKit.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-objc-isa-usage -Wno-format"; }; };
-		C6F8BEC3B4D840DCBF216562 /* GCDiscreetNotificationView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 519ED27DD8D0474599CDE019 /* GCDiscreetNotificationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7EDE768851148CBACB06DE1 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 117D19449EE94AF4B70E836A /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-Wno-format -Wno-format-extra-args"; }; };
-		C85F79B1A35649D3B55847A1 /* GCDiscreetNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0CC01681F2426FAE189C28 /* GCDiscreetNotificationView.m */; };
-		C9DBC67D224840A28E791B20 /* BlockBackground.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 899C51B81B9A4F6E942A8E23 /* BlockBackground.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CC7BDFBE3A804555B537F215 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DE136FFF8048A0826C4EEC /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		D3C178CC7AA9415F8FEE5348 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD04F7FD7EB44A98C7AC648 /* ISO8601DateFormatter.m */; };
-		DFE997D6547746C495C47060 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8091F526A18E49FAB8C5BD53 /* NSData+Base64.m */; };
-		E36953D917CD4556A10D73FD /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2A48ABC04FBD8AD9AE76 /* MWFeedItem.m */; settings = {COMPILER_FLAGS = "-Wno-format -Wno-format-extra-args"; }; };
-		E9501F0E28E04BACA2EE57E3 /* MWFeedInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A54806F5BD74F698661C24F /* MWFeedInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC289E654E084656A371B8D7 /* ISO8601DateFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9FED386DF0D4427CA6BEB9B0 /* ISO8601DateFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ED70F53115E14FB5B35C115B /* DDNSLoggerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F3FA210775A548F9878C66BA /* DDNSLoggerLogger.m */; };
-		F2810B4666A74BBAA00F3EBF /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3402000CF3241CE80FAA250 /* UIView+GMGridViewAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F660D028CA0140589D0A9D5B /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 390B9E7ABC3044D4A75E48D5 /* BlockBackground.m */; };
-		F8C450A320F44BC18D6A5EAD /* GMGridViewCell+Extended.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A840C364D554B8AAB434F3F /* GMGridViewCell+Extended.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F95E15D82F3B4B00AFF0065D /* BlockUI.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94A8FD7D4F754A46ACA04C21 /* BlockUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FBFA92CE7A854C4B9B0DB37F /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9866CF219243E0B9BF6DA3 /* MWFeedInfo.m */; settings = {COMPILER_FLAGS = "-Wno-format -Wno-format-extra-args"; }; };
-		FD0DEBB7B4534B859C73C56D /* GTMNSString+HTML.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4044CCB09F984C1587288D0C /* GTMNSString+HTML.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FE1559D4538E4932BF052F88 /* PSDDFormatter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7FA2F1FDE6BE4986B511AF35 /* PSDDFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-/* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		F14FB94969DC4F1399D3A323 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				BDA93BB4522F47A5B469C1ED /* Appirater.h in CopyFiles */,
-				11CA1919A0304B449DA8806F /* BlockActionSheet.h in CopyFiles */,
-				00CD2E1099DA4DB9B4E6B944 /* BlockAlertView.h in CopyFiles */,
-				C9DBC67D224840A28E791B20 /* BlockBackground.h in CopyFiles */,
-				A1B0E5C5F73742CD8878B1F8 /* BlockTextPromptAlertView.h in CopyFiles */,
-				F95E15D82F3B4B00AFF0065D /* BlockUI.h in CopyFiles */,
-				641FFB2F449D478782184395 /* DDAbstractDatabaseLogger.h in CopyFiles */,
-				B4B192044EF142208B177C21 /* DDASLLogger.h in CopyFiles */,
-				9925E992A5524E1C874E7921 /* DDFileLogger.h in CopyFiles */,
-				B144D5B7414C4F19951FF321 /* DDLog.h in CopyFiles */,
-				111A2C07A03F4B239C2D8957 /* DDTTYLogger.h in CopyFiles */,
-				A68281B1EE684530BD91242E /* ContextFilterLogFormatter.h in CopyFiles */,
-				6601764EDE954FC0BD3C23E4 /* DispatchQueueLogFormatter.h in CopyFiles */,
-				79580C7B749E4056A6B17BDD /* Flurry.h in CopyFiles */,
-				C6F8BEC3B4D840DCBF216562 /* GCDiscreetNotificationView.h in CopyFiles */,
-				8ABB32BA374E43548BDA019B /* GMGridView-Constants.h in CopyFiles */,
-				05D029E33F75493DABAAFC15 /* GMGridView.h in CopyFiles */,
-				F8C450A320F44BC18D6A5EAD /* GMGridViewCell+Extended.h in CopyFiles */,
-				1589FFF3B5114CCC9CA61954 /* GMGridViewCell.h in CopyFiles */,
-				1AED5EF9E7DB46AC8C4439EB /* GMGridViewLayoutStrategies.h in CopyFiles */,
-				65C1B98E102041078D9C088E /* UIGestureRecognizer+GMGridViewAdditions.h in CopyFiles */,
-				5E1E2200E5F246A79293FCF3 /* UIView+GMGridViewAdditions.h in CopyFiles */,
-				EC289E654E084656A371B8D7 /* ISO8601DateFormatter.h in CopyFiles */,
-				4114FCD85DC0409099B92190 /* JSONKit.h in CopyFiles */,
-				949E45BE8F7E4735BF8CF71B /* Lockbox.h in CopyFiles */,
-				5BE3AA83A68940239E73B4F1 /* MBProgressHUD.h in CopyFiles */,
-				E9501F0E28E04BACA2EE57E3 /* MWFeedInfo.h in CopyFiles */,
-				4097B4DEDA3840C3B67ACECC /* MWFeedItem.h in CopyFiles */,
-				B023862770394CDA9CF3E964 /* MWFeedParser.h in CopyFiles */,
-				8CF693460C2B4B8FA528F7C5 /* MWFeedParser_Private.h in CopyFiles */,
-				6B0DAA0FEB25405B895B35D3 /* NSString+HTML.h in CopyFiles */,
-				FD0DEBB7B4534B859C73C56D /* GTMNSString+HTML.h in CopyFiles */,
-				27710A9EDDA3451E80A836FF /* NSDate+InternetDateTime.h in CopyFiles */,
-				5E950C136C3F4111842D5AB1 /* NSData+Base64.h in CopyFiles */,
-				265D4B14C5B34C53803B40BA /* LoggerClient.h in CopyFiles */,
-				AC3AC52ACABA48D28E611211 /* LoggerCommon.h in CopyFiles */,
-				FE1559D4538E4932BF052F88 /* PSDDFormatter.h in CopyFiles */,
-				509096976DE04A23A3278507 /* DDNSLoggerLogger.h in CopyFiles */,
-				B990A9760044410086DD992E /* OBSlider.h in CopyFiles */,
-				450E56DEDFEE474EBEE1877D /* SDURLCache.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
-/* Begin PBXFileReference section */
-		02DE136FFF8048A0826C4EEC /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; name = DDFileLogger.m; path = CocoaLumberjack/Lumberjack/DDFileLogger.m; sourceTree = SOURCE_ROOT; };
-		08E387B7DC9B4195B46C977A /* GTMNSString+HTML.m */ = {isa = PBXFileReference; includeInIndex = 1; name = "GTMNSString+HTML.m"; path = "MWFeedParser/Classes/GTMNSString+HTML.m"; sourceTree = SOURCE_ROOT; };
-		0BD0E17C0A0D49EB8FAE712A /* JSONKit.m */ = {isa = PBXFileReference; includeInIndex = 1; name = JSONKit.m; path = JSONKit/JSONKit.m; sourceTree = SOURCE_ROOT; };
-		1119BA7C1B43470EA5977343 /* BlockActionSheet.m */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockActionSheet.m; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockActionSheet.m"; sourceTree = SOURCE_ROOT; };
-		117D19449EE94AF4B70E836A /* NSString+HTML.m */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSString+HTML.m"; path = "MWFeedParser/Classes/NSString+HTML.m"; sourceTree = SOURCE_ROOT; };
-		127384F396E84E7AB7BD84EB /* Appirater.h */ = {isa = PBXFileReference; includeInIndex = 1; name = Appirater.h; path = Appirater/Appirater.h; sourceTree = SOURCE_ROOT; };
-		146D81D14F9E4898888A28B2 /* SDURLCache.m */ = {isa = PBXFileReference; includeInIndex = 1; name = SDURLCache.m; path = SDURLCache/SDURLCache.m; sourceTree = SOURCE_ROOT; };
-		1A0A850F57A542DC93671A30 /* LoggerClient.m */ = {isa = PBXFileReference; includeInIndex = 1; name = LoggerClient.m; path = "NSLogger/Client Logger/iOS/LoggerClient.m"; sourceTree = SOURCE_ROOT; };
-		1A840C364D554B8AAB434F3F /* GMGridViewCell+Extended.h */ = {isa = PBXFileReference; includeInIndex = 1; name = "GMGridViewCell+Extended.h"; path = "GMGridView/GMGridView/GMGridViewCell+Extended.h"; sourceTree = SOURCE_ROOT; };
-		1B30276CCA124CCCA922FB6B /* GMGridViewLayoutStrategies.m */ = {isa = PBXFileReference; includeInIndex = 1; name = GMGridViewLayoutStrategies.m; path = GMGridView/GMGridView/GMGridViewLayoutStrategies.m; sourceTree = SOURCE_ROOT; };
-		1BFE99D4D60746B6B65DF0B9 /* Lockbox.h */ = {isa = PBXFileReference; includeInIndex = 1; name = Lockbox.h; path = Lockbox/Lockbox.h; sourceTree = SOURCE_ROOT; };
-		1DD9874CBD0548799FFE8B57 /* LoggerClient.h */ = {isa = PBXFileReference; includeInIndex = 1; name = LoggerClient.h; path = "NSLogger/Client Logger/iOS/LoggerClient.h"; sourceTree = SOURCE_ROOT; };
-		2185EB1F9E0E4241B54076D8 /* GMGridViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; name = GMGridViewCell.h; path = GMGridView/GMGridView/GMGridViewCell.h; sourceTree = SOURCE_ROOT; };
-		21A9203BE10744A297F435B6 /* DDNSLoggerLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; name = DDNSLoggerLogger.h; path = "NSLogger-CocoaLumberjack-connector/DDNSLoggerLogger.h"; sourceTree = SOURCE_ROOT; };
-		2287981F23994AD0B816A737 /* Pods-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; name = "Pods-prefix.pch"; path = "Pods-prefix.pch"; sourceTree = SOURCE_ROOT; };
-		23CED44D2EEE4622A1A33DB8 /* MWFeedParser.h */ = {isa = PBXFileReference; includeInIndex = 1; name = MWFeedParser.h; path = MWFeedParser/Classes/MWFeedParser.h; sourceTree = SOURCE_ROOT; };
-		23E03751EDB24B2CBE9D3D12 /* MWFeedParser_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; name = MWFeedParser_Private.h; path = MWFeedParser/Classes/MWFeedParser_Private.h; sourceTree = SOURCE_ROOT; };
-		242177CB03344FABB84B93AA /* BlockTextPromptAlertView.h */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockTextPromptAlertView.h; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockTextPromptAlertView.h"; sourceTree = SOURCE_ROOT; };
-		267D27E664904CB7A04FF326 /* DispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; name = DispatchQueueLogFormatter.h; path = CocoaLumberjack/Lumberjack/Extensions/DispatchQueueLogFormatter.h; sourceTree = SOURCE_ROOT; };
-		2804857CA838460FBF4A4536 /* ContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; name = ContextFilterLogFormatter.m; path = CocoaLumberjack/Lumberjack/Extensions/ContextFilterLogFormatter.m; sourceTree = SOURCE_ROOT; };
-		292650641FDE4CF4AA4C5433 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; name = DDAbstractDatabaseLogger.h; path = CocoaLumberjack/Lumberjack/DDAbstractDatabaseLogger.h; sourceTree = SOURCE_ROOT; };
-		2AAC278F1B56476288185A5D /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; name = DDAbstractDatabaseLogger.m; path = CocoaLumberjack/Lumberjack/DDAbstractDatabaseLogger.m; sourceTree = SOURCE_ROOT; };
-		2BD0EEA8D4DA48149FCAE216 /* LoggerCommon.h */ = {isa = PBXFileReference; includeInIndex = 1; name = LoggerCommon.h; path = "NSLogger/Client Logger/iOS/LoggerCommon.h"; sourceTree = SOURCE_ROOT; };
-		2C91AA47F90F4F98A98DC4A0 /* MWFeedParser.m */ = {isa = PBXFileReference; includeInIndex = 1; name = MWFeedParser.m; path = MWFeedParser/Classes/MWFeedParser.m; sourceTree = SOURCE_ROOT; };
-		2E793452A3664E38BD5B84AC /* BlockActionSheet.h */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockActionSheet.h; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockActionSheet.h"; sourceTree = SOURCE_ROOT; };
-		301C0CE5280D4D6299EA8683 /* NSData+Base64.h */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSData+Base64.h"; path = "NSData+Base64/NSData+Base64.h"; sourceTree = SOURCE_ROOT; };
-		37735993D5A84CAC87DDBCE9 /* BlockAlertView.h */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockAlertView.h; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockAlertView.h"; sourceTree = SOURCE_ROOT; };
-		38082074BD934797A5A63A97 /* DispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; name = DispatchQueueLogFormatter.m; path = CocoaLumberjack/Lumberjack/Extensions/DispatchQueueLogFormatter.m; sourceTree = SOURCE_ROOT; };
-		390B9E7ABC3044D4A75E48D5 /* BlockBackground.m */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockBackground.m; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockBackground.m"; sourceTree = SOURCE_ROOT; };
-		3B0024A70FC141318A6D670E /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; name = "UIView+GMGridViewAdditions.h"; path = "GMGridView/GMGridView/UIView+GMGridViewAdditions.h"; sourceTree = SOURCE_ROOT; };
-		3B6FB8C6DF694CA0B80A3C52 /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
-		3E268643940B431197C61070 /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSDate+InternetDateTime.h"; path = "MWFeedParser/Classes/NSDate+InternetDateTime.h"; sourceTree = SOURCE_ROOT; };
-		4044CCB09F984C1587288D0C /* GTMNSString+HTML.h */ = {isa = PBXFileReference; includeInIndex = 1; name = "GTMNSString+HTML.h"; path = "MWFeedParser/Classes/GTMNSString+HTML.h"; sourceTree = SOURCE_ROOT; };
-		475215EB275B4A038A6298D2 /* Appirater.m */ = {isa = PBXFileReference; includeInIndex = 1; name = Appirater.m; path = Appirater/Appirater.m; sourceTree = SOURCE_ROOT; };
-		482B3EA5621B4CE98312E7A9 /* Lockbox.m */ = {isa = PBXFileReference; includeInIndex = 1; name = Lockbox.m; path = Lockbox/Lockbox.m; sourceTree = SOURCE_ROOT; };
-		49FBE61D3CFB467694E81A19 /* ContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; name = ContextFilterLogFormatter.h; path = CocoaLumberjack/Lumberjack/Extensions/ContextFilterLogFormatter.h; sourceTree = SOURCE_ROOT; };
-		519ED27DD8D0474599CDE019 /* GCDiscreetNotificationView.h */ = {isa = PBXFileReference; includeInIndex = 1; name = GCDiscreetNotificationView.h; path = GCDiscreetNotificationView/GCDiscreetNotificationView/GCDiscreetNotificationView.h; sourceTree = SOURCE_ROOT; };
-		51FC3CE258E2406A80037B44 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; name = DDASLLogger.m; path = CocoaLumberjack/Lumberjack/DDASLLogger.m; sourceTree = SOURCE_ROOT; };
-		52D713BB1F6243019461DD1A /* SDURLCache.h */ = {isa = PBXFileReference; includeInIndex = 1; name = SDURLCache.h; path = SDURLCache/SDURLCache.h; sourceTree = SOURCE_ROOT; };
-		567A6490CAA34EB68ECDE6CF /* UIGestureRecognizer+GMGridViewAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; name = "UIGestureRecognizer+GMGridViewAdditions.h"; path = "GMGridView/GMGridView/UIGestureRecognizer+GMGridViewAdditions.h"; sourceTree = SOURCE_ROOT; };
-		6D87B0C8606D4BDA8EBE63BF /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		776BBEFD1238497C9C324E95 /* Flurry.h */ = {isa = PBXFileReference; includeInIndex = 1; name = Flurry.h; path = FlurrySDK/Flurry/Flurry.h; sourceTree = SOURCE_ROOT; };
-		7FA2F1FDE6BE4986B511AF35 /* PSDDFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; name = PSDDFormatter.h; path = "NSLogger-CocoaLumberjack-connector/PSDDFormatter/PSDDFormatter.h"; sourceTree = SOURCE_ROOT; };
-		8091F526A18E49FAB8C5BD53 /* NSData+Base64.m */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSData+Base64.m"; path = "NSData+Base64/NSData+Base64.m"; sourceTree = SOURCE_ROOT; };
-		839FEFEA851F4F05A603A4BB /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; name = DDFileLogger.h; path = CocoaLumberjack/Lumberjack/DDFileLogger.h; sourceTree = SOURCE_ROOT; };
-		85DC87FF708640919B25A883 /* NSString+HTML.h */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSString+HTML.h"; path = "MWFeedParser/Classes/NSString+HTML.h"; sourceTree = SOURCE_ROOT; };
-		899C51B81B9A4F6E942A8E23 /* BlockBackground.h */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockBackground.h; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockBackground.h"; sourceTree = SOURCE_ROOT; };
-		8AC609A590F2407CB9234E3F /* JSONKit.h */ = {isa = PBXFileReference; includeInIndex = 1; name = JSONKit.h; path = JSONKit/JSONKit.h; sourceTree = SOURCE_ROOT; };
-		8D6FC292E5924FCF9CB59FB4 /* BlockTextPromptAlertView.m */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockTextPromptAlertView.m; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockTextPromptAlertView.m"; sourceTree = SOURCE_ROOT; };
-		8FD04F7FD7EB44A98C7AC648 /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; name = ISO8601DateFormatter.m; path = ISO8601DateFormatter/ISO8601DateFormatter.m; sourceTree = SOURCE_ROOT; };
-		94A8FD7D4F754A46ACA04C21 /* BlockUI.h */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockUI.h; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ProjectSpecific/BlockUI.h"; sourceTree = SOURCE_ROOT; };
-		94CABC9F34E74608AC4AC0BA /* GMGridView.m */ = {isa = PBXFileReference; includeInIndex = 1; name = GMGridView.m; path = GMGridView/GMGridView/GMGridView.m; sourceTree = SOURCE_ROOT; };
-		9A54806F5BD74F698661C24F /* MWFeedInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; name = MWFeedInfo.h; path = MWFeedParser/Classes/MWFeedInfo.h; sourceTree = SOURCE_ROOT; };
-		9FED386DF0D4427CA6BEB9B0 /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; name = ISO8601DateFormatter.h; path = ISO8601DateFormatter/ISO8601DateFormatter.h; sourceTree = SOURCE_ROOT; };
-		A3402000CF3241CE80FAA250 /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; name = "UIView+GMGridViewAdditions.m"; path = "GMGridView/GMGridView/UIView+GMGridViewAdditions.m"; sourceTree = SOURCE_ROOT; };
-		A5F9CB0408E04743A541C0CE /* MWFeedItem.h */ = {isa = PBXFileReference; includeInIndex = 1; name = MWFeedItem.h; path = MWFeedParser/Classes/MWFeedItem.h; sourceTree = SOURCE_ROOT; };
-		AB7D2DBA585D41FFA67BEE21 /* PSDDFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; name = PSDDFormatter.m; path = "NSLogger-CocoaLumberjack-connector/PSDDFormatter/PSDDFormatter.m"; sourceTree = SOURCE_ROOT; };
-		AC612E32FB3344DB8C0EA808 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPods.a; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B18690D55E124A66A0CB45E7 /* OBSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; name = OBSlider.m; path = OBSlider/OBSlider/OBSlider.m; sourceTree = SOURCE_ROOT; };
-		BA130AB64F584B2E9F0CFE9D /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSDate+InternetDateTime.m"; path = "MWFeedParser/Classes/NSDate+InternetDateTime.m"; sourceTree = SOURCE_ROOT; };
-		BA5FA8B0BBDE4F71A0F3EEDB /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; name = DDLog.m; path = CocoaLumberjack/Lumberjack/DDLog.m; sourceTree = SOURCE_ROOT; };
-		C0DE2A48ABC04FBD8AD9AE76 /* MWFeedItem.m */ = {isa = PBXFileReference; includeInIndex = 1; name = MWFeedItem.m; path = MWFeedParser/Classes/MWFeedItem.m; sourceTree = SOURCE_ROOT; };
-		C1BD1AA6D2134DBBAA359F24 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; name = DDTTYLogger.m; path = CocoaLumberjack/Lumberjack/DDTTYLogger.m; sourceTree = SOURCE_ROOT; };
-		C4AE9CC1CAEF4668A525B97B /* BlockAlertView.m */ = {isa = PBXFileReference; includeInIndex = 1; name = BlockAlertView.m; path = "BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockAlertView.m"; sourceTree = SOURCE_ROOT; };
-		C677B2B951CF438B8AF6E3ED /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; name = DDLog.h; path = CocoaLumberjack/Lumberjack/DDLog.h; sourceTree = SOURCE_ROOT; };
-		CC8753ADC2114587B6E2ABAE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		CCB58541009143A090C85F37 /* OBSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; name = OBSlider.h; path = OBSlider/OBSlider/OBSlider.h; sourceTree = SOURCE_ROOT; };
-		CE0CC01681F2426FAE189C28 /* GCDiscreetNotificationView.m */ = {isa = PBXFileReference; includeInIndex = 1; name = GCDiscreetNotificationView.m; path = GCDiscreetNotificationView/GCDiscreetNotificationView/GCDiscreetNotificationView.m; sourceTree = SOURCE_ROOT; };
-		DCB2979B28724B5CBF019387 /* PodsDummy_Pods.m */ = {isa = PBXFileReference; includeInIndex = 1; name = PodsDummy_Pods.m; path = PodsDummy_Pods.m; sourceTree = SOURCE_ROOT; };
-		E698D149F46E472595A47348 /* GMGridViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; name = GMGridViewCell.m; path = GMGridView/GMGridView/GMGridViewCell.m; sourceTree = SOURCE_ROOT; };
-		EA8D33B06D9E4C8F97DD92E6 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; name = DDTTYLogger.h; path = CocoaLumberjack/Lumberjack/DDTTYLogger.h; sourceTree = SOURCE_ROOT; };
-		EDBCB7C04C6F4903B56E8C7F /* GMGridView-Constants.h */ = {isa = PBXFileReference; includeInIndex = 1; name = "GMGridView-Constants.h"; path = "GMGridView/GMGridView/GMGridView-Constants.h"; sourceTree = SOURCE_ROOT; };
-		EE7A163D08C34787B31E562C /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; name = DDASLLogger.h; path = CocoaLumberjack/Lumberjack/DDASLLogger.h; sourceTree = SOURCE_ROOT; };
-		F1654895894B4163A05F69E0 /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; name = "UIGestureRecognizer+GMGridViewAdditions.m"; path = "GMGridView/GMGridView/UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = SOURCE_ROOT; };
-		F21CB3982F444F1BA8346E42 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; name = "Pods-resources.sh"; path = "Pods-resources.sh"; sourceTree = SOURCE_ROOT; };
-		F3FA210775A548F9878C66BA /* DDNSLoggerLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; name = DDNSLoggerLogger.m; path = "NSLogger-CocoaLumberjack-connector/DDNSLoggerLogger.m"; sourceTree = SOURCE_ROOT; };
-		F546A30CE15E4A96B43443E2 /* GMGridView.h */ = {isa = PBXFileReference; includeInIndex = 1; name = GMGridView.h; path = GMGridView/GMGridView/GMGridView.h; sourceTree = SOURCE_ROOT; };
-		F570685190F142FBB32A60DC /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
-		FAF14936C2AD44C794C4A12C /* GMGridViewLayoutStrategies.h */ = {isa = PBXFileReference; includeInIndex = 1; name = GMGridViewLayoutStrategies.h; path = GMGridView/GMGridView/GMGridViewLayoutStrategies.h; sourceTree = SOURCE_ROOT; };
-		FD9866CF219243E0B9BF6DA3 /* MWFeedInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; name = MWFeedInfo.m; path = MWFeedParser/Classes/MWFeedInfo.m; sourceTree = SOURCE_ROOT; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		FDB4CB4408AA4FAA874F8012 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				249F6C3DFD36419D8E083655 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		0DDDAF1E562D4E2E93092418 /* FlurrySDK */ = {
-			isa = PBXGroup;
-			children = (
-				776BBEFD1238497C9C324E95 /* Flurry.h */,
-			);
-			name = FlurrySDK;
-			sourceTree = "<group>";
-		};
-		1363928325974A3BB2F0D68C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7A3939D5092F4D678EF518D0 /* Appirater */,
-				884F11EB09D24C0CB3B937E0 /* BlockAlertsAnd-ActionSheets */,
-				499367B942A740248AD9F304 /* CocoaLumberjack */,
-				0DDDAF1E562D4E2E93092418 /* FlurrySDK */,
-				965BF81B17794994987C14AF /* GCDiscreetNotificationView */,
-				326F01453C5B436796A10505 /* GMGridView */,
-				E60D2EC6D17C45FC86D84BE4 /* ISO8601DateFormatter */,
-				7A876B30C5E048F08E89073F /* JSONKit */,
-				499121D513E24F83AE6F7EB0 /* Lockbox */,
-				E5C470AC1A0E454882710BF1 /* MBProgressHUD */,
-				1D719BC5273C41B883A08EF7 /* MWFeedParser */,
-				E78B2BD6B85C44C18ECA5DAC /* NSData+Base64 */,
-				E561DD1C65324917999444AF /* NSLogger */,
-				87C7660A3617410C87622966 /* NSLogger-CocoaLumberjack-connector */,
-				C99D74F078194C679BBF5951 /* OBSlider */,
-				99D719F4C5614AA0B57A1D16 /* SDURLCache */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		1D719BC5273C41B883A08EF7 /* MWFeedParser */ = {
-			isa = PBXGroup;
-			children = (
-				D4F9775EFA284D348AC9424E /* Feed */,
-				37CD040C346D423ABFC95634 /* NSString+HTML */,
-				B2A150FC184D4D35BFF07C96 /* NSDate+InternetDateTime */,
-			);
-			name = MWFeedParser;
-			sourceTree = "<group>";
-		};
-		326F01453C5B436796A10505 /* GMGridView */ = {
-			isa = PBXGroup;
-			children = (
-				EDBCB7C04C6F4903B56E8C7F /* GMGridView-Constants.h */,
-				F546A30CE15E4A96B43443E2 /* GMGridView.h */,
-				1A840C364D554B8AAB434F3F /* GMGridViewCell+Extended.h */,
-				2185EB1F9E0E4241B54076D8 /* GMGridViewCell.h */,
-				FAF14936C2AD44C794C4A12C /* GMGridViewLayoutStrategies.h */,
-				567A6490CAA34EB68ECDE6CF /* UIGestureRecognizer+GMGridViewAdditions.h */,
-				3B0024A70FC141318A6D670E /* UIView+GMGridViewAdditions.h */,
-				94CABC9F34E74608AC4AC0BA /* GMGridView.m */,
-				E698D149F46E472595A47348 /* GMGridViewCell.m */,
-				1B30276CCA124CCCA922FB6B /* GMGridViewLayoutStrategies.m */,
-				F1654895894B4163A05F69E0 /* UIGestureRecognizer+GMGridViewAdditions.m */,
-				A3402000CF3241CE80FAA250 /* UIView+GMGridViewAdditions.m */,
-			);
-			name = GMGridView;
-			sourceTree = "<group>";
-		};
-		37CD040C346D423ABFC95634 /* NSString+HTML */ = {
-			isa = PBXGroup;
-			children = (
-				85DC87FF708640919B25A883 /* NSString+HTML.h */,
-				117D19449EE94AF4B70E836A /* NSString+HTML.m */,
-				4044CCB09F984C1587288D0C /* GTMNSString+HTML.h */,
-				08E387B7DC9B4195B46C977A /* GTMNSString+HTML.m */,
-			);
-			name = "NSString+HTML";
-			sourceTree = "<group>";
-		};
-		3ADFA9D1511C40DB9DD4EAE8 = {
-			isa = PBXGroup;
-			children = (
-				506E95B6324F4C4FBA2C5B76 /* Products */,
-				1363928325974A3BB2F0D68C /* Pods */,
-				DF76972761DE458BB1DBC5C6 /* Targets Support Files */,
-				51707E1A8E314DF6A83BEC54 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		499121D513E24F83AE6F7EB0 /* Lockbox */ = {
-			isa = PBXGroup;
-			children = (
-				1BFE99D4D60746B6B65DF0B9 /* Lockbox.h */,
-				482B3EA5621B4CE98312E7A9 /* Lockbox.m */,
-			);
-			name = Lockbox;
-			sourceTree = "<group>";
-		};
-		499367B942A740248AD9F304 /* CocoaLumberjack */ = {
-			isa = PBXGroup;
-			children = (
-				292650641FDE4CF4AA4C5433 /* DDAbstractDatabaseLogger.h */,
-				EE7A163D08C34787B31E562C /* DDASLLogger.h */,
-				839FEFEA851F4F05A603A4BB /* DDFileLogger.h */,
-				C677B2B951CF438B8AF6E3ED /* DDLog.h */,
-				EA8D33B06D9E4C8F97DD92E6 /* DDTTYLogger.h */,
-				2AAC278F1B56476288185A5D /* DDAbstractDatabaseLogger.m */,
-				51FC3CE258E2406A80037B44 /* DDASLLogger.m */,
-				02DE136FFF8048A0826C4EEC /* DDFileLogger.m */,
-				BA5FA8B0BBDE4F71A0F3EEDB /* DDLog.m */,
-				C1BD1AA6D2134DBBAA359F24 /* DDTTYLogger.m */,
-				49FBE61D3CFB467694E81A19 /* ContextFilterLogFormatter.h */,
-				267D27E664904CB7A04FF326 /* DispatchQueueLogFormatter.h */,
-				2804857CA838460FBF4A4536 /* ContextFilterLogFormatter.m */,
-				38082074BD934797A5A63A97 /* DispatchQueueLogFormatter.m */,
-			);
-			name = CocoaLumberjack;
-			sourceTree = "<group>";
-		};
-		506E95B6324F4C4FBA2C5B76 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AC612E32FB3344DB8C0EA808 /* libPods.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		51707E1A8E314DF6A83BEC54 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6D87B0C8606D4BDA8EBE63BF /* Foundation.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7A3939D5092F4D678EF518D0 /* Appirater */ = {
-			isa = PBXGroup;
-			children = (
-				127384F396E84E7AB7BD84EB /* Appirater.h */,
-				475215EB275B4A038A6298D2 /* Appirater.m */,
-			);
-			name = Appirater;
-			sourceTree = "<group>";
-		};
-		7A876B30C5E048F08E89073F /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				8AC609A590F2407CB9234E3F /* JSONKit.h */,
-				0BD0E17C0A0D49EB8FAE712A /* JSONKit.m */,
-			);
-			name = JSONKit;
-			sourceTree = "<group>";
-		};
-		8703C0C8130447CAAC0F5003 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F21CB3982F444F1BA8346E42 /* Pods-resources.sh */,
-				2287981F23994AD0B816A737 /* Pods-prefix.pch */,
-				CC8753ADC2114587B6E2ABAE /* Pods.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		87C7660A3617410C87622966 /* NSLogger-CocoaLumberjack-connector */ = {
-			isa = PBXGroup;
-			children = (
-				7FA2F1FDE6BE4986B511AF35 /* PSDDFormatter.h */,
-				AB7D2DBA585D41FFA67BEE21 /* PSDDFormatter.m */,
-				21A9203BE10744A297F435B6 /* DDNSLoggerLogger.h */,
-				F3FA210775A548F9878C66BA /* DDNSLoggerLogger.m */,
-			);
-			name = "NSLogger-CocoaLumberjack-connector";
-			sourceTree = "<group>";
-		};
-		884F11EB09D24C0CB3B937E0 /* BlockAlertsAnd-ActionSheets */ = {
-			isa = PBXGroup;
-			children = (
-				2E793452A3664E38BD5B84AC /* BlockActionSheet.h */,
-				37735993D5A84CAC87DDBCE9 /* BlockAlertView.h */,
-				899C51B81B9A4F6E942A8E23 /* BlockBackground.h */,
-				242177CB03344FABB84B93AA /* BlockTextPromptAlertView.h */,
-				1119BA7C1B43470EA5977343 /* BlockActionSheet.m */,
-				C4AE9CC1CAEF4668A525B97B /* BlockAlertView.m */,
-				390B9E7ABC3044D4A75E48D5 /* BlockBackground.m */,
-				8D6FC292E5924FCF9CB59FB4 /* BlockTextPromptAlertView.m */,
-				94A8FD7D4F754A46ACA04C21 /* BlockUI.h */,
-			);
-			name = "BlockAlertsAnd-ActionSheets";
-			sourceTree = "<group>";
-		};
-		965BF81B17794994987C14AF /* GCDiscreetNotificationView */ = {
-			isa = PBXGroup;
-			children = (
-				519ED27DD8D0474599CDE019 /* GCDiscreetNotificationView.h */,
-				CE0CC01681F2426FAE189C28 /* GCDiscreetNotificationView.m */,
-			);
-			name = GCDiscreetNotificationView;
-			sourceTree = "<group>";
-		};
-		99D719F4C5614AA0B57A1D16 /* SDURLCache */ = {
-			isa = PBXGroup;
-			children = (
-				52D713BB1F6243019461DD1A /* SDURLCache.h */,
-				146D81D14F9E4898888A28B2 /* SDURLCache.m */,
-			);
-			name = SDURLCache;
-			sourceTree = "<group>";
-		};
-		B2A150FC184D4D35BFF07C96 /* NSDate+InternetDateTime */ = {
-			isa = PBXGroup;
-			children = (
-				3E268643940B431197C61070 /* NSDate+InternetDateTime.h */,
-				BA130AB64F584B2E9F0CFE9D /* NSDate+InternetDateTime.m */,
-			);
-			name = "NSDate+InternetDateTime";
-			sourceTree = "<group>";
-		};
-		C99D74F078194C679BBF5951 /* OBSlider */ = {
-			isa = PBXGroup;
-			children = (
-				CCB58541009143A090C85F37 /* OBSlider.h */,
-				B18690D55E124A66A0CB45E7 /* OBSlider.m */,
-			);
-			name = OBSlider;
-			sourceTree = "<group>";
-		};
-		D4F9775EFA284D348AC9424E /* Feed */ = {
-			isa = PBXGroup;
-			children = (
-				9A54806F5BD74F698661C24F /* MWFeedInfo.h */,
-				FD9866CF219243E0B9BF6DA3 /* MWFeedInfo.m */,
-				A5F9CB0408E04743A541C0CE /* MWFeedItem.h */,
-				C0DE2A48ABC04FBD8AD9AE76 /* MWFeedItem.m */,
-				23CED44D2EEE4622A1A33DB8 /* MWFeedParser.h */,
-				2C91AA47F90F4F98A98DC4A0 /* MWFeedParser.m */,
-				23E03751EDB24B2CBE9D3D12 /* MWFeedParser_Private.h */,
-			);
-			name = Feed;
-			sourceTree = "<group>";
-		};
-		DF76972761DE458BB1DBC5C6 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				8703C0C8130447CAAC0F5003 /* Pods */,
-				DCB2979B28724B5CBF019387 /* PodsDummy_Pods.m */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		E561DD1C65324917999444AF /* NSLogger */ = {
-			isa = PBXGroup;
-			children = (
-				1DD9874CBD0548799FFE8B57 /* LoggerClient.h */,
-				2BD0EEA8D4DA48149FCAE216 /* LoggerCommon.h */,
-				1A0A850F57A542DC93671A30 /* LoggerClient.m */,
-			);
-			name = NSLogger;
-			sourceTree = "<group>";
-		};
-		E5C470AC1A0E454882710BF1 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				F570685190F142FBB32A60DC /* MBProgressHUD.h */,
-				3B6FB8C6DF694CA0B80A3C52 /* MBProgressHUD.m */,
-			);
-			name = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		E60D2EC6D17C45FC86D84BE4 /* ISO8601DateFormatter */ = {
-			isa = PBXGroup;
-			children = (
-				9FED386DF0D4427CA6BEB9B0 /* ISO8601DateFormatter.h */,
-				8FD04F7FD7EB44A98C7AC648 /* ISO8601DateFormatter.m */,
-			);
-			name = ISO8601DateFormatter;
-			sourceTree = "<group>";
-		};
-		E78B2BD6B85C44C18ECA5DAC /* NSData+Base64 */ = {
-			isa = PBXGroup;
-			children = (
-				301C0CE5280D4D6299EA8683 /* NSData+Base64.h */,
-				8091F526A18E49FAB8C5BD53 /* NSData+Base64.m */,
-			);
-			name = "NSData+Base64";
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		EAF8E0B1EC7042C09FA8CFBF /* Pods */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 75F14DF0DAFE40B99AFF53EC /* Build configuration list for PBXNativeTarget "Pods" */;
-			buildPhases = (
-				F2E91416686144B185FF12DE /* Sources */,
-				F14FB94969DC4F1399D3A323 /* CopyFiles */,
-				FDB4CB4408AA4FAA874F8012 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Pods;
-			productName = Pods;
-			productReference = AC612E32FB3344DB8C0EA808 /* libPods.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		FA7EDD3E2C2140C6B29BEBF1 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastUpgradeCheck = 0420;
-			};
-			buildConfigurationList = 6D9D6BE675F54E519712D91F /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 3ADFA9D1511C40DB9DD4EAE8;
-			productRefGroup = 506E95B6324F4C4FBA2C5B76 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				EAF8E0B1EC7042C09FA8CFBF /* Pods */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		F2E91416686144B185FF12DE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D4C921F80324A2A8D5D3027 /* Appirater.m in Sources */,
-				4D74D74B7D804A8E8615F0BC /* BlockActionSheet.m in Sources */,
-				BA9827BC769848D8AEC5C451 /* BlockAlertView.m in Sources */,
-				F660D028CA0140589D0A9D5B /* BlockBackground.m in Sources */,
-				A2F9D2D54B7843B19DFD94FD /* BlockTextPromptAlertView.m in Sources */,
-				26B4ECF00F174D00BF5D182B /* DDAbstractDatabaseLogger.m in Sources */,
-				8F4EC536B6A84197B06D7719 /* DDASLLogger.m in Sources */,
-				CC7BDFBE3A804555B537F215 /* DDFileLogger.m in Sources */,
-				72956A1B168F4C1C9ECA068F /* DDLog.m in Sources */,
-				0CFFA6D5DEDA4628A7D9AF27 /* DDTTYLogger.m in Sources */,
-				0EE96C8B9F69482BB3A367AD /* ContextFilterLogFormatter.m in Sources */,
-				04F05B6DD5A84F8091BC32DC /* DispatchQueueLogFormatter.m in Sources */,
-				C85F79B1A35649D3B55847A1 /* GCDiscreetNotificationView.m in Sources */,
-				7683BD8E2AD1425FAEB17253 /* GMGridView.m in Sources */,
-				95F06DEBB0D540AB8302B506 /* GMGridViewCell.m in Sources */,
-				64016E7F51F247DB8F5BC6E8 /* GMGridViewLayoutStrategies.m in Sources */,
-				3C1ABB33107A48878A69CE3F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
-				F2810B4666A74BBAA00F3EBF /* UIView+GMGridViewAdditions.m in Sources */,
-				D3C178CC7AA9415F8FEE5348 /* ISO8601DateFormatter.m in Sources */,
-				BF1B795AC1B6463F92976DEC /* JSONKit.m in Sources */,
-				7AC821479DA34710B669DEC1 /* Lockbox.m in Sources */,
-				8C6C31862FD34D2ABBF065C4 /* MBProgressHUD.m in Sources */,
-				FBFA92CE7A854C4B9B0DB37F /* MWFeedInfo.m in Sources */,
-				E36953D917CD4556A10D73FD /* MWFeedItem.m in Sources */,
-				65866D98AF6945ECA0776A67 /* MWFeedParser.m in Sources */,
-				C7EDE768851148CBACB06DE1 /* NSString+HTML.m in Sources */,
-				2172999366FD44688A800617 /* GTMNSString+HTML.m in Sources */,
-				1B80781046CC4B589F558E81 /* NSDate+InternetDateTime.m in Sources */,
-				DFE997D6547746C495C47060 /* NSData+Base64.m in Sources */,
-				07959C2324C44B08BB638A56 /* LoggerClient.m in Sources */,
-				3466B6FF9F654209B32DE2A3 /* PSDDFormatter.m in Sources */,
-				ED70F53115E14FB5B35C115B /* DDNSLoggerLogger.m in Sources */,
-				9EC6697E6B3343F780B7BA7D /* OBSlider.m in Sources */,
-				4BEB2284983B4568843CA77A /* SDURLCache.m in Sources */,
-				0785F6B1FDE1426BAC833E11 /* PodsDummy_Pods.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin XCBuildConfiguration section */
-		0062B56D50C44253A1D5BDF8 /* Ad_Hoc */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC8753ADC2114587B6E2ABAE /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pods-prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "";
-				PODS_HEADERS_SEARCH_PATHS = "${PODS_BUILD_HEADERS_SEARCH_PATHS}";
-				PODS_ROOT = "${SRCROOT}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Ad_Hoc;
-		};
-		269893CFE40645E4B4B2E245 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		50C79FF946BA41909F2238F4 /* Ad_Hoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Ad_Hoc;
-		};
-		55CE90F782994C4095250B30 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC8753ADC2114587B6E2ABAE /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pods-prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "";
-				PODS_HEADERS_SEARCH_PATHS = "${PODS_BUILD_HEADERS_SEARCH_PATHS}";
-				PODS_ROOT = "${SRCROOT}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		563402A58B0342048F62FE6F /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = AppStore;
-		};
-		8EDDB8657273478DA3DC71E3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC8753ADC2114587B6E2ABAE /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pods-prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "";
-				PODS_HEADERS_SEARCH_PATHS = "${PODS_BUILD_HEADERS_SEARCH_PATHS}";
-				PODS_ROOT = "${SRCROOT}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		A81B56BFB6394C3488F63C2B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Release;
-		};
-		D1F14716B8DA4EAB98EC6DEA /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC8753ADC2114587B6E2ABAE /* Pods.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/xcodeproj.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pods-prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
-				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "";
-				PODS_HEADERS_SEARCH_PATHS = "${PODS_BUILD_HEADERS_SEARCH_PATHS}";
-				PODS_ROOT = "${SRCROOT}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = AppStore;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		6D9D6BE675F54E519712D91F /* Build configuration list for PBXProject "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				269893CFE40645E4B4B2E245 /* Debug */,
-				A81B56BFB6394C3488F63C2B /* Release */,
-				563402A58B0342048F62FE6F /* AppStore */,
-				50C79FF946BA41909F2238F4 /* Ad_Hoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		75F14DF0DAFE40B99AFF53EC /* Build configuration list for PBXNativeTarget "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8EDDB8657273478DA3DC71E3 /* Debug */,
-				55CE90F782994C4095250B30 /* Release */,
-				D1F14716B8DA4EAB98EC6DEA /* AppStore */,
-				0062B56D50C44253A1D5BDF8 /* Ad_Hoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = FA7EDD3E2C2140C6B29BEBF1 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>027EC63C2ADC439C86E7F9C1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>ContextFilterLogFormatter.m</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/Extensions/ContextFilterLogFormatter.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>0292D6707A2B42D29CD94DC1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9297875F01514263B81D167A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-Wno-format -Wno-format-extra-args</string>
+			</dict>
+		</dict>
+		<key>04BE2653641B4FA39233F954</key>
+		<dict>
+			<key>fileRef</key>
+			<string>54F7C400EA954D78A08699F5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>05AAF3600FFF41F493258B6A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>UIGestureRecognizer+GMGridViewAdditions.h</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/UIGestureRecognizer+GMGridViewAdditions.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>05D3719BC56F47EDBB5D74D1</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6B64D24AA1A548A39B65FFE1</string>
+				<string>B62A36A85A8E4FF5B0705756</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MBProgressHUD</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>06B236D009764D15B53DE32E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F0C75026A95A4C2B8A4F5337</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>07DCF822AFEF4C0795CE1EED</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>5ADFE910F0724F1AA085095E</string>
+				<string>E6548F89E2D7420DB7279D22</string>
+				<string>4F152ABC4B6F4C01B6E385A0</string>
+				<string>1FE261AF4D2943C4AA81A2D3</string>
+				<string>F939057A394B415F8476E13C</string>
+				<string>FD7360AB2B4B434686BE9335</string>
+				<string>DE082A451C4C4227AEBD0013</string>
+				<string>CDCC33E9ABC94491B4FB1760</string>
+				<string>0EAFD9BA282543D58E754254</string>
+				<string>05D3719BC56F47EDBB5D74D1</string>
+				<string>87DE7FC076154346A6B07B7E</string>
+				<string>3C51F0F4039041BDAFABB27D</string>
+				<string>2AD2A7788599400F816DC266</string>
+				<string>457CA4952587455FB91D6FA5</string>
+				<string>425E9C8855EE4B1FBD9BA6A6</string>
+				<string>2B4C0789FEDC439C9F65FB78</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>09D0A30B86E5491C92B82FD1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockTextPromptAlertView.m</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockTextPromptAlertView.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>0EAFD9BA282543D58E754254</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>45D302803D904C2697020AC4</string>
+				<string>CD50E4A1D821427C93C7F7F1</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Lockbox</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0FA73C8DC9AA480B970F11B5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>125C02DBFCFF4E4C866FD99E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>104B1EF16BFF44F6A88365CC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDAbstractDatabaseLogger.h</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDAbstractDatabaseLogger.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>10BAA41990B54A6A8D851D02</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AD436AC3025B47B88DF3067B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>10BAC52E556744529D44B8C3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CC6AB2D1EA464CF88CEFCFEE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>11D032B6CAAF4B0087C9E987</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDTTYLogger.m</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDTTYLogger.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>125C02DBFCFF4E4C866FD99E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>SDURLCache.h</string>
+			<key>path</key>
+			<string>SDURLCache/SDURLCache.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>12973D6EA4CD45E8B1C3604B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1ED13255C85A4933885A0734</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>1321FF7568AE404393D576E0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Appirater.m</string>
+			<key>path</key>
+			<string>Appirater/Appirater.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1941D86CEAF349959ED0DAC9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9038243E0B5B4463A91157AA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>1A906D858C714A68BC3B8A47</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4698FD082D564521B6E69734</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-Wno-format -Wno-format-extra-args</string>
+			</dict>
+		</dict>
+		<key>1AAF8549A7F2404F8B0677AF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DC38A23275ED461BBC6AF535</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>1C9198E3ACF1458ABC123F54</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MWFeedParser_Private.h</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/MWFeedParser_Private.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1E654FFC37934A9E86B15B6C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NSDate+InternetDateTime.h</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/NSDate+InternetDateTime.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1EAC1B0D06B14902A2AE4A52</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2E9FFCBC166247B3A9060231</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>1ED13255C85A4933885A0734</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MWFeedParser.h</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/MWFeedParser.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>1FE261AF4D2943C4AA81A2D3</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6BA1698CBF4C49E098AE688C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>FlurrySDK</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>24047D56965A40FC9B84F98F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2ADC52FF45EB4C1896F5BB36</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>252934B5BB584F0BB00FB3FF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3062E63698124C7DBC177EB3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-Wno-format -Wno-format-extra-args</string>
+			</dict>
+		</dict>
+		<key>25A1906CD22B428A82A74BC0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>JSONKit.m</string>
+			<key>path</key>
+			<string>JSONKit/JSONKit.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>291C2ABB017E4BB3A60257BE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>25A1906CD22B428A82A74BC0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-Wno-deprecated-objc-isa-usage -Wno-format</string>
+			</dict>
+		</dict>
+		<key>2AD2A7788599400F816DC266</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9038243E0B5B4463A91157AA</string>
+				<string>382E4108D0F047998EFDBAA4</string>
+				<string>40A56D9F940143598D9C99C3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>NSLogger</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2ADC52FF45EB4C1896F5BB36</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockUI.h</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ProjectSpecific/BlockUI.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2B4C0789FEDC439C9F65FB78</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>125C02DBFCFF4E4C866FD99E</string>
+				<string>B6358179577A442BA44A1EE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>SDURLCache</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2CCDBF4E57C34068A1A94442</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A08B9ACB24A24744A2A1E2B0</string>
+				<string>07DCF822AFEF4C0795CE1EED</string>
+				<string>B77977C4B07E465089939AF0</string>
+				<string>E268B946C44E4E95B5CC9361</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2E9FFCBC166247B3A9060231</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>ISO8601DateFormatter.h</string>
+			<key>path</key>
+			<string>ISO8601DateFormatter/ISO8601DateFormatter.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>3062E63698124C7DBC177EB3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MWFeedParser.m</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/MWFeedParser.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>31543E95586F451CB336565F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A6A5BD7E2FAB4007BB4BC1C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>35BE0D525F664EEEBFA2069E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A5C85A31D43D4393ACD47071</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>37F9A85030D14FD7BF2617B4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A4C40D1C4BB647DBA4392683</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>382E4108D0F047998EFDBAA4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>LoggerCommon.h</string>
+			<key>path</key>
+			<string>NSLogger/Client Logger/iOS/LoggerCommon.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>39332C6C727841DCB75AA9BA</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1E654FFC37934A9E86B15B6C</string>
+				<string>A598EE076BAB45C5A3910B30</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>NSDate+InternetDateTime</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3C51F0F4039041BDAFABB27D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>8F5B43BAA8D54547BF0528DC</string>
+				<string>A5C85A31D43D4393ACD47071</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>NSData+Base64</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3E041A70EF31421DAA3EE29A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B828318C376C4935B73FC906</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>3EF886E1BB574A2DAF802FD6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MWFeedItem.h</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/MWFeedItem.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4086F29B72954BB6AE7C28F3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6DC4DBB07A054C55B69B8952</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>40A56D9F940143598D9C99C3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>LoggerClient.m</string>
+			<key>path</key>
+			<string>NSLogger/Client Logger/iOS/LoggerClient.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>425E9C8855EE4B1FBD9BA6A6</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A8953A082C854E62A289A853</string>
+				<string>DC38A23275ED461BBC6AF535</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>OBSlider</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>43ACBE7EF6B548A590A61B78</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>5D0ED6B9F1FB452186938335</string>
+				<string>F7124580AE60451682C1522B</string>
+				<string>5ACAE6F86034450CBA56CDED</string>
+				<string>C93CAD6D89E248E48555733A</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>452546C59A574309B4C43895</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C569AA6584F54B0682CD7D36</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>457CA4952587455FB91D6FA5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A08C665F09E6472184AD513E</string>
+				<string>651E3B3BD2674D7086E260D1</string>
+				<string>AD436AC3025B47B88DF3067B</string>
+				<string>B4B8EDA0B81D4268B1EF28BF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>NSLogger-CocoaLumberjack-connector</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>45901037D5BB45749238CB1C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>45D302803D904C2697020AC4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>45D02F23B37A4D50929F1BEB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A598EE076BAB45C5A3910B30</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-Wno-format -Wno-format-extra-args</string>
+			</dict>
+		</dict>
+		<key>45D302803D904C2697020AC4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Lockbox.h</string>
+			<key>path</key>
+			<string>Lockbox/Lockbox.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4608223699E24AE8B34C7585</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>554AF640F97C443F9ED22FC1</string>
+				<string>CA87580491FC4C3593B20018</string>
+				<string>566990D1DD32429EAF1B2B00</string>
+				<string>518E0F81BC6640C398C3CF3B</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>46699CB490754487A59A753D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDLog.h</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDLog.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4698FD082D564521B6E69734</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MWFeedInfo.m</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/MWFeedInfo.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>486B6CAAE7324E0CA417F29C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B62A36A85A8E4FF5B0705756</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4D2D526B85344C6095DDE3D8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GMGridViewLayoutStrategies.m</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/GMGridViewLayoutStrategies.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4F152ABC4B6F4C01B6E385A0</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>104B1EF16BFF44F6A88365CC</string>
+				<string>F17D62739B824A87B3E236D9</string>
+				<string>CF3FA4707B104FDA8D70A0F0</string>
+				<string>46699CB490754487A59A753D</string>
+				<string>8EEF8B8C4B86404793425ABC</string>
+				<string>DEA24B17ED3D4B5A962ECCD8</string>
+				<string>A3B4CD0DC2E4432097418FF9</string>
+				<string>F0C75026A95A4C2B8A4F5337</string>
+				<string>C569AA6584F54B0682CD7D36</string>
+				<string>11D032B6CAAF4B0087C9E987</string>
+				<string>82E75B4715B342209FB04377</string>
+				<string>DACFB8B1573246EB982E8556</string>
+				<string>027EC63C2ADC439C86E7F9C1</string>
+				<string>610EAA265FC9478CA52CD610</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>CocoaLumberjack</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>501EDAF8D70C438AAD3F98C5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GMGridView-Constants.h</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/GMGridView-Constants.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>50D17DAFE44D4F429FB14D2D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>869EC290768E44BB88F43252</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>515FD7A7EA9C4863A8413BDC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>651E3B3BD2674D7086E260D1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>518E0F81BC6640C398C3CF3B</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict/>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Ad_Hoc</string>
+		</dict>
+		<key>53181D0B404A4714B0FC3CEE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DEA24B17ED3D4B5A962ECCD8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>5382C6C927EE4DA99D1A9C1D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>UIView+GMGridViewAdditions.m</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/UIView+GMGridViewAdditions.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>54F7C400EA954D78A08699F5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GCDiscreetNotificationView.h</string>
+			<key>path</key>
+			<string>GCDiscreetNotificationView/GCDiscreetNotificationView/GCDiscreetNotificationView.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>554AF640F97C443F9ED22FC1</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict/>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>566990D1DD32429EAF1B2B00</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict/>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>AppStore</string>
+		</dict>
+		<key>5678D8E5D1EB48DBA904325B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockBackground.m</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockBackground.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>59BB6FA7F3E24C1794BBFBCA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FA41440775984140BA2026C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>59C9509A34F444FB833D3BC8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F88E5549093B4848A93CA243</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>5A1420575E2E45BDBEEB3F40</key>
+		<dict>
+			<key>fileRef</key>
+			<string>40A56D9F940143598D9C99C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5A87A1D3C71F457795D1DF9D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5FAAB006362646F3B7E7FC40</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5ACAE6F86034450CBA56CDED</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>AA6545F501114C10AB62F63B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_32_BIT)</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>DSTROOT</key>
+				<string>/tmp/xcodeproj.dst</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Pods-prefix.pch</string>
+				<key>GCC_VERSION</key>
+				<string>com.apple.compilers.llvm.clang.1_0</string>
+				<key>GCC_WARN_INHIBIT_ALL_WARNINGS</key>
+				<string>YES</string>
+				<key>INSTALL_PATH</key>
+				<string>$(BUILT_PRODUCTS_DIR)</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>4.3</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>PODS_HEADERS_SEARCH_PATHS</key>
+				<string>${PODS_BUILD_HEADERS_SEARCH_PATHS}</string>
+				<key>PODS_ROOT</key>
+				<string>${SRCROOT}</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>AppStore</string>
+		</dict>
+		<key>5ADFE910F0724F1AA085095E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F88E5549093B4848A93CA243</string>
+				<string>1321FF7568AE404393D576E0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Appirater</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5D0ED6B9F1FB452186938335</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>AA6545F501114C10AB62F63B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_32_BIT)</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DSTROOT</key>
+				<string>/tmp/xcodeproj.dst</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Pods-prefix.pch</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_VERSION</key>
+				<string>com.apple.compilers.llvm.clang.1_0</string>
+				<key>GCC_WARN_INHIBIT_ALL_WARNINGS</key>
+				<string>YES</string>
+				<key>INSTALL_PATH</key>
+				<string>$(BUILT_PRODUCTS_DIR)</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>4.3</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>PODS_HEADERS_SEARCH_PATHS</key>
+				<string>${PODS_BUILD_HEADERS_SEARCH_PATHS}</string>
+				<key>PODS_ROOT</key>
+				<string>${SRCROOT}</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>5FAAB006362646F3B7E7FC40</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockAlertView.m</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockAlertView.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>60431B1627DB433F928177C6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DACFB8B1573246EB982E8556</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>610EAA265FC9478CA52CD610</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DispatchQueueLogFormatter.m</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/Extensions/DispatchQueueLogFormatter.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>62F7792957E44302B5A916F3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>PodsDummy_Pods.m</string>
+			<key>path</key>
+			<string>PodsDummy_Pods.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>651E3B3BD2674D7086E260D1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>PSDDFormatter.m</string>
+			<key>path</key>
+			<string>NSLogger-CocoaLumberjack-connector/PSDDFormatter/PSDDFormatter.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>6921C2B670AF44089A0EB032</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5678D8E5D1EB48DBA904325B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>695DCCB7F4844CDBBEFA3DD7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>988CB1EBC5644700B27E834E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6B64D24AA1A548A39B65FFE1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MBProgressHUD.h</string>
+			<key>path</key>
+			<string>MBProgressHUD/MBProgressHUD.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>6BA1698CBF4C49E098AE688C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Flurry.h</string>
+			<key>path</key>
+			<string>FlurrySDK/Flurry/Flurry.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>6DC4DBB07A054C55B69B8952</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>UIGestureRecognizer+GMGridViewAdditions.m</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/UIGestureRecognizer+GMGridViewAdditions.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>6FA6B6AC33AE4266A0C3917E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EE81F54A85D44ACCA31F50D6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-Wno-format -Wno-format-extra-args</string>
+			</dict>
+		</dict>
+		<key>73A99024C58F49A09B3CE073</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4D2D526B85344C6095DDE3D8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>75E8C2FB03E648E5B53FF9E4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>77B4B0C2A0864BF980A11BAA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>765B69FE3A1646E3A2215037</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>dstPath</key>
+			<string>$(PRODUCT_NAME)</string>
+			<key>dstSubfolderSpec</key>
+			<string>16</string>
+			<key>files</key>
+			<array>
+				<string>59C9509A34F444FB833D3BC8</string>
+				<string>C3C63B0007664205AC4519A8</string>
+				<string>C79496B6D6CA44AAA214AA75</string>
+				<string>75E8C2FB03E648E5B53FF9E4</string>
+				<string>9FB1E47146924AD4A1569641</string>
+				<string>24047D56965A40FC9B84F98F</string>
+				<string>E1242B134194480788748059</string>
+				<string>8C806825719346768290F79C</string>
+				<string>E43308CB6B34429BBE0BF8D8</string>
+				<string>969AC693AFA04912BDE66CAB</string>
+				<string>8540676801884907B1860941</string>
+				<string>D5210920F2FA45A08D3ED151</string>
+				<string>60431B1627DB433F928177C6</string>
+				<string>92FB1C2C61534A1C8808BAD9</string>
+				<string>04BE2653641B4FA39233F954</string>
+				<string>86F2F94EDAFB484D80F42D8B</string>
+				<string>C8B4BB463088439095E10B02</string>
+				<string>E66C50281D104513BE7C87D2</string>
+				<string>853D8E325AE34F6C93D88115</string>
+				<string>59BB6FA7F3E24C1794BBFBCA</string>
+				<string>963D74ECE33E419181619D9E</string>
+				<string>8763D8BBE36D476CB8CA43ED</string>
+				<string>1EAC1B0D06B14902A2AE4A52</string>
+				<string>10BAC52E556744529D44B8C3</string>
+				<string>45901037D5BB45749238CB1C</string>
+				<string>CCE09630CC224B5B9A816041</string>
+				<string>CD7D077428E74CF6804C0D08</string>
+				<string>BE1107B634644CF08ACE1C38</string>
+				<string>12973D6EA4CD45E8B1C3604B</string>
+				<string>954163D47E834D8A996A3705</string>
+				<string>37F9A85030D14FD7BF2617B4</string>
+				<string>C166695112544D47BD88B030</string>
+				<string>7889DFF162C94A19AA80FAB5</string>
+				<string>E3CD685B88C940C6B4A384F0</string>
+				<string>1941D86CEAF349959ED0DAC9</string>
+				<string>B02233BB08D4410E9D6D3A47</string>
+				<string>FC4FE428F52E4DDFBA7041B8</string>
+				<string>10BAA41990B54A6A8D851D02</string>
+				<string>BAB90989A704485AAE391E90</string>
+				<string>0FA73C8DC9AA480B970F11B5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXCopyFilesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>77B4B0C2A0864BF980A11BAA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockBackground.h</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockBackground.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>7889DFF162C94A19AA80FAB5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1E654FFC37934A9E86B15B6C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>79A2997B488A4AAEA9DD32F1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5382C6C927EE4DA99D1A9C1D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>7D9843BDD6E043B1B5F1C8B5</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>43ACBE7EF6B548A590A61B78</string>
+			<key>buildPhases</key>
+			<array>
+				<string>F165CDFF62294E138C7BE0E4</string>
+				<string>765B69FE3A1646E3A2215037</string>
+				<string>BD7DEACEFDF54D6BB7C6BCFD</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>productName</key>
+			<string>Pods</string>
+			<key>productReference</key>
+			<string>B900132E50554F1A969A9547</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>7FECC0536A584A118271BA22</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A4C40D1C4BB647DBA4392683</string>
+				<string>9297875F01514263B81D167A</string>
+				<string>DA517B4F3B37423F86DD43A2</string>
+				<string>B65ADC4116484FF293B5A30D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>NSString+HTML</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>81C1E92835B64E4FAE051DA8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>11D032B6CAAF4B0087C9E987</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>820394F431794CEA8A45D2B1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>95B25C24612548398430627A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>82893602B7DD4354B2324F4E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GMGridView.h</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/GMGridView.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>82E75B4715B342209FB04377</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>ContextFilterLogFormatter.h</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/Extensions/ContextFilterLogFormatter.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>853D8E325AE34F6C93D88115</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EAB3FA74C23E4F2885EC1B07</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>8540676801884907B1860941</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8EEF8B8C4B86404793425ABC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>869EC290768E44BB88F43252</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockActionSheet.m</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockActionSheet.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>86F2F94EDAFB484D80F42D8B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>501EDAF8D70C438AAD3F98C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>8763D8BBE36D476CB8CA43ED</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9CC2136634B64571BA2343D6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>87DE7FC076154346A6B07B7E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>AC54A59C4CE245A68F62AE61</string>
+				<string>7FECC0536A584A118271BA22</string>
+				<string>39332C6C727841DCB75AA9BA</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MWFeedParser</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>888BB003EDDC424083DFA448</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GCDiscreetNotificationView.m</string>
+			<key>path</key>
+			<string>GCDiscreetNotificationView/GCDiscreetNotificationView/GCDiscreetNotificationView.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>89F5CCF9B15E43E5AE9059E9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>888BB003EDDC424083DFA448</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8C806825719346768290F79C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F17D62739B824A87B3E236D9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>8EEF8B8C4B86404793425ABC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDTTYLogger.h</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDTTYLogger.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>8F5B43BAA8D54547BF0528DC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NSData+Base64.h</string>
+			<key>path</key>
+			<string>NSData+Base64/NSData+Base64.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>9038243E0B5B4463A91157AA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>LoggerClient.h</string>
+			<key>path</key>
+			<string>NSLogger/Client Logger/iOS/LoggerClient.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>9297875F01514263B81D167A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NSString+HTML.m</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/NSString+HTML.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>92FB1C2C61534A1C8808BAD9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6BA1698CBF4C49E098AE688C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>932D5950B91F416397CD978F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MWFeedInfo.h</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/MWFeedInfo.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>954163D47E834D8A996A3705</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1C9198E3ACF1458ABC123F54</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>95B25C24612548398430627A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GMGridView.m</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/GMGridView.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>962BB748282240E8938C2989</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockActionSheet.h</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockActionSheet.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>963D74ECE33E419181619D9E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>05AAF3600FFF41F493258B6A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>969AC693AFA04912BDE66CAB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>46699CB490754487A59A753D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>980DC3CAB94F49DB9C6ECFAE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B4B8EDA0B81D4268B1EF28BF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>988CB1EBC5644700B27E834E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>ISO8601DateFormatter.m</string>
+			<key>path</key>
+			<string>ISO8601DateFormatter/ISO8601DateFormatter.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>9CC2136634B64571BA2343D6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>UIView+GMGridViewAdditions.h</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/UIView+GMGridViewAdditions.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>9FB1E47146924AD4A1569641</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AF3A3696CFB548D9BC6FD6FA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>A08B9ACB24A24744A2A1E2B0</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B900132E50554F1A969A9547</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A08C665F09E6472184AD513E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>PSDDFormatter.h</string>
+			<key>path</key>
+			<string>NSLogger-CocoaLumberjack-connector/PSDDFormatter/PSDDFormatter.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A2012AD8B0404A439B0B60D8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>09D0A30B86E5491C92B82FD1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A3B4CD0DC2E4432097418FF9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDASLLogger.m</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDASLLogger.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A4C40D1C4BB647DBA4392683</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NSString+HTML.h</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/NSString+HTML.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A598EE076BAB45C5A3910B30</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NSDate+InternetDateTime.m</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/NSDate+InternetDateTime.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A5C85A31D43D4393ACD47071</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NSData+Base64.m</string>
+			<key>path</key>
+			<string>NSData+Base64/NSData+Base64.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A6A5BD7E2FAB4007BB4BC1C3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>A8953A082C854E62A289A853</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>OBSlider.h</string>
+			<key>path</key>
+			<string>OBSlider/OBSlider/OBSlider.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A8B3D3315F6D4BD2A5F1A80F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A3B4CD0DC2E4432097418FF9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>A8E4E2305E9447E6A31F180D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods-resources.sh</string>
+			<key>path</key>
+			<string>Pods-resources.sh</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>AA6545F501114C10AB62F63B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.xcconfig</string>
+			<key>path</key>
+			<string>Pods.xcconfig</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>AC54A59C4CE245A68F62AE61</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>932D5950B91F416397CD978F</string>
+				<string>4698FD082D564521B6E69734</string>
+				<string>3EF886E1BB574A2DAF802FD6</string>
+				<string>EE81F54A85D44ACCA31F50D6</string>
+				<string>1ED13255C85A4933885A0734</string>
+				<string>3062E63698124C7DBC177EB3</string>
+				<string>1C9198E3ACF1458ABC123F54</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Feed</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AD436AC3025B47B88DF3067B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDNSLoggerLogger.h</string>
+			<key>path</key>
+			<string>NSLogger-CocoaLumberjack-connector/DDNSLoggerLogger.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>AF3A3696CFB548D9BC6FD6FA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockTextPromptAlertView.h</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockTextPromptAlertView.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B02233BB08D4410E9D6D3A47</key>
+		<dict>
+			<key>fileRef</key>
+			<string>382E4108D0F047998EFDBAA4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>B4B8EDA0B81D4268B1EF28BF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDNSLoggerLogger.m</string>
+			<key>path</key>
+			<string>NSLogger-CocoaLumberjack-connector/DDNSLoggerLogger.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B62A36A85A8E4FF5B0705756</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MBProgressHUD.m</string>
+			<key>path</key>
+			<string>MBProgressHUD/MBProgressHUD.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B6358179577A442BA44A1EE5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>SDURLCache.m</string>
+			<key>path</key>
+			<string>SDURLCache/SDURLCache.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B65ADC4116484FF293B5A30D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GTMNSString+HTML.m</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/GTMNSString+HTML.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B77977C4B07E465089939AF0</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FD9716EE09574CB8A680FF19</string>
+				<string>62F7792957E44302B5A916F3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B828318C376C4935B73FC906</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GMGridViewCell.m</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/GMGridViewCell.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>B900132E50554F1A969A9547</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libPods.a</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>BA8FBD7DBF094A7F881AD43D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>027EC63C2ADC439C86E7F9C1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>BAB90989A704485AAE391E90</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A8953A082C854E62A289A853</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>BD7DEACEFDF54D6BB7C6BCFD</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>31543E95586F451CB336565F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>BE1107B634644CF08ACE1C38</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3EF886E1BB574A2DAF802FD6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C1298607ED61412B80726D5A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1321FF7568AE404393D576E0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C166695112544D47BD88B030</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DA517B4F3B37423F86DD43A2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C3C63B0007664205AC4519A8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>962BB748282240E8938C2989</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C569AA6584F54B0682CD7D36</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDLog.m</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDLog.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>C79496B6D6CA44AAA214AA75</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FA0E37C3C26E43C78DA20806</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C8B4BB463088439095E10B02</key>
+		<dict>
+			<key>fileRef</key>
+			<string>82893602B7DD4354B2324F4E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C91C3A69CEC245098731657C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>62F7792957E44302B5A916F3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C93CAD6D89E248E48555733A</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>AA6545F501114C10AB62F63B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_32_BIT)</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>DSTROOT</key>
+				<string>/tmp/xcodeproj.dst</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Pods-prefix.pch</string>
+				<key>GCC_VERSION</key>
+				<string>com.apple.compilers.llvm.clang.1_0</string>
+				<key>GCC_WARN_INHIBIT_ALL_WARNINGS</key>
+				<string>YES</string>
+				<key>INSTALL_PATH</key>
+				<string>$(BUILT_PRODUCTS_DIR)</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>4.3</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>PODS_HEADERS_SEARCH_PATHS</key>
+				<string>${PODS_BUILD_HEADERS_SEARCH_PATHS}</string>
+				<key>PODS_ROOT</key>
+				<string>${SRCROOT}</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Ad_Hoc</string>
+		</dict>
+		<key>CA87580491FC4C3593B20018</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict/>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>CB8E7E7E33DE4CE4A9B1609F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>610EAA265FC9478CA52CD610</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>CC6AB2D1EA464CF88CEFCFEE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>JSONKit.h</string>
+			<key>path</key>
+			<string>JSONKit/JSONKit.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>CCE09630CC224B5B9A816041</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6B64D24AA1A548A39B65FFE1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>CD50E4A1D821427C93C7F7F1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Lockbox.m</string>
+			<key>path</key>
+			<string>Lockbox/Lockbox.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>CD7D077428E74CF6804C0D08</key>
+		<dict>
+			<key>fileRef</key>
+			<string>932D5950B91F416397CD978F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>CDCC33E9ABC94491B4FB1760</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>CC6AB2D1EA464CF88CEFCFEE</string>
+				<string>25A1906CD22B428A82A74BC0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>JSONKit</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CF3FA4707B104FDA8D70A0F0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDFileLogger.h</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDFileLogger.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>CF4C99CAC1DD43AAA0B41D98</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GMGridViewCell+Extended.h</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/GMGridViewCell+Extended.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>D5210920F2FA45A08D3ED151</key>
+		<dict>
+			<key>fileRef</key>
+			<string>82E75B4715B342209FB04377</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>DA517B4F3B37423F86DD43A2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GTMNSString+HTML.h</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/GTMNSString+HTML.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>DACFB8B1573246EB982E8556</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DispatchQueueLogFormatter.h</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/Extensions/DispatchQueueLogFormatter.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>DC38A23275ED461BBC6AF535</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>OBSlider.m</string>
+			<key>path</key>
+			<string>OBSlider/OBSlider/OBSlider.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>DE082A451C4C4227AEBD0013</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>2E9FFCBC166247B3A9060231</string>
+				<string>988CB1EBC5644700B27E834E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>ISO8601DateFormatter</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DEA24B17ED3D4B5A962ECCD8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDAbstractDatabaseLogger.m</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDAbstractDatabaseLogger.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>E1242B134194480788748059</key>
+		<dict>
+			<key>fileRef</key>
+			<string>104B1EF16BFF44F6A88365CC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E268B946C44E4E95B5CC9361</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A6A5BD7E2FAB4007BB4BC1C3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E2A45191D09B40909A150E20</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastUpgradeCheck</key>
+				<string>0420</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>4608223699E24AE8B34C7585</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>2CCDBF4E57C34068A1A94442</string>
+			<key>productRefGroup</key>
+			<string>A08B9ACB24A24744A2A1E2B0</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>7D9843BDD6E043B1B5F1C8B5</string>
+			</array>
+		</dict>
+		<key>E3CD685B88C940C6B4A384F0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8F5B43BAA8D54547BF0528DC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E43308CB6B34429BBE0BF8D8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CF3FA4707B104FDA8D70A0F0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E5BDBBB8B48E439E96A1B3B3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B6358179577A442BA44A1EE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E6548F89E2D7420DB7279D22</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>962BB748282240E8938C2989</string>
+				<string>FA0E37C3C26E43C78DA20806</string>
+				<string>77B4B0C2A0864BF980A11BAA</string>
+				<string>AF3A3696CFB548D9BC6FD6FA</string>
+				<string>869EC290768E44BB88F43252</string>
+				<string>5FAAB006362646F3B7E7FC40</string>
+				<string>5678D8E5D1EB48DBA904325B</string>
+				<string>09D0A30B86E5491C92B82FD1</string>
+				<string>2ADC52FF45EB4C1896F5BB36</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>BlockAlertsAnd-ActionSheets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E66C50281D104513BE7C87D2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CF4C99CAC1DD43AAA0B41D98</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>EAB3FA74C23E4F2885EC1B07</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GMGridViewCell.h</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/GMGridViewCell.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>ED4D49547FAB476190AF4AA9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods-prefix.pch</string>
+			<key>path</key>
+			<string>Pods-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>EDAD134C173D44628F1A03D8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD50E4A1D821427C93C7F7F1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>EDE8116F6CCD45BC91A97EB7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B65ADC4116484FF293B5A30D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-Wno-format -Wno-format-extra-args</string>
+			</dict>
+		</dict>
+		<key>EE81F54A85D44ACCA31F50D6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>MWFeedItem.m</string>
+			<key>path</key>
+			<string>MWFeedParser/Classes/MWFeedItem.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>F0C75026A95A4C2B8A4F5337</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDFileLogger.m</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDFileLogger.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>F165CDFF62294E138C7BE0E4</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>C1298607ED61412B80726D5A</string>
+				<string>50D17DAFE44D4F429FB14D2D</string>
+				<string>5A87A1D3C71F457795D1DF9D</string>
+				<string>6921C2B670AF44089A0EB032</string>
+				<string>A2012AD8B0404A439B0B60D8</string>
+				<string>53181D0B404A4714B0FC3CEE</string>
+				<string>A8B3D3315F6D4BD2A5F1A80F</string>
+				<string>06B236D009764D15B53DE32E</string>
+				<string>452546C59A574309B4C43895</string>
+				<string>81C1E92835B64E4FAE051DA8</string>
+				<string>BA8FBD7DBF094A7F881AD43D</string>
+				<string>CB8E7E7E33DE4CE4A9B1609F</string>
+				<string>89F5CCF9B15E43E5AE9059E9</string>
+				<string>820394F431794CEA8A45D2B1</string>
+				<string>3E041A70EF31421DAA3EE29A</string>
+				<string>73A99024C58F49A09B3CE073</string>
+				<string>4086F29B72954BB6AE7C28F3</string>
+				<string>79A2997B488A4AAEA9DD32F1</string>
+				<string>695DCCB7F4844CDBBEFA3DD7</string>
+				<string>291C2ABB017E4BB3A60257BE</string>
+				<string>EDAD134C173D44628F1A03D8</string>
+				<string>486B6CAAE7324E0CA417F29C</string>
+				<string>1A906D858C714A68BC3B8A47</string>
+				<string>6FA6B6AC33AE4266A0C3917E</string>
+				<string>252934B5BB584F0BB00FB3FF</string>
+				<string>0292D6707A2B42D29CD94DC1</string>
+				<string>EDE8116F6CCD45BC91A97EB7</string>
+				<string>45D02F23B37A4D50929F1BEB</string>
+				<string>35BE0D525F664EEEBFA2069E</string>
+				<string>5A1420575E2E45BDBEEB3F40</string>
+				<string>515FD7A7EA9C4863A8413BDC</string>
+				<string>980DC3CAB94F49DB9C6ECFAE</string>
+				<string>1AAF8549A7F2404F8B0677AF</string>
+				<string>E5BDBBB8B48E439E96A1B3B3</string>
+				<string>C91C3A69CEC245098731657C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F17D62739B824A87B3E236D9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>DDASLLogger.h</string>
+			<key>path</key>
+			<string>CocoaLumberjack/Lumberjack/DDASLLogger.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>F7124580AE60451682C1522B</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>AA6545F501114C10AB62F63B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>ARCHS</key>
+				<string>$(ARCHS_STANDARD_32_BIT)</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>DSTROOT</key>
+				<string>/tmp/xcodeproj.dst</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Pods-prefix.pch</string>
+				<key>GCC_VERSION</key>
+				<string>com.apple.compilers.llvm.clang.1_0</string>
+				<key>GCC_WARN_INHIBIT_ALL_WARNINGS</key>
+				<string>YES</string>
+				<key>INSTALL_PATH</key>
+				<string>$(BUILT_PRODUCTS_DIR)</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>4.3</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>PODS_HEADERS_SEARCH_PATHS</key>
+				<string>${PODS_BUILD_HEADERS_SEARCH_PATHS}</string>
+				<key>PODS_ROOT</key>
+				<string>${SRCROOT}</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>F88E5549093B4848A93CA243</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Appirater.h</string>
+			<key>path</key>
+			<string>Appirater/Appirater.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>F939057A394B415F8476E13C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>54F7C400EA954D78A08699F5</string>
+				<string>888BB003EDDC424083DFA448</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>GCDiscreetNotificationView</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FA0E37C3C26E43C78DA20806</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>BlockAlertView.h</string>
+			<key>path</key>
+			<string>BlockAlertsAnd-ActionSheets/BlockAlertsDemo/ToAddToYourProjects/BlockAlertView.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>FA41440775984140BA2026C5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>GMGridViewLayoutStrategies.h</string>
+			<key>path</key>
+			<string>GMGridView/GMGridView/GMGridViewLayoutStrategies.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>FC4FE428F52E4DDFBA7041B8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A08C665F09E6472184AD513E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>FD7360AB2B4B434686BE9335</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>501EDAF8D70C438AAD3F98C5</string>
+				<string>82893602B7DD4354B2324F4E</string>
+				<string>CF4C99CAC1DD43AAA0B41D98</string>
+				<string>EAB3FA74C23E4F2885EC1B07</string>
+				<string>FA41440775984140BA2026C5</string>
+				<string>05AAF3600FFF41F493258B6A</string>
+				<string>9CC2136634B64571BA2343D6</string>
+				<string>95B25C24612548398430627A</string>
+				<string>B828318C376C4935B73FC906</string>
+				<string>4D2D526B85344C6095DDE3D8</string>
+				<string>6DC4DBB07A054C55B69B8952</string>
+				<string>5382C6C927EE4DA99D1A9C1D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>GMGridView</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FD9716EE09574CB8A680FF19</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A8E4E2305E9447E6A31F180D</string>
+				<string>ED4D49547FAB476190AF4AA9</string>
+				<string>AA6545F501114C10AB62F63B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>E2A45191D09B40909A150E20</string>
+</dict>
+</plist>

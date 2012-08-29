@@ -27,7 +27,7 @@ PODS:
   - SDURLCache (1.2)
 
 DEPENDENCIES:
-  - Appirater
+  - Appirater [HEAD]
   - BlockAlertsAnd-ActionSheets
   - FlurrySDK
   - GCDiscreetNotificationView

@@ -164,7 +164,7 @@ NSString *uuid();
     
     saveTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
     return YES;
-    
+    [Appirater appLaunched:YES];
 }
 
 - (void)saveData
