@@ -6,7 +6,7 @@
 
 
 #import "SVHtmlViewer.h"
-#import "NSString+MW_HTML.h"
+#import "NSString+HTML.h"
 #import "NativeWebView.h"
 
 

@@ -11,8 +11,8 @@
 #import "SVPodcast.h"
 #import "SVPlaybackManager.h"
 #import "UILabel+VerticalAlign.h"
-#import "NSAttributedString+HTML.h"
-#import "NSString+MW_HTML.h"
+
+#import "NSString+HTML.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SVDownloadManager.h"
 #import <Twitter/Twitter.h>

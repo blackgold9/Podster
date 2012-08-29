@@ -610,7 +610,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     DDLogVerbose(@"executing frc");
     [fetcher performFetch:nil];
     DDLogVerbose(@"Done with frc");
-//    [self.tableView reloadData];
+   [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated

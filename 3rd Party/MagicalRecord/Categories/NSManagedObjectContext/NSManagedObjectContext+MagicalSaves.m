@@ -34,6 +34,7 @@
 	BOOL saved = NO;
 	@try
 	{
+        [self obtainPermanentIDsForObjects:[[self insertedObjects] allObjects] error:nil];
         saved = [self save:&error];
 	}
 	@catch (NSException *exception)
@@ -77,6 +78,7 @@
 - (void) MR_saveErrorHandler:(void (^)(NSError *))errorCallback;
 {
     [self performBlockAndWait:^{
+        [self obtainPermanentIDsForObjects:[[self insertedObjects] allObjects] error:nil];
         [self MR_saveWithErrorCallback:errorCallback];
     }];
     

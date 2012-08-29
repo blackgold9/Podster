@@ -8,7 +8,7 @@
 
 #import "SVEpisodeListCell.h"
 #import "SVPodcastEntry.h"
-#import "NSString+MW_HTML.h"
+#import "NSString+HTML.h"
 @implementation SVEpisodeListCell
 @synthesize downloadedIndicator, subtitleLabel, titleLabel, durationLabel,dateLabel, unplayedIndicator, progressIndicator;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
