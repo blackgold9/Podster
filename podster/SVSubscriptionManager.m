@@ -61,24 +61,20 @@ static char const kRefreshInterval = -3;
 
 
     // Actually do the update
-    [self refreshPodcasts:podcasts
-                 complete:^void() {
-                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                         [[SVDownloadManager sharedInstance] downloadPendingEntries];
-                     });
+    [self refreshPodcasts:podcasts complete:^void() {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [[SVDownloadManager sharedInstance] downloadPendingEntries];
+        });
 
-                     dispatch_async(dispatch_get_main_queue(), ^{
-                         self.isBusy = NO;
-                         DDLogInfo(@"Refreshing Subscriptions is complete");
-                     });
-                 }
-                  onQueue:dispatch_get_main_queue()];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.isBusy = NO;
+            DDLogInfo(@"Refreshing Subscriptions is complete");
+        });
+    }];
     
 }
 
-- (void)refreshPodcasts:(NSArray *)podcasts complete:(void (^)())complete onQueue:(dispatch_queue_t)queue
-{
-    dispatch_retain(queue);
+- (void)refreshPodcasts:(NSArray *)podcasts complete:(void (^)())complete {
     dispatch_group_t group = dispatch_group_create();
     NSArray *currentIds= [syncQueue.operations valueForKey:@"podcast"];
     NSSet *currentOperationLookup = [NSSet setWithArray:currentIds];
@@ -98,11 +94,10 @@ static char const kRefreshInterval = -3;
         }
     }
 
-    if (queue && complete) {
-        dispatch_group_notify(group, queue, ^void() {
+    if (complete) {
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^void() {
             complete();
             dispatch_release(group);
-            dispatch_release(queue);
         });
     } 
 

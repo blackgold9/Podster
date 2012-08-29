@@ -25,4 +25,5 @@
  */
 + (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;
 
++ (dispatch_queue_t)actionQueue;
 @end

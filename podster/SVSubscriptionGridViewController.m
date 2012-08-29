@@ -163,9 +163,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [request setIncludesPendingChanges:YES];
         [request setReturnsObjectsAsFaults:NO];
         
-        NSError *error;
-        NSArray *newItems = [self.context executeFetchRequest:request error:&error];
-        NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
+
+        __block NSArray *newItems;
+        dispatch_sync([MagicalRecord actionQueue], ^{
+            NSError *error;
+            newItems = [self.context executeFetchRequest:request error:&error];
+            NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
+        });
+
+        
         DDLogVerbose(@"Retrieved %lu items for display", (long)newItems.count);
         self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
         self.noContentLabel.numberOfLines = 0;

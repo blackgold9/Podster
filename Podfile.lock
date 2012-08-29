@@ -1,0 +1,44 @@
+PODS:
+  - Appirater (0.0.3)
+  - BlockAlertsAnd-ActionSheets (1.0.0)
+  - CocoaLumberjack (1.6)
+  - FlurrySDK (4.0.1)
+  - GCDiscreetNotificationView (0.0.1)
+  - GMGridView (1.1.1)
+  - ISO8601DateFormatter (0.6)
+  - JSONKit (1.5pre)
+  - Lockbox (1.0.2)
+  - MBProgressHUD (0.5)
+  - MWFeedParser (0.0.1):
+    - MWFeedParser/Feed (= 0.0.1)
+    - MWFeedParser/NSDate+InternetDateTime (= 0.0.1)
+    - MWFeedParser/NSString+HTML (= 0.0.1)
+    - MWFeedParser/NSString+XMLEntities (= 0.0.1)
+  - MWFeedParser/Feed (0.0.1)
+  - MWFeedParser/NSDate+InternetDateTime (0.0.1)
+  - MWFeedParser/NSString+HTML (0.0.1)
+  - MWFeedParser/NSString+XMLEntities (0.0.1)
+  - NSData+Base64 (1.0.0)
+  - NSLogger (1.1)
+  - NSLogger-CocoaLumberjack-connector (1.1):
+    - CocoaLumberjack
+    - NSLogger
+  - OBSlider (1.1.0)
+  - SDURLCache (1.2)
+
+DEPENDENCIES:
+  - Appirater
+  - BlockAlertsAnd-ActionSheets
+  - FlurrySDK
+  - GCDiscreetNotificationView
+  - GMGridView
+  - ISO8601DateFormatter
+  - JSONKit
+  - Lockbox
+  - MBProgressHUD
+  - MWFeedParser
+  - NSData+Base64
+  - NSLogger
+  - NSLogger-CocoaLumberjack-connector (from `git://github.com/steipete/NSLogger-CocoaLumberjack-connector.git', commit `444fa49e9f')
+  - OBSlider
+  - SDURLCache

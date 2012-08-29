@@ -20,6 +20,7 @@
 #import "PodcastSettingsViewController.h"
 #import "SVHtmlViewController.h"
 #import "PodcastUpdateOperation.h"
+#import "SVSubscriptionManager.h"
 
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface SVPodcastDetailsViewController () <PodcastSettingsViewControllerDelegate>
@@ -520,31 +521,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                        repeats:NO];
     
     NSAssert(localPodcast != nil, @"PLocal Podcast should not be nil");
-    PodcastUpdateOperation *updateOperation = [[PodcastUpdateOperation alloc] initWithPodcast:localPodcast
-                                                                                   andContext:self.context];
-    updateOperation.onUpdateComplete = ^void(PodcastUpdateOperation *operation) {
-        
+    [[SVSubscriptionManager sharedInstance] refreshPodcasts:@[localPodcast] complete:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([operation completedSuccessfully]) {
-                [self reloadFetchedResultsController];
-                loadCompleteHandler();
-            } else if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusNotReachable) {
-                // TODO: Handle offline case better
-                loadCompleteHandler();
-            } else {
-                BlockAlertView *alert = [BlockAlertView alertWithTitle:[MessageGenerator randomErrorAlertTitle]
-                                                               message:NSLocalizedString(@"There was an error downloading this podcast. Please try again later", @"There was an error downloading this podcast. Please try again later")];
-                [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", nil) block:^{
-                    
-                }];
-                [alert show];
-            }
+            [self reloadFetchedResultsController];
+            loadCompleteHandler();
         });
-    };
-    
-    [updateOperationQueue addOperation:updateOperation];
-    
-    
+    }];
 }
 
 - (void)configureUIForSubscriptionStatus:(BOOL)isSubscribedValue {
@@ -608,7 +590,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     fetcher.delegate = self;
     DDLogVerbose(@"executing frc");
-    [fetcher performFetch:nil];
+    dispatch_sync([MagicalRecord actionQueue], ^{
+        [fetcher performFetch:nil];
+    });
+
     DDLogVerbose(@"Done with frc");
    [self.tableView reloadData];
 }

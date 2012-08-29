@@ -32,7 +32,10 @@ void reset_action_queue(void)
 }
 
 @implementation MagicalRecord (Actions)
-
++ (dispatch_queue_t)actionQueue
+{
+    return action_queue();
+}
 + (void) saveInBackgroundUsingContext:(NSManagedObjectContext *)localContext block:(void (^)(NSManagedObjectContext *))block completion:(void(^)(void))completion errorHandler:(void(^)(NSError *))errorHandler;
 {
     dispatch_async(action_queue(), ^{
@@ -62,7 +65,7 @@ void reset_action_queue(void)
                                                                   }];
     mainContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
     localContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy;
-        
+    
     [localContext performBlock:^{
         block(localContext);
         NSError *error;
@@ -79,7 +82,7 @@ void reset_action_queue(void)
         }
         
         MRLog(@"Done saving child work context");
-        [mainContext performBlock:^{
+        dispatch_async(action_queue(), ^{
             MRLog(@"Saving root context");
             [mainContext save:nil];
             MRLog(@"Done saving root context");
@@ -87,7 +90,7 @@ void reset_action_queue(void)
                 dispatch_async(dispatch_get_main_queue(), completion);
             }
             
-        }];
+        });      
     }];
 }
 

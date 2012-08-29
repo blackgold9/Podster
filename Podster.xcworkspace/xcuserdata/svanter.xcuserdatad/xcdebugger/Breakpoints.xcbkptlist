@@ -52,8 +52,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "76"
          endingLineNumber = "76"
-         landmarkName = "-refreshAllSubscriptions"
-         landmarkType = "5">
+         landmarkName = "@implementation SVSubscriptionManager"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -65,7 +65,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "91"
          endingLineNumber = "91"
-         landmarkName = "-refreshPodcasts:complete:onQueue:"
+         landmarkName = "-refreshPodcasts:complete:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -170,19 +170,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367737020.19235"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "523"
-         endingLineNumber = "523"
-         landmarkName = "-displayEpisodesAndRefreshData"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "podster/PodcastUpdateOperation.m"
          timestampString = "367467912.39548"
          startingColumnNumber = "9223372036854775807"
@@ -190,19 +177,6 @@
          startingLineNumber = "62"
          endingLineNumber = "62"
          landmarkName = "-finish"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367737020.19235"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "522"
-         endingLineNumber = "522"
-         landmarkName = "-displayEpisodesAndRefreshData"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -236,11 +210,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367702130.37714"
+         timestampString = "367944885.749531"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
          landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -262,11 +236,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367702130.37714"
+         timestampString = "367944885.749531"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
          landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -288,11 +262,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367702130.37714"
+         timestampString = "367944885.749531"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
          landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -301,11 +275,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367702130.37714"
+         timestampString = "367944885.749531"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
          landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -340,11 +314,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367737982.505203"
+         timestampString = "367944885.749531"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "630"
-         endingLineNumber = "630"
+         startingLineNumber = "633"
+         endingLineNumber = "633"
          landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -353,11 +327,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367737982.505203"
+         timestampString = "367944885.749531"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "629"
-         endingLineNumber = "629"
+         startingLineNumber = "632"
+         endingLineNumber = "632"
          landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
