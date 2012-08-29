@@ -149,5 +149,4 @@ static NSManagedObjectContext *defaultManagedObjectContext_ = nil;
     return context;
 }
 
-
 @end

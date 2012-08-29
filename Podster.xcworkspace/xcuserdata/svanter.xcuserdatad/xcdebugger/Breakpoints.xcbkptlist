@@ -144,38 +144,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367717146.850828"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
-         landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
+         timestampString = "367737020.19235"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "451"
-         endingLineNumber = "451"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "602"
-         endingLineNumber = "602"
+         startingLineNumber = "588"
+         endingLineNumber = "588"
          landmarkName = "-reloadFetchedResultsController"
          landmarkType = "5">
       </FileBreakpoint>
@@ -184,11 +158,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
+         timestampString = "367737020.19235"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "601"
-         endingLineNumber = "601"
+         startingLineNumber = "587"
+         endingLineNumber = "587"
          landmarkName = "-reloadFetchedResultsController"
          landmarkType = "5">
       </FileBreakpoint>
@@ -197,11 +171,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
+         timestampString = "367737020.19235"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "536"
-         endingLineNumber = "536"
+         startingLineNumber = "523"
+         endingLineNumber = "523"
          landmarkName = "-displayEpisodesAndRefreshData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -223,11 +197,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
+         timestampString = "367737020.19235"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "535"
-         endingLineNumber = "535"
+         startingLineNumber = "522"
+         endingLineNumber = "522"
          landmarkName = "-displayEpisodesAndRefreshData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -236,26 +210,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
+         timestampString = "367737020.19235"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "534"
-         endingLineNumber = "534"
+         startingLineNumber = "521"
+         endingLineNumber = "521"
          landmarkName = "-displayEpisodesAndRefreshData"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/PodcastUpdateOperation.m"
-         timestampString = "367468340.622927"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "97"
-         endingLineNumber = "97"
-         landmarkName = "@implementation PodcastUpdateOperation"
-         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -275,11 +236,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367717146.850828"
+         timestampString = "367702130.37714"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
          landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -301,11 +262,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367717146.850828"
+         timestampString = "367702130.37714"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
          landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -327,11 +288,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367717146.850828"
+         timestampString = "367702130.37714"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
+         startingLineNumber = "68"
+         endingLineNumber = "68"
          landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -340,11 +301,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367717146.850828"
+         timestampString = "367702130.37714"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
          landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -379,12 +340,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
+         timestampString = "367737982.505203"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "628"
-         endingLineNumber = "628"
-         landmarkName = "-reloadFetchedResultsController"
+         startingLineNumber = "630"
+         endingLineNumber = "630"
+         landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -392,51 +353,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
+         timestampString = "367737982.505203"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "542"
-         endingLineNumber = "542"
-         landmarkName = "-displayEpisodesAndRefreshData"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "541"
-         endingLineNumber = "541"
-         landmarkName = "-displayEpisodesAndRefreshData"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "627"
-         endingLineNumber = "627"
-         landmarkName = "-reloadFetchedResultsController"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "podster/SVPodcastDetailsViewController.m"
-         timestampString = "367717263.80496"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "506"
-         endingLineNumber = "506"
-         landmarkName = "-displayEpisodesAndRefreshData"
+         startingLineNumber = "629"
+         endingLineNumber = "629"
+         landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

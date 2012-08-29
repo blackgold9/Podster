@@ -16,7 +16,7 @@
 #import "SVPodcastSearchResult.h"
 #import "NSString+URLEncoding.h"
 #import "AFNetworkActivityIndicatorManager.h"
-#import "SVPodcastModalView.h"
+
 static const int ddLogLevel = LOG_LEVEL_WARN;
 @implementation SVPodcatcherClient
 + (id)sharedInstance
@@ -253,7 +253,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"subscribe failed with error: %@", error);
-               [FlurryAnalytics logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
+               [Flurry logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
                if (onError) {
                    onError(error);
                }
@@ -309,7 +309,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
            }
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                LOG_NETWORK(1, @"subscribe failed with error: %@", error);
-               [FlurryAnalytics logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
+               [Flurry logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
                if (onError) {
                    onError(error);
                }

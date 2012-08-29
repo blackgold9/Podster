@@ -71,16 +71,24 @@ void reset_action_queue(void)
             [MagicalRecord handleErrors:error];
             error = nil;
         }
+        
+        MRLog(@"Saving child work context");
         if (![localContext save:&error]) {
+
             @throw [NSException exceptionWithName:@"CoreDataSaveError" reason:[error localizedDescription] userInfo:nil];
         }
-        [mainContext performBlockAndWait:^{
+        
+        MRLog(@"Done saving child work context");
+        [mainContext performBlock:^{
+            MRLog(@"Saving root context");
             [mainContext save:nil];
+            MRLog(@"Done saving root context");
+            if (completion) {
+                dispatch_async(dispatch_get_main_queue(), completion);
+            }
+
         }];
-        if (completion) {
-            dispatch_sync(dispatch_get_main_queue(), completion);
-        }
-    }];
+           }];
 }
 
 + (void) saveInBackgroundUsingCurrentContextWithBlock:(void (^)(NSManagedObjectContext *))block completion:(void (^)(void))completion errorHandler:(void (^)(NSError *))errorHandler;

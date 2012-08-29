@@ -45,7 +45,6 @@
 
 #import "BannerViewController.h"
 #import "GADBannerView.h"
-#import <CoreLocation/CoreLocation.h>
 NSString *const BannerViewActionWillBegin = @"BannerViewActionWillBegin";
 NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
@@ -71,14 +70,7 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
             _bannerView.rootViewController = self;
             // Initiate a generic request to load it with an ad.
             GADRequest *request = [GADRequest request];
-
-            if ([CLLocationManager locationServicesEnabled]) {
-                            CLLocationManager *locationManager = [[CLLocationManager alloc] init];
-                [request setLocationWithLatitude:locationManager.location.coordinate.latitude
-                                       longitude:locationManager.location.coordinate.longitude
-                                        accuracy:locationManager.location.horizontalAccuracy];
-            }
-            
+           
             [request.keywords addObject:@"Podcast"];
             [request.keywords addObject:@"Podcasts"];
             [request.keywords addObject:@"Radio"];
@@ -196,7 +188,7 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 }
 
 - (void)adViewWillPresentScreen:(GADBannerView *)adView {
-    [FlurryAnalytics logEvent:@"AdsFullscreenShown"];
+    [Flurry logEvent:@"AdsFullscreenShown"];
     //Pause playback?
     [[NSNotificationCenter defaultCenter] postNotificationName:BannerViewActionWillBegin object:self];
 }

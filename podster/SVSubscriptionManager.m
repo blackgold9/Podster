@@ -63,7 +63,7 @@ static char const kRefreshInterval = -3;
     // Actually do the update
     [self refreshPodcasts:podcasts
                  complete:^void() {
-                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                          [[SVDownloadManager sharedInstance] downloadPendingEntries];
                      });
 

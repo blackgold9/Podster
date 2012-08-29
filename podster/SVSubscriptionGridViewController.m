@@ -141,7 +141,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.noContentLabel.hidden = YES;
     
     
-    [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
+    [Flurry logEvent:@"SubscriptionGridPageView" timed:YES];
 }
 
 - (void)reloadData
@@ -185,7 +185,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
+    [Flurry endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
    // self.fetcher.delegate = nil;
     LOG_GENERAL(2, @"WilDisappear");
     [[NSNotificationCenter defaultCenter] removeObserver:self

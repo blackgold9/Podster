@@ -75,10 +75,10 @@ static const NSInteger kDefaultPageSize = 50;
     self.tableView.rowHeight = 88;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (self.searchString) {
-        [FlurryAnalytics logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"Search" forKey:@"Type"]];
+        [Flurry logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"Search" forKey:@"Type"]];
         
     } else {
-        [FlurryAnalytics logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"CategoryList" forKey:@"Type"]];
+        [Flurry logEvent:@"SearchResultsPageView" withParameters:[NSDictionary dictionaryWithObject:@"CategoryList" forKey:@"Type"]];
     }
 
     [self loadNextPage];
@@ -117,7 +117,7 @@ static const NSInteger kDefaultPageSize = 50;
     } else {
         currentPage ++;
     }
-    [FlurryAnalytics logEvent:@"LoadSearchResultsPage" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:currentPage] forKey:@"Page"]];
+    [Flurry logEvent:@"LoadSearchResultsPage" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:currentPage] forKey:@"Page"]];
     isLoading = YES;
     // Insert the loading row
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:podcasts.count inSection:0]] 

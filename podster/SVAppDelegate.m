@@ -111,16 +111,16 @@ NSString *uuid();
     
 #if defined (CONFIGURATION_AppStore)
     DDLogVerbose(@"Running in Appstore mode");
-    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
-    [FlurryAnalytics setSecureTransportEnabled:YES];
+    [Flurry startSession:@"SQ19K1VRZT84NIFMRA1S"];
+    [Flurry setSecureTransportEnabled:YES];
 #endif
     
 #if defined (CONFIGURATION_Ad_Hoc)
     DDLogVerbose(@"Running in Ad_Hoc mode");
 
-    [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
-    [FlurryAnalytics setSecureTransportEnabled:YES];
-    [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
+    [Flurry startSession:@"FGIFUZFEUSAMC74URBVL"];
+    [Flurry setSecureTransportEnabled:YES];
+    [Flurry  setUserID:[[SVSettings sharedInstance] deviceId]];
 #endif
 
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -139,7 +139,7 @@ NSString *uuid();
     
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
-    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
+//    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
     [NSURLCache setSharedURLCache:URLCache];
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
@@ -208,7 +208,7 @@ NSString *uuid();
                                                      }
                                                      
                                                  } onError:^(NSError *error) {
-                                                     [FlurryAnalytics logError:@"RegistrationFailed"
+                                                     [Flurry logError:@"RegistrationFailed"
                                                                        message:[error localizedDescription]
                                                                          error:error];
                                                      LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
@@ -229,7 +229,7 @@ NSString *uuid();
     }
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    [FlurryAnalytics logEvent:@"LaunchedWithNotificationsDisabled"];
+    [Flurry logEvent:@"LaunchedWithNotificationsDisabled"];
     [[SVSettings sharedInstance] setNotificationsEnabled:NO];
     [self registerWithOptionalNotificationToken:nil];
 }
@@ -254,7 +254,7 @@ NSString *uuid();
         
         //System will be shutting down the app at any point in time now
     }];
-    [FlurryAnalytics logEvent:@"SavingOnEnteringBackground" timed:YES];
+    [Flurry logEvent:@"SavingOnEnteringBackground" timed:YES];
     //Background tasks require you to use asynchronous tasks
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -272,7 +272,7 @@ NSString *uuid();
             
         }];
         [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
-        [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
+        [Flurry endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
         [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
         background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
         

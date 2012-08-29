@@ -69,7 +69,7 @@ enum SVMiscRows {
 
 - (void)contactUsTapped {
     if ([MFMailComposeViewController canSendMail]) {
-        [FlurryAnalytics logEvent:@"ContactUs"];
+        [Flurry logEvent:@"ContactUs"];
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
 
         mailer.mailComposeDelegate = self;
@@ -94,7 +94,7 @@ enum SVMiscRows {
         [self presentModalViewController:mailer animated:YES];
     }
     else {
-        [FlurryAnalytics logEvent:@"ContactUs-NoEmail"];
+        [Flurry logEvent:@"ContactUs-NoEmail"];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Failure"
                                                         message:@"Your device doesn't have e-mail configured"
                                                        delegate:nil cancelButtonTitle:@"OK"
@@ -140,7 +140,7 @@ enum SVMiscRows {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationItem.title = NSLocalizedString(@"Settings", @"Settings");
-    [FlurryAnalytics logEvent:@"SettingsPageView"];
+    [Flurry logEvent:@"SettingsPageView"];
 }
 
 
@@ -405,7 +405,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                                                                        NSString *buyFormatString = NSLocalizedString(@"BUY_FORMAT_STRING", @"Format string for listing buy option");
                                                                        [sheet addButtonWithTitle:[NSString stringWithFormat:buyFormatString, name, price]
                                                                                            block:^{
-                                                                                               [FlurryAnalytics logEvent:@"PurchaseTapped" withParameters:[NSDictionary dictionaryWithObject:name forKey:@"sku"]];
+                                                                                               [Flurry logEvent:@"PurchaseTapped" withParameters:[NSDictionary dictionaryWithObject:name forKey:@"sku"]];
                                                                                                
                                                                                                [[PodsterIAPHelper sharedInstance] buyProductIdentifier:[product productIdentifier]];
                                                                                                [self waitForPurchaseCompletion];
@@ -413,12 +413,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                                                                    }
                                                                    
                                                                    [sheet setCancelButtonWithTitle:@"Cancel" block:^{
-                                                                       [FlurryAnalytics logEvent:@"CanceledPurchase"];   
+                                                                       [Flurry logEvent:@"CanceledPurchase"];   
                                                                    }];
                                                                    if (!hasProducts) {
-                                                                       [FlurryAnalytics logEvent:@"NoProductsAvailable"];        
+                                                                       [Flurry logEvent:@"NoProductsAvailable"];        
                                                                    }
-                                                                   [FlurryAnalytics logEvent:@"ShowPurchaseOptions"];   
+                                                                   [Flurry logEvent:@"ShowPurchaseOptions"];   
                                                                    [sheet showInView:self.view];
                                                                    LOG_GENERAL(2, @"Removing observer");
                                                                    [[NSNotificationCenter defaultCenter] removeObserver:tmpObserver
@@ -482,7 +482,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)smartSyncTapped {
     if (![[SVSettings sharedInstance] premiumModeUnlocked]) {
-        [FlurryAnalytics logEvent:@"HitSmartSyncUpsell"];
+        [Flurry logEvent:@"HitSmartSyncUpsell"];
         BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE", @"Unlock Premium Mode") message:@"SmartSync is a Premium Feature. Unlock it now!"];
         [alert addButtonWithTitle:@"Unlock" block:^{
             [self showPurchaseOptions];
@@ -499,7 +499,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 - (IBAction)cellularSwitchChanged:(id)sender {
     UISwitch *theSwitch = sender;
     if (theSwitch.on && ![[SVSettings sharedInstance] premiumModeUnlocked]) {
-        [FlurryAnalytics logEvent:@"HitCellularDownloadUpsell"];
+        [Flurry logEvent:@"HitCellularDownloadUpsell"];
         BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"MAX_NOTIFICATIONS_UPDGRADE_PROMPT_TITLE", @"Unlock Premium Mode") message:@"Downloading episodes over 3g is a premium feature. Unlock it now!"];
         [alert addButtonWithTitle:@"Unlock" block:^{
             [self showPurchaseOptions];
@@ -513,7 +513,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         DDLogInfo(@"User Set Allow downloads on 3g to %@", theSwitch.on ? @"ON" : @"OFF");
         [[SVSettings sharedInstance] setDownloadOn3g:theSwitch.on];
         if (theSwitch.on) {
-            [FlurryAnalytics logEvent:@"AllowDownloadsOnCellular"];
+            [Flurry logEvent:@"AllowDownloadsOnCellular"];
         }
     }
 }

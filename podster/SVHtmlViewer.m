@@ -62,7 +62,7 @@
     NSURL *requestURL = [request URL];
     if ( ( [ [ requestURL scheme ] isEqualToString: @"http" ] || [ [ requestURL scheme ] isEqualToString: @"https" ] || [ [ requestURL scheme ] isEqualToString: @"mailto" ])
             && ( navigationType == UIWebViewNavigationTypeLinkClicked ) ) {
-        [FlurryAnalytics logEvent:@"UserTappedLinkFromShowNotes"];
+        [Flurry logEvent:@"UserTappedLinkFromShowNotes"];
         return ![ [ UIApplication sharedApplication ] openURL: requestURL ];
     }
     return YES;
