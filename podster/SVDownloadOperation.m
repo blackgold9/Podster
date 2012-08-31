@@ -46,7 +46,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)downloadProgressChanged:(double)progress forDownload:(SVDownload *)localDownload
 {
     NSInteger percentage = MIN(100,(NSInteger)(progress * 100));
-    if (currentProgressPercentage != percentage && currentProgressPercentage < 100) {
+    if (currentProgressPercentage != percentage && percentage < 100) {
         
         [SSRateLimit executeBlock:^{            
             currentProgressPercentage = percentage;
@@ -62,13 +62,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 }
                                            
             }];
-        } name:@"DownloadProgressUpdateUIRefresh" limit:0.5];
-    } else if (currentProgressPercentage == 100) {
+        } name:@"DownloadProgressUpdateUIRefresh" limit:0.1];
+    } else if (percentage == 100) {
         [[NSManagedObjectContext MR_defaultContext] performBlock: ^{
-            if (currentProgressPercentage == 100) {
                 SVDownload *mainThreadDownload = [localDownload MR_inContext:[NSManagedObjectContext MR_defaultContext]];
                 mainThreadDownload.entry.podcast.isDownloadingValue = NO;
-            }
             
         }];
 

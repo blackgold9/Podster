@@ -5,89 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16e80353-79d0-481c-83d4-aba2650099bd" name="Default" comment="Renamed tag controllers to appropriate names">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 21.xcdatamodel/contents" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/MagicalImportFunctions.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/MagicalImportFunctions.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSAttributeDescription+MagicalDataImport.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSEntityDescription+MagicalDataImport.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSNumber+MagicalDataImport.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSObject+MagicalDataImport.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSRelationshipDescription+MagicalDataImport.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/DataImport/NSString+MagicalDataImport.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalAggregation.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalAggregation.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalDataImport.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalDataImport.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalFinders.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalFinders.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRecord.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRecord.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRequests.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObject/NSManagedObject+MagicalRequests.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalObserving.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalRecord.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalRecord.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalSaves.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalThreading.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectContext/NSManagedObjectContext+MagicalThreading.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSManagedObjectModel+MagicalRecord.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStore+MagicalRecord.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStore+MagicalRecord.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Categories/NSPersistentStoreCoordinator+MagicalRecord.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Actions.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+ErrorHandling.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+ErrorHandling.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Options.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Options.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Setup.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+Setup.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+ShorthandSupport.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+ShorthandSupport.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+iCloud.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord+iCloud.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecord.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/Core/MagicalRecordShorthand.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/3rd Party/MagicalRecord/CoreData+MagicalRecord.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/Appirater/Appirater.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/Appirater/Appirater.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/Appirater/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/BuildHeaders/Appirater/Appirater.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/BuildHeaders/NSLogger-CocoaLumberjack-connector/PSDDFormatter.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/Headers/Appirater/Appirater.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/Headers/NSLogger-CocoaLumberjack-connector/PSDDFormatter.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/NSLogger-CocoaLumberjack-connector/PSDDFormatter/PSDDFormatter.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Pods/NSLogger-CocoaLumberjack-connector/PSDDFormatter/PSDDFormatter.m" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podfile.lock" afterPath="$PROJECT_DIR$/Podfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podfile" afterPath="$PROJECT_DIR$/Podfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods-Acknowledgements.markdown" afterPath="$PROJECT_DIR$/Pods/Pods-Acknowledgements.markdown" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods-Acknowledgements.plist" afterPath="$PROJECT_DIR$/Pods/Pods-Acknowledgements.plist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods-prefix.pch" afterPath="$PROJECT_DIR$/Pods/Pods-prefix.pch" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods-resources.sh" afterPath="$PROJECT_DIR$/Pods/Pods-resources.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods.xcconfig" afterPath="$PROJECT_DIR$/Pods/Pods.xcconfig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/Pods.xcscheme" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/Pods.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/xcschememanagement.plist" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/svanter.xcuserdatad/xcschemes/xcschememanagement.plist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd Party/JMTabView/Subviews/Layers/BarBackgroundLayer.m" afterPath="$PROJECT_DIR$/3rd Party/JMTabView/Subviews/Layers/BarBackgroundLayer.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" afterPath="$PROJECT_DIR$/Podster.xcworkspace/xcuserdata/svanter.xcuserdatad/xcdebugger/Breakpoints.xcbkptlist" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/podster.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVAppDelegate.m" afterPath="$PROJECT_DIR$/podster/SVAppDelegate.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/.xccurrentversion" afterPath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/.xccurrentversion" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 20.xcdatamodel/contents" afterPath="$PROJECT_DIR$/podster/SVPodcastDatastore.xcdatamodeld/SVPodcastDatastore 20.xcdatamodel/contents" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/PodcastGridCellView.m" afterPath="$PROJECT_DIR$/podster/PodcastGridCellView.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVDownloadOperation.m" afterPath="$PROJECT_DIR$/podster/SVDownloadOperation.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" afterPath="$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" afterPath="$PROJECT_DIR$/podster/SVSubscriptionGridViewController.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podster/podster-Info.plist" afterPath="$PROJECT_DIR$/podster/podster-Info.plist" />
     </list>
     <ignored path="podster.iws" />
@@ -118,7 +42,7 @@
       <file leaf-file-name="SVAppDelegate.m" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="335" column="166" selection-start="14912" selection-end="14912" vertical-scroll-proportion="0.0">
+            <state line="340" column="166" selection-start="15032" selection-end="15032" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -181,7 +105,7 @@
       <file leaf-file-name="SVPodcastDetailsViewController.m" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="776" selection-end="776" vertical-scroll-proportion="0.022692889">
+            <state line="31" column="0" selection-start="851" selection-end="851" vertical-scroll-proportion="0.022692889">
               <folding />
             </state>
           </provider>
@@ -585,7 +509,7 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="783" />
+      <option name="time" value="785" />
     </breakpoint-manager>
   </component>
   <component name="XcodeMetaData" SELECTED_TARGET="iphonesimulator_5.1_1" />
@@ -709,14 +633,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVAppDelegate.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="335" column="166" selection-start="14912" selection-end="14912" vertical-scroll-proportion="0.0">
+        <state line="340" column="166" selection-start="15032" selection-end="15032" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/podster/SVPodcastDetailsViewController.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="776" selection-end="776" vertical-scroll-proportion="0.022692889">
+        <state line="31" column="0" selection-start="851" selection-end="851" vertical-scroll-proportion="0.022692889">
           <folding />
         </state>
       </provider>

@@ -566,6 +566,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 - (void)reloadFetchedResultsController
 {
+    if (!localPodcast) {
+        return;
+    }
+    
     NSPredicate *itemsInPodcastPredicate = [NSPredicate predicateWithFormat:@"podcast = %@", localPodcast];
     NSPredicate *predicate;
     
@@ -625,6 +629,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self reloadFetchedResultsController];
     [self.navigationController setToolbarHidden:NO animated:NO];
     [Flurry logEvent:@"PodcastDetailsPageView" timed:YES];
 }
@@ -684,6 +689,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     SVEpisodeDetailsViewController *details = [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"episodeDetails"];
     details.context = self.context;
     details.episode =[fetcher objectAtIndexPath:indexPath];
+    NSAssert(details.episode, @"There should be an episode here");
     [[self navigationController] pushViewController:details
                                            animated:YES];
     

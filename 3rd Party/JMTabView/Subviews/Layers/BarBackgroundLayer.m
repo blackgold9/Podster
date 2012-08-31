@@ -1,7 +1,6 @@
 //  Created by Jason Morrissey
 
 #import "BarBackgroundLayer.h"
-#import "UIColor+Hex.h"
 
 @implementation BarBackgroundLayer
 

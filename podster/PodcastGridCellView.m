@@ -176,19 +176,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             [self setDownloadProgressHidden:!coreDataPodcast.isDownloadingValue animated:YES];
             
         } else if ([keyPath isEqualToString:SVPodcastAttributes.unlistenedSinceSubscribedCount]) {
-                                                                    
-                                if (coreDataPodcast.unlistenedSinceSubscribedCountValue > 0) {
-                                    [self.countOverlay setCount:coreDataPodcast.unlistenedSinceSubscribedCountValue];
-                                    [self.countOverlay sizeToFit];
-                                    CGRect newFrame = self.countOverlay.frame;
-                                    newFrame.origin.x = self.frame.size.width - newFrame.size.width;
-                                    self.countOverlay.frame = newFrame;
-                                    self.countOverlay.hidden = NO;
-                                } else {
-                                    self.countOverlay.hidden = YES;
-                                }                            
+            NSInteger newEpisodeCount = coreDataPodcast.unlistenedSinceSubscribedCountValue;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (newEpisodeCount > 0) {
+                    [self.countOverlay setCount:newEpisodeCount];
+                    [self.countOverlay sizeToFit];
+                    CGRect newFrame = self.countOverlay.frame;
+                    newFrame.origin.x = self.frame.size.width - newFrame.size.width;
+                    self.countOverlay.frame = newFrame;
+                    self.countOverlay.hidden = NO;
+                } else {
+                    self.countOverlay.hidden = YES;
+                }
+            });
         }
-    }    
+    }
 }
 
 
