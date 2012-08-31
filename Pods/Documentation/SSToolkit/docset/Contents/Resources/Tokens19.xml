@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSLabel.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSLabel</TokenIdentifier>
+			<Abstract type="html">Simple label subclass that adds the ability to align your text to the top or bottom.</Abstract>
+			<DeclaredIn>SSLabel.h</DeclaredIn>
+			
+			<NodeRef refid="19"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSLabel/setVerticalTextAlignment:</TokenIdentifier>
+			<Abstract type="html">The vertical text alignment of the receiver.</Abstract>
+			<DeclaredIn>SSLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) SSLabelVerticalTextAlignment verticalTextAlignment</Declaration>
+			
+			
+			<Anchor>//api/name/verticalTextAlignment</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSLabel/verticalTextAlignment</TokenIdentifier>
+			<Abstract type="html">The vertical text alignment of the receiver.</Abstract>
+			<DeclaredIn>SSLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) SSLabelVerticalTextAlignment verticalTextAlignment</Declaration>
+			
+			
+			<Anchor>//api/name/verticalTextAlignment</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSLabel/setTextEdgeInsets:</TokenIdentifier>
+			<Abstract type="html">The edge insets of the text.</Abstract>
+			<DeclaredIn>SSLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIEdgeInsets textEdgeInsets</Declaration>
+			
+			
+			<Anchor>//api/name/textEdgeInsets</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSLabel/textEdgeInsets</TokenIdentifier>
+			<Abstract type="html">The edge insets of the text.</Abstract>
+			<DeclaredIn>SSLabel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIEdgeInsets textEdgeInsets</Declaration>
+			
+			
+			<Anchor>//api/name/textEdgeInsets</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/BlockTextPromptAlertView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/BlockTextPromptAlertView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockTextPromptAlertView/setTextField:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) UITextField *textField</Declaration>
+			
+			
+			<Anchor>//api/name/textField</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/BlockTextPromptAlertView/textField</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) UITextField *textField</Declaration>
+			
+			
+			<Anchor>//api/name/textField</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/BlockTextPromptAlertView/promptWithTitle:message:defaultText:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>+ (BlockTextPromptAlertView *)promptWithTitle:(NSString *)title message:(NSString *)message defaultText:(NSString *)defaultText</Declaration>
+			
+			
+			<Anchor>//api/name/promptWithTitle:message:defaultText:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/BlockTextPromptAlertView/promptWithTitle:message:defaultText:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>+ (BlockTextPromptAlertView *)promptWithTitle:(NSString *)title message:(NSString *)message defaultText:(NSString *)defaultText block:(TextFieldReturnCallBack)block</Declaration>
+			
+			
+			<Anchor>//api/name/promptWithTitle:message:defaultText:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/BlockTextPromptAlertView/promptWithTitle:message:textField:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>+ (BlockTextPromptAlertView *)promptWithTitle:(NSString *)title message:(NSString *)message textField:(out UITextField **)textField</Declaration>
+			
+			
+			<Anchor>//api/name/promptWithTitle:message:textField:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/BlockTextPromptAlertView/promptWithTitle:message:textField:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>+ (BlockTextPromptAlertView *)promptWithTitle:(NSString *)title message:(NSString *)message textField:(out UITextField **)textField block:(TextFieldReturnCallBack)block</Declaration>
+			
+			
+			<Anchor>//api/name/promptWithTitle:message:textField:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockTextPromptAlertView/initWithTitle:message:defaultText:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithTitle:(NSString *)title message:(NSString *)message defaultText:(NSString *)defaultText block:(TextFieldReturnCallBack)block</Declaration>
+			
+			
+			<Anchor>//api/name/initWithTitle:message:defaultText:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockTextPromptAlertView/setAllowableCharacters:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (void)setAllowableCharacters:(NSString *)accepted</Declaration>
+			
+			
+			<Anchor>//api/name/setAllowableCharacters:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockTextPromptAlertView/setMaxLength:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockTextPromptAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (void)setMaxLength:(NSInteger)max</Declaration>
+			
+			
+			<Anchor>//api/name/setMaxLength:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

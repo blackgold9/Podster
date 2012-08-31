@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSTextView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSTextView</TokenIdentifier>
+			<Abstract type="html">UITextView subclass that adds placeholder support like UITextField has.</Abstract>
+			<DeclaredIn>SSTextView.h</DeclaredIn>
+			
+			<NodeRef refid="29"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSTextView/setPlaceholder:</TokenIdentifier>
+			<Abstract type="html">The string that is displayed when there is no other text in the text view.</Abstract>
+			<DeclaredIn>SSTextView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSString *placeholder</Declaration>
+			
+			
+			<Anchor>//api/name/placeholder</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSTextView/placeholder</TokenIdentifier>
+			<Abstract type="html">The string that is displayed when there is no other text in the text view.</Abstract>
+			<DeclaredIn>SSTextView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSString *placeholder</Declaration>
+			
+			
+			<Anchor>//api/name/placeholder</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSTextView/setPlaceholderColor:</TokenIdentifier>
+			<Abstract type="html">The color of the placeholder.</Abstract>
+			<DeclaredIn>SSTextView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *placeholderColor</Declaration>
+			
+			
+			<Anchor>//api/name/placeholderColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSTextView/placeholderColor</TokenIdentifier>
+			<Abstract type="html">The color of the placeholder.</Abstract>
+			<DeclaredIn>SSTextView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *placeholderColor</Declaration>
+			
+			
+			<Anchor>//api/name/placeholderColor</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

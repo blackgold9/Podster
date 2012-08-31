@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/UIScrollView+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/UIScrollView(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to UIScrollView for various common tasks.</Abstract>
+			<DeclaredIn>UIScrollView+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="45"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIScrollView(SSToolkitAdditions)/scrollToTop</TokenIdentifier>
+			<Abstract type="html">Scroll to the top of the receiver without animation.</Abstract>
+			<DeclaredIn>UIScrollView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)scrollToTop</Declaration>
+			
+			
+			<Anchor>//api/name/scrollToTop</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIScrollView(SSToolkitAdditions)/scrollToTopAnimated:</TokenIdentifier>
+			<Abstract type="html">Scroll to the top of the receiver.</Abstract>
+			<DeclaredIn>UIScrollView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)scrollToTopAnimated:(BOOL)animated</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>animated</Name>
+					<Abstract type="html">YES to animate the transition at a constant velocity to the new offset, NO to make the transition immediate.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/scrollToTopAnimated:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

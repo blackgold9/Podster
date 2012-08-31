@@ -39,3 +39,5 @@ install_resource 'BlockAlertsAnd-ActionSheets/BlockAlertsDemo/images/AlertView/a
 install_resource 'BlockAlertsAnd-ActionSheets/BlockAlertsDemo/images/AlertView/alert-red-button@2x.png'
 install_resource 'BlockAlertsAnd-ActionSheets/BlockAlertsDemo/images/AlertView/alert-window.png'
 install_resource 'BlockAlertsAnd-ActionSheets/BlockAlertsDemo/images/AlertView/alert-window@2x.png'
+install_resource 'SSToolkit/Assets'
+install_resource 'iRate/iRate/iRate.bundle'

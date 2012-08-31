@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSCollectionViewItemTableViewCell.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSCollectionViewItemTableViewCell</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>
+			
+			<NodeRef refid="13"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItemTableViewCell/setItemSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGSize itemSize</Declaration>
+			
+			
+			<Anchor>//api/name/itemSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItemTableViewCell/itemSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGSize itemSize</Declaration>
+			
+			
+			<Anchor>//api/name/itemSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItemTableViewCell/setItemSpacing:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat itemSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/itemSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItemTableViewCell/itemSpacing</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat itemSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/itemSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItemTableViewCell/setItems:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSArray *items</Declaration>
+			
+			
+			<Anchor>//api/name/items</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItemTableViewCell/items</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSArray *items</Declaration>
+			
+			
+			<Anchor>//api/name/items</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItemTableViewCell/setCollectionView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, unsafe_unretained) SSCollectionView *collectionView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItemTableViewCell/collectionView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, unsafe_unretained) SSCollectionView *collectionView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItemTableViewCell/initWithReuseIdentifier:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithReuseIdentifier:(NSString *)aReuseIdentifier</Declaration>
+			
+			
+			<Anchor>//api/name/initWithReuseIdentifier:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

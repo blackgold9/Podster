@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSRatingPickerScrollView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSRatingPickerScrollView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSRatingPickerScrollView.h</DeclaredIn>
+			
+			<NodeRef refid="26"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPickerScrollView/setRatingPicker:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSRatingPickerScrollView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSRatingPicker *ratingPicker</Declaration>
+			
+			
+			<Anchor>//api/name/ratingPicker</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPickerScrollView/ratingPicker</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSRatingPickerScrollView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSRatingPicker *ratingPicker</Declaration>
+			
+			
+			<Anchor>//api/name/ratingPicker</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPickerScrollView/setTitleTextField:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSRatingPickerScrollView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSTextField *titleTextField</Declaration>
+			
+			
+			<Anchor>//api/name/titleTextField</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPickerScrollView/titleTextField</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSRatingPickerScrollView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSTextField *titleTextField</Declaration>
+			
+			
+			<Anchor>//api/name/titleTextField</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPickerScrollView/setReviewTextView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSRatingPickerScrollView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSTextView *reviewTextView</Declaration>
+			
+			
+			<Anchor>//api/name/reviewTextView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPickerScrollView/reviewTextView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSRatingPickerScrollView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSTextView *reviewTextView</Declaration>
+			
+			
+			<Anchor>//api/name/reviewTextView</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

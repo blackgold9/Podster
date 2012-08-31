@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSData+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSData(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to NSData for various common tasks.</Abstract>
+			<DeclaredIn>NSData+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="33"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSData(SSToolkitAdditions)/MD5Sum</TokenIdentifier>
+			<Abstract type="html">Returns a string of the MD5 sum of the receiver.</Abstract>
+			<DeclaredIn>NSData+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)MD5Sum</Declaration>
+			
+			<ReturnValue><Abstract type="html">The string of the MD5 sum of the receiver.</Abstract></ReturnValue>
+			<Anchor>//api/name/MD5Sum</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSData(SSToolkitAdditions)/SHA1Sum</TokenIdentifier>
+			<Abstract type="html">Returns a string of the SHA1 sum of the receiver.</Abstract>
+			<DeclaredIn>NSData+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)SHA1Sum</Declaration>
+			
+			<ReturnValue><Abstract type="html">The string of the SHA1 sum of the receiver.</Abstract></ReturnValue>
+			<Anchor>//api/name/SHA1Sum</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSData(SSToolkitAdditions)/base64EncodedString</TokenIdentifier>
+			<Abstract type="html">Returns a string representation of the receiver Base64 encoded.</Abstract>
+			<DeclaredIn>NSData+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)base64EncodedString</Declaration>
+			
+			<ReturnValue><Abstract type="html">A Base64 encoded string</Abstract></ReturnValue>
+			<Anchor>//api/name/base64EncodedString</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSData(SSToolkitAdditions)/dataWithBase64String:</TokenIdentifier>
+			<Abstract type="html">Returns a new data contained in the Base64 encoded string.</Abstract>
+			<DeclaredIn>NSData+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>+ (NSData *)dataWithBase64String:(NSString *)base64String</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>base64String</Name>
+					<Abstract type="html">A Base64 encoded string</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">Data contained in base64String</Abstract></ReturnValue>
+			<Anchor>//api/name/dataWithBase64String:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSString+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSString(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to NSString for various common tasks.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="37"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/containsString:</TokenIdentifier>
+			<Abstract type="html">Returns a Boolean if the receiver contains the given string.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)containsString:(NSString *)string</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>string</Name>
+					<Abstract type="html">A string to test the the receiver for</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A Boolean if the receiver contains the given string</Abstract></ReturnValue>
+			<Anchor>//api/name/containsString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/MD5Sum</TokenIdentifier>
+			<Abstract type="html">Returns a string of the MD5 sum of the receiver.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)MD5Sum</Declaration>
+			
+			<ReturnValue><Abstract type="html">The string of the MD5 sum of the receiver.</Abstract></ReturnValue>
+			<Anchor>//api/name/MD5Sum</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/SHA1Sum</TokenIdentifier>
+			<Abstract type="html">Returns a string of the SHA1 sum of the receiver.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)SHA1Sum</Declaration>
+			
+			<ReturnValue><Abstract type="html">The string of the SHA1 sum of the receiver.</Abstract></ReturnValue>
+			<Anchor>//api/name/SHA1Sum</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/compareToVersionString:</TokenIdentifier>
+			<Abstract type="html">Returns a comparison result for the receiver and a given version.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSComparisonResult)compareToVersionString:(NSString *)version</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>version</Name>
+					<Abstract type="html">A version string to compare to the receiver</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A comparison result for the receiver and a given version</Abstract></ReturnValue>
+			<Anchor>//api/name/compareToVersionString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/escapeHTML</TokenIdentifier>
+			<Abstract type="html">Returns a new string with any HTML escaped.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/unescapeHTML</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSString *)escapeHTML</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string with any HTML escaped.</Abstract></ReturnValue>
+			<Anchor>//api/name/escapeHTML</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/unescapeHTML</TokenIdentifier>
+			<Abstract type="html">Returns a new string with any HTML unescaped.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/escapeHTML</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSString *)unescapeHTML</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string with any HTML unescaped.</Abstract></ReturnValue>
+			<Anchor>//api/name/unescapeHTML</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByEscapingForURLQuery</TokenIdentifier>
+			<Abstract type="html">Returns a new string escaped for a URL query parameter.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByUnescapingFromURLQuery</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSString *)stringByEscapingForURLQuery</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string escaped for a URL query parameter.</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByEscapingForURLQuery</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByUnescapingFromURLQuery</TokenIdentifier>
+			<Abstract type="html">Returns a new string unescaped from a URL query parameter.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByEscapingForURLQuery</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSString *)stringByUnescapingFromURLQuery</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string escaped for a URL query parameter.</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByUnescapingFromURLQuery</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/URLEncodedString</TokenIdentifier>
+			<Abstract type="html">Returns a new string encoded for a URL. (Deprecated)</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)URLEncodedString</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string escaped for a URL.</Abstract></ReturnValue>
+			<Anchor>//api/name/URLEncodedString</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/URLEncodedParameterString</TokenIdentifier>
+			<Abstract type="html">Returns a new string encoded for a URL parameter. (Deprecated)</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)URLEncodedParameterString</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string escaped for a URL parameter.</Abstract></ReturnValue>
+			<Anchor>//api/name/URLEncodedParameterString</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/URLDecodedString</TokenIdentifier>
+			<Abstract type="html">Returns a new string decoded from a URL.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)URLDecodedString</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string decoded from a URL.</Abstract></ReturnValue>
+			<Anchor>//api/name/URLDecodedString</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/base64EncodedString</TokenIdentifier>
+			<Abstract type="html">Returns a string representation of the receiver Base64 encoded.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)base64EncodedString</Declaration>
+			
+			<ReturnValue><Abstract type="html">A Base64 encoded string</Abstract></ReturnValue>
+			<Anchor>//api/name/base64EncodedString</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringWithBase64String:</TokenIdentifier>
+			<Abstract type="html">Returns a new string contained in the Base64 encoded string.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>+ (NSString *)stringWithBase64String:(NSString *)base64String</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>base64String</Name>
+					<Abstract type="html">A Base64 encoded string</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">String contained in base64String</Abstract></ReturnValue>
+			<Anchor>//api/name/stringWithBase64String:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringWithUUID</TokenIdentifier>
+			<Abstract type="html">Returns a new string containing a Universally Unique Identifier.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>+ (NSString *)stringWithUUID</Declaration>
+			
+			
+			<Anchor>//api/name/stringWithUUID</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByTrimmingLeadingAndTrailingCharactersInSet:</TokenIdentifier>
+			<Abstract type="html">Returns a new string by trimming leading and trailing characters in a given NSCharacterSet.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByTrimmingLeadingAndTrailingCharactersInSet:(NSCharacterSet *)characterSet</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>characterSet</Name>
+					<Abstract type="html">Character set to trim characters</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new string by trimming leading and trailing characters in characterSet</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByTrimmingLeadingAndTrailingCharactersInSet:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters</TokenIdentifier>
+			<Abstract type="html">Returns a new string by trimming leading and trailing whitespace and newline characters.
+  </Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string by trimming leading and trailing whitespace and newline characters</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByTrimmingLeadingCharactersInSet:</TokenIdentifier>
+			<Abstract type="html">Returns a new string by trimming leading characters in a given NSCharacterSet.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByTrimmingLeadingCharactersInSet:(NSCharacterSet *)characterSet</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>characterSet</Name>
+					<Abstract type="html">Character set to trim characters</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new string by trimming leading characters in characterSet</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByTrimmingLeadingCharactersInSet:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByTrimmingLeadingWhitespaceAndNewlineCharacters</TokenIdentifier>
+			<Abstract type="html">Returns a new string by trimming leading whitespace and newline characters.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByTrimmingLeadingWhitespaceAndNewlineCharacters</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string by trimming leading whitespace and newline characters</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByTrimmingLeadingWhitespaceAndNewlineCharacters</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByTrimmingTrailingCharactersInSet:</TokenIdentifier>
+			<Abstract type="html">Returns a new string by trimming trailing characters in a given NSCharacterSet.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByTrimmingTrailingCharactersInSet:(NSCharacterSet *)characterSet</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>characterSet</Name>
+					<Abstract type="html">Character set to trim characters</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new string by trimming trailing characters in characterSet</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByTrimmingTrailingCharactersInSet:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(SSToolkitAdditions)/stringByTrimmingTrailingWhitespaceAndNewlineCharacters</TokenIdentifier>
+			<Abstract type="html">Returns a new string by trimming trailing whitespace and newline characters.</Abstract>
+			<DeclaredIn>NSString+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByTrimmingTrailingWhitespaceAndNewlineCharacters</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new string by trimming trailing whitespace and newline characters</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByTrimmingTrailingWhitespaceAndNewlineCharacters</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

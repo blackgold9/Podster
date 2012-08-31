@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSDictionary+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSDictionary(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to NSDictionary for various common tasks.</Abstract>
+			<DeclaredIn>NSDictionary+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="35"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDictionary(SSToolkitAdditions)/dictionaryWithFormEncodedString:</TokenIdentifier>
+			<Abstract type="html">Returns a new dictionary that contains a dictionary for a form encoded string.</Abstract>
+			<DeclaredIn>NSDictionary+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>+ (NSDictionary *)dictionaryWithFormEncodedString:(NSString *)encodedString</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>encodedString</Name>
+					<Abstract type="html">A string of form encoded compontents.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new dictionary that contains a dictionary for the form encoded string, or nil if encodedString is an
+invalid representation of a dictionary.</Abstract></ReturnValue>
+			<Anchor>//api/name/dictionaryWithFormEncodedString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDictionary(SSToolkitAdditions)/stringWithFormEncodedComponents</TokenIdentifier>
+			<Abstract type="html">Returns a string of form encoded components for using as the query string in a URL.</Abstract>
+			<DeclaredIn>NSDictionary+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringWithFormEncodedComponents</Declaration>
+			
+			<ReturnValue><Abstract type="html">A string of form encoded compontents.</Abstract></ReturnValue>
+			<Anchor>//api/name/stringWithFormEncodedComponents</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDictionary(SSToolkitAdditions)/deepMutableCopy</TokenIdentifier>
+			<Abstract type="html">Returns the object returned by mutableCopyWithZone: where the zone is nil.</Abstract>
+			<DeclaredIn>NSDictionary+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSMutableDictionary *)deepMutableCopy</Declaration>
+			
+			<ReturnValue><Abstract type="html">The object returned by the NSMutableCopying protocol method mutableCopyWithZone:, where the zone is nil.</Abstract></ReturnValue>
+			<Anchor>//api/name/deepMutableCopy</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDictionary(SSToolkitAdditions)/MD5Sum</TokenIdentifier>
+			<Abstract type="html">Returns a string of the MD5 sum of the receiver.</Abstract>
+			<DeclaredIn>NSDictionary+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)MD5Sum</Declaration>
+			
+			<ReturnValue><Abstract type="html">The string of the MD5 sum of the receiver.</Abstract></ReturnValue>
+			<Anchor>//api/name/MD5Sum</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDictionary(SSToolkitAdditions)/SHA1Sum</TokenIdentifier>
+			<Abstract type="html">Returns a string of the SHA1 sum of the receiver.</Abstract>
+			<DeclaredIn>NSDictionary+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)SHA1Sum</Declaration>
+			
+			<ReturnValue><Abstract type="html">The string of the SHA1 sum of the receiver.</Abstract></ReturnValue>
+			<Anchor>//api/name/SHA1Sum</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

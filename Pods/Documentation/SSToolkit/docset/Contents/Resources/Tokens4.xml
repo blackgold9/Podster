@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSAnimatedImageView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSAnimatedImageView</TokenIdentifier>
+			<Abstract type="html">Animated image view.</Abstract>
+			<DeclaredIn>SSAnimatedImageView.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSAnimatedImageView/startImageAnimation:images:delegate:</TokenIdentifier>
+			<Abstract type="html">Start an image animation.</Abstract>
+			<DeclaredIn>SSAnimatedImageView.h</DeclaredIn>			
+			
+			<Declaration>- (void)startImageAnimation:(NSString *)animationName images:(NSArray *)images delegate:(id&lt;SSAnimatedImageViewDelegate&gt;)delegate</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>animationName</Name>
+					<Abstract type="html">The named of the animation.</Abstract>
+				</Parameter><Parameter>
+					<Name>images</Name>
+					<Abstract type="html">An array of UIImage objects that will be animated.</Abstract>
+				</Parameter><Parameter>
+					<Name>delegate</Name>
+					<Abstract type="html">The delegate of the animation.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/startImageAnimation:images:delegate:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSAnimatedImageView/startImageAnimation:images:duration:repeatCount:delegate:</TokenIdentifier>
+			<Abstract type="html">Start an image animation with duration and repeat count.</Abstract>
+			<DeclaredIn>SSAnimatedImageView.h</DeclaredIn>			
+			
+			<Declaration>- (void)startImageAnimation:(NSString *)animationName images:(NSArray *)images duration:(NSTimeInterval)duration repeatCount:(NSUInteger)repeatCount delegate:(id&lt;SSAnimatedImageViewDelegate&gt;)delegate</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>animationName</Name>
+					<Abstract type="html">The named of the animation.</Abstract>
+				</Parameter><Parameter>
+					<Name>images</Name>
+					<Abstract type="html">An array of UIImage objects that will be animated.</Abstract>
+				</Parameter><Parameter>
+					<Name>duration</Name>
+					<Abstract type="html">The duration of the animation.</Abstract>
+				</Parameter><Parameter>
+					<Name>repeatCount</Name>
+					<Abstract type="html">The number of times the animation repeats. Specify 0 to repeat indefinitely.</Abstract>
+				</Parameter><Parameter>
+					<Name>delegate</Name>
+					<Abstract type="html">The delegate of the animation.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/startImageAnimation:images:duration:repeatCount:delegate:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSAnimatedImageView/startTimedImageAnimation:images:keyTimes:repeatCount:delegate:</TokenIdentifier>
+			<Abstract type="html">Start a timed image animation with repeat count.</Abstract>
+			<DeclaredIn>SSAnimatedImageView.h</DeclaredIn>			
+			
+			<Declaration>- (void)startTimedImageAnimation:(NSString *)animationName images:(NSArray *)images keyTimes:(NSArray *)keyTimes repeatCount:(NSUInteger)repeatCount delegate:(id&lt;SSAnimatedImageViewDelegate&gt;)delegate</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>animationName</Name>
+					<Abstract type="html">The named of the animation.</Abstract>
+				</Parameter><Parameter>
+					<Name>images</Name>
+					<Abstract type="html">An array of UIImage objects that will be animated.</Abstract>
+				</Parameter><Parameter>
+					<Name>keyTimes</Name>
+					<Abstract type="html">An array of NSNumber objects that define the duration of each keyframe segment.</Abstract>
+				</Parameter><Parameter>
+					<Name>repeatCount</Name>
+					<Abstract type="html">The number of times the animation repeats. Specify 0 to repeat indefinitely.</Abstract>
+				</Parameter><Parameter>
+					<Name>delegate</Name>
+					<Abstract type="html">The delegate of the animation.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/startTimedImageAnimation:images:keyTimes:repeatCount:delegate:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

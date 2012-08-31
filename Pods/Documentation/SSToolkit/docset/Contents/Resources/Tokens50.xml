@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SSCollectionViewDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SSCollectionViewDelegate</TokenIdentifier>
+			<Abstract type="html">The delegate of a SSCollectionView object must adopt the SSCollectionViewDelegate protocol. Optional methods of the
+protocol allow the delegate to manage selections, configure section headings and footers, and perform other actions.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>
+			
+			<NodeRef refid="50"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:itemSizeForSection:</TokenIdentifier>
+			<Abstract type="html">Asks the delegate for the size to use for an item in a specified location.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (CGSize)collectionView:(SSCollectionView *)aCollectionView itemSizeForSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">The collection view object requesting this information.</Abstract>
+				</Parameter><Parameter>
+					<Name>section</Name>
+					<Abstract type="html">The section to size items.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A value that specifies the size (in points) that item should be.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:itemSizeForSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:willDisplayItem:atIndexPath:</TokenIdentifier>
+			<Abstract type="html">Tells the delegate the collection view is about to draw an item for a particular index path.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)collectionView:(SSCollectionView *)aCollectionView willDisplayItem:(SSCollectionViewItem *)item atIndexPath:(NSIndexPath *)indexPath</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">The collection view object informing the delegate of this impending event.</Abstract>
+				</Parameter><Parameter>
+					<Name>item</Name>
+					<Abstract type="html">A collection view item object that aCollectionView is going to use when drawing the item.</Abstract>
+				</Parameter><Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path locating the item in aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/collectionView:willDisplayItem:atIndexPath:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:willSelectItemAtIndexPath:</TokenIdentifier>
+			<Abstract type="html">Tells the delegate that a specified item is about to be selected.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:didSelectItemAtIndexPath:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:willDeselectItemAtIndexPath:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)collectionView:(SSCollectionView *)aCollectionView willSelectItemAtIndexPath:(NSIndexPath *)indexPath</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">A collection view object informing the delegate about the impending selection.</Abstract>
+				</Parameter><Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path locating the row in aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An index-path object that confirms or alters the selected item. Return an NSIndexPath object other than
+indexPath if you want another item to be selected. Return nil if you don&apos;t want the item selected.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:willSelectItemAtIndexPath:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:didSelectItemAtIndexPath:</TokenIdentifier>
+			<Abstract type="html">Tells the delegate that the specified item is now selected.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:willSelectItemAtIndexPath:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:didDeselectItemAtIndexPath:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)collectionView:(SSCollectionView *)aCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">A collection view object informing the delegate about the new item selection.</Abstract>
+				</Parameter><Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path locating the new selected item in aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/collectionView:didSelectItemAtIndexPath:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:willDeselectItemAtIndexPath:</TokenIdentifier>
+			<Abstract type="html">Tells the delegate that a specified item is about to be deselected.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:didDeselectItemAtIndexPath:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:willSelectItemAtIndexPath:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)collectionView:(SSCollectionView *)aCollectionView willDeselectItemAtIndexPath:(NSIndexPath *)indexPath</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">A collection view object informing the delegate about the impending selection.</Abstract>
+				</Parameter><Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path locating the item in aCollectionView to be deselected.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An index-path object that confirms or alters the deselected item. Return an NSIndexPath object other than
+indexPath if you want another item to be deselected. Return nil if you don&apos;t want the item deselected.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:willDeselectItemAtIndexPath:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:didDeselectItemAtIndexPath:</TokenIdentifier>
+			<Abstract type="html">Tells the delegate that the specified item is now deselected.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:willDeselectItemAtIndexPath:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:didSelectItemAtIndexPath:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)collectionView:(SSCollectionView *)aCollectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">A collection view object informing the delegate about the item deselection.</Abstract>
+				</Parameter><Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path locating the deselected item in aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/collectionView:didDeselectItemAtIndexPath:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:viewForHeaderInSection:</TokenIdentifier>
+			<Abstract type="html">Asks the delegate for a view object to display in the header of the specified section of the collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:heightForHeaderInSection:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (UIView *)collectionView:(SSCollectionView *)aCollectionView viewForHeaderInSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">The collection view object asking for the view object.</Abstract>
+				</Parameter><Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number identifying a section of aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A view object to be displayed in the header of section.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:viewForHeaderInSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:viewForFooterInSection:</TokenIdentifier>
+			<Abstract type="html">Asks the delegate for a view object to display in the fotter of the specified section of the collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:heightForFooterInSection:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (UIView *)collectionView:(SSCollectionView *)aCollectionView viewForFooterInSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">The collection view object asking for the view object.</Abstract>
+				</Parameter><Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number identifying a section of aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A view object to be displayed in the footer of section.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:viewForFooterInSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:heightForHeaderInSection:</TokenIdentifier>
+			<Abstract type="html">Asks the delegate for the height to use for the header of a particular section.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:viewForHeaderInSection:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (CGFloat)collectionView:(SSCollectionView *)aCollectionView heightForHeaderInSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">The collection view object requesting this information.</Abstract>
+				</Parameter><Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number identifying a section of aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A floating-point value that specifies the height (in points) of the header for section.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:heightForHeaderInSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:heightForFooterInSection:</TokenIdentifier>
+			<Abstract type="html">Asks the delegate for the height to use for the footer of a particular section.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDelegate/collectionView:viewForFooterInSection:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (CGFloat)collectionView:(SSCollectionView *)aCollectionView heightForFooterInSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">The collection view object requesting this information.</Abstract>
+				</Parameter><Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number identifying a section of aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A floating-point value that specifies the height (in points) of the footer for section.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:heightForFooterInSection:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

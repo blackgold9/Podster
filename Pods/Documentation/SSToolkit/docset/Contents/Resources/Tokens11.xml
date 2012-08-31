@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSCollectionViewExtremityTableViewCell.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSCollectionViewExtremityTableViewCell</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewExtremityTableViewCell.h</DeclaredIn>
+			
+			<NodeRef refid="11"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewExtremityTableViewCell/setExtrimityView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewExtremityTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *extrimityView</Declaration>
+			
+			
+			<Anchor>//api/name/extrimityView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewExtremityTableViewCell/extrimityView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewExtremityTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *extrimityView</Declaration>
+			
+			
+			<Anchor>//api/name/extrimityView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewExtremityTableViewCell/initWithReuseIdentifier:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewExtremityTableViewCell.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithReuseIdentifier:(NSString *)aReuseIdentifier</Declaration>
+			
+			
+			<Anchor>//api/name/initWithReuseIdentifier:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

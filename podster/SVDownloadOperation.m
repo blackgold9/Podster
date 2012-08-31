@@ -12,6 +12,7 @@
 #import "SVPodcastEntry.h"
 #import "SVPodcatcherClient.h"
 #import <sys/xattr.h>
+#import "SSToolkit.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVDownloadOperation ()
 @property (nonatomic, strong) NSNumber *entryId;
@@ -45,24 +46,32 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)downloadProgressChanged:(double)progress forDownload:(SVDownload *)localDownload
 {
     NSInteger percentage = MIN(100,(NSInteger)(progress * 100));
-    if (currentProgressPercentage != percentage) {
-        currentProgressPercentage = percentage;
-        DDLogVerbose(@"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
-        NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry podstoreId], @"podstoreId", [NSNumber numberWithDouble:progress], @"progress",  nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
-        [[NSManagedObjectContext MR_defaultContext] performBlock: ^{
-            SVDownload *mainThreadDownload = [localDownload MR_inContext:[NSManagedObjectContext MR_defaultContext]];
-            mainThreadDownload.stateValue = SVDownloadStateDownloading;
+    if (currentProgressPercentage != percentage && currentProgressPercentage < 100) {
+        
+        [SSRateLimit executeBlock:^{            
+            currentProgressPercentage = percentage;
+            DDLogVerbose(@"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
+            NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry podstoreId], @"podstoreId", [NSNumber numberWithDouble:progress], @"progress",  nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
+            [[NSManagedObjectContext MR_defaultContext] performBlock: ^{
+                SVDownload *mainThreadDownload = [localDownload MR_inContext:[NSManagedObjectContext MR_defaultContext]];
+                mainThreadDownload.stateValue = SVDownloadStateDownloading;
                 mainThreadDownload.entry.podcast.downloadPercentageValue = percentage;
-            if (!mainThreadDownload.entry.podcast.isDownloadingValue) {
-                mainThreadDownload.entry.podcast.isDownloadingValue = YES;
-            } 
-         
-         if (currentProgressPercentage == 100) {
-              mainThreadDownload.entry.podcast.isDownloadingValue = NO;
-         }
-
+                if (!mainThreadDownload.entry.podcast.isDownloadingValue) {
+                    mainThreadDownload.entry.podcast.isDownloadingValue = YES;
+                }
+                                           
+            }];
+        } name:@"DownloadProgressUpdateUIRefresh" limit:0.5];
+    } else if (currentProgressPercentage == 100) {
+        [[NSManagedObjectContext MR_defaultContext] performBlock: ^{
+            if (currentProgressPercentage == 100) {
+                SVDownload *mainThreadDownload = [localDownload MR_inContext:[NSManagedObjectContext MR_defaultContext]];
+                mainThreadDownload.entry.podcast.isDownloadingValue = NO;
+            }
+            
         }];
+
     }
 }
 

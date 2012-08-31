@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSCollectionView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSCollectionView</TokenIdentifier>
+			<Abstract type="html">Simple collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/dequeueReusableItemWithIdentifier:</TokenIdentifier>
+			<Abstract type="html">Returns a reusable collection view item object located by its identifier.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (SSCollectionViewItem *)dequeueReusableItemWithIdentifier:(NSString *)identifier</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>identifier</Name>
+					<Abstract type="html">A string identifying the item object to be reused.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A SSCollectionViewItem object with the associated identifier or nil if no such object exists in the
+reusable-item queue.</Abstract></ReturnValue>
+			<Anchor>//api/name/dequeueReusableItemWithIdentifier:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/numberOfItemsInSection:</TokenIdentifier>
+			<Abstract type="html">Returns the number of item (collection view items) in a specified section.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (NSUInteger)numberOfItemsInSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number that identifies a section of the collection.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The number of items in the section.</Abstract></ReturnValue>
+			<Anchor>//api/name/numberOfItemsInSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setNumberOfSections:</TokenIdentifier>
+			<Abstract type="html">The number of sections in the collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) NSUInteger numberOfSections</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfSections</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/numberOfSections</TokenIdentifier>
+			<Abstract type="html">The number of sections in the collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) NSUInteger numberOfSections</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfSections</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setBackgroundView:</TokenIdentifier>
+			<Abstract type="html">The background view of the collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *backgroundView</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/backgroundView</TokenIdentifier>
+			<Abstract type="html">The background view of the collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *backgroundView</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setCollectionHeaderView:</TokenIdentifier>
+			<Abstract type="html">Returns an accessory view that is displayed above the collection.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *collectionHeaderView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionHeaderView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/collectionHeaderView</TokenIdentifier>
+			<Abstract type="html">Returns an accessory view that is displayed above the collection.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *collectionHeaderView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionHeaderView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setCollectionFooterView:</TokenIdentifier>
+			<Abstract type="html">Returns an accessory view that is displayed below the collection.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *collectionFooterView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionFooterView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/collectionFooterView</TokenIdentifier>
+			<Abstract type="html">Returns an accessory view that is displayed below the collection.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *collectionFooterView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionFooterView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setExtremitiesStyle:</TokenIdentifier>
+			<Abstract type="html">The style of the receiving collection view&apos;s headers and footers.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) SSCollectionViewExtremitiesStyle extremitiesStyle</Declaration>
+			
+			
+			<Anchor>//api/name/extremitiesStyle</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/extremitiesStyle</TokenIdentifier>
+			<Abstract type="html">The style of the receiving collection view&apos;s headers and footers.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) SSCollectionViewExtremitiesStyle extremitiesStyle</Declaration>
+			
+			
+			<Anchor>//api/name/extremitiesStyle</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setMinimumColumnSpacing:</TokenIdentifier>
+			<Abstract type="html">The minimum column spacing.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat minimumColumnSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/minimumColumnSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/minimumColumnSpacing</TokenIdentifier>
+			<Abstract type="html">The minimum column spacing.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat minimumColumnSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/minimumColumnSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setRowSpacing:</TokenIdentifier>
+			<Abstract type="html">The spacing between each row in the receiver. This does not add space above the first row or below the last.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat rowSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/rowSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/rowSpacing</TokenIdentifier>
+			<Abstract type="html">The spacing between each row in the receiver. This does not add space above the first row or below the last.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat rowSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/rowSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setRowBackgroundColor:</TokenIdentifier>
+			<Abstract type="html">The background color of a row.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *rowBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/rowBackgroundColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/rowBackgroundColor</TokenIdentifier>
+			<Abstract type="html">The background color of a row.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *rowBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/rowBackgroundColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/itemForIndexPath:</TokenIdentifier>
+			<Abstract type="html">Returns the collection view item at the specified index path.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/indexPathForItem:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (SSCollectionViewItem *)itemForIndexPath:(NSIndexPath *)indexPath</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">The index path locating the item in the receiver.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An object representing an item of the collection or nil if the item is not visible or indexPath is out of
+range.</Abstract></ReturnValue>
+			<Anchor>//api/name/itemForIndexPath:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/indexPathForItem:</TokenIdentifier>
+			<Abstract type="html">Returns an index path representing the row (index) and section of a given collection view item.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (NSIndexPath *)indexPathForItem:(SSCollectionViewItem *)item</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">An item object of the collection view.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An index path representing the row and section of the item or nil if the index path is invalid.</Abstract></ReturnValue>
+			<Anchor>//api/name/indexPathForItem:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/visibleItems</TokenIdentifier>
+			<Abstract type="html">Returns the collection view items that are visible in the receiver.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (NSArray *)visibleItems</Declaration>
+			
+			<ReturnValue><Abstract type="html">An array containing SSCollectionViewItem objects, each representing a visible item in the receiving
+collection view. The array&apos;s order is undefined.</Abstract></ReturnValue>
+			<Anchor>//api/name/visibleItems</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/indexPathsForVisibleRows</TokenIdentifier>
+			<Abstract type="html">Returns an array of index paths each identifying a visible item in the receiver.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (NSArray *)indexPathsForVisibleRows</Declaration>
+			
+			<ReturnValue><Abstract type="html">An array of NSIndexPath objects each representing a row index and section index that together identify a
+visible item in the collection view. Returns nil if no items are visible. The array&apos;s order is undefined.</Abstract></ReturnValue>
+			<Anchor>//api/name/indexPathsForVisibleRows</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/scrollToItemAtIndexPath:atScrollPosition:animated:</TokenIdentifier>
+			<Abstract type="html">Scrolls the receiver until an item identified by index path is at a particular location on the screen.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)scrollToItemAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(SSCollectionViewScrollPosition)scrollPosition animated:(BOOL)animated</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path that identifies an item in the table view by its row index and its section index.</Abstract>
+				</Parameter><Parameter>
+					<Name>scrollPosition</Name>
+					<Abstract type="html">A constant that identifies a relative position in the receiving collection view (top, middle,
+bottom) for row when scrolling concludes.</Abstract>
+				</Parameter><Parameter>
+					<Name>animated</Name>
+					<Abstract type="html">YES if you want to animate the change in position, NO if it should be
+immediate.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/scrollToItemAtIndexPath:atScrollPosition:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setScrollView:</TokenIdentifier>
+			<Abstract type="html">The internal scroll view of the collection view. This should only be used to inspect its state or scrolling. Changing
+the value of its attributes is undefined.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIScrollView *scrollView</Declaration>
+			
+			
+			<Anchor>//api/name/scrollView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/scrollView</TokenIdentifier>
+			<Abstract type="html">The internal scroll view of the collection view. This should only be used to inspect its state or scrolling. Changing
+the value of its attributes is undefined.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIScrollView *scrollView</Declaration>
+			
+			
+			<Anchor>//api/name/scrollView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/selectItemAtIndexPath:animated:scrollPosition:</TokenIdentifier>
+			<Abstract type="html">Selects an item in the receiver identified by index path, optionally scrolling the item to a location in the receiver.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)selectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(SSCollectionViewScrollPosition)scrollPosition</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path identifying an item in the receiver.</Abstract>
+				</Parameter><Parameter>
+					<Name>animated</Name>
+					<Abstract type="html">YES if you want to animate the selection and any change in position, NO if
+the change should be immediate.</Abstract>
+				</Parameter><Parameter>
+					<Name>scrollPosition</Name>
+					<Abstract type="html">A constant that identifies a relative position in the receiving collection view (top, middle,
+bottom) for the row when scrolling concludes.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/selectItemAtIndexPath:animated:scrollPosition:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/deselectItemAtIndexPath:animated:</TokenIdentifier>
+			<Abstract type="html">Deselects a given item identified by index path, with an option to animate the deselection.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)deselectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path identifying an item in the receiver.</Abstract>
+				</Parameter><Parameter>
+					<Name>animated</Name>
+					<Abstract type="html">YES if you want to animate the deselection and NO if the change should be
+immediate.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/deselectItemAtIndexPath:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setAllowsSelection:</TokenIdentifier>
+			<Abstract type="html">A Boolean value that determines whether selecting items is enabled.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL allowsSelection</Declaration>
+			
+			
+			<Anchor>//api/name/allowsSelection</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/allowsSelection</TokenIdentifier>
+			<Abstract type="html">A Boolean value that determines whether selecting items is enabled.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL allowsSelection</Declaration>
+			
+			
+			<Anchor>//api/name/allowsSelection</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/beginUpdates</TokenIdentifier>
+			<Abstract type="html">Begin a series of method calls that insert, delete, or select items and sections of the receiver.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/endUpdates</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)beginUpdates</Declaration>
+			
+			
+			<Anchor>//api/name/beginUpdates</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/endUpdates</TokenIdentifier>
+			<Abstract type="html">Conclude a series of method calls that insert, delete, select, or reload items and sections of the receiver.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/beginUpdates</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)endUpdates</Declaration>
+			
+			
+			<Anchor>//api/name/endUpdates</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/insertItemsAtIndexPaths:withItemAnimation:</TokenIdentifier>
+			<Abstract type="html">Inserts items in the receiver at the locations identified by an array of index paths, with an option to animate the
+insertion.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)insertItemsAtIndexPaths:(NSArray *)indexPaths withItemAnimation:(SSCollectionViewItemAnimation)animation</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>indexPaths</Name>
+					<Abstract type="html">An array of NSIndexPath objects each representing a item index and section index that together
+identify an item in the collection view.</Abstract>
+				</Parameter><Parameter>
+					<Name>animation</Name>
+					<Abstract type="html">A constant that either specifies the kind of animation to perform when inserting the item or requests
+no animation. See SSCollectionViewItemAnimation in the header file for more.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/insertItemsAtIndexPaths:withItemAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/deleteItemsAtIndexPaths:withItemAnimation:</TokenIdentifier>
+			<Abstract type="html">Deletes the items specified by an array of index paths, with an option to animate the deletion.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)deleteItemsAtIndexPaths:(NSArray *)indexPaths withItemAnimation:(SSCollectionViewItemAnimation)animation</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>indexPaths</Name>
+					<Abstract type="html">An array of NSIndexPath objects each representing a item index and section index that together
+identify an item in the collection view.</Abstract>
+				</Parameter><Parameter>
+					<Name>animation</Name>
+					<Abstract type="html">A constant that either specifies the kind of animation to perform when inserting the item or requests
+no animation. See SSCollectionViewItemAnimation in the header file for more.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/deleteItemsAtIndexPaths:withItemAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/insertSections:withItemAnimation:</TokenIdentifier>
+			<Abstract type="html">Inserts one or more sections in the receiver, with an option to animate the insertion.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)insertSections:(NSIndexSet *)sections withItemAnimation:(SSCollectionViewItemAnimation)animation</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sections</Name>
+					<Abstract type="html">An index set that specifies the sections to insert in the receiving collection view. If a section
+already exists at the specified index location, it is moved down one index location.</Abstract>
+				</Parameter><Parameter>
+					<Name>animation</Name>
+					<Abstract type="html">A constant that indicates how the insertion is to be animated, for example, fade in or slide in from
+the left. See SSCollectionViewItemAnimation in the header file for more.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/insertSections:withItemAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/deleteSections:withItemAnimation:</TokenIdentifier>
+			<Abstract type="html">Deletes one or more sections in the receiver, with an option to animate the deletion.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)deleteSections:(NSIndexSet *)sections withItemAnimation:(SSCollectionViewItemAnimation)animation</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sections</Name>
+					<Abstract type="html">An index set that specifies the sections to insert in the receiving collection view. If a section
+already exists at the specified index location, it is moved down one index location.</Abstract>
+				</Parameter><Parameter>
+					<Name>animation</Name>
+					<Abstract type="html">A constant that indicates how the insertion is to be animated, for example, fade in or slide in from
+the left. See SSCollectionViewItemAnimation in the header file for more.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/deleteSections:withItemAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/reloadData</TokenIdentifier>
+			<Abstract type="html">Reloads the items and sections of the receiver.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)reloadData</Declaration>
+			
+			
+			<Anchor>//api/name/reloadData</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/reloadItemsAtIndexPaths:</TokenIdentifier>
+			<Abstract type="html">Reloads the specified item.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (void)reloadItemsAtIndexPaths:(NSArray *)indexPaths</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>indexPaths</Name>
+					<Abstract type="html">An index path that identifies an item in the collection view by its row index and its section index.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/reloadItemsAtIndexPaths:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/rectForSection:</TokenIdentifier>
+			<Abstract type="html">Returns the drawing area for a specified section of the receiver.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (CGRect)rectForSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number identifying a section of the collection view.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A rectangle defining the area in which the collection view draws the section.</Abstract></ReturnValue>
+			<Anchor>//api/name/rectForSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/rectForFooterInSection:</TokenIdentifier>
+			<Abstract type="html">Returns the drawing area for the footer of the specified section.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (CGRect)rectForFooterInSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number identifying a section of the collection view.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A rectangle defining the area in which the collection view draws the section footer.</Abstract></ReturnValue>
+			<Anchor>//api/name/rectForFooterInSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/rectForHeaderInSection:</TokenIdentifier>
+			<Abstract type="html">Returns the drawing area for the header of the specified section.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (CGRect)rectForHeaderInSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number identifying a section of the collection view.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A rectangle defining the area in which the collection view draws the section header.</Abstract></ReturnValue>
+			<Anchor>//api/name/rectForHeaderInSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setDataSource:</TokenIdentifier>
+			<Abstract type="html">The object that acts as the data source of the receiving collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, unsafe_unretained) id&lt;SSCollectionViewDataSource&gt; dataSource</Declaration>
+			
+			
+			<Anchor>//api/name/dataSource</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/dataSource</TokenIdentifier>
+			<Abstract type="html">The object that acts as the data source of the receiving collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, unsafe_unretained) id&lt;SSCollectionViewDataSource&gt; dataSource</Declaration>
+			
+			
+			<Anchor>//api/name/dataSource</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/setDelegate:</TokenIdentifier>
+			<Abstract type="html">The object that acts as the delegate of the receiving collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, unsafe_unretained) id&lt;SSCollectionViewDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionView/delegate</TokenIdentifier>
+			<Abstract type="html">The object that acts as the delegate of the receiving collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, unsafe_unretained) id&lt;SSCollectionViewDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/_reuseItems:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewInternal.h</DeclaredIn>			
+			
+			<Declaration>- (void)_reuseItems:(NSArray *)items</Declaration>
+			
+			
+			<Anchor>//api/name/_reuseItems:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionView/_reuseItem:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewInternal.h</DeclaredIn>			
+			
+			<Declaration>- (void)_reuseItem:(SSCollectionViewItem *)item</Declaration>
+			
+			
+			<Anchor>//api/name/_reuseItem:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

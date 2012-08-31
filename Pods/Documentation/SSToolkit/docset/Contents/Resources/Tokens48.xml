@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SSAnimatedImageViewDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SSAnimatedImageViewDelegate</TokenIdentifier>
+			<Abstract type="html">The SSAnimatedImageViewDelegate protocol defines methods that a delegate of a SSAnimatedImageView object can
+optionally implement to observe the animation status.</Abstract>
+			<DeclaredIn>SSAnimatedImageView.h</DeclaredIn>
+			
+			<NodeRef refid="48"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSAnimatedImageViewDelegate/imageView:didStartAnimation:</TokenIdentifier>
+			<Abstract type="html">Sent when an image view begins playing its animation.</Abstract>
+			<DeclaredIn>SSAnimatedImageView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSAnimatedImageViewDelegate/imageView:didFinishAnimation:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)imageView:(SSAnimatedImageView *)anImageView didStartAnimation:(NSString *)animationName</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>anImageView</Name>
+					<Abstract type="html">The image view that started playng its animation.</Abstract>
+				</Parameter><Parameter>
+					<Name>animationName</Name>
+					<Abstract type="html">The name of the animation that started.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/imageView:didStartAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSAnimatedImageViewDelegate/imageView:didFinishAnimation:</TokenIdentifier>
+			<Abstract type="html">Sent after an image view finished playing its animation.</Abstract>
+			<DeclaredIn>SSAnimatedImageView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSAnimatedImageViewDelegate/imageView:didStartAnimation:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)imageView:(SSAnimatedImageView *)anImageView didFinishAnimation:(NSString *)animationName</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>anImageView</Name>
+					<Abstract type="html">The image view that finished playng its animation.</Abstract>
+				</Parameter><Parameter>
+					<Name>animationName</Name>
+					<Abstract type="html">The name of the animation that started.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/imageView:didFinishAnimation:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

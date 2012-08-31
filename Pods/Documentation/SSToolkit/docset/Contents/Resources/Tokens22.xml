@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSPickerViewController.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSPickerViewController</TokenIdentifier>
+			<Abstract type="html">This is an abstract class for displaying a UITableView with a list of items for the user to choose similar to
+Settings.app.</Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>
+			
+			<NodeRef refid="22"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPickerViewController/setKeys:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSArray *keys</Declaration>
+			
+			
+			<Anchor>//api/name/keys</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPickerViewController/keys</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSArray *keys</Declaration>
+			
+			
+			<Anchor>//api/name/keys</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPickerViewController/setSelectedKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) id selectedKey</Declaration>
+			
+			
+			<Anchor>//api/name/selectedKey</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPickerViewController/selectedKey</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) id selectedKey</Declaration>
+			
+			
+			<Anchor>//api/name/selectedKey</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPickerViewController/setCurrentIndexPath:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSIndexPath *currentIndexPath</Declaration>
+			
+			
+			<Anchor>//api/name/currentIndexPath</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPickerViewController/currentIndexPath</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSIndexPath *currentIndexPath</Declaration>
+			
+			
+			<Anchor>//api/name/currentIndexPath</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPickerViewController/loadKeys</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>- (void)loadKeys</Declaration>
+			
+			
+			<Anchor>//api/name/loadKeys</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPickerViewController/cellTextForKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)cellTextForKey:(id)key</Declaration>
+			
+			
+			<Anchor>//api/name/cellTextForKey:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPickerViewController/cellImageForKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>- (UIImage *)cellImageForKey:(id)key</Declaration>
+			
+			
+			<Anchor>//api/name/cellImageForKey:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

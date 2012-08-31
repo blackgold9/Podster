@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/UIView+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/UIView(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to UIView for various common tasks.</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="46"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIView(SSToolkitAdditions)/imageRepresentation</TokenIdentifier>
+			<Abstract type="html">Takes a screenshot of the underlying CALayer of the receiver and returns a UIImage object representation.</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (UIImage *)imageRepresentation</Declaration>
+			
+			<ReturnValue><Abstract type="html">An image representing the receiver</Abstract></ReturnValue>
+			<Anchor>//api/name/imageRepresentation</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIView(SSToolkitAdditions)/hide</TokenIdentifier>
+			<Abstract type="html">Sets the alpha value of the receiver to 0.0.</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)hide</Declaration>
+			
+			
+			<Anchor>//api/name/hide</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIView(SSToolkitAdditions)/show</TokenIdentifier>
+			<Abstract type="html">Sets the alpha value of the receiver to 1.0.</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)show</Declaration>
+			
+			
+			<Anchor>//api/name/show</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIView(SSToolkitAdditions)/fadeOut</TokenIdentifier>
+			<Abstract type="html">Fade out the receiver.</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)fadeOut</Declaration>
+			
+			
+			<Anchor>//api/name/fadeOut</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIView(SSToolkitAdditions)/fadeOutAndRemoveFromSuperview</TokenIdentifier>
+			<Abstract type="html">Fade out the receiver and remove from its super view</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)fadeOutAndRemoveFromSuperview</Declaration>
+			
+			
+			<Anchor>//api/name/fadeOutAndRemoveFromSuperview</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIView(SSToolkitAdditions)/fadeIn</TokenIdentifier>
+			<Abstract type="html">Fade in the receiver.</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)fadeIn</Declaration>
+			
+			
+			<Anchor>//api/name/fadeIn</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIView(SSToolkitAdditions)/superviews</TokenIdentifier>
+			<Abstract type="html">Returns an array of the receiver&apos;s superviews.</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSArray *)superviews</Declaration>
+			
+			<ReturnValue><Abstract type="html">An array of view objects containing the receiver</Abstract></ReturnValue>
+			<Anchor>//api/name/superviews</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIView(SSToolkitAdditions)/firstSuperviewOfClass:</TokenIdentifier>
+			<Abstract type="html">Returns the first super view of a given class.</Abstract>
+			<DeclaredIn>UIView+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (id)firstSuperviewOfClass:(Class)superviewClass</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>superviewClass</Name>
+					<Abstract type="html">A Class to search the superviews for</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A view object or nil</Abstract></ReturnValue>
+			<Anchor>//api/name/firstSuperviewOfClass:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

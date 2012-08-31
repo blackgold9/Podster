@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSCollectionViewItem.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSCollectionViewItem</TokenIdentifier>
+			<Abstract type="html">View for display in a collection view.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>
+			
+			<NodeRef refid="12"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setImageView:</TokenIdentifier>
+			<Abstract type="html">Returns the image view of the collection view item. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIImageView *imageView</Declaration>
+			
+			
+			<Anchor>//api/name/imageView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/imageView</TokenIdentifier>
+			<Abstract type="html">Returns the image view of the collection view item. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIImageView *imageView</Declaration>
+			
+			
+			<Anchor>//api/name/imageView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setTextLabel:</TokenIdentifier>
+			<Abstract type="html">Returns the label used for the main textual content of the table cell. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) SSLabel *textLabel</Declaration>
+			
+			
+			<Anchor>//api/name/textLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/textLabel</TokenIdentifier>
+			<Abstract type="html">Returns the label used for the main textual content of the table cell. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) SSLabel *textLabel</Declaration>
+			
+			
+			<Anchor>//api/name/textLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setDetailTextLabel:</TokenIdentifier>
+			<Abstract type="html">Returns the secondary label of the collection view item. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) SSLabel *detailTextLabel</Declaration>
+			
+			
+			<Anchor>//api/name/detailTextLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/detailTextLabel</TokenIdentifier>
+			<Abstract type="html">Returns the secondary label of the collection view item. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) SSLabel *detailTextLabel</Declaration>
+			
+			
+			<Anchor>//api/name/detailTextLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setBackgroundView:</TokenIdentifier>
+			<Abstract type="html">The view used as the background of the item.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *backgroundView</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/backgroundView</TokenIdentifier>
+			<Abstract type="html">The view used as the background of the item.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *backgroundView</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setSelectedBackgroundView:</TokenIdentifier>
+			<Abstract type="html">The view used as the background of the item when it is selected.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *selectedBackgroundView</Declaration>
+			
+			
+			<Anchor>//api/name/selectedBackgroundView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/selectedBackgroundView</TokenIdentifier>
+			<Abstract type="html">The view used as the background of the item when it is selected.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *selectedBackgroundView</Declaration>
+			
+			
+			<Anchor>//api/name/selectedBackgroundView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setReuseIdentifier:</TokenIdentifier>
+			<Abstract type="html">A string used to identify an item that is reusable. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, copy) NSString *reuseIdentifier</Declaration>
+			
+			
+			<Anchor>//api/name/reuseIdentifier</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/reuseIdentifier</TokenIdentifier>
+			<Abstract type="html">A string used to identify an item that is reusable. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, copy) NSString *reuseIdentifier</Declaration>
+			
+			
+			<Anchor>//api/name/reuseIdentifier</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setSelected:</TokenIdentifier>
+			<Abstract type="html">A Boolean value that indicates whether the cell is selected.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setSelected:animated:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, getter=isSelected) BOOL selected</Declaration>
+			
+			
+			<Anchor>//api/name/selected</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/selected</TokenIdentifier>
+			<Abstract type="html">A Boolean value that indicates whether the cell is selected.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setSelected:animated:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, getter=isSelected) BOOL selected</Declaration>
+			
+			
+			<Anchor>//api/name/selected</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setHighlighted:</TokenIdentifier>
+			<Abstract type="html">A Boolean value that indicates whether the item is highlighted.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setHighlighted:animated:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, getter=isHighlighted) BOOL highlighted</Declaration>
+			
+			
+			<Anchor>//api/name/highlighted</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/highlighted</TokenIdentifier>
+			<Abstract type="html">A Boolean value that indicates whether the item is highlighted.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setHighlighted:animated:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, getter=isHighlighted) BOOL highlighted</Declaration>
+			
+			
+			<Anchor>//api/name/highlighted</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/initWithStyle:reuseIdentifier:</TokenIdentifier>
+			<Abstract type="html">Initializes a collection view item with a style and a reuse identifier and returns it to the caller.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithStyle:(SSCollectionViewItemStyle)style reuseIdentifier:(NSString *)aReuseIdentifier</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>style</Name>
+					<Abstract type="html">A constant indicating a item style.</Abstract>
+				</Parameter><Parameter>
+					<Name>aReuseIdentifier</Name>
+					<Abstract type="html">A string used to identify the item object if it is to be reused for drawing multiple items of a
+collection view. Pass nil if the cell object is not to be reused. You should use the same reuse identifier for all
+cells of the same form.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An initialized SSCollectionViewItem object or nil if the object could not be created.</Abstract></ReturnValue>
+			<Anchor>//api/name/initWithStyle:reuseIdentifier:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/prepareForReuse</TokenIdentifier>
+			<Abstract type="html">Prepares a reusable item for reuse by the table view&apos;s delegate.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>- (void)prepareForReuse</Declaration>
+			
+			
+			<Anchor>//api/name/prepareForReuse</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setSelected:animated:</TokenIdentifier>
+			<Abstract type="html">Sets the selected state of the item, optionally animating the transition between states.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>- (void)setSelected:(BOOL)selected animated:(BOOL)animated</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>selected</Name>
+					<Abstract type="html">YES to set the item as selected, NO to set it as unselected. The default is NO.</Abstract>
+				</Parameter><Parameter>
+					<Name>animated</Name>
+					<Abstract type="html">YES to animate the transition between selected states, NO to make the transition immediate.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setSelected:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setHighlighted:animated:</TokenIdentifier>
+			<Abstract type="html">Sets the highlighted state of the item, optionally animating the transition between states.</Abstract>
+			<DeclaredIn>SSCollectionViewItem.h</DeclaredIn>			
+			
+			<Declaration>- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>highlighted</Name>
+					<Abstract type="html">YES to set the item as highlighted, NO to set it as
+unhighlighted. The default is NO.</Abstract>
+				</Parameter><Parameter>
+					<Name>animated</Name>
+					<Abstract type="html">YES to animate the transition between highlighted states, NO
+to make the transition immediate.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setHighlighted:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setIndexPath:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemInternal.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSIndexPath *indexPath</Declaration>
+			
+			
+			<Anchor>//api/name/indexPath</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/indexPath</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemInternal.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSIndexPath *indexPath</Declaration>
+			
+			
+			<Anchor>//api/name/indexPath</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewItem/setCollectionView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemInternal.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, unsafe_unretained) SSCollectionView *collectionView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewItem/collectionView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewItemInternal.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, unsafe_unretained) SSCollectionView *collectionView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionView</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

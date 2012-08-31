@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSRatingPicker.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSRatingPicker</TokenIdentifier>
+			<Abstract type="html">A simple control for picking a rating.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>
+			
+			<NodeRef refid="25"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPicker/setSelectedNumberOfStars:</TokenIdentifier>
+			<Abstract type="html">The float value of the selected number of stars. Setting this value will send UIControlEventValueChanged to the
+pickers targets.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat selectedNumberOfStars</Declaration>
+			
+			
+			<Anchor>//api/name/selectedNumberOfStars</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPicker/selectedNumberOfStars</TokenIdentifier>
+			<Abstract type="html">The float value of the selected number of stars. Setting this value will send UIControlEventValueChanged to the
+pickers targets.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat selectedNumberOfStars</Declaration>
+			
+			
+			<Anchor>//api/name/selectedNumberOfStars</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPicker/setTotalNumberOfStars:</TokenIdentifier>
+			<Abstract type="html">The unsigned integer value of the total number of stars.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSUInteger totalNumberOfStars</Declaration>
+			
+			
+			<Anchor>//api/name/totalNumberOfStars</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPicker/totalNumberOfStars</TokenIdentifier>
+			<Abstract type="html">The unsigned integer value of the total number of stars.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSUInteger totalNumberOfStars</Declaration>
+			
+			
+			<Anchor>//api/name/totalNumberOfStars</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPicker/setEmptyStarImage:</TokenIdentifier>
+			<Abstract type="html">The image draw for a star that is empty.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIImage *emptyStarImage</Declaration>
+			
+			
+			<Anchor>//api/name/emptyStarImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPicker/emptyStarImage</TokenIdentifier>
+			<Abstract type="html">The image draw for a star that is empty.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIImage *emptyStarImage</Declaration>
+			
+			
+			<Anchor>//api/name/emptyStarImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPicker/setFilledStarImage:</TokenIdentifier>
+			<Abstract type="html">The image draw for a star that is filled.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIImage *filledStarImage</Declaration>
+			
+			
+			<Anchor>//api/name/filledStarImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPicker/filledStarImage</TokenIdentifier>
+			<Abstract type="html">The image draw for a star that is filled.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIImage *filledStarImage</Declaration>
+			
+			
+			<Anchor>//api/name/filledStarImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPicker/setStarSize:</TokenIdentifier>
+			<Abstract type="html">The spacing of stars.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGSize starSize</Declaration>
+			
+			
+			<Anchor>//api/name/starSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPicker/starSize</TokenIdentifier>
+			<Abstract type="html">The spacing of stars.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGSize starSize</Declaration>
+			
+			
+			<Anchor>//api/name/starSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPicker/setStarSpacing:</TokenIdentifier>
+			<Abstract type="html">The spacing of stars.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat starSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/starSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPicker/starSpacing</TokenIdentifier>
+			<Abstract type="html">The spacing of stars.</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat starSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/starSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPicker/setTextLabel:</TokenIdentifier>
+			<Abstract type="html">The text label drawn under the stars when there is no rating selected. (read-only)</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *textLabel</Declaration>
+			
+			
+			<Anchor>//api/name/textLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPicker/textLabel</TokenIdentifier>
+			<Abstract type="html">The text label drawn under the stars when there is no rating selected. (read-only)</Abstract>
+			<DeclaredIn>SSRatingPicker.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *textLabel</Declaration>
+			
+			
+			<Anchor>//api/name/textLabel</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

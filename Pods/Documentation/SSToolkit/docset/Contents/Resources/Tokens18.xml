@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSHUDWindow.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSHUDWindow</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSHUDWindow.h</DeclaredIn>
+			
+			<NodeRef refid="18"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSHUDWindow/setHidesVignette:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSHUDWindow.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL hidesVignette</Declaration>
+			
+			
+			<Anchor>//api/name/hidesVignette</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSHUDWindow/hidesVignette</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSHUDWindow.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL hidesVignette</Declaration>
+			
+			
+			<Anchor>//api/name/hidesVignette</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SSHUDWindow/defaultWindow</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSHUDWindow.h</DeclaredIn>			
+			
+			<Declaration>+ (SSHUDWindow *)defaultWindow</Declaration>
+			
+			
+			<Anchor>//api/name/defaultWindow</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

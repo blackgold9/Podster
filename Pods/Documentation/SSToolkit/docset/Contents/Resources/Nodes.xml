@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+    <TOC>
+        <Node type="folder">
+            <Name>SSToolkit 1.0.2</Name>
+            <Path>index.html</Path>
+			<Subnodes>
+                
+				
+				<Node type="folder">
+					<Name>Classes</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="1"/>
+						<NodeRef refid="2"/>
+						<NodeRef refid="3"/>
+						<NodeRef refid="4"/>
+						<NodeRef refid="5"/>
+						<NodeRef refid="6"/>
+						<NodeRef refid="7"/>
+						<NodeRef refid="8"/>
+						<NodeRef refid="9"/>
+						<NodeRef refid="10"/>
+						<NodeRef refid="11"/>
+						<NodeRef refid="12"/>
+						<NodeRef refid="13"/>
+						<NodeRef refid="14"/>
+						<NodeRef refid="15"/>
+						<NodeRef refid="16"/>
+						<NodeRef refid="17"/>
+						<NodeRef refid="18"/>
+						<NodeRef refid="19"/>
+						<NodeRef refid="20"/>
+						<NodeRef refid="21"/>
+						<NodeRef refid="22"/>
+						<NodeRef refid="23"/>
+						<NodeRef refid="24"/>
+						<NodeRef refid="25"/>
+						<NodeRef refid="26"/>
+						<NodeRef refid="27"/>
+						<NodeRef refid="28"/>
+						<NodeRef refid="29"/>
+						<NodeRef refid="30"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Categories</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="31"/>
+						<NodeRef refid="32"/>
+						<NodeRef refid="33"/>
+						<NodeRef refid="34"/>
+						<NodeRef refid="35"/>
+						<NodeRef refid="36"/>
+						<NodeRef refid="37"/>
+						<NodeRef refid="38"/>
+						<NodeRef refid="39"/>
+						<NodeRef refid="40"/>
+						<NodeRef refid="41"/>
+						<NodeRef refid="42"/>
+						<NodeRef refid="43"/>
+						<NodeRef refid="44"/>
+						<NodeRef refid="45"/>
+						<NodeRef refid="46"/>
+						<NodeRef refid="47"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Protocols</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="48"/>
+						<NodeRef refid="49"/>
+						<NodeRef refid="50"/>
+						<NodeRef refid="51"/>
+						
+					</Subnodes>
+				</Node>
+				
+			</Subnodes>
+        </Node>
+    </TOC>
+	<Library>
+		
+		<Node id="1">
+			<Name>SSAddressBarTextField</Name>
+			<Path>Classes/SSAddressBarTextField.html</Path>
+		</Node>
+		<Node id="2">
+			<Name>SSAddressBarTextFieldBackgroundView</Name>
+			<Path>Classes/SSAddressBarTextFieldBackgroundView.html</Path>
+		</Node>
+		<Node id="3">
+			<Name>SSAddressBarTextFieldBackgroundViewInnerView</Name>
+			<Path>Classes/SSAddressBarTextFieldBackgroundViewInnerView.html</Path>
+		</Node>
+		<Node id="4">
+			<Name>SSAnimatedImageView</Name>
+			<Path>Classes/SSAnimatedImageView.html</Path>
+		</Node>
+		<Node id="5">
+			<Name>SSBadgeTableViewCell</Name>
+			<Path>Classes/SSBadgeTableViewCell.html</Path>
+		</Node>
+		<Node id="6">
+			<Name>SSBadgeView</Name>
+			<Path>Classes/SSBadgeView.html</Path>
+		</Node>
+		<Node id="7">
+			<Name>SSBorderedView</Name>
+			<Path>Classes/SSBorderedView.html</Path>
+		</Node>
+		<Node id="8">
+			<Name>SSButton</Name>
+			<Path>Classes/SSButton.html</Path>
+		</Node>
+		<Node id="9">
+			<Name>SSCollectionView</Name>
+			<Path>Classes/SSCollectionView.html</Path>
+		</Node>
+		<Node id="10">
+			<Name>SSCollectionViewController</Name>
+			<Path>Classes/SSCollectionViewController.html</Path>
+		</Node>
+		<Node id="11">
+			<Name>SSCollectionViewExtremityTableViewCell</Name>
+			<Path>Classes/SSCollectionViewExtremityTableViewCell.html</Path>
+		</Node>
+		<Node id="12">
+			<Name>SSCollectionViewItem</Name>
+			<Path>Classes/SSCollectionViewItem.html</Path>
+		</Node>
+		<Node id="13">
+			<Name>SSCollectionViewItemTableViewCell</Name>
+			<Path>Classes/SSCollectionViewItemTableViewCell.html</Path>
+		</Node>
+		<Node id="14">
+			<Name>SSCollectionViewTableView</Name>
+			<Path>Classes/SSCollectionViewTableView.html</Path>
+		</Node>
+		<Node id="15">
+			<Name>SSConcurrentOperation</Name>
+			<Path>Classes/SSConcurrentOperation.html</Path>
+		</Node>
+		<Node id="16">
+			<Name>SSGradientView</Name>
+			<Path>Classes/SSGradientView.html</Path>
+		</Node>
+		<Node id="17">
+			<Name>SSHUDView</Name>
+			<Path>Classes/SSHUDView.html</Path>
+		</Node>
+		<Node id="18">
+			<Name>SSHUDWindow</Name>
+			<Path>Classes/SSHUDWindow.html</Path>
+		</Node>
+		<Node id="19">
+			<Name>SSLabel</Name>
+			<Path>Classes/SSLabel.html</Path>
+		</Node>
+		<Node id="20">
+			<Name>SSLineView</Name>
+			<Path>Classes/SSLineView.html</Path>
+		</Node>
+		<Node id="21">
+			<Name>SSLoadingView</Name>
+			<Path>Classes/SSLoadingView.html</Path>
+		</Node>
+		<Node id="22">
+			<Name>SSPickerViewController</Name>
+			<Path>Classes/SSPickerViewController.html</Path>
+		</Node>
+		<Node id="23">
+			<Name>SSPieProgressView</Name>
+			<Path>Classes/SSPieProgressView.html</Path>
+		</Node>
+		<Node id="24">
+			<Name>SSRateLimit</Name>
+			<Path>Classes/SSRateLimit.html</Path>
+		</Node>
+		<Node id="25">
+			<Name>SSRatingPicker</Name>
+			<Path>Classes/SSRatingPicker.html</Path>
+		</Node>
+		<Node id="26">
+			<Name>SSRatingPickerScrollView</Name>
+			<Path>Classes/SSRatingPickerScrollView.html</Path>
+		</Node>
+		<Node id="27">
+			<Name>SSRatingPickerViewController</Name>
+			<Path>Classes/SSRatingPickerViewController.html</Path>
+		</Node>
+		<Node id="28">
+			<Name>SSTextField</Name>
+			<Path>Classes/SSTextField.html</Path>
+		</Node>
+		<Node id="29">
+			<Name>SSTextView</Name>
+			<Path>Classes/SSTextView.html</Path>
+		</Node>
+		<Node id="30">
+			<Name>SSWebView</Name>
+			<Path>Classes/SSWebView.html</Path>
+		</Node>
+		
+		<Node id="31">
+			<Name>NSArray(SSToolkitAdditions)</Name>
+			<Path>Categories/NSArray+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="32">
+			<Name>NSBundle(SSToolkitAdditions)</Name>
+			<Path>Categories/NSBundle+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="33">
+			<Name>NSData(SSToolkitAdditions)</Name>
+			<Path>Categories/NSData+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="34">
+			<Name>NSDate(SSToolkitAdditions)</Name>
+			<Path>Categories/NSDate+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="35">
+			<Name>NSDictionary(SSToolkitAdditions)</Name>
+			<Path>Categories/NSDictionary+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="36">
+			<Name>NSNumber(SSToolkitAdditions)</Name>
+			<Path>Categories/NSNumber+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="37">
+			<Name>NSString(SSToolkitAdditions)</Name>
+			<Path>Categories/NSString+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="38">
+			<Name>NSURL(SSToolkitAdditions)</Name>
+			<Path>Categories/NSURL+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="39">
+			<Name>UIApplication(SSToolkitAdditions)</Name>
+			<Path>Categories/UIApplication+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="40">
+			<Name>UIColor(SSToolkitAdditions)</Name>
+			<Path>Categories/UIColor+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="41">
+			<Name>UIControl(SSToolkitAdditions)</Name>
+			<Path>Categories/UIControl+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="42">
+			<Name>UIDevice(SSToolkitAdditions)</Name>
+			<Path>Categories/UIDevice+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="43">
+			<Name>UIImage(SSToolkitAdditions)</Name>
+			<Path>Categories/UIImage+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="44">
+			<Name>UIScreen(SSToolkitAdditions)</Name>
+			<Path>Categories/UIScreen+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="45">
+			<Name>UIScrollView(SSToolkitAdditions)</Name>
+			<Path>Categories/UIScrollView+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="46">
+			<Name>UIView(SSToolkitAdditions)</Name>
+			<Path>Categories/UIView+SSToolkitAdditions.html</Path>
+		</Node>
+		<Node id="47">
+			<Name>UIViewController(SSToolkitAdditions)</Name>
+			<Path>Categories/UIViewController+SSToolkitAdditions.html</Path>
+		</Node>
+		
+		<Node id="48">
+			<Name>SSAnimatedImageViewDelegate</Name>
+			<Path>Protocols/SSAnimatedImageViewDelegate.html</Path>
+		</Node>
+		<Node id="49">
+			<Name>SSCollectionViewDataSource</Name>
+			<Path>Protocols/SSCollectionViewDataSource.html</Path>
+		</Node>
+		<Node id="50">
+			<Name>SSCollectionViewDelegate</Name>
+			<Path>Protocols/SSCollectionViewDelegate.html</Path>
+		</Node>
+		<Node id="51">
+			<Name>SSWebViewDelegate</Name>
+			<Path>Protocols/SSWebViewDelegate.html</Path>
+		</Node>
+		
+	</Library>
+</DocSetNodes>

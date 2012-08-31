@@ -1,0 +1,813 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>SSBadgeView Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">SSToolkit 1.0.2 </a></h1>
+				<a id="developerHome" href="../index.html">Sam Soffes</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">SSBadgeView Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/badgeAlignment">&nbsp;&nbsp;&nbsp;&nbsp;badgeAlignment</option>
+	
+	<option value="//api/name/badgeColor">&nbsp;&nbsp;&nbsp;&nbsp;badgeColor</option>
+	
+	<option value="//api/name/badgeImage">&nbsp;&nbsp;&nbsp;&nbsp;badgeImage</option>
+	
+	<option value="//api/name/cornerRadius">&nbsp;&nbsp;&nbsp;&nbsp;cornerRadius</option>
+	
+	<option value="//api/name/highlighted">&nbsp;&nbsp;&nbsp;&nbsp;highlighted</option>
+	
+	<option value="//api/name/highlightedBadgeColor">&nbsp;&nbsp;&nbsp;&nbsp;highlightedBadgeColor</option>
+	
+	<option value="//api/name/highlightedBadgeImage">&nbsp;&nbsp;&nbsp;&nbsp;highlightedBadgeImage</option>
+	
+	<option value="//api/name/textLabel">&nbsp;&nbsp;&nbsp;&nbsp;textLabel</option>
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/defaultBadgeColor">&nbsp;&nbsp;&nbsp;&nbsp;+ defaultBadgeColor</option>
+	
+	
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Accessing the Badge Label">Accessing the Badge Label</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Accessing the Badge Attributes">Accessing the Badge Attributes</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Drawing Images">Drawing Images</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Defaults">Defaults</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/badgeAlignment">badgeAlignment</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/badgeColor">badgeColor</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/badgeImage">badgeImage</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cornerRadius">cornerRadius</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/highlighted">highlighted</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/highlightedBadgeColor">highlightedBadgeColor</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/highlightedBadgeImage">highlightedBadgeImage</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/textLabel">textLabel</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/defaultBadgeColor">defaultBadgeColor</a></span></li>
+	
+</ul></li>
+
+
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="SSBadgeView Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">SSBadgeView Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">UIView</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">SSBadgeView.h</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Badge view.</p>
+
+<p>Provides the accesory view for a <a href="../Classes/SSBadgeTableViewCell.html">SSBadgeTableViewCell</a>, available through the <code>badgeView</code> property.</p>
+
+<p>Acts very much like the badges in Mail.app, with the key difference being that Apple uses images and <code>SSBadgeView</code> is
+rendered with Core Graphics for improved scrolling performance (although images are supported). This also allows for
+more flexible resizing.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="Accessing the Badge Label" name="task_Accessing the Badge Label"></a>
+						<h3 class="subsubtitle task-title">Accessing the Badge Label</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/textLabel">&nbsp;&nbsp;textLabel</a></code>
+		<span class="tooltip"><p>The badge text label.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Accessing the Badge Attributes" name="task_Accessing the Badge Attributes"></a>
+						<h3 class="subsubtitle task-title">Accessing the Badge Attributes</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/badgeColor">&nbsp;&nbsp;badgeColor</a></code>
+		<span class="tooltip"><p>The badge&rsquo;s background color.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/highlightedBadgeColor">&nbsp;&nbsp;highlightedBadgeColor</a></code>
+		<span class="tooltip"><p>The badge&rsquo;s background color while its cell is <a href="#//api/name/highlighted">highlighted</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/cornerRadius">&nbsp;&nbsp;cornerRadius</a></code>
+		<span class="tooltip"><p>The corner radius used when rendering the badge&rsquo;s outline.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/badgeAlignment">&nbsp;&nbsp;badgeAlignment</a></code>
+		<span class="tooltip"><p>The badge&rsquo;s horizontal alignment within the accesoryView frame.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/highlighted">&nbsp;&nbsp;highlighted</a></code>
+		<span class="tooltip"><p>A Boolean value indicating whether the receiver should be drawn with a highlight.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Drawing Images" name="task_Drawing Images"></a>
+						<h3 class="subsubtitle task-title">Drawing Images</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/badgeImage">&nbsp;&nbsp;badgeImage</a></code>
+		<span class="tooltip"><p>The badge&rsquo;s background image.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/highlightedBadgeImage">&nbsp;&nbsp;highlightedBadgeImage</a></code>
+		<span class="tooltip"><p>The badge&rsquo;s background image while its cell is <a href="#//api/name/highlighted">highlighted</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Defaults" name="task_Defaults"></a>
+						<h3 class="subsubtitle task-title">Defaults</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/defaultBadgeColor">+&nbsp;defaultBadgeColor</a></code>
+		<span class="tooltip"><p>The default badge color.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/badgeAlignment" title="badgeAlignment"></a>
+	<h3 class="subsubtitle method-title">badgeAlignment</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The badge&rsquo;s horizontal alignment within the accesoryView frame.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) SSBadgeViewAlignment badgeAlignment</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The badge&rsquo;s horizontal alignment within the accesoryView frame.</p>
+
+<p>This will position the badge in the view&rsquo;s bounds accordinly.</p>
+
+<p>The default value of this property is <code>SSBadgeViewAlignmentCenter</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/badgeColor" title="badgeColor"></a>
+	<h3 class="subsubtitle method-title">badgeColor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The badge&rsquo;s background color.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIColor *badgeColor</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The badge&rsquo;s background color.</p>
+
+<p>The default value of this property is grayish blue (that matches Mail.app).</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/defaultBadgeColor">+ defaultBadgeColor</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/badgeImage" title="badgeImage"></a>
+	<h3 class="subsubtitle method-title">badgeImage</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The badge&rsquo;s background image.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIImage *badgeImage</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The badge&rsquo;s background image.</p>
+
+<p>The default value of this property is <code>nil</code>. If the value is non-nil, it will be draw instead of the color.</p>
+
+<p>Setting a strechable image for this property is recommended.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/cornerRadius" title="cornerRadius"></a>
+	<h3 class="subsubtitle method-title">cornerRadius</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The corner radius used when rendering the badge&rsquo;s outline.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGFloat cornerRadius</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The corner radius used when rendering the badge&rsquo;s outline.</p>
+
+<p>The default value of this property is 10.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/highlighted" title="highlighted"></a>
+	<h3 class="subsubtitle method-title">highlighted</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A Boolean value indicating whether the receiver should be drawn with a highlight.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, getter=isHighlighted) BOOL highlighted</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A Boolean value indicating whether the receiver should be drawn with a highlight.</p>
+
+<p>Setting this property causes the receiver to redraw with the appropriate highlight state.</p>
+
+<p>The default value of this property is <code>NO</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/highlightedBadgeColor" title="highlightedBadgeColor"></a>
+	<h3 class="subsubtitle method-title">highlightedBadgeColor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The badge&rsquo;s background color while its cell is <a href="#//api/name/highlighted">highlighted</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIColor *highlightedBadgeColor</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The badge&rsquo;s background color while its cell is <a href="#//api/name/highlighted">highlighted</a>.</p>
+
+<p>The default value of this property is white.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/highlightedBadgeImage" title="highlightedBadgeImage"></a>
+	<h3 class="subsubtitle method-title">highlightedBadgeImage</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The badge&rsquo;s background image while its cell is <a href="#//api/name/highlighted">highlighted</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIImage *highlightedBadgeImage</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The badge&rsquo;s background image while its cell is <a href="#//api/name/highlighted">highlighted</a>.</p>
+
+<p>The default value of this property is <code>nil</code>. If the value is non-nil, it will be draw instead of the color.</p>
+
+<p>Setting a strechable image for this property is recommended.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/textLabel" title="textLabel"></a>
+	<h3 class="subsubtitle method-title">textLabel</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The badge text label.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) SSLabel *textLabel</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The badge text label.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/defaultBadgeColor" title="defaultBadgeColor"></a>
+	<h3 class="subsubtitle method-title">defaultBadgeColor</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The default badge color.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (UIColor *)defaultBadgeColor</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A color with its value set to the default badge color.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The default badge color.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SSBadgeView.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Sam Soffes. All rights reserved. (Last updated: 2012-08-31)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSConcurrentOperation.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSConcurrentOperation</TokenIdentifier>
+			<Abstract type="html">A simple wrapper for concurrent NSOperations</Abstract>
+			<DeclaredIn>SSConcurrentOperation.h</DeclaredIn>
+			
+			<NodeRef refid="15"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSConcurrentOperation/finish</TokenIdentifier>
+			<Abstract type="html">Finishes the receiver&apos;s task.</Abstract>
+			<DeclaredIn>SSConcurrentOperation.h</DeclaredIn>			
+			
+			<Declaration>- (void)finish</Declaration>
+			
+			
+			<Anchor>//api/name/finish</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

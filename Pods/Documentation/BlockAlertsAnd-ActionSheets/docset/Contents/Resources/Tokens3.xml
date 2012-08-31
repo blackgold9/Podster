@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/BlockBackground.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/BlockBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/BlockBackground/sharedInstance</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>			
+			
+			<Declaration>+ (BlockBackground *)sharedInstance</Declaration>
+			
+			
+			<Anchor>//api/name/sharedInstance</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockBackground/addToMainWindow:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>			
+			
+			<Declaration>- (void)addToMainWindow:(UIView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/addToMainWindow:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockBackground/reduceAlphaIfEmpty</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>			
+			
+			<Declaration>- (void)reduceAlphaIfEmpty</Declaration>
+			
+			
+			<Anchor>//api/name/reduceAlphaIfEmpty</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockBackground/removeView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>			
+			
+			<Declaration>- (void)removeView:(UIView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/removeView:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockBackground/setBackgroundImage:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) UIImage *backgroundImage</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/BlockBackground/backgroundImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) UIImage *backgroundImage</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockBackground/setVignetteBackground:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readwrite) BOOL vignetteBackground</Declaration>
+			
+			
+			<Anchor>//api/name/vignetteBackground</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/BlockBackground/vignetteBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockBackground.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readwrite) BOOL vignetteBackground</Declaration>
+			
+			
+			<Anchor>//api/name/vignetteBackground</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

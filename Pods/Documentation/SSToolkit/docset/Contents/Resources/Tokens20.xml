@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSLineView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSLineView</TokenIdentifier>
+			<Abstract type="html">Don&apos;t under estimate this class. It draws lines, but they are awesome.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>
+			
+			<NodeRef refid="20"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSLineView/setLineColor:</TokenIdentifier>
+			<Abstract type="html">The primary color of the line.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *lineColor</Declaration>
+			
+			
+			<Anchor>//api/name/lineColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSLineView/lineColor</TokenIdentifier>
+			<Abstract type="html">The primary color of the line.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *lineColor</Declaration>
+			
+			
+			<Anchor>//api/name/lineColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSLineView/setInsetColor:</TokenIdentifier>
+			<Abstract type="html">The color of the line inset.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *insetColor</Declaration>
+			
+			
+			<Anchor>//api/name/insetColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSLineView/insetColor</TokenIdentifier>
+			<Abstract type="html">The color of the line inset.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *insetColor</Declaration>
+			
+			
+			<Anchor>//api/name/insetColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSLineView/setDashPhase:</TokenIdentifier>
+			<Abstract type="html">A float that specifies how far into the dash pattern the line starts, in points.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat dashPhase</Declaration>
+			
+			
+			<Anchor>//api/name/dashPhase</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSLineView/dashPhase</TokenIdentifier>
+			<Abstract type="html">A float that specifies how far into the dash pattern the line starts, in points.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat dashPhase</Declaration>
+			
+			
+			<Anchor>//api/name/dashPhase</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSLineView/setDashLengths:</TokenIdentifier>
+			<Abstract type="html">An array of values that specify the lengths of the painted segments and unpainted segments, respectively, of the
+dash pattern—or nil for no dash pattern.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSArray *dashLengths</Declaration>
+			
+			
+			<Anchor>//api/name/dashLengths</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSLineView/dashLengths</TokenIdentifier>
+			<Abstract type="html">An array of values that specify the lengths of the painted segments and unpainted segments, respectively, of the
+dash pattern—or nil for no dash pattern.</Abstract>
+			<DeclaredIn>SSLineView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSArray *dashLengths</Declaration>
+			
+			
+			<Anchor>//api/name/dashLengths</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

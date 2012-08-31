@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSBorderedView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSBorderedView</TokenIdentifier>
+			<Abstract type="html">Simple UIView for drawing top and bottom borders with optional insets in a view.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSBorderedView/setTopBorderColor:</TokenIdentifier>
+			<Abstract type="html">The top border color. The default is nil.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/bottomBorderColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *topBorderColor</Declaration>
+			
+			
+			<Anchor>//api/name/topBorderColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/topBorderColor</TokenIdentifier>
+			<Abstract type="html">The top border color. The default is nil.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/bottomBorderColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *topBorderColor</Declaration>
+			
+			
+			<Anchor>//api/name/topBorderColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSBorderedView/setTopInsetColor:</TokenIdentifier>
+			<Abstract type="html">The top inset color. The default is nil.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/bottomInsetColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *topInsetColor</Declaration>
+			
+			
+			<Anchor>//api/name/topInsetColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/topInsetColor</TokenIdentifier>
+			<Abstract type="html">The top inset color. The default is nil.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/bottomInsetColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *topInsetColor</Declaration>
+			
+			
+			<Anchor>//api/name/topInsetColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSBorderedView/setBottomInsetColor:</TokenIdentifier>
+			<Abstract type="html">The bottom inset color. The default is nil.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/topInsetColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *bottomInsetColor</Declaration>
+			
+			
+			<Anchor>//api/name/bottomInsetColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/bottomInsetColor</TokenIdentifier>
+			<Abstract type="html">The bottom inset color. The default is nil.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/topInsetColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *bottomInsetColor</Declaration>
+			
+			
+			<Anchor>//api/name/bottomInsetColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSBorderedView/setBottomBorderColor:</TokenIdentifier>
+			<Abstract type="html">The bottom border color. The default is nil.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/topBorderColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *bottomBorderColor</Declaration>
+			
+			
+			<Anchor>//api/name/bottomBorderColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/bottomBorderColor</TokenIdentifier>
+			<Abstract type="html">The bottom border color. The default is nil.</Abstract>
+			<DeclaredIn>SSBorderedView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSBorderedView/topBorderColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *bottomBorderColor</Declaration>
+			
+			
+			<Anchor>//api/name/bottomBorderColor</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

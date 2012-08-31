@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSCollectionViewTableView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSCollectionViewTableView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewTableView.h</DeclaredIn>
+			
+			<NodeRef refid="14"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewTableView/_setDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewTableView.h</DeclaredIn>			
+			
+			<Declaration>- (void)_setDelegate:(SSCollectionView *)aCollectionView</Declaration>
+			
+			
+			<Anchor>//api/name/_setDelegate:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewTableView/_setDataSource:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSCollectionViewTableView.h</DeclaredIn>			
+			
+			<Declaration>- (void)_setDataSource:(SSCollectionView *)aCollectionView</Declaration>
+			
+			
+			<Anchor>//api/name/_setDataSource:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSRatingPickerViewController.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSRatingPickerViewController</TokenIdentifier>
+			<Abstract type="html">Creates a controller object that manages a rating picker.</Abstract>
+			<DeclaredIn>SSRatingPickerViewController.h</DeclaredIn>
+			
+			<NodeRef refid="27"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPickerViewController/setRatingPicker:</TokenIdentifier>
+			<Abstract type="html">The rating picker. (read-only)</Abstract>
+			<DeclaredIn>SSRatingPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSRatingPicker *ratingPicker</Declaration>
+			
+			
+			<Anchor>//api/name/ratingPicker</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPickerViewController/ratingPicker</TokenIdentifier>
+			<Abstract type="html">The rating picker. (read-only)</Abstract>
+			<DeclaredIn>SSRatingPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSRatingPicker *ratingPicker</Declaration>
+			
+			
+			<Anchor>//api/name/ratingPicker</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPickerViewController/setTitleTextField:</TokenIdentifier>
+			<Abstract type="html">The text field for the title. (read-only)</Abstract>
+			<DeclaredIn>SSRatingPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSTextField *titleTextField</Declaration>
+			
+			
+			<Anchor>//api/name/titleTextField</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPickerViewController/titleTextField</TokenIdentifier>
+			<Abstract type="html">The text field for the title. (read-only)</Abstract>
+			<DeclaredIn>SSRatingPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSTextField *titleTextField</Declaration>
+			
+			
+			<Anchor>//api/name/titleTextField</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSRatingPickerViewController/setReviewTextView:</TokenIdentifier>
+			<Abstract type="html">The text view for the review.  (read-only)</Abstract>
+			<DeclaredIn>SSRatingPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSTextView *reviewTextView</Declaration>
+			
+			
+			<Anchor>//api/name/reviewTextView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSRatingPickerViewController/reviewTextView</TokenIdentifier>
+			<Abstract type="html">The text view for the review.  (read-only)</Abstract>
+			<DeclaredIn>SSRatingPickerViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSTextView *reviewTextView</Declaration>
+			
+			
+			<Anchor>//api/name/reviewTextView</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

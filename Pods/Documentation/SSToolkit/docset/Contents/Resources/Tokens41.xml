@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/UIControl+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/UIControl(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to UIControl for various common tasks.</Abstract>
+			<DeclaredIn>UIControl+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="41"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIControl(SSToolkitAdditions)/removeAllTargets</TokenIdentifier>
+			<Abstract type="html">Removes all targets and actions for all events from an internal dispatch table.</Abstract>
+			<DeclaredIn>UIControl+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)removeAllTargets</Declaration>
+			
+			
+			<Anchor>//api/name/removeAllTargets</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIControl(SSToolkitAdditions)/setTarget:action:forControlEvents:</TokenIdentifier>
+			<Abstract type="html">Sets exclusive target for specified event, all previous targets will be removed, usefull for table cells etc</Abstract>
+			<DeclaredIn>UIControl+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents</Declaration>
+			
+			
+			<Anchor>//api/name/setTarget:action:forControlEvents:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

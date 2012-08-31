@@ -590,9 +590,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     fetcher.delegate = self;
     DDLogVerbose(@"executing frc");
-    dispatch_sync([MagicalRecord actionQueue], ^{
+    
         [fetcher performFetch:nil];
-    });
+    
 
     DDLogVerbose(@"Done with frc");
    [self.tableView reloadData];

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSRateLimit.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSRateLimit</TokenIdentifier>
+			<Abstract type="html">Simple utility for only executing code every so often.</Abstract>
+			<DeclaredIn>SSRateLimit.h</DeclaredIn>
+			
+			<NodeRef refid="24"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SSRateLimit/executeBlock:name:limit:</TokenIdentifier>
+			<Abstract type="html">Executes the given block. If the block has been executed in less time than the limit, it will not be executed.</Abstract>
+			<DeclaredIn>SSRateLimit.h</DeclaredIn>			
+			
+			<Declaration>+ (BOOL)executeBlock:(void ( ^ ) ( void ))block name:(NSString *)name limit:(NSTimeInterval)limit</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>block</Name>
+					<Abstract type="html">The block to be executed. This should not be nil.</Abstract>
+				</Parameter><Parameter>
+					<Name>name</Name>
+					<Abstract type="html">A string identifying the block. If more than one block have the same name, their last executed time will be
+stored together.</Abstract>
+				</Parameter><Parameter>
+					<Name>limit</Name>
+					<Abstract type="html">The time interval (in seconds). This should be a positive, non-zero value.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">YES if the block was executed. NO if it was not.
+
+The time will not be persisted across application launches (for now). The block is synchronously executed on the same
+thread that called this method and not in a GCD queue. If you need to dispatch, simply do that in the block you
+provide.</Abstract></ReturnValue>
+			<Anchor>//api/name/executeBlock:name:limit:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SSRateLimit/resetLimitForName:</TokenIdentifier>
+			<Abstract type="html">Resets the time for a given name.</Abstract>
+			<DeclaredIn>SSRateLimit.h</DeclaredIn>			
+			
+			<Declaration>+ (void)resetLimitForName:(NSString *)name</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>name</Name>
+					<Abstract type="html">A string identifying a block&apos;s stored time.
+
+The next time a block with the same name is passed to executeBlock:name:limit: it will be executed.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/resetLimitForName:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

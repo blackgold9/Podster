@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/UIColor+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/UIColor(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to UIColor for various common tasks.</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="40"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIColor(SSToolkitAdditions)/colorWithHex:</TokenIdentifier>
+			<Abstract type="html">Creates and returns an UIColor object containing a given value.</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>+ (UIColor *)colorWithHex:(NSString *)hex</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>hex</Name>
+					<Abstract type="html">The value for the new color. The # sign is not required.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An UIColor object containing a value.
+
+You can specify hex values in the following formats: rgb, rrggbb, or rrggbbaa.
+
+The default alpha value is 1.0.</Abstract></ReturnValue>
+			<Anchor>//api/name/colorWithHex:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIColor(SSToolkitAdditions)/hexValue</TokenIdentifier>
+			<Abstract type="html">Returns the receiver&apos;s value as a hex string.</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)hexValue</Declaration>
+			
+			<ReturnValue><Abstract type="html">The receiver&apos;s value as a hex string.
+
+The value will be nil if the color is in a color space other than Grayscale or RGB. The # sign is omitted. Alpha
+will be omitted.</Abstract></ReturnValue>
+			<Anchor>//api/name/hexValue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIColor(SSToolkitAdditions)/hexValueWithAlpha:</TokenIdentifier>
+			<Abstract type="html">Returns the receiver&apos;s value as a hex string.</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)hexValueWithAlpha:(BOOL)includeAlpha</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>includeAlpha</Name>
+					<Abstract type="html">YES if alpha should be included. NO if it should not.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The receiver&apos;s value as a hex string.
+
+The value will be nil if the color is in a color space other than Grayscale or RGB. The # sign is omitted. Alpha is
+included if includeAlpha is YES.</Abstract></ReturnValue>
+			<Anchor>//api/name/hexValueWithAlpha:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIColor(SSToolkitAdditions)/setRed:</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s red component value. (read-only)</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGFloat red</Declaration>
+			
+			
+			<Anchor>//api/name/red</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/UIColor(SSToolkitAdditions)/red</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s red component value. (read-only)</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGFloat red</Declaration>
+			
+			
+			<Anchor>//api/name/red</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIColor(SSToolkitAdditions)/setGreen:</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s green component value. (read-only)</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGFloat green</Declaration>
+			
+			
+			<Anchor>//api/name/green</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/UIColor(SSToolkitAdditions)/green</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s green component value. (read-only)</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGFloat green</Declaration>
+			
+			
+			<Anchor>//api/name/green</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIColor(SSToolkitAdditions)/setBlue:</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s blue component value. (read-only)</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGFloat blue</Declaration>
+			
+			
+			<Anchor>//api/name/blue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/UIColor(SSToolkitAdditions)/blue</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s blue component value. (read-only)</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGFloat blue</Declaration>
+			
+			
+			<Anchor>//api/name/blue</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIColor(SSToolkitAdditions)/setAlpha:</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s alpha value. (read-only)</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGFloat alpha</Declaration>
+			
+			
+			<Anchor>//api/name/alpha</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/UIColor(SSToolkitAdditions)/alpha</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s alpha value. (read-only)</Abstract>
+			<DeclaredIn>UIColor+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly) CGFloat alpha</Declaration>
+			
+			
+			<Anchor>//api/name/alpha</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

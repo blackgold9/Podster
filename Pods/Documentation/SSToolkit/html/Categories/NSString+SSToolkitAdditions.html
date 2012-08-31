@@ -1,0 +1,1600 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>NSString(SSToolkitAdditions) Category Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">SSToolkit 1.0.2 </a></h1>
+				<a id="developerHome" href="../index.html">Sam Soffes</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">NSString(SSToolkitAdditions) Category Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/stringWithBase64String:">&nbsp;&nbsp;&nbsp;&nbsp;+ stringWithBase64String:</option>
+	
+	<option value="//api/name/stringWithUUID">&nbsp;&nbsp;&nbsp;&nbsp;+ stringWithUUID</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/MD5Sum">&nbsp;&nbsp;&nbsp;&nbsp;- MD5Sum</option>
+	
+	<option value="//api/name/SHA1Sum">&nbsp;&nbsp;&nbsp;&nbsp;- SHA1Sum</option>
+	
+	<option value="//api/name/URLDecodedString">&nbsp;&nbsp;&nbsp;&nbsp;- URLDecodedString</option>
+	
+	<option value="//api/name/URLEncodedParameterString">&nbsp;&nbsp;&nbsp;&nbsp;- URLEncodedParameterString</option>
+	
+	<option value="//api/name/URLEncodedString">&nbsp;&nbsp;&nbsp;&nbsp;- URLEncodedString</option>
+	
+	<option value="//api/name/base64EncodedString">&nbsp;&nbsp;&nbsp;&nbsp;- base64EncodedString</option>
+	
+	<option value="//api/name/compareToVersionString:">&nbsp;&nbsp;&nbsp;&nbsp;- compareToVersionString:</option>
+	
+	<option value="//api/name/containsString:">&nbsp;&nbsp;&nbsp;&nbsp;- containsString:</option>
+	
+	<option value="//api/name/escapeHTML">&nbsp;&nbsp;&nbsp;&nbsp;- escapeHTML</option>
+	
+	<option value="//api/name/stringByEscapingForURLQuery">&nbsp;&nbsp;&nbsp;&nbsp;- stringByEscapingForURLQuery</option>
+	
+	<option value="//api/name/stringByTrimmingLeadingAndTrailingCharactersInSet:">&nbsp;&nbsp;&nbsp;&nbsp;- stringByTrimmingLeadingAndTrailingCharactersInSet:</option>
+	
+	<option value="//api/name/stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters">&nbsp;&nbsp;&nbsp;&nbsp;- stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters</option>
+	
+	<option value="//api/name/stringByTrimmingLeadingCharactersInSet:">&nbsp;&nbsp;&nbsp;&nbsp;- stringByTrimmingLeadingCharactersInSet:</option>
+	
+	<option value="//api/name/stringByTrimmingLeadingWhitespaceAndNewlineCharacters">&nbsp;&nbsp;&nbsp;&nbsp;- stringByTrimmingLeadingWhitespaceAndNewlineCharacters</option>
+	
+	<option value="//api/name/stringByTrimmingTrailingCharactersInSet:">&nbsp;&nbsp;&nbsp;&nbsp;- stringByTrimmingTrailingCharactersInSet:</option>
+	
+	<option value="//api/name/stringByTrimmingTrailingWhitespaceAndNewlineCharacters">&nbsp;&nbsp;&nbsp;&nbsp;- stringByTrimmingTrailingWhitespaceAndNewlineCharacters</option>
+	
+	<option value="//api/name/stringByUnescapingFromURLQuery">&nbsp;&nbsp;&nbsp;&nbsp;- stringByUnescapingFromURLQuery</option>
+	
+	<option value="//api/name/unescapeHTML">&nbsp;&nbsp;&nbsp;&nbsp;- unescapeHTML</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Checking Contents">Checking Contents</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Hashing">Hashing</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Comparing Versions">Comparing Versions</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_HTML Escaping and Unescaping">HTML Escaping and Unescaping</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_URL Escaping and Unescaping">URL Escaping and Unescaping</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_URL Encoding and Unencoding (Deprecated)">URL Encoding and Unencoding (Deprecated)</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Base64 Encoding">Base64 Encoding</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Generating a UUID">Generating a UUID</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Trimming">Trimming</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringWithBase64String:">stringWithBase64String:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringWithUUID">stringWithUUID</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/MD5Sum">MD5Sum</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/SHA1Sum">SHA1Sum</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/URLDecodedString">URLDecodedString</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/URLEncodedParameterString">URLEncodedParameterString</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/URLEncodedString">URLEncodedString</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/base64EncodedString">base64EncodedString</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/compareToVersionString:">compareToVersionString:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/containsString:">containsString:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/escapeHTML">escapeHTML</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringByEscapingForURLQuery">stringByEscapingForURLQuery</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringByTrimmingLeadingAndTrailingCharactersInSet:">stringByTrimmingLeadingAndTrailingCharactersInSet:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters">stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringByTrimmingLeadingCharactersInSet:">stringByTrimmingLeadingCharactersInSet:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringByTrimmingLeadingWhitespaceAndNewlineCharacters">stringByTrimmingLeadingWhitespaceAndNewlineCharacters</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringByTrimmingTrailingCharactersInSet:">stringByTrimmingTrailingCharactersInSet:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringByTrimmingTrailingWhitespaceAndNewlineCharacters">stringByTrimmingTrailingWhitespaceAndNewlineCharacters</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringByUnescapingFromURLQuery">stringByUnescapingFromURLQuery</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/unescapeHTML">unescapeHTML</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="NSString(SSToolkitAdditions) Category Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">NSString(SSToolkitAdditions) Category Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">NSString+SSToolkitAdditions.h</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Provides extensions to <code>NSString</code> for various common tasks.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="Checking Contents" name="task_Checking Contents"></a>
+						<h3 class="subsubtitle task-title">Checking Contents</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/containsString:">&ndash;&nbsp;containsString:</a></code>
+		<span class="tooltip"><p>Returns a Boolean if the receiver contains the given <code>string</code>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Hashing" name="task_Hashing"></a>
+						<h3 class="subsubtitle task-title">Hashing</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/MD5Sum">&ndash;&nbsp;MD5Sum</a></code>
+		<span class="tooltip"><p>Returns a string of the MD5 sum of the receiver.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/SHA1Sum">&ndash;&nbsp;SHA1Sum</a></code>
+		<span class="tooltip"><p>Returns a string of the SHA1 sum of the receiver.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Comparing Versions" name="task_Comparing Versions"></a>
+						<h3 class="subsubtitle task-title">Comparing Versions</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/compareToVersionString:">&ndash;&nbsp;compareToVersionString:</a></code>
+		<span class="tooltip"><p>Returns a comparison result for the receiver and a given <code>version</code>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="HTML Escaping and Unescaping" name="task_HTML Escaping and Unescaping"></a>
+						<h3 class="subsubtitle task-title">HTML Escaping and Unescaping</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/escapeHTML">&ndash;&nbsp;escapeHTML</a></code>
+		<span class="tooltip"><p>Returns a new string with any HTML escaped.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/unescapeHTML">&ndash;&nbsp;unescapeHTML</a></code>
+		<span class="tooltip"><p>Returns a new string with any HTML unescaped.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="URL Escaping and Unescaping" name="task_URL Escaping and Unescaping"></a>
+						<h3 class="subsubtitle task-title">URL Escaping and Unescaping</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringByEscapingForURLQuery">&ndash;&nbsp;stringByEscapingForURLQuery</a></code>
+		<span class="tooltip"><p>Returns a new string escaped for a URL query parameter.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringByUnescapingFromURLQuery">&ndash;&nbsp;stringByUnescapingFromURLQuery</a></code>
+		<span class="tooltip"><p>Returns a new string unescaped from a URL query parameter.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="URL Encoding and Unencoding (Deprecated)" name="task_URL Encoding and Unencoding (Deprecated)"></a>
+						<h3 class="subsubtitle task-title">URL Encoding and Unencoding (Deprecated)</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/URLEncodedString">&ndash;&nbsp;URLEncodedString</a></code>
+		<span class="tooltip"><p>Returns a new string encoded for a URL. (Deprecated)</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/URLEncodedParameterString">&ndash;&nbsp;URLEncodedParameterString</a></code>
+		<span class="tooltip"><p>Returns a new string encoded for a URL parameter. (Deprecated)</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/URLDecodedString">&ndash;&nbsp;URLDecodedString</a></code>
+		<span class="tooltip"><p>Returns a new string decoded from a URL.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Base64 Encoding" name="task_Base64 Encoding"></a>
+						<h3 class="subsubtitle task-title">Base64 Encoding</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/base64EncodedString">&ndash;&nbsp;base64EncodedString</a></code>
+		<span class="tooltip"><p>Returns a string representation of the receiver Base64 encoded.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringWithBase64String:">+&nbsp;stringWithBase64String:</a></code>
+		<span class="tooltip"><p>Returns a new string contained in the Base64 encoded string.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Generating a UUID" name="task_Generating a UUID"></a>
+						<h3 class="subsubtitle task-title">Generating a UUID</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringWithUUID">+&nbsp;stringWithUUID</a></code>
+		<span class="tooltip"><p>Returns a new string containing a Universally Unique Identifier.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Trimming" name="task_Trimming"></a>
+						<h3 class="subsubtitle task-title">Trimming</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringByTrimmingLeadingAndTrailingCharactersInSet:">&ndash;&nbsp;stringByTrimmingLeadingAndTrailingCharactersInSet:</a></code>
+		<span class="tooltip"><p>Returns a new string by trimming leading and trailing characters in a given <code>NSCharacterSet</code>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters">&ndash;&nbsp;stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters</a></code>
+		<span class="tooltip"><p>Returns a new string by trimming leading and trailing whitespace and newline characters.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringByTrimmingLeadingCharactersInSet:">&ndash;&nbsp;stringByTrimmingLeadingCharactersInSet:</a></code>
+		<span class="tooltip"><p>Returns a new string by trimming leading characters in a given <code>NSCharacterSet</code>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringByTrimmingLeadingWhitespaceAndNewlineCharacters">&ndash;&nbsp;stringByTrimmingLeadingWhitespaceAndNewlineCharacters</a></code>
+		<span class="tooltip"><p>Returns a new string by trimming leading whitespace and newline characters.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringByTrimmingTrailingCharactersInSet:">&ndash;&nbsp;stringByTrimmingTrailingCharactersInSet:</a></code>
+		<span class="tooltip"><p>Returns a new string by trimming trailing characters in a given <code>NSCharacterSet</code>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stringByTrimmingTrailingWhitespaceAndNewlineCharacters">&ndash;&nbsp;stringByTrimmingTrailingWhitespaceAndNewlineCharacters</a></code>
+		<span class="tooltip"><p>Returns a new string by trimming trailing whitespace and newline characters.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/stringWithBase64String:" title="stringWithBase64String:"></a>
+	<h3 class="subsubtitle method-title">stringWithBase64String:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string contained in the Base64 encoded string.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (NSString *)stringWithBase64String:(NSString *)<em>base64String</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>base64String</em></dt>
+			<dd><p>A Base64 encoded string</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>String contained in <code>base64String</code></p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string contained in the Base64 encoded string.</p>
+
+<p>This uses <code>NSData</code>&rsquo;s <code>dataWithBase64String:</code> method to do the conversion then initializes a string with the resulting
+<code>NSData</code> object using <code>NSUTF8StringEncoding</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringWithUUID" title="stringWithUUID"></a>
+	<h3 class="subsubtitle method-title">stringWithUUID</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string containing a Universally Unique Identifier.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (NSString *)stringWithUUID</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string containing a Universally Unique Identifier.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/MD5Sum" title="MD5Sum"></a>
+	<h3 class="subsubtitle method-title">MD5Sum</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a string of the MD5 sum of the receiver.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)MD5Sum</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The string of the MD5 sum of the receiver.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a string of the MD5 sum of the receiver.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/SHA1Sum" title="SHA1Sum"></a>
+	<h3 class="subsubtitle method-title">SHA1Sum</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a string of the SHA1 sum of the receiver.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)SHA1Sum</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The string of the SHA1 sum of the receiver.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a string of the SHA1 sum of the receiver.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/URLDecodedString" title="URLDecodedString"></a>
+	<h3 class="subsubtitle method-title">URLDecodedString</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string decoded from a URL.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)URLDecodedString</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string decoded from a URL.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string decoded from a URL.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/URLEncodedParameterString" title="URLEncodedParameterString"></a>
+	<h3 class="subsubtitle method-title">URLEncodedParameterString</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string encoded for a URL parameter. (Deprecated)</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)URLEncodedParameterString</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string escaped for a URL parameter.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string encoded for a URL parameter. (Deprecated)</p>
+
+<p>The following characters are encoded: <code>:/=,!$&amp;'()*+;[]@#?</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/URLEncodedString" title="URLEncodedString"></a>
+	<h3 class="subsubtitle method-title">URLEncodedString</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string encoded for a URL. (Deprecated)</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)URLEncodedString</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string escaped for a URL.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string encoded for a URL. (Deprecated)</p>
+
+<p>The following characters are encoded: <code>:/=,!$&amp;'()*+;[]@#?%</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/base64EncodedString" title="base64EncodedString"></a>
+	<h3 class="subsubtitle method-title">base64EncodedString</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a string representation of the receiver Base64 encoded.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)base64EncodedString</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A Base64 encoded string</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a string representation of the receiver Base64 encoded.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/compareToVersionString:" title="compareToVersionString:"></a>
+	<h3 class="subsubtitle method-title">compareToVersionString:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a comparison result for the receiver and a given <code>version</code>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSComparisonResult)compareToVersionString:(NSString *)<em>version</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>version</em></dt>
+			<dd><p>A version string to compare to the receiver</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A comparison result for the receiver and a given <code>version</code></p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a comparison result for the receiver and a given <code>version</code>.</p>
+
+<p>Examples:</p>
+
+<pre><code>[@"10.4" compareToVersionString:@"10.3"]; // NSOrderedDescending
+[@"10.5" compareToVersionString:@"10.5.0"]; // NSOrderedSame
+[@"10.4 Build 8L127" compareToVersionString:@"10.4 Build 8P135"]; // NSOrderedAscending</code></pre>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/containsString:" title="containsString:"></a>
+	<h3 class="subsubtitle method-title">containsString:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a Boolean if the receiver contains the given <code>string</code>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)containsString:(NSString *)<em>string</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>string</em></dt>
+			<dd><p>A string to test the the receiver for</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A Boolean if the receiver contains the given <code>string</code></p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a Boolean if the receiver contains the given <code>string</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/escapeHTML" title="escapeHTML"></a>
+	<h3 class="subsubtitle method-title">escapeHTML</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string with any HTML escaped.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)escapeHTML</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string with any HTML escaped.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string with any HTML escaped.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/unescapeHTML">&ndash; unescapeHTML</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringByEscapingForURLQuery" title="stringByEscapingForURLQuery"></a>
+	<h3 class="subsubtitle method-title">stringByEscapingForURLQuery</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string escaped for a URL query parameter.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringByEscapingForURLQuery</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string escaped for a URL query parameter.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string escaped for a URL query parameter.</p>
+
+<p>The following characters are escaped: <code>\n\r:/=,!$&amp;'()*+;[]@#?%</code>. Spaces are escaped to the <code>+</code> character. (<code>+</code> is
+escaped to <code>%2B</code>).</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/stringByUnescapingFromURLQuery">&ndash; stringByUnescapingFromURLQuery</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringByTrimmingLeadingAndTrailingCharactersInSet:" title="stringByTrimmingLeadingAndTrailingCharactersInSet:"></a>
+	<h3 class="subsubtitle method-title">stringByTrimmingLeadingAndTrailingCharactersInSet:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string by trimming leading and trailing characters in a given <code>NSCharacterSet</code>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringByTrimmingLeadingAndTrailingCharactersInSet:(NSCharacterSet *)<em>characterSet</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>characterSet</em></dt>
+			<dd><p>Character set to trim characters</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string by trimming leading and trailing characters in <code>characterSet</code></p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string by trimming leading and trailing characters in a given <code>NSCharacterSet</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters" title="stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters"></a>
+	<h3 class="subsubtitle method-title">stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string by trimming leading and trailing whitespace and newline characters.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringByTrimmingLeadingAndTrailingWhitespaceAndNewlineCharacters</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string by trimming leading and trailing whitespace and newline characters</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string by trimming leading and trailing whitespace and newline characters.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringByTrimmingLeadingCharactersInSet:" title="stringByTrimmingLeadingCharactersInSet:"></a>
+	<h3 class="subsubtitle method-title">stringByTrimmingLeadingCharactersInSet:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string by trimming leading characters in a given <code>NSCharacterSet</code>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringByTrimmingLeadingCharactersInSet:(NSCharacterSet *)<em>characterSet</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>characterSet</em></dt>
+			<dd><p>Character set to trim characters</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string by trimming leading characters in <code>characterSet</code></p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string by trimming leading characters in a given <code>NSCharacterSet</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringByTrimmingLeadingWhitespaceAndNewlineCharacters" title="stringByTrimmingLeadingWhitespaceAndNewlineCharacters"></a>
+	<h3 class="subsubtitle method-title">stringByTrimmingLeadingWhitespaceAndNewlineCharacters</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string by trimming leading whitespace and newline characters.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringByTrimmingLeadingWhitespaceAndNewlineCharacters</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string by trimming leading whitespace and newline characters</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string by trimming leading whitespace and newline characters.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringByTrimmingTrailingCharactersInSet:" title="stringByTrimmingTrailingCharactersInSet:"></a>
+	<h3 class="subsubtitle method-title">stringByTrimmingTrailingCharactersInSet:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string by trimming trailing characters in a given <code>NSCharacterSet</code>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringByTrimmingTrailingCharactersInSet:(NSCharacterSet *)<em>characterSet</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>characterSet</em></dt>
+			<dd><p>Character set to trim characters</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string by trimming trailing characters in <code>characterSet</code></p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string by trimming trailing characters in a given <code>NSCharacterSet</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringByTrimmingTrailingWhitespaceAndNewlineCharacters" title="stringByTrimmingTrailingWhitespaceAndNewlineCharacters"></a>
+	<h3 class="subsubtitle method-title">stringByTrimmingTrailingWhitespaceAndNewlineCharacters</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string by trimming trailing whitespace and newline characters.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringByTrimmingTrailingWhitespaceAndNewlineCharacters</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string by trimming trailing whitespace and newline characters</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string by trimming trailing whitespace and newline characters.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stringByUnescapingFromURLQuery" title="stringByUnescapingFromURLQuery"></a>
+	<h3 class="subsubtitle method-title">stringByUnescapingFromURLQuery</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string unescaped from a URL query parameter.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)stringByUnescapingFromURLQuery</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string escaped for a URL query parameter.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string unescaped from a URL query parameter.</p>
+
+<p><code>+</code> characters are unescaped to spaces.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/stringByEscapingForURLQuery">&ndash; stringByEscapingForURLQuery</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/unescapeHTML" title="unescapeHTML"></a>
+	<h3 class="subsubtitle method-title">unescapeHTML</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new string with any HTML unescaped.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)unescapeHTML</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new string with any HTML unescaped.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns a new string with any HTML unescaped.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/escapeHTML">&ndash; escapeHTML</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSString+SSToolkitAdditions.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Sam Soffes. All rights reserved. (Last updated: 2012-08-31)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

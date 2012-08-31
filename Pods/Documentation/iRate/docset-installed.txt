@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/svanter/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.iRate-1.4.7.docset
+Time: 2012-08-31 14:45:31 +0000

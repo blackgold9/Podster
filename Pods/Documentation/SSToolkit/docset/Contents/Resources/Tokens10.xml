@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSCollectionViewController.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSCollectionViewController</TokenIdentifier>
+			<Abstract type="html">Creates a controller object that manages a collection view.</Abstract>
+			<DeclaredIn>SSCollectionViewController.h</DeclaredIn>
+			
+			<NodeRef refid="10"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSCollectionViewController/setCollectionView:</TokenIdentifier>
+			<Abstract type="html">Returns the table view managed by the controller object. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSCollectionView *collectionView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSCollectionViewController/collectionView</TokenIdentifier>
+			<Abstract type="html">Returns the table view managed by the controller object. (read-only)</Abstract>
+			<DeclaredIn>SSCollectionViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) SSCollectionView *collectionView</Declaration>
+			
+			
+			<Anchor>//api/name/collectionView</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

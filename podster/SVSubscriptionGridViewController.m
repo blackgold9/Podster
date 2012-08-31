@@ -14,7 +14,6 @@
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+VerticalAlign.h"
-
 #import "UIColor+Hex.h"
 #import "PodcastGridCellView.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -54,7 +53,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (!_context) {
         _context = [NSManagedObjectContext MR_defaultContext];
     }
-
+    
     return _context;
 }
 
@@ -65,7 +64,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewDidDisappear:animated];
     
-   //self.fetcher.delegate = nil;
+    //self.fetcher.delegate = nil;
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -75,7 +74,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                              selector:@selector(reloadNotificationRecieved:)
                                                  name:@"SVReloadData"
                                                object:nil];
-
+    
     [[SVPodcatcherClient sharedInstance] addObserver:self forKeyPath:@"networkReachabilityStatus"
                                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
     
@@ -102,12 +101,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 }
             }
         }
-
+        
         if (subscriptionsChanged) {
             [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         }
     }
-
+    
 }
 
 - (void)reloadNotificationRecieved:(NSNotification *)notification
@@ -153,8 +152,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }  else {
             predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
         }
-                    
-
+        
+        
         
         NSFetchRequest *request = [SVPodcast MR_requestAllWithPredicate:predicate inContext:self.context];
         [request setReturnsObjectsAsFaults:NO];
@@ -163,28 +162,33 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [request setIncludesPendingChanges:YES];
         [request setReturnsObjectsAsFaults:NO];
         
-
+        
         __block NSArray *newItems;
-        dispatch_sync([MagicalRecord actionQueue], ^{
-            NSError *error;
-            newItems = [self.context executeFetchRequest:request error:&error];
-            NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
-        });
-
         
-        DDLogVerbose(@"Retrieved %lu items for display", (long)newItems.count);
-        self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
-        self.noContentLabel.numberOfLines = 0;
-        
+        NSError *error;
+        newItems = [self.context executeFetchRequest:request error:&error];
+        NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
         dispatch_async(dispatch_get_main_queue(), ^{
-            items = [newItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]]];
+            DDLogVerbose(@"Retrieved %lu items for display", (long)newItems.count);
+            self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
+            self.noContentLabel.numberOfLines = 0;
+            
+
+                items = [newItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]]];
+
+            
             DDLogVerbose(@"Displayed Items: ");
             for (SVPodcast *podcast in items) {
                 DDLogVerbose(@"%@", podcast.title);
             }
             [[self gridView] reloadData];
             self.noContentLabel.hidden = items.count > 0;
+            
+            
         });
+        
+        
+        
     });
 }
 
@@ -192,12 +196,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewWillDisappear:animated];
     [Flurry endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
-   // self.fetcher.delegate = nil;
+    // self.fetcher.delegate = nil;
     LOG_GENERAL(2, @"WilDisappear");
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"SVReloadData"
                                                   object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSManagedObjectContextDidSaveNotification
                                                   object:self.context];
@@ -236,7 +240,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
-
+    
     tappedIndex = position;
     SVPodcast *podcast =  [items objectAtIndex:position];
     
@@ -265,18 +269,18 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     static UINib *podcastNib = nil;
     if (podcastNib == nil) {
-        podcastNib = [UINib nibWithNibName:@"PodcastGridCellView" bundle:nil];   
+        podcastNib = [UINib nibWithNibName:@"PodcastGridCellView" bundle:nil];
     }
     SVPodcast *currentPodcast = (SVPodcast *)[items objectAtIndex:index];
     CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:UIInterfaceOrientationPortrait];
     
     GMGridViewCell *cell = (GMGridViewCell *)[gridView dequeueReusableCellWithIdentifier:@"MySubscriptionsGridCell"];
     
-    if (!cell) 
+    if (!cell)
     {
         cell = [[GMGridViewCell alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         cell.reuseIdentifier = @"MySubscriptionsGridCell";
-        PodcastGridCellView *newCell = [[podcastNib instantiateWithOwner:nil options:nil] objectAtIndex:0]; 
+        PodcastGridCellView *newCell = [[podcastNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
         
         cell.contentView = newCell;
         

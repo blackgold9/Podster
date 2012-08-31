@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/UIScreen+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/UIScreen(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to UIScreen for various common tasks.</Abstract>
+			<DeclaredIn>UIScreen+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="44"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIScreen(SSToolkitAdditions)/currentBounds</TokenIdentifier>
+			<Abstract type="html">Returns the bounds of the screen for the current device orientation.</Abstract>
+			<DeclaredIn>UIScreen+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/UIScreen(SSToolkitAdditions)/boundsForOrientation:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (CGRect)currentBounds</Declaration>
+			
+			<ReturnValue><Abstract type="html">A rect indicating the bounds of the screen.</Abstract></ReturnValue>
+			<Anchor>//api/name/currentBounds</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIScreen(SSToolkitAdditions)/boundsForOrientation:</TokenIdentifier>
+			<Abstract type="html">Returns the bounds of the screen for a given device orientation. UIScreen&apos;s bounds method always returns the bounds
+of the screen of it in the portrait orientation.</Abstract>
+			<DeclaredIn>UIScreen+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/UIScreen(SSToolkitAdditions)/currentBounds</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (CGRect)boundsForOrientation:(UIInterfaceOrientation)orientation</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>orientation</Name>
+					<Abstract type="html">The orientation to get the screen&apos;s bounds.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A rect indicating the bounds of the screen.</Abstract></ReturnValue>
+			<Anchor>//api/name/boundsForOrientation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIScreen(SSToolkitAdditions)/isRetinaDisplay</TokenIdentifier>
+			<Abstract type="html">Returns a Boolean indicating if the screen is a Retina display.</Abstract>
+			<DeclaredIn>UIScreen+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)isRetinaDisplay</Declaration>
+			
+			<ReturnValue><Abstract type="html">A Boolean indicating if the screen is a Retina display.</Abstract></ReturnValue>
+			<Anchor>//api/name/isRetinaDisplay</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

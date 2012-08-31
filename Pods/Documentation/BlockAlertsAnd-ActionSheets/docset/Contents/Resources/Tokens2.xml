@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/BlockAlertView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/BlockAlertView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/BlockAlertView/alertWithTitle:message:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>+ (BlockAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message</Declaration>
+			
+			
+			<Anchor>//api/name/alertWithTitle:message:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/initWithTitle:message:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithTitle:(NSString *)title message:(NSString *)message</Declaration>
+			
+			
+			<Anchor>//api/name/initWithTitle:message:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/setDestructiveButtonWithTitle:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (void)setDestructiveButtonWithTitle:(NSString *)title block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/setDestructiveButtonWithTitle:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/setCancelButtonWithTitle:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (void)setCancelButtonWithTitle:(NSString *)title block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/setCancelButtonWithTitle:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/addButtonWithTitle:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (void)addButtonWithTitle:(NSString *)title block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/addButtonWithTitle:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/show</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (void)show</Declaration>
+			
+			
+			<Anchor>//api/name/show</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/dismissWithClickedButtonIndex:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>- (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/dismissWithClickedButtonIndex:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/setBackgroundImage:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) UIImage *backgroundImage</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/BlockAlertView/backgroundImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) UIImage *backgroundImage</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundImage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/setView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIView *view</Declaration>
+			
+			
+			<Anchor>//api/name/view</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/BlockAlertView/view</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIView *view</Declaration>
+			
+			
+			<Anchor>//api/name/view</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockAlertView/setVignetteBackground:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readwrite) BOOL vignetteBackground</Declaration>
+			
+			
+			<Anchor>//api/name/vignetteBackground</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/BlockAlertView/vignetteBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockAlertView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readwrite) BOOL vignetteBackground</Declaration>
+			
+			
+			<Anchor>//api/name/vignetteBackground</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

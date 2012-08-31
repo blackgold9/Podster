@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SSWebViewDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SSWebViewDelegate</TokenIdentifier>
+			<Abstract type="html">The SSWebViewDelegate protocol defines methods that a delegate of a SSWebView object can optionally implement to
+intervene when web content is loaded.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>
+			
+			<NodeRef refid="51"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidStartLoadingPage:</TokenIdentifier>
+			<Abstract type="html">Sent before a web view begins loading a page.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidFinishLoadingPage:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidLoadDOM:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidStartLoad:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)webViewDidStartLoadingPage:(SSWebView *)aWebView</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aWebView</Name>
+					<Abstract type="html">The web view that started loading its page.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/webViewDidStartLoadingPage:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidLoadDOM:</TokenIdentifier>
+			<Abstract type="html">Sent after a web view finishes loading its DOM.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidStartLoadingPage:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidFinishLoadingPage:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)webViewDidLoadDOM:(SSWebView *)aWebView</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aWebView</Name>
+					<Abstract type="html">The web view that finished loading its DOM.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/webViewDidLoadDOM:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidFinishLoadingPage:</TokenIdentifier>
+			<Abstract type="html">Sent after a web view finishes loading a page.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidStartLoadingPage:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidLoadDOM:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidFinishLoad:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)webViewDidFinishLoadingPage:(SSWebView *)aWebView</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aWebView</Name>
+					<Abstract type="html">The web view that finished loading its page.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/webViewDidFinishLoadingPage:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webView:didFailLoadWithError:</TokenIdentifier>
+			<Abstract type="html">Sent if a web view failed to load a frame.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webView:shouldStartLoadWithRequest:navigationType:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidStartLoad:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidFinishLoad:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)webView:(SSWebView *)aWebView didFailLoadWithError:(NSError *)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aWebView</Name>
+					<Abstract type="html">The web view that failed to load a frame.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract type="html">The error that occurred during loading.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/webView:didFailLoadWithError:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webView:shouldStartLoadWithRequest:navigationType:</TokenIdentifier>
+			<Abstract type="html">Sent before a web view begins loading a frame.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidStartLoad:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidFinishLoad:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webView:didFailLoadWithError:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (BOOL)webView:(SSWebView *)aWebView shouldStartLoadWithRequest:(NSURLRequest *)aRequest navigationType:(UIWebViewNavigationType)navigationType</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aWebView</Name>
+					<Abstract type="html">The web view that is about to load a new frame.</Abstract>
+				</Parameter><Parameter>
+					<Name>aRequest</Name>
+					<Abstract type="html">The content location.</Abstract>
+				</Parameter><Parameter>
+					<Name>navigationType</Name>
+					<Abstract type="html">The type of user action that started the load request.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/webView:shouldStartLoadWithRequest:navigationType:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidFinishLoad:</TokenIdentifier>
+			<Abstract type="html">Sent after a web view finishes loading a frame.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webView:shouldStartLoadWithRequest:navigationType:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidStartLoad:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webView:didFailLoadWithError:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)webViewDidFinishLoad:(SSWebView *)aWebView</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aWebView</Name>
+					<Abstract type="html">The web view has finished loading.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/webViewDidFinishLoad:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidStartLoad:</TokenIdentifier>
+			<Abstract type="html">Sent after a web view starts loading a frame.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webView:shouldStartLoadWithRequest:navigationType:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webViewDidFinishLoad:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSWebViewDelegate/webView:didFailLoadWithError:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)webViewDidStartLoad:(SSWebView *)aWebView</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aWebView</Name>
+					<Abstract type="html">The web view that has begun loading a new frame.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/webViewDidStartLoad:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

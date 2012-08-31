@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SSCollectionViewDataSource.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SSCollectionViewDataSource</TokenIdentifier>
+			<Abstract type="html">The SSCollectionViewDataSource protocol is adopted by an object that mediates the application&apos;s data model for a
+SSCollectionView object. The data source provides the collection view object with the information it needs to
+construct and modify a collection view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>
+			
+			<NodeRef refid="49"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDataSource/collectionView:numberOfItemsInSection:</TokenIdentifier>
+			<Abstract type="html">Tells the data source to return the number of items in a given section of a collection view. (required)</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDataSource/numberOfSectionsInCollectionView:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSUInteger)collectionView:(SSCollectionView *)aCollectionView numberOfItemsInSection:(NSUInteger)section</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">The collection view object requesting this information.</Abstract>
+				</Parameter><Parameter>
+					<Name>section</Name>
+					<Abstract type="html">An index number identifying a section in aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The number of items in section.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:numberOfItemsInSection:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDataSource/collectionView:itemForIndexPath:</TokenIdentifier>
+			<Abstract type="html">Asks the data source for an item to insert in a particular location of the collection view. (required)</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+			<Declaration>- (SSCollectionViewItem *)collectionView:(SSCollectionView *)aCollectionView itemForIndexPath:(NSIndexPath *)indexPath</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">A collection view object requesting the item.</Abstract>
+				</Parameter><Parameter>
+					<Name>indexPath</Name>
+					<Abstract type="html">An index path locating an item in aCollectionView.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An object inheriting from SSCollectionViewItem that the collection view can use for the specified row. An
+assertion is raised if you return nil.</Abstract></ReturnValue>
+			<Anchor>//api/name/collectionView:itemForIndexPath:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDataSource/numberOfSectionsInCollectionView:</TokenIdentifier>
+			<Abstract type="html">Asks the data source to return the number of sections in the table view.</Abstract>
+			<DeclaredIn>SSCollectionView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/SSCollectionViewDataSource/collectionView:numberOfItemsInSection:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSUInteger)numberOfSectionsInCollectionView:(SSCollectionView *)aCollectionView</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aCollectionView</Name>
+					<Abstract type="html">An object representing the collection view requesting this information.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The number of sections in aCollectionView. The default value is 1.</Abstract></ReturnValue>
+			<Anchor>//api/name/numberOfSectionsInCollectionView:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

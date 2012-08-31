@@ -209,19 +209,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367944885.749531"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
-         landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "PodsterTests/PodsterTests.m"
          timestampString = "367687368.686725"
          startingColumnNumber = "9223372036854775807"
@@ -235,19 +222,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367944885.749531"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
-         landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "PodsterTests/PodsterTests.m"
          timestampString = "367688404.833028"
          startingColumnNumber = "9223372036854775807"
@@ -255,32 +229,6 @@
          startingLineNumber = "65"
          endingLineNumber = "65"
          landmarkName = "-testNestedProblem"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367944885.749531"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "3rd Party/MagicalRecord/Core/MagicalRecord+Actions.m"
-         timestampString = "367944885.749531"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
-         landmarkName = "+saveInBackgroundWithBlock:completion:errorHandler:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -319,7 +267,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "633"
          endingLineNumber = "633"
-         landmarkName = "-viewWillDisappear:"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -332,7 +280,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "632"
          endingLineNumber = "632"
-         landmarkName = "-viewWillDisappear:"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -345,7 +293,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "608"
          endingLineNumber = "608"
-         landmarkName = "-reloadFetchedResultsController"
+         landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -364,7 +312,7 @@
    </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          scope = "0"

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSArray+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSArray(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to NSArray for various common tasks.</Abstract>
+			<DeclaredIn>NSArray+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="31"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSArray(SSToolkitAdditions)/firstObject</TokenIdentifier>
+			<Abstract type="html">Returns the object in the array with the lowest index value.</Abstract>
+			<DeclaredIn>NSArray+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (id)firstObject</Declaration>
+			
+			<ReturnValue><Abstract type="html">The object in the array with the lowest index value. If the array is empty, returns nil.</Abstract></ReturnValue>
+			<Anchor>//api/name/firstObject</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSArray(SSToolkitAdditions)/randomObject</TokenIdentifier>
+			<Abstract type="html">Returns the object in the array with a random index value.</Abstract>
+			<DeclaredIn>NSArray+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (id)randomObject</Declaration>
+			
+			<ReturnValue><Abstract type="html">The object in the array with a random index value. If the array is empty, returns nil.</Abstract></ReturnValue>
+			<Anchor>//api/name/randomObject</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSArray(SSToolkitAdditions)/shuffledArray</TokenIdentifier>
+			<Abstract type="html">Returns a new array with its elements shuffled.</Abstract>
+			<DeclaredIn>NSArray+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSArray *)shuffledArray</Declaration>
+			
+			<ReturnValue><Abstract type="html">A new array containing the receiving array&apos;s elements rearranged in a random order.</Abstract></ReturnValue>
+			<Anchor>//api/name/shuffledArray</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSArray(SSToolkitAdditions)/deepMutableCopy</TokenIdentifier>
+			<Abstract type="html">Returns the object returned by mutableCopyWithZone: where the zone is nil.</Abstract>
+			<DeclaredIn>NSArray+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSMutableArray *)deepMutableCopy</Declaration>
+			
+			<ReturnValue><Abstract type="html">The object returned by the NSMutableCopying protocol method mutableCopyWithZone:, where the zone is nil.</Abstract></ReturnValue>
+			<Anchor>//api/name/deepMutableCopy</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSArray(SSToolkitAdditions)/MD5Sum</TokenIdentifier>
+			<Abstract type="html">Returns a string of the MD5 sum of the receiver.</Abstract>
+			<DeclaredIn>NSArray+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)MD5Sum</Declaration>
+			
+			<ReturnValue><Abstract type="html">The string of the MD5 sum of the receiver.
+
+Internally, NSPropertyListSerialization is used to created the hash. Only objects that can be serialized should be
+contained in the receiver when calling this method.</Abstract></ReturnValue>
+			<Anchor>//api/name/MD5Sum</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSArray(SSToolkitAdditions)/SHA1Sum</TokenIdentifier>
+			<Abstract type="html">Returns a string of the SHA1 sum of the receiver.</Abstract>
+			<DeclaredIn>NSArray+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)SHA1Sum</Declaration>
+			
+			<ReturnValue><Abstract type="html">The string of the SHA1 sum of the receiver.
+
+Internally, NSPropertyListSerialization is used to created the hash. Only objects that can be serialized should be
+contained in the receiver when calling this method.</Abstract></ReturnValue>
+			<Anchor>//api/name/SHA1Sum</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

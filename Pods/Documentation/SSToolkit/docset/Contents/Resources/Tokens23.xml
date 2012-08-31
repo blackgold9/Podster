@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSPieProgressView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSPieProgressView</TokenIdentifier>
+			<Abstract type="html">Pie chart style progress pie chart similar to the one in Xcode 3&apos;s status bar.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>
+			
+			<NodeRef refid="23"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPieProgressView/setProgress:</TokenIdentifier>
+			<Abstract type="html">The current progress shown by the receiver.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat progress</Declaration>
+			
+			
+			<Anchor>//api/name/progress</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPieProgressView/progress</TokenIdentifier>
+			<Abstract type="html">The current progress shown by the receiver.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat progress</Declaration>
+			
+			
+			<Anchor>//api/name/progress</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPieProgressView/setPieBorderWidth:</TokenIdentifier>
+			<Abstract type="html">The outer border width.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat pieBorderWidth</Declaration>
+			
+			
+			<Anchor>//api/name/pieBorderWidth</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPieProgressView/pieBorderWidth</TokenIdentifier>
+			<Abstract type="html">The outer border width.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGFloat pieBorderWidth</Declaration>
+			
+			
+			<Anchor>//api/name/pieBorderWidth</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPieProgressView/setPieBorderColor:</TokenIdentifier>
+			<Abstract type="html">The border color.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/SSPieProgressView/defaultPieColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *pieBorderColor</Declaration>
+			
+			
+			<Anchor>//api/name/pieBorderColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPieProgressView/pieBorderColor</TokenIdentifier>
+			<Abstract type="html">The border color.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/SSPieProgressView/defaultPieColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *pieBorderColor</Declaration>
+			
+			
+			<Anchor>//api/name/pieBorderColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPieProgressView/setPieFillColor:</TokenIdentifier>
+			<Abstract type="html">The fill color.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/SSPieProgressView/defaultPieColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *pieFillColor</Declaration>
+			
+			
+			<Anchor>//api/name/pieFillColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPieProgressView/pieFillColor</TokenIdentifier>
+			<Abstract type="html">The fill color.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/SSPieProgressView/defaultPieColor</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIColor *pieFillColor</Declaration>
+			
+			
+			<Anchor>//api/name/pieFillColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPieProgressView/setPieBackgroundColor:</TokenIdentifier>
+			<Abstract type="html">The background color.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *pieBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/pieBackgroundColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPieProgressView/pieBackgroundColor</TokenIdentifier>
+			<Abstract type="html">The background color.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIColor *pieBackgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/pieBackgroundColor</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SSPieProgressView/defaultPieColor</TokenIdentifier>
+			<Abstract type="html">The default value of pieBorderColor and pieFillColor.</Abstract>
+			<DeclaredIn>SSPieProgressView.h</DeclaredIn>			
+			
+			<Declaration>+ (UIColor *)defaultPieColor</Declaration>
+			
+			
+			<Anchor>//api/name/defaultPieColor</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

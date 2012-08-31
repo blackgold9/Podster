@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSLoadingView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSLoadingView</TokenIdentifier>
+			<Abstract type="html">An easy view to show loading similar to the loading screens in the iTunes or App Store applications. The view is
+intended to cover another view while it is loading and the removed once loading is complete.</Abstract>
+			<DeclaredIn>SSLoadingView.h</DeclaredIn>
+			
+			<NodeRef refid="21"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSLoadingView/setTextLabel:</TokenIdentifier>
+			<Abstract type="html">The text label that is displayed to the user.</Abstract>
+			<DeclaredIn>SSLoadingView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *textLabel</Declaration>
+			
+			
+			<Anchor>//api/name/textLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSLoadingView/textLabel</TokenIdentifier>
+			<Abstract type="html">The text label that is displayed to the user.</Abstract>
+			<DeclaredIn>SSLoadingView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *textLabel</Declaration>
+			
+			
+			<Anchor>//api/name/textLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSLoadingView/setActivityIndicatorView:</TokenIdentifier>
+			<Abstract type="html">A view that indicates loading activity to the user. (read-only)</Abstract>
+			<DeclaredIn>SSLoadingView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicatorView</Declaration>
+			
+			
+			<Anchor>//api/name/activityIndicatorView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSLoadingView/activityIndicatorView</TokenIdentifier>
+			<Abstract type="html">A view that indicates loading activity to the user. (read-only)</Abstract>
+			<DeclaredIn>SSLoadingView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicatorView</Declaration>
+			
+			
+			<Anchor>//api/name/activityIndicatorView</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

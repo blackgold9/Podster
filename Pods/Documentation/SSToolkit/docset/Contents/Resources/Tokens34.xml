@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSDate+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSDate(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to NSDate for various common tasks.</Abstract>
+			<DeclaredIn>NSDate+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="34"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/dateFromISO8601String:</TokenIdentifier>
+			<Abstract type="html">Returns a new date represented by an ISO8601 string.</Abstract>
+			<DeclaredIn>NSDate+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>+ (NSDate *)dateFromISO8601String:(NSString *)iso8601String</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>iso8601String</Name>
+					<Abstract type="html">An ISO8601 string</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">Date represented by the ISO8601 string</Abstract></ReturnValue>
+			<Anchor>//api/name/dateFromISO8601String:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/ISO8601String</TokenIdentifier>
+			<Abstract type="html">Returns a string representation of the receiver in ISO8601 format.</Abstract>
+			<DeclaredIn>NSDate+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)ISO8601String</Declaration>
+			
+			<ReturnValue><Abstract type="html">A string representation of the receiver in ISO8601 format.</Abstract></ReturnValue>
+			<Anchor>//api/name/ISO8601String</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/briefTimeInWords</TokenIdentifier>
+			<Abstract type="html">Returns a string representing the time interval from now in words (including seconds).</Abstract>
+			<DeclaredIn>NSDate+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)briefTimeInWords</Declaration>
+			
+			<ReturnValue><Abstract type="html">A string representing the time interval from now in words</Abstract></ReturnValue>
+			<Anchor>//api/name/briefTimeInWords</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWords</TokenIdentifier>
+			<Abstract type="html">Returns a string representing the time interval from now in words (including seconds).</Abstract>
+			<DeclaredIn>NSDate+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWordsIncludingSeconds:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWordsFromTimeInterval:includingSeconds:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSString *)timeInWords</Declaration>
+			
+			<ReturnValue><Abstract type="html">A string representing the time interval from now in words</Abstract></ReturnValue>
+			<Anchor>//api/name/timeInWords</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWordsIncludingSeconds:</TokenIdentifier>
+			<Abstract type="html">Returns a string representing the time interval from now in words.</Abstract>
+			<DeclaredIn>NSDate+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWordsIncludingSeconds:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWordsFromTimeInterval:includingSeconds:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSString *)timeInWordsIncludingSeconds:(BOOL)includeSeconds</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>includeSeconds</Name>
+					<Abstract type="html">YES if seconds should be included. NO if they should not.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A string representing the time interval from now in words</Abstract></ReturnValue>
+			<Anchor>//api/name/timeInWordsIncludingSeconds:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWordsFromTimeInterval:includingSeconds:</TokenIdentifier>
+			<Abstract type="html">Returns a string representing a time interval in words.</Abstract>
+			<DeclaredIn>NSDate+SSToolkitAdditions.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWords</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intfm/NSDate(SSToolkitAdditions)/timeInWordsIncludingSeconds:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (NSString *)timeInWordsFromTimeInterval:(NSTimeInterval)intervalInSeconds includingSeconds:(BOOL)includeSeconds</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>intervalInSeconds</Name>
+					<Abstract type="html">The time interval to convert to a string</Abstract>
+				</Parameter><Parameter>
+					<Name>includeSeconds</Name>
+					<Abstract type="html">YES if seconds should be included. NO if they should not.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A string representing the time interval in words</Abstract></ReturnValue>
+			<Anchor>//api/name/timeInWordsFromTimeInterval:includingSeconds:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

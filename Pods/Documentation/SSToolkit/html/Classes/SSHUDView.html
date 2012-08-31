@@ -1,0 +1,699 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>SSHUDView Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">SSToolkit 1.0.2 </a></h1>
+				<a id="developerHome" href="../index.html">Sam Soffes</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">SSHUDView Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/activityIndicator">&nbsp;&nbsp;&nbsp;&nbsp;activityIndicator</option>
+	
+	<option value="//api/name/completeImage">&nbsp;&nbsp;&nbsp;&nbsp;completeImage</option>
+	
+	<option value="//api/name/failImage">&nbsp;&nbsp;&nbsp;&nbsp;failImage</option>
+	
+	<option value="//api/name/hidesVignette">&nbsp;&nbsp;&nbsp;&nbsp;hidesVignette</option>
+	
+	<option value="//api/name/hudSize">&nbsp;&nbsp;&nbsp;&nbsp;hudSize</option>
+	
+	<option value="//api/name/loading">&nbsp;&nbsp;&nbsp;&nbsp;loading</option>
+	
+	<option value="//api/name/successful">&nbsp;&nbsp;&nbsp;&nbsp;successful</option>
+	
+	<option value="//api/name/textLabel">&nbsp;&nbsp;&nbsp;&nbsp;textLabel</option>
+	
+	<option value="//api/name/textLabelHidden">&nbsp;&nbsp;&nbsp;&nbsp;textLabelHidden</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/completeAndDismissWithTitle:">&nbsp;&nbsp;&nbsp;&nbsp;- completeAndDismissWithTitle:</option>
+	
+	<option value="//api/name/completeQuicklyWithTitle:">&nbsp;&nbsp;&nbsp;&nbsp;- completeQuicklyWithTitle:</option>
+	
+	<option value="//api/name/completeWithTitle:">&nbsp;&nbsp;&nbsp;&nbsp;- completeWithTitle:</option>
+	
+	<option value="//api/name/dismiss">&nbsp;&nbsp;&nbsp;&nbsp;- dismiss</option>
+	
+	<option value="//api/name/dismissAnimated:">&nbsp;&nbsp;&nbsp;&nbsp;- dismissAnimated:</option>
+	
+	<option value="//api/name/failAndDismissWithTitle:">&nbsp;&nbsp;&nbsp;&nbsp;- failAndDismissWithTitle:</option>
+	
+	<option value="//api/name/failQuicklyWithTitle:">&nbsp;&nbsp;&nbsp;&nbsp;- failQuicklyWithTitle:</option>
+	
+	<option value="//api/name/failWithTitle:">&nbsp;&nbsp;&nbsp;&nbsp;- failWithTitle:</option>
+	
+	<option value="//api/name/initWithTitle:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithTitle:</option>
+	
+	<option value="//api/name/initWithTitle:loading:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithTitle:loading:</option>
+	
+	<option value="//api/name/show">&nbsp;&nbsp;&nbsp;&nbsp;- show</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/activityIndicator">activityIndicator</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/completeImage">completeImage</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/failImage">failImage</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/hidesVignette">hidesVignette</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/hudSize">hudSize</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loading">loading</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/successful">successful</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/textLabel">textLabel</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/textLabelHidden">textLabelHidden</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/completeAndDismissWithTitle:">completeAndDismissWithTitle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/completeQuicklyWithTitle:">completeQuicklyWithTitle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/completeWithTitle:">completeWithTitle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dismiss">dismiss</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dismissAnimated:">dismissAnimated:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/failAndDismissWithTitle:">failAndDismissWithTitle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/failQuicklyWithTitle:">failQuicklyWithTitle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/failWithTitle:">failWithTitle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithTitle:">initWithTitle:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithTitle:loading:">initWithTitle:loading:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/show">show</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="SSHUDView Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">SSHUDView Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">UIView</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">SSHUDView.h</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/textLabel">&nbsp;&nbsp;textLabel</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/textLabelHidden">&nbsp;&nbsp;textLabelHidden</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/activityIndicator">&nbsp;&nbsp;activityIndicator</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/hudSize">&nbsp;&nbsp;hudSize</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loading">&nbsp;&nbsp;loading</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/successful">&nbsp;&nbsp;successful</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/hidesVignette">&nbsp;&nbsp;hidesVignette</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/completeImage">&nbsp;&nbsp;completeImage</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/failImage">&nbsp;&nbsp;failImage</a></code>
+		
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithTitle:">&ndash;&nbsp;initWithTitle:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithTitle:loading:">&ndash;&nbsp;initWithTitle:loading:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/show">&ndash;&nbsp;show</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/dismiss">&ndash;&nbsp;dismiss</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/dismissAnimated:">&ndash;&nbsp;dismissAnimated:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/completeWithTitle:">&ndash;&nbsp;completeWithTitle:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/completeAndDismissWithTitle:">&ndash;&nbsp;completeAndDismissWithTitle:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/completeQuicklyWithTitle:">&ndash;&nbsp;completeQuicklyWithTitle:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/failWithTitle:">&ndash;&nbsp;failWithTitle:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/failAndDismissWithTitle:">&ndash;&nbsp;failAndDismissWithTitle:</a></code>
+		
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/failQuicklyWithTitle:">&ndash;&nbsp;failQuicklyWithTitle:</a></code>
+		
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/activityIndicator" title="activityIndicator"></a>
+	<h3 class="subsubtitle method-title">activityIndicator</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicator</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/completeImage" title="completeImage"></a>
+	<h3 class="subsubtitle method-title">completeImage</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIImage *completeImage</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/failImage" title="failImage"></a>
+	<h3 class="subsubtitle method-title">failImage</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) UIImage *failImage</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/hidesVignette" title="hidesVignette"></a>
+	<h3 class="subsubtitle method-title">hidesVignette</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL hidesVignette</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/hudSize" title="hudSize"></a>
+	<h3 class="subsubtitle method-title">hudSize</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGSize hudSize</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/loading" title="loading"></a>
+	<h3 class="subsubtitle method-title">loading</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, getter=isLoading) BOOL loading</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/successful" title="successful"></a>
+	<h3 class="subsubtitle method-title">successful</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign, getter=isSuccessful) BOOL successful</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/textLabel" title="textLabel"></a>
+	<h3 class="subsubtitle method-title">textLabel</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly) UILabel *textLabel</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/textLabelHidden" title="textLabelHidden"></a>
+	<h3 class="subsubtitle method-title">textLabelHidden</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL textLabelHidden</code></div>
+
+    
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/completeAndDismissWithTitle:" title="completeAndDismissWithTitle:"></a>
+	<h3 class="subsubtitle method-title">completeAndDismissWithTitle:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)completeAndDismissWithTitle:(NSString *)<em>aTitle</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/completeQuicklyWithTitle:" title="completeQuicklyWithTitle:"></a>
+	<h3 class="subsubtitle method-title">completeQuicklyWithTitle:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)completeQuicklyWithTitle:(NSString *)<em>aTitle</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/completeWithTitle:" title="completeWithTitle:"></a>
+	<h3 class="subsubtitle method-title">completeWithTitle:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)completeWithTitle:(NSString *)<em>aTitle</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/dismiss" title="dismiss"></a>
+	<h3 class="subsubtitle method-title">dismiss</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)dismiss</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/dismissAnimated:" title="dismissAnimated:"></a>
+	<h3 class="subsubtitle method-title">dismissAnimated:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)dismissAnimated:(BOOL)<em>animated</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/failAndDismissWithTitle:" title="failAndDismissWithTitle:"></a>
+	<h3 class="subsubtitle method-title">failAndDismissWithTitle:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)failAndDismissWithTitle:(NSString *)<em>aTitle</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/failQuicklyWithTitle:" title="failQuicklyWithTitle:"></a>
+	<h3 class="subsubtitle method-title">failQuicklyWithTitle:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)failQuicklyWithTitle:(NSString *)<em>aTitle</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/failWithTitle:" title="failWithTitle:"></a>
+	<h3 class="subsubtitle method-title">failWithTitle:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)failWithTitle:(NSString *)<em>aTitle</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithTitle:" title="initWithTitle:"></a>
+	<h3 class="subsubtitle method-title">initWithTitle:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (id)initWithTitle:(NSString *)<em>aTitle</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithTitle:loading:" title="initWithTitle:loading:"></a>
+	<h3 class="subsubtitle method-title">initWithTitle:loading:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (id)initWithTitle:(NSString *)<em>aTitle</em> loading:(BOOL)<em>isLoading</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/show" title="show"></a>
+	<h3 class="subsubtitle method-title">show</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)show</code></div>
+
+    
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Sam Soffes. All rights reserved. (Last updated: 2012-08-31)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

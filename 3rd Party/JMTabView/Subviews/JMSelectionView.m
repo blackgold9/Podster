@@ -2,7 +2,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "JMSelectionView.h"
-#import "UIColor+Hex.h"
 #import "UIView+InnerShadow.h"
 
 @implementation JMSelectionView
@@ -29,7 +28,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [self drawInnerShadowInRect:rect fillColor:[UIColor colorWithHex:0x252525]];
+    [self drawInnerShadowInRect:rect fillColor:[UIColor colorWithHex:@"0x252525"]];
 }
 
 - (void)dealloc

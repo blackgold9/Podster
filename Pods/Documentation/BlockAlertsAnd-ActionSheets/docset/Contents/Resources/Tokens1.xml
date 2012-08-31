@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/BlockActionSheet.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/BlockActionSheet</TokenIdentifier>
+			<Abstract type="html">A simple block-enabled API wrapper on top of UIActionSheet.</Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/setView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIView *view</Declaration>
+			
+			
+			<Anchor>//api/name/view</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/BlockActionSheet/view</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIView *view</Declaration>
+			
+			
+			<Anchor>//api/name/view</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/setVignetteBackground:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readwrite) BOOL vignetteBackground</Declaration>
+			
+			
+			<Anchor>//api/name/vignetteBackground</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/BlockActionSheet/vignetteBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readwrite) BOOL vignetteBackground</Declaration>
+			
+			
+			<Anchor>//api/name/vignetteBackground</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/BlockActionSheet/sheetWithTitle:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>+ (id)sheetWithTitle:(NSString *)title</Declaration>
+			
+			
+			<Anchor>//api/name/sheetWithTitle:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/initWithTitle:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithTitle:(NSString *)title</Declaration>
+			
+			
+			<Anchor>//api/name/initWithTitle:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/setCancelButtonWithTitle:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (void)setCancelButtonWithTitle:(NSString *)title block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/setCancelButtonWithTitle:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/setDestructiveButtonWithTitle:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (void)setDestructiveButtonWithTitle:(NSString *)title block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/setDestructiveButtonWithTitle:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/addButtonWithTitle:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (void)addButtonWithTitle:(NSString *)title block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/addButtonWithTitle:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/setCancelButtonWithTitle:atIndex:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (void)setCancelButtonWithTitle:(NSString *)title atIndex:(NSInteger)index block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/setCancelButtonWithTitle:atIndex:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/setDestructiveButtonWithTitle:atIndex:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (void)setDestructiveButtonWithTitle:(NSString *)title atIndex:(NSInteger)index block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/setDestructiveButtonWithTitle:atIndex:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/addButtonWithTitle:atIndex:block:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (void)addButtonWithTitle:(NSString *)title atIndex:(NSInteger)index block:(void ( ^ ) ( ))block</Declaration>
+			
+			
+			<Anchor>//api/name/addButtonWithTitle:atIndex:block:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/showInView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (void)showInView:(UIView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/showInView:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/BlockActionSheet/buttonCount</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>BlockActionSheet.h</DeclaredIn>			
+			
+			<Declaration>- (NSUInteger)buttonCount</Declaration>
+			
+			
+			<Anchor>//api/name/buttonCount</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

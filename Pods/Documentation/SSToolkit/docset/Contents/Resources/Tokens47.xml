@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/UIViewController+SSToolkitAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/UIViewController(SSToolkitAdditions)</TokenIdentifier>
+			<Abstract type="html">Provides extensions to UIViewController for various common tasks.</Abstract>
+			<DeclaredIn>UIViewController+SSToolkitAdditions.h</DeclaredIn>
+			
+			<NodeRef refid="47"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIViewController(SSToolkitAdditions)/displayError:</TokenIdentifier>
+			<Abstract type="html">Present a UIAlertView with an error messagae.</Abstract>
+			<DeclaredIn>UIViewController+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)displayError:(NSError *)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>error</Name>
+					<Abstract type="html">Error to present.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/displayError:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/UIViewController(SSToolkitAdditions)/displayErrorString:</TokenIdentifier>
+			<Abstract type="html">Present a UIAlertView with an error messagae.</Abstract>
+			<DeclaredIn>UIViewController+SSToolkitAdditions.h</DeclaredIn>			
+			
+			<Declaration>- (void)displayErrorString:(NSString *)string</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>string</Name>
+					<Abstract type="html">Error string to present.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/displayErrorString:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

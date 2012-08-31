@@ -5,7 +5,7 @@
 //  Created by Vanterpool, Stephen on 12/23/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
-#import "Appirater.h"
+#import "iRate.h"
 #import "SVAppDelegate.h"
 #import "UIColor+Hex.h"
 #import "SVDownloadManager.h"
@@ -42,6 +42,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 NSString *uuid();
 @synthesize window = _window;
++ (void)initialize
+{
+    [iRate sharedInstance].daysUntilPrompt = 5;
+    [iRate sharedInstance].usesUntilPrompt = 15;
+}
 
 -(void)handleCoreDataError:(NSError *)error
 {
@@ -164,7 +169,6 @@ NSString *uuid();
     
     saveTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
     return YES;
-    [Appirater appLaunched:YES];
 }
 
 - (void)saveData
@@ -281,7 +285,7 @@ NSString *uuid();
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [Appirater appEnteredForeground:YES];
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

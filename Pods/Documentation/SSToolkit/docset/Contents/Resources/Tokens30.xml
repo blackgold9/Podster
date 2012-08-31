@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSWebView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSWebView</TokenIdentifier>
+			<Abstract type="html">This class pushes UIWebView to its limits and many common and usually difficult tasks very simple.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>
+			
+			<NodeRef refid="30"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setShadowsHidden:</TokenIdentifier>
+			<Abstract type="html">A Boolean value that controls whether the web view draws shadows around the outside of its content.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL shadowsHidden</Declaration>
+			
+			
+			<Anchor>//api/name/shadowsHidden</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/shadowsHidden</TokenIdentifier>
+			<Abstract type="html">A Boolean value that controls whether the web view draws shadows around the outside of its content.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL shadowsHidden</Declaration>
+			
+			
+			<Anchor>//api/name/shadowsHidden</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setDelegate:</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s delegate.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;SSWebViewDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/delegate</TokenIdentifier>
+			<Abstract type="html">The receiver&apos;s delegate.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;SSWebViewDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadData:MIMEType:textEncodingName:baseURL:</TokenIdentifier>
+			<Abstract type="html">Sets the main page contents, MIME type, content encoding, and base URL.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)encodingName baseURL:(NSURL *)baseURL</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>data</Name>
+					<Abstract type="html">The content for the main page.</Abstract>
+				</Parameter><Parameter>
+					<Name>MIMEType</Name>
+					<Abstract type="html">The MIME type of the content.</Abstract>
+				</Parameter><Parameter>
+					<Name>encodingName</Name>
+					<Abstract type="html">The IANA encoding name as in utf-8 or utf-16.</Abstract>
+				</Parameter><Parameter>
+					<Name>baseURL</Name>
+					<Abstract type="html">The base URL for the content.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/loadData:MIMEType:textEncodingName:baseURL:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadHTMLString:baseURL:</TokenIdentifier>
+			<Abstract type="html">Sets the main page content and base URL.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (void)loadHTMLString:(NSString *)string baseURL:(NSURL *)baseURL</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>string</Name>
+					<Abstract type="html">The content for the main page.</Abstract>
+				</Parameter><Parameter>
+					<Name>baseURL</Name>
+					<Abstract type="html">The base URL for the content.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/loadHTMLString:baseURL:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadRequest:</TokenIdentifier>
+			<Abstract type="html">Connects to a given URL by initiating an asynchronous client request.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSWebView/request</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/stopLoading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/SSWebView/loading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/reload</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)loadRequest:(NSURLRequest *)aRequest</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aRequest</Name>
+					<Abstract type="html">A URL request identifying the location of the content to load.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/loadRequest:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadHTMLString:</TokenIdentifier>
+			<Abstract type="html">Sets the main page content.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadHTMLString:baseURL:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)loadHTMLString:(NSString *)string</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>string</Name>
+					<Abstract type="html">The content for the main page.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/loadHTMLString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadURL:</TokenIdentifier>
+			<Abstract type="html">Connects to a given URL by initiating an asynchronous client request.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadURLString:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadRequest:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/SSWebView/request</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/stopLoading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/SSWebView/loading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/reload</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)loadURL:(NSURL *)aURL</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aURL</Name>
+					<Abstract type="html">A URL identifying the location of the content to load.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/loadURL:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadURLString:</TokenIdentifier>
+			<Abstract type="html">Connects to a given URL by initiating an asynchronous client request.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadURL:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadRequest:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/SSWebView/request</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/stopLoading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/SSWebView/loading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/reload</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)loadURLString:(NSString *)string</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>string</Name>
+					<Abstract type="html">A string containing a URL identifying the location of the content to load.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/loadURLString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setRequest:</TokenIdentifier>
+			<Abstract type="html">The URL request identifying the location of the content to load. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSURLRequest *request</Declaration>
+			
+			
+			<Anchor>//api/name/request</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/request</TokenIdentifier>
+			<Abstract type="html">The URL request identifying the location of the content to load. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSURLRequest *request</Declaration>
+			
+			
+			<Anchor>//api/name/request</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setLastRequest:</TokenIdentifier>
+			<Abstract type="html">The last NSURLRequest that the web view loaded. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSURLRequest *lastRequest</Declaration>
+			
+			
+			<Anchor>//api/name/lastRequest</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/lastRequest</TokenIdentifier>
+			<Abstract type="html">The last NSURLRequest that the web view loaded. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSURLRequest *lastRequest</Declaration>
+			
+			
+			<Anchor>//api/name/lastRequest</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setLoading:</TokenIdentifier>
+			<Abstract type="html">A Boolean value indicating whether the receiver is done loading content. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isLoading) BOOL loading</Declaration>
+			
+			
+			<Anchor>//api/name/loading</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/loading</TokenIdentifier>
+			<Abstract type="html">A Boolean value indicating whether the receiver is done loading content. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isLoading) BOOL loading</Declaration>
+			
+			
+			<Anchor>//api/name/loading</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setLoadingPage:</TokenIdentifier>
+			<Abstract type="html">Returns whether the web view is loading a page. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isLoadingPage) BOOL loadingPage</Declaration>
+			
+			
+			<Anchor>//api/name/loadingPage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/loadingPage</TokenIdentifier>
+			<Abstract type="html">Returns whether the web view is loading a page. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isLoadingPage) BOOL loadingPage</Declaration>
+			
+			
+			<Anchor>//api/name/loadingPage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/stopLoading</TokenIdentifier>
+			<Abstract type="html">Stops the loading of any web content managed by the receiver.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (void)stopLoading</Declaration>
+			
+			
+			<Anchor>//api/name/stopLoading</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/reload</TokenIdentifier>
+			<Abstract type="html">Reloads the current page.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSWebView/request</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instp/SSWebView/loading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/loadRequest:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSWebView/stopLoading</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (void)reload</Declaration>
+			
+			
+			<Anchor>//api/name/reload</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setCanGoBack:</TokenIdentifier>
+			<Abstract type="html">A Boolean value indicating whether the receiver can move backward. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) BOOL canGoBack</Declaration>
+			
+			
+			<Anchor>//api/name/canGoBack</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/canGoBack</TokenIdentifier>
+			<Abstract type="html">A Boolean value indicating whether the receiver can move backward. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) BOOL canGoBack</Declaration>
+			
+			
+			<Anchor>//api/name/canGoBack</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setCanGoForward:</TokenIdentifier>
+			<Abstract type="html">A Boolean value indicating whether the receiver can move forward. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) BOOL canGoForward</Declaration>
+			
+			
+			<Anchor>//api/name/canGoForward</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/canGoForward</TokenIdentifier>
+			<Abstract type="html">A Boolean value indicating whether the receiver can move forward. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) BOOL canGoForward</Declaration>
+			
+			
+			<Anchor>//api/name/canGoForward</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/goBack</TokenIdentifier>
+			<Abstract type="html">Loads the previous location in the back-forward list.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (void)goBack</Declaration>
+			
+			
+			<Anchor>//api/name/goBack</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/goForward</TokenIdentifier>
+			<Abstract type="html">Loads the next location in the back-forward list.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (void)goForward</Declaration>
+			
+			
+			<Anchor>//api/name/goForward</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setScalesPageToFit:</TokenIdentifier>
+			<Abstract type="html">A Boolean value determining whether the webpage scales to fit the view and the user can change the scale.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL scalesPageToFit</Declaration>
+			
+			
+			<Anchor>//api/name/scalesPageToFit</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/scalesPageToFit</TokenIdentifier>
+			<Abstract type="html">A Boolean value determining whether the webpage scales to fit the view and the user can change the scale.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL scalesPageToFit</Declaration>
+			
+			
+			<Anchor>//api/name/scalesPageToFit</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setScrollView:</TokenIdentifier>
+			<Abstract type="html">The scroll view associated with the web view. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIScrollView *scrollView</Declaration>
+			
+			
+			<Anchor>//api/name/scrollView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/scrollView</TokenIdentifier>
+			<Abstract type="html">The scroll view associated with the web view. (read-only)</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIScrollView *scrollView</Declaration>
+			
+			
+			<Anchor>//api/name/scrollView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/stringByEvaluatingJavaScriptFromString:</TokenIdentifier>
+			<Abstract type="html">Returns the result of running a script.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>script</Name>
+					<Abstract type="html">The script to run.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The result of running script or nil if it fails.</Abstract></ReturnValue>
+			<Anchor>//api/name/stringByEvaluatingJavaScriptFromString:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setConsoleEnabled:</TokenIdentifier>
+			<Abstract type="html">A Boolean value that controls whether console.log messages are intercepted.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL consoleEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/consoleEnabled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/consoleEnabled</TokenIdentifier>
+			<Abstract type="html">A Boolean value that controls whether console.log messages are intercepted.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL consoleEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/consoleEnabled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setDataDetectorTypes:</TokenIdentifier>
+			<Abstract type="html">The types of data converted to clickable URLs in the web view&apos;s content.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIDataDetectorTypes dataDetectorTypes</Declaration>
+			
+			
+			<Anchor>//api/name/dataDetectorTypes</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/dataDetectorTypes</TokenIdentifier>
+			<Abstract type="html">The types of data converted to clickable URLs in the web view&apos;s content.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIDataDetectorTypes dataDetectorTypes</Declaration>
+			
+			
+			<Anchor>//api/name/dataDetectorTypes</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setAllowsInlineMediaPlayback:</TokenIdentifier>
+			<Abstract type="html">A Boolean value that determines whether HTML5 videos play inline or use the native full-screen controller.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL allowsInlineMediaPlayback</Declaration>
+			
+			
+			<Anchor>//api/name/allowsInlineMediaPlayback</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/allowsInlineMediaPlayback</TokenIdentifier>
+			<Abstract type="html">A Boolean value that determines whether HTML5 videos play inline or use the native full-screen controller.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL allowsInlineMediaPlayback</Declaration>
+			
+			
+			<Anchor>//api/name/allowsInlineMediaPlayback</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/setMediaPlaybackRequiresUserAction:</TokenIdentifier>
+			<Abstract type="html">A Boolean value that determines whether HTML5 videos can play automatically or require the user to start playing them.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL mediaPlaybackRequiresUserAction</Declaration>
+			
+			
+			<Anchor>//api/name/mediaPlaybackRequiresUserAction</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSWebView/mediaPlaybackRequiresUserAction</TokenIdentifier>
+			<Abstract type="html">A Boolean value that determines whether HTML5 videos can play automatically or require the user to start playing them.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL mediaPlaybackRequiresUserAction</Declaration>
+			
+			
+			<Anchor>//api/name/mediaPlaybackRequiresUserAction</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/dismissKeyboard</TokenIdentifier>
+			<Abstract type="html">Uses JavaScript to remove focus from the active element.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (void)dismissKeyboard</Declaration>
+			
+			
+			<Anchor>//api/name/dismissKeyboard</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/removeTextSelection</TokenIdentifier>
+			<Abstract type="html">Removes the text selection in the web view.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (void)removeTextSelection</Declaration>
+			
+			
+			<Anchor>//api/name/removeTextSelection</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSWebView/reset</TokenIdentifier>
+			<Abstract type="html">Destroys the internal UIWebView and recreates.</Abstract>
+			<DeclaredIn>SSWebView.h</DeclaredIn>			
+			
+			<Declaration>- (void)reset</Declaration>
+			
+			
+			<Anchor>//api/name/reset</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
