@@ -508,11 +508,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             
             strongSelf->isLoading = NO;
             LOG_GENERAL(2, @"Done loading entries");
-            [strongSelf loadFeedImage];
-            
-            
+            [strongSelf loadFeedImage];                        
         }
-        
     };
     gracePeriodTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                         target:self
@@ -522,11 +519,12 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     NSAssert(localPodcast != nil, @"PLocal Podcast should not be nil");
     [[SVSubscriptionManager sharedInstance] refreshPodcasts:@[localPodcast] complete:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self reloadFetchedResultsController];
-            loadCompleteHandler();
-        });
+        [self reloadFetchedResultsController];
+        loadCompleteHandler();
     }];
+    
+    [self reloadFetchedResultsController];
+
 }
 
 - (void)configureUIForSubscriptionStatus:(BOOL)isSubscribedValue {

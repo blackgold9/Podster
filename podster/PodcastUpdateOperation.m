@@ -12,7 +12,7 @@
 
 static int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface PodcastUpdateOperation ()
-@property NSNumber *podstoreId;
+
 @end
 
 @implementation PodcastUpdateOperation {

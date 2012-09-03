@@ -39,7 +39,7 @@ static char const kRefreshInterval = -3;
     self = [super init];
     if (self) {
         syncQueue = [[NSOperationQueue alloc] init];
-        syncQueue.maxConcurrentOperationCount = 2;
+        syncQueue.maxConcurrentOperationCount = 6;
         syncQueue.name = @"net.vanterpool.podster.podcastUpdate";
     }
 
@@ -76,8 +76,15 @@ static char const kRefreshInterval = -3;
 
 - (void)refreshPodcasts:(NSArray *)podcasts complete:(void (^)())complete {
     dispatch_group_t group = dispatch_group_create();
-    NSArray *currentIds= [syncQueue.operations valueForKey:@"podcast"];
-    NSSet *currentOperationLookup = [NSSet setWithArray:currentIds];
+    NSMutableSet *currentOperationLookup = [NSMutableSet set];
+    for (NSOperation *op in syncQueue.operations) {
+        if ([op isKindOfClass:[PodcastUpdateOperation class]]) {
+            PodcastUpdateOperation *podcastOp = (PodcastUpdateOperation *)op;
+            [currentOperationLookup addObject:podcastOp.podstoreId];
+        }
+        
+    }
+
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     for (SVPodcast *podcast in podcasts) {
         if (![currentOperationLookup containsObject:podcast]) {

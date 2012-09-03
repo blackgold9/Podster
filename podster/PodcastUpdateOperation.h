@@ -13,7 +13,7 @@ typedef void (^UpdateCompleteBlock)(PodcastUpdateOperation *);
 @interface PodcastUpdateOperation : NSOperation
 @property (nonatomic, copy) UpdateCompleteBlock onUpdateComplete;
 
-
+@property NSNumber *podstoreId;
 - (id)initWithPodcast:(SVPodcast *)podcast andContext:(NSManagedObjectContext *)theContext;
 - (BOOL)completedSuccessfully;
 @end

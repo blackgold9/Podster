@@ -29,6 +29,7 @@
 #import "Lockbox.h"
 #import <HockeySDK/HockeySDK.h>
 #import <Crashlytics/Crashlytics.h>
+#import "SSRateLimit.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVAppDelegate() <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate> {}
 @end
@@ -101,10 +102,11 @@ NSString *uuid();
 #ifndef CONFIGURATION_AppStore
     [DDLog addLogger:[DDNSLoggerLogger sharedInstance]];
 #endif
+    
     fileLogger = [[DDFileLogger alloc] init];
     fileLogger.rollingFrequency = 60 * 60 * 1; // 1 hour rolling
-    fileLogger.logFileManager.maximumNumberOfLogFiles = 1;
-    
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 2;
+    [fileLogger rollLogFile];
     [DDLog addLogger:fileLogger];
     
     [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"
@@ -222,9 +224,7 @@ NSString *uuid();
 
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    
-    
+{    
     if (application.applicationState != UIApplicationStateActive) {
         NSString *feedId= [userInfo valueForKey:@"feedId"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RecievedPodcastNotification" object:self userInfo:userInfo];
@@ -256,8 +256,8 @@ NSString *uuid();
         [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
         background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
         
-        //System will be shutting down the app at any point in time now
     }];
+    
     [Flurry logEvent:@"SavingOnEnteringBackground" timed:YES];
     //Background tasks require you to use asynchronous tasks
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -285,21 +285,20 @@ NSString *uuid();
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SVReloadData" object:nil];
+    [SSRateLimit executeBlock:^{
+        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    } name:@"ReloadSubscriptions" limit:30];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
 }
 
 #pragma mark - remote control
@@ -314,6 +313,7 @@ NSString *uuid();
 {
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [self resignFirstResponder];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
 }
 
 -(BOOL)canBecomeFirstResponder
@@ -361,8 +361,9 @@ NSString *uuid();
 -(NSString *)applicationLogForCrashManager:(BITCrashManager *)crashManager
 {
     NSString *output;
-    if ([[fileLogger logFileManager] sortedLogFilePaths].count > 0) {
-        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:0]
+    if ([[fileLogger logFileManager] sortedLogFilePaths].count > 1) {
+        // We roll the logs when the app launches, so the SECOND log is the one from the last session.
+        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:1]
                                            encoding:NSUTF8StringEncoding
                                               error:nil];
     }

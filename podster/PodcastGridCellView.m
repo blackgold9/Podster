@@ -179,6 +179,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             NSInteger newEpisodeCount = coreDataPodcast.unlistenedSinceSubscribedCountValue;
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (newEpisodeCount > 0) {
+                    DDLogVerbose(@"Setting new epsidoe count of %lu for podcast: %@", (long)newEpisodeCount, titleLabel.text);
                     [self.countOverlay setCount:newEpisodeCount];
                     [self.countOverlay sizeToFit];
                     CGRect newFrame = self.countOverlay.frame;
