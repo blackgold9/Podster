@@ -106,7 +106,7 @@ static NSString *const kIsBusyKey = @"isBusy";
                                                       if (podcast) {
                                                           NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
                                                                                                              forKey:@"Title"];
-                                                          [FlurryAnalytics logEvent:@"LaunchedFromNotification"
+                                                          [Flurry logEvent:@"LaunchedFromNotification"
                                                                      withParameters:params];
                                                           
                                                           SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];

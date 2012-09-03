@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1807" systemVersion="12B19" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12B19" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Download" representedClassName="SVDownload" syncable="YES">
         <attribute name="downloadedBytes" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="manuallyTriggered" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -35,10 +35,10 @@
         <attribute name="unlistenedSinceSubscribedCount" optional="YES" transient="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updating" optional="YES" transient="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="websiteURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="fullImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" storedInTruthFile="YES" syncable="YES"/>
-        <relationship name="gridImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" syncable="YES"/>
+        <relationship name="fullImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" inverseName="fullOwner" inverseEntity="PodcastImage" storedInTruthFile="YES" syncable="YES"/>
+        <relationship name="gridImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" inverseName="gridOwner" inverseEntity="PodcastImage" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PodcastEntry" inverseName="podcast" inverseEntity="PodcastEntry" syncable="YES"/>
-        <relationship name="listImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" syncable="YES"/>
+        <relationship name="listImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" inverseName="listOwner" inverseEntity="PodcastImage" syncable="YES"/>
     </entity>
     <entity name="PodcastEntry" representedClassName="SVPodcastEntry" syncable="YES">
         <attribute name="contentLength" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -63,6 +63,9 @@
     </entity>
     <entity name="PodcastImage" representedClassName="PodcastImage" syncable="YES">
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="fullOwner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="fullImage" inverseEntity="Podcast" syncable="YES"/>
+        <relationship name="gridOwner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="gridImage" inverseEntity="Podcast" syncable="YES"/>
+        <relationship name="listOwner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Podcast" inverseName="listImage" inverseEntity="Podcast" syncable="YES"/>
     </entity>
     <elements>
         <element name="Download" positionX="160" positionY="192" width="128" height="165"/>

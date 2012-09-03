@@ -12,6 +12,7 @@
 #import "SVPodcastEntry.h"
 #import "SVPodcatcherClient.h"
 #import <sys/xattr.h>
+#import "SSToolkit.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVDownloadOperation ()
 @property (nonatomic, strong) NSNumber *entryId;
@@ -30,7 +31,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @synthesize downloadObjectID;
 @synthesize entryId = _entryId;
 -(id)initWithEntryId:(NSNumber *)entryId
-            filePath:(NSString *)path
+             filePath:(NSString *)path
 {
     self = [super init];
     if (self) {
@@ -45,24 +46,30 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)downloadProgressChanged:(double)progress forDownload:(SVDownload *)localDownload
 {
     NSInteger percentage = MIN(100,(NSInteger)(progress * 100));
-    if (currentProgressPercentage != percentage) {
-        currentProgressPercentage = percentage;
-        DDLogVerbose(@"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
-        NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry podstoreId], @"podstoreId", [NSNumber numberWithDouble:progress], @"progress",  nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
+    if (currentProgressPercentage != percentage && percentage < 100) {
+        
+        [SSRateLimit executeBlock:^{            
+            currentProgressPercentage = percentage;
+            DDLogVerbose(@"Download Progress: %d for entry: %@" , currentProgressPercentage, localDownload.entry.title);
+            NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:[localDownload.entry podstoreId], @"podstoreId", [NSNumber numberWithDouble:progress], @"progress",  nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadProgressChanged" object:nil userInfo:info];
+            [[NSManagedObjectContext MR_defaultContext] performBlock: ^{
+                SVDownload *mainThreadDownload = [localDownload MR_inContext:[NSManagedObjectContext MR_defaultContext]];
+                mainThreadDownload.stateValue = SVDownloadStateDownloading;
+                mainThreadDownload.entry.podcast.downloadPercentageValue = percentage;
+                if (!mainThreadDownload.entry.podcast.isDownloadingValue) {
+                    mainThreadDownload.entry.podcast.isDownloadingValue = YES;
+                }
+                                           
+            }];
+        } name:@"DownloadProgressUpdateUIRefresh" limit:0.1];
+    } else if (percentage == 100) {
         [[NSManagedObjectContext MR_defaultContext] performBlock: ^{
-            
-            localDownload.stateValue = SVDownloadStateDownloading;
-            localDownload.entry.podcast.downloadPercentageValue = percentage;
-            if (!localDownload.entry.podcast.isDownloadingValue) {
-                localDownload.entry.podcast.isDownloadingValue = YES;
-            }
-            
-            if (currentProgressPercentage == 100) {
-                localDownload.entry.podcast.isDownloadingValue = NO;
-            }
+                SVDownload *mainThreadDownload = [localDownload MR_inContext:[NSManagedObjectContext MR_defaultContext]];
+                mainThreadDownload.entry.podcast.isDownloadingValue = NO;
             
         }];
+
     }
 }
 
@@ -95,24 +102,25 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [[UIApplication sharedApplication] presentLocalNotificationNow:notDone];
         
     }];
+
   //  dispatch_semaphore_t semaphore =  dispatch_semaphore_create(0);
     NSManagedObjectContext *localContext = [NSManagedObjectContext MR_rootSavingContext];
 
     __block SVDownload *theDownload;
     [localContext performBlockAndWait:^{
         SVPodcastEntry *entry = [SVPodcastEntry MR_findFirstByAttribute:SVPodcastEntryAttributes.podstoreId withValue:self.entryId inContext:localContext];
-        NSAssert(entry != nil, @"the entry should already exist");
+                NSAssert(entry != nil, @"the entry should already exist");
         theDownload = entry.download;
         NSAssert(theDownload != nil, @"the download should already exist");
         DDLogInfo(@"Downloading %@ - %@  at URL: %@", theDownload.entry.podcast.title, theDownload.entry.title, theDownload.entry.mediaURL);
         NSAssert(!theDownload.entry.downloadCompleteValue, @"This entry is already downloaded");
-        
+               
         [self willChangeValueForKey:@"isExecuting"];
         _isExecuting = YES;
         [self didChangeValueForKey:@"isExecuting"];
         theDownload.stateValue = SVDownloadStateDownloading;
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:theDownload.entry.mediaURL]];
-        
+               
         __block BOOL alreadyDownloaded = NO;
         if ([[NSFileManager defaultManager] fileExistsAtPath:[theDownload.entry localFilePath]] ){
             NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -124,7 +132,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 [localContext performBlockAndWait:^{
                     DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [theDownload.entry localFilePath]);
                     SVPodcastEntry *entry = theDownload.entry;
-                    entry.downloadCompleteValue = YES;
+                    entry.downloadCompleteValue = YES;                
                     entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
                     DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
                     if (theDownload) {
@@ -143,13 +151,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         } else {
             initialSize = 0;
         }
-        
         if (alreadyDownloaded) {
             return;
         }
-        
-        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        
+
+         AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
         [op setOutputStream:[NSOutputStream outputStreamToFileAtPath:filePath append:YES]];
         [op setCacheResponseBlock:^NSCachedURLResponse *(NSURLConnection *connection, NSCachedURLResponse *cachedResponse) {
             return nil;
@@ -158,18 +165,18 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             double progress =  [[NSNumber numberWithDouble:initialSize + totalBytesRead] doubleValue] / [[NSNumber numberWithDouble:totalBytesExpectedToRead] doubleValue];
             [self downloadProgressChanged:progress
                               forDownload:theDownload];
-        }];
+        }];      
         
         [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             [self downloadComplete];
-            
+                        
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self downloadFailed:error];
             
         }];
         networkOp = op;
         [op start];
-        
+       
     }];
     
     download = theDownload;
@@ -178,26 +185,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)downloadComplete
 {
     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
-        
+       
         SVPodcastEntry *entry = [SVPodcastEntry MR_findFirstByAttribute:SVPodcastEntryAttributes.podstoreId withValue:self.entryId inContext:localContext];
         NSAssert(entry != nil, @"the entry should already exist");
         SVDownload *localDownload = entry.download;
         NSAssert(localDownload != nil, @"the download should already exist");
-        
-        DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [entry localFilePath]);
-        
-        entry.downloadCompleteValue = YES;
-        entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
-        DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
-        if (localDownload) {
-            entry.download = nil;
-            [localDownload MR_deleteInContext:localContext];
-        }
+
+            DDLogInfo(@"Downloading file %@ complete. Setting DownloadComplete = YES", [entry localFilePath]);
+            
+            entry.downloadCompleteValue = YES;
+            entry.podcast.downloadCount = [NSNumber numberWithUnsignedInteger:[entry.podcast.items filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"downloadComplete = YES && played == NO"]].count];
+            DDLogVerbose(@"Podcast %@ now has %d completed downloads", entry.podcast.title, entry.podcast.downloadCountValue);
+            if (localDownload) {
+                entry.download = nil;
+                [localDownload MR_deleteInContext:localContext];
+            }
         [localContext MR_saveNestedContexts];
-    } completion:^{
+          } completion:^{
         [self done];
     }];
-    
+
 }
 
 - (void)downloadFailed:(NSError *)error
@@ -208,11 +215,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             NSAssert(entry != nil, @"the entry should already exist");
             SVDownload *localDownload = entry.download;
             NSAssert(localDownload != nil, @"the download should already exist");
-            
-            
-            // DDLogError(@"Failed to download episode: %@ with error %@", localDownload.entry.title, error);
-            localDownload.stateValue = SVDownloadStateFailed;
-            [localDownload MR_deleteInContext:localContext];
+
+
+       // DDLogError(@"Failed to download episode: %@ with error %@", localDownload.entry.title, error);
+        localDownload.stateValue = SVDownloadStateFailed;
+        [localDownload MR_deleteInContext:localContext];
         }];
     } completion:^{
         [self done];
@@ -249,8 +256,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     const char* attrName = "com.apple.MobileBackup";
     u_int8_t attrValue = 1;
     DDLogVerbose(@"Disabling backup for %@", path);
-    int result = setxattr([path fileSystemRepresentation], attrName, &attrValue, sizeof(attrValue), 0, 0);
+    int result = setxattr([path fileSystemRepresentation], attrName, &attrValue, sizeof(attrValue), 0, 0);       
     NSAssert(result == 0, @"Did not set no-backup attribute correctly");
+    if (result != 0) {
+        DDLogWarn(@"Do-not backup attribute was not set properly");
+    }
     
 }
 @end

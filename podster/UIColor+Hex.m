@@ -10,10 +10,6 @@
 
 @implementation UIColor (Hex)
 
-+ (UIColor*) colorWithHex:(long)hexColor;
-{
-    return [UIColor colorWithHex:hexColor alpha:1.];    
-}
 
 + (UIColor *)colorWithHex:(long)hexColor alpha:(float)opacity
 {

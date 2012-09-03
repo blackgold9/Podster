@@ -8,7 +8,7 @@
 
 #import "GridCellCountOverlay.h"
 #import <QuartzCore/QuartzCore.h>
-
+static int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation GridCellCountOverlay
 {
     UIImageView *flagImageView;
@@ -72,6 +72,7 @@
 
 - (void)setCount:(NSUInteger)theCount
 {
+    DDLogVerbose(@"Updating count overlay to %lu", (long)theCount);
     count = theCount;
 
    

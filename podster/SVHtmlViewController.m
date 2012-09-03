@@ -45,7 +45,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [FlurryAnalytics logEvent:@"PodcastDescriptionView"];
+    [Flurry logEvent:@"PodcastDescriptionView"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -1,7 +1,7 @@
 #define kDownloadsDirectory @"PodcatcherDownloads"
 #import "SVPodcastEntry.h"
 #import "SVPodcast.h"
-#import "NSString+MW_HTML.h"
+#import "NSString+HTML.h"
 #import "SVDownloadManager.h"
 
 static const int ddLogLevel = LOG_LEVEL_INFO;

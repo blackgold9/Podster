@@ -2,7 +2,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "JMSelectionView.h"
-#import "UIColor+Hex.h"
 #import "UIView+InnerShadow.h"
 
 @implementation JMSelectionView

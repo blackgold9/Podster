@@ -45,7 +45,6 @@
 
 #import "BannerViewController.h"
 #import "GADBannerView.h"
-#import <CoreLocation/CoreLocation.h>
 NSString *const BannerViewActionWillBegin = @"BannerViewActionWillBegin";
 NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 
@@ -65,7 +64,6 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     start = CFAbsoluteTimeGetCurrent();
     self = [super init];
     if (self != nil) {
-        
         _contentController = contentController;
     }
     return self;
@@ -201,7 +199,7 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 }
 
 - (void)adViewWillPresentScreen:(GADBannerView *)adView {
-    [FlurryAnalytics logEvent:@"AdsFullscreenShown"];
+    [Flurry logEvent:@"AdsFullscreenShown"];
     //Pause playback?
     [[NSNotificationCenter defaultCenter] postNotificationName:BannerViewActionWillBegin object:self];
 }

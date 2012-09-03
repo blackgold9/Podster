@@ -14,7 +14,7 @@ static NSString *const kPodcastHasBeenUpdated = @"PodcastHasBeenUpdated";
 @property (assign) BOOL isBusy;
 -(void)refreshAllSubscriptions;
 
-- (void)refreshPodcasts:(NSArray *)podsterIDs complete:(void (^)())complete onQueue:(dispatch_queue_t)queue;
+- (void)refreshPodcasts:(NSArray *)podcasts complete:(void (^)())complete;
 
 + (id)sharedInstance;
 

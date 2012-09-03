@@ -221,7 +221,7 @@ void audioRouteChangeListenerCallback (
         [self.currentEpisode.managedObjectContext performBlock:^void() {
             self.currentEpisode.downloadCompleteValue = NO;
         }];
-        [FlurryAnalytics logEvent:@"MissingLocalFile"];
+        [Flurry logEvent:@"MissingLocalFile"];
         DDLogError(@"!!!!Expected to find a file for episode with id %d, did not.", self.currentEpisode.podstoreIdValue);
     }
 
@@ -293,7 +293,7 @@ void audioRouteChangeListenerCallback (
     BOOL prettyMuchAtTheEnd = episode.positionInSecondsValue > episode.durationValue - 120;
 
     if (hasSavedPlaybackPosition && !prettyMuchAtTheEnd ) {
-        [FlurryAnalytics logEvent:@"PlayingEpisodeResumingFromPreviousPosition"];
+        [Flurry logEvent:@"PlayingEpisodeResumingFromPreviousPosition"];
         LOG_PLAYBACK(2, @"Resuming at %d seconds", episode.positionInSecondsValue);
         [_player seekToTime:CMTimeMake(episode.positionInSecondsValue, 1)];
     } else {
@@ -361,7 +361,7 @@ void audioRouteChangeListenerCallback (
                     LOG_PLAYBACK(2,@"Started Playback");
                 } else if (_player.status == AVPlayerItemStatusFailed) {
                     LOG_PLAYBACK(1,@"Playback failed with error: %@", _player.error);
-                    [FlurryAnalytics logError:@"PlaybackFailed" message:[_player.error localizedDescription] error:_player.error];
+                    [Flurry logError:@"PlaybackFailed" message:[_player.error localizedDescription] error:_player.error];
                     if (monitorId) {
                         [_player removeTimeObserver:monitorId];
                         monitorId = nil;
@@ -397,7 +397,7 @@ void audioRouteChangeListenerCallback (
                 case AVPlayerItemStatusFailed:
                 {
                     NSAssert([NSThread isMainThread], @"Should only execute on main thread");
-                    [FlurryAnalytics logError:@"PlaybackFailed" 
+                    [Flurry logError:@"PlaybackFailed" 
                                       message:[currentItem.error localizedDescription] 
                                         error:currentItem.error];
                     DDLogError(@"Playback Error:  %@", currentItem.error);

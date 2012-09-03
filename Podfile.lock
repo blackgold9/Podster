@@ -1,0 +1,82 @@
+
+PODS:
+- BlockAlertsAnd-ActionSheets (1.0.0)
+- CocoaLumberjack (1.6)
+- FlurrySDK (4.0.1)
+- GCDiscreetNotificationView (0.0.1)
+- GMGridView (1.1.1)
+- ISO8601DateFormatter (0.6)
+- JSONKit (1.5pre)
+- Lockbox (1.0.2)
+- MBProgressHUD (0.5)
+- MWFeedParser (0.0.1):
+  - MWFeedParser/Feed (= 0.0.1)
+  - MWFeedParser/NSDate+InternetDateTime (= 0.0.1)
+  - MWFeedParser/NSString+HTML (= 0.0.1)
+  - MWFeedParser/NSString+XMLEntities (= 0.0.1)
+- MWFeedParser/Feed (0.0.1)
+- MWFeedParser/NSDate+InternetDateTime (0.0.1)
+- MWFeedParser/NSString+HTML (0.0.1)
+- MWFeedParser/NSString+XMLEntities (0.0.1)
+- MagicalRecord (2.0)
+- NSData+Base64 (1.0.0)
+- NSLogger (1.1)
+- NSLogger-CocoaLumberjack-connector (1.2):
+  - CocoaLumberjack
+  - NSLogger
+- OBSlider (1.1.0)
+- SDURLCache (1.2)
+- SSToolkit (1.0.2)
+- iRate (1.4.7)
+
+DEPENDENCIES:
+- BlockAlertsAnd-ActionSheets
+- FlurrySDK
+- GCDiscreetNotificationView
+- GMGridView
+- ISO8601DateFormatter
+- JSONKit
+- Lockbox
+- MBProgressHUD
+- MWFeedParser
+- MagicalRecord (from `https://github.com/blackgold9/MagicalRecord.git', commit `c545183',
+  branch `ios5Fixes')
+- NSData+Base64
+- NSLogger
+- NSLogger-CocoaLumberjack-connector
+- OBSlider
+- SDURLCache
+- SSToolkit
+- iRate
+
+EXTERNAL SOURCES:
+  MagicalRecord:
+    :git: https://github.com/blackgold9/MagicalRecord.git
+    :branch: ios5Fixes
+    :commit: c545183
+
+SPEC CHECKSUMS:
+  BlockAlertsAnd-ActionSheets: cb6379caff86c068616d112b8bfb862b0ec932a6
+  CocoaLumberjack: 0f2fa7090a23f13261072d882e017c688300efbe
+  FlurrySDK: 77366f5ad4fb998c1db3783109e90805ec1d20cd
+  GCDiscreetNotificationView: 15c3e146a52303b80143dab5c3fee917a46c3bb1
+  GMGridView: 6ef84c7fb99a2b28dc6fb2ddd36a8ef96360fa5e
+  ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
+  JSONKit: a01a22c75f27eae76b4badd55a91c20fe6e86477
+  Lockbox: ff59abb5a0e2cb8303cf0072d6e868f304b66665
+  MBProgressHUD: b23ee11c42253d6d804e8e0bfabdc334e8b2571f
+  MWFeedParser: 5d33f16583ac2d3b82f0528467bd07b86183256a
+  MWFeedParser/Feed: 5d33f16583ac2d3b82f0528467bd07b86183256a
+  MWFeedParser/NSDate+InternetDateTime: 5d33f16583ac2d3b82f0528467bd07b86183256a
+  MWFeedParser/NSString+HTML: 5d33f16583ac2d3b82f0528467bd07b86183256a
+  MWFeedParser/NSString+XMLEntities: 5d33f16583ac2d3b82f0528467bd07b86183256a
+  MagicalRecord: e0949ecc61ae24702b417e85afd92b97ed871ee5
+  NSData+Base64: be7e201540fa7805ecedc1f38d456e008be259b2
+  NSLogger: 960e4b9f95062e73796325b670003115cfb0226f
+  NSLogger-CocoaLumberjack-connector: 4e190725b829c1f0f903ab3023d9684d95184b33
+  OBSlider: 1eae1ad6fea0af687f7dde0366003044c4ba3d27
+  SDURLCache: 2208f93474756c694eed002fa7e3ab62ff3c6468
+  SSToolkit: 852044205c6a15586431e90f46b2ef01f693285a
+  iRate: 311516c3b072ce14850be893841c674b29089fb8
+
+COCOAPODS: 0.14.0.rc2

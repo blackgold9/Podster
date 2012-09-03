@@ -288,6 +288,41 @@
 			remoteGlobalIDString = 4B71F78A14A5B08C00D26F4C;
 			remoteInfo = Podster;
 		};
+		4BAE0F5E15DB6C5300CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		4BAE0F6015DB6C5300CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B239101D1357DC3E00ADE21B;
+			remoteInfo = SSToolkitTests;
+		};
+		4BAE0F6215DB6C5300CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2C507EA151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
+		4BAE0F6415DB6C6F00CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = SSToolkit;
+		};
+		4BAE0F6615DB6C6F00CB6F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B2C507E9151BA64400E94614;
+			remoteInfo = SSToolkitResources;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -679,10 +714,12 @@
 		7DD61F0B159B92BD006181AE /* GADCustomEventInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventInterstitialDelegate.h; sourceTree = "<group>"; };
 		7DD61F0C159B92BD006181AE /* GADCustomEventRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventRequest.h; sourceTree = "<group>"; };
 		7DD61F0D159B92BD006181AE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		925324931A50DB9837A9BFD6 /* SVAsyncOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVAsyncOperation.m; sourceTree = "<group>"; };
 		925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVCustomGroupedTableViewController.m; sourceTree = "<group>"; };
 		9253277E9ED9AC7A796DE69A /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		925327A34FE940080957C560 /* NativeWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeWebView.h; sourceTree = "<group>"; };
 		925327FB93FD7D934F91CA4A /* SVCustomGroupedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCustomGroupedTableViewController.h; sourceTree = "<group>"; };
+		925327FD0F01CB051DE2E9E0 /* SVAsyncOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVAsyncOperation.h; sourceTree = "<group>"; };
 		9253297D753C12BC5154E5E7 /* NativeWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeWebView.m; sourceTree = "<group>"; };
 		AFDE278F47BE40B88A6BDDF0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D608C9AC150D6BA2009BA9BD /* honeycomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = honeycomb.png; sourceTree = "<group>"; };
@@ -1160,6 +1197,8 @@
 		4B71F79514A5B08C00D26F4C /* podster */ = {
 			isa = PBXGroup;
 			children = (
+				925327FD0F01CB051DE2E9E0 /* SVAsyncOperation.h */,
+				925324931A50DB9837A9BFD6 /* SVAsyncOperation.m */,
 				4B3A846B15E71B5100FFE56F /* operations */,
 				925327FB93FD7D934F91CA4A /* SVCustomGroupedTableViewController.h */,
 				925325435FFEED02ED9FDE98 /* SVCustomGroupedTableViewController.m */,
@@ -1430,6 +1469,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				4BAE0F6515DB6C6F00CB6F36 /* PBXTargetDependency */,
+				4BAE0F6715DB6C6F00CB6F36 /* PBXTargetDependency */,
 			);
 			name = Podster;
 			productName = podster;
@@ -1442,7 +1483,7 @@
 		4B71F78214A5B08C00D26F4C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 4B71F78514A5B08C00D26F4C /* Build configuration list for PBXProject "podster" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1459,6 +1500,12 @@
 			mainGroup = 4B71F78014A5B08C00D26F4C;
 			productRefGroup = 4B71F78C14A5B08C00D26F4C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4BAE0F5515DB6C5300CB6F36 /* Products */;
+					ProjectRef = 4BAE0F5415DB6C5300CB6F36 /* SSToolkit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4B71F78A14A5B08C00D26F4C /* Podster */,
@@ -1466,6 +1513,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4BAE0F5F15DB6C5300CB6F36 /* libSSToolkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSSToolkit.a;
+			remoteRef = 4BAE0F5E15DB6C5300CB6F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BAE0F6115DB6C5300CB6F36 /* SSToolkitTests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SSToolkitTests.app;
+			remoteRef = 4BAE0F6015DB6C5300CB6F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4BAE0F6315DB6C5300CB6F36 /* SSToolkitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SSToolkitResources.bundle;
+			remoteRef = 4BAE0F6215DB6C5300CB6F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4B29C4F115EA00D100B87868 /* Resources */ = {
@@ -1779,6 +1850,7 @@
 				92532D82DA333A407478B30F /* NativeWebView.m in Sources */,
 				4B29327915BA8A0800F446E8 /* _PodcastImage.m in Sources */,
 				4B29327A15BA8A0800F446E8 /* PodcastImage.m in Sources */,
+				925323126DAB7291C747BDC3 /* SVAsyncOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1789,6 +1861,16 @@
 			isa = PBXTargetDependency;
 			target = 4B71F78A14A5B08C00D26F4C /* Podster */;
 			targetProxy = 4B29C50815EA743300B87868 /* PBXContainerItemProxy */;
+		};
+		4BAE0F6515DB6C6F00CB6F36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkit;
+			targetProxy = 4BAE0F6415DB6C6F00CB6F36 /* PBXContainerItemProxy */;
+		};
+		4BAE0F6715DB6C6F00CB6F36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SSToolkitResources;
+			targetProxy = 4BAE0F6615DB6C6F00CB6F36 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1843,7 +1925,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "11F161B2-FFFB-47DE-8086-36920AAF460C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "11F161B2-FFFB-47DE-8086-36920AAF460C";
@@ -1879,7 +1961,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2024,7 +2106,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PROVISIONING_PROFILE = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
 				SDKROOT = iphoneos;
@@ -2046,7 +2128,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B96EB6E-34C8-45B5-941B-4E86628C2B63";
@@ -2084,7 +2166,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2133,7 +2215,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2171,7 +2253,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "56D57A8E-C98A-458A-976F-BECCCE170247";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "56D57A8E-C98A-458A-976F-BECCCE170247";
@@ -2206,7 +2288,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "podster/podster-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

@@ -53,7 +53,7 @@
 #pragma mark - View lifecycle
 -(void)viewDidAppear:(BOOL)animated
 {
-    [FlurryAnalytics logEvent:@"PlaybackPageView" timed:YES];
+    [Flurry logEvent:@"PlaybackPageView" timed:YES];
    
         NSURL *imageURL = [NSURL URLWithString:[SVPlaybackManager sharedInstance].currentPodcast.logoURL];
         SVPodcastEntry *episode = [SVPlaybackManager sharedInstance].currentEpisode;
@@ -71,7 +71,7 @@
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
-    [FlurryAnalytics endTimedEvent:@"PlaybackPageView" withParameters:nil];
+    [Flurry endTimedEvent:@"PlaybackPageView" withParameters:nil];
     [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
     [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
     [player removeTimeObserver:playerObserver];
@@ -106,7 +106,7 @@
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *note) {
-                                                      if ([self.navigationController.topViewController class] == [SVPlaybackController class]) {
+                                                      if (self.navigationController.topViewController == self) {
                                                           [self.navigationController popViewControllerAnimated:YES];
                                                       }
                                                   }];
@@ -224,10 +224,10 @@
 - (IBAction)playTapped:(id)sender {
     if (player.rate == 0) {
         [[SVPlaybackManager sharedInstance] play];
-        [FlurryAnalytics logEvent:@"PlayTapped"];
+        [Flurry logEvent:@"PlayTapped"];
     } else {
         [[SVPlaybackManager sharedInstance] pause];
-        [FlurryAnalytics logEvent:@"PauseTapped"];
+        [Flurry logEvent:@"PauseTapped"];
     }
 }
 - (IBAction)sliderChanged:(id)sender {
@@ -246,13 +246,13 @@
 }
 
 - (IBAction)skipForwardTapped:(id)sender {
-    [FlurryAnalytics logEvent:@"SkipBackTapped"];
+    [Flurry logEvent:@"SkipBackTapped"];
     [[SVPlaybackManager sharedInstance] skipForward];
     
 }
 
 - (IBAction)skipBackTapped:(id)sender {
-    [FlurryAnalytics logEvent:@"SkipForwardTapped"];
+    [Flurry logEvent:@"SkipForwardTapped"];
         [[SVPlaybackManager sharedInstance] skipBack];
   }
 

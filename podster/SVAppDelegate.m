@@ -5,7 +5,7 @@
 //  Created by Vanterpool, Stephen on 12/23/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
-#import "Appirater.h"
+#import "iRate.h"
 #import "SVAppDelegate.h"
 #import "UIColor+Hex.h"
 #import "SVDownloadManager.h"
@@ -29,6 +29,7 @@
 #import "Lockbox.h"
 #import <HockeySDK/HockeySDK.h>
 #import <Crashlytics/Crashlytics.h>
+#import "SSRateLimit.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface SVAppDelegate() <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate> {}
 @end
@@ -42,6 +43,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 NSString *uuid();
 @synthesize window = _window;
++ (void)initialize
+{
+    [iRate sharedInstance].daysUntilPrompt = 5;
+    [iRate sharedInstance].usesUntilPrompt = 15;
+}
 
 -(void)handleCoreDataError:(NSError *)error
 {
@@ -89,10 +95,11 @@ NSString *uuid();
 #ifndef CONFIGURATION_AppStore
     [DDLog addLogger:[DDNSLoggerLogger sharedInstance]];
 #endif
+    
     fileLogger = [[DDFileLogger alloc] init];
     fileLogger.rollingFrequency = 60 * 60 * 1; // 1 hour rolling
-    fileLogger.logFileManager.maximumNumberOfLogFiles = 1;
-    
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 2;
+    [fileLogger rollLogFile];
     [DDLog addLogger:fileLogger];
     
     [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:@"587e7ffe1fa052cc37e3ba449ecf426e"
@@ -104,16 +111,16 @@ NSString *uuid();
     
 #if defined (CONFIGURATION_AppStore)
     DDLogVerbose(@"Running in Appstore mode");
-    [FlurryAnalytics startSession:@"SQ19K1VRZT84NIFMRA1S"];
-    [FlurryAnalytics setSecureTransportEnabled:YES];
+    [Flurry startSession:@"SQ19K1VRZT84NIFMRA1S"];
+    [Flurry setSecureTransportEnabled:YES];
 #endif
     
 #if defined (CONFIGURATION_Ad_Hoc)
     DDLogVerbose(@"Running in Ad_Hoc mode");
 
-    [FlurryAnalytics startSession:@"FGIFUZFEUSAMC74URBVL"];
-    [FlurryAnalytics setSecureTransportEnabled:YES];
-    [FlurryAnalytics setUserID:[[SVSettings sharedInstance] deviceId]];
+    [Flurry startSession:@"FGIFUZFEUSAMC74URBVL"];
+    [Flurry setSecureTransportEnabled:YES];
+    [Flurry  setUserID:[[SVSettings sharedInstance] deviceId]];
 #endif
 
 
@@ -133,7 +140,7 @@ NSString *uuid();
 
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
-    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
+//    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
     [NSURLCache setSharedURLCache:URLCache];
 
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
@@ -159,7 +166,6 @@ NSString *uuid();
     
     saveTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
     return YES;
-    
 }
 
 - (void)saveData
@@ -201,21 +207,19 @@ NSString *uuid();
                                                      } else {
                                                          [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
                                                      }
-
-                                                 }
-                                                      onError:^(NSError *error) {
-        [FlurryAnalytics logError:@"RegistrationFailed"
-                          message:[error localizedDescription]
-                            error:error];
-        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
-        LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
-    }];
+                                                     
+                                                 } onError:^(NSError *error) {
+                                                     [Flurry logError:@"RegistrationFailed"
+                                                                       message:[error localizedDescription]
+                                                                         error:error];
+                                                     LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
+                                                 }];
 }
 
 
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
+{    
     if (application.applicationState != UIApplicationStateActive) {
         NSString *feedId= [userInfo valueForKey:@"feedId"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RecievedPodcastNotification" object:self userInfo:userInfo];
@@ -223,7 +227,7 @@ NSString *uuid();
     }
 }
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    [FlurryAnalytics logEvent:@"LaunchedWithNotificationsDisabled"];
+    [Flurry logEvent:@"LaunchedWithNotificationsDisabled"];
     [[SVSettings sharedInstance] setNotificationsEnabled:NO];
     [self registerWithOptionalNotificationToken:nil];
 }
@@ -244,9 +248,9 @@ NSString *uuid();
         [application endBackgroundTask: background_task]; //Tell the system that we are done with the tasks
         background_task = UIBackgroundTaskInvalid; //Set the task to be invalid
         
-        //System will be shutting down the app at any point in time now
     }];
-    [FlurryAnalytics logEvent:@"SavingOnEnteringBackground" timed:YES];
+    
+    [Flurry logEvent:@"SavingOnEnteringBackground" timed:YES];
     //Background tasks require you to use asynchronous tasks
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -264,7 +268,7 @@ NSString *uuid();
             
         }];
         [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
-        [FlurryAnalytics endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
+        [Flurry endTimedEvent:@"SavingOnEnteringBackground" withParameters:nil];
         [application endBackgroundTask: background_task]; //End the task so the system knows that you are done with what you need to perform
         background_task = UIBackgroundTaskInvalid; //Invalidate the background_task
     });
@@ -272,21 +276,19 @@ NSString *uuid();
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    [SSRateLimit executeBlock:^{
+        [[SVSubscriptionManager sharedInstance] refreshAllSubscriptions];
+    } name:@"ReloadSubscriptions" limit:30];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    /*
-     Called when the application is about to terminate.
-     Save data if appropriate.
-     See also applicationDidEnterBackground:.
-     */
+    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
 }
 
 #pragma mark - remote control
@@ -301,6 +303,7 @@ NSString *uuid();
 {
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [self resignFirstResponder];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
 }
 
 -(BOOL)canBecomeFirstResponder
@@ -348,8 +351,9 @@ NSString *uuid();
 -(NSString *)applicationLogForCrashManager:(BITCrashManager *)crashManager
 {
     NSString *output;
-    if ([[fileLogger logFileManager] sortedLogFilePaths].count > 0) {
-        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:0]
+    if ([[fileLogger logFileManager] sortedLogFilePaths].count > 1) {
+        // We roll the logs when the app launches, so the SECOND log is the one from the last session.
+        output = [NSString stringWithContentsOfFile:[[[fileLogger logFileManager] sortedLogFilePaths] objectAtIndex:1]
                                            encoding:NSUTF8StringEncoding
                                               error:nil];
     }

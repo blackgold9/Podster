@@ -59,7 +59,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         queue.name = @"com.vantertech.podster.downloads";
         [queue addObserver:self forKeyPath:@"operations" options:0 context:NULL];
         NSString *lostWifi = NSLocalizedString(@"Downloads have been paused because you lost WI-FI connectivity", @"Downloads have been paused because you lost WI-FI connectivity");
-                
+        
+        
         [[NSNotificationCenter defaultCenter] addObserverForName:AFNetworkingReachabilityDidChangeNotification
                                                           object:nil queue:nil usingBlock:^void(NSNotification *note) {
                                                               AFNetworkReachabilityStatus status = [[SVPodcatcherClient sharedInstance] networkReachabilityStatus];
@@ -77,11 +78,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                   }
                                                               }
                                                           }];
+        
     }
     
     return self;
 }
-
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                          change:(NSDictionary *)change context:(void *)context
 {
@@ -150,7 +151,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         SVDownload *download = entry.download;
         if (!download && !entry.downloadCompleteValue) {
             download = [SVDownload MR_createInContext:localContext];
-            [localContext obtainPermanentIDsForObjects:@[download] error:nil];
             download.manuallyTriggeredValue = isManualDownload;
             entry.download = download;
             download.entry = entry;
@@ -200,6 +200,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     int result = setxattr([path fileSystemRepresentation], attrName, &attrValue, sizeof(attrValue), 0, 0);
     NSAssert(result == 0, @"Did not set no-backup attribute correctly");
+    if (result != 0) {
+        DDLogWarn(@"Do-not backup attribute was not set properly");
+    }
     
 }
 
@@ -391,8 +394,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 //            DDLogVerbose(@"Deleting %@", path);
 //            [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 //        }
-//
+//        
+        // Push changesup
 
+//        NSArray *toDownload = [shouldBePresent allObjects];
+        NSError *error;
+        if (error) {
+            DDLogError(@"Error obtaining permanent IDs: %@", error);
+        }
         DDLogInfo(@"Going through %d items that we want stored", shouldBePresent.count);
         for (SVPodcastEntry *entry in shouldBePresent) {
             NSAssert(entry != nil, @"Entry should exist");
@@ -407,6 +416,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 DDLogVerbose(@"Skipping entry that was already on downloaded/on disk");
             }
         }
+             
+        
     } completion:^{
         if (queue.operationCount == 0) {
             // No items to download, end here
@@ -415,10 +426,13 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 if (downloading) {
                     downloading = NO;
                 }
-            }            
+            }
+            
         }
      
         [queue setSuspended:NO];
+        
+        
     }];
 }
 

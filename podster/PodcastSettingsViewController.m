@@ -50,7 +50,7 @@ enum SVDownloadRows {
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-    [FlurryAnalytics logEvent:@"PodcastSettingsPageView"];
+    [Flurry logEvent:@"PodcastSettingsPageView"];
 }
 - (void)viewDidUnload
 {

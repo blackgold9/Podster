@@ -11,8 +11,8 @@
 #import "SVPodcast.h"
 #import "SVPlaybackManager.h"
 #import "UILabel+VerticalAlign.h"
-#import "NSAttributedString+HTML.h"
-#import "NSString+MW_HTML.h"
+
+#import "NSString+HTML.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SVDownloadManager.h"
 #import <Twitter/Twitter.h>
@@ -67,7 +67,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [FlurryAnalytics logEvent:@"EpisodeDetailsPageView"];
+    [Flurry logEvent:@"EpisodeDetailsPageView"];
     
 }
 -(void)bind:(SVPodcastEntry *)theEpisode
@@ -111,7 +111,7 @@
     NSURL *requestURL = [request URL]; 
     if ( ( [ [ requestURL scheme ] isEqualToString: @"http" ] || [ [ requestURL scheme ] isEqualToString: @"https" ] || [ [ requestURL scheme ] isEqualToString: @"mailto" ]) 
         && ( navigationType == UIWebViewNavigationTypeLinkClicked ) ) { 
-        [FlurryAnalytics logEvent:@"UserTappedLinkFromShowNotes"];
+        [Flurry logEvent:@"UserTappedLinkFromShowNotes"];
         return ![ [ UIApplication sharedApplication ] openURL: requestURL ]; 
     }
     return YES; 

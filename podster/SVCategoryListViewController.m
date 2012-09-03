@@ -63,7 +63,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [FlurryAnalytics logEvent:@"CategoryListPageView"];
+    [Flurry logEvent:@"CategoryListPageView"];
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 

@@ -14,7 +14,6 @@
 #import "SVPodcatcherClient.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UILabel+VerticalAlign.h"
-
 #import "UIColor+Hex.h"
 #import "PodcastGridCellView.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -53,7 +52,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (!_context) {
         _context = [NSManagedObjectContext MR_defaultContext];
     }
-
+    
     return _context;
 }
 
@@ -64,7 +63,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super viewDidDisappear:animated];
     
-   //self.fetcher.delegate = nil;
+    //self.fetcher.delegate = nil;
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -74,7 +73,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                              selector:@selector(reloadNotificationRecieved:)
                                                  name:@"SVReloadData"
                                                object:nil];
-
+    
     [[SVPodcatcherClient sharedInstance] addObserver:self forKeyPath:@"networkReachabilityStatus"
                                              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial context:nil];
     
@@ -101,12 +100,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 }
             }
         }
-
+        
         if (subscriptionsChanged) {
             [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         }
     }
-
+    
 }
 
 - (void)reloadNotificationRecieved:(NSNotification *)notification
@@ -137,7 +136,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     self.noContentLabel.hidden = YES;
     
     
-    [FlurryAnalytics logEvent:@"SubscriptionGridPageView" timed:YES];
+    [Flurry logEvent:@"SubscriptionGridPageView" timed:YES];
 }
 
 - (void)reloadData
@@ -149,8 +148,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }  else {
             predicate = [NSPredicate predicateWithFormat:@"isSubscribed == YES"];
         }
-                    
-
+        
+        
         
         NSFetchRequest *request = [SVPodcast MR_requestAllWithPredicate:predicate inContext:self.context];
         [request setReturnsObjectsAsFaults:NO];
@@ -159,35 +158,46 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [request setIncludesPendingChanges:YES];
         [request setReturnsObjectsAsFaults:NO];
         
-        NSError *error;
-        NSArray *newItems = [self.context executeFetchRequest:request error:&error];
-        NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
-        DDLogVerbose(@"Retrieved %lu items for display", newItems.count);
-        self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
-        self.noContentLabel.numberOfLines = 0;
         
+        __block NSArray *newItems;
+        
+        NSError *error;
+        newItems = [self.context executeFetchRequest:request error:&error];
+        NSAssert(error == nil, @"There was an error while fetching the next unplayed item:%@", error);
         dispatch_async(dispatch_get_main_queue(), ^{
-            items = [newItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]]];
+            DDLogVerbose(@"Retrieved %lu items for display", (long)newItems.count);
+            self.noContentLabel.text = NSLocalizedString(@"FAVORITES_NO_CONTENT", @"Message to show when the user hasn't added any favorites yet");
+            self.noContentLabel.numberOfLines = 0;
+            
+
+                items = [newItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]]];
+
+            
             DDLogVerbose(@"Displayed Items: ");
             for (SVPodcast *podcast in items) {
                 DDLogVerbose(@"%@", podcast.title);
             }
             [[self gridView] reloadData];
             self.noContentLabel.hidden = items.count > 0;
+            
+            
         });
+        
+        
+        
     });
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [FlurryAnalytics endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
-   // self.fetcher.delegate = nil;
+    [Flurry endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
+    // self.fetcher.delegate = nil;
     LOG_GENERAL(2, @"WilDisappear");
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"SVReloadData"
                                                   object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSManagedObjectContextDidSaveNotification
                                                   object:self.context];

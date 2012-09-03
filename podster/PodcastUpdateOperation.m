@@ -12,7 +12,7 @@
 
 static int ddLogLevel = LOG_LEVEL_VERBOSE;
 @interface PodcastUpdateOperation ()
-@property NSNumber *podstoreId;
+
 @end
 
 @implementation PodcastUpdateOperation {
@@ -165,7 +165,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                  }
                                                                   onError:^void(NSError *error) {
                                                                       DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", self.podstoreId);
-                                                                      [FlurryAnalytics logError:@"PodcastUpdateFailed" message:[error localizedDescription] error:error];
+                                                                      [Flurry logError:@"PodcastUpdateFailed" message:[error localizedDescription] error:error];
                                                                       dispatch_group_leave(group);
                                                                   }];
             dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -225,7 +225,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
         
         if (error) {
             DDLogError(@"There was a problem updating this podcast %@ - %@", localPodcast, error);
-            [FlurryAnalytics logError:@"SavingPodcastFailed" message:[error localizedDescription] error:error];
+            [Flurry logError:@"SavingPodcastFailed" message:[error localizedDescription] error:error];
         } else {
             DDLogVerbose(@"Updating podcast succeeded");
         }

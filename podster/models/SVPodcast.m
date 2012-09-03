@@ -131,6 +131,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                        [context performBlock:^{
                                                            // Then we make a new podcast in the data store
                                                            SVPodcast *localPodcast = [SVPodcast MR_createInContext:context];
+                                                           [context obtainPermanentIDsForObjects:@[localPodcast] error:nil];
                                                            [localPodcast populateWithPodcast:[podcasts objectAtIndex:0]];
 
                                                            [localPodcast subscribe];
