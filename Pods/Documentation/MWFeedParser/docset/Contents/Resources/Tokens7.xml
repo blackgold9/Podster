@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/MWFeedParserDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/MWFeedParserDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MWFeedParserDelegate/feedParserDidStart:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (void)feedParserDidStart:(MWFeedParser *)parser</Declaration>
+			
+			
+			<Anchor>//api/name/feedParserDidStart:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MWFeedParserDelegate/feedParser:didParseFeedInfo:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info</Declaration>
+			
+			
+			<Anchor>//api/name/feedParser:didParseFeedInfo:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MWFeedParserDelegate/feedParser:didParseFeedItem:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item</Declaration>
+			
+			
+			<Anchor>//api/name/feedParser:didParseFeedItem:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MWFeedParserDelegate/feedParserDidFinish:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (void)feedParserDidFinish:(MWFeedParser *)parser</Declaration>
+			
+			
+			<Anchor>//api/name/feedParserDidFinish:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/MWFeedParserDelegate/feedParser:didFailWithError:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error</Declaration>
+			
+			
+			<Anchor>//api/name/feedParser:didFailWithError:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

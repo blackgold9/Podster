@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/svanter/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.GMGridView-1.1.1.docset
+Time: 2012-09-03 23:50:03 +0000

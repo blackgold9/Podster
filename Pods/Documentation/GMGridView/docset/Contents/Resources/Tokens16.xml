@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/GMGridViewTransformationDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/GMGridViewTransformationDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>
+			
+			<NodeRef refid="16"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewTransformationDelegate/GMGridView:sizeInFullSizeForCell:atIndex:inInterfaceOrientation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (CGSize)GMGridView:(GMGridView *)gridView sizeInFullSizeForCell:(GMGridViewCell *)cell atIndex:(NSInteger)index inInterfaceOrientation:(UIInterfaceOrientation)orientation</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:sizeInFullSizeForCell:atIndex:inInterfaceOrientation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewTransformationDelegate/GMGridView:fullSizeViewForCell:atIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (UIView *)GMGridView:(GMGridView *)gridView fullSizeViewForCell:(GMGridViewCell *)cell atIndex:(NSInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:fullSizeViewForCell:atIndex:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewTransformationDelegate/GMGridView:didStartTransformingCell:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView didStartTransformingCell:(GMGridViewCell *)cell</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:didStartTransformingCell:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewTransformationDelegate/GMGridView:didEnterFullSizeForCell:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView didEnterFullSizeForCell:(GMGridViewCell *)cell</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:didEnterFullSizeForCell:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewTransformationDelegate/GMGridView:didEndTransformingCell:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView didEndTransformingCell:(GMGridViewCell *)cell</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:didEndTransformingCell:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

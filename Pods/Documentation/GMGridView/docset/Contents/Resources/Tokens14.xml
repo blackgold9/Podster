@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/GMGridViewLayoutStrategy.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/GMGridViewLayoutStrategy</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>
+			
+			<NodeRef refid="14"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewLayoutStrategy/requiresEnablingPaging</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>+ (BOOL)requiresEnablingPaging</Declaration>
+			
+			
+			<Anchor>//api/name/requiresEnablingPaging</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewLayoutStrategy/type</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (GMGridViewLayoutStrategyType)type</Declaration>
+			
+			
+			<Anchor>//api/name/type</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewLayoutStrategy/setupItemSize:andItemSpacing:withMinEdgeInsets:andCenteredGrid:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (void)setupItemSize:(CGSize)itemSize andItemSpacing:(NSInteger)spacing withMinEdgeInsets:(UIEdgeInsets)edgeInsets andCenteredGrid:(BOOL)centered</Declaration>
+			
+			
+			<Anchor>//api/name/setupItemSize:andItemSpacing:withMinEdgeInsets:andCenteredGrid:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewLayoutStrategy/rebaseWithItemCount:insideOfBounds:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (void)rebaseWithItemCount:(NSInteger)count insideOfBounds:(CGRect)bounds</Declaration>
+			
+			
+			<Anchor>//api/name/rebaseWithItemCount:insideOfBounds:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewLayoutStrategy/contentSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (CGSize)contentSize</Declaration>
+			
+			
+			<Anchor>//api/name/contentSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewLayoutStrategy/originForItemAtPosition:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (CGPoint)originForItemAtPosition:(NSInteger)position</Declaration>
+			
+			
+			<Anchor>//api/name/originForItemAtPosition:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewLayoutStrategy/itemPositionFromLocation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (NSInteger)itemPositionFromLocation:(CGPoint)location</Declaration>
+			
+			
+			<Anchor>//api/name/itemPositionFromLocation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewLayoutStrategy/rangeOfPositionsInBoundsFromOffset:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (NSRange)rangeOfPositionsInBoundsFromOffset:(CGPoint)offset</Declaration>
+			
+			
+			<Anchor>//api/name/rangeOfPositionsInBoundsFromOffset:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

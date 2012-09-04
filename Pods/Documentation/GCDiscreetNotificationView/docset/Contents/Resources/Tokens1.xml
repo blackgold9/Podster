@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/GCDiscreetNotificationView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/GCDiscreetNotificationView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setLabel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) UILabel *label</Declaration>
+			
+			
+			<Anchor>//api/name/label</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GCDiscreetNotificationView/label</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) UILabel *label</Declaration>
+			
+			
+			<Anchor>//api/name/label</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setActivityIndicator:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) UIActivityIndicatorView *activityIndicator</Declaration>
+			
+			
+			<Anchor>//api/name/activityIndicator</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GCDiscreetNotificationView/activityIndicator</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain, readonly) UIActivityIndicatorView *activityIndicator</Declaration>
+			
+			
+			<Anchor>//api/name/activityIndicator</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIView *view</Declaration>
+			
+			
+			<Anchor>//api/name/view</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GCDiscreetNotificationView/view</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIView *view</Declaration>
+			
+			
+			<Anchor>//api/name/view</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setPresentationMode:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) GCDiscreetNotificationViewPresentationMode presentationMode</Declaration>
+			
+			
+			<Anchor>//api/name/presentationMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GCDiscreetNotificationView/presentationMode</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) GCDiscreetNotificationViewPresentationMode presentationMode</Declaration>
+			
+			
+			<Anchor>//api/name/presentationMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setTextLabel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *textLabel</Declaration>
+			
+			
+			<Anchor>//api/name/textLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GCDiscreetNotificationView/textLabel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *textLabel</Declaration>
+			
+			
+			<Anchor>//api/name/textLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setShowActivity:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL showActivity</Declaration>
+			
+			
+			<Anchor>//api/name/showActivity</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GCDiscreetNotificationView/showActivity</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) BOOL showActivity</Declaration>
+			
+			
+			<Anchor>//api/name/showActivity</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setShowing:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isShowing) BOOL showing</Declaration>
+			
+			
+			<Anchor>//api/name/showing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GCDiscreetNotificationView/showing</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isShowing) BOOL showing</Declaration>
+			
+			
+			<Anchor>//api/name/showing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/initWithText:inView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithText:(NSString *)text inView:(UIView *)aView</Declaration>
+			
+			
+			<Anchor>//api/name/initWithText:inView:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/initWithText:showActivity:inView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithText:(NSString *)text showActivity:(BOOL)activity inView:(UIView *)aView</Declaration>
+			
+			
+			<Anchor>//api/name/initWithText:showActivity:inView:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/initWithText:showActivity:inPresentationMode:inView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithText:(NSString *)text showActivity:(BOOL)activity inPresentationMode:(GCDiscreetNotificationViewPresentationMode)aPresentationMode inView:(UIView *)aView</Declaration>
+			
+			
+			<Anchor>//api/name/initWithText:showActivity:inPresentationMode:inView:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/showAnimated</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)showAnimated</Declaration>
+			
+			
+			<Anchor>//api/name/showAnimated</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/hideAnimated</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)hideAnimated</Declaration>
+			
+			
+			<Anchor>//api/name/hideAnimated</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/hideAnimatedAfter:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)hideAnimatedAfter:(NSTimeInterval)timeInterval</Declaration>
+			
+			
+			<Anchor>//api/name/hideAnimatedAfter:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/show:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)show:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/show:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/hide:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)hide:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/hide:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/showAndDismissAutomaticallyAnimated</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)showAndDismissAutomaticallyAnimated</Declaration>
+			
+			
+			<Anchor>//api/name/showAndDismissAutomaticallyAnimated</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/showAndDismissAfter:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)showAndDismissAfter:(NSTimeInterval)timeInterval</Declaration>
+			
+			
+			<Anchor>//api/name/showAndDismissAfter:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setTextLabel:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextLabel:(NSString *)aText animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/setTextLabel:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setShowActivity:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)setShowActivity:(BOOL)activity animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/setShowActivity:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GCDiscreetNotificationView/setTextLabel:andSetShowActivity:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GCDiscreetNotificationView.h</DeclaredIn>			
+			
+			<Declaration>- (void)setTextLabel:(NSString *)aText andSetShowActivity:(BOOL)activity animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/setTextLabel:andSetShowActivity:animated:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

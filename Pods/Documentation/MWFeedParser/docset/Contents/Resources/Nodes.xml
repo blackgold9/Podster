@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+    <TOC>
+        <Node type="folder">
+            <Name>MWFeedParser 0.0.1</Name>
+            <Path>index.html</Path>
+			<Subnodes>
+                
+				
+				<Node type="folder">
+					<Name>Classes</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="1"/>
+						<NodeRef refid="2"/>
+						<NodeRef refid="3"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Categories</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="4"/>
+						<NodeRef refid="5"/>
+						<NodeRef refid="6"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Protocols</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="7"/>
+						
+					</Subnodes>
+				</Node>
+				
+			</Subnodes>
+        </Node>
+    </TOC>
+	<Library>
+		
+		<Node id="1">
+			<Name>MWFeedInfo</Name>
+			<Path>Classes/MWFeedInfo.html</Path>
+		</Node>
+		<Node id="2">
+			<Name>MWFeedItem</Name>
+			<Path>Classes/MWFeedItem.html</Path>
+		</Node>
+		<Node id="3">
+			<Name>MWFeedParser</Name>
+			<Path>Classes/MWFeedParser.html</Path>
+		</Node>
+		
+		<Node id="4">
+			<Name>NSDate(InternetDateTime)</Name>
+			<Path>Categories/NSDate+InternetDateTime.html</Path>
+		</Node>
+		<Node id="5">
+			<Name>NSString(GTMNSStringHTMLAdditions)</Name>
+			<Path>Categories/NSString+GTMNSStringHTMLAdditions.html</Path>
+		</Node>
+		<Node id="6">
+			<Name>NSString(HTML)</Name>
+			<Path>Categories/NSString+HTML.html</Path>
+		</Node>
+		
+		<Node id="7">
+			<Name>MWFeedParserDelegate</Name>
+			<Path>Protocols/MWFeedParserDelegate.html</Path>
+		</Node>
+		
+	</Library>
+</DocSetNodes>

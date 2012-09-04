@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>GMGridView 1.1.1 Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">GMGridView 1.1.1 </a></h1>
+				<a id="developerHome" href="index.html">Gulam Moledina</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">GMGridView 1.1.1 Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">GMGridView 1.1.1 Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1><a href="http://www.gmoledina.ca/projects/gmgridview/">GM-GRID-VIEW</a></h1>
+
+<p><a target="_blank" href="[http://www.gmoledina.ca/projects/gmgridview/](http://www.gmoledina.ca/projects/gmgridview/)">
+<img style="position: relative; width: 768px; margin: 0;" src="[http://www.gmoledina.ca/wp-content/uploads/2012/04/GMGridView](http://www.gmoledina.ca/wp-content/uploads/2012/04/GMGridView)_iPad_promo1.png" alt="GMGridView"/>
+</a></p>
+
+<p>&ldquo;<strong>Definitely looks like one to watch</strong>&rdquo; [ManiacDev.com]</p>
+
+<p>&ldquo;<strong>Looks like the best 3rd party implementation I have seen so far</strong>&rdquo; [iosDevWeekly.com]</p>
+
+<hr />
+
+<p>An iOS Grid-View allowing the user to sort the views in the scrollView and also to see the views in full-size by pinching them.
+This view is inspired by the UITableView and uses a datasource and delegates in order to get the data and interact with it.</p>
+
+<p>The cells are reusable and are not loaded until required (only the ones visible on the scrollview are loaded).
+It is important to use the dequeue method to reuse the cell.</p>
+
+<p>The best sorting style (swap or push) depends on personal taste and the frame of the grid; you can choose the one that suits you best.
+Same applies to the layout strategy (vertical, horizontal, paged,&hellip; and more to come).</p>
+
+<p>Many working examples provided in the demo app.</p>
+
+<p>Let us know how this component works out for you!
+New feature requests are welcome. (ping <a href="http://twitter.com/gmoledina">@gmoledina</a> or <a href="http://twitter.com/steipete">@steipete</a>)</p>
+
+<hr />
+
+<p><strong>Fresh from the baking oven</strong>:</p>
+
+<ul>
+<li>The component is now shipped as a static library</li>
+<li>The component now inherits from UIScrollView and changing the scroll delegate is now allowed!</li>
+<li>Support for different item sizes per interface orientation</li>
+</ul>
+
+
+<p><strong>Coming soon</strong>:</p>
+
+<ul>
+<li>Changing the zoom scale dynamically (when pinching to go fullscreen)</li>
+<li>Better performance of items scalling on pinch</li>
+<li>More customization options</li>
+</ul>
+
+
+<hr />
+
+<p><strong>Consider making a small donation to <a href="http://www.gmoledina.ca/projects/gmgridview/">support future developement</a> of this component.</strong></p>
+
+<hr />
+
+<p><strong>Requirements</strong>:</p>
+
+<ul>
+<li>iOS 4 and up</li>
+<li>Xcode 4.2 (<a href="Classes/GMGridView.html">GMGridView</a> uses ARC)</li>
+<li>Frameworks: Foundation, UIKit, CoreGraphics and QuartzCore</li>
+</ul>
+
+
+<p><strong>Features &ndash; General</strong>:</p>
+
+<ul>
+<li>Works on both the iPhone and iPad (best suited for iPad)</li>
+<li>Works on both portrait and landscape orientation</li>
+<li>Inherits from UIScrollView &ndash; you can override the UIScrollViewDelegate if you wish</li>
+<li>Reusable cells</li>
+<li>Edit mode to delete cells</li>
+<li>Gestures work great inside of the scrollView</li>
+<li>4 different layout strategies (Vertical, Horizontal, Horizontal Paged LTR/TTB)</li>
+<li>Possibility to provide your own layout strategy</li>
+<li>Paging!! 2 horizontally paged layout strategies added</li>
+<li>shaking animation on items when in edit mode</li>
+<li>Changing the scrollview delegate is allowed!</li>
+<li>Demo app provided, with options panel</li>
+</ul>
+
+
+<p><strong>Features &ndash; Sorting</strong>:</p>
+
+<ul>
+<li>Perform a long-touch on a view to be able to move it</li>
+<li>Two different animation styles (&ldquo;Swap&rdquo; or &ldquo;Push&rdquo;)</li>
+<li>Sorted view has a shake animation (can be disabled)</li>
+<li>Only one UIPanGestureRecognizer and one UILongTouchGestureRecognizer used to track ALL views</li>
+</ul>
+
+
+<p><strong>Features &ndash; Fullsize</strong>:</p>
+
+<ul>
+<li>Pinch, rotate and drag views using 2 fingers</li>
+<li>Switch to fullsize mode on the view at the end of these gestures if the view scaled enough</li>
+<li>Provide a different fullsize view (detailed view) for the view via the delegate</li>
+<li>Every view doesn&rsquo;t have it&rsquo;s own gesture recognizers, the main view handles a set of gestures for ALL views</li>
+</ul>
+
+						
+						
+					</div>
+					
+                        
+                    
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/GMGridView.html">GMGridView</a></li>
+							
+							<li><a href="Classes/GMGridViewCell.html">GMGridViewCell</a></li>
+							
+							<li><a href="Classes/GMGridViewLayoutHorizontalPagedLTRStrategy.html">GMGridViewLayoutHorizontalPagedLTRStrategy</a></li>
+							
+							<li><a href="Classes/GMGridViewLayoutHorizontalPagedStrategy.html">GMGridViewLayoutHorizontalPagedStrategy</a></li>
+							
+							<li><a href="Classes/GMGridViewLayoutHorizontalPagedTTBStrategy.html">GMGridViewLayoutHorizontalPagedTTBStrategy</a></li>
+							
+							<li><a href="Classes/GMGridViewLayoutHorizontalStrategy.html">GMGridViewLayoutHorizontalStrategy</a></li>
+							
+							<li><a href="Classes/GMGridViewLayoutStrategyBase.html">GMGridViewLayoutStrategyBase</a></li>
+							
+							<li><a href="Classes/GMGridViewLayoutStrategyFactory.html">GMGridViewLayoutStrategyFactory</a></li>
+							
+							<li><a href="Classes/GMGridViewLayoutVerticalStrategy.html">GMGridViewLayoutVerticalStrategy</a></li>
+							
+						</ul>
+					</div>
+					
+					
+						
+					<div class="index-column">
+						
+						<h2 class="index-title">Protocol References</h2>
+						<ul>
+							
+							<li><a href="Protocols/GMGridViewActionDelegate.html">GMGridViewActionDelegate</a></li>
+							
+							<li><a href="Protocols/GMGridViewDataSource.html">GMGridViewDataSource</a></li>
+							
+							<li><a href="Protocols/GMGridViewLayoutStrategy.html">GMGridViewLayoutStrategy</a></li>
+							
+							<li><a href="Protocols/GMGridViewSortingDelegate.html">GMGridViewSortingDelegate</a></li>
+							
+							<li><a href="Protocols/GMGridViewTransformationDelegate.html">GMGridViewTransformationDelegate</a></li>
+							
+						</ul>
+						
+						
+						<h2 class="index-title">Category References</h2>
+						<ul>
+							
+							<li><a href="Categories/UIGestureRecognizer+GMGridViewAdditions.html">UIGestureRecognizer(GMGridViewAdditions)</a></li>
+							
+							<li><a href="Categories/UIView+GMGridViewAdditions.html">UIView(GMGridViewAdditions)</a></li>
+							
+						</ul>
+						
+					</div>
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Gulam Moledina. All rights reserved. (Last updated: 2012-09-03)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/MBRoundProgressView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/MBRoundProgressView</TokenIdentifier>
+			<Abstract type="html">A progress view for showing definite progress by filling up a circle (pie chart).</Abstract>
+			<DeclaredIn>MBProgressHUD.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MBRoundProgressView/setProgress:</TokenIdentifier>
+			<Abstract type="html">Progress (0.0 to 1.0)</Abstract>
+			<DeclaredIn>MBProgressHUD.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) float progress</Declaration>
+			
+			
+			<Anchor>//api/name/progress</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MBRoundProgressView/progress</TokenIdentifier>
+			<Abstract type="html">Progress (0.0 to 1.0)</Abstract>
+			<DeclaredIn>MBProgressHUD.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) float progress</Declaration>
+			
+			
+			<Anchor>//api/name/progress</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MBRoundProgressView/setAnnular:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MBProgressHUD.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, getter=isAnnular) BOOL annular</Declaration>
+			
+			
+			<Anchor>//api/name/annular</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MBRoundProgressView/annular</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MBProgressHUD.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, getter=isAnnular) BOOL annular</Declaration>
+			
+			
+			<Anchor>//api/name/annular</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

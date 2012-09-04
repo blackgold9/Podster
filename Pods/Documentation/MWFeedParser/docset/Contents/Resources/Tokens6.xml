@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSString+HTML.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSString(HTML)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>
+			
+			<NodeRef refid="6"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(HTML)/stringByConvertingHTMLToPlainText</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByConvertingHTMLToPlainText</Declaration>
+			
+			
+			<Anchor>//api/name/stringByConvertingHTMLToPlainText</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(HTML)/stringByDecodingHTMLEntities</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByDecodingHTMLEntities</Declaration>
+			
+			
+			<Anchor>//api/name/stringByDecodingHTMLEntities</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(HTML)/stringByEncodingHTMLEntities</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByEncodingHTMLEntities</Declaration>
+			
+			
+			<Anchor>//api/name/stringByEncodingHTMLEntities</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(HTML)/stringByEncodingHTMLEntities:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByEncodingHTMLEntities:(BOOL)isUnicode</Declaration>
+			
+			
+			<Anchor>//api/name/stringByEncodingHTMLEntities:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(HTML)/stringWithNewLinesAsBRs</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringWithNewLinesAsBRs</Declaration>
+			
+			
+			<Anchor>//api/name/stringWithNewLinesAsBRs</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(HTML)/stringByRemovingNewLinesAndWhitespace</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByRemovingNewLinesAndWhitespace</Declaration>
+			
+			
+			<Anchor>//api/name/stringByRemovingNewLinesAndWhitespace</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(HTML)/stringByLinkifyingURLs</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByLinkifyingURLs</Declaration>
+			
+			
+			<Anchor>//api/name/stringByLinkifyingURLs</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(HTML)/stringByStrippingTags</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)stringByStrippingTags</Declaration>
+			
+			
+			<Anchor>//api/name/stringByStrippingTags</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

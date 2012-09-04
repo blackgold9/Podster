@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSArray+JSONKitSerializingBlockAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSArray(JSONKitSerializingBlockAdditions)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>JSONKit.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSArray(JSONKitSerializingBlockAdditions)/JSONDataWithOptions:serializeUnsupportedClassesUsingBlock:error:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>JSONKit.h</DeclaredIn>			
+			
+			<Declaration>- (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingBlock:(id ( ^ ) ( id object ))block error:(NSError **)error</Declaration>
+			
+			
+			<Anchor>//api/name/JSONDataWithOptions:serializeUnsupportedClassesUsingBlock:error:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSArray(JSONKitSerializingBlockAdditions)/JSONStringWithOptions:serializeUnsupportedClassesUsingBlock:error:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>JSONKit.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)JSONStringWithOptions:(JKSerializeOptionFlags)serializeOptions serializeUnsupportedClassesUsingBlock:(id ( ^ ) ( id object ))block error:(NSError **)error</Declaration>
+			
+			
+			<Anchor>//api/name/JSONStringWithOptions:serializeUnsupportedClassesUsingBlock:error:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

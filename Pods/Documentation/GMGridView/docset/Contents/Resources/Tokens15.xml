@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/GMGridViewSortingDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/GMGridViewSortingDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>
+			
+			<NodeRef refid="15"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewSortingDelegate/GMGridView:moveItemAtIndex:toIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView moveItemAtIndex:(NSInteger)oldIndex toIndex:(NSInteger)newIndex</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:moveItemAtIndex:toIndex:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewSortingDelegate/GMGridView:exchangeItemAtIndex:withItemAtIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView exchangeItemAtIndex:(NSInteger)index1 withItemAtIndex:(NSInteger)index2</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:exchangeItemAtIndex:withItemAtIndex:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewSortingDelegate/GMGridView:didStartMovingCell:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView didStartMovingCell:(GMGridViewCell *)cell</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:didStartMovingCell:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewSortingDelegate/GMGridView:didEndMovingCell:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView didEndMovingCell:(GMGridViewCell *)cell</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:didEndMovingCell:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewSortingDelegate/GMGridView:shouldAllowShakingBehaviorWhenMovingCell:atIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)GMGridView:(GMGridView *)gridView shouldAllowShakingBehaviorWhenMovingCell:(GMGridViewCell *)view atIndex:(NSInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:shouldAllowShakingBehaviorWhenMovingCell:atIndex:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

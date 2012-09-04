@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/GMGridViewLayoutVerticalStrategy.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/GMGridViewLayoutVerticalStrategy</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutVerticalStrategy/setNumberOfItemsPerRow:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger numberOfItemsPerRow</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfItemsPerRow</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutVerticalStrategy/numberOfItemsPerRow</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger numberOfItemsPerRow</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfItemsPerRow</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

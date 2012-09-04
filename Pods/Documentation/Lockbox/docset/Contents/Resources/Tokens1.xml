@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/Lockbox.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/Lockbox</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>Lockbox.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/Lockbox/setString:forKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>Lockbox.h</DeclaredIn>			
+			
+			<Declaration>+ (BOOL)setString:(NSString *)value forKey:(NSString *)key</Declaration>
+			
+			
+			<Anchor>//api/name/setString:forKey:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/Lockbox/stringForKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>Lockbox.h</DeclaredIn>			
+			
+			<Declaration>+ (NSString *)stringForKey:(NSString *)key</Declaration>
+			
+			
+			<Anchor>//api/name/stringForKey:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/Lockbox/setArray:forKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>Lockbox.h</DeclaredIn>			
+			
+			<Declaration>+ (BOOL)setArray:(NSArray *)value forKey:(NSString *)key</Declaration>
+			
+			
+			<Anchor>//api/name/setArray:forKey:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/Lockbox/arrayForKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>Lockbox.h</DeclaredIn>			
+			
+			<Declaration>+ (NSArray *)arrayForKey:(NSString *)key</Declaration>
+			
+			
+			<Anchor>//api/name/arrayForKey:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/Lockbox/setSet:forKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>Lockbox.h</DeclaredIn>			
+			
+			<Declaration>+ (BOOL)setSet:(NSSet *)value forKey:(NSString *)key</Declaration>
+			
+			
+			<Anchor>//api/name/setSet:forKey:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/Lockbox/setForKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>Lockbox.h</DeclaredIn>			
+			
+			<Declaration>+ (NSSet *)setForKey:(NSString *)key</Declaration>
+			
+			
+			<Anchor>//api/name/setForKey:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/svanter/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.SDURLCache-1.2.docset
+Time: 2012-09-03 23:50:15 +0000

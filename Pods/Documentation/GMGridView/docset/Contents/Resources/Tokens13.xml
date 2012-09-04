@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/GMGridViewDataSource.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/GMGridViewDataSource</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>
+			
+			<NodeRef refid="13"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewDataSource/numberOfItemsInGMGridView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfItemsInGMGridView:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewDataSource/GMGridView:sizeForItemsInInterfaceOrientation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:sizeForItemsInInterfaceOrientation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewDataSource/GMGridView:cellForItemAtIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:cellForItemAtIndex:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewDataSource/GMGridView:canDeleteItemAtIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:canDeleteItemAtIndex:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

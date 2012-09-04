@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>GCDiscreetNotificationView 0.0.1 Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">GCDiscreetNotificationView 0.0.1 </a></h1>
+				<a id="developerHome" href="index.html">Guillaume Campagna</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">GCDiscreetNotificationView 0.0.1 Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">GCDiscreetNotificationView 0.0.1 Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<p>h1. GCDiscreetNotificationView</p>
+
+<p>GCDiscreetNotificationView is a discreet, non-modal, notification view for iOS. You can use it to show an activity or state of you app without blocking the user interactions.</p>
+
+<p>!<a href="http://littlekiwi.co.cc/GithubImages/DiscreetNotificationImage.png!">http://littlekiwi.co.cc/GithubImages/DiscreetNotificationImage.png!</a></p>
+
+<p><a href="Classes/GCDiscreetNotificationView.html">GCDiscreetNotificationView</a> features:</p>
+
+<ul>
+<li>Easy to use : init and show</li>
+<li>Can show an activity indicator</li>
+<li>Two presentation mode (top and bottom)</li>
+<li>All properties (text, activity and presentation mode) can be changed in a animated fashion</li>
+</ul>
+
+
+<p>h2. Usage</p>
+
+<p>(See the demo project included)</p>
+
+<p>You simply allocate the notification view with one of the following methods.</p>
+
+<p>The parameters are the following :
+* <em>text</em> : the text presented on the notification
+* <em>activity</em> : if set to @YES@, the notification with show a activity indicator
+* <em>aPresentationMode</em> : the presentation mode of the notification (top or bottom)
+* <em>aView</em> : the view that will contain the notification. The view should be able to accept subviews (will not work on a @UITableView@ for example)</p>
+
+<pre>
+- (id) initWithText:(NSString *)text inView:(UIView *)aView;
+- (id) initWithText:(NSString *)text showActivity:(BOOL)activity inView:(UIView *)aView;
+- (id) initWithText:(NSString *)text showActivity:(BOOL)activity inPresentationMode:(GCDiscreetNotificationViewPresentationMode) aPresentationMode inView:(UIView *)aView;
+</pre>
+
+
+<p>You show or hide the notification with these methods. The @showAndDismissAutomaticallyAnimated@ will hide your notification automatically after 1 second.</p>
+
+<pre>
+- (void) showAnimated;
+- (void) hideAnimated;
+- (void) hideAnimatedAfter:(NSTimeInterval) timeInterval;
+- (void) show:(BOOL) animated;
+- (void) hide:(BOOL) animated;
+- (void) showAndDismissAutomaticallyAnimated;
+- (void) showAndDismissAfter:(NSTimeInterval) timeInterval;
+</pre>
+
+
+<p>You can change the text of the label of the activity viewing at any moment with these properties.</p>
+
+<pre>
+@property (nonatomic, assign) UIView *view;
+@property (nonatomic, assign) GCDiscreetNotificationViewPresentationMode presentationMode;
+@property (nonatomic, copy) NSString* textLabel;
+@property (nonatomic, assign) BOOL showActivity;
+</pre>
+
+
+<p>These properties can be changed in a animated fashion (except the view).</p>
+
+<pre>
+- (void) setTextLabel:(NSString *) aText animated:(BOOL) animated;
+- (void) setShowActivity:(BOOL) activity animated:(BOOL) animated;
+- (void) setTextLabel:(NSString *)aText andSetShowActivity:(BOOL)activity animated:(BOOL)animated;
+- (void) setPresentationMode:(GCDiscreetNotificationViewPresentationMode) newPresentationMode animated:(BOOL) animated;
+</pre>
+
+
+<p>You can access directly the notification&rsquo;s label and activity indicator. And change some propreties on that label and activity indicator. If you want to change the label&rsquo;s text or hide the indicator, use @textLabel@ or @showActivity@ instead.</p>
+
+<pre>
+@property (nonatomic, retain, readonly) UILabel *label;  
+@property (nonatomic, retain, readonly) UIActivityIndicatorView *activityIndicator;
+</pre>
+
+						
+						
+					</div>
+					
+                        
+                    
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/GCDiscreetNotificationView.html">GCDiscreetNotificationView</a></li>
+							
+						</ul>
+					</div>
+					
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Guillaume Campagna. All rights reserved. (Last updated: 2012-09-03)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/GMGridViewLayoutStrategyBase.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/GMGridViewLayoutStrategyBase</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setType:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) GMGridViewLayoutStrategyType type</Declaration>
+			
+			
+			<Anchor>//api/name/type</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/type</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) GMGridViewLayoutStrategyType type</Declaration>
+			
+			
+			<Anchor>//api/name/type</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setItemSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) CGSize itemSize</Declaration>
+			
+			
+			<Anchor>//api/name/itemSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/itemSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) CGSize itemSize</Declaration>
+			
+			
+			<Anchor>//api/name/itemSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setItemSpacing:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger itemSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/itemSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/itemSpacing</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger itemSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/itemSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setMinEdgeInsets:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIEdgeInsets minEdgeInsets</Declaration>
+			
+			
+			<Anchor>//api/name/minEdgeInsets</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/minEdgeInsets</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIEdgeInsets minEdgeInsets</Declaration>
+			
+			
+			<Anchor>//api/name/minEdgeInsets</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setCenteredGrid:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) BOOL centeredGrid</Declaration>
+			
+			
+			<Anchor>//api/name/centeredGrid</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/centeredGrid</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) BOOL centeredGrid</Declaration>
+			
+			
+			<Anchor>//api/name/centeredGrid</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setItemCount:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger itemCount</Declaration>
+			
+			
+			<Anchor>//api/name/itemCount</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/itemCount</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger itemCount</Declaration>
+			
+			
+			<Anchor>//api/name/itemCount</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setEdgeInsets:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIEdgeInsets edgeInsets</Declaration>
+			
+			
+			<Anchor>//api/name/edgeInsets</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/edgeInsets</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIEdgeInsets edgeInsets</Declaration>
+			
+			
+			<Anchor>//api/name/edgeInsets</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setGridBounds:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) CGRect gridBounds</Declaration>
+			
+			
+			<Anchor>//api/name/gridBounds</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/gridBounds</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) CGRect gridBounds</Declaration>
+			
+			
+			<Anchor>//api/name/gridBounds</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setContentSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) CGSize contentSize</Declaration>
+			
+			
+			<Anchor>//api/name/contentSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutStrategyBase/contentSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) CGSize contentSize</Declaration>
+			
+			
+			<Anchor>//api/name/contentSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setupItemSize:andItemSpacing:withMinEdgeInsets:andCenteredGrid:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (void)setupItemSize:(CGSize)itemSize andItemSpacing:(NSInteger)spacing withMinEdgeInsets:(UIEdgeInsets)edgeInsets andCenteredGrid:(BOOL)centered</Declaration>
+			
+			
+			<Anchor>//api/name/setupItemSize:andItemSpacing:withMinEdgeInsets:andCenteredGrid:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutStrategyBase/setEdgeAndContentSizeFromAbsoluteContentSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (void)setEdgeAndContentSizeFromAbsoluteContentSize:(CGSize)actualContentSize</Declaration>
+			
+			
+			<Anchor>//api/name/setEdgeAndContentSizeFromAbsoluteContentSize:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

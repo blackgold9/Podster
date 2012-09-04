@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>MBProgressHUD 0.5 Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">MBProgressHUD 0.5 </a></h1>
+				<a id="developerHome" href="index.html">Jonathan George and Matej Bukovinski</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MBProgressHUD 0.5 Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MBProgressHUD 0.5 Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1><a href="Classes/MBProgressHUD.html">MBProgressHUD</a></h1>
+
+<p><a href="Classes/MBProgressHUD.html">MBProgressHUD</a> is an iOS drop-in class that displays a translucent HUD with a progress indicator and some optional labels while work is being done in a background thread. The HUD is meant as a replacement for the undocumented, private UIKit UIProgressHUD with some additional features.</p>
+
+<p><a href="http://dl.dropbox.com/u/378729/MBProgressHUD/1.png"><img src="http://dl.dropbox.com/u/378729/MBProgressHUD/1-thumb.png" alt="" /></a>
+<a href="http://dl.dropbox.com/u/378729/MBProgressHUD/2.png"><img src="http://dl.dropbox.com/u/378729/MBProgressHUD/2-thumb.png" alt="" /></a>
+<a href="http://dl.dropbox.com/u/378729/MBProgressHUD/3.png"><img src="http://dl.dropbox.com/u/378729/MBProgressHUD/3-thumb.png" alt="" /></a>
+<a href="http://dl.dropbox.com/u/378729/MBProgressHUD/4.png"><img src="http://dl.dropbox.com/u/378729/MBProgressHUD/4-thumb.png" alt="" /></a>
+<a href="http://dl.dropbox.com/u/378729/MBProgressHUD/5.png"><img src="http://dl.dropbox.com/u/378729/MBProgressHUD/5-thumb.png" alt="" /></a>
+<a href="http://dl.dropbox.com/u/378729/MBProgressHUD/6.png"><img src="http://dl.dropbox.com/u/378729/MBProgressHUD/6-thumb.png" alt="" /></a>
+<a href="http://dl.dropbox.com/u/378729/MBProgressHUD/7.png"><img src="http://dl.dropbox.com/u/378729/MBProgressHUD/7-thumb.png" alt="" /></a></p>
+
+<h1>Adding <a href="Classes/MBProgressHUD.html">MBProgressHUD</a> to your project</h1>
+
+<p>The simplest way to add the <a href="Classes/MBProgressHUD.html">MBProgressHUD</a> to your project is to directly add the <code></code>MBProgressHUD<code>.h</code> and <code></code>MBProgressHUD<code>.m</code> source files to your project.</p>
+
+<ol>
+<li>Download the latest code version from the repository (you can simply use the Download Source button and get the zip or tar archive of the master branch).</li>
+<li>Extract the archive.</li>
+<li>Open your project in Xcode, than drag and drop <code></code>MBProgressHUD<code>.h</code> and <code></code>MBProgressHUD<code>.m</code> to your classes group (in the Groups &amp; Files view).</li>
+<li>Make sure to select Copy items when asked.</li>
+</ol>
+
+
+<p>If you have a git tracked project, you can add <a href="Classes/MBProgressHUD.html">MBProgressHUD</a> as a submodule to your project.</p>
+
+<ol>
+<li>Move inside your git tracked project.</li>
+<li>Add <a href="Classes/MBProgressHUD.html">MBProgressHUD</a> as a submodule using <code>git submodule add git://github.com/matej/</code>MBProgressHUD<code>.git </code>MBProgressHUD<code></code> .</li>
+<li>Open your project in Xcode, than drag and drop <code></code>MBProgressHUD<code>.h</code> and <code></code>MBProgressHUD<code>.m</code> to your classes group (in the Groups &amp; Files view).</li>
+<li>Don&rsquo;t select Copy items and select a suitable Reference type (relative to project should work fine most of the time).</li>
+</ol>
+
+
+<p>You can also add MBProgressHUD as a static library to your workspace. See <a href="[http://blog.carbonfive.com/2011/04/04/using-open-source-static-libraries-in-xcode-4/](http://blog.carbonfive.com/2011/04/04/using-open-source-static-libraries-in-xcode-4/">this article</a>#using_a_static_library) for details.</p>
+
+<h1>Usage</h1>
+
+<p>Extensive documentation is provided in the header file (<a href="Classes/MBProgressHUD.html">MBProgressHUD</a>.h). In addition a full Xcode demo project is included in the Demo directory.</p>
+
+<h1>License</h1>
+
+<p>This code is distributed under the terms and conditions of the MIT license.</p>
+
+<p>Copyright &copy; 2011 Matej Bukovinski</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &ldquo;Software&rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+
+<h1>Change-log</h1>
+
+<p><strong>Version 0.5</strong> @ 22.03.12</p>
+
+<ul>
+<li>Major source code modernization and cleanup (KVO, layout code, instance vars, etc.).</li>
+<li>New annular determinate mode.</li>
+<li>New text only mode.</li>
+<li>Added a static library project and Xcode 4 workspace.</li>
+<li>Added methods to find and return HUD(s) on a view.</li>
+<li>Various bug fixes.</li>
+<li>Various demo project enhancements (hi-res rescues, new samples).</li>
+</ul>
+
+
+<p>IMPORTANT: Requires LLVM 3+.</p>
+
+<p><strong>Version 0.41</strong> @ 03.01.12</p>
+
+<ul>
+<li>Support for ARC.</li>
+</ul>
+
+
+<p><strong>Version 0.4</strong> @ 25.07.10</p>
+
+<ul>
+<li>Different animation modes. Default set to zoom.</li>
+<li>Class convenience methods (tadelv &ndash; <a href="http://github.com/tadelv">http://github.com/tadelv).</a>.)</li>
+<li>Autorotation when added to a UIWindow (wuf810 &ndash; <a href="http://github.com/wuf810">http://github.com/wuf810).</a>.)</li>
+<li>Extended demo app.</li>
+<li>Several smaller fixes.</li>
+</ul>
+
+
+<p><strong>Version 0.33</strong> @ 27.03.10</p>
+
+<ul>
+<li>Custom view operation mode added.</li>
+<li>Fixed a memory leak.</li>
+</ul>
+
+
+<p><strong>Version 0.32</strong> @ 4.01.10</p>
+
+<ul>
+<li>Added minShowTime, graceTime, xOffset, yOffset.</li>
+<li>Various fixes.</li>
+</ul>
+
+
+<p><strong>Version 0.31</strong> @ 8.10.09</p>
+
+<ul>
+<li>Fix for touch through during the fade-out animation.</li>
+</ul>
+
+
+<p><strong>Version 0.3</strong> @ 30.9.09</p>
+
+<ul>
+<li>Added show: and hide: methods.</li>
+<li>Now using UIViews layoutSubviews to automate layout calls.</li>
+<li>Added some floors to round pixel positions and thereby prevent unsharp views.</li>
+<li>Some additional documentation and code cleanup.</li>
+</ul>
+
+
+<p><strong>Version 0.2</strong> @ 21.7.09</p>
+
+<ul>
+<li>Added determinate progress mode and switching capabilities between determinate and indeterminate modes.</li>
+<li>Various bugfixes.</li>
+</ul>
+
+
+<p><strong>Version 0.11</strong> @ 2.6.09.</p>
+
+<ul>
+<li>Updated labelText and detailsLabelText properties to support text modifications while the HUD is being shown.</li>
+</ul>
+
+
+<p><strong>Version 0.1</strong> @ 2.4.09</p>
+
+<ul>
+<li>Initial release.</li>
+</ul>
+
+						
+						
+					</div>
+					
+                        
+                    
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/MBProgressHUD.html">MBProgressHUD</a></li>
+							
+							<li><a href="Classes/MBRoundProgressView.html">MBRoundProgressView</a></li>
+							
+						</ul>
+					</div>
+					
+					
+						
+					<div class="index-column">
+						
+						<h2 class="index-title">Protocol References</h2>
+						<ul>
+							
+							<li><a href="Protocols/MBProgressHUDDelegate.html">MBProgressHUDDelegate</a></li>
+							
+						</ul>
+						
+						
+					</div>
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Jonathan George and Matej Bukovinski. All rights reserved. (Last updated: 2012-09-03)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

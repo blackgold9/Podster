@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSDate+InternetDateTime.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSDate(InternetDateTime)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSDate+InternetDateTime.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(InternetDateTime)/dateFromInternetDateTimeString:formatHint:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSDate+InternetDateTime.h</DeclaredIn>			
+			
+			<Declaration>+ (NSDate *)dateFromInternetDateTimeString:(NSString *)dateString formatHint:(DateFormatHint)hint</Declaration>
+			
+			
+			<Anchor>//api/name/dateFromInternetDateTimeString:formatHint:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(InternetDateTime)/dateFromRFC3339String:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSDate+InternetDateTime.h</DeclaredIn>			
+			
+			<Declaration>+ (NSDate *)dateFromRFC3339String:(NSString *)dateString</Declaration>
+			
+			
+			<Anchor>//api/name/dateFromRFC3339String:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSDate(InternetDateTime)/dateFromRFC822String:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSDate+InternetDateTime.h</DeclaredIn>			
+			
+			<Declaration>+ (NSDate *)dateFromRFC822String:(NSString *)dateString</Declaration>
+			
+			
+			<Anchor>//api/name/dateFromRFC822String:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

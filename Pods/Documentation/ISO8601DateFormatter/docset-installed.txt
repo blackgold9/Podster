@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/svanter/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.ISO8601DateFormatter-0.6.docset
+Time: 2012-09-03 23:50:04 +0000

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SDURLCache.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SDURLCache</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SDURLCache.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SDURLCache/setMinCacheInterval:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SDURLCache.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval minCacheInterval</Declaration>
+			
+			
+			<Anchor>//api/name/minCacheInterval</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SDURLCache/minCacheInterval</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SDURLCache.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval minCacheInterval</Declaration>
+			
+			
+			<Anchor>//api/name/minCacheInterval</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SDURLCache/defaultCachePath</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SDURLCache.h</DeclaredIn>			
+			
+			<Declaration>+ (NSString *)defaultCachePath</Declaration>
+			
+			
+			<Anchor>//api/name/defaultCachePath</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

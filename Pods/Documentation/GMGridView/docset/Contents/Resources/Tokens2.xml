@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/GMGridViewCell.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/GMGridViewCell</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setContentView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *contentView</Declaration>
+			
+			
+			<Anchor>//api/name/contentView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/contentView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *contentView</Declaration>
+			
+			
+			<Anchor>//api/name/contentView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setDeleteButtonIcon:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIImage *deleteButtonIcon</Declaration>
+			
+			
+			<Anchor>//api/name/deleteButtonIcon</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/deleteButtonIcon</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIImage *deleteButtonIcon</Declaration>
+			
+			
+			<Anchor>//api/name/deleteButtonIcon</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setDeleteButtonOffset:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) CGPoint deleteButtonOffset</Declaration>
+			
+			
+			<Anchor>//api/name/deleteButtonOffset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/deleteButtonOffset</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) CGPoint deleteButtonOffset</Declaration>
+			
+			
+			<Anchor>//api/name/deleteButtonOffset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setReuseIdentifier:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSString *reuseIdentifier</Declaration>
+			
+			
+			<Anchor>//api/name/reuseIdentifier</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/reuseIdentifier</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) NSString *reuseIdentifier</Declaration>
+			
+			
+			<Anchor>//api/name/reuseIdentifier</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/prepareForReuse</TokenIdentifier>
+			<Abstract type="html">Override to release custom data before cell is reused.</Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>- (void)prepareForReuse</Declaration>
+			
+			
+			<Anchor>//api/name/prepareForReuse</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setFullSizeView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *fullSizeView</Declaration>
+			
+			
+			<Anchor>//api/name/fullSizeView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/fullSizeView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) UIView *fullSizeView</Declaration>
+			
+			
+			<Anchor>//api/name/fullSizeView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setFullSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGSize fullSize</Declaration>
+			
+			
+			<Anchor>//api/name/fullSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/fullSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) CGSize fullSize</Declaration>
+			
+			
+			<Anchor>//api/name/fullSize</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setInShakingMode:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isInShakingMode) BOOL inShakingMode</Declaration>
+			
+			
+			<Anchor>//api/name/inShakingMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/inShakingMode</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isInShakingMode) BOOL inShakingMode</Declaration>
+			
+			
+			<Anchor>//api/name/inShakingMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setInFullSizeMode:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isInFullSizeMode) BOOL inFullSizeMode</Declaration>
+			
+			
+			<Anchor>//api/name/inFullSizeMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/inFullSizeMode</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isInFullSizeMode) BOOL inFullSizeMode</Declaration>
+			
+			
+			<Anchor>//api/name/inFullSizeMode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setEditing:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, getter=isEditing) BOOL editing</Declaration>
+			
+			
+			<Anchor>//api/name/editing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/editing</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, getter=isEditing) BOOL editing</Declaration>
+			
+			
+			<Anchor>//api/name/editing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setEditing:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>- (void)setEditing:(BOOL)editing animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/setEditing:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setDeleteBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) GMGridViewCellDeleteBlock deleteBlock</Declaration>
+			
+			
+			<Anchor>//api/name/deleteBlock</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/deleteBlock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) GMGridViewCellDeleteBlock deleteBlock</Declaration>
+			
+			
+			<Anchor>//api/name/deleteBlock</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setDefaultFullsizeViewResizingMask:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIViewAutoresizing defaultFullsizeViewResizingMask</Declaration>
+			
+			
+			<Anchor>//api/name/defaultFullsizeViewResizingMask</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/defaultFullsizeViewResizingMask</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIViewAutoresizing defaultFullsizeViewResizingMask</Declaration>
+			
+			
+			<Anchor>//api/name/defaultFullsizeViewResizingMask</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/setDeleteButton:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) UIButton *deleteButton</Declaration>
+			
+			
+			<Anchor>//api/name/deleteButton</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewCell/deleteButton</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) UIButton *deleteButton</Declaration>
+			
+			
+			<Anchor>//api/name/deleteButton</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/shake:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>- (void)shake:(BOOL)on</Declaration>
+			
+			
+			<Anchor>//api/name/shake:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/switchToFullSizeMode:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>- (void)switchToFullSizeMode:(BOOL)fullSizeEnabled</Declaration>
+			
+			
+			<Anchor>//api/name/switchToFullSizeMode:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewCell/stepToFullsizeWithAlpha:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewCell+Extended.h</DeclaredIn>			
+			
+			<Declaration>- (void)stepToFullsizeWithAlpha:(CGFloat)alpha</Declaration>
+			
+			
+			<Anchor>//api/name/stepToFullsizeWithAlpha:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/MWFeedParser.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/MWFeedParser</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;MWFeedParserDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/delegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;MWFeedParserDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setFeedParseType:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) ParseType feedParseType</Declaration>
+			
+			
+			<Anchor>//api/name/feedParseType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/feedParseType</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) ParseType feedParseType</Declaration>
+			
+			
+			<Anchor>//api/name/feedParseType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setConnectionType:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) ConnectionType connectionType</Declaration>
+			
+			
+			<Anchor>//api/name/connectionType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/connectionType</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) ConnectionType connectionType</Declaration>
+			
+			
+			<Anchor>//api/name/connectionType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setStopped:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isStopped) BOOL stopped</Declaration>
+			
+			
+			<Anchor>//api/name/stopped</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/stopped</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isStopped) BOOL stopped</Declaration>
+			
+			
+			<Anchor>//api/name/stopped</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setFailed:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=didFail) BOOL failed</Declaration>
+			
+			
+			<Anchor>//api/name/failed</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/failed</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=didFail) BOOL failed</Declaration>
+			
+			
+			<Anchor>//api/name/failed</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setParsing:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isParsing) BOOL parsing</Declaration>
+			
+			
+			<Anchor>//api/name/parsing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/parsing</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isParsing) BOOL parsing</Declaration>
+			
+			
+			<Anchor>//api/name/parsing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/initWithFeedURL:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithFeedURL:(NSURL *)feedURL</Declaration>
+			
+			
+			<Anchor>//api/name/initWithFeedURL:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/parse</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)parse</Declaration>
+			
+			
+			<Anchor>//api/name/parse</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/stopParsing</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (void)stopParsing</Declaration>
+			
+			
+			<Anchor>//api/name/stopParsing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/url</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser.h</DeclaredIn>			
+			
+			<Declaration>- (NSURL *)url</Declaration>
+			
+			
+			<Anchor>//api/name/url</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setUrl:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSURL *url</Declaration>
+			
+			
+			<Anchor>//api/name/url</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/url</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSURL *url</Declaration>
+			
+			
+			<Anchor>//api/name/url</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setUrlConnection:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSURLConnection *urlConnection</Declaration>
+			
+			
+			<Anchor>//api/name/urlConnection</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/urlConnection</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSURLConnection *urlConnection</Declaration>
+			
+			
+			<Anchor>//api/name/urlConnection</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setAsyncData:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSMutableData *asyncData</Declaration>
+			
+			
+			<Anchor>//api/name/asyncData</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/asyncData</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSMutableData *asyncData</Declaration>
+			
+			
+			<Anchor>//api/name/asyncData</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setAsyncTextEncodingName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSString *asyncTextEncodingName</Declaration>
+			
+			
+			<Anchor>//api/name/asyncTextEncodingName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/asyncTextEncodingName</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSString *asyncTextEncodingName</Declaration>
+			
+			
+			<Anchor>//api/name/asyncTextEncodingName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setFeedParser:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSXMLParser *feedParser</Declaration>
+			
+			
+			<Anchor>//api/name/feedParser</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/feedParser</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSXMLParser *feedParser</Declaration>
+			
+			
+			<Anchor>//api/name/feedParser</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setCurrentPath:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSString *currentPath</Declaration>
+			
+			
+			<Anchor>//api/name/currentPath</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/currentPath</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSString *currentPath</Declaration>
+			
+			
+			<Anchor>//api/name/currentPath</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setCurrentText:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSMutableString *currentText</Declaration>
+			
+			
+			<Anchor>//api/name/currentText</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/currentText</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSMutableString *currentText</Declaration>
+			
+			
+			<Anchor>//api/name/currentText</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setCurrentElementAttributes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSDictionary *currentElementAttributes</Declaration>
+			
+			
+			<Anchor>//api/name/currentElementAttributes</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/currentElementAttributes</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSDictionary *currentElementAttributes</Declaration>
+			
+			
+			<Anchor>//api/name/currentElementAttributes</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setItem:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) MWFeedItem *item</Declaration>
+			
+			
+			<Anchor>//api/name/item</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/item</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) MWFeedItem *item</Declaration>
+			
+			
+			<Anchor>//api/name/item</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setInfo:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) MWFeedInfo *info</Declaration>
+			
+			
+			<Anchor>//api/name/info</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/info</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) MWFeedInfo *info</Declaration>
+			
+			
+			<Anchor>//api/name/info</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/setPathOfElementWithXHTMLType:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *pathOfElementWithXHTMLType</Declaration>
+			
+			
+			<Anchor>//api/name/pathOfElementWithXHTMLType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedParser/pathOfElementWithXHTMLType</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *pathOfElementWithXHTMLType</Declaration>
+			
+			
+			<Anchor>//api/name/pathOfElementWithXHTMLType</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/reset</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (void)reset</Declaration>
+			
+			
+			<Anchor>//api/name/reset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/abortParsingEarly</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (void)abortParsingEarly</Declaration>
+			
+			
+			<Anchor>//api/name/abortParsingEarly</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/parsingFinished</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (void)parsingFinished</Declaration>
+			
+			
+			<Anchor>//api/name/parsingFinished</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/parsingFailedWithErrorCode:andDescription:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (void)parsingFailedWithErrorCode:(int)code andDescription:(NSString *)description</Declaration>
+			
+			
+			<Anchor>//api/name/parsingFailedWithErrorCode:andDescription:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/startParsingData:textEncodingName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (void)startParsingData:(NSData *)data textEncodingName:(NSString *)textEncodingName</Declaration>
+			
+			
+			<Anchor>//api/name/startParsingData:textEncodingName:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/dispatchFeedInfoToDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (void)dispatchFeedInfoToDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/dispatchFeedInfoToDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/dispatchFeedItemToDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (void)dispatchFeedItemToDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/dispatchFeedItemToDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/createEnclosureFromAttributes:andAddToItem:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)createEnclosureFromAttributes:(NSDictionary *)attributes andAddToItem:(MWFeedItem *)currentItem</Declaration>
+			
+			
+			<Anchor>//api/name/createEnclosureFromAttributes:andAddToItem:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedParser/processAtomLink:andAddToMWObject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedParser_Private.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)processAtomLink:(NSDictionary *)attributes andAddToMWObject:(id)MWObject</Declaration>
+			
+			
+			<Anchor>//api/name/processAtomLink:andAddToMWObject:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

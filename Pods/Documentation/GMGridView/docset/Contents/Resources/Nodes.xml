@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+    <TOC>
+        <Node type="folder">
+            <Name>GMGridView 1.1.1</Name>
+            <Path>index.html</Path>
+			<Subnodes>
+                
+				
+				<Node type="folder">
+					<Name>Classes</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="1"/>
+						<NodeRef refid="2"/>
+						<NodeRef refid="3"/>
+						<NodeRef refid="4"/>
+						<NodeRef refid="5"/>
+						<NodeRef refid="6"/>
+						<NodeRef refid="7"/>
+						<NodeRef refid="8"/>
+						<NodeRef refid="9"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Categories</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="10"/>
+						<NodeRef refid="11"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				<Node type="folder">
+					<Name>Protocols</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="12"/>
+						<NodeRef refid="13"/>
+						<NodeRef refid="14"/>
+						<NodeRef refid="15"/>
+						<NodeRef refid="16"/>
+						
+					</Subnodes>
+				</Node>
+				
+			</Subnodes>
+        </Node>
+    </TOC>
+	<Library>
+		
+		<Node id="1">
+			<Name>GMGridView</Name>
+			<Path>Classes/GMGridView.html</Path>
+		</Node>
+		<Node id="2">
+			<Name>GMGridViewCell</Name>
+			<Path>Classes/GMGridViewCell.html</Path>
+		</Node>
+		<Node id="3">
+			<Name>GMGridViewLayoutHorizontalPagedLTRStrategy</Name>
+			<Path>Classes/GMGridViewLayoutHorizontalPagedLTRStrategy.html</Path>
+		</Node>
+		<Node id="4">
+			<Name>GMGridViewLayoutHorizontalPagedStrategy</Name>
+			<Path>Classes/GMGridViewLayoutHorizontalPagedStrategy.html</Path>
+		</Node>
+		<Node id="5">
+			<Name>GMGridViewLayoutHorizontalPagedTTBStrategy</Name>
+			<Path>Classes/GMGridViewLayoutHorizontalPagedTTBStrategy.html</Path>
+		</Node>
+		<Node id="6">
+			<Name>GMGridViewLayoutHorizontalStrategy</Name>
+			<Path>Classes/GMGridViewLayoutHorizontalStrategy.html</Path>
+		</Node>
+		<Node id="7">
+			<Name>GMGridViewLayoutStrategyBase</Name>
+			<Path>Classes/GMGridViewLayoutStrategyBase.html</Path>
+		</Node>
+		<Node id="8">
+			<Name>GMGridViewLayoutStrategyFactory</Name>
+			<Path>Classes/GMGridViewLayoutStrategyFactory.html</Path>
+		</Node>
+		<Node id="9">
+			<Name>GMGridViewLayoutVerticalStrategy</Name>
+			<Path>Classes/GMGridViewLayoutVerticalStrategy.html</Path>
+		</Node>
+		
+		<Node id="10">
+			<Name>UIGestureRecognizer(GMGridViewAdditions)</Name>
+			<Path>Categories/UIGestureRecognizer+GMGridViewAdditions.html</Path>
+		</Node>
+		<Node id="11">
+			<Name>UIView(GMGridViewAdditions)</Name>
+			<Path>Categories/UIView+GMGridViewAdditions.html</Path>
+		</Node>
+		
+		<Node id="12">
+			<Name>GMGridViewActionDelegate</Name>
+			<Path>Protocols/GMGridViewActionDelegate.html</Path>
+		</Node>
+		<Node id="13">
+			<Name>GMGridViewDataSource</Name>
+			<Path>Protocols/GMGridViewDataSource.html</Path>
+		</Node>
+		<Node id="14">
+			<Name>GMGridViewLayoutStrategy</Name>
+			<Path>Protocols/GMGridViewLayoutStrategy.html</Path>
+		</Node>
+		<Node id="15">
+			<Name>GMGridViewSortingDelegate</Name>
+			<Path>Protocols/GMGridViewSortingDelegate.html</Path>
+		</Node>
+		<Node id="16">
+			<Name>GMGridViewTransformationDelegate</Name>
+			<Path>Protocols/GMGridViewTransformationDelegate.html</Path>
+		</Node>
+		
+	</Library>
+</DocSetNodes>

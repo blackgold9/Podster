@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/MWFeedItem.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/MWFeedItem</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedItem/setIdentifier:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *identifier</Declaration>
+			
+			
+			<Anchor>//api/name/identifier</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedItem/identifier</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *identifier</Declaration>
+			
+			
+			<Anchor>//api/name/identifier</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedItem/setTitle:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *title</Declaration>
+			
+			
+			<Anchor>//api/name/title</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedItem/title</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *title</Declaration>
+			
+			
+			<Anchor>//api/name/title</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedItem/setLink:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *link</Declaration>
+			
+			
+			<Anchor>//api/name/link</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedItem/link</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *link</Declaration>
+			
+			
+			<Anchor>//api/name/link</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedItem/setDate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSDate *date</Declaration>
+			
+			
+			<Anchor>//api/name/date</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedItem/date</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSDate *date</Declaration>
+			
+			
+			<Anchor>//api/name/date</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedItem/setUpdated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSDate *updated</Declaration>
+			
+			
+			<Anchor>//api/name/updated</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedItem/updated</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSDate *updated</Declaration>
+			
+			
+			<Anchor>//api/name/updated</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedItem/setSummary:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *summary</Declaration>
+			
+			
+			<Anchor>//api/name/summary</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedItem/summary</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *summary</Declaration>
+			
+			
+			<Anchor>//api/name/summary</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedItem/setContent:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *content</Declaration>
+			
+			
+			<Anchor>//api/name/content</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedItem/content</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSString *content</Declaration>
+			
+			
+			<Anchor>//api/name/content</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MWFeedItem/setEnclosures:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSArray *enclosures</Declaration>
+			
+			
+			<Anchor>//api/name/enclosures</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MWFeedItem/enclosures</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>MWFeedItem.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy) NSArray *enclosures</Declaration>
+			
+			
+			<Anchor>//api/name/enclosures</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

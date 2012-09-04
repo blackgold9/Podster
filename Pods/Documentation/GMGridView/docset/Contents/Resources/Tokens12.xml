@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/GMGridViewActionDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/GMGridViewActionDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>
+			
+			<NodeRef refid="12"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewActionDelegate/GMGridView:didTapOnItemAtIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:didTapOnItemAtIndex:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewActionDelegate/GMGridViewDidTapOnEmptySpace:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridViewDidTapOnEmptySpace:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/GMGridViewActionDelegate/GMGridView:processDeleteActionForItemAtIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)GMGridView:(GMGridView *)gridView processDeleteActionForItemAtIndex:(NSInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/GMGridView:processDeleteActionForItemAtIndex:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

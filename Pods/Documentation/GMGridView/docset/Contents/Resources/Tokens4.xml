@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/GMGridViewLayoutHorizontalPagedStrategy.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/GMGridViewLayoutHorizontalPagedStrategy</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutHorizontalPagedStrategy/setNumberOfItemsPerRow:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger numberOfItemsPerRow</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfItemsPerRow</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutHorizontalPagedStrategy/numberOfItemsPerRow</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger numberOfItemsPerRow</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfItemsPerRow</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutHorizontalPagedStrategy/setNumberOfItemsPerPage:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger numberOfItemsPerPage</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfItemsPerPage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutHorizontalPagedStrategy/numberOfItemsPerPage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger numberOfItemsPerPage</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfItemsPerPage</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutHorizontalPagedStrategy/setNumberOfPages:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger numberOfPages</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfPages</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridViewLayoutHorizontalPagedStrategy/numberOfPages</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSInteger numberOfPages</Declaration>
+			
+			
+			<Anchor>//api/name/numberOfPages</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutHorizontalPagedStrategy/positionForItemAtColumn:row:page:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (NSInteger)positionForItemAtColumn:(NSInteger)column row:(NSInteger)row page:(NSInteger)page</Declaration>
+			
+			
+			<Anchor>//api/name/positionForItemAtColumn:row:page:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutHorizontalPagedStrategy/columnForItemAtPosition:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (NSInteger)columnForItemAtPosition:(NSInteger)position</Declaration>
+			
+			
+			<Anchor>//api/name/columnForItemAtPosition:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridViewLayoutHorizontalPagedStrategy/rowForItemAtPosition:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridViewLayoutStrategies.h</DeclaredIn>			
+			
+			<Declaration>- (NSInteger)rowForItemAtPosition:(NSInteger)position</Declaration>
+			
+			
+			<Anchor>//api/name/rowForItemAtPosition:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

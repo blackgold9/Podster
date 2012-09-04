@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/GMGridView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/GMGridView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setDataSource:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet NSObject&lt;GMGridViewDataSource&gt; *dataSource</Declaration>
+			
+			
+			<Anchor>//api/name/dataSource</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/dataSource</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet NSObject&lt;GMGridViewDataSource&gt; *dataSource</Declaration>
+			
+			
+			<Anchor>//api/name/dataSource</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setActionDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet NSObject&lt;GMGridViewActionDelegate&gt; *actionDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/actionDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/actionDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet NSObject&lt;GMGridViewActionDelegate&gt; *actionDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/actionDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setSortingDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet NSObject&lt;GMGridViewSortingDelegate&gt; *sortingDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/sortingDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/sortingDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet NSObject&lt;GMGridViewSortingDelegate&gt; *sortingDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/sortingDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setTransformDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet NSObject&lt;GMGridViewTransformationDelegate&gt; *transformDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/transformDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/transformDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet NSObject&lt;GMGridViewTransformationDelegate&gt; *transformDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/transformDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setLayoutStrategy:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) IBOutlet id&lt;GMGridViewLayoutStrategy&gt; layoutStrategy</Declaration>
+			
+			
+			<Anchor>//api/name/layoutStrategy</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/layoutStrategy</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong) IBOutlet id&lt;GMGridViewLayoutStrategy&gt; layoutStrategy</Declaration>
+			
+			
+			<Anchor>//api/name/layoutStrategy</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setEditing:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, getter=isEditing) BOOL editing</Declaration>
+			
+			
+			<Anchor>//api/name/editing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/editing</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, getter=isEditing) BOOL editing</Declaration>
+			
+			
+			<Anchor>//api/name/editing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setEditing:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)setEditing:(BOOL)editing animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/setEditing:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setMainSuperView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet UIView *mainSuperView</Declaration>
+			
+			
+			<Anchor>//api/name/mainSuperView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/mainSuperView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, gm_weak) IBOutlet UIView *mainSuperView</Declaration>
+			
+			
+			<Anchor>//api/name/mainSuperView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setStyle:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) GMGridViewStyle style</Declaration>
+			
+			
+			<Anchor>//api/name/style</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/style</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) GMGridViewStyle style</Declaration>
+			
+			
+			<Anchor>//api/name/style</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setItemSpacing:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) NSInteger itemSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/itemSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/itemSpacing</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) NSInteger itemSpacing</Declaration>
+			
+			
+			<Anchor>//api/name/itemSpacing</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setCenterGrid:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) BOOL centerGrid</Declaration>
+			
+			
+			<Anchor>//api/name/centerGrid</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/centerGrid</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) BOOL centerGrid</Declaration>
+			
+			
+			<Anchor>//api/name/centerGrid</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setMinEdgeInsets:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets minEdgeInsets</Declaration>
+			
+			
+			<Anchor>//api/name/minEdgeInsets</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/minEdgeInsets</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) UIEdgeInsets minEdgeInsets</Declaration>
+			
+			
+			<Anchor>//api/name/minEdgeInsets</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setMinimumPressDuration:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) CFTimeInterval minimumPressDuration</Declaration>
+			
+			
+			<Anchor>//api/name/minimumPressDuration</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/minimumPressDuration</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) CFTimeInterval minimumPressDuration</Declaration>
+			
+			
+			<Anchor>//api/name/minimumPressDuration</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setShowFullSizeViewWithAlphaWhenTransforming:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) BOOL showFullSizeViewWithAlphaWhenTransforming</Declaration>
+			
+			
+			<Anchor>//api/name/showFullSizeViewWithAlphaWhenTransforming</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/showFullSizeViewWithAlphaWhenTransforming</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic) BOOL showFullSizeViewWithAlphaWhenTransforming</Declaration>
+			
+			
+			<Anchor>//api/name/showFullSizeViewWithAlphaWhenTransforming</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/setScrollView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIScrollView *scrollView</Declaration>
+			
+			
+			<Anchor>//api/name/scrollView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/GMGridView/scrollView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) UIScrollView *scrollView</Declaration>
+			
+			
+			<Anchor>//api/name/scrollView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/dequeueReusableCell</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (GMGridViewCell *)dequeueReusableCell</Declaration>
+			
+			
+			<Anchor>//api/name/dequeueReusableCell</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/dequeueReusableCellWithIdentifier:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (GMGridViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier</Declaration>
+			
+			
+			<Anchor>//api/name/dequeueReusableCellWithIdentifier:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/cellForItemAtIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (GMGridViewCell *)cellForItemAtIndex:(NSInteger)position</Declaration>
+			
+			
+			<Anchor>//api/name/cellForItemAtIndex:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/reloadData</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)reloadData</Declaration>
+			
+			
+			<Anchor>//api/name/reloadData</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/insertObjectAtIndex:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)insertObjectAtIndex:(NSInteger)index animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/insertObjectAtIndex:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/insertObjectAtIndex:withAnimation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)insertObjectAtIndex:(NSInteger)index withAnimation:(GMGridViewItemAnimation)animation</Declaration>
+			
+			
+			<Anchor>//api/name/insertObjectAtIndex:withAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/removeObjectAtIndex:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)removeObjectAtIndex:(NSInteger)index animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/removeObjectAtIndex:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/removeObjectAtIndex:withAnimation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)removeObjectAtIndex:(NSInteger)index withAnimation:(GMGridViewItemAnimation)animation</Declaration>
+			
+			
+			<Anchor>//api/name/removeObjectAtIndex:withAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/reloadObjectAtIndex:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)reloadObjectAtIndex:(NSInteger)index animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/reloadObjectAtIndex:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/reloadObjectAtIndex:withAnimation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)reloadObjectAtIndex:(NSInteger)index withAnimation:(GMGridViewItemAnimation)animation</Declaration>
+			
+			
+			<Anchor>//api/name/reloadObjectAtIndex:withAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/swapObjectAtIndex:withObjectAtIndex:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)swapObjectAtIndex:(NSInteger)index1 withObjectAtIndex:(NSInteger)index2 animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/swapObjectAtIndex:withObjectAtIndex:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/swapObjectAtIndex:withObjectAtIndex:withAnimation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)swapObjectAtIndex:(NSInteger)index1 withObjectAtIndex:(NSInteger)index2 withAnimation:(GMGridViewItemAnimation)animation</Declaration>
+			
+			
+			<Anchor>//api/name/swapObjectAtIndex:withObjectAtIndex:withAnimation:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/scrollToObjectAtIndex:atScrollPosition:animated:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)scrollToObjectAtIndex:(NSInteger)index atScrollPosition:(GMGridViewScrollPosition)scrollPosition animated:(BOOL)animated</Declaration>
+			
+			
+			<Anchor>//api/name/scrollToObjectAtIndex:atScrollPosition:animated:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/GMGridView/layoutSubviewsWithAnimation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>GMGridView.h</DeclaredIn>			
+			
+			<Declaration>- (void)layoutSubviewsWithAnimation:(GMGridViewItemAnimation)animation</Declaration>
+			
+			
+			<Anchor>//api/name/layoutSubviewsWithAnimation:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSString+GTMNSStringHTMLAdditions.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSString(GTMNSStringHTMLAdditions)</TokenIdentifier>
+			<Abstract type="html">Utilities for NSStrings containing HTML</Abstract>
+			<DeclaredIn>GTMNSString+HTML.h</DeclaredIn>
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(GTMNSStringHTMLAdditions)/gtm_stringByEscapingForHTML</TokenIdentifier>
+			<Abstract type="html">  For example, &apos;&amp;amp;&apos; become &apos;&amp;amp;amp;&apos;. This will only cover characters from table
+  A.2.2 of http://www.w3.org/TR/xhtml1/dtds.html#adtdSpecial_characters
+  which is what you want for a unicode encoded webpage. If you have a ascii
+  or non-encoded webpage, please use stringByEscapingAsciiHTML which will
+  encode all characters.</Abstract>
+			<DeclaredIn>GTMNSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)gtm_stringByEscapingForHTML</Declaration>
+			
+			
+			<Anchor>//api/name/gtm_stringByEscapingForHTML</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(GTMNSStringHTMLAdditions)/gtm_stringByEscapingForAsciiHTML</TokenIdentifier>
+			<Abstract type="html">  For example, &apos;&amp;amp;&apos; become &apos;&amp;amp;amp;&apos;
+  All non-mapped characters (unicode that don&apos;t have a &amp;amp;keyword; mapping)
+  will be converted to the appropriate &amp;amp;#xxx; value. If your webpage is
+  unicode encoded (UTF16 or UTF8) use stringByEscapingHTML instead as it is
+  faster, and produces less bloated and more readable HTML (as long as you
+  are using a unicode compliant HTML reader).</Abstract>
+			<DeclaredIn>GTMNSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)gtm_stringByEscapingForAsciiHTML</Declaration>
+			
+			
+			<Anchor>//api/name/gtm_stringByEscapingForAsciiHTML</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/NSString(GTMNSStringHTMLAdditions)/gtm_stringByUnescapingFromHTML</TokenIdentifier>
+			<Abstract type="html">  For example, &apos;&amp;amp;amp;&apos; becomes &apos;&amp;amp;&apos;
+  Handles &amp;amp;#32; and &amp;amp;#x32; cases as well</Abstract>
+			<DeclaredIn>GTMNSString+HTML.h</DeclaredIn>			
+			
+			<Declaration>- (NSString *)gtm_stringByUnescapingFromHTML</Declaration>
+			
+			
+			<Anchor>//api/name/gtm_stringByUnescapingFromHTML</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
