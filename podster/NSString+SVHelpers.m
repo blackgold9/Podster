@@ -7,7 +7,7 @@
 //
 
 #import "NSString+SVHelpers.h"
-#import "ISO8601DateFormatter.h"
+#import "NSDate+Rails.h"
 @implementation NSString (SVHelpers)
 +(NSString *)formattedStringRepresentationOfSeconds:(NSInteger)totalSeconds
 {
@@ -42,14 +42,6 @@
 
 - (NSDate *)dateFromRailsDate
 {
-  static ISO8601DateFormatter *dateFormatter;
-    if (!dateFormatter){
-        dateFormatter = [[ISO8601DateFormatter alloc] init];
-    }
-
-
-
-
- return  [dateFormatter dateFromString:self];
+    return [NSDate dateFromISO8601String:self];
 }
 @end

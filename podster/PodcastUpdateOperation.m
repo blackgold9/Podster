@@ -150,18 +150,12 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                                      if (operation) {
                                                                          operation->success = YES;
                                                                      }
-                                                                     NSManagedObjectContext *rootContext = [NSManagedObjectContext MR_rootSavingContext];
-                                                                     NSManagedObjectContext *childContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-                                                                     childContext.parentContext = rootContext;
-                                                                     [childContext performBlock:^{
+                                                                     [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
                                                                          [self processResponse:response
-                                                                                     inContext:rootContext];
-                                                                         [childContext MR_save];
-                                                                         [rootContext MR_save];
-                                                                         [childContext reset];
-                                                                         dispatch_group_leave(group);
-                                                                     }];
-                                                                     
+                                                                                     inContext:localContext];
+                                                                     } completion:^{
+                                                                          dispatch_group_leave(group);
+                                                                     }];                                                                                                                                                                                                             
                                                                  }
                                                                   onError:^void(NSError *error) {
                                                                       DDLogError(@"There was an error communicating with the server attempting to sync podcast with Id: %@", self.podstoreId);

@@ -165,7 +165,7 @@
 
 - (IBAction)cancelButtonTapped:(id)sender {
     if ([self parentViewController]) {
-        [[self parentViewController] dismissModalViewControllerAnimated:YES];
+        [[self parentViewController] dismissViewControllerAnimated:YES completion:nil];
     }
 }
 @end

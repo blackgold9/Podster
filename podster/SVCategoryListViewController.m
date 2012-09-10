@@ -10,7 +10,7 @@
 #import "SVPodcatcherClient.h"
 #import "SVCategory.h"
 #import "SVPodcastsSearchResultsViewController.h"
-
+static int ddLogLevel = LOG_LEVEL_INFO;
 @implementation SVCategoryListViewController {
     NSArray *categories;
     BOOL _isLoading;
@@ -189,7 +189,7 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar
 {
-    LOG_GENERAL(2, @"User tapped search");
+    DDLogInfo(@"User tapped search");
     SVPodcastsSearchResultsViewController *controller =[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"searchResultsController"];
     
     
@@ -204,7 +204,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    LOG_GENERAL(2, @"USer tapped a category");
+    DDLogInfo( @"USer tapped a category");
     SVPodcastsSearchResultsViewController *controller =[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"searchResultsController"];
     
     

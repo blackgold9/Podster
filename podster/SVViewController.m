@@ -123,7 +123,6 @@
     if (object == localManager) {
         if([keyPath isEqualToString:@"currentEpisode"]) {
             if (localManager.currentEpisode != nil) {
-                LOG_PLAYBACK(2, @"Current episode changed: %@", localManager.currentEpisode);
                 [self showNowPLayingIcon];
             }
         } else if ([keyPath isEqualToString:@"playbackState"]){

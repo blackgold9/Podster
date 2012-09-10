@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="podster" type="AppleRunConfiguration" factoryName="Application" SCHEME_NAME="podster" PROJECT_NAME="podster" TARGET_NAME="Podster" CONFIG_NAME="Debug" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" RUN_TARGET_PROJECT_NAME="podster" RUN_TARGET_NAME="Podster" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
-    <envs />
-    <RunnerSettings RunnerId="AppRunner" />
-    <ConfigurationWrapper RunnerId="AppRunner" />
-    <method />
-  </configuration>
-</component>

@@ -7,11 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GMGridView.h"
-#import "NRGridViewDataSource.h"
-#import "NRGridViewDelegate.h"
 
-@interface FeaturedController : UIViewController< NRGridViewDataSource, NRGridViewDelegate>
-@property (weak, nonatomic) IBOutlet GMGridView *gridView;
-@property (weak, nonatomic) IBOutlet NRGridView *featuedGrid;
+@interface FeaturedController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate>
+@property (weak, nonatomic) IBOutlet UICollectionView *featuedGrid;
 @end

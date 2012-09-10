@@ -17,7 +17,7 @@
 #import "NSString+URLEncoding.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
-static const int ddLogLevel = LOG_LEVEL_WARN;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 @implementation SVPodcatcherClient
 + (id)sharedInstance
 {
@@ -37,7 +37,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     NSLocale *current = [NSLocale currentLocale];
     NSString *code = [(NSString *)[current objectForKey:NSLocaleCountryCode] lowercaseString];
-    LOG_NETWORK(2, @"Making call with country code %@",code);
+    DDLogInfo(@"Making call with country code %@",code);
     return code;
 }
 -(id)initWithBaseURL:(NSURL *)url
@@ -95,7 +95,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
               completion(categories);
           } 
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              LOG_NETWORK(1, @"categoriesInLanguage failed with error: %@", error);
+              DDLogError(@"categoriesInLanguage failed with error: %@", error);
               errorBlock(error);
           }];
 }
@@ -122,7 +122,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
               completion(podcasts);
           } 
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              LOG_NETWORK(1, @"feedsByCategory faild with error: %@", error);
+              DDLogError(@"feedsByCategory faild with error: %@", error);
               errorBlock(error);
           }];
 }
@@ -164,7 +164,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
               completion(featured);
           } 
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              LOG_NETWORK(1, @"feedsByCategory faild with error: %@", error);
+              DDLogError(@"feedsByCategory faild with error: %@", error);
               errorBlock(error);
           }];
     
@@ -231,7 +231,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                dispatch_async(dispatch_get_main_queue(), ^{
-                   LOG_NETWORK(1, @"registerForPushNotification failed with error: %@", error);
+                   DDLogError(@"registerForPushNotification failed with error: %@", error);
                    onError(error);                   
                });               
            }];
@@ -252,7 +252,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                completion(responseObject);
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               LOG_NETWORK(1, @"subscribe failed with error: %@", error);
+               DDLogError(@"subscribe failed with error: %@", error);
                [Flurry logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
                if (onError) {
                    onError(error);
@@ -308,7 +308,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                completion();
            }
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               LOG_NETWORK(1, @"subscribe failed with error: %@", error);
+               DDLogError(@"subscribe failed with error: %@", error);
                [Flurry logError:@"NetworkFeedSubscribeFailed" message:[error localizedDescription] error:error];
                if (onError) {
                    onError(error);
@@ -363,10 +363,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                completion();
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               LOG_NETWORK(1, @"unsubscribe failed with error: %@", error);
+               DDLogError(@"unsubscribe failed with error: %@", error);
                onError(error);
            }];
 }
+
 
 
 - (void)getNewItemsForFeedWithId:(NSNumber *)podstoreId

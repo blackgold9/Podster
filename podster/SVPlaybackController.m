@@ -16,7 +16,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <Twitter/Twitter.h>
+#import "MBProgressHUD.h"
 #import "PodcastImage.h"
+static int ddLogLevel = LOG_LEVEL_WARN;
 @implementation SVPlaybackController {
     AVPlayer *player;
     id playerObserver;
@@ -116,8 +118,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
         self.navigationController.toolbarHidden = YES;
-    LOG_GENERAL(2, @"View did appear");
-    LOG_NETWORK(4, @"Triggering albumart image load");
     if (player.rate == 0) {
         self.playButton.selected = NO;
     } else {
@@ -135,7 +135,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    LOG_GENERAL(4, @"Super viewdidload");
     [super viewDidLoad];
     
     UIView *placeholder = [self.view viewWithTag:1111];
@@ -147,7 +146,10 @@
     volumeView.showsRouteButton = YES;
     volumeView.showsVolumeSlider = NO;
     [placeholderSuperView addSubview:volumeView];
-          
+    
+    [[SVPlaybackManager sharedInstance] addObserver:self
+                                         forKeyPath:@"playbackState"
+                                            options:NSKeyValueObservingOptionInitial |NSKeyValueObservingOptionNew context:nil];
     player = [[SVPlaybackManager sharedInstance] player];
     rateImage.userInteractionEnabled = YES;
     rateImage.alpha = player.rate == 1.5 ? 1.0 : 0.5;
@@ -207,9 +209,9 @@
         
                 if (player.status == AVPlayerStatusReadyToPlay) {
                     [[SVPlaybackManager sharedInstance] play];
-                    LOG_GENERAL(3, @"Started Playback");
+                    DDLogInfo(@"UI Regiestered playback starting");
                 } else {
-                    LOG_GENERAL(3, @"Error downloing");
+                    DDLogError(@"Error downloing");
                 }
             } else if ([keyPath isEqualToString:@"rate"]){
                 if (player.rate == 0) {
@@ -218,7 +220,19 @@
                     self.playButton.selected = YES;
                 }
             }
+        } else if (object == [SVPlaybackManager sharedInstance]) {
+            if ([keyPath isEqualToString:@"playbackState"]) {
+                switch([SVPlaybackManager sharedInstance].playbackState) {
+                    case kPlaybackStateBuffering:
+                        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                        break;
+                    default:
+                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                        break;
+                }
+            }
         }
+        
     }
 }
 - (IBAction)playTapped:(id)sender {

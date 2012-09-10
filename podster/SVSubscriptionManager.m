@@ -58,7 +58,7 @@ static char const kRefreshInterval = -3;
 
     
     NSArray *podcasts = [SVPodcast MR_findByAttribute:SVPodcastAttributes.isSubscribed withValue:[NSNumber numberWithBool:YES]];
-    []
+//    []
 
     // Actually do the update
     [self refreshPodcasts:podcasts complete:^void() {

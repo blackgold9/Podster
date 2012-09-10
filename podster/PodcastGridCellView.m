@@ -70,6 +70,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             NSCache *cache = [self cache];
             __block UIImage *image = [cache objectForKey:coreCast.objectID];
             if (image == nil) {
+                self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"]; 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     DDLogVerbose( @"Loaded local image");
                     image = [UIImage imageWithData:coreCast.gridImage.imageData];
@@ -123,7 +124,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)bind:(id<ActsAsPodcast>)podcast
 {
-    self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
+    //self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
     [imageLoadOp cancel];
     [self loadImageWithPodcast:podcast];
     self.titleLabel.text = podcast.title;
@@ -189,19 +190,17 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             
         } else if ([keyPath isEqualToString:SVPodcastAttributes.unlistenedSinceSubscribedCount]) {
             NSInteger newEpisodeCount = coreDataPodcast.unlistenedSinceSubscribedCountValue;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (newEpisodeCount > 0) {
-                    DDLogVerbose(@"Setting new epsidoe count of %lu for podcast: %@", (long)newEpisodeCount, titleLabel.text);
-                    [self.countOverlay setCount:newEpisodeCount];
-                    [self.countOverlay sizeToFit];
-                    CGRect newFrame = self.countOverlay.frame;
-                    newFrame.origin.x = self.frame.size.width - newFrame.size.width;
-                    self.countOverlay.frame = newFrame;
-                    self.countOverlay.hidden = NO;
-                } else {
-                    self.countOverlay.hidden = YES;
-                }
-            });
+            if (newEpisodeCount > 0) {
+                DDLogVerbose(@"Setting new epsidoe count of %lu for podcast: %@", (long)newEpisodeCount, titleLabel.text);
+                [self.countOverlay setCount:newEpisodeCount];
+                [self.countOverlay sizeToFit];
+                CGRect newFrame = self.countOverlay.frame;
+                newFrame.origin.x = self.frame.size.width - newFrame.size.width;
+                self.countOverlay.frame = newFrame;
+                self.countOverlay.hidden = NO;
+            } else {
+                self.countOverlay.hidden = YES;
+            }
         }
     }
 }

@@ -31,16 +31,19 @@ typedef void (^SVErrorBlock)(NSError *error);
               onCompletion:(PodcastListResponeBlock)completion
                    onError:(SVErrorBlock)error;
 
-- (void)subscribeToFeedWithId:(NSNumber *)feedId onCompletion:(void (^)())completion onError:(SVErrorBlock)onError;
-
 - (void)changeNotificationSetting:(BOOL)shouldNotify
                    forFeedWithId:(NSNumber *)feedId
                      onCompletion:(void (^)())completion
                           onError:(SVErrorBlock)onError;
 
--(void)unsubscribeFromFeedWithId:(NSNumber *)podstoreId 
+- (void)subscribeToFeedWithId:(NSNumber *)feedId
+                 onCompletion:(void (^)())completion
+                      onError:(SVErrorBlock)onError;
+
+- (void)unsubscribeFromFeedWithId:(NSNumber *)podstoreId
                     onCompletion:(void (^)(void))completion 
                          onError:(SVErrorBlock)onError;
+
 - (void)getNewItemsForFeedWithId:(NSNumber *)podstoreId withLastSyncDate:(NSDate *)lastSycned complete:(void (^)(id))onComplete onError:(SVErrorBlock)onError;
 
 

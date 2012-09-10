@@ -12,6 +12,7 @@
 #import "SVPodcastEntry.h"
 typedef enum {
     kPlaybackStatePaused,
+    kPlaybackStateBuffering,
     kPlaybackStatePlaying,
     kPlaybackStateStopped
 } PlaybackState;

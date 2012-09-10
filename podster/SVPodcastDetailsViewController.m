@@ -120,7 +120,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [signupAlert addButtonWithTitle:NSLocalizedString(@"LEARN_MORE", @"Find out more about a given option") block:^{
         [Flurry logEvent:@"LimitUpsellLearnMoreTapped"];
         UIViewController *controller = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
-        [self presentModalViewController:controller animated:YES];
+        [self presentViewController:controller animated:YES completion:nil];
     }];
 
     [signupAlert setCancelButtonWithTitle:NSLocalizedString(@"No, Thanks", @"No, Thanks") block:^{
@@ -158,7 +158,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                                                       onCompletion:^{
                                                           [Flurry logEvent:@"ChangedNotificationSettingForFeed"
                                                                      withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:shouldNotify] forKey:@"ON"]];
-                                                          LOG_GENERAL(2, @"Notifications setting changed successfully");
+                                                          DDLogInfo(@"Notifications setting changed successfully");
                                                           [self.context performBlock:^{
                                                               localPodcast.shouldNotifyValue = shouldNotify;
                                                           }];
@@ -189,7 +189,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 - (void)askUserIfTheyWantNotifications
 {
     // If notifications are enabled, figure out if we want to subscribe for this podcast
-    LOG_GENERAL(2, @"Checking if notifications are enabled");
+    DDLogInfo( @"Checking if notifications are enabled");
     if([[SVSettings sharedInstance] notificationsEnabled]){
 
         SVSettings *settings = [SVSettings sharedInstance];
@@ -200,15 +200,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 if([self hasHitNotificationLimit]) {
                     [self showNotificationsUpsell];
                 } else {
-                    LOG_GENERAL(2, @"Creating notification subscription");
+                    DDLogInfo( @"Creating notification subscription");
                     [[SVPodcatcherClient sharedInstance] changeNotificationSetting:YES
                                                                      forFeedWithId:localPodcast.podstoreId
                                                                       onCompletion:^{
-                                                                          LOG_GENERAL(2, @"Succeed creating notification subscription");
+                                                                          DDLogInfo( @"Succeed creating notification subscription");
                                                                           localPodcast.shouldNotifyValue = YES;
                                                                       }
                                                                            onError:^(NSError *error) {
-                                                                               LOG_GENERAL(2, @"Failed creating notification subscription");
+                                                                               DDLogInfo( @"Failed creating notification subscription");
                                                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                                                    [self showFeedNotificationSubscriptionError];
 
@@ -257,7 +257,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
 
     dispatch_async(dispatch_get_main_queue(), ^void() {
-        LOG_GENERAL(2, @"Creating a subscription for this podcast");
+        DDLogInfo( @"Creating a subscription for this podcast");
     });
     
     [Flurry logEvent:@"SubscribedToFeed"];
@@ -301,7 +301,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 }
 
 - (IBAction)subscribeTapped:(id)sender {
-    LOG_GENERAL(2, @"Subscribe tapped");
+    DDLogInfo( @"Subscribe tapped");
     if(!localPodcast.isSubscribedValue) {
         [self subscribeToPodcast];
     } else {
@@ -423,7 +423,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)viewDidLoad
 {
-    LOG_GENERAL(2, @"%s", sel_getName(_cmd));
+    DDLogInfo( @"%s", sel_getName(_cmd));
     [super viewDidLoad];
     isInitialLoad = YES;
 
@@ -441,7 +441,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [self.context performBlock:^{
         NSNumber *feedId = self.podcast.podstoreId;
         NSAssert(feedId, @"Feed id should be present");
-        LOG_GENERAL(2, @"Looking up podcast in data store with Id: %@", feedId);
+        DDLogInfo( @"Looking up podcast in data store with Id: %@", feedId);
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, feedId];
         NSFetchRequest *request = [SVPodcast MR_requestFirstWithPredicate:predicate];
         [request setIncludesSubentities:YES];
@@ -508,7 +508,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             __strong SVPodcastDetailsViewController *strongSelf = blockSelf;
 
             strongSelf->isLoading = NO;
-            LOG_GENERAL(2, @"Done loading entries");
+            DDLogInfo( @"Done loading entries");
 
             [strongSelf loadFeedImage];                        
         }

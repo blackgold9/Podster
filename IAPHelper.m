@@ -9,6 +9,7 @@
 #import "IAPHelper.h"
 #import "NSData+Base64.h"
 #import "BlockAlertView.h"
+static int ddLogLevel = LOG_LEVEL_INFO;
 @implementation IAPHelper
 @synthesize productIdentifiers = _productIdentifiers;
 @synthesize products = _products;
@@ -27,9 +28,9 @@
             BOOL productPurchased = [[NSUserDefaults standardUserDefaults] boolForKey:productIdentifier];
             if (productPurchased) {
                 [purchasedProducts addObject:productIdentifier];
-                LOG_GENERAL(2,@"StoreKit: Previously purchased: %@", productIdentifier);
+                DDLogInfo(@"StoreKit: Previously purchased: %@", productIdentifier);
             }
-            LOG_GENERAL(2,@"StoreKit: Not purchased: %@", productIdentifier);
+            DDLogInfo(@"StoreKit: Not purchased: %@", productIdentifier);
         }
         self.purchasedProducts = purchasedProducts;
                         
@@ -47,7 +48,7 @@
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     
-    LOG_GENERAL(2,@"StoreKit: Received products results...");   
+    DDLogInfo(@"StoreKit: Received products results...");   
     self.products = response.products;
     self.request = nil;    
     
@@ -55,14 +56,14 @@
 }
 -(void)request:(SKRequest *)request didFailWithError:(NSError *)error
 {
-    LOG_GENERAL(0, @"StoreKit: request failed with error: %@", error);
+    DDLogError(@"StoreKit: request failed with error: %@", error);
 }
 
 - (void)recordTransaction:(SKPaymentTransaction *)transaction {    
 }
 
 - (void)provideContent:(NSString *)productIdentifier {       
-    LOG_GENERAL(2,@"Toggling flag for: %@", productIdentifier);
+    DDLogInfo(@"Toggling flag for: %@", productIdentifier);
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:productIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [_purchasedProducts addObject:productIdentifier];
@@ -73,7 +74,7 @@
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
     
-    LOG_GENERAL(2,@"StoreKit: completeTransaction...");
+    DDLogInfo(@"StoreKit: completeTransaction...");
     
     [self recordTransaction: transaction];
     [self provideContent: transaction.payment.productIdentifier];
@@ -83,7 +84,7 @@
 
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
     
-    LOG_GENERAL(2,@"StoreKit: restoreTransaction...");
+    DDLogInfo(@"StoreKit: restoreTransaction...");
     
     [self recordTransaction: transaction];
     [self provideContent: transaction.payment.productIdentifier];
@@ -95,7 +96,7 @@
     
     if (transaction.error.code != SKErrorPaymentCancelled)
     {
-        LOG_GENERAL(2,@"Transaction error: %@", transaction.error.localizedDescription);
+        DDLogInfo(@"Transaction error: %@", transaction.error.localizedDescription);
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kProductPurchaseFailedNotification object:transaction];
@@ -126,7 +127,7 @@
 
 - (void)buyProductIdentifier:(NSString *)productIdentifier {
     
-    LOG_GENERAL(2,@"Buying %@...", productIdentifier);
+    DDLogInfo(@"Buying %@...", productIdentifier);
     SKProduct *product = nil;
     for(SKProduct *current in self.products) {
         if([[current productIdentifier] isEqualToString:productIdentifier]) {

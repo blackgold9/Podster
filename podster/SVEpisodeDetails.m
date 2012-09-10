@@ -16,6 +16,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SVDownloadManager.h"
 #import <Twitter/Twitter.h>
+static int ddLogLevel = LOG_LEVEL_INFO;
 @implementation SVEpisodeDetailsViewController {
 
     SVPodcastEntry *episode;
@@ -168,7 +169,7 @@
     [tweet addURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.podsterapp.com/feed_items/%d",episode.podstoreIdValue]]];
     
     // Show the controller
-    [self presentModalViewController:tweet animated:YES];
+    [self presentViewController:tweet animated:NO completion:nil];
     
     // Called when the tweet dialog has been closed
     tweet.completionHandler = ^(TWTweetComposeViewControllerResult result) 
@@ -176,7 +177,7 @@
         
         
         // Dismiss the controller
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     };
 
 }
@@ -215,13 +216,12 @@
 
 - (IBAction)listenTapped:(id)sender {
     // Playback logic
-    LOG_GENERAL(3, @"Triggering playback");
+    DDLogInfo(@"User tapped listen");
     [[SVPlaybackManager sharedInstance] playEpisode:self.episode ofPodcast:self.episode.podcast];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
     NSParameterAssert(controller);
-    
-    LOG_GENERAL(3, @"Navigating to player");
+
     [[self navigationController] pushViewController:controller animated:YES];
 
 }

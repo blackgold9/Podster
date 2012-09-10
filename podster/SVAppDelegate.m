@@ -51,7 +51,7 @@ NSString *uuid();
 
 -(void)handleCoreDataError:(NSError *)error
 {
-    LOG_GENERAL(0, @"Core data error: %@", error);
+    DDLogError(@"Core data error: %@", error);
 }
 
 - (void)configureTheming
@@ -171,7 +171,7 @@ NSString *uuid();
 - (void)saveData
 {
     DDLogInfo(@"Saving datastore to disk.");
-    //   [[NSManagedObjectContext MR_defaultContext] MR_save];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
@@ -212,7 +212,7 @@ NSString *uuid();
                                                      [Flurry logError:@"RegistrationFailed"
                                                                        message:[error localizedDescription]
                                                                          error:error];
-                                                     LOG_GENERAL(2, @"Registering with podstore failed with error: %@", error);
+                                                     DDLogError(@"Registering with podstore failed with error: %@", error);
                                                  }];
 }
 

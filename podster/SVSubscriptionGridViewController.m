@@ -62,7 +62,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
+
     //self.fetcher.delegate = nil;
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -117,10 +117,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    LOG_GENERAL(2, @"Initializing");
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background-gradient.jpg"]];
-    self.gridView.backgroundView = image;
+    DDLogInfo( @"Initializing");
+    self.gridView.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor clearColor];
     [self.gridView registerNib:[UINib nibWithNibName:@"PodcastGridCellView" bundle:nil] forCellWithReuseIdentifier:@"PodcastCell"];
+
 }
 
 - (void)viewDidUnload
@@ -132,10 +133,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    LOG_GENERAL(2, @"ViewWillAppear");
+    DDLogInfo( @"ViewWillAppear");
+        [self reloadData];
     self.noContentLabel.hidden = YES;
-    
-    
+        
     [Flurry logEvent:@"SubscriptionGridPageView" timed:YES];
 }
 
@@ -193,7 +194,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [super viewWillDisappear:animated];
     [Flurry endTimedEvent:@"SubscriptionGridPageView" withParameters:nil];
     // self.fetcher.delegate = nil;
-    LOG_GENERAL(2, @"WilDisappear");
+    DDLogInfo( @"WilDisappear");
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"SVReloadData"
                                                   object:nil];
@@ -217,7 +218,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     
-    LOG_GENERAL(2, @"Controller will changecontent");
+    DDLogInfo( @"Controller will changecontent");
     needsReload = NO;
     
 }
@@ -225,9 +226,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     
-    LOG_GENERAL(2, @"Controller done changing content");
+    DDLogInfo( @"Controller done changing content");
     if (needsReload) {
-        LOG_GENERAL(2, @"Needs reload");
+        DDLogInfo( @"Needs reload");
         [self.gridView reloadData];
     }
     self.noContentLabel.hidden = items.count > 0;

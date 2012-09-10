@@ -420,7 +420,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                                                                    }
                                                                    [Flurry logEvent:@"ShowPurchaseOptions"];   
                                                                    [sheet showInView:self.view];
-                                                                   LOG_GENERAL(2, @"Removing observer");
+                                                                   DDLogVerbose(@"Removing observer");
                                                                    [[NSNotificationCenter defaultCenter] removeObserver:tmpObserver
                                                                                                                    name:kProductsLoadedNotification
                                                                                                                  object:nil];

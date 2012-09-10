@@ -72,7 +72,6 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)setCount:(NSUInteger)theCount
 {
-    DDLogVerbose(@"Updating count overlay to %lu", (long)theCount);
     count = theCount;
 
    
@@ -82,7 +81,6 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
     [shapeLayer setPath:[path CGPath]];
         
     countLabel.text = [NSString stringWithFormat:@"%d", count];
-    LOG_GENERAL(3, @"%@ - %@", NSStringFromCGRect(countLabel.frame), countLabel.text);
     [self setNeedsLayout];
     [self setNeedsDisplay];
 }
@@ -93,7 +91,7 @@ static int ddLogLevel = LOG_LEVEL_VERBOSE;
                                   constrainedToSize:CGSizeMake(100, 20) 
                                       lineBreakMode:UILineBreakModeWordWrap];
     CGSize calculatedSize =  CGSizeMake(CGRectGetMaxX(flagImageView.frame) + 5 + textSize.width + margins.right, size.height);
-    LOG_GENERAL(2, @"Overlay calculated size: %@", NSStringFromCGSize(calculatedSize));
+    DDLogVerbose(@"Overlay calculated size: %@", NSStringFromCGSize(calculatedSize));
     return calculatedSize;
 }
 

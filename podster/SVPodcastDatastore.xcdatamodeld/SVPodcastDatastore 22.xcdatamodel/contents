@@ -32,7 +32,7 @@
         <attribute name="thumbLogoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tinyLogoURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="unlistenedSinceSubscribedCount" optional="YES" transient="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="unlistenedSinceSubscribedCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updating" optional="YES" transient="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="websiteURL" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="fullImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PodcastImage" inverseName="fullOwner" inverseEntity="PodcastImage" storedInTruthFile="YES" syncable="YES"/>

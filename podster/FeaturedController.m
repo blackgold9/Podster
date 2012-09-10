@@ -21,10 +21,10 @@
 #import "BlockAlertView.h"
 #import "SVPodcast.h"
 #import "MBProgressHUD.h"
+static int ddLogLevel = LOG_LEVEL_INFO;
 @implementation FeaturedController {
     NSArray *featured;
 }
-@synthesize gridView;
 @synthesize featuedGrid;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,8 +60,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [self.view addSubview:imageView];
     [self.view sendSubviewToBack:imageView];
-     
-    self.featuedGrid.cellSize = CGSizeMake(160, 160);
+    [self.featuedGrid registerNib:[UINib nibWithNibName:@"PodcastGridCellView" bundle:nil] forCellWithReuseIdentifier:@"PodcastCell"];
     self.featuedGrid.backgroundColor = [UIColor clearColor];
     self.featuedGrid.dataSource = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -72,7 +71,7 @@
                                                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                         } onError:^(NSError *error) {
                                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                            LOG_GENERAL(2, @"Error occured downloading featured podcasts");
+                                                            DDLogError( @"Error occured downloading featured podcasts");
                                                             BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Oh No!" message:@"There was a problem downloading the featured podcasts for today. Please try again later."];
                                                             [alert setCancelButtonWithTitle:NSLocalizedString(@"OK", @"OK button text") block:^{
                                                                 
@@ -84,70 +83,60 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.featuedGrid reloadData];
-    self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
-}
--(NSInteger)numberOfSectionsInGridView:(NRGridView *)gridView
-{
-    return featured.count;
+   // self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
 }
 
 -(NSString *)gridView:(NRGridView *)gridView titleForHeaderInSection:(NSInteger)section
 {
     return NSLocalizedString([[featured objectAtIndex:section] valueForKey:@"name"], @"Localized header");
-
 }
 
-- (NSInteger)gridView:(NRGridView*)gridView numberOfItemsInSection:(NSInteger)section
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSArray *podcasts = [[featured objectAtIndex:section] objectForKey:@"feeds"];
-    return 0;
+    return podcasts.count;
 }
 
--(UIView *)gridView:(NRGridView *)grid viewForHeaderInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 280, 50)];
-    [label setFont:[UIFont boldSystemFontOfSize:17.0f]];
-    label.backgroundColor = [UIColor clearColor];
-    [background addSubview:label];
-    label.text = [self gridView:grid titleForHeaderInSection:section];
-    background.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"list-item.png"]];
-    label.textColor = [UIColor whiteColor];
-    return background;
+    return featured.count;
 }
-
--(NRGridViewCell *)gridView:(NRGridView *)gridView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+//- (NSInteger)gridView:(NRGridView*)gridView numberOfItemsInSection:(NSInteger)section
+//{
+//    NSArray *podcasts = [[featured objectAtIndex:section] objectForKey:@"feeds"];
+//    return 0;
+//}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *MyCellIdentifier = @"FeaturedCell";
     
-    NRGridViewCell* cell = [self.featuedGrid dequeueReusableCellWithIdentifier:MyCellIdentifier];
+    PodcastGridCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PodcastCell"
+                                                                          forIndexPath:indexPath];
     
-    if(cell == nil){
-        cell = [[NRGridViewCell alloc] initWithReuseIdentifier:MyCellIdentifier];
-
-        static UINib *podcastNib = nil;
-        if (podcastNib == nil) {
-            podcastNib = [UINib nibWithNibName:@"PodcastGridCellView" bundle:nil];   
-        }
-        
-        PodcastGridCellView *podCell = [[podcastNib instantiateWithOwner:nil options:nil] objectAtIndex:0]; 
-        podCell.tag = 29;
-        podCell.frame = CGRectOffset(podCell.frame, 5, 0);
-
-        [cell.contentView addSubview:podCell];
-        
-    }
-
     NSDictionary *sectionDict = [featured objectAtIndex:indexPath.section];
     NSArray *feeds = [sectionDict valueForKey:@"feeds"];
     id<ActsAsPodcast> podcast = [feeds objectAtIndex:indexPath.row];
-    PodcastGridCellView *gridCell = (PodcastGridCellView *) [[cell contentView] viewWithTag:29];
-        [gridCell bind:podcast];
+    
+    [cell bind:podcast];
+    cell.clipsToBounds = YES;
     return cell;
+
+
 }
 
-
+//-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+//{
+//    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+//    
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 280, 50)];
+//    [label setFont:[UIFont boldSystemFontOfSize:17.0f]];
+//    label.backgroundColor = [UIColor clearColor];
+//    [background addSubview:label];
+//    label.text = [self gridView:grid titleForHeaderInSection:section];
+//    background.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"list-item.png"]];
+//    label.textColor = [UIColor whiteColor];
+//    return background;
+//
+//}
 
 - (void)viewDidUnload
 {
@@ -165,17 +154,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)gridView:(NRGridView *)theGridView didSelectCellAtIndexPath:(NSIndexPath *)indexPath
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *sectionDict = [featured objectAtIndex:indexPath.section];
-        NSArray *feeds = [sectionDict valueForKey:@"feeds"];
-        id<ActsAsPodcast> podcast = [feeds objectAtIndex:indexPath.row];
+    NSArray *feeds = [sectionDict valueForKey:@"feeds"];
+    id<ActsAsPodcast> podcast = [feeds objectAtIndex:indexPath.row];
     SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
-        controller.podcast = podcast;
-    [self.navigationController pushViewController:controller animated:YES];
-
-    [theGridView deselectCellAtIndexPath:indexPath animated:NO];
-
+    controller.podcast = podcast;
+    [self.navigationController pushViewController:controller animated:YES]; 
 }
+
 
 @end

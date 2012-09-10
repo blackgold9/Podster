@@ -9,6 +9,7 @@
 #import "PodsterIAPHelper.h"
 #import "NSData+Base64.h"
 #import "BlockAlertView.h"
+static int ddLogLevel = LOG_LEVEL_INFO;
 @implementation PodsterIAPHelper
 {
     BOOL restoring;
@@ -40,7 +41,7 @@
 
 -(void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-    LOG_GENERAL(2, @"Finnished recieving restores");
+    DDLogInfo(@"Finnished recieving restores");
     restoring = NO;
     if (lastTransaction!=nil) {
         [self recordTransaction:lastTransaction];
@@ -55,39 +56,6 @@
     }
 
 }
-
-//-(void)recordTransaction:(SKPaymentTransaction *)transaction
-//{
-//    LOG_GENERAL(2, @"Transaction DatE: %@", [[transaction transactionDate] description]);
-//    if (restoring) {
-//        if(transaction.originalTransaction.transactionState == SKPaymentTransactionStatePurchased) {
-////            if (lastTransaction == nil ||
-//  //              [lastTransaction.transactionDate compare:transaction.transactionDate] == NSOrderedAscending) {
-//                lastTransaction = transaction;            
-//    //        }                    
-//        } else {
-//            LOG_GENERAL(2, @"Original transaction was not  a puchase");
-//        }
-//
-//    } else{
-//
-//
-//        NSString *receipt = [transaction.transactionReceipt base64EncodedString];
-//        [[SVPodcatcherClient sharedInstance] updateDeviceReceipt:receipt
-//                                                    onCompletion:^(BOOL isPremium) {
-//                                                        [[SVSettings sharedInstance] setPremiumMode:isPremium];
-//                                                    } onError:^(NSError *error) {
-//            LOG_GENERAL(0, @"Purchase failed with error: %@", error);
-//            NSString *title = NSLocalizedString(@"PURCHASE_ERROR", nil);
-//            NSString *body = NSLocalizedString(@"PURCHASE_VALIDATION_FAILED", nil);
-//            BlockAlertView *alertView = [BlockAlertView alertWithTitle:title message:body];
-//            [alertView setCancelButtonWithTitle:NSLocalizedString(@"OK", nil)   block:^{
-//
-//            }];
-//            [alertView show];
-//        }];
-//    }
-//}
 
 
 @end

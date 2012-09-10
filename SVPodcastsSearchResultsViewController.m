@@ -14,6 +14,7 @@
 #import "ActsAsPodcast.h"
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
+static int ddLogLevel = LOG_LEVEL_INFO;
 static const NSInteger kDefaultPageSize = 50;
 @interface SVPodcastsSearchResultsViewController()
 -(void)loadNextPage;
@@ -130,14 +131,14 @@ static const NSInteger kDefaultPageSize = 50;
 
         self.navigationItem.title = self.searchString;
         
-        LOG_GENERAL(2, @"A search string was entered");
+        DDLogInfo(@"A search string was entered");
         [[SVPodcatcherClient sharedInstance] searchForPodcastsMatchingQuery:self.searchString onCompletion:^(NSArray *returnedPodcasts) {
             [self processPodcasts:returnedPodcasts 
                    withStartIndex:startIndex 
                       andPageSize:kDefaultPageSize];
             
         }                                                           onError:^(NSError *error) {
-            LOG_GENERAL(2, @"search failed with error: %@", error);
+            DDLogError(@"search failed with error: %@", error);
         }];
     } else {
         [[SVPodcatcherClient sharedInstance] podcastsByCategory:self.category.categoryId
@@ -245,6 +246,7 @@ static const NSInteger kDefaultPageSize = 50;
                  sender:(id)sender {
     SVPodcastDetailsViewController *destination = segue.destinationViewController;
     SVPodcast *podcast = (SVPodcast *) [podcasts objectAtIndex:(NSUInteger) [self.tableView indexPathForSelectedRow].row];
+
     NSAssert(podcast.feedURL != nil, @"feedURL should not be nil");
     destination.podcast = podcast;
 }
