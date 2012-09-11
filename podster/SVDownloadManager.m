@@ -12,7 +12,8 @@
 #import "SVPodcast.h"
 #import "SVDownload.h"
 #import "SVDownloadOperation.h"
-
+#import "SVPodcatcherClient.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 #include <sys/xattr.h>
 
 @interface SVDownloadManager ()
@@ -227,7 +228,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     isVideo |= [mediaURLString rangeOfString:@"m4v" options:NSCaseInsensitiveSearch].location != NSNotFound;
     isVideo |= [mediaURLString rangeOfString:@"mov" options:NSCaseInsensitiveSearch].location != NSNotFound;
     isVideo |= [mediaURLString rangeOfString:@"mp4" options:NSCaseInsensitiveSearch].location != NSNotFound;
-    if ([[SVPodcatcherClient sharedInstance] networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi ||
+    AFHTTPClient *client = [SVPodcatcherClient sharedInstance];
+    if ([client networkReachabilityStatus] == AFNetworkReachabilityStatusReachableViaWiFi ||
         ([[SVSettings sharedInstance] downloadOn3g] && !isVideo)) {
         SVDownloadOperation *op = [[SVDownloadOperation alloc] initWithEntryId:download.entry.podstoreId
                                                                                filePath:filePath];

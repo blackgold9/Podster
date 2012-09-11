@@ -65,6 +65,9 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
     self = [super init];
     if (self != nil) {
         _contentController = contentController;
+        self.restorationIdentifier = @"BannerViewController";
+       // self.restorationClass = [self class];
+
     }
     return self;
 }
@@ -72,7 +75,30 @@ NSString *const BannerViewActionDidFinish = @"BannerViewActionDidFinish";
 - (UIViewController *)contentController {
     return _contentController;
 }
+-(void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    UIViewController *controller = self.contentController;
+    [coder encodeObject:controller forKey:@"contentController"];
+    [super encodeRestorableStateWithCoder:coder];
+    
+}
 
+-(void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    UIViewController *controller = [coder decodeObjectForKey:@"contentController"];
+    NSLog(@"%@", controller);
+    [super decodeRestorableStateWithCoder:coder];
+}
+
+//+(UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
+//{
+//    BannerViewController *controller = nil;
+//    UIViewController *content = [coder decodeObjectForKey:@"contentController"];
+//    if (content) {
+//        controller = [[BannerViewController alloc] initWithContentViewController:content];
+//    }
+//    return controller;
+//}
 
 - (void)viewDidLoad {
     

@@ -103,7 +103,7 @@ void audioRouteChangeListenerCallback (
             
 		} else {
             
-            LOG_GENERAL(2, @"A route change occurred that does not require pausing of application audio.");
+//            DDLogInfo(@"A route change occurred that does not require pausing of application audio.");
 		}
 	}
 }
@@ -196,16 +196,17 @@ void audioRouteChangeListenerCallback (
     }];
 }
 
-- (void)playEpisode:(SVPodcastEntry *)episode
-          ofPodcast:(SVPodcast *)podcast{
+
+- (void)loadEpisode:(SVPodcastEntry *)episode
+            andPlay:(BOOL)shouldPlay
+{
     DDLogInfo(@"Assigning new current podcast/episode");
     
     NSParameterAssert(episode);
-    NSParameterAssert(podcast);
     NSManagedObjectContext *context = [NSManagedObjectContext MR_defaultContext];
     [self stopAndCleanUpPlayer];
     self.currentEpisode = [episode MR_inContext:context];
-    self.currentPodcast = [podcast MR_inContext:context];
+    self.currentPodcast = episode.podcast;
     BOOL isDownloaded = self.currentEpisode.downloadCompleteValue;
     NSString *localFilePath = self.currentEpisode.localFilePath;
     NSString *mediaURL  =self.currentEpisode.mediaURL;
@@ -227,7 +228,6 @@ void audioRouteChangeListenerCallback (
     BOOL actuallyDownloaded = isDownloaded && fileExists;
     NSURL *url = actuallyDownloaded ? [NSURL fileURLWithPath:localFilePath]: [NSURL URLWithString:mediaURL];
     self.isStreaming = !actuallyDownloaded;
-    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
     if(isDownloaded && !fileExists) {
         NSAssert(fileExists, @"The file should exist at this point");
         
@@ -244,84 +244,88 @@ void audioRouteChangeListenerCallback (
     
     DDLogInfo(@"Playing %@ - %@ at URL: %@", podcastTitle, episodeTitle, url);
     DDLogInfo(@"Playing %@ version", actuallyDownloaded ? @"local" : @"streaming");
-        [[AVAudioSession sharedInstance] setDelegate:self];
-
-        if (!_player) {
-            DDLogVerbose(@"Initializing player");
-            _player = [AVPlayer playerWithURL:url];
-            DDLogVerbose(@"Player Initialized");
-                        
-            [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
-            [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
-            [_player addObserver:self forKeyPath:@"currentItem" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
+    [[AVAudioSession sharedInstance] setDelegate:self];
+    
+    if (!_player) {
+        DDLogVerbose(@"Initializing player");
+        _player = [AVPlayer playerWithURL:url];
+        DDLogVerbose(@"Player Initialized");
+        
+        [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
+        [_player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
+        [_player addObserver:self forKeyPath:@"currentItem" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
+        
+        [(SVAppDelegate *)[[UIApplication sharedApplication] delegate] startListening];
+    }
+    
+    
+    // If there was an existing current item, clear it first
+    if (currentItem) {
+        //            [currentItem removeObserver:self forKeyPath:@"status"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:currentItem];
+        currentItem = nil;
+    }
+    
+    DDLogInfo(@"Loading media at URL:%@", url);
+    currentItem = [[AVPlayerItem alloc] initWithURL:url];
+    //        [currentItem addObserver:self
+    //                      forKeyPath:@"status"
+    //                         options:NSKeyValueObservingOptionNew
+    //                         context:(__bridge void*)self];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(itemReachedEnd)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification object:currentItem];
+    
+    [_player replaceCurrentItemWithPlayerItem:currentItem];
+    if (shouldPlay) {
+        [self setPlaybackRate:1];
+    } else {
+        [self setPlaybackRate:0];
+        self.playbackState = kPlaybackStatePaused;
+    }
+    NSDictionary *params = @{
+    MPMediaItemPropertyTitle : episodeTitle,
+    MPMediaItemPropertyAlbumTitle : podcastTitle
+    };
+    
+    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:params];
+    
+    [[NSManagedObjectContext MR_defaultContext] performBlock:^{
+        if (self.currentPodcast.fullImage == nil) {
+            AFImageRequestOperation *imageOp =
+            [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.currentPodcast logoURL]]]
+                                                              success:^(UIImage *image) {
+                                                                  NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
+                                                                  MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+                                                                  [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
+                                                                  [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:imageParams];
+                                                                  
+                                                                  
+                                                              }];
             
-            [(SVAppDelegate *)[[UIApplication sharedApplication] delegate] startListening];
-        }
-        
-  
-        // If there was an existing current item, clear it first
-        if (currentItem) {
-//            [currentItem removeObserver:self forKeyPath:@"status"];
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:currentItem];
-            currentItem = nil;
-        }
-        
-        DDLogInfo(@"Loading media at URL:%@", url);
-        currentItem = [[AVPlayerItem alloc] initWithURL:url];
-//        [currentItem addObserver:self
-//                      forKeyPath:@"status"
-//                         options:NSKeyValueObservingOptionNew
-//                         context:(__bridge void*)self];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(itemReachedEnd)
-                                                     name:AVPlayerItemDidPlayToEndTimeNotification object:currentItem];
-
-            [_player replaceCurrentItemWithPlayerItem:currentItem];
-            [self setPlaybackRate:1];
-
-
-        NSDictionary *params = @{
-        MPMediaItemPropertyTitle : episodeTitle,
-        MPMediaItemPropertyAlbumTitle : podcastTitle
-        };
-        
-        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:params];
-        
-        [[NSManagedObjectContext MR_defaultContext] performBlock:^{
-            if (currentPodcast.fullImage == nil) {
-                AFImageRequestOperation *imageOp =
-                [AFImageRequestOperation imageRequestOperationWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[currentPodcast logoURL]]]
-                                                                  success:^(UIImage *image) {
-                                                                      NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
-                                                                      MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
-                                                                      [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
-                                                                      [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:imageParams];
-                                                                      
-                                                                      
-                                                                  }];
+            [imageOp start];
+        } else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage *image = [[UIImage alloc] initWithData:currentPodcast.fullImage.imageData];
+                NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
+                MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+                [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
+                [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:imageParams];
                 
-                [imageOp start];
-            } else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    UIImage *image = [[UIImage alloc] initWithData:currentPodcast.fullImage.imageData];
-                    NSMutableDictionary *imageParams = [NSMutableDictionary dictionaryWithDictionary:params];
-                    MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
-                    [imageParams setObject:artwork forKey:MPMediaItemPropertyArtwork];
-                    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:imageParams];
-                    
-                });
-            }
-   
-            if (hasSavedPlaybackPosition && !prettyMuchAtTheEnd ) {
-                [Flurry logEvent:@"PlayingEpisodeResumingFromPreviousPosition"];
-                DDLogInfo(@"Resuming at %d seconds", episode.positionInSecondsValue);
-                [_player seekToTime:CMTimeMake(episode.positionInSecondsValue, 1)];
-            } else {
-                DDLogInfo(@"Starting at the beginning");
-            }
-        }];
-
+            });
+        }
+        
+        if (hasSavedPlaybackPosition && !prettyMuchAtTheEnd ) {
+            [Flurry logEvent:@"PlayingEpisodeResumingFromPreviousPosition"];
+            DDLogInfo(@"Resuming at %d seconds", episode.positionInSecondsValue);
+            [_player seekToTime:CMTimeMake(episode.positionInSecondsValue, 1)];
+        } else {
+            DDLogInfo(@"Starting at the beginning");
+        }
+    }];   
 }
+
+
 - (void)itemReachedEnd
 {
     [[NSManagedObjectContext MR_defaultContext] performBlock:^{
@@ -474,5 +478,28 @@ void audioRouteChangeListenerCallback (
             }
         }
    // }
+}
+
+#pragma mark - state restoration
+- (void)savePlaybackStateToCoder:(NSCoder *)coder
+{
+    if (self.currentEpisode) {
+        [coder setValue:self.currentEpisode.podstoreId forKey:@"playingPodstoreId"];
+    }
+}
+
+- (void)loadPlaybackStateFromCoder:(NSCoder *)coder
+{
+    if ([coder decodeObjectForKey:@"playingPodstoreId"]) {
+        DDLogInfo(@"Found playback state to restore");
+        NSNumber *podstoreId = [coder valueForKey:@"playingPodstoreId"];
+        SVPodcastEntry *entry = [SVPodcastEntry MR_findFirstByAttribute:@"podstoreId" withValue:podstoreId];
+        if (entry) {
+            [self loadEpisode:entry
+                      andPlay:NO];
+        }
+    } else {
+        DDLogInfo(@"Didn't find any playback state to restore");
+    }
 }
 @end

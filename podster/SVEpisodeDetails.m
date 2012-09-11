@@ -217,7 +217,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
 - (IBAction)listenTapped:(id)sender {
     // Playback logic
     DDLogInfo(@"User tapped listen");
-    [[SVPlaybackManager sharedInstance] playEpisode:self.episode ofPodcast:self.episode.podcast];
+    [[SVPlaybackManager sharedInstance] loadEpisode:self.episode andPlay:YES];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"playback"];
     NSParameterAssert(controller);
@@ -235,9 +235,6 @@ static int ddLogLevel = LOG_LEVEL_INFO;
         }
         
         [self performSelectorOnMainThread:@selector(configureToolbar) withObject:nil waitUntilDone:NO];
-    }];
-
-       
-      
+    }];        
 }
 @end

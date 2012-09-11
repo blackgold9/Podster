@@ -20,7 +20,7 @@
 #import "BlockAlertView.h"
 #import "SVPodcastDetailsViewController.h"
 
-static const int ddLogLevel = LOG_LEVEL_INFO;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 static NSString *const kIsBusyKey = @"isBusy";
 
 @interface HomeController ()
@@ -42,7 +42,6 @@ static NSString *const kIsBusyKey = @"isBusy";
 }
 
 @synthesize scrollView = _scrollView;
-@synthesize currentScreen = _currentScreen;
 @synthesize subscriptionsController = _subscriptionsController;
 @synthesize titleTabView = _titleTabView;
 @synthesize currentView = _currentView;
@@ -62,23 +61,35 @@ static NSString *const kIsBusyKey = @"isBusy";
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-
+    
     // Release any cached data, images, etc that aren't in use.
 }
-
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
 {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        self.currentScreen = HomePageFeaturedScreen;    
-    }
+    [coder encodeBool:self.pageView.viewControllers[0] == [self featuredController]
+               forKey:@"featured"];
+}
 
-    return self;
+-(void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    BOOL shouldBeOnFeatured = [coder decodeBoolForKey:@"featured"];
+    if (shouldBeOnFeatured && [self.pageView.viewControllers[0] class] != [FeaturedController class]) {
+        [self.pageView setViewControllers:@[[self featuredController]] direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:^(BOOL finished) {
+            [self.titleTabView setSelectedIndex:0];
+            
+        }];
+    }
+    
+    if (!shouldBeOnFeatured && [self.pageView.viewControllers[0] class] != [SVSubscriptionGridViewController class]) {
+        [self.pageView setViewControllers:@[[self subscriptionsController]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:^(BOOL finished) {
+            [self.titleTabView setSelectedIndex:1];
+        }];
+    }
 }
 - (void)configureToolbar:(BOOL)animated
 {
     NSMutableArray *items = [NSMutableArray array];
-    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"] 
+    [items addObject:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear.png"]
                                                       style:UIBarButtonItemStylePlain
                                                      target:self
                                                      action:@selector(settingsTapped:)]];
@@ -91,10 +102,11 @@ static NSString *const kIsBusyKey = @"isBusy";
                                                      action:@selector(directoryButtonTapped:)]];
     
     [self setToolbarItems:items animated:animated];
-
+    
 }
 - (void)viewDidLoad
 {
+    DDLogVerbose(@" HOme ViewDidLoad");
     [[NSNotificationCenter defaultCenter] addObserverForName:@"RecievedPodcastNotification"
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
@@ -107,31 +119,28 @@ static NSString *const kIsBusyKey = @"isBusy";
                                                           NSDictionary *params = [NSDictionary dictionaryWithObject:podcast.title
                                                                                                              forKey:@"Title"];
                                                           [Flurry logEvent:@"LaunchedFromNotification"
-                                                                     withParameters:params];
+                                                            withParameters:params];
                                                           
                                                           SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
                                                           NSAssert(controller, @"Controller should not be nil");
                                                           NSAssert([controller class] == [SVPodcastDetailsViewController class], @"Controller shouldbe the correct class");
-                                                          controller.podcast = podcast;
+                                                          controller.podcastId= podcast.podstoreId;
                                                           controller.context = [NSManagedObjectContext MR_defaultContext];
                                                           [self.navigationController pushViewController:controller animated:YES];
                                                       }
-
+                                                      
                                                   }];
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background-gradient.jpg"]];
-
-
-    [self configureToolbar:NO];
-
-
-        
-        [self configureTabView];
-        self.scrollView.contentOffset = CGPointMake(0, 0);
-
+    
+    
+    [self configureToolbar:NO];    
+    [self configureTabView];
+    self.scrollView.contentOffset = CGPointMake(0, 0);
+    
     [self.titleTabView setSelectedIndex:0];
-
-
+    
+    
     notificationView = [[GCDiscreetNotificationView alloc] initWithText:NSLocalizedString(@"Updating Podcasts", @"Updating Podcasts")
                                                            showActivity:YES
                                                      inPresentationMode:GCDiscreetNotificationViewPresentationModeBottom
@@ -141,7 +150,7 @@ static NSString *const kIsBusyKey = @"isBusy";
                                                                   options:nil];
     [self.pageView setViewControllers:@[[self featuredController]] direction:UIPageViewControllerNavigationDirectionForward animated:YES
                            completion:^(BOOL finished) {
-    
+                               
                            }];
     [self addChildViewController:self.pageView];
     self.pageView.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -162,7 +171,7 @@ static NSString *const kIsBusyKey = @"isBusy";
     }
     
     return _subscriptionsController;
-
+    
 }
 - (FeaturedController *)featuredController
 {
@@ -172,13 +181,13 @@ static NSString *const kIsBusyKey = @"isBusy";
     }
     
     return _featuredController;
-
+    
 }
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     if ([viewController class] == [FeaturedController class]) {
         return [self subscriptionsController];
-           } else {
+    } else {
         return nil;
     }
 }
@@ -189,7 +198,7 @@ static NSString *const kIsBusyKey = @"isBusy";
         return nil;
     } else {
         return [self featuredController];
-           }
+    }
 }
 
 -(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
@@ -217,7 +226,7 @@ static NSString *const kIsBusyKey = @"isBusy";
     UIViewController *controller =[[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
     controller.modalPresentationStyle = UIModalPresentationFullScreen;
     controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:controller 
+    [self presentViewController:controller
                        animated:YES
                      completion:NULL];
 }
@@ -230,7 +239,7 @@ static NSString *const kIsBusyKey = @"isBusy";
     DDLogInfo(@"HomeController:ViewDidDisappear");
     [[SVSubscriptionManager sharedInstance] removeObserver:self
                                                 forKeyPath:kIsBusyKey];
-
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -274,37 +283,37 @@ static NSString *const kIsBusyKey = @"isBusy";
     [self.titleTabView addTabItemWithTitle:whatsHot
                                       icon:nil executeBlock:^{
                                           
-    }];
-
+                                      }];
+    
     NSString *favorites = NSLocalizedString(@"FAVORITES", @"Favorites");
     [self.titleTabView addTabItemWithTitle:favorites
                                       icon:nil executeBlock:^{
-
-    }];
+                                          
+                                      }];
     self.titleTabView.delegate = self;
     [self.titleTabView setBackgroundLayer:nil];
     [self.titleTabView setItemSpacing:10];
-
+    
     [self.titleTabView setSelectedIndex:1];
-
+    
 }
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-
+    
     BOOL updating = [[SVSubscriptionManager sharedInstance] isBusy];
-  
+    
     if ([keyPath isEqualToString:kIsBusyKey]){
         
         dispatch_async(dispatch_get_main_queue(), ^{
-           if (updating) {
-               DDLogVerbose(@"Showing loading message");
-               [self.view bringSubviewToFront:notificationView];
-               [notificationView show:YES];
-           } else if([notificationView isShowing]) {
-               DDLogVerbose(@"Hiding loading message");
-               [notificationView hideAnimatedAfter:1.0];
-           }
+            if (updating) {
+                DDLogVerbose(@"Showing loading message");
+                [self.view bringSubviewToFront:notificationView];
+                [notificationView show:YES];
+            } else if([notificationView isShowing]) {
+                DDLogVerbose(@"Hiding loading message");
+                [notificationView hideAnimatedAfter:1.0];
+            }
         });
     } else {
         

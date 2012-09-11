@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2829" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2829" systemVersion="12C43" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rH6-DC-ajB">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4500" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1914"/>
     </dependencies>
@@ -81,7 +80,7 @@
         <!--Podcasts Search Results View Controller - Tagged 'Tag'-->
         <scene sceneID="w0A-9D-Yl8">
             <objects>
-                <tableViewController storyboardIdentifier="searchResultsController" id="7eF-mi-Iw1" customClass="SVPodcastsSearchResultsViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="searchResultsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7eF-mi-Iw1" customClass="SVPodcastsSearchResultsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Czt-4I-mD4">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,7 +147,7 @@
         <!--Podcast Details View Controller - Podcast Details-->
         <scene sceneID="3VK-cs-szj">
             <objects>
-                <viewController storyboardIdentifier="podcastDetailsController" title="Podcast Details" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="podcastDetailsController" title="Podcast Details" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xyd-co-oUC" customClass="SVPodcastDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hra-2Y-S1w">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -304,7 +303,7 @@
         <!--Episode Details View Controller - Episode Details-->
         <scene sceneID="Rqu-WU-irX">
             <objects>
-                <viewController storyboardIdentifier="episodeDetails" id="Ud2-Hj-ZkH" customClass="SVEpisodeDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="episodeDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ud2-Hj-ZkH" customClass="SVEpisodeDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6CF-NT-Z7D">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -344,7 +343,7 @@
         <!--Playback Controller - Now Playing-->
         <scene sceneID="iM8-22-u5p">
             <objects>
-                <viewController storyboardIdentifier="playback" title="Now Playing" hidesBottomBarWhenPushed="YES" id="qhM-Sb-G9s" customClass="SVPlaybackController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playback" title="Now Playing" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qhM-Sb-G9s" customClass="SVPlaybackController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S2i-Tj-qkR">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -506,24 +505,10 @@
             </objects>
             <point key="canvasLocation" x="1700" y="552"/>
         </scene>
-        <!--Root Controller-->
-        <scene sceneID="AXF-8O-pt5">
-            <objects>
-                <viewController storyboardIdentifier="slideContainer" id="G1m-uo-Ar1" customClass="RootController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kUE-Qc-AFf">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UC7-CT-owX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-879" y="122"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="GTp-18-0Rf">
             <objects>
-                <navigationController storyboardIdentifier="mainNavigationController" id="rH6-DC-ajB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rH6-DC-ajB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
@@ -548,7 +533,7 @@
         <!--Home Controller-->
         <scene sceneID="kjp-pu-lFU">
             <objects>
-                <viewController id="nTD-fN-BeU" customClass="HomeController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="homeController" storyboardIdentifier="homeController" id="nTD-fN-BeU" customClass="HomeController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QYw-aj-Og4">
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -563,7 +548,7 @@
         <!--Subscription Grid View Controller - Subscripton Grid View-->
         <scene sceneID="JQt-u6-o4T">
             <objects>
-                <viewController storyboardIdentifier="subscriptionGridController" title="Subscripton Grid View" id="1nk-N3-2Nt" customClass="SVSubscriptionGridViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="subscriptionGridController" title="Subscripton Grid View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1nk-N3-2Nt" customClass="SVSubscriptionGridViewController" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="lkc-WF-bF9">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -608,7 +593,7 @@
         <!--Featured Controller - Featured-->
         <scene sceneID="hF1-eS-QHN">
             <objects>
-                <viewController storyboardIdentifier="featuredController" title="Featured" id="3eP-dT-cog" customClass="FeaturedController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="featuredController" title="Featured" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3eP-dT-cog" customClass="FeaturedController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DIr-9o-Wjm">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -644,7 +629,7 @@
         <!--Category List View Controller - Directory-->
         <scene sceneID="szf-9S-t5T">
             <objects>
-                <tableViewController storyboardIdentifier="categoryListView" title="Directory" id="sDD-bl-slx" customClass="SVCategoryListViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="categoryListView" title="Directory" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sDD-bl-slx" customClass="SVCategoryListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fjO-8G-iUa">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -712,6 +697,123 @@
         <image name="skipforward.png" width="24" height="24"/>
         <image name="unplayed-flag.png" width="22" height="22"/>
     </resources>
+    <classes>
+        <class className="FeaturedController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="featuedGrid" candidateClass="UICollectionView"/>
+            </relationships>
+        </class>
+        <class className="HomeController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="containedController" candidateClass="UIView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
+        <class className="NativeWebView" superclassName="UIWebView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NativeWebView.h"/>
+        </class>
+        <class className="OBSlider" superclassName="UISlider">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OBSlider.h"/>
+        </class>
+        <class className="SVCategoryListViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVCategoryListViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="SVEpisodeDetailsViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="listenTapped:"/>
+                <relationship kind="action" name="markAsPlayedTapped:"/>
+                <relationship kind="outlet" name="imageBackground" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="markAsPlayedButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="SVEpisodeListCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVEpisodeListCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="downloadedIndicator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="durationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="progressIndicator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="subtitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="unplayedIndicator" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="SVPlaybackController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPlaybackController.h"/>
+            <relationships>
+                <relationship kind="action" name="actionTapped:"/>
+                <relationship kind="action" name="playTapped:"/>
+                <relationship kind="action" name="shareTapped:"/>
+                <relationship kind="action" name="skipBackTapped:"/>
+                <relationship kind="action" name="skipForwardTapped:"/>
+                <relationship kind="action" name="sliderChanged:"/>
+                <relationship kind="outlet" name="artworkImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="foregroundAlbumArt" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="progressSlider" candidateClass="OBSlider"/>
+                <relationship kind="outlet" name="rateImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="rateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="skipBackButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="skipForwardButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="timeElapsedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="timeRemainingLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outletCollection" name="chromeViews" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="SVPodcastDetailsViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="shareTapped:"/>
+                <relationship kind="action" name="showDescriptionGestureRecognizerTapped:"/>
+                <relationship kind="action" name="subscribeTapped:"/>
+                <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="metadataView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="optionsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="subscribeButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SVPodcastDirectoryViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastDirectoryViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonTapped:"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="SVPodcastsSearchResultsViewController" superclassName="SVViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVPodcastsSearchResultsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="SVSubscriptionGridViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVSubscriptionGridViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="gridView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="noContentLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="SVViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SVViewController.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

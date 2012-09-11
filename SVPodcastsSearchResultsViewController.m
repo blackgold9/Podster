@@ -245,9 +245,31 @@ static const NSInteger kDefaultPageSize = 50;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue
                  sender:(id)sender {
     SVPodcastDetailsViewController *destination = segue.destinationViewController;
-    SVPodcast *podcast = (SVPodcast *) [podcasts objectAtIndex:(NSUInteger) [self.tableView indexPathForSelectedRow].row];
+    id<ActsAsPodcast> podcast = (id<ActsAsPodcast>)[podcasts objectAtIndex:(NSUInteger) [self.tableView indexPathForSelectedRow].row];
+    DDLogInfo( @"Looking up podcast in data store with Id: %@", podcast.podstoreId);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, podcast.podstoreId];
+    NSFetchRequest *request = [SVPodcast MR_requestFirstWithPredicate:predicate];
+    [request setIncludesSubentities:YES];
+//    [request setRelationshipKeyPathsForPrefetching:@[SVPodcastRelationships.listImage]];
+    SVPodcast *coreDataPodcast = [[self.context executeFetchRequest:request error:nil] lastObject];
+    DDLogVerbose(@"Lookup complete");
+    if (!coreDataPodcast) {
+        DDLogInfo( @"Podcast with id %@ didn't exist, creating it", coreDataPodcast.podstoreId);
+        __block SVPodcast *newPodcast;
+        [[NSManagedObjectContext MR_rootSavingContext] performBlockAndWait:^{
+            newPodcast = [SVPodcast MR_createInContext:[NSManagedObjectContext MR_rootSavingContext]];
+            [newPodcast populateWithPodcast:podcast];
+            
+            [[NSManagedObjectContext MR_rootSavingContext] save:nil];
+            DDLogVerbose(@"Saved newly created podcast into root context");
+        }];                
+    } else {
+        [coreDataPodcast populateWithPodcast:podcast];
+        [[NSManagedObjectContext MR_defaultContext] MR_save];
+    }
+
 
     NSAssert(podcast.feedURL != nil, @"feedURL should not be nil");
-    destination.podcast = podcast;
+    destination.podcastId = podcast.podstoreId;
 }
 @end

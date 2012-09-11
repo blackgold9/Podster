@@ -29,6 +29,9 @@ typedef enum {
 - (void)skipForward;
 - (void)skipBack;
 - (BOOL)startedPlayback;
-- (void)playEpisode:(SVPodcastEntry *)episode ofPodcast:(SVPodcast *)podcast;
+- (void)loadEpisode:(SVPodcastEntry *)episode
+            andPlay:(BOOL)shouldPlay;
 - (void)setPlaybackRate:(CGFloat)rate;
+- (void)loadPlaybackStateFromCoder:(NSCoder *)coder;
+- (void)savePlaybackStateToCoder:(NSCoder *)coder;
 @end

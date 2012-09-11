@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GMGridView.h"
 #import "SVViewController.h"
 #import "CoreDataController.h"
 @interface SVSubscriptionGridViewController : UIViewController<CoreDataController, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>

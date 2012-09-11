@@ -26,5 +26,6 @@
 #import "SVPodcatcherClient.h"
 #import "Flurry.h"
 #import "DDLog.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 #endif

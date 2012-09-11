@@ -4,7 +4,6 @@ PODS:
 - CocoaLumberjack (1.6)
 - FlurrySDK (4.0.1)
 - GCDiscreetNotificationView (0.0.1)
-- GMGridView (1.1.1)
 - JSONKit (1.5pre)
 - Lockbox (1.0.2)
 - MBProgressHUD (0.5)
@@ -32,7 +31,6 @@ DEPENDENCIES:
 - BlockAlertsAnd-ActionSheets
 - FlurrySDK
 - GCDiscreetNotificationView
-- GMGridView
 - JSONKit
 - Lockbox
 - MBProgressHUD
@@ -58,7 +56,6 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 0f2fa7090a23f13261072d882e017c688300efbe
   FlurrySDK: 77366f5ad4fb998c1db3783109e90805ec1d20cd
   GCDiscreetNotificationView: 15c3e146a52303b80143dab5c3fee917a46c3bb1
-  GMGridView: 6ef84c7fb99a2b28dc6fb2ddd36a8ef96360fa5e
   JSONKit: a01a22c75f27eae76b4badd55a91c20fe6e86477
   Lockbox: ff59abb5a0e2cb8303cf0072d6e868f304b66665
   MBProgressHUD: b23ee11c42253d6d804e8e0bfabdc334e8b2571f

@@ -15,7 +15,6 @@
 #import "SVPodcastsSearchResultsViewController.h"
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcastImageCache.h"
-#import "NRGridView.h"
 #import "SVPodcatcherClient.h"
 #import "UIColor+Hex.h"
 #import "BlockAlertView.h"
@@ -86,10 +85,10 @@ static int ddLogLevel = LOG_LEVEL_INFO;
    // self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
 }
 
--(NSString *)gridView:(NRGridView *)gridView titleForHeaderInSection:(NSInteger)section
-{
-    return NSLocalizedString([[featured objectAtIndex:section] valueForKey:@"name"], @"Localized header");
-}
+//-(NSString *)gridView:(NRGridView *)gridView titleForHeaderInSection:(NSInteger)section
+//{
+//    return NSLocalizedString([[featured objectAtIndex:section] valueForKey:@"name"], @"Localized header");
+//}
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -160,7 +159,31 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     NSArray *feeds = [sectionDict valueForKey:@"feeds"];
     id<ActsAsPodcast> podcast = [feeds objectAtIndex:indexPath.row];
     SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
-    controller.podcast = podcast;
+    DDLogInfo( @"Looking up podcast in data store with Id: %@", podcast.podstoreId);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, podcast.podstoreId];
+    NSFetchRequest *request = [SVPodcast MR_requestFirstWithPredicate:predicate];
+    [request setIncludesSubentities:YES];
+    //    [request setRelationshipKeyPathsForPrefetching:@[SVPodcastRelationships.listImage]];
+    SVPodcast *coreDataPodcast = [[[NSManagedObjectContext MR_defaultContext] executeFetchRequest:request error:nil] lastObject];
+    DDLogVerbose(@"Lookup complete");
+    if (!coreDataPodcast) {
+        DDLogInfo( @"Podcast with id %@ didn't exist, creating it", coreDataPodcast.podstoreId);
+        __block SVPodcast *newPodcast;
+        [[NSManagedObjectContext MR_rootSavingContext] performBlockAndWait:^{
+            newPodcast = [SVPodcast MR_createInContext:[NSManagedObjectContext MR_rootSavingContext]];
+            [newPodcast populateWithPodcast:podcast];
+            
+            [[NSManagedObjectContext MR_rootSavingContext] save:nil];
+            DDLogVerbose(@"Saved newly created podcast into root context");
+        }];
+    } else {
+        [coreDataPodcast populateWithPodcast:podcast];
+        [[NSManagedObjectContext MR_defaultContext] MR_save];
+    }
+    
+    
+    NSAssert(podcast.feedURL != nil, @"feedURL should not be nil");
+    controller.podcastId = podcast.podstoreId;
     [self.navigationController pushViewController:controller animated:YES]; 
 }
 

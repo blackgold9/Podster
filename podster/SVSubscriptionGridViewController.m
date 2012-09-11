@@ -7,7 +7,6 @@
 //
 
 #import "SVSubscriptionGridViewController.h"
-#import "GMGridView.h"
 #import "SVSubscriptionManager.h"
 #import "SVPodcast.h"
 #import "SVPodcastDetailsViewController.h"
@@ -242,7 +241,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     SVPodcastDetailsViewController *controller =  [[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"podcastDetailsController"];
     controller.context = self.context;
-    controller.podcast = podcast;
+    controller.podcastId = podcast.podstoreId;
     [self.navigationController pushViewController:controller animated:YES];
 
 }

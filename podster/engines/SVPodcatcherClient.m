@@ -179,9 +179,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSParameterAssert(query);
     NSParameterAssert(completion);
     NSParameterAssert(errorHandler);
-    
-    NSString *queryPath = [NSString stringWithFormat:@"feeds.json?cc=%@&query=%@", [self countryCode], AFURLEncodedStringFromStringWithEncoding(query, NSUTF8StringEncoding)];
-    [self getPath:queryPath parameters:nil
+
+       [self getPath:@"feeds.json" parameters:@{@"cc":[self countryCode], @"query": query}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSArray *returnedData = responseObject;
               NSMutableArray *podcasts = [NSMutableArray array];

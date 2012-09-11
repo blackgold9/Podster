@@ -70,25 +70,36 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             NSCache *cache = [self cache];
             __block UIImage *image = [cache objectForKey:coreCast.objectID];
             if (image == nil) {
-                self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"]; 
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    DDLogVerbose( @"Loaded local image");
+
+                
+                // If we're not idel (Default mode, do it asynchronously)
+                if ([[[NSRunLoop mainRunLoop] currentMode] isEqualToString:NSDefaultRunLoopMode]) {
+                    self.podcastArtImageView.image =  [UIImage imageNamed:@"placeholder.png"];
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        DDLogVerbose( @"Loaded local image");
+                        image = [UIImage imageWithData:coreCast.gridImage.imageData];
+                        [cache setObject:image forKey:coreCast.objectID];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [UIView animateWithDuration:0.33
+                                                  delay:0
+                                                options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionTransitionCrossDissolve
+                                             animations:^{
+                                                 self.podcastArtImageView.image = image;
+                                             } completion:^(BOOL finished) {
+                                                 
+                                             }];
+                            
+                            
+                        });
+                        
+                        // Load image
+                    });
+                } else {
+                    // We're idle, so just do it on the main thread
                     image = [UIImage imageWithData:coreCast.gridImage.imageData];
                     [cache setObject:image forKey:coreCast.objectID];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [UIView animateWithDuration:0.33
-                                              delay:0
-                                            options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionTransitionCrossDissolve
-                                         animations:^{
-                                             self.podcastArtImageView.image = image;
-                                         } completion:^(BOOL finished) {
-                                             
-                                         }];
-                        
-                        
-                    });
-                    // Load image
-                });
+                    self.podcastArtImageView.image = image;
+                }
             } else {
                 DDLogVerbose(@"Loaded cached Image");
                 self.podcastArtImageView.image = image;

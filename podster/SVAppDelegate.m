@@ -15,7 +15,6 @@
 #import "SVPodcastDetailsViewController.h"
 #import "SVPodcast.h"
 #import "SDURLCache.h"
-#import "GMGridView.h"
 #import "SVSubscriptionManager.h"
 #import "PodsterIAPHelper.h"
 #import <CoreText/CoreText.h>
@@ -45,7 +44,7 @@ NSString *uuid();
 @synthesize window = _window;
 + (void)initialize
 {
-    [iRate sharedInstance].daysUntilPrompt = 5;
+    [iRate sharedInstance].daysUntilPrompt = 14;
     [iRate sharedInstance].usesUntilPrompt = 15;
 }
 
@@ -87,8 +86,7 @@ NSString *uuid();
     [[UISlider appearance] setMaximumTrackTintColor:colorOne];
     //  [[UIProgressView appearance] setMaximumTrackTintColor:colorOne];
 }
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
@@ -117,13 +115,13 @@ NSString *uuid();
     
 #if defined (CONFIGURATION_Ad_Hoc)
     DDLogVerbose(@"Running in Ad_Hoc mode");
-
+    
     [Flurry startSession:@"FGIFUZFEUSAMC74URBVL"];
     [Flurry setSecureTransportEnabled:YES];
     [Flurry  setUserID:[[SVSettings sharedInstance] deviceId]];
 #endif
-
-
+    
+    
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
         NSString *feedId= [userInfo valueForKey:@"feedId"];
@@ -133,20 +131,20 @@ NSString *uuid();
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             DDLogInfo(@"Showing podcast indicated from notification");
             [[NSNotificationCenter defaultCenter] postNotificationName:@"RecievedPodcastNotification" object:self userInfo:userInfo];
-        });       
+        });
     }
     
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"PodsterData/StoreContent/persistentStore"];
-
+    
     isFirstRun = [[SVSettings sharedInstance] firstRun];
     SDURLCache *URLCache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024*2 diskCapacity:1024*1024*100 diskPath:[SDURLCache defaultCachePath]];
-//    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
+    //    [URLCache setIgnoreMemoryOnlyStoragePolicy:YES];
     [NSURLCache setSharedURLCache:URLCache];
-
+    
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PodsterIAPHelper sharedInstance]];
-
+    
     [self configureTheming];
-
+    
     // Actually register
 #ifndef CONFIGURATION_Debug
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|
@@ -155,18 +153,28 @@ NSString *uuid();
 #else
     [self application:[UIApplication sharedApplication] didFailToRegisterForRemoteNotificationsWithError:nil];
 #endif
-
     
     
-    BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];
-    self.window.rootViewController = controller;
-    
+        
     [[SVSettings sharedInstance] setFirstRun:NO];
-
+    
     
     saveTimer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(saveData) userInfo:nil repeats:YES];
+    DDLogInfo(@"WillFinishLaunching complete");
     return YES;
+
 }
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    DDLogInfo(@"Starting didfinishlaunching");
+    if (!self.window.rootViewController) {
+        DDLogInfo(@"root controller not set, making one");
+        BannerViewController *controller = [[BannerViewController alloc] initWithContentViewController:[[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil] instantiateInitialViewController]];    
+        self.window.rootViewController = controller;
+
+    }
+    return YES;
+   }
 
 - (void)saveData
 {
@@ -370,6 +378,32 @@ NSString *uuid();
         return [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];
 #endif
     return nil;
+}
+
+-(BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
+{
+
+
+    return YES;
+    
+}
+
+-(void)application:(UIApplication *)application willEncodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    DDLogInfo(@"Encoding state");
+    [[SVPlaybackManager sharedInstance] savePlaybackStateToCoder:coder];
+   // [coder encodeObject:self.window.rootViewController forKey:@"rootController"];
+}
+-(void)application:(UIApplication *)application didDecodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    DDLogInfo(@"Decoding state");
+    [[SVPlaybackManager sharedInstance] loadPlaybackStateFromCoder:coder];
+   // self.window.rootViewController = [coder decodeObjectForKey:@"rootController"];
+}
+
+-(BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
+{
+    return YES;
 }
 
 @end

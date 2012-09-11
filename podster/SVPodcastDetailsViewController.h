@@ -11,7 +11,7 @@
 #import "SVViewController.h"
 #import "CoreDataController.h"
 @class SVPodcastSearchResult;
-@interface SVPodcastDetailsViewController : SVViewController<CoreDataController, NSFetchedResultsControllerDelegate, UITableViewDataSource,UITableViewDelegate>
+@interface SVPodcastDetailsViewController : SVViewController<CoreDataController, NSFetchedResultsControllerDelegate, UITableViewDataSource,UITableViewDelegate, UIViewControllerRestoration>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -19,9 +19,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 - (IBAction)subscribeTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *subscribeButton;
-@property (weak) id<ActsAsPodcast> podcast;
 @property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *shareButton;
+@property (nonatomic, strong) NSNumber *podcastId;
 - (IBAction)shareTapped:(id)sender;
 - (IBAction)showDescriptionGestureRecognizerTapped:(id)sender;
 @end
