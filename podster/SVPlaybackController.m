@@ -71,17 +71,32 @@ static int ddLogLevel = LOG_LEVEL_WARN;
                 [self.artworkImage setImageWithURL:imageURL placeholderImage:nil];
             }
 }
--(void)viewDidDisappear:(BOOL)animated
+- (void)unregisterObservers
 {
     [Flurry endTimedEvent:@"PlaybackPageView" withParameters:nil];
     [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
     [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
     [player removeTimeObserver:playerObserver];
+    [[SVPlaybackManager sharedInstance] removeObserver:self forKeyPath:@"player"];
+    [[SVPlaybackManager sharedInstance] removeObserver:self forKeyPath:@"playbackState"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [self unregisterObservers];
 
 }
 - (void)registerObservers
 {
+    [[SVPlaybackManager sharedInstance] addObserver:self
+                                         forKeyPath:@"player"
+                                            options:NSKeyValueObservingOptionPrior | NSKeyValueObservingOptionNew
+                                            context:(__bridge void*)self];
+    [[SVPlaybackManager sharedInstance] addObserver:self
+                                         forKeyPath:@"playbackState"
+                                            options:NSKeyValueObservingOptionInitial |NSKeyValueObservingOptionNew context:nil];
+
     [player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     [player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:(__bridge void*)self];
     __weak SVPlaybackController  *weakSelf = self;
@@ -104,6 +119,17 @@ static int ddLogLevel = LOG_LEVEL_WARN;
         }
     }];
     
+    if ([SVPlaybackManager sharedInstance].currentEpisode) {
+        NSInteger duration = [SVPlaybackManager sharedInstance].currentEpisode.durationValue;
+        if (duration > 0) {
+            NSInteger currentPosition =[SVPlaybackManager sharedInstance].currentEpisode.positionInSecondsValue;
+            NSInteger remaining = duration - currentPosition;
+
+            self.timeElapsedLabel.text =  [SVPlaybackController formattedStringRepresentationOfSeconds:(currentPosition)];
+            self.timeRemainingLabel.text =  [SVPlaybackController formattedStringRepresentationOfSeconds:(remaining)];
+            self.progressSlider.value = (float) currentPosition /duration;
+        }
+    }
     [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification
                                                       object:nil
                                                        queue:[NSOperationQueue mainQueue]
@@ -117,13 +143,17 @@ static int ddLogLevel = LOG_LEVEL_WARN;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-        self.navigationController.toolbarHidden = YES;
+    player = [[SVPlaybackManager sharedInstance] player];
+    rateImage.userInteractionEnabled = YES;
+    rateImage.alpha = player.rate == 1.5 ? 1.0 : 0.5;
+    playbackSpeed = player.rate;
+
+    self.navigationController.toolbarHidden = YES;
     if (player.rate == 0) {
         self.playButton.selected = NO;
     } else {
         self.playButton.selected = YES;
     }
-
     
     self.timeRemainingLabel.text = [SVPlaybackController formattedStringRepresentationOfSeconds:[SVPlaybackManager sharedInstance].currentEpisode.durationValue];
     self.navigationItem.title = NSLocalizedString(@"Now Playing", @"Now Playing");
@@ -147,13 +177,6 @@ static int ddLogLevel = LOG_LEVEL_WARN;
     volumeView.showsVolumeSlider = NO;
     [placeholderSuperView addSubview:volumeView];
     
-    [[SVPlaybackManager sharedInstance] addObserver:self
-                                         forKeyPath:@"playbackState"
-                                            options:NSKeyValueObservingOptionInitial |NSKeyValueObservingOptionNew context:nil];
-    player = [[SVPlaybackManager sharedInstance] player];
-    rateImage.userInteractionEnabled = YES;
-    rateImage.alpha = player.rate == 1.5 ? 1.0 : 0.5;
-    playbackSpeed = player.rate;
     UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rateTapped:)];
     [rateImage addGestureRecognizer:tapRec];
 }
@@ -168,9 +191,8 @@ static int ddLogLevel = LOG_LEVEL_WARN;
         [[SVPlaybackManager sharedInstance] setPlaybackRate:1.5];
         playbackSpeed = 1.5;
     }
-    
- 
 }
+
 - (void)viewDidUnload
 {
     [self setProgressSlider:nil];
@@ -186,13 +208,9 @@ static int ddLogLevel = LOG_LEVEL_WARN;
     [self setRateLabel:nil];
     [self setRateImage:nil];
     [super viewDidUnload];
-        // Release any retained subviews of the main view.
+    // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     NSLog(@"Removing observers");
-    [player removeObserver:self forKeyPath:@"status" context:(__bridge void*)self];
-    [player removeObserver:self forKeyPath:@"rate" context:(__bridge void*)self];
-    [player removeTimeObserver:playerObserver];
-
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -230,10 +248,23 @@ static int ddLogLevel = LOG_LEVEL_WARN;
                         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                         break;
                 }
+            } if ([keyPath isEqualToString:@"player"]) {
+                if ([[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue] == YES) {
+                    // This is observed with prior observation option, so this fires BEFORE it changes
+                    if ([SVPlaybackManager sharedInstance].player) {
+                        if (playerObserver) {
+                            [self unregisterObservers];
+                            playerObserver = nil;
+                        }
+                    }
+                } else {
+                    // This is when a NEW player is detected
+                    [self registerObservers];
+                }
             }
         }
         
-    }
+    } 
 }
 - (IBAction)playTapped:(id)sender {
     if (player.rate == 0) {

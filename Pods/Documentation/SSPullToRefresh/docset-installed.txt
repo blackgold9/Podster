@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/svanter/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.SSPullToRefresh-1.0.1.docset
+Time: 2012-09-10 18:09:46 +0000

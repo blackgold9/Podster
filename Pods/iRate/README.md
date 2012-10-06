@@ -7,8 +7,8 @@ iRate is a library to help you promote your iPhone and Mac App Store apps by pro
 Supported OS & SDK Versions
 -----------------------------
 
-* Supported build target - iOS 5.0 / Mac OS 10.7 (Xcode 4.3.1, Apple LLVM compiler 3.1)
-* Earliest supported deployment target - iOS 4.3 / Mac OS 10.6
+* Supported build target - iOS 6.0 / Mac OS 10.8 (Xcode 4.5, Apple LLVM compiler 4.1)
+* Earliest supported deployment target - iOS 5.0 / Mac OS 10.7
 * Earliest compatible deployment target - iOS 3.0 / Mac OS 10.6
 
 NOTE: 'Supported' means that the library has been tested with this version. 'Compatible' means that the library should work on this OS version (i.e. it doesn't rely on any unavailable SDK features) but is no longer being tested for compatibility and may require tweaking or bug fixes to run correctly.
@@ -31,19 +31,17 @@ Installation
 
 To install iRate into your app, drag the iRate.h, .m and .bundle files into your project. You can omit the .bundle if you are not interested in localised copy.
 
-To enable iRate in your application you need to instantiate and configure iRate *before* the app has finished launching. The easiest way to do this is to add the iRate configuration code in your AppDelegate's initialize method, like this:
+As of version 1.4, iRate typically requires no configuration at all and will simply run automatically, using the application's bundle ID to look the app ID up on the App Store.
 
-As of version 1.4, iRate typically requires no configuration at all and will simply run automatically, using the Application's bundle ID to look the app ID up on the App Store.
-
-**Note:** If you have apps with matching bundle IDs on both the Mac and iOS app stores (even if they use different capitalisation), the lookup mechanism won't work, so you'll need to manually set the appStoreID property, which is a numeric ID that can be found in iTunes Connect after you set up an app.
+**Note:** If you have apps with matching bundle IDs on both the Mac and iOS app stores (even if they use different capitalisation), the lookup mechanism won't work, so you'll need to manually set the appStoreID property, which is a numeric ID that can be found in iTunes Connect after you set up an app. Also, if you are creating a sandboxed Mac app and your app does not request the network access permission then you will need to set the appStoreID because it cannot be retrieved from the iTunes service. 
 
 If you do wish to customise iRate, the best time to do this is *before* the app has finished launching. The easiest way to do this is to add the iRate configuration code in your AppDelegate's `initialize` method, like this:
 
 	+ (void)initialize
 	{
 		//configure iRate
-		[iRate sharedInstance].appStoreID = 355313284;
-		[iRate sharedInstance].appStoreGenre = iRateAppStoreGenreGame;
+		[iRate sharedInstance].daysUntilPrompt = 5;
+		[iRate sharedInstance].usesUntilPrompt = 15;
 	}
 
 
@@ -54,15 +52,15 @@ To configure iRate, there are a number of properties of the iRate class that can
 
     @property (nonatomic, assign) NSUInteger appStoreID;
 
-This should match the iTunes app ID of your application, which you can get from iTunes connect after setting up your app. This value is not normally necessary and is generally only required if you have the aforementioned conflict between bundle IDs for your Mac and iOS apps.
+This should match the iTunes app ID of your application, which you can get from iTunes connect after setting up your app. This value is not normally necessary and is generally only required if you have the aforementioned conflict between bundle IDs for your Mac and iOS apps, or in the case of Sandboxed Mac apps, if your app does not have network permission because it won't be able to fetch the appStoreID automatically using iTunes services.
 
-    @property (nonatomic, copy) NSString *appStoreGenre;
+    @property (nonatomic, assign) NSUInteger appStoreGenreID;
 
-This is the type of app, used to determine the default text for the rating dialog. This is set automatically by calling an iTunes service, so you shouldn't need to set it manually for most purposes. If you do wish to override this value, setting it to the `iRateAppStoreGenreGame` constant will cause iRate to use the "game" version of the rating dialog, and setting it to any other value will use the "app" version of the rating dialog.
+This is the type of app, used to determine the default text for the rating dialog. This is set automatically by calling an iTunes service, so you shouldn't need to set it manually for most purposes. If you do wish to override this value, setting it to the `iRateAppStoreGameGenreID` constant will cause iRate to use the "game" version of the rating dialog, and setting it to any other value will use the "app" version of the rating dialog.
 
     @property (nonatomic, copy) NSString *appStoreCountry;
 
-This is the two-letter country code used to specify which iTunes store to check. It is set automatically from the device locale preferences, so shouldn't need to be changed in most cases. You can override this to point to the US store, or another specific store if you prefer.
+This is the two-letter country code used to specify which iTunes store to check. It is set automatically from the device locale preferences, so shouldn't need to be changed in most cases. You can override this to point to the US store, or another specific store if you prefer, which may be a good idea if your app is only available in certain countries.
 
     @property (nonatomic, copy) NSString *applicationName;
 
@@ -70,7 +68,7 @@ This is the name of the app displayed in the iRate alert. It is set automaticall
 
     @property (nonatomic, copy) NSString *applicationBundleID;
 
-This is the application bundle ID, used to retrieve the `appStoreID` and `appStoreGenre` from iTunes. This is set automatically from the app's info.plist, so you shouldn't need to change it except for testing purposes.
+This is the application bundle ID, used to retrieve the `appStoreID` and `appStoreGenreID` from iTunes. This is set automatically from the app's info.plist, so you shouldn't need to change it except for testing purposes.
 
     @property (nonatomic, assign) float daysUntilPrompt;
 
@@ -112,6 +110,10 @@ The button label for the button the user presses if they don't want to rate the 
 
 On iOS, iRate includes some logic to resize the alert view to ensure that your rating message is visible in both portrait and landscape mode, and that it doesn't scroll or become truncated. The code to do this is a rather nasty hack, so if your alert text is very short and/or your app only needs to function in portrait mode on iPhone, you may wish to set this property to YES, which may help make your app more robust against future iOS updates. Try the *Resizing Disabled* example for a demonstration of the effect.
 
+    @property (nonatomic, assign) BOOL promptAgainForEachNewVersion;
+    
+Because iTunes ratings are version-specific, you ideally want users to rate each new version of your app. However, it's debatable whether many users will actually do this, and if you update frequently this may get annoying. Set `promptAgainForEachNewVersion` to `NO`, and iRate won't prompt the user again each time they install an update if they've already rated the app. It will still prompt them each new version if they have *not* rated the app, but you can override this using the `iRateShouldShouldPromptForRating` delegate method if you wish.
+
     @property (nonatomic, assign) BOOL onlyPromptIfLatestVersion;
 
 Set this to NO to enabled the rating prompt to be displayed even if the user is not running the latest version of the app. This defaults to YES because that way users won't leave bad reviews due to bugs that you've already fixed, etc.
@@ -124,7 +126,11 @@ This setting is applicable to Mac OS only. By default, on Mac OS the iRate alert
 
 Set this to NO to disable the rating prompt appearing automatically when the application launches or returns from the background. The rating criteria will continue to be tracked, but the prompt will not be displayed automatically while this setting is in effect. You can use this option if you wish to manually control display of the rating prompt.
 
-    @property (nonatomic, assign) BOOL debug;
+    @property (nonatomic, assign) BOOL verboseLogging;
+
+This option will cause iRate to send detailed logs to the console about the prompt decision process. If your app is not correctly prompting for a rating when you would expect it to, this will help you figure out why. Verbose logging is enabled by default on debug builds, and disabled on release and deployment builds.
+
+    @property (nonatomic, assign) BOOL previewMode;
 
 If set to YES, iRate will always display the rating prompt on launch, regardless of how long the app has been in use or whether it's the latest version. Use this to proofread your message and check your configuration is correct during testing, but disable it for the final release (defaults to NO).
 
@@ -136,7 +142,7 @@ If the default iRate behaviour doesn't meet your requirements, you can implement
 
     @property (nonatomic, strong) NSURL *ratingsURL;
 
-The URL that the app will direct the user to so they can write a rating for the app. If you are implementing your own rating prompt, you should probably use the `openRatingsPageInAppStore` method instead, especially on Mac OS, as the process for opening the Mac app store is more complex than merely opening the URL.
+The URL that the app will direct the user to so they can write a rating for the app. This is set to the correct value for the given platform automatically. On iOS 5 and below this takes users directly to the ratings page, but on iOS 6 and Mac OS it takes users to the main app page (if there is a way to directly link to the ratings page on those platforms, I've yet to find it). If you are implementing your own rating prompt, you should probably use the `openRatingsPageInAppStore` method instead, especially on Mac OS, as the process for opening the Mac app store is more complex than merely opening the URL.
 
     @property (nonatomic, strong) NSDate *firstUsed;
 
@@ -158,9 +164,17 @@ The number of significant application events that have been recorded since the c
 
 This flag indicates whether the user has declined to rate the current version (YES) or not (NO).
 
+    @property (nonatomic, assign) BOOL declinedAnyVersion;
+
+This flag indicates whether the user has declined to rate any previous version of the app (YES) or not (NO). This is not currently used by the iRate prompting logic, but may be useful for implementing your own rules using the `iRateShouldPromptForRating` delegate method.
+
     @property (nonatomic, assign) BOOL ratedThisVersion;
 
 This flag indicates whether the user has already rated the current version (YES) or not (NO).
+
+    @property (nonatomic, readonly) BOOL ratedAnyVersion;
+
+This (readonly) flag indicates whether the user has previously rated any version of the app (YES) or not (NO).
 
     @property (nonatomic, assign) id<iRateDelegate> delegate;
 
@@ -182,11 +196,11 @@ Returns YES if the prompt criteria have been met, and NO if they have not. You c
 
     - (void)promptForRating;
 
-This method will immediately trigger the rating prompt without checking that the  app store is available, and without calling the iRateShouldShouldPromptForRating delegate method. Note that this method depends on the `appStoreID` and `applicationGenre` properties, which is only retrieved after polling the iTunes server, so if you intend to call this method directly, you will need to set these properties yourself beforehand, or use the `promptIfNetworkAvailable` method instead.
+This method will immediately trigger the rating prompt without checking that the  app store is available, and without calling the iRateShouldShouldPromptForRating delegate method. Note that this method depends on the `appStoreID` and `applicationGenre` properties, which are only retrieved after polling the iTunes server, so if you intend to call this method directly, you will need to set these properties yourself beforehand, or use the `promptIfNetworkAvailable` method instead.
 
     - (void)promptIfNetworkAvailable;
 
-This method will check if the app store is available, and if it is, it will display the rating prompt to the user. The iRateShouldShouldPromptForRating delegate method will be called before the alert is shown, so you can intercept it.
+This method will check if the app store is available, and if it is, it will display the rating prompt to the user. The iRateShouldShouldPromptForRating delegate method will be called before the alert is shown, so you can intercept it. Note that if your app is sandboxed and does not have the network access permission, this method will ignore the network availability status, however in this case you will need to manually set the appStoreID or iRate cannot function.
 
     - (void)openRatingsPageInAppStore;
 
@@ -200,7 +214,7 @@ The iRateDelegate protocol provides the following methods that can be used inter
 
     - (void)iRateCouldNotConnectToAppStore:(NSError *)error;
 
-This method is called if iRate cannot connect to the App Store, usually because the network connection is down.
+This method is called if iRate cannot connect to the App Store, usually because the network connection is down. This may also fire if your app does not have access to the network due to Sandbox permissions, in which case you will need to manually set the appStoreID so that iRate can still function.
 
     - (void)iRateDidDetectAppUpdate;
 
@@ -247,9 +261,9 @@ If you want to override some of the localised strings but leave the others intac
 Example Projects
 ---------------
 
-When you build and run the basic Mac or iPhone example project for the first time, it will show an alert asking you to rate the app. This is because the debug option is set.
+When you build and run the basic Mac or iPhone example project for the first time, it will show an alert asking you to rate the app. This is because the previewMode option is set.
 
-Disable the debug option and play with the other settings to see how the app behaves in practice.
+Disable the previewMode option and play with the other settings to see how the app behaves in practice.
 
 
 Advanced Example

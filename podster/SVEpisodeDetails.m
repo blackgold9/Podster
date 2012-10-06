@@ -164,6 +164,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)shareTapped:(id)sender
 {
+    
     TWTweetComposeViewController *tweet = [[TWTweetComposeViewController alloc] init];
     [tweet setInitialText:[NSString stringWithFormat:@"Sharing an episode of %@ (via @ItsPodster)",     episode.podcast.title]];
     [tweet addURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.podsterapp.com/feed_items/%d",episode.podstoreIdValue]]];

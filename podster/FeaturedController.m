@@ -20,7 +20,7 @@
 #import "BlockAlertView.h"
 #import "SVPodcast.h"
 #import "MBProgressHUD.h"
-static int ddLogLevel = LOG_LEVEL_INFO;
+static int ddLogLevel = LOG_LEVEL_VERBOSE;
 @implementation FeaturedController {
     NSArray *featured;
 }
@@ -53,8 +53,8 @@ static int ddLogLevel = LOG_LEVEL_INFO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
-//    self.gridView.centerGrid = NO;
+    //    self.featuedGrid.cellSize = DEFAULT_GRID_CELL_SIZE;
+    //    self.gridView.centerGrid = NO;
     UIImage *image = [UIImage imageNamed:@"background-gradient.jpg"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [self.view addSubview:imageView];
@@ -65,9 +65,9 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[SVPodcatcherClient sharedInstance] featuredPodcastsForLanguage:nil
                                                         onCompletion:^(NSArray *returned) {
-                                                            featured = returned;                                                                                                                                                                                 
+                                                            featured = returned;
                                                             [self.featuedGrid reloadData];
-                                                                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                         } onError:^(NSError *error) {
                                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                             DDLogError( @"Error occured downloading featured podcasts");
@@ -82,7 +82,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.featuedGrid reloadData];
-   // self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
+    // self.gridView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"CarbonFiber-1.png"]];
 }
 
 //-(NSString *)gridView:(NRGridView *)gridView titleForHeaderInSection:(NSInteger)section
@@ -118,14 +118,14 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     [cell bind:podcast];
     cell.clipsToBounds = YES;
     return cell;
-
-
+    
+    
 }
 
 //-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 //{
 //    UIView *background = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-//    
+//
 //    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 280, 50)];
 //    [label setFont:[UIFont boldSystemFontOfSize:17.0f]];
 //    label.backgroundColor = [UIColor clearColor];
@@ -142,7 +142,7 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     self.featuedGrid = nil;
     [super viewDidUnload];
     
-  //  featuredPodcasts = [NSArray array];
+    //  featuredPodcasts = [NSArray array];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -162,29 +162,43 @@ static int ddLogLevel = LOG_LEVEL_INFO;
     DDLogInfo( @"Looking up podcast in data store with Id: %@", podcast.podstoreId);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", SVPodcastAttributes.podstoreId, podcast.podstoreId];
     NSFetchRequest *request = [SVPodcast MR_requestFirstWithPredicate:predicate];
-    [request setIncludesSubentities:YES];
-    //    [request setRelationshipKeyPathsForPrefetching:@[SVPodcastRelationships.listImage]];
+    NSAssert(podcast.feedURL != nil, @"feedURL should not be nil");
+    controller.podcastId = podcast.podstoreId;
+    
     SVPodcast *coreDataPodcast = [[[NSManagedObjectContext MR_defaultContext] executeFetchRequest:request error:nil] lastObject];
     DDLogVerbose(@"Lookup complete");
     if (!coreDataPodcast) {
-        DDLogInfo( @"Podcast with id %@ didn't exist, creating it", coreDataPodcast.podstoreId);
+        DDLogInfo( @"Podcast with id %@ didn't exist, creating it", podcast.podstoreId);
         __block SVPodcast *newPodcast;
-        [[NSManagedObjectContext MR_rootSavingContext] performBlockAndWait:^{
-            newPodcast = [SVPodcast MR_createInContext:[NSManagedObjectContext MR_rootSavingContext]];
-            [newPodcast populateWithPodcast:podcast];
+        
+        [MagicalRecord saveInBackgroundWithBlock:^(NSManagedObjectContext *localContext) {
             
-            [[NSManagedObjectContext MR_rootSavingContext] save:nil];
+            
+            newPodcast = [SVPodcast MR_createInContext:localContext];
+            [newPodcast populateWithPodcast:podcast];
+
+        } completion:^{
             DDLogVerbose(@"Saved newly created podcast into root context");
-        }];
+            int64_t delayInSeconds = 0.5;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController pushViewController:controller animated:YES];
+                });
+
+            });
+            
+        }];;
     } else {
+        DDLogVerbose(@"updated existing podcast with new json");
         [coreDataPodcast populateWithPodcast:podcast];
-        [[NSManagedObjectContext MR_defaultContext] MR_save];
+        [[NSManagedObjectContext MR_defaultContext] MR_saveNestedContexts];
+        [self.navigationController pushViewController:controller animated:YES];
     }
     
     
-    NSAssert(podcast.feedURL != nil, @"feedURL should not be nil");
-    controller.podcastId = podcast.podstoreId;
-    [self.navigationController pushViewController:controller animated:YES]; 
+    
+    
 }
 
 

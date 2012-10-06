@@ -1,7 +1,7 @@
 //
 //  iRate.h
 //
-//  Version 1.4.7
+//  Version 1.5.2
 //
 //  Created by Nick Lockwood on 26/01/2011.
 //  Copyright 2011 Charcoal Design
@@ -34,7 +34,7 @@
 //
 //  ARC Helper
 //
-//  Version 1.3.1
+//  Version 2.1
 //
 //  Created by Nick Lockwood on 05/01/2012.
 //  Copyright 2012 Charcoal Design
@@ -45,44 +45,33 @@
 //  https://gist.github.com/1563325
 //
 
-#ifndef AH_RETAIN
+#ifndef ah_retain
 #if __has_feature(objc_arc)
-#define AH_RETAIN(x) (x)
-#define AH_RELEASE(x) (void)(x)
-#define AH_AUTORELEASE(x) (x)
-#define AH_SUPER_DEALLOC (void)(0)
-#define __AH_BRIDGE __bridge
+#define ah_retain self
+#define ah_dealloc self
+#define release self
+#define autorelease self
 #else
-#define __AH_WEAK
-#define AH_WEAK assign
-#define AH_RETAIN(x) [(x) retain]
-#define AH_RELEASE(x) [(x) release]
-#define AH_AUTORELEASE(x) [(x) autorelease]
-#define AH_SUPER_DEALLOC [super dealloc]
-#define __AH_BRIDGE
+#define ah_retain retain
+#define ah_dealloc dealloc
+#define __bridge
 #endif
 #endif
 
-//  Weak reference support
+//  Weak delegate support
 
+#ifndef ah_weak
 #import <Availability.h>
-#ifndef AH_WEAK
-#if defined __IPHONE_OS_VERSION_MIN_REQUIRED
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
-#define __AH_WEAK __weak
-#define AH_WEAK weak
+#if (__has_feature(objc_arc)) && \
+((defined __IPHONE_OS_VERSION_MIN_REQUIRED && \
+__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0) || \
+(defined __MAC_OS_X_VERSION_MIN_REQUIRED && \
+__MAC_OS_X_VERSION_MIN_REQUIRED > __MAC_10_7))
+#define ah_weak weak
+#define __ah_weak __weak
 #else
-#define __AH_WEAK __unsafe_unretained
-#define AH_WEAK unsafe_unretained
-#endif
-#elif defined __MAC_OS_X_VERSION_MIN_REQUIRED
-#if __MAC_OS_X_VERSION_MIN_REQUIRED >= 1070
-#define __AH_WEAK __weak
-#define AH_WEAK weak
-#else
-#define __AH_WEAK __unsafe_unretained
-#define AH_WEAK unsafe_unretained
-#endif
+#define ah_weak unsafe_unretained
+#define __ah_weak __unsafe_unretained
 #endif
 #endif
 
@@ -96,7 +85,17 @@
 #endif
 
 
-extern NSString *const iRateAppStoreGenreGame;
+extern NSUInteger const iRateAppStoreGameGenreID;
+extern NSString *const iRateErrorDomain;
+
+
+typedef enum
+{
+    iRateErrorBundleIdDoesNotMatchAppStore = 1,
+    iRateErrorApplicationNotFoundOnAppStore,
+    iRateErrorApplicationIsNotLatestVersion
+}
+iRateErrorCode;
 
 
 @protocol iRateDelegate <NSObject>
@@ -117,10 +116,10 @@ extern NSString *const iRateAppStoreGenreGame;
 //required for 32-bit Macs
 #ifdef __i386
 {
-@private
+    @private
     
     NSUInteger _appStoreID;
-    NSString *_appStoreGenre;
+    NSUInteger _appStoreGenreID;
     NSString *_appStoreCountry;
     NSString *_applicationName;
     NSString *_applicationVersion;
@@ -136,13 +135,16 @@ extern NSString *const iRateAppStoreGenreGame;
     NSString *_rateButtonLabel;
     NSURL *_ratingsURL;
     BOOL _disableAlertViewResizing;
+    BOOL _promptAgainForEachNewVersion;
     BOOL _onlyPromptIfLatestVersion;
     BOOL _onlyPromptIfMainWindowIsAvailable;
     BOOL _promptAtLaunch;
-    BOOL _debug;
-    id<iRateDelegate> __AH_WEAK _delegate;
+    BOOL _verboseLogging;
+    BOOL _previewMode;
+    id<iRateDelegate> __ah_weak _delegate;
     id _visibleAlert;
     int _previousOrientation;
+    BOOL _currentlyChecking;
 }
 #endif
 
@@ -153,7 +155,7 @@ extern NSString *const iRateAppStoreGenreGame;
 @property (nonatomic, assign) NSUInteger appStoreID;
 
 //application details - these are set automatically
-@property (nonatomic, copy) NSString *appStoreGenre;
+@property (nonatomic, assign) NSUInteger appStoreGenreID;
 @property (nonatomic, copy) NSString *appStoreCountry;
 @property (nonatomic, copy) NSString *applicationName;
 @property (nonatomic, copy) NSString *applicationVersion;
@@ -174,10 +176,12 @@ extern NSString *const iRateAppStoreGenreGame;
 
 //debugging and prompt overrides
 @property (nonatomic, assign) BOOL disableAlertViewResizing;
+@property (nonatomic, assign) BOOL promptAgainForEachNewVersion;
 @property (nonatomic, assign) BOOL onlyPromptIfLatestVersion;
 @property (nonatomic, assign) BOOL onlyPromptIfMainWindowIsAvailable;
 @property (nonatomic, assign) BOOL promptAtLaunch;
-@property (nonatomic, assign) BOOL debug;
+@property (nonatomic, assign) BOOL verboseLogging;
+@property (nonatomic, assign) BOOL previewMode;
 
 //advanced properties for implementing custom behaviour
 @property (nonatomic, strong) NSURL *ratingsURL;
@@ -186,8 +190,10 @@ extern NSString *const iRateAppStoreGenreGame;
 @property (nonatomic, assign) NSUInteger usesCount;
 @property (nonatomic, assign) NSUInteger eventCount;
 @property (nonatomic, assign) BOOL declinedThisVersion;
+@property (nonatomic, readonly) BOOL declinedAnyVersion;
 @property (nonatomic, assign) BOOL ratedThisVersion;
-@property (nonatomic, AH_WEAK) id<iRateDelegate> delegate;
+@property (nonatomic, readonly) BOOL ratedAnyVersion;
+@property (nonatomic, ah_weak) id<iRateDelegate> delegate;
 
 //manually control behaviour
 - (BOOL)shouldPromptForRating;

@@ -258,7 +258,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 iRate
 
-Version 1.4.7, May 25th, 2012
+Version 1.5.2, September 19th, 2012
 
 Copyright (C) 2011 Charcoal Design
 

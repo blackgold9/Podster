@@ -519,7 +519,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     NSAssert(self.podcast != nil, @"Local Podcast should not be nil");
     [[SVSubscriptionManager sharedInstance] refreshPodcasts:@[self.podcast] complete:^{
-        [self reloadFetchedResultsController];
+       // [self reloadFetchedResultsController];
         loadCompleteHandler();
     }];
     
@@ -596,7 +596,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     fetcher.delegate = self;
     DDLogVerbose(@"executing frc");
     NSError *error;
-    if (!        [fetcher performFetch:&error]){
+    if (![fetcher performFetch:&error]){
         DDLogError(@"Error refreshing data from core data: %@", error);
     }
     

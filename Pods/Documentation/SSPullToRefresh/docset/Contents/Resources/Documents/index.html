@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>SSPullToRefresh 1.0.1 Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">SSPullToRefresh 1.0.1 </a></h1>
+				<a id="developerHome" href="index.html">Sam Soffes</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">SSPullToRefresh 1.0.1 Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">SSPullToRefresh 1.0.1 Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1>SSPullToRefresh</h1>
+
+<p>There are dozens of pull to refresh views. I&rsquo;ve never found one I&rsquo;m happy with. I always end up customizing one, so I decided to write one that&rsquo;s highly customizable. You can just write you view and forget about the actual pull to refresh details.</p>
+
+<p>If you&rsquo;re using SSPullToRefresh in your application, add it to <a href="https://github.com/samsoffes/sspulltorefresh/wiki/Applications">the list</a>.</p>
+
+<h2>Example Usage</h2>
+
+<p>``` objective-c
+&ndash; (void)viewDidLoad {
+   [super viewDidLoad];
+   self.pullToRefreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+}</p>
+
+<ul>
+<li><p>(void)refresh {
+ [self.pullToRefreshView startLoading];
+ // Load data&hellip;
+ [self.pullToRefreshView finishLoading];
+}</p></li>
+<li><p>(void)pullToRefreshViewDidStartLoading:(<a href="Classes/SSPullToRefreshView.html">SSPullToRefreshView</a> *)view {
+ [self refresh];
+}
+```</p></li>
+</ul>
+
+
+<h2>Customizing</h2>
+
+<p>SSPullToRefresh view is highly customizable. All of the pulling logic, animations, etc are wrapped up for you in <a href="Classes/SSPullToRefreshView.html">SSPullToRefreshView</a>. It doesn&rsquo;t have any UI. Its <code>contentView</code> handles displaying the UI. By default, it sets up an instance of <a href="https://github.com/samsoffes/sspulltorefresh/blob/master/SSSimplePullToRefreshContentView.h"><code>SSSimplePullToRefreshContentView</code></a> as the <code>contentView</code>.</p>
+
+<h3>Provided Content Views</h3>
+
+<p><a href="https://github.com/samsoffes/sspulltorefresh/blob/master/SSPullToRefreshDefaultContentView.h">SSPullToRefreshDefaultContentView</a> and <a href="https://github.com/samsoffes/sspulltorefresh/blob/master/SSPullToRefreshSimpleContentView.h">SSPullToRefreshSimpleContentView</a> are provided by SSPullToRefresh. By default <code>SSPullToRefreshDefaultContentView</code> is used if you do not provide a content view. To use the provided simple content view, simply set it:</p>
+
+<p><code>objective-c
+pullToRefreshView.contentView = [[SSPullToRefreshSimpleContentView alloc] initWithFrame:CGRectZero];
+</code></p>
+
+<h3>Custom Content Views</h3>
+
+<p>You can simply subclass <code>SSPullToRefreshDefaultContentView</code> or implement your own view that conforms to <code>SSPullToRefreshContentView</code>. You must implement the following method:</p>
+
+<p><code>objective-c
+- (void)setState:(SSPullToRefreshViewState)state withPullToRefreshView:(SSPullToRefreshView *)view
+</code>
+This method will get called whenever the state changes. Here are the possible states. It is recommended to implement UI for most of the states, but you can do whatever you want.</p>
+
+<ul>
+<li><code>SSPullToRefreshViewStateNormal</code> (<em>recommended</em>) — Most will say &ldquo;Pull to refresh&rdquo; in this state</li>
+<li><code>SSPullToRefreshViewStateReady</code> (<em>recommended</em>) — Most will say &ldquo;Release to refresh&rdquo; in this state</li>
+<li><code>SSPullToRefreshViewStateLoading</code> (<em>recommended</em>) — The view is loading</li>
+<li><code>SSPullToRefreshViewStateClosing</code> (<em>optional</em>) — The view has finished loading and is animating closed</li>
+</ul>
+
+
+<p>You may also optionally implement this method:</p>
+
+<p><code>objective-c
+- (void)setLastUpdatedAt:(NSDate *)date withPullToRefreshView:(SSPullToRefreshView *)view
+</code></p>
+
+<h2>Adding To Your Project</h2>
+
+<p><a href="https://github.com/samsoffes/sspulltorefresh/zipball/master">Download</a> the source files or add it as a <a href="http://schacon.github.com/git/user-manual.html#submodules">git submodule</a>. Here&rsquo;s how to add it as a submodule:</p>
+
+<pre><code>$ cd YourProject
+$ git submodule add https://github.com/samsoffes/sspulltorefresh.git Vendor/SSPullToRefresh
+</code></pre>
+
+<p>Add all of the Objective-C files to your project.</p>
+
+<p>SSPullToRefresh uses <a href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html">Automatic Reference Counting (ARC)</a>. (I think <a href="http://blog.samsoff.es/automatic-reference-counting">you should use ARC</a> by the way.) If your project doesn&rsquo;t use ARC, you will need to set the <code>-fobjc-arc compiler</code> flag on all of the SSPullToRefresh source files. To do this in Xcode, go to your active target and select the &ldquo;Build Phases&rdquo; tab. In the &ldquo;Compiler Flags&rdquo; column, set <code>-fobjc-arc</code> for each of the SSPullToRefresh source files.</p>
+
+<h3>CocoaPods</h3>
+
+<p>If you are using <a href="http://cocoapods.org">CocoaPods</a> than just add next line to your <code>Podfile</code>:</p>
+
+<p><code>ruby
+dependency 'SSPullToRefresh'
+</code></p>
+
+<p>Now run <code>pod install</code> to install the dependency.</p>
+
+<h2>Thanks</h2>
+
+<p>I took some inspiration from <a href="https://github.com/chpwn/PullToRefreshView">PullToRefreshView by chpwn</a>, which is based on <a href="https://github.com/enormego/EGOTableViewPullRefresh">EGOTableViewPullRefresh</a>, which is inspired by Tweetie&rsquo;s pull to refresh by <a href="http://twitter.com/lorenb">Loren Brichter</a>. And around we go.</p>
+
+<p>Enjoy.</p>
+						
+						
+					</div>
+					
+                        
+                    
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/SSPullToRefreshDefaultContentView.html">SSPullToRefreshDefaultContentView</a></li>
+							
+							<li><a href="Classes/SSPullToRefreshSimpleContentView.html">SSPullToRefreshSimpleContentView</a></li>
+							
+							<li><a href="Classes/SSPullToRefreshView.html">SSPullToRefreshView</a></li>
+							
+						</ul>
+					</div>
+					
+					
+						
+					<div class="index-column">
+						
+						<h2 class="index-title">Protocol References</h2>
+						<ul>
+							
+							<li><a href="Protocols/SSPullToRefreshContentView.html">SSPullToRefreshContentView</a></li>
+							
+							<li><a href="Protocols/SSPullToRefreshViewDelegate.html">SSPullToRefreshViewDelegate</a></li>
+							
+						</ul>
+						
+						
+					</div>
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Sam Soffes. All rights reserved. (Last updated: 2012-09-10)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

@@ -29,6 +29,8 @@
 		4B0A7B211506770200BADEBB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0A7B201506770200BADEBB /* StoreKit.framework */; };
 		4B0A7B231506863000BADEBB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B0A7B221506863000BADEBB /* Settings.storyboard */; };
 		4B0A7B271506992800BADEBB /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0A7B261506992700BADEBB /* SettingsViewController.m */; };
+		4B0AE04816083E96008AC4B5 /* Default-568h@2x.jpg in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0AE04716083E96008AC4B5 /* Default-568h@2x.jpg */; };
+		4B0AE04A16083ECB008AC4B5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B0AE04916083ECB008AC4B5 /* Default-568h@2x.png */; };
 		4B0E653614DF3CF1008913B2 /* CarbonFiber-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E652E14DF3CF0008913B2 /* CarbonFiber-1.png */; };
 		4B0E653714DF3CF1008913B2 /* CarbonFiber-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E652F14DF3CF0008913B2 /* CarbonFiber-1@2x.png */; };
 		4B0E653814DF3CF1008913B2 /* CarbonFiber-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B0E653014DF3CF0008913B2 /* CarbonFiber-2.png */; };
@@ -321,6 +323,8 @@
 		4B0A7B221506863000BADEBB /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		4B0A7B251506992700BADEBB /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = images/SettingsViewController.h; sourceTree = "<group>"; };
 		4B0A7B261506992700BADEBB /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = images/SettingsViewController.m; sourceTree = "<group>"; };
+		4B0AE04716083E96008AC4B5 /* Default-568h@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Default-568h@2x.jpg"; path = "../../Documents/Default-568h@2x.jpg"; sourceTree = "<group>"; };
+		4B0AE04916083ECB008AC4B5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4B0E652E14DF3CF0008913B2 /* CarbonFiber-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CarbonFiber-1.png"; sourceTree = "<group>"; };
 		4B0E652F14DF3CF0008913B2 /* CarbonFiber-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CarbonFiber-1@2x.png"; sourceTree = "<group>"; };
 		4B0E653014DF3CF0008913B2 /* CarbonFiber-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CarbonFiber-2.png"; sourceTree = "<group>"; };
@@ -714,6 +718,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B02EFC215EC9DD8000E6DF9 /* CFNetwork.framework in Frameworks */,
+				4B0AE04816083E96008AC4B5 /* Default-568h@2x.jpg in Frameworks */,
 				4B01E0D51547E02A00EECA01 /* Twitter.framework in Frameworks */,
 				4B0A7B211506770200BADEBB /* StoreKit.framework in Frameworks */,
 				4B71F7F714A5BBFB00D26F4C /* SystemConfiguration.framework in Frameworks */,
@@ -1044,6 +1049,8 @@
 		4B71F78014A5B08C00D26F4C = {
 			isa = PBXGroup;
 			children = (
+				4B0AE04916083ECB008AC4B5 /* Default-568h@2x.png */,
+				4B0AE04716083E96008AC4B5 /* Default-568h@2x.jpg */,
 				7DB67311159A063200FA932D /* whatsnew.txt */,
 				7DB6730F159A062300FA932D /* keywords.txt */,
 				4B01E0D41547E02900EECA01 /* Twitter.framework */,
@@ -1610,6 +1617,7 @@
 				D6A8789115894C34009DD522 /* sliders@2x.png in Resources */,
 				4BA9DA4C15EDE14C00393775 /* HockeySDKResources.bundle in Resources */,
 				4BA9DA4D15EDE14C00393775 /* LICENSE.txt in Resources */,
+				4B0AE04A16083ECB008AC4B5 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

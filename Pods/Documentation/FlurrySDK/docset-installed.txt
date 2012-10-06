@@ -1,4 +1,4 @@
 Documentation set was installed to Xcode!
 
-Path: /Users/svanter/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.FlurrySDK-4.0.1.docset
-Time: 2012-09-03 23:50:01 +0000
+Path: /Users/svanter/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.FlurrySDK-4.0.4.docset
+Time: 2012-10-06 01:27:34 +0000

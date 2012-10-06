@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSPullToRefreshView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSPullToRefreshView</TokenIdentifier>
+			<Abstract type="html">The view has finished loading and is animating</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/setContentView:</TokenIdentifier>
+			<Abstract type="html">The content view displayed when the scrollView is pulled down. By default this is an instance of SSPullToRefreshDefaultContentView.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/SSPullToRefreshContentView</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIView&lt;SSPullToRefreshContentView&gt; *contentView</Declaration>
+			
+			
+			<Anchor>//api/name/contentView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/contentView</TokenIdentifier>
+			<Abstract type="html">The content view displayed when the scrollView is pulled down. By default this is an instance of SSPullToRefreshDefaultContentView.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/SSPullToRefreshContentView</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, strong) UIView&lt;SSPullToRefreshContentView&gt; *contentView</Declaration>
+			
+			
+			<Anchor>//api/name/contentView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/setDefaultContentInset:</TokenIdentifier>
+			<Abstract type="html">If you need to update the scroll view&apos;s content inset while it contains a pull to refresh view, you should set the
+defaultContentInset on the pull to refresh view and it will forward it to the scroll view taking into account the
+pull to refresh view&apos;s position.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIEdgeInsets defaultContentInset</Declaration>
+			
+			
+			<Anchor>//api/name/defaultContentInset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/defaultContentInset</TokenIdentifier>
+			<Abstract type="html">If you need to update the scroll view&apos;s content inset while it contains a pull to refresh view, you should set the
+defaultContentInset on the pull to refresh view and it will forward it to the scroll view taking into account the
+pull to refresh view&apos;s position.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) UIEdgeInsets defaultContentInset</Declaration>
+			
+			
+			<Anchor>//api/name/defaultContentInset</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/setExpandedHeight:</TokenIdentifier>
+			<Abstract type="html">The height of the fully expanded content view. The default is 70.0.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/expanded</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGFloat expandedHeight</Declaration>
+			
+			
+			<Anchor>//api/name/expandedHeight</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/expandedHeight</TokenIdentifier>
+			<Abstract type="html">The height of the fully expanded content view. The default is 70.0.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/expanded</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) CGFloat expandedHeight</Declaration>
+			
+			
+			<Anchor>//api/name/expandedHeight</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/setExpanded:</TokenIdentifier>
+			<Abstract type="html">A boolean indicating if the pull to refresh view is expanded.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/expandedHeight</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/startLoadingAndExpand:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign, readonly, getter=isExpanded) BOOL expanded</Declaration>
+			
+			
+			<Anchor>//api/name/expanded</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/expanded</TokenIdentifier>
+			<Abstract type="html">A boolean indicating if the pull to refresh view is expanded.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/expandedHeight</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/startLoadingAndExpand:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign, readonly, getter=isExpanded) BOOL expanded</Declaration>
+			
+			
+			<Anchor>//api/name/expanded</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/setScrollView:</TokenIdentifier>
+			<Abstract type="html">The scroll view containing the pull to refresh view. This is automatically set with initWithScrollView:delegate:.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/initWithScrollView:delegate:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign, readonly) UIScrollView *scrollView</Declaration>
+			
+			
+			<Anchor>//api/name/scrollView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/scrollView</TokenIdentifier>
+			<Abstract type="html">The scroll view containing the pull to refresh view. This is automatically set with initWithScrollView:delegate:.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/initWithScrollView:delegate:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign, readonly) UIScrollView *scrollView</Declaration>
+			
+			
+			<Anchor>//api/name/scrollView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/setDelegate:</TokenIdentifier>
+			<Abstract type="html">The delegate is sent messages when the pull to refresh view starts loading. This is automatically set with initWithScrollView:delegate:.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/initWithScrollView:delegate:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intf/SSPullToRefreshViewDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) id&lt;SSPullToRefreshViewDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/delegate</TokenIdentifier>
+			<Abstract type="html">The delegate is sent messages when the pull to refresh view starts loading. This is automatically set with initWithScrollView:delegate:.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/initWithScrollView:delegate:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intf/SSPullToRefreshViewDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign) id&lt;SSPullToRefreshViewDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/setState:</TokenIdentifier>
+			<Abstract type="html">The state of the pull to refresh view.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/startLoading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/startLoadingAndExpand:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/finishLoading</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign, readonly) SSPullToRefreshViewState state</Declaration>
+			
+			
+			<Anchor>//api/name/state</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshView/state</TokenIdentifier>
+			<Abstract type="html">The state of the pull to refresh view.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/startLoading</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/startLoadingAndExpand:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/finishLoading</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, assign, readonly) SSPullToRefreshViewState state</Declaration>
+			
+			
+			<Anchor>//api/name/state</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/initWithScrollView:delegate:</TokenIdentifier>
+			<Abstract type="html">All you need to do to add this view to your scroll view is call this method (passing in the scroll view). That&apos;s it.
+You don&apos;t have to add it as subview or anything else. The rest is magic.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithScrollView:(UIScrollView *)scrollView delegate:(id&lt;SSPullToRefreshViewDelegate&gt;)delegate</Declaration>
+			
+			
+			<Anchor>//api/name/initWithScrollView:delegate:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/startLoading</TokenIdentifier>
+			<Abstract type="html">Call this method when you start loading. If you trigger loading another way besides pulling to refresh, call this
+method so the pull to refresh view will be in sync with the loading status. By default, it will not expand the view
+so it loads quietly out of view.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (void)startLoading</Declaration>
+			
+			
+			<Anchor>//api/name/startLoading</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/startLoadingAndExpand:</TokenIdentifier>
+			<Abstract type="html">Call this method when you start loading. If you trigger loading another way besides pulling to refresh, call this
+method so the pull to refresh view will be in sync with the loading status. You may pass YES for shouldExpand to
+animate down the pull to refresh view to show that it&apos;s loading.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (void)startLoadingAndExpand:(BOOL)shouldExpand</Declaration>
+			
+			
+			<Anchor>//api/name/startLoadingAndExpand:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/finishLoading</TokenIdentifier>
+			<Abstract type="html">Call this when you finish loading.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (void)finishLoading</Declaration>
+			
+			
+			<Anchor>//api/name/finishLoading</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshView/refreshLastUpdatedAt</TokenIdentifier>
+			<Abstract type="html">Manually update the last updated at time. This will automatically get called when the pull to refresh view finishes laoding.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (void)refreshLastUpdatedAt</Declaration>
+			
+			
+			<Anchor>//api/name/refreshLastUpdatedAt</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

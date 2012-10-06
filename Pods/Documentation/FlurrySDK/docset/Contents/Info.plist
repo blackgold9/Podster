@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.cocoapods.FlurrySDK-4.0.1</string>
+	<string>org.cocoapods.FlurrySDK-4.0.4</string>
 	<key>CFBundleName</key>
-	<string>FlurrySDK 4.0.1 Documentation</string>
+	<string>FlurrySDK 4.0.4 Documentation</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -18,7 +18,7 @@
 	<string>FlurrySDK for analytics tracking and reporting.</string>
 	
 	<key>DocSetFeedName</key>
-	<string>FlurrySDK 4.0.1 Documentation</string>
+	<string>FlurrySDK 4.0.4 Documentation</string>
 	
 	<key>DocSetMinimumXcodeVersion</key>
 	<string>3.0</string>

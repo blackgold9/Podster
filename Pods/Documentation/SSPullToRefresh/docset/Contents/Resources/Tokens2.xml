@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSPullToRefreshSimpleContentView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSPullToRefreshSimpleContentView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshSimpleContentView.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshSimpleContentView/setStatusLabel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshSimpleContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *statusLabel</Declaration>
+			
+			
+			<Anchor>//api/name/statusLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshSimpleContentView/statusLabel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshSimpleContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *statusLabel</Declaration>
+			
+			
+			<Anchor>//api/name/statusLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshSimpleContentView/setActivityIndicatorView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshSimpleContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicatorView</Declaration>
+			
+			
+			<Anchor>//api/name/activityIndicatorView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshSimpleContentView/activityIndicatorView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshSimpleContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicatorView</Declaration>
+			
+			
+			<Anchor>//api/name/activityIndicatorView</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

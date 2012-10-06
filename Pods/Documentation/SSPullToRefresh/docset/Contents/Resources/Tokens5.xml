@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SSPullToRefreshViewDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SSPullToRefreshViewDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSPullToRefreshViewDelegate/pullToRefreshViewShouldStartLoading:</TokenIdentifier>
+			<Abstract type="html">Return NO if the pull to refresh view should no start loading.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)pullToRefreshViewShouldStartLoading:(SSPullToRefreshView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/pullToRefreshViewShouldStartLoading:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSPullToRefreshViewDelegate/pullToRefreshViewDidStartLoading:</TokenIdentifier>
+			<Abstract type="html">The pull to refresh view started loading. You should kick off whatever you need to load when this is called.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (void)pullToRefreshViewDidStartLoading:(SSPullToRefreshView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/pullToRefreshViewDidStartLoading:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSPullToRefreshViewDelegate/pullToRefreshViewDidFinishLoading:</TokenIdentifier>
+			<Abstract type="html">The pull to refresh view finished loading. This will get called when it receives finishLoading.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (void)pullToRefreshViewDidFinishLoading:(SSPullToRefreshView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/pullToRefreshViewDidFinishLoading:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SSPullToRefreshViewDelegate/pullToRefreshViewLastUpdatedAt:</TokenIdentifier>
+			<Abstract type="html">The date when data was last updated. This will get called when it finishes loading or if it receives refreshLastUpdatedAt.
+Some content views may display this date.</Abstract>
+			<DeclaredIn>SSPullToRefreshView.h</DeclaredIn>			
+			
+			<Declaration>- (NSDate *)pullToRefreshViewLastUpdatedAt:(SSPullToRefreshView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/pullToRefreshViewLastUpdatedAt:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

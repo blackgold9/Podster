@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SSPullToRefreshDefaultContentView.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SSPullToRefreshDefaultContentView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshDefaultContentView.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshDefaultContentView/setStatusLabel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshDefaultContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *statusLabel</Declaration>
+			
+			
+			<Anchor>//api/name/statusLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshDefaultContentView/statusLabel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshDefaultContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *statusLabel</Declaration>
+			
+			
+			<Anchor>//api/name/statusLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshDefaultContentView/setLastUpdatedAtLabel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshDefaultContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *lastUpdatedAtLabel</Declaration>
+			
+			
+			<Anchor>//api/name/lastUpdatedAtLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshDefaultContentView/lastUpdatedAtLabel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshDefaultContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UILabel *lastUpdatedAtLabel</Declaration>
+			
+			
+			<Anchor>//api/name/lastUpdatedAtLabel</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SSPullToRefreshDefaultContentView/setActivityIndicatorView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshDefaultContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicatorView</Declaration>
+			
+			
+			<Anchor>//api/name/activityIndicatorView</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SSPullToRefreshDefaultContentView/activityIndicatorView</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SSPullToRefreshDefaultContentView.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicatorView</Declaration>
+			
+			
+			<Anchor>//api/name/activityIndicatorView</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

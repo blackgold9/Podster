@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.cocoapods.GCDiscreetNotificationView-0.0.1</string>
+	<string>org.cocoapods.GCDiscreetNotificationView-1.0.0</string>
 	<key>CFBundleName</key>
-	<string>GCDiscreetNotificationView 0.0.1 Documentation</string>
+	<string>GCDiscreetNotificationView 1.0.0 Documentation</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -18,7 +18,7 @@
 	<string>A discreet, non-modal, notification view for iOS.</string>
 	
 	<key>DocSetFeedName</key>
-	<string>GCDiscreetNotificationView 0.0.1 Documentation</string>
+	<string>GCDiscreetNotificationView 1.0.0 Documentation</string>
 	
 	<key>DocSetMinimumXcodeVersion</key>
 	<string>3.0</string>

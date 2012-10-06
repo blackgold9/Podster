@@ -21,9 +21,9 @@ typedef enum {
 @property (strong) SVPodcastEntry *currentEpisode;
 @property (assign, readonly) PlaybackState playbackState;
 @property (assign, readonly) BOOL isStreaming;
+@property (nonatomic, strong, readonly) AVPlayer *player;
 + (SVPlaybackManager *)sharedInstance;
 
-- (AVPlayer *)player;
 - (void)play;
 - (void)pause;
 - (void)skipForward;
