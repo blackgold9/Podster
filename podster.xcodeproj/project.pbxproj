@@ -1838,7 +1838,7 @@
 				CODE_SIGN_ENTITLEMENTS = podster/podster.entitlements;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = podster/podster.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1874,7 +1874,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E8A235A6-241A-47F0-A043-03E4C86189BC";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E8A235A6-241A-47F0-A043-03E4C86189BC";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -2164,7 +2164,7 @@
 			baseConfigurationReference = AFDE278F47BE40B88A6BDDF0 /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Stephen Vanterpool";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stephen Vanterpool";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2200,6 +2200,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
